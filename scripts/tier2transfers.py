@@ -12,6 +12,7 @@ tier2transfer.py [options]
 --destination, -d                  cern,fnal,local
 --nolsmode, -n                     don't check if files already exist, default off
 --checkmode, -c                    check if all files are transferred, default off
+--recursive, -r                    recursive search directory, default on
 """
 
 pisapre='srm://stormfe1.pi.infn.it:8444/srm/managerv2?SFN=/cms/store/user/'
@@ -31,8 +32,9 @@ wildcard=''
 
 checkmode=False
 nolsmode=False
+recursive=True
 
-(opts, args) = getopt.getopt(sys.argv[1:], 'd:i:o:w:s:hcn', ['source=','destination=','input-dir=', 'output-dir=', 'help', 'wildcard=','checkmode'])
+(opts, args) = getopt.getopt(sys.argv[1:], 'd:i:o:w:s:hcnr:', ['source=','destination=','input-dir=', 'output-dir=', 'help', 'wildcard=','nolsmode','checkmode','recursive'])
 
 for opt,argm in opts:
     #print opt,argm
@@ -53,6 +55,8 @@ for opt,argm in opts:
         checkmode=True
     elif (opt == "-n" or opt == "--nolsmode"):
         nolsmode=True
+    elif (opt == "-r" or opt == "--recursive"):
+        recursive=argm
     else:
         print 'Wrong options: %s' % (opt)
         sys.exit(3)
@@ -78,7 +82,6 @@ else:
     sys.exit(0)
 
 
-
 def LCG_LS_WRAP(args):
     cmd=['lcg-ls','-b','-D','srmv2']
     cmd.extend(args)
@@ -88,7 +91,7 @@ def LCG_LS_WRAP(args):
 
 def LCG_CP_WRAP(input, output):
     cmd=['lcg-cp','-b','-D','srmv2',input,output]
-    #print cmd
+    print cmd
     subprocess.Popen(cmd)
 
 
@@ -103,6 +106,8 @@ def DoesFileExist(inpath,outpath):
             #same size
             return True
         else:
+            print inpath
+            print "size different",inls.split()[4],outls.split()[4]
             return False
     except Exception as e:
         #print "ERROR",e
@@ -125,7 +130,7 @@ def MakeFileList(rootpath):
                     continue
             if item.find(".root") != -1:
                 files.append(item)
-            else:
+            elif recursive == True:
                 try:
                     files.extend(MakeFileList(sourcepre+item))
                 except:
@@ -186,7 +191,7 @@ while ifile!=len(files):
         if transfer is True:
             #print "File does not exist", outpath
             if checkmode is True:
-               untransfiles.append(outpath) 
+                untransfiles.append(outpath) 
             else:
                 LCG_CP_WRAP(inpath, outpath)
                 newsleep=1
