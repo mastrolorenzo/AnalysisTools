@@ -91,7 +91,7 @@ def LCG_LS_WRAP(args):
 
 def LCG_CP_WRAP(input, output):
     cmd=['lcg-cp','-b','-D','srmv2',input,output]
-    print cmd
+    #print cmd
     subprocess.Popen(cmd)
 
 
