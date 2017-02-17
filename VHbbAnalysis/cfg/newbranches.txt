@@ -10,8 +10,14 @@ type=1  name=hJetInd2_bestCSV
 type=1  name=hJetInd2_highestPt
 type=1  name=hJetInd2_highestPtJJ
 type=1  name=elInd
+type=1  name=el1Ind
+type=1  name=el2Ind
 type=1  name=muInd
+type=1  name=mu1Ind
+type=1  name=mu2Ind
 type=1  name=lepInd
+type=1  name=lep1Ind
+type=1  name=lep2Ind
 type=1  name=nHJetsMatched
 type=1  name=eventClass
 type=2  name=lepMetDPhi
@@ -27,6 +33,9 @@ type=2  name=weight_ptQCD
 type=2  name=weight_ptEWK
 type=1  name=isWenu
 type=1  name=isWmunu
+type=1  name=isZnunu
+type=1  name=isZmumu
+type=1  name=isZee
 type=1  name=cutFlow
 type=1  name=controlSample
 type=2  name=nProcEvents

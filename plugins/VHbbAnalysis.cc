@@ -229,19 +229,35 @@ bool VHbbAnalysis::Analyze(){
     *in["lepInd"] = -1;
     *in["isWmunu"] = 0;
     *in["isWenu"] = 0;
-    if(MuonSelection() && (cursample->lepFlav==-1 || cursample->lepFlav==0)) {
+    *in["isZmumu"] = 0;
+    *in["isZee"] = 0;
+    *in["isZnunu"] = 0;
+    if(DiMuonSelection() && (cursample->lepFlav==-1 || cursample->lepFlav==0)) {
+        *in["isZmumu"] = 1;
+        *in["eventClass"]=0;
+        *in["lep1Ind"] = *in["mu1Ind"];
+        *in["lep2Ind"] = *in["mu2Ind"];
+    } else if(DiElectronSelection() && (cursample->lepFlav==-1 || cursample->lepFlav==0)) {
+        *in["isZee"] = 1;
+        *in["eventClass"]=0;
+        *in["lep1Ind"] = *in["el1Ind"];
+        *in["lep2Ind"] = *in["el2Ind"];
+    } else if(MuonSelection() && (cursample->lepFlav==-1 || cursample->lepFlav==0)) {
         *in["isWmunu"] = 1;
         *in["eventClass"]=0;
         *in["lepInd"] = *in["muInd"];
-    }
-    if(ElectronSelection() && (cursample->lepFlav==-1 || cursample->lepFlav==1)) {
+    } else if(ElectronSelection() && (cursample->lepFlav==-1 || cursample->lepFlav==1)) {
         *in["isWenu"] = 1;
         if (!(*in["isWmunu"])) {
             *in["eventClass"]=1000;
             *in["lepInd"] = *in["elInd"];
         }
+    } else { // Znunu selection
+        if(*f["met_pt"] > 170 ) {
+            *in["isZnunu"] = 1;
+        }
     }
-    if (*in["isWmunu"] == 0 && *in["isWenu"] == 0) sel = false;
+    if (*in["isWmunu"] == 0 && *in["isWenu"] == 0 && *in["isZee"] == 0 && *in["isZmumu"] == 0 && *in["isZnunu"] == 0) sel = false;
     if (sel) *in["cutFlow"] += 1; // lepton selection
     
     *f["selLeptons_pt_0"] = f["selLeptons_pt"][*in["lepInd"]];
@@ -1312,6 +1328,64 @@ void VHbbAnalysis::TermAnalysis(){
     return;
 }
 
+bool VHbbAnalysis::DiElectronSelection(){
+    bool selectEvent=false;
+    if(debug>1000){
+        std::cout<<"Running Wenu selections"<<std::endl;
+        std::cout<<"*in[\"nselLeptons\"] "<<*in["nselLeptons"]<<std::endl;
+        std::cout<<"d[\"selLeptons_pt\"][0] "<<f["selLeptons_pt"][0]<<std::endl;
+        std::cout<<"in[\"selLeptons_pdgId\"] "<<in["selLeptons_pdgId"][0]<<std::endl;
+        std::cout<<"d[\"selLeptons_relIso03\"] "<<f["selLeptons_relIso03"][0]<<std::endl;
+        std::cout<<"*f[\"met_pt\"] "<<*f["met_pt"]<<std::endl;
+        std::cout<<"*f[selLeptons_eleSieie_0] = "<<*f["selLeptons_eleSieie_0"]<<std::endl;
+        std::cout<<"*f[hJets_pt_1] = "<<*f["hJets_pt_1"]<<std::endl;
+    }
+    
+    // there is only one selected electron for Vtype == 3 which is the electron tag
+    // FIXME add configurable cuts
+    *in["el1Ind"] = -1;
+    float elMaxPt = 0; // max pt of the electrons we select
+    for (int i =0; i<*in["nselLeptons"]; i++) {
+        if(fabs(in["selLeptons_pdgId"][i])==11 
+            && f["selLeptons_pt"][i]      > *f["e1ptcut"] 
+            && fabs(f["selLeptons_eta"][i]) < *f["dieletacut"]
+            && f["selLeptons_relIso03"][i]< *f["dierelisocut"]
+            //&& in["selLeptons_eleCutIdSpring15_25ns_v1"][i] >= *f["elidcut"]
+            //&& in["selLeptons_tightId"][i] >= *f["elidcut"]
+            && in["selLeptons_eleMVAIdSpring15Trig"][i] >= *f["dielidcut"]
+            ){
+            if (f["selLeptons_pt"][i] > elMaxPt) {
+                elMaxPt = f["selLeptons_pt"][i];
+                *in["el1Ind"] = i;
+            }
+        }
+    }
+    if (*in["el1Ind"] == -1) return selectEvent;
+    
+    *in["el2Ind"] = -1;
+    elMaxPt = 0; // max pt of the electrons we select
+    for (int i =0; i<*in["nselLeptons"]; i++) {
+        if(fabs(in["selLeptons_pdgId"][i])==11 
+            && i != *in["el1Ind"]
+            && f["selLeptons_pt"][i]      > *f["e2ptcut"] 
+            && fabs(f["selLeptons_eta"][i]) < *f["dieletacut"]
+            && f["selLeptons_relIso03"][i]< *f["dierelisocut"]
+            //&& in["selLeptons_eleCutIdSpring15_25ns_v1"][i] >= *f["elidcut"]
+            //&& in["selLeptons_tightId"][i] >= *f["elidcut"]
+            && in["selLeptons_eleMVAIdSpring15Trig"][i] >= *f["dielidcut"]
+            ){
+            if (f["selLeptons_pt"][i] > elMaxPt) {
+                elMaxPt = f["selLeptons_pt"][i];
+                *in["el2Ind"] = i;
+            }
+        }
+    }
+    if (*in["el2Ind"] == -1) return selectEvent;
+
+    selectEvent=true;
+    return selectEvent;
+}
+
 bool VHbbAnalysis::ElectronSelection(){
     bool selectEvent=true;
     if(debug>1000){
@@ -1381,6 +1455,59 @@ bool VHbbAnalysis::MuonSelection(){
     }
     if (*in["muInd"] == -1) selectEvent = false;
 
+    return selectEvent;
+}
+
+bool VHbbAnalysis::DiMuonSelection(){
+    
+    bool selectEvent=false;
+    if(debug>1000){
+        std::cout<<"Running Wmunu selections"<<std::endl;
+        std::cout<<"*in[\"nselLeptons\"] "<<*in["nselLeptons"]<<std::endl;
+        std::cout<<"d[\"selLeptons_pt\"][0] "<<f["selLeptons_pt"][0]<<std::endl;
+        std::cout<<"in[\"selLeptons_pdgId\"] "<<in["selLeptons_pdgId"][0]<<std::endl;
+        std::cout<<"d[\"selLeptons_relIso04\"] "<<f["selLeptons_relIso04"][0]<<std::endl;
+        std::cout<<"*d[\"met_pt\"] "<<*f["met_pt"]<<std::endl;
+    }
+    
+    // there is only one selected electron for Vtype == 3 which is the electron tag
+    // FIXME add configurable cuts
+
+    *in["mu1Ind"] = -1;
+    *in["mu2Ind"] = -1;
+    float muMaxPt = 0; // max pt of the muons we select 
+    for (int i=0; i<*in["nselLeptons"]; i++) {
+        if(fabs(in["selLeptons_pdgId"][i])==13 
+            && f["selLeptons_pt"][i]      > *f["mu1ptcut"]
+            && fabs(f["selLeptons_eta"][i]) < *f["muetacut"]
+            && f["selLeptons_relIso04"][i]< *f["dimurelisocut"]
+            && in["selLeptons_tightId"][i] >= *f["dimuidcut"]
+            ){
+            if (f["selLeptons_pt"][i] > muMaxPt) {
+                muMaxPt = f["selLeptons_pt"][i];
+                *in["mu1Ind"] = i;
+            }
+        }
+    }
+    if (*in["mu1Ind"] == -1) return selectEvent;
+
+    muMaxPt = 0; // max pt of the muons we select 
+    for (int i=0; i<*in["nselLeptons"]; i++) {
+        if(fabs(in["selLeptons_pdgId"][i])==13 
+            && i != *in["mu1Ind"] 
+            && f["selLeptons_pt"][i]      > *f["mu2ptcut"]
+            && fabs(f["selLeptons_eta"][i]) < *f["muetacut"]
+            && f["selLeptons_relIso04"][i]< *f["dimurelisocut"]
+            && in["selLeptons_tightId"][i] >= *f["dimuidcut"]
+            ){
+            if (f["selLeptons_pt"][i] > muMaxPt) {
+                muMaxPt = f["selLeptons_pt"][i];
+                *in["mu2Ind"] = i;
+            }
+        }
+    }
+    if (*in["mu2Ind"] == -1) return selectEvent;
+    selectEvent=true;
     return selectEvent;
 }
 

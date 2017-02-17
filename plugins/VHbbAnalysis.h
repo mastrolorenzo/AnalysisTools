@@ -26,6 +26,8 @@ class VHbbAnalysis : public AnalysisManager {
 
     bool ElectronSelection();
     bool MuonSelection();
+    bool DiElectronSelection();
+    bool DiMuonSelection();
     float ReWeightMC(int nPU=0);
     float puWeight_ichep(int i=0);
     float puWeight_ichep_up(int i=0);
