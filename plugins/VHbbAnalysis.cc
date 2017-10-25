@@ -162,9 +162,11 @@ bool VHbbAnalysis::Analyze(){
             if (*in["HLT_BIT_HLT_Ele27_eta2p1_WPLoose_Gsf_v"]!=1 && *in["HLT_BIT_HLT_IsoMu22_v"]!=1 && *in["HLT_BIT_HLT_IsoTkMu22_v"]!=1 ) sel=false;
         }
     }else {
-        if (*in["HLT_BIT_HLT_PFMET110_PFMHT110_IDTight_v"]!=1 && *in["HLT_BIT_HLT_PFMET120_PFMHT120_IDTight_v"]!=1 && *in["HLT_BIT_HLT_PFMET170_NoiseCleaned_v"]!=1 && *in["HLT_BIT_HLT_PFMET170_HBHE_BeamHaloCleaned_v"]!=1 && *in["HLT_BIT_HLT_PFMET170_HBHECleaned_v"]!=-1) sel=false;  //0-lep
-        if (*in["HLT_BIT_HLT_Ele27_eta2p1_WPTight_Gsf_v"]!=1 && *in["HLT_BIT_HLT_IsoMu24_v"]!=1 && *in["HLT_BIT_HLT_IsoTkMu24_v"]!=1) sel=false;// 1-lep       
-        if (*in["HLT_BIT_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_v"]!=-1 && *in["HLT_BIT_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v"]!=-1 && *in["HLT_BIT_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v"]!=-1 && *in["HLT_BIT_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v"]!=-1 && *in["HLT_BIT_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v"]!=-1) sel=false; // 2-lep
+        if (*f["VtypeSim"]!=4 && *in["HLT_BIT_HLT_PFMET110_PFMHT110_IDTight_v"]!=1 && *in["HLT_BIT_HLT_PFMET120_PFMHT120_IDTight_v"]!=1 && *in["HLT_BIT_HLT_PFMET170_NoiseCleaned_v"]!=1 && *in["HLT_BIT_HLT_PFMET170_HBHE_BeamHaloCleaned_v"]!=1 && *in["HLT_BIT_HLT_PFMET170_HBHECleaned_v"]!=-1) {  //0-lep
+            if (*f["VtypeSim"]!=2 && *f["VtypeSim"]!=3 && *in["HLT_BIT_HLT_Ele27_eta2p1_WPTight_Gsf_v"]!=1 && *in["HLT_BIT_HLT_IsoMu24_v"]!=1 && *in["HLT_BIT_HLT_IsoTkMu24_v"]!=1) { // 1-lep       
+                if (*f["VtypeSim"]!=0 && *f["VtypeSim"]!=1 && *in["HLT_BIT_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_v"]!=-1 && *in["HLT_BIT_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v"]!=-1 && *in["HLT_BIT_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v"]!=-1 && *in["HLT_BIT_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v"]!=-1 && *in["HLT_BIT_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v"]!=-1) sel=false; // 2-lep
+            }
+        }
     }
 
     if (*in["sampleIndex"]==0) {
@@ -273,15 +275,16 @@ bool VHbbAnalysis::Analyze(){
     } else if(MuonSelection(1) && (cursample->lepFlav==-1 || cursample->lepFlav==0)) {
         *in["isWmunu"] = 1;
         *in["eventClass"]=0;
-        *in["lepInd1"] = *in["muInd"];
+        *in["lepInd1"] = *in["muInd1"];
     } else if(ElectronSelection(1) && (cursample->lepFlav==-1 || cursample->lepFlav==1)) {
         *in["isWenu"] = 1;
         *in["eventClass"]=1000;
-        *in["lepInd1"] = *in["elInd"];
+        *in["lepInd1"] = *in["elInd1"];
     } else if( *f["met_pt"] > *f["metcut"] ) {
         *in["isZnn"]=1;
     }
 
+    if(debug>1000) std::cout<<"VtypeSim isZnn isWmunu isWenu isZmm isZee "<<*f["VtypeSim"]<<" "<<*in["isZnn"]<<" "<<*in["isWmunu"]<<" "<<*in["isWenu"]<<" "<<*in["isZmm"]<<" "<<*in["isZee"]<<std::endl;
     if ( *in["isZnn"] == 0 && *in["isWmunu"] == 0 && *in["isWenu"] == 0 && *in["isZmm"] == 0 && *in["isZee"] == 0) sel = false;
     
     if (sel) *in["cutFlow"] += 1; // lepton selection
@@ -299,14 +302,19 @@ bool VHbbAnalysis::Analyze(){
         lep2.SetPtEtaPhiM(f["selLeptons_pt"][*in["lepInd2"]], f["selLeptons_eta"][*in["lepInd2"]], f["selLeptons_phi"][*in["lepInd2"]], f["selLeptons_mass"][*in["lepInd2"]]); 
         V=lep1+lep2;
     }else if(*in["isWenu"]==1 || *in["isWmunu"]==1){
+        //std::cout<<" isWenu "<<*in["isWenu"]<<std::endl;
+        
+        //std::cout<<" lepInd1 "<<*in["lepInd1"]<<std::endl;
         *f["selLeptons_pt_0"] = f["selLeptons_pt"][*in["lepInd1"]];
         *f["selLeptons_eta_0"] = f["selLeptons_eta"][*in["lepInd1"]];
+        //std::cout<<" lepInd1 "<<*in["lepInd1"]<<std::endl;
         
         //FIXME why do we do this?  Cut-flow?  CP
         if (*in["lepInd1"] == -1) {
             // not Wenu or Wmunu, use preselected lepton
             *in["lepInd1"] = 0;
         }
+        //std::cout<<" lepInd1 "<<*in["lepInd1"]<<std::endl;
 
         if(debug>1000) {
             std::cout<<"cutting on dphi(lep, met)"<<std::endl;
@@ -318,11 +326,13 @@ bool VHbbAnalysis::Analyze(){
         else if (*in["isWenu"] && *f["lepMetDPhi"] > *f["elMetDPhiCut"]) sel = false;
         if (sel) *in["cutFlow"] += 1;   
 
+        //std::cout<<" 1 "<<std::endl;
         TLorentzVector Lep, MET; 
         // Reconstruct W
         if(debug>1000) {
             std::cout<<"met "<<*f["met_pt"]<<" "<<*f["met_phi"]<<std::endl;
         }
+        //std::cout<<" 2 "<<std::endl;
         MET.SetPtEtaPhiM(*f["met_pt"], 0., *f["met_phi"], 0.); // Eta/M don't affect calculation of W.pt and W.phi
         Lep.SetPtEtaPhiM(f["selLeptons_pt"][*in["lepInd1"]], f["selLeptons_eta"][*in["lepInd1"]], f["selLeptons_phi"][*in["lepInd1"]], f["selLeptons_mass"][*in["lepInd1"]]); 
         double cosPhi12 = ( Lep.Px()*MET.Px() + Lep.Py()*MET.Py() ) / ( Lep.Pt()*MET.Pt() ); // cos of the angle between the lepton and the missing energy
@@ -331,29 +341,18 @@ bool VHbbAnalysis::Analyze(){
         *f["Lep_HJ2_dPhi"] = Lep.DeltaPhi(HJ2);
         V = MET + Lep; 
     
+        //std::cout<<" 3 "<<std::endl;
         TLorentzVector neutrino = getNu4Momentum(Lep, MET);
         W_withNuFromMWCon = neutrino + Lep;
         
         //FIXME we should reduce this code to keep only what we use
-        *f["Top1_mass_fromLepton"] = GetRecoTopMass(Lep, false, 0, false); // construct top mass from closest jet to lepton
-        *f["Top1_mass_fromLepton_wMET"] = GetRecoTopMass(Lep, false, 1, false); // construct top mass from closest jet to lepton
-        *f["Top1_mass_fromLepton_w4MET"] = GetRecoTopMass(Lep, false, 2, false); // construct top mass from closest jet to lepton
         
+        //std::cout<<" 4 "<<std::endl;
         *f["Top1_mass_fromLepton_regPT"] = GetRecoTopMass(Lep, false, 0, true); // construct top mass from closest jet to lepton
         *f["Top1_mass_fromLepton_regPT_wMET"] = GetRecoTopMass(Lep, false, 1, true); // construct top mass from closest jet to lepton
         *f["Top1_mass_fromLepton_regPT_w4MET"] = GetRecoTopMass(Lep, false, 2, true); // construct top mass from closest jet to lepton
     
-        TLorentzVector HJ1_bestCSV;
-        HJ1_bestCSV.SetPtEtaPhiM(f["Jet_pt"][*in["hJetInd1_bestCSV"]],f["Jet_eta"][*in["hJetInd1_bestCSV"]],f["Jet_phi"][*in["hJetInd1_bestCSV"]],f["Jet_mass"][*in["hJetInd1_bestCSV"]] * (f["Jet_pt_reg"][*in["hJetInd1_bestCSV"]] / f["Jet_pt"][*in["hJetInd1_bestCSV"]] ) );
-        *f["Top1_mass_bestCSV_regPT"] = GetRecoTopMass(HJ1_bestCSV, true, 0, true); // construct top mass from closest jet to lepton
-        *f["Top1_mass_bestCSV_regPT_wMET"] = GetRecoTopMass(HJ1_bestCSV, true, 1, true); // construct top mass from closest jet to lepton
-        *f["Top1_mass_bestCSV_regPT_w4MET"] = GetRecoTopMass(HJ1_bestCSV, true, 2, true); // construct top mass from closest jet to lepton
-        
-        TLorentzVector HJ1_highestPtJJ;
-        HJ1_highestPtJJ.SetPtEtaPhiM(f["Jet_pt"][*in["hJetInd1_highestPtJJ"]],f["Jet_eta"][*in["hJetInd1_highestPtJJ"]],f["Jet_phi"][*in["hJetInd1_highestPtJJ"]],f["Jet_mass"][*in["hJetInd1_highestPtJJ"]] * (f["Jet_pt_reg"][*in["hJetInd1_highestPtJJ"]] / f["Jet_pt"][*in["hJetInd1_highestPtJJ"]] ) );
-        *f["Top1_mass_highestPtJJ_regPT"] = GetRecoTopMass(HJ1_highestPtJJ, true, 0, true); // construct top mass from closest jet to lepton
-        *f["Top1_mass_highestPtJJ_regPT_wMET"] = GetRecoTopMass(HJ1_highestPtJJ, true, 1, true); // construct top mass from closest jet to lepton
-        *f["Top1_mass_highestPtJJ_regPT_w4MET"] = GetRecoTopMass(HJ1_highestPtJJ, true, 2, true); // construct top mass from closest jet to lepton
+        //std::cout<<" 5 "<<std::endl;
 
         // we don't use this right now.
         /////// Let's try to reconstruct the second top from a hadronically decaying W
@@ -409,11 +408,13 @@ bool VHbbAnalysis::Analyze(){
     }
     
     
+    //std::cout<<" 6 "<<std::endl;
     
     
     // calculate V, H and V+H kinematics
     
     *f["V_pt"] = V.Pt(); 
+    //std::cout<<" 7 "<<std::endl;
       
     if (*f["doVPtReweighting"] > 0) {
         // some extras for potential pT(W) re-weighting with 2016 36/fb dataset
@@ -431,6 +432,8 @@ bool VHbbAnalysis::Analyze(){
     }
     if (sel) *in["cutFlow"] += 1; // pT(W) cut
     
+    //std::cout<<" 8 "<<std::endl;
+    
 
     // di-jet kinematics
     *f["HJ1_HJ2_dPhi"] = HJ1.DeltaPhi(HJ2);
@@ -446,20 +449,27 @@ bool VHbbAnalysis::Analyze(){
         *in[Form("nAddJets252p9_puid_%s",cursyst->name.c_str())] = *in["nAddJets252p9_puid"];
     }
 
+    //std::cout<<" 9 "<<std::endl;
     if (cursyst->name != "nominal") {
         for (int i = 0; i<*in["nJet"]; i++) {
             f[Form("Jet_btagCSV_%s",cursyst->name.c_str())][i] = f["Jet_btagCSV"][i];
         }
     }
     
+    //std::cout<<" 9.1 "<<std::endl;
     // Now we can calculate whatever we want (transverse) with W and H four-vectors
     *f["jjVPtRatio"] = *f["H_pt"] / *f["V_pt"];
+    //std::cout<<" 9.2 "<<std::endl;
     *f["HVdPhi"] = Hbb.DeltaPhi(V);
+    //std::cout<<" 9.3 "<<std::endl;
     *f["HVdEta"] = fabs(Hbb.Eta() - V.Eta());
+    //std::cout<<" 9.4 "<<std::endl;
     if(*in["isWmunu"]==1 || *in["isWenu"]==1){
         *f["HVdEta_4MET"] = fabs(Hbb.Eta() -  W_withNuFromMWCon.Eta());
+    //std::cout<<" 9.5 "<<std::endl;
     }
 
+    //std::cout<<" 10 "<<std::endl;
     // Compare gen kinematics for b jets for signal vs. ttbar
     if(*in["sampleIndex"]!=0) {
         if (*in["nGenBQuarkFromH"] > 1) {
@@ -622,6 +632,7 @@ bool VHbbAnalysis::Analyze(){
             }
         }
     }
+    //std::cout<<" 11 "<<std::endl;
 
     if(debug>1000) std::cout<<"counting additional leptons"<<std::endl;
     // count the number of additional leptons and jets, then cut on this number
@@ -1443,6 +1454,7 @@ void VHbbAnalysis::TermAnalysis(){
 bool VHbbAnalysis::ElectronSelection(int nLep){
     bool selectEvent=true;
     if(debug>1000){
+        std::cout<<"nLep "<<nLep<<std::endl; 
         std::cout<<"Running Wenu selections"<<std::endl;
         std::cout<<"*in[\"nselLeptons\"] "<<*in["nselLeptons"]<<std::endl;
         std::cout<<"d[\"selLeptons_pt\"][0] "<<f["selLeptons_pt"][0]<<std::endl;
@@ -1452,10 +1464,10 @@ bool VHbbAnalysis::ElectronSelection(int nLep){
         std::cout<<"*f[selLeptons_eleSieie_0] = "<<*f["selLeptons_eleSieie_0"]<<std::endl;
         std::cout<<"*f[hJets_pt_1] = "<<*f["hJets_pt_1"]<<std::endl;
     }
-    
     // there is only one selected electron for Vtype == 3 which is the electron tag
+    *in["elInd1"] = -1;
+    *in["elInd2"] = -1;
     if(nLep==1){
-        *in["elInd"] = -1;
         float elMaxPt = 0; // max pt of the electrons we select
         for (int i =0; i<*in["nselLeptons"]; i++) {
             if(fabs(in["selLeptons_pdgId"][i])==11 
@@ -1469,27 +1481,21 @@ bool VHbbAnalysis::ElectronSelection(int nLep){
                 ){
                 if (f["selLeptons_pt"][i] > elMaxPt) {
                     elMaxPt = f["selLeptons_pt"][i];
-                    *in["elInd"] = i;
+                    *in["elInd1"] = i;
                 }
             }
         }
-        if (*in["elInd"] == -1) selectEvent = false;
+        if (*in["elInd1"] == -1) selectEvent = false;
     } else if(nLep==2){
-        *in["elInd1"] = -1;
-        *in["elInd2"] = -1;
         float elMaxPt = 0; // max pt of the electrons we select
         float elMax2Pt = 0; // 2nd max pt of the electrons we select
         for (int i =0; i<*in["nselLeptons"]; i++) {
             if(fabs(in["selLeptons_pdgId"][i])==11 
-                && f["selLeptons_pt"][i]      > *f["eptcut"] 
                 && fabs(f["selLeptons_eta"][i]) < *f["eletacut"]
                 && f["selLeptons_relIso03"][i]< *f["erelisocut"]
-                //&& in["selLeptons_eleCutIdSpring15_25ns_v1"][i] >= *f["elidcut"]
-                //&& in["selLeptons_tightId"][i] >= *f["elidcut"]
-                //&& in["selLeptons_eleMVAIdSpring15Trig"][i] >= *f["elidcut"]
                 && in["selLeptons_eleMVAIdSppring16GenPurp"][i] >= *f["elidcut"]
                 ){
-                if (f["selLeptons_pt"][i] > elMaxPt &&  f["selLeptons_pt"][i] > *f["lep1PtCut"]) {
+                if (f["selLeptons_pt"][i] > elMaxPt &&  f["selLeptons_pt"][i] > *f["e1ptcut"]) {
                     elMaxPt = f["selLeptons_pt"][i];
                     *in["elInd1"] = i;
                 }
@@ -1502,7 +1508,7 @@ bool VHbbAnalysis::ElectronSelection(int nLep){
         if (debug>1000) {
             std::cout<<"elInd1/2 = "<<*in["elInd1"]<<", "<<*in["elInd2"]<<std::endl;
         }
-        if (*in["elInd"] == -1 || *in["elInd2"] == -1) selectEvent = false;
+        if (*in["elInd1"] == -1 || *in["elInd2"] == -1) selectEvent = false;
     } else {
         std::cout<<"nLep is not 1 or 2 "<<nLep<<" - fail it."<<std::endl;
         selectEvent = false;
@@ -1515,6 +1521,7 @@ bool VHbbAnalysis::MuonSelection(int nLep){
     
     bool selectEvent=true;
     if(debug>1000){
+        std::cout<<"nLep "<<nLep<<std::endl; 
         std::cout<<"Running Wmunu selections"<<std::endl;
         std::cout<<"*in[\"nselLeptons\"] "<<*in["nselLeptons"]<<std::endl;
         std::cout<<"d[\"selLeptons_pt\"][0] "<<f["selLeptons_pt"][0]<<std::endl;
@@ -1527,7 +1534,7 @@ bool VHbbAnalysis::MuonSelection(int nLep){
     // FIXME add configurable cuts
 
     if(nLep==1){
-        *in["muInd"] = -1;
+        *in["muInd1"] = -1;
         float muMaxPt = 0; // max pt of the muons we select 
         for (int i=0; i<*in["nselLeptons"]; i++) {
             if(fabs(in["selLeptons_pdgId"][i])==13 
@@ -1538,11 +1545,11 @@ bool VHbbAnalysis::MuonSelection(int nLep){
                 ){
                 if (f["selLeptons_pt"][i] > muMaxPt) {
                     muMaxPt = f["selLeptons_pt"][i];
-                    *in["muInd"] = i;
+                    *in["muInd1"] = i;
                 }
             }
         }
-        if (*in["muInd"] == -1) selectEvent = false;
+        if (*in["muInd1"] == -1) selectEvent = false;
     } else if(nLep==2) {
         *in["muInd1"] = -1;
         *in["muInd2"] = -1;
@@ -1550,13 +1557,11 @@ bool VHbbAnalysis::MuonSelection(int nLep){
         float muMax2Pt = 0; // 2nd max pt of the muons we select 
         for (int i=0; i<*in["nselLeptons"]; i++) {
             if(fabs(in["selLeptons_pdgId"][i])==13 
-                && f["selLeptons_pt"][i]      > *f["muptcut"]
                 && fabs(f["selLeptons_eta"][i]) < *f["muetacut"]
                 && f["selLeptons_relIso04"][i]< *f["murelisocut"]
-                //&& in["selLeptons_tightId"][i] >= *f["muidcut"]
                 && in["selLeptons_looseIdPOG"][i] >= *f["muidcut"]
                 ){
-                if (f["selLeptons_pt"][i] > muMaxPt &&  f["selLeptons_pt"][i] > *f["lep1PtCut"]) {
+                if (f["selLeptons_pt"][i] > muMaxPt &&  f["selLeptons_pt"][i] > *f["mu1ptcut"]) {
                     muMaxPt = f["selLeptons_pt"][i];
                     *in["muInd1"] = i;
                 } else if (*in["muInd1"]>-1 && f["selLeptons_pt"][i] > muMax2Pt 
@@ -2213,8 +2218,6 @@ TLorentzVector VHbbAnalysis::getNu4Momentum(const TLorentzVector& TLepton, const
           minPx=zeroValue;
           minPy=pyZeroValue;}
 
-        //    std::cout<<" MtW2 from min py and min px "<< sqrt((minPy*minPy+minPx*minPx))*ptlep*2 -2*(pxlep*minPx + pylep*minPy)  <<std::endl;
-        ///    ////Y part   
 
         double mu_Minimum = (mW*mW)/2 + minPx*pxlep + minPy*pylep;
         double a_Minimum  = (mu_Minimum*Lepton.Pz())/(Lepton.Energy()*Lepton.Energy() - Lepton.Pz()*Lepton.Pz());
