@@ -119,6 +119,7 @@ type=2  name=minDeltaRaJet
 type=2  name=selLeptons_pt_0
 type=2  name=selLeptons_phi_0
 type=2  name=selLeptons_eta_0
+type=2  name=selLeptons_mass_0
 type=1  name=selLeptons_pdgId_0
 type=1  name=selLeptons_eleCutIdCSA14_25ns_v1_0
 type=1  name=selLeptons_tightId_0
