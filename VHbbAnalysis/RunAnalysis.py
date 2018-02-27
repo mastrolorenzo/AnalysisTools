@@ -209,8 +209,7 @@ else:
         # Set up environment
         echo "setting up the environment"
         #cd %s/..
-        export \"SCRAM_ARCH=slc6_amd64_gcc630\"
-        cd /cvmfs/cms.cern.ch/slc6_amd64_gcc630/cms/cmssw/CMSSW_9_4_4/src/
+        cd /cvmfs/cms.cern.ch/slc6_amd64_gcc493/cms/cmssw-patch/CMSSW_7_6_3_patch2/src
         source /cvmfs/cms.cern.ch/cmsset_default.sh
         eval `scramv1 runtime -sh`
         #source env.sh
