@@ -1,4 +1,4 @@
-prefix=/eos/uscms/store/group/lpchbb/VHbbNanoPostProc/VHbbPostNano2016_V1/
+prefix=/store/group/lpchbb/VHbbNanoPostProc/VHbbPostNano2016_V1/
 
 
 #DATA
