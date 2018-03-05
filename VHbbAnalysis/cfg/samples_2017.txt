@@ -1,90 +1,104 @@
 prefix=/pnfs/desy.de/cms/tier2/store/user/htholen/VHbbPostNano2017_V1/
 
-############################ DATA ##########################################
-name=Run2016BToG_Ele_ReMiniAOD  dir=SingleElectron/   type=0 xsec=1 lepFlav=1
-name=Run2016BToG_Mu_ReMiniAOD   dir=SingleMuon/  type=0 xsec=1 lepFlav=0
-name=Run2016BToH_MET_MiniAOD    dir=MET/    type=0 xsec=1 lepFlav=0
-name=Run2016BToG_DoubleEle_ReMiniAOD  dir=DoubleEG/   type=0 xsec=1 lepFlav=1
-name=Run2016BToG_DoubleMu_ReMiniAOD  dir=DoubleMuon/   type=0 xsec=1 lepFlav=0
+############################ DATA ###########################################################
+name=Run2017_Ele_ReMiniAOD		dir=SingleElectron/   type=0 xsec=1	lepFlav=1
+name=Run2017_Mu_ReMiniAOD     		dir=SingleMuon/       type=0 xsec=1 	lepFlav=0
+name=Run2017_MET_MiniAOD      		dir=MET/    	      type=0 xsec=1 	lepFlav=0
+name=Run2017_DoubleEle_ReMiniAOD  	dir=DoubleEG/         type=0 xsec=1 	lepFlav=1
+name=Run2017_DoubleMu_ReMiniAOD  	dir=DoubleMuon/       type=0 xsec=1 	lepFlav=0
 
 
 ############################ MONTE CARLO SIMULATION ##########################################
 
 #=========>>>>% Signal sample: Higgs boson produced in association with an electroweak vector boson
 
-name=ZH125_powheg           dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/   type=-12502   xsec=0.0535
-name=WH125_powheg_herwigpp  dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/, WplusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/  type=-125012  xsec=0.25942
-name=WminusH125_herwig      dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/   type=-12801 xsec=0.101
-name=WplusH125_herwig       dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/ type=-12800 xsec=0.159
-name=ZH125_herwig	    dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_herwigpp/   xsec=0.0535
-name=ZH125_poweg 	    dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/  type=-12502  xsec=0.0535
-name=ggZH125_ZLL_herwig	    dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_herwigpp/  #(NOT FOUND!!)
-name=ggZH125_ZNuNu_herwig   dir=ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_herwigpp/   #(NOT FOUND!!)
+name=ZH125_ZLL_powheg           dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/        type=-12502   xsec=0.0535 #(xsec=0.048650253 from AN-15-168)
+name=WH125_herwigp  		dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/, WplusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/  type=-125012  xsec=0.25942
+name=WminusH125_herwig      	dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/ type=-12801   xsec=0.101 (0.1728 from XSDB)
+name=WplusH125_herwig       	dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/  type=-12800   xsec=0.159
+name=ZH125_ZLL_herwig	    	dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_herwigpp/       type=-12500   xsec=0.0535
+name=ggZH125_ZLL_herwig	    	dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_herwigpp/     type=-12600   xsec=0.006954
+name=ggZH125_ZNuNu_herwig   	dir=ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_herwigpp/   type=-12601   xsec=0.01373
+#name=WH125_powheg  	    	dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/, WplusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/  type=-125013  xsec=0.25942
+#name=WplusH125_powheg	    	dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/   type=-12804   xsec=0.2791  ( 0.053097059 from AN-15-168)
+#name=WminusH125_powheg     	dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/  type=-12803   xsec=0.1733  ( 0.033691348 from AN-15-168)
+#name=ZH125_ZNuNu_powheg    	dir=ZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8/      type=-12501   xsec=0.1482  ( 0.089121199 from AN-15-168)
+#name=ggZH125_ZLL_powheg    	dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/      type=-12602   xsec=0.006954( 0.007842073 from AN-15-168)
+#name=ggZH125_ZNuNu_powheg  	dir=ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8/    type=-12603   xsec=0.01373 ( 0.014365700 from AN-15-168)
+
 
 
 #=========>>>>% Drell-Yan
 name=DYToLL_madgraph            dir=DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=23  xsec=5765.4  doJetFlavorSplit=1
-#name=DY1JetsToLL_highM     	dir=DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/ xsec=1012.0 #(https://cms-gen-dev.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=10&searchQuery=DAS%3DDY1JetsToLL)
-#name=DY2JetsToLL_highM     	dir=DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/ xsec=334.7  #(https://cms-gen-dev.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=10&searchQuery=DAS%3DDY2JetsToLL_M-50)
-#name=DY3JetsToLL_highM     	dir=DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/ xsec=102.3  #(https://cms-gen-dev.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=10&searchQuery=DAS%3DDY3JetsToLL_M-50)
-#name=DY4JetsToLL_highM     	dir=DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/ xsec=54.52  #(https://cms-gen-dev.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=10&searchQuery=DAS%3DDY4JetsToLL_M-50)
+name=DY1JetsToLL_highM     	dir=DY1JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/ type=24  xsec=1012.0  doJetFlavorSplit=1 #(https://cms-gen-dev.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=10&searchQuery=DAS%3DDY1JetsToLL)
+name=DY2JetsToLL_highM     	dir=DY2JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/ type=25  xsec=334.7   doJetFlavorSplit=1 #(https://cms-gen-dev.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=10&searchQuery=DAS%3DDY2JetsToLL_M-50)
+name=DY3JetsToLL_highM     	dir=DY3JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/ type=26  xsec=102.3   doJetFlavorSplit=1 #(https://cms-gen-dev.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=10&searchQuery=DAS%3DDY3JetsToLL_M-50)
+name=DY4JetsToLL_highM     	dir=DY4JetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/ type=27  xsec=54.52   doJetFlavorSplit=1 #(https://cms-gen-dev.cern.ch/xsdb/?columns=67108863&currentPage=0&pageSize=10&searchQuery=DAS%3DDY4JetsToLL_M-50)
 
 #in the TWiki I found 5To50 instead 4To50
-#name=DYToLL_lowM_HT70to100     dir=DYJetsToLL_M-4to50_HT-70to100_TuneCP5_13TeV-madgraphMLM-pythia8/         xsec=301.2 
-#name=DYToLL_lowM_HT100to200    dir=DYJetsToLL_M-4to50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/       xsec=224.2
-#name=DYToLL_lowM_HT200to400    dir=DYJetsToLL_M-4to50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/       xsec=37.2
-#name=DYToLL_lowM_HT400to600    dir=DYJetsToLL_M-4to50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/       xsec=3.581
-#name=DYToLL_lowM_HT600to1000   dir=DYJetsToLL_M-4to50_HT-600toInf_TuneCP5_13TeV-madgraphMLM-pythia8/      xsec=1.124
-#name=DYToLL_HT100to200    	dir=DYJetsToLL_M-50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/    type=61    xsec=147.40
-#name=DYToLL_HT200to400    	dir=DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/    type=62    xsec=40.99
-#name=DYToLL_HT400to600    	dir=DYJetsToLL_M-50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/    type=63    xsec=5.678
-#name=DYToLL_HT600to800    	dir=DYJetsToLL_M-50_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8/    type=64    xsec=1.367
-#name=DYToLL_HT800to1200   	dir=DYJetsToLL_M-50_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8/   type=65    xsec=0.6304
-#name=DYToLL_HT2500toInf  	dir=DYJetsToLL_M-50_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8/   type=67    xsec=0.003565
+name=DYToLL_highM_HT100to200_madgraph    	dir=DYJetsToLL_M-50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/    type=61    xsec=147.40	doJetFlavorSplit=1
+name=DYToLL_highM_HT200to400_madgraph    	dir=DYJetsToLL_M-50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/    type=62    xsec=40.99    	doJetFlavorSplit=1
+name=DYToLL_highM_HT400to600_madgraph    	dir=DYJetsToLL_M-50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/    type=63    xsec=5.678   	doJetFlavorSplit=1
+name=DYToLL_highM_HT600to800_madgraph    	dir=DYJetsToLL_M-50_HT-600to800_TuneCP5_13TeV-madgraphMLM-pythia8/    type=64    xsec=1.367   	doJetFlavorSplit=1
+name=DYToLL_highM_HT800to1200_madgraph   	dir=DYJetsToLL_M-50_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8/   type=65    xsec=0.6304   	doJetFlavorSplit=1
+name=DYToLL_highM_HT2500toInf_madgraph  	dir=DYJetsToLL_M-50_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8/   type=67    xsec=0.003565	doJetFlavorSplit=1
+name=DYToLL_lowM_HT70to100_madgraph     	dir=DYJetsToLL_M-4to50_HT-70to100_TuneCP5_13TeV-madgraphMLM-pythia8/  type=68    xsec=301.2     doJetFlavorSplit=1
+name=DYToLL_lowM_HT100to200_madgraph    	dir=DYJetsToLL_M-4to50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/ type=69    xsec=224.2    	doJetFlavorSplit=1
+name=DYToLL_lowM_HT200to400_madgraph    	dir=DYJetsToLL_M-4to50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/ type=70    xsec=37.2    	doJetFlavorSplit=1
+name=DYToLL_lowM_HT400to600_madgraph    	dir=DYJetsToLL_M-4to50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/ type=71    xsec=3.581    	doJetFlavorSplit=1
+name=DYToLL_lowM_HT600toInf_madgraph 	 	dir=DYJetsToLL_M-4to50_HT-600toInf_TuneCP5_13TeV-madgraphMLM-pythia8/ type=72    xsec=1.124    	doJetFlavorSplit=1
 
-dir=DYToEE_M-50_NNPDF31_13TeV-powheg-pythia8/ xsec=1964
+#name=DYToNuNu_HT400to600_madgraph 		dir=ZJetsToNuNu_HT-400To600_13TeV-madgraph/       type=73    	xsec=3.584	 doJetFlavorSplit=1 (from XSDB)
+#name=DYToNuNu_HT600to800_madgraph 		dir=ZJetsToNuNu_HT-600To800_13TeV-madgraph/       type=74    	xsec=0.853	 doJetFlavorSplit=1(from XSDB)
+#name=DYToNuNu_HT800to1200_madgraph 		dir=ZJetsToNuNu_HT-800To1200_13TeV-madgraph/      type=75    	xsec=1.124  	 doJetFlavorSplit=1(from XSDB)
+#name=DYToNuNu_HT1200to2500_madgraph 		dir=ZJetsToNuNu_HT-1200To2500_13TeV-madgraph/     type=76    	xsec=0.09543  	 doJetFlavorSplit=1 (from XSDB)
+#name=DYToNuNu_HT2500toInf_madgraph 		dir=ZJetsToNuNu_HT-2500ToInf_13TeV-madgraph/	  type=77   	xsec=0.002304  	 doJetFlavorSplit=1(from XSDB)
 
-#do we wanna keep this one?
-dir=DYJetsToLL_M-50_Zpt-150toInf_TuneCP5_13TeV-madgraphMLM-pythia8/ xsec=18.36 (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DDYJetsToLL_M-50_Zpt-150toInf)
+name=DYToEE_highM	 	        	dir=DYToEE_M-50_NNPDF31_13TeV-powheg-pythia8/       type=78    xsec=1964  doJetFlavorSplit=1
+
+#ARE WE GOING TO KEEP IT?
+#dir=DYJetsToLL_M-50_Zpt-150toInf_TuneCP5_13TeV-madgraphMLM-pythia8/ xsec=18.36 (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DDYJetsToLL_M-50_Zpt-150toInf)
+
+
 
 #=========>>>>% QCD
-#name=QCD_HT100to200		dir=QCD_HT100to200_TuneCP5_13TeV-madgraph-pythia8/	type=24	    xsec=27990000
-#name=QCD_HT200to300		dir=QCD_HT200to300_TuneCP5_13TeV-madgraph-pythia8/   	type=25     xsec=1712000
-#name=QCD_HT300to500		dir=QCD_HT300to500_TuneCP5_13TeV-madgraph-pythia8/   	type=26     xsec=347700
-#name=QCD_HT500to700		dir=QCD_HT500to700_TuneCP5_13TeV-madgraph-pythia8/   	type=27     xsc=32100
-#name=QCD_HT700to1000		dir=QCD_HT700to1000_TuneCP5_13TeV-madgraph-pythia8/   	type=28     xsec=6831
-#name=QCD_HT1000to1500		dir=QCD_HT1000to1500_TuneCP5_13TeV-madgraph-pythia8/  	type=29     xsec=1207
-#name=QCD_HT1500to2000		dir=QCD_HT1500to2000_TuneCP5_13TeV-madgraph-pythia8/   	type=30     xsec=119.9
-#name=QCD_HT2000toInf		dir=QCD_HT2000toInf_TuneCP5_13TeV-madgraph-pythia8/   	type=31     xsec=25.24
+name=QCD_HT100to200		dir=QCD_HT100to200_TuneCP5_13TeV-madgraph-pythia8/	type=24	    xsec=27990000
+name=QCD_HT200to300		dir=QCD_HT200to300_TuneCP5_13TeV-madgraph-pythia8/   	type=25     xsec=1712000
+name=QCD_HT300to500		dir=QCD_HT300to500_TuneCP5_13TeV-madgraph-pythia8/   	type=26     xsec=347700
+name=QCD_HT500to700		dir=QCD_HT500to700_TuneCP5_13TeV-madgraph-pythia8/   	type=27     xsec=32100
+name=QCD_HT700to1000		dir=QCD_HT700to1000_TuneCP5_13TeV-madgraph-pythia8/   	type=28     xsec=6831
+name=QCD_HT1000to1500		dir=QCD_HT1000to1500_TuneCP5_13TeV-madgraph-pythia8/  	type=29     xsec=1207
+name=QCD_HT1500to2000		dir=QCD_HT1500to2000_TuneCP5_13TeV-madgraph-pythia8/   	type=30     xsec=119.9
+name=QCD_HT2000toInf		dir=QCD_HT2000toInf_TuneCP5_13TeV-madgraph-pythia8/   	type=31     xsec=25.24
 
 ## for the subsequent QCD sample, BGenFilter and bEnriched 
-#name=QCD_HT200to300_bFlt 		dir=QCD_HT200to300_BGenFilter_TuneCP5_13TeV-madgraph-pythia8/		xsec=154400.0 (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_HT200to300) 
-#name=QCD_HT300to500_bFlt		dir=QCD_HT300to500_BGenFilter_TuneCP5_13TeV-madgraph-pythia8/   	xsec=37680.0  (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_HT300to500_BGenFilter)
-#name=QCD_HT700to1000_bFlt		dir=QCD_HT700to1000_BGenFilter_TuneCP5_13TeV-madgraph-pythia8/   	xsec=978.4    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_HT700to1000_BGenFilter)
-#name=QCD_HT1000to2000_bFlt		dir=QCD_HT1500to2000_BGenFilter_TuneCP5_13TeV-madgraph-pythia8/  	xsec=20.35    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_HT1500to2000_BGenFilter)
-#name=QCD_HT200to300_bEnr		dir=QCD_bEnriched_HT200to300_TuneCP5_13TeV-madgraph-pythia8/    	xsec=88320.0  (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT200to300)
-#name=QCD_HT500to700_bEnr		dir=QCD_bEnriched_HT500to700_TuneCP5_13TeV-madgraph-pythia8/    	xsec=1594.0   (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT500to700)
-#name=QCD_HT700to1000_bEnr		dir=QCD_bEnriched_HT700to1000_TuneCP5_13TeV-madgraph-pythia8/    	xsec=321.3    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT700to1000)
-#name=QCD_HT1000to1500_bEnr		dir=QCD_bEnriched_HT1000to1500_TuneCP5_13TeV-madgraph-pythia8/  	xsec=51.61    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT1000to1500)
-#name=QCD_HT1500to2000_bEnr		dir=QCD_bEnriched_HT1500to2000_TuneCP5_13TeV-madgraph-pythia8/  	xsec=4.445    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT1500to2000)
-#name=QCD_HT2000toInf_bEnr		dir=QCD_bEnriched_HT2000toInf_TuneCP5_13TeV-madgraph-pythia8/   	xsec=0.7845   (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT2000toInf)
+name=QCD_HT200to300_bFlt 		dir=QCD_HT200to300_BGenFilter_TuneCP5_13TeV-madgraph-pythia8/	type=32		xsec=154400.0 (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_HT200to300) 
+name=QCD_HT300to500_bFlt		dir=QCD_HT300to500_BGenFilter_TuneCP5_13TeV-madgraph-pythia8/   type=33		xsec=37680.0  (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_HT300to500_BGenFilter)
+name=QCD_HT700to1000_bFlt		dir=QCD_HT700to1000_BGenFilter_TuneCP5_13TeV-madgraph-pythia8/  type=34 	xsec=978.4    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_HT700to1000_BGenFilter)
+name=QCD_HT1000to2000_bFlt		dir=QCD_HT1500to2000_BGenFilter_TuneCP5_13TeV-madgraph-pythia8/ type=35 	xsec=20.35    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_HT1500to2000_BGenFilter)
+name=QCD_HT200to300_bEnr		dir=QCD_bEnriched_HT200to300_TuneCP5_13TeV-madgraph-pythia8/    type=36		xsec=88320.0  (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT200to300)
+name=QCD_HT500to700_bEnr		dir=QCD_bEnriched_HT500to700_TuneCP5_13TeV-madgraph-pythia8/    type=37		xsec=1594.0   (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT500to700)
+name=QCD_HT700to1000_bEnr		dir=QCD_bEnriched_HT700to1000_TuneCP5_13TeV-madgraph-pythia8/   type=38 	xsec=321.3    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT700to1000)
+name=QCD_HT1000to1500_bEnr		dir=QCD_bEnriched_HT1000to1500_TuneCP5_13TeV-madgraph-pythia8/  type=39		xsec=51.61    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT1000to1500)
+name=QCD_HT1500to2000_bEnr		dir=QCD_bEnriched_HT1500to2000_TuneCP5_13TeV-madgraph-pythia8/  type=40		xsec=4.445    (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT1500to2000)
+name=QCD_HT2000toInf_bEnr		dir=QCD_bEnriched_HT2000toInf_TuneCP5_13TeV-madgraph-pythia8/   type=41		xsec=0.7845   (https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DQCD_bEnriched_HT2000toInf)
 
 
 
 #=========>>>>% Single-Top
-dir=ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-amcatnlo-pythia8/ xsec=3.365 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_s-channel_4f_leptonDecays)
-dir=ST_s-channel_4f_leptonDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8/ xsec=3.365 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_s-channel_4f_leptonDecays)
-dir=ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/ #(NOT FOUND!!)
-dir=ST_t-channel_top_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/  #(NOT FOUND!!)
+name=ST_tW_top_5f_inc		 	dir=ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/  type=10  xsec=35.85 #(https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SingleTopRefXsec#Single_top_Wt_channel_cross_sect)
+name=ST_tW_antitop_5f_inc	 	dir=ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/ type=10   xsec=35.85  #(https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SingleTopRefXsec#Single_top_Wt_channel_cross_sect)
+name=ST_t-c_antitop_4f_inc 	 	dir=ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/ #(NOT FOUND!!) type=11
+name=ST_t-c_top_4f_inc 	 	 	dir=ST_t-channel_top_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/  #(NOT FOUND!!)   type=11
+name=ST_s-c_4f_lep		 	dir=ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-amcatnlo-pythia8/     type=12     xsec=3.365 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_s-channel_4f_leptonDecays)
+name=ST_tW_top_5f_noFullHad 		dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/  type=13   xsec=38.09 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_tW_top_5f_NoFullyHadronicDecay)
+name=ST_tW_antitop_5f_noFullHad		dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/    type=13	   xsec=38.06 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DtW_antitop_5f_NoFullyHadronicDecays)
+name=ST_tW_antitop_5f_noFullHad_PSw	dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/  type=14    xsec=38.06 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_tW_antitop_5f_NoFu
+llyHadronicDecays)
+name=ST_tW_top_5f_noFullHad_PSw		dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/ type=14 xsec=38.09 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_tW_top_5f_NoFullyHadronicDecay) 
+name=ST_tW_top_5f_inc_PSw 		dir=ST_tW_top_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/ xsec=35.85 type=15   #(https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SingleTopRefXsec#Single_top_Wt_channel_cross_sect)
+name=ST_s-c_4f_lep_PSw 		 	dir=ST_s-channel_4f_leptonDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8/   type=16   xsec=3.365 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_s-channel_4f_leptonDecays) 
 
-dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/    xsec=38.06 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DtW_antitop_5f_NoFullyHadronicDecays)
-dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/   xsec=38.06 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_tW_antitop_5f_NoFullyHadronicDecays)
-dir=ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/  xsec=35.85  #(https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SingleTopRefXsec#Single_top_Wt_channel_cross_sect)
-dir=ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/  xsec=35.85 #(https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SingleTopRefXsec#Single_top_Wt_channel_cross_sect)
-
-dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/  xsec=38.09 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_tW_top_5f_NoFullyHadronicDecay)
-dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/  xsec=38.09 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DST_tW_top_5f_NoFullyHadronicDecay) 
-dir=ST_tW_top_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/ xsec=35.85   #(https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SingleTopRefXsec#Single_top_Wt_channel_cross_sect)
 
 #=========>>>>% top-antitop pair
 dir=TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/       xsec=88.29 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DTTTo2L2Nu_TuneCP5)
@@ -92,7 +106,6 @@ dir=TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/   xsec=88.29  #(https://cm
 dir=TTTo2L2Nu_TuneCP5up_PSweights_13TeV-powheg-pythia8/  xsec=88.29   #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DTTTo2L2Nu_TuneCP5)
 dir=TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8/   xsec=377.96 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DTTToHadronic_TuneCP5)
 dir=TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/   xsec=365.34 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DTTToSemiLeptonic)
-
 dir=TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/   xsec=0.2043 #(actually xsec=0.2001 from https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DTTWJetsToLNu)
 dir=TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/    xsec=0.4062 #(actually xsec=0.405 from https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DTTWJetsToLNu)
 dir=TTZToLLNuNu_M-10_TuneCP5_13TeV-amcatnlo-pythia8/    xsec=0.2529
@@ -100,15 +113,59 @@ dir=/pnfs/desy.de/cms/ST_t-channel_top_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2
 dir=TTZZ_TuneCP5_13TeV-madgraph-pythia8/  xsec=0.001563 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DTTZZ)
 
 #=========>>>>% Di-Boson + SingleW+3jets
-name=WJets_2J  dir=W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/  type=83  xsec=39.17+3.288  #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DW3JetsToLNu)
-dir=WWTo1L1Nu2Q_13TeV_amcatnloFXFX_madspin_pythia8/   xsec=45.68  #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DWWTo1L1Nu2Q)
-dir=WWTo2L2Nu_NNPDF31_TuneCP5_13TeV-powheg-pythia8/   xsec=12.178
-dir=WWToLNuQQ_NNPDF31_TuneCP5_13TeV-powheg-pythia8/   xsec=49.997 
-dir=WW_TuneCP5_13TeV-pythia8/   xsec=64.3 #(https://cms-gen-dev.cern.ch/xsdb/?searchQuery=DAS=WW_TuneCUETP8M1_13TeV-pythia8)
-dir=WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8/    xsec=4.42965
-dir=WZ_TuneCP5_13TeV-pythia8/    xsec=47.13   
-dir=ZZTo2L2Nu_13TeV_powheg_pythia8/    xsec=0.564
-dir=ZZTo4L_13TeV_powheg_pythia8/    xsec= 1.256
-dir=ZZ_TuneCP5_13TeV-pythia8/   xsec=16.523
+name=WW             dir=WW_TuneCP5_13TeV-pythia8/			type=370	xsec=64.3		doJetFlavorSplit=1 #(https://cms-gen-dev.cern.ch/xsdb/?searchQuery=DAS=WW_TuneCUETP8M1_13TeV-pythia8)
+name=WZ  	    dir=WZ_TuneCP5_13TeV-pythia8/   			type=371	xsec=47.13    		doJetFlavorSplit=1
+name=ZZ   	    dir=ZZ_TuneCP5_13TeV-pythia8/   			type=372	xsec=16.523		doJetFlavorSplit=1	
+name=W3Jets  	    dir=W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/  type=373	xsec=39.17+3.288  	doJetFlavorSplit=1 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DW3JetsToLNu)
+name=WW_1L1Nu2Q     dir=WWTo1L1Nu2Q_13TeV_amcatnloFXFX_madspin_pythia8/ type=374	xsec=45.68  		doJetFlavorSplit=1 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DWWTo1L1Nu2Q)
+name=WW_2L2Nu       dir=WWTo2L2Nu_NNPDF31_TuneCP5_13TeV-powheg-pythia8/ type=375	xsec=12.178    		doJetFlavorSplit=1
+name=WW_LNu2Q_nlo   dir=WWToLNuQQ_NNPDF31_TuneCP5_13TeV-powheg-pythia8/ type=376	xsec=49.997   		doJetFlavorSplit=1
+name=WZ_3LNu 	    dir=WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8/   	type=377	xsec=4.42965  	      	doJetFlavorSplit=1
+name=ZZ_2L2Nu       dir=ZZTo2L2Nu_13TeV_powheg_pythia8/  		type=378 	xsec=0.564 	 	doJetFlavorSplit=1
+name=ZZ_4L   	    dir=ZZTo4L_13TeV_powheg_pythia8/   			type=379	xsec= 1.256 		doJetFlavorSplit=1
+
+
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%% MISSING SAMPLE NANO-AOD BUT MINI-AOD ARE ALREADY PRODUCED:
+#name=DYToNuNu_HT400to600_madgraph 		dir=ZJetsToNuNu_HT-400To600_13TeV-madgraph/       type=73    	xsec=3.584 (from XSDB)
+#name=DYToNuNu_HT600to800_madgraph 		dir=ZJetsToNuNu_HT-600To800_13TeV-madgraph/       type=74    	xsec=0.853 (from XSDB)
+#name=DYToNuNu_HT800to1200_madgraph 		dir=ZJetsToNuNu_HT-800To1200_13TeV-madgraph/      type=75    	xsec=1.124 (from XSDB)
+#name=DYToNuNu_HT1200to2500_madgraph 		dir=ZJetsToNuNu_HT-1200To2500_13TeV-madgraph/     type=76    	xsec=0.09543 (from XSDB)
+#name=DYToNuNu_HT2500toInf_madgraph 		dir=ZJetsToNuNu_HT-2500ToInf_13TeV-madgraph/	  type=77   	xsec=0.002304 (from XSDB)
+
+
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%% MISSING IN MINI_AOD BUT PRESENT IN 2016 ANALYSIS:
+#/DYJetsToLL_M-50_HT-1200to2500_TuneCP5_13TeV-madgraphMLM-pythia8
+#/DY1JetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+#/DY2JetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+#/DY3JetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+#/DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+#/DYJetsToLL_M-50_HT-1200to2500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+#/DYBJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8
+#/DYBJetsToLL_M-50_Zpt-100to200_TuneCUETP8M1 13TeV-madgraphMLM-pythia8
+#/DYBJetsToLL_M-50_Zpt-200toInf_TuneCUETP8M1 13TeV-madgraphMLM-pythia8
+
+#/WJetsToLNu_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8                       
+#/WJetsToLNu_Pt-100To250_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8           
+#/WJetsToLNu_Pt-250To400_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8         
+#/WJetsToLNu_Pt-400To600_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8         
+#/WJetsToLNu_Pt-600ToInf_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8           
+#/WToLNu_0J_13TeV-amcatnloFXFX-pythia8                                    
+#/WToLNu_1J_13TeV-amcatnloFXFX-pythia8                                     
+#/WToLNu_2J_13TeV-amcatnloFXFX-pythia8                                     
+#/WJetsToLNu_TuneCUETP8M1_13TeV-madgraphMLM-pythia8                        
+#/WJetsToLNu_HT-100To200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            
+#/WJetsToLNu_HT-200To400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            
+#/WJetsToLNu_HT-400To600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            
+#/WJetsToLNu_HT-600To800_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            
+#/WJetsToLNu_HT-800To1200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8           
+#/WJetsToLNu_HT-1200To2500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8          
+#/WJetsToLNu_HT-2500ToInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            
+#/WBJetsToLNu_Wpt-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8          
+#/WBJetsToLNu_Wpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8           
+#/WJetsToLNu_BGenFilter_Wpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8 
+#/WJetsToLNu_BGenFilter_Wpt-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8  
+
+
 
 
