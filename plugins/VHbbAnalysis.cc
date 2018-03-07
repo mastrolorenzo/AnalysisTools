@@ -382,6 +382,10 @@ bool VHbbAnalysis::Analyze() {
         j1ptCSV = m("j1ptCSV_2lepchan");
     }
 
+
+    std::pair<int,int> bjets_bestCMVA = HighestCMVABJets(j1ptCut, j2ptCut);
+    *in["hJetInd1_bestCMVA"] = bjets_bestCMVA.first;
+    *in["hJetInd2_bestCMVA"] = bjets_bestCMVA.second;
     std::pair<int,int> bjets_bestCSV = HighestCSVBJets(j1ptCut, j2ptCut);
     *in["hJetInd1_bestCSV"] = bjets_bestCSV.first;
     *in["hJetInd2_bestCSV"] = bjets_bestCSV.second;
@@ -393,7 +397,7 @@ bool VHbbAnalysis::Analyze() {
     *in["hJetInd2_highestPtJJ"] = bjets_highestPtJJ.second;
 
     // the jet selection algorithm we actually use for the rest of the analysis chain
-    std::pair<int,int> bjets = HighestCSVBJets(j1ptCut, j2ptCut);
+    std::pair<int,int> bjets = HighestCMVABJets(j1ptCut, j2ptCut);
 
     // put CMVA cuts out of selection functions
     if (bjets.first != -1 && bjets.second != -1) {
@@ -2269,6 +2273,43 @@ std::pair<int,int> VHbbAnalysis::HighestCSVBJets(float j1ptCut, float j2ptCut){
     return pair;
 }
 
+
+std::pair<int,int> VHbbAnalysis::HighestCMVABJets(float j1ptCut, float j2ptCut){
+    std::pair<int,int> pair(-1,-1);
+
+    for(int i=0; i<mInt("nJet"); i++){
+        if(mInt("Jet_puId",i) > 0
+            && m("Jet_bReg",i)>j1ptCut
+            &&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
+            if( pair.first == -1 ) {
+                pair.first = i;
+            } else if(m("Jet_btagCMVA",pair.first)<m("Jet_btagCMVA",i)){
+                pair.first = i;
+            }
+        }
+    }
+
+    for(int i=0; i<mInt("nJet"); i++){
+        if(i==pair.first) continue;
+        if(mInt("Jet_puId",i) > 0
+            && m("Jet_bReg",i)>j2ptCut
+            &&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
+            if( pair.second == -1 ) {
+                pair.second = i;
+            } else if(m("Jet_btagCMVA",pair.second)<m("Jet_btagCMVA",i)){
+                pair.second = i;
+            }
+        }
+    }
+
+    // different pt threshold can set the highest CMVA value into pair.second
+    if (pair.first > -1 && pair.second > -1 && m("Jet_btagCMVA",pair.first) < m("Jet_btagCMVA",pair.second)) {
+        pair = std::make_pair(pair.second, pair.first);
+    }
+
+    return pair;
+}
+
 std::pair<int,int> VHbbAnalysis::HighestPtJJBJets(){
     std::pair<int,int> pair(-1,-1);
 
@@ -2319,8 +2360,9 @@ std::pair<int,int> VHbbAnalysis::HighestPtJJBJets(){
         }
     }
     // important to cut on CSV here to kill TTbar
-    if (m("Jet_btagCSVV2",pair.first) < m("j1ptCSV")) pair.first = -1;
-    if (m("Jet_btagCSVV2",pair.second) < m("j2ptCSV")) pair.second = -1;
+    if (pair.first > -1 && pair.second > -1 && m("Jet_btagCMVA",pair.first) < m("Jet_btagCMVA",pair.second)) {
+        pair = std::make_pair(pair.second, pair.first);
+    }
     return pair;
 }
 
