@@ -1309,8 +1309,11 @@ void VHbbAnalysis::FinishEvent() {
     if(mInt("sampleIndex")!=0){
         if (m("doICHEP") != 1) {
             *f["weight_PU"] = m("puWeight");
-            *f["weight_PUUp"] = m("puWeightUp") / m("puWeight");
-            *f["weight_PUDown"] = m("puWeightDown") / m("puWeight");
+            //TEMPORARY SOLUTION: REMEMBER TO FIX IT BACK ONCE weightUP/DOWN WILL BE IN NANOAOD
+            //  *f["weight_PUUp"] = m("puWeightUp") / m("puWeight");
+	    *f["weight_PUUp"] = m("puWeight");
+	    //  *f["weight_PUDown"] = m("puWeightDown") / m("puWeight");
+            *f["weight_PUDown"] = m("puWeight");
         }
         else {
             //*f["weight_PU"] = *f["puWeight"];
@@ -1323,7 +1326,7 @@ void VHbbAnalysis::FinishEvent() {
             // only apply to Z/W+jet samples
             *f["weight_ptQCD"]=ptWeightQCD(mInt("nGenVbosons"), m("LHE_HT"), mInt("GenVbosons_pdgId",0));
             *f["weight_ptEWK"]=ptWeightEWK(mInt("nGenVbosons"), m("GenVbosons_pt",0), m("Vtype"), mInt("GenVbosons_pdgId",0));
-        }
+	}
     } else {
         *f["weight_PU"]=1;
         *f["weight_PUUp"]=1;
