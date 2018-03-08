@@ -37,6 +37,9 @@ type=2  name=j1ptCSV            val=-0.5884
 type=2  name=j2ptCSV            val=-0.5884
 type=2  name=JetEtaCut          val=2.5
 
+#use the following dictionary: 0. => DeepCSV, 1. => CMVA, 2. => CSV
+type=2  name=taggerType         val=0.
+
 type=2  name=JetPtPresel        val=20
 type=2  name=LepPtPresel        val=20
 
