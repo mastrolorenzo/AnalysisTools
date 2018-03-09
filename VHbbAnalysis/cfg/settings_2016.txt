@@ -38,7 +38,7 @@ type=2  name=j2ptBtag            val=-0.5884
 type=2  name=JetEtaCut          val=2.5
 
 #use the following dictionary: 0. => DeepCSV, 1. => CMVA, 2. => CSV
-type=2  name=taggerType         val=0.
+type=2  name=taggerType         val=1.
 
 #define the correct loose (L), medium (M) and tight (T) working point (WP) associated to the chosen tagger
 type=2  name=tagWPL             val=-0.5884
