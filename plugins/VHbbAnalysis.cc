@@ -1283,7 +1283,7 @@ void VHbbAnalysis::FinishEvent() {
                     flav,
                     fabs(m("Jet_eta", i)),
                     m("Jet_pt", i),
-                    m("Jet_btagDeepB", i)
+                    m(taggerName, i)
                 );
             }
         }
