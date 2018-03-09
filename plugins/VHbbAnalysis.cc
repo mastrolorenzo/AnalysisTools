@@ -36,7 +36,7 @@ void VHbbAnalysis::SetTaggerName( float taggerType ){
   }else if( m("taggerType")==2 ){
     name.append("Jet_btagCSVV2");
   }else{
-    std::cout << "Invalid tagger type, setting the tagger name to its defauld value: CSV" << std::endl;
+    std::cout << "Invalid tagger type, setting the tagger name to its defauld value: CMVA" << std::endl;
       name.append("Jet_btagCMVA");
   }
   
@@ -206,6 +206,10 @@ bool VHbbAnalysis::Analyze() {
     bool doOnlySignalRegion = bool(m("doOnlySignalRegion"));
     *in["controlSample"] = 0;
     *in["cutFlow"] = 0;
+
+
+    // Retrieve b-tagger working points
+    float taggerWP_T = m("tagWPT"), taggerWP_M = m("tagWPM"), taggerWP_L = m("tagWPL");
 
 
     // move fast requirements to the front
@@ -401,19 +405,19 @@ bool VHbbAnalysis::Analyze() {
     }
 
     // keep track of each jet selection method separately
-    float j1ptCut, j2ptCut, j1ptCSV;
+    float j1ptCut, j2ptCut, j1ptBtag;
     if (mInt("isZnn")) {
         j1ptCut = m("j1ptCut_0lepchan");
         j2ptCut = m("j2ptCut_0lepchan");
-        j1ptCSV = m("j1ptCSV_0lepchan");
+        j1ptBtag = m("j1ptBtag_0lepchan");
     } else if (mInt("isWmunu") || mInt("isWenu")) {
         j1ptCut = m("j1ptCut_1lepchan");
         j2ptCut = m("j2ptCut_1lepchan");
-        j1ptCSV = m("j1ptCSV_1lepchan");
+        j1ptBtag = m("j1ptBtag_1lepchan");
     } else if (mInt("isZmm") || mInt("isZee")) {
         j1ptCut = m("j1ptCut_2lepchan");
         j2ptCut = m("j2ptCut_2lepchan");
-        j1ptCSV = m("j1ptCSV_2lepchan");
+        j1ptBtag = m("j1ptBtag_2lepchan");
     }
 
     // for the moment keep also the old function to fill the branches declared in newbranches.txt
@@ -433,19 +437,14 @@ bool VHbbAnalysis::Analyze() {
     *in["hJetInd1_highestPtJJ"] = bjets_highestPtJJ.first;
     *in["hJetInd2_highestPtJJ"] = bjets_highestPtJJ.second;
 
+    // the jet selection algorithm we actually use for the rest of the analysis chain
     std::pair<int, int> bjets_bestTagger =  HighestTaggerValueBJets(j1ptCut, j2ptCut, taggerName);
-    std::string BestJetInd1="hJetInd1_"+taggerName;
-    std::string BestJetInd2="hJetInd1_"+taggerName;
-
-    // the jet selection algorithm we actually use for the rest of the analysis chain: is a redoundance declaration of what is 4 lines above? (Luca 08/03/18)
-    std::pair<int,int> bjets = HighestTaggerValueBJets(j1ptCut, j2ptCut, taggerName);
-   
-
-    // put B-Tagger cuts out of selection functions
-    if (bjets.first != -1 && bjets.second != -1) {
-        if (m(taggerName,bjets.first) < j1ptCSV) {
+ 
+   // put B-Tagger cuts out of selection functions
+    if (bjets_bestTagger.first != -1 && bjets_bestTagger.second != -1) {
+        if (m(taggerName,bjets_bestTagger.first) < j1ptBtag) {
             *in["controlSample"] = -1;
-        } else if (m(taggerName,bjets.second) < m("j2ptCSV")) {  // 2nd jet B-Tagged is the same in all SR's
+        } else if (m(taggerName,bjets_bestTagger.second) < m("j2ptBtag")) {  // 2nd jet B-Tagged is the same in all SR's
             *in["controlSample"] = -1;
         }
     }
@@ -454,16 +453,16 @@ bool VHbbAnalysis::Analyze() {
     }
 
 
-    if (bjets.first == -1) {
+    if (bjets_bestTagger.first == -1) {
         if (int(m("doBoost")) == 0) {
             return false;  // TODO this must be the same for signal and control regions?
         }
         *in["hJetInd1"] = 0;
     } else {
-        *in["hJetInd1"] = bjets.first;
+        *in["hJetInd1"] = bjets_bestTagger.first;
     }
 
-    if (bjets.second == -1) {
+    if (bjets_bestTagger.second == -1) {
         if (int(m("doBoost")) == 0) {
             return false;  // TODO this must be the same for signal and control regions?
             *in["hJetInd2"] = 1;
@@ -473,14 +472,14 @@ bool VHbbAnalysis::Analyze() {
             *in["hJetInd2"] = 0;
         }
     } else {
-        *in["hJetInd2"] = bjets.second;
+        *in["hJetInd2"] = bjets_bestTagger.second;
     }
 
     if (int(m("doBoost")) != 0) {
         // need to do some filtering on b-tagging for events that we won't use in the boosted analysis
         // (i.e. there is no fat jet) or file size for W+jets is ridiculous for boosted analysis
         if (mInt("nFatJet") < 1) {
-            if (m(taggerName,mInt("hJetInd1")) < m("j1ptCSV") || m(taggerName,mInt("hJetInd2")) < m("j2ptCSV")) {
+            if (m(taggerName,mInt("hJetInd1")) < m("j1ptBtag") || m(taggerName,mInt("hJetInd2")) < m("j2ptBtag")) {
                 return false;  // TODO this must be the same for signal and control regions?
             }
         }
@@ -504,7 +503,7 @@ bool VHbbAnalysis::Analyze() {
         std::cout << "nJet = " << mInt("nJet") << std::endl;
         std::cout << "hJetInd1 = " << mInt("hJetInd1") << std::endl;
         std::cout << "hJetInd2 = " << mInt("hJetInd2") << std::endl;
-        std::cout << "found two bjets with pt and CSV "
+        std::cout << "found two bjets with pt and "<< taggerName << ": "
                   << m("Jet_bReg",mInt("hJetInd1")) << " "
                   << m(taggerName,mInt("hJetInd1")) << " "
                   << m("Jet_bReg",mInt("hJetInd2")) << " "
@@ -984,9 +983,7 @@ bool VHbbAnalysis::Analyze() {
                         *f[Form("AddJets%i%s_puid_leadJet_pt", ptCuts[i], eta_cut.c_str())] = maxPt;
                         *f[Form("AddJets%i%s_puid_leadJet_eta", ptCuts[i], eta_cut.c_str())] = m("Jet_eta",k);
                         *f[Form("AddJets%i%s_puid_leadJet_phi", ptCuts[i], eta_cut.c_str())] = m("Jet_phi",k);
-                        *f[Form("AddJets%i%s_puid_leadJet_btagCSV", ptCuts[i], eta_cut.c_str())] = m("Jet_btagCSVV2",k);
-			//Kept CSV name... not optimal choice just temporarily
-			*f[Form("AddJets%i%s_puid_leadJet_btagCSV", ptCuts[i], eta_cut.c_str())] = m(taggerName,k);
+                      	*f[Form("AddJets%i%s_puid_leadJet_btagged", ptCuts[i], eta_cut.c_str())] = m(taggerName,k);
                     }
                 }
             }
@@ -1092,8 +1089,6 @@ bool VHbbAnalysis::Analyze() {
     float minBTagged = std::min(higgsJet1BTagged, higgsJet2BTagged);
     float maxBTagged = std::max(higgsJet1BTagged, higgsJet2BTagged);
 
-    // didn't modify the variable names below... think about it (Luca 08/03/18)
-    float CSVAL = -0.5884, CSVAM = 0.4432, CSVAT = 0.9432;
     float V_mass = m("V_mass"), H_mass = m("H_mass");
 
 
@@ -1110,7 +1105,7 @@ bool VHbbAnalysis::Analyze() {
         // Higgs Jet Cuts
         && m("Jet_bReg",mInt("hJetInd1")) > 60
         && m("Jet_bReg",mInt("hJetInd2")) > 35
-        && higgsJet2BTagged > CSVAL
+        && higgsJet2BTagged > taggerWP_L
         && fabs(m("Jet_eta",mInt("hJetInd1"))) < 2.4
         && fabs(m("Jet_eta",mInt("hJetInd2"))) < 2.4
         //&& in["Jet_id"][*in["hJetInd1"]] >= 4
@@ -1134,7 +1129,7 @@ bool VHbbAnalysis::Analyze() {
         if (mInt("isWmunu") || mInt("isWenu")) {
             // FIXME nselLeptons needs to be replaced
             //if (minAbsDeltaPhiHiggsJetsMet < 1.57 && *in["nselLeptons"] >= 1 && higgsJet1CMVA > CSVAM && nJetsCentral >= 4 && absDeltaPhiHiggsMet > 2) {
-            if (minAbsDeltaPhiHiggsJetsMet < 1.57 && higgsJet1BTagged > CSVAM && nJetsCentral >= 4 && absDeltaPhiHiggsMet > 2) {
+            if (minAbsDeltaPhiHiggsJetsMet < 1.57 && higgsJet1BTagged > taggerWP_M && nJetsCentral >= 4 && absDeltaPhiHiggsMet > 2) {
                 *in["controlSample"] = 1; // TTbar Control Sample Index
             }
         // } else if (*f["Vtype"] == 4) {
@@ -1143,9 +1138,9 @@ bool VHbbAnalysis::Analyze() {
             // FIXME nselLeptons needs to be replaced
             //if (nJetsCloseToMet == 0 && absDeltaPhiMetTrackMet < 0.5 && *in["nselLeptons"] == 0 && absDeltaPhiHiggsMet > 2) {
             if (nJetsCloseToMet == 0 && absDeltaPhiMetTrackMet < 0.5 && absDeltaPhiHiggsMet > 2) {
-	        if (higgsJet1BTagged < CSVAM && nJetsCentral <= 3) {
+	        if (higgsJet1BTagged < taggerWP_M && nJetsCentral <= 3) {
                     *in["controlSample"] = 2; // Z+Light Control Sample Index
-                }else if (higgsJet1BTagged > CSVAT && nJetsCentral == 2 && vetoHiggsMassWindow) {
+                }else if (higgsJet1BTagged > taggerWP_T && nJetsCentral == 2 && vetoHiggsMassWindow) {
                     *in["controlSample"] = 3; // Z+bb Control Sample Index
                 }
             }
@@ -1193,13 +1188,13 @@ bool VHbbAnalysis::Analyze() {
     }
 
     if (base1LepCSSelection) {
-        if (maxBTagged > CSVAT){ //ttbar or W+HF
+        if (maxBTagged > taggerWP_T){ //ttbar or W+HF
             if (mInt("nAddJets252p9_puid") > 1.5) { //ttbar
                 *in["controlSample"] = 11;
             } else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
                 *in["controlSample"] = 13;
             }
-        }else if (maxBTagged > CSVAL && maxBTagged < CSVAM && m("MET_pt")/sqrt(m("htJet30")) > 2.) { //W+LF
+        }else if (maxBTagged > taggerWP_L && maxBTagged < taggerWP_M && m("MET_pt")/sqrt(m("htJet30")) > 2.) { //W+LF
             *in["controlSample"] = 12;
         }
 
@@ -1223,22 +1218,22 @@ bool VHbbAnalysis::Analyze() {
 
     if (base2LepCSSelection) {
         if (////////////////////////// ttbar
-            maxBTagged > CSVAT
-            && minBTagged > CSVAL
+            maxBTagged > taggerWP_T
+            && minBTagged > taggerWP_L
             && (V_mass > 10 && (V_mass < 75 || V_mass > 120))
         ) {
             *in["controlSample"] = 21;
         } else if (/////////////////// Z + LF
-	    maxBTagged < CSVAL
-            && minBTagged < CSVAL
+	    maxBTagged < taggerWP_L
+            && minBTagged < taggerWP_L
             && absDeltaPhiHiggsMet > 2.5
             && (V_mass > 75 && V_mass < 105)
             && (H_mass > 90 && H_mass <= 150)
         ) {
             *in["controlSample"] = 22;
         } else if (/////////////////// Z + HF
-	    maxBTagged > CSVAT
-            && minBTagged > CSVAL
+	    maxBTagged > taggerWP_T
+            && minBTagged > taggerWP_L
             && m("MET_pt") < 60
             && absDeltaPhiHiggsMet > 2.5
             && (V_mass > 85 && V_mass <= 97)
@@ -1746,9 +1741,8 @@ void VHbbAnalysis::FinishEvent() {
     //*f["H_pt_f"] = (float) *f["H_pt"];
     //*f["V_pt_f"] = (float) *f["V_pt"];
     
-    //but don't change the name of the branch!!! Think about that... (Luca 08/03/18)
-    *f["hJets_btagCSV_0"] = (float) m(taggerName,mInt("hJetInd1"));
-    *f["hJets_btagCSV_1"] = (float) m(taggerName,mInt("hJetInd2"));
+    *f["hJets_btagged_0"] = (float) m(taggerName,mInt("hJetInd1"));
+    *f["hJets_btagged_1"] = (float) m(taggerName,mInt("hJetInd2"));
 
     //*f["HVdPhi_f"] = (float) *f["HVdPhi"];
     *f["H_dEta"] = fabs(m("Jet_eta",mInt("hJetInd1")) - m("Jet_eta",mInt("hJetInd2")));
@@ -2338,7 +2332,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
     for(int i=0; i<mInt("nJet"); i++){
         if(mInt("Jet_puId",i) > 0
             && m("Jet_bReg",i)>m("j1ptCut")
-            && m("Jet_btagCSVV2",i)>m("j1ptCSV")&&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
+            && m("Jet_btagCSVV2",i)>m("j1ptBtag")&&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
                 pair.first = i;
             } else if(m("Jet_bReg",pair.first)<m("Jet_pt",i)){
@@ -2351,7 +2345,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
         if(i==pair.first) continue;
         if(mInt("Jet_puId",i) > 0
             && m("Jet_bReg",i)>m("j2ptCut")
-            && m("Jet_btagCSVV2",i)>m("j2ptCSV")&&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
+            && m("Jet_btagCSVV2",i)>m("j2ptBtag")&&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {
                 pair.second = i;
             } else if(m("Jet_bReg",pair.second)<m("Jet_pt",i)){
@@ -2562,12 +2556,12 @@ std::pair<int,int> VHbbAnalysis::HighestPtJJBJets(){
     }
     // important to cut on CSV here to kill TTbar
     if(pair.first != -1){
-        if (m("Jet_btagCSVV2",pair.first) < m("j1ptCSV")) {
+        if (m("Jet_btagCSVV2",pair.first) < m("j1ptBtag")) {
             pair.first = -1;
         }
     }
     if(pair.second != -1){
-        if (m("Jet_btagCSVV2",pair.second) < m("j2ptCSV")) {
+        if (m("Jet_btagCSVV2",pair.second) < m("j2ptBtag")) {
             pair.second = -1;
         }
     }
