@@ -23,10 +23,13 @@ sys.dont_write_bytecode = True
 
 cwd = os.getcwd()
 full_cfg_path = sys.argv[1]
+print 'cwd,fukll_cfg: ',cwd, full_cfg_path
 cfg_path, cfg = os.path.split(full_cfg_path.replace('.py', ''))
+print 'cfg_path after removing of .py', cfg_path
 try:
     os.chdir(cfg_path)
     config = __import__(cfg)
+    print 'trying...'
 except ImportError, e:
     print 'Could not load config. Exit.'
     print e
@@ -44,17 +47,20 @@ all_input_tokens_and_file_patterns = dict(
     for items in config.the_samples_dict.itervalues()
     for tok in items[-1]
 )
+print all_input_tokens_and_file_patterns
 filenames = dict(
     (
         s_name,
         list(  # collect all files from all input tokens for a given sample here
             filename
             for input_token in s_items[-1]
-            for filename in glob.glob(all_input_tokens_and_file_patterns[input_token])
-        )
+            for filename in glob.glob(all_input_tokens_and_file_patterns[input_token])        
+        )           
     )
     for s_name, s_items in config.the_samples_dict.iteritems()
 )
+print 'filename: ', filenames
+   
 # structure of filenames: {'samplename': ['/path/file1.root', ...]}
 
 # order filenames by size of the sample, so that the largest samples are started first
@@ -89,7 +95,8 @@ def mk_tree_projector(region_block):
     # plug a block of parameter together (including histogram def's)
     params = {
         'histos': histos,
-        'treename': getattr(config, 'treename', 'tree'),
+#Luca        'treename': getattr(config, 'treename', 'tree'),
+        'treename': getattr(config, 'treename', 'Events'),
         'nm1': region_block.endswith('N-1'),
     }
     params.update(getattr(config, 'params', {}))

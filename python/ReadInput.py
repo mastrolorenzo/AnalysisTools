@@ -45,9 +45,9 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             samples=ReadTextFile(settings["samples"], "samplefile",samplesToRun)
             for name in samples:
                 addedAtLeastOneFile=False
-                #print "is name in samplesToRun?",name,(name in samplesToRun)
+                print "is name in samplesToRun?",name,(name in samplesToRun)
                 if (runSelectedSamples and name not in samplesToRun):
-                    #print "runSelectedSamples is TRUE and",name,"not in",samplesToRun
+                    print "runSelectedSamples is TRUE and",name,"not in",samplesToRun
                     continue
                 sample=samples[name]
                 #print sample, sampledic[sample]
@@ -73,14 +73,19 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 if sample.has_key("lepFlav"):
                     samplecon.lepFlav = sample["lepFlav"]
                 #print "Reading",sample["name"],"with",len(sample["files"]),"files"
+                print "sample files: ", sample["files"]   
                 for filename in sample["files"]:
                     #print filename,filesToRun
-                    if sample["type"]==0 and len(filesToRun)!=0:
-                        if filename not in filesToRun:
-                            continue
-                        else:
-                            print "Files match!",filename
-
+                    print "sample LUCA ",sample["type"]
+                    print "len file LUCA ",len(filesToRun)
+                    print "file to run: ", filesToRun
+                    #if sample["type"]==0 and len(filesToRun)!=0:
+                    #    print 'inside the if type == 0 and files to run != 0'
+                    #    if filename not in filesToRun:
+                    #        print 'filename ', filename,' is not in the filesToRun list'
+                    #        continue
+                    #    else:
+                    #        print "Files match!",filename
                     # AnalysisManager needs to be initialized
                     # with one file at the beginning
                     if aminitialized == 0:
@@ -102,7 +107,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                             am.outputTreeName=settings["outputname"]
                     # if data and fileToRun is not empty then only run that file
                     try:
-                        #print "adding file, isBatch",isBatch
+                        print "adding file, isBatch",isBatch
                         #if not isBatch:
                         #    testfile = ROOT.TFile.Open(filename)
                         #    testfile.Recover()
@@ -213,6 +218,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
 
         return am
     elif filetype is "samplefile":
+        print "samples to runb: ", samplesToRun
         samples=MakeSampleMap(filelines,samplesToRun)
         #print "writing samples to pickle file"
         #import pickle
@@ -315,10 +321,13 @@ def MakeSampleMap(lines,samplesToRun):
         dontRun = False
         for item in line.split():
             name,value=item.split("=")
+            print "name, value",name,value
+
             if name.find("name") is 0:
                 if len(samplesToRun)>0 and str(value) not in samplesToRun:
                     line = ""
                     dontRun = True
+        print "dontRun inside MakeSampleMap, ",dontRun
         if dontRun: continue
 
         for item in line.split():

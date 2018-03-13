@@ -1,10 +1,38 @@
 
 
-lep_pt_safe = 'lepInd1 > -1 ? selLeptons_pt[lepInd1] : -1.'
+lep_pt_safe = 'lepInd1 > -1 ? selLeptons_pt_[lepInd1] : -1.'
 CMVAmax = 'Jet_btagCMVA[hJetInd1] > Jet_btagCMVA[hJetInd2] ? Jet_btagCMVA[hJetInd1] : Jet_btagCMVA[hJetInd2]'
 CMVAmin = 'Jet_btagCMVA[hJetInd1] > Jet_btagCMVA[hJetInd2] ? Jet_btagCMVA[hJetInd2] : Jet_btagCMVA[hJetInd1]'
 lepRelIso1_safe = 'isWmunu || isWenu || isZmm || isZee ? selLeptons_relIso_0 : -1'
 lepRelIso2_safe = 'isZmm || isZee ? selLeptons_relIso_1 : -1'
+
+
+vars_used_luca = {
+#   histoname            variable                               title;x-axis;y-axis             n-bins   low     up
+# signal region
+    'Vpt':              ('V_pt',                                ';p_{T}(W)@[GeV];',             30,      0,      500     ),
+    'Vmass':            ('V_mass',                              ';M_{ll}@GeV;',                 25,      0,      250     ),
+#    'lepPt':            (lep_pt_safe,                           ';Lepton@p_{T};',               30,      0,      300     ),
+    'Hpt':              ('H_pt',                                ';p_{T}(jj)@GeV;',              21,      0,      350     ),
+    'Hmass':            ('H_mass',                              ';M_{jj}@GeV;',                 25,      0,      250     ),
+    'CMVAmax':          (CMVAmax,                               ';CMVA_{max};',                 60,      -1,     1       ),
+    'CMVAmin':          (CMVAmin,                               ';CMVA_{min};',                 60,      -1,     1       ),
+    'nAddJets':         ('nAddJets252p9_puid',                  ';nAddJets252p9_puid;',         11,      -.5,    10.5    ),
+    'nAddLeptons':      ('nAddLeptons',                         ';nAddLeptons;',                11,      -.5,    10.5    ),
+    'met_pt':           ('MET_pt',                              ';MET@p_{T}@GeV;',              30,      0,      500     ),
+    'BDT':              ('CMS_vhbb_BDT_Wln_13TeV',              ';BDT@Output;',                 30,      -1,     1       ),
+
+# additional from 0-lepton CR selection
+#    'Vtype':            ('Vtype',                               ';Vtype;',                      10,      -.5,    9.5     ),
+#    'minMetjDPhi':      ('minMetjDPhi',                         ';MetjDPhi;',                   16,      0,      3.2     ),
+
+# additional from 1-lepton CR selection
+#    'sigma_met_pt':     ('MET_pt / sqrt(htJet30)',              ';#sigma(p_{T}^{miss});',       20,      0,      10      ),
+
+# other
+    'cutFlow':          ('cutFlow',                             ';cutFlow;',                    15,      -.5,    14.5    ),
+    'controlSample':    ('controlSample',                       ';controlSample;',              30,      -1.5,   28.5    ),
+}
 
 
 vars_used_in_selections = {
@@ -12,7 +40,7 @@ vars_used_in_selections = {
 # signal region
     'Vpt':              ('V_pt',                                ';p_{T}(W)@[GeV];',             30,      0,      500     ),
     'Vmass':            ('V_mass',                              ';M_{ll}@GeV;',                 25,      0,      250     ),
-    'lepPt':            (lep_pt_safe,                           ';Lepton@p_{T};',               30,      0,      300     ),
+#    'lepPt':            (lep_pt_safe,                           ';Lepton@p_{T};',               30,      0,      300     ),
     'jetleadpt':        ('Jet_pt_reg[hJetInd1]',                ';Jet1@P_{T}@GeV;',             30,      0,      500     ),
     'jetsubleadpt':     ('Jet_pt_reg[hJetInd2]',                ';Jet2@P_{T}@GeV;',             25,      0,      250     ),
     'Hpt':              ('H_pt',                                ';p_{T}(jj)@GeV;',              21,      0,      350     ),
@@ -22,7 +50,7 @@ vars_used_in_selections = {
     'CMVAmin':          (CMVAmin,                               ';CMVA_{min};',                 60,      -1,     1       ),
     'nAddJets':         ('nAddJets252p9_puid',                  ';nAddJets252p9_puid;',         11,      -.5,    10.5    ),
     'nAddLeptons':      ('nAddLeptons',                         ';nAddLeptons;',                11,      -.5,    10.5    ),
-    'met_pt':           ('met_pt',                              ';MET@p_{T}@GeV;',              30,      0,      500     ),
+    'met_pt':           ('MET_pt',                              ';MET@p_{T}@GeV;',              30,      0,      500     ),
     # MetjDPhi not yet in tree
     'MetTkMetDPhi':     ('MetTkMetDPhi',                        ';MetTkMetDPhi;',               16,      0,      3.2     ),
     'lepMetDPhi':       ('lepMetDPhi',                          ';lepMetDPhi;',                 16,      0,      3.2     ),
@@ -35,7 +63,7 @@ vars_used_in_selections = {
     'minMetjDPhi':      ('minMetjDPhi',                         ';MetjDPhi;',                   16,      0,      3.2     ),
 
 # additional from 1-lepton CR selection
-    'sigma_met_pt':     ('met_pt / sqrt(htJet30)',              ';#sigma(p_{T}^{miss});',       20,      0,      10      ),
+    'sigma_met_pt':     ('MET_pt / sqrt(htJet30)',              ';#sigma(p_{T}^{miss});',       20,      0,      10      ),
 
 # other
     'cutFlow':          ('cutFlow',                             ';cutFlow;',                    15,      -.5,    14.5    ),
@@ -57,9 +85,9 @@ vars_1lepCR_only = {  # copied from plotvariables_CS.dat
 
 # lepton
     'lepRelIso':        ('selLeptons_relIso_0',                 ';Lep@Rel@Iso;',                20,      0,      0.2     ),
-    'lepPt':            ('selLeptons_pt[lepInd1]',              ';Lepton@p_{T};',               30,      0,      300     ),
-    'lepPhi':           ('selLeptons_phi[lepInd1]',             ';Lepton@#phi;',                30,      -3.2,   3.2     ),
-    'lepEta':           ('selLeptons_eta[lepInd1]',             ';Lepton@#eta;',                30,      -3,     3       ),
+    'lepPt':            ('selLeptons_pt_[lepInd1]',              ';Lepton@p_{T};',               30,      0,      300     ),
+    'lepPhi':           ('selLeptons_phi_[lepInd1]',             ';Lepton@#phi;',                30,      -3.2,   3.2     ),
+    'lepEta':           ('selLeptons_eta_[lepInd1]',             ';Lepton@#eta;',                30,      -3,     3       ),
 
 # DiJet Variables
     'mjj':              ('H_mass',                              ';M_{jj}@GeV;',                 25,      0,      250     ),
@@ -72,12 +100,12 @@ vars_1lepCR_only = {  # copied from plotvariables_CS.dat
     'HVdPhi':           ('HVdPhi',                              ';HVdPhi;',                     16,      0,      3.2     ),
 
 # MET
-    'met_pt':           ('met_pt',                              ';MET@p_{T}@GeV;',              30,      0,      500     ),
+    'met_pt':           ('MET_pt',                              ';MET@p_{T}@GeV;',              30,      0,      500     ),
     'met_phi':          ('met_phi',                             ';MET@Phi;',                    30,      -3.15,  3.15    ),
     'lepMetDPhi':       ('lepMetDPhi',                          ';Lep+Met@d#phi;',              30,      0,      3.14    ),
     'sqrtHTJet30':      ('sqrt(htJet30)',                       ';sqrt(htJet30);',              25,      0,      50      ),
-    'MetSig':           ('met_pt/sqrt(htJet30)',                ';MET@Sig;',                    25,      0,      25      ),
-    'min_met':          ('min(met_pt,mhtJet30)',                ';min(MET,MHT);',               25,      0,      400     ),
+    'MetSig':           ('MET_pt/sqrt(htJet30)',                ';MET@Sig;',                    25,      0,      25      ),
+    'min_met':          ('min(MET_pt,mhtJet30)',                ';min(MET,MHT);',               25,      0,      400     ),
 
 # BDT
     'BDT':              ('CMS_vhbb_BDT_Wln_13TeV',              ';BDT@Output;',                 30,      -1,     1       ),
@@ -106,15 +134,15 @@ vars_2lepCR_only = {
     'jjWPtBal':         ('H_pt/V_pt',   ';p_{T} balance after regression;', 25,      0,      2.     ),
     'drjj':             ('HJ1_HJ2_dR',  ';reg. Delta R(jj);',               30,      0,      6      ),
 
-    'lep1Pt':            ('selLeptons_pt[lepInd1]',              ';1st Lepton@p_{T};',               30,      0,      150     ),
-    'lep1Phi':           ('selLeptons_phi[lepInd1]',             ';1st Lepton@#phi;',                30,      -3.2,   3.2     ),
-    'lep1Eta':           ('selLeptons_eta[lepInd1]',             ';1st Lepton@#eta;',                30,      -3,     3       ),
+    'lep1Pt':            ('selLeptons_pt_[lepInd1]',              ';1st Lepton@p_{T};',               30,      0,      150     ),
+    'lep1Phi':           ('selLeptons_phi_[lepInd1]',             ';1st Lepton@#phi;',                30,      -3.2,   3.2     ),
+    'lep1Eta':           ('selLeptons_eta_[lepInd1]',             ';1st Lepton@#eta;',                30,      -3,     3       ),
     'lep1IDMu':          ('selLeptons_looseIdPOG[lepInd1]',      ';1st Lepton mu ID;',               6,      -1.5,    4.5     ),
     'lep1IDEl':          ('selLeptons_eleMVAIdSppring16GenPurp[lepInd1]', ';1st Lepton ele ID;',     6,      -1.5,    4.5     ),
 
-    'lep2Pt':            ('selLeptons_pt[lepInd2]',              ';2nd Lepton@p_{T};',               30,      0,      150     ),
-    'lep2Phi':           ('selLeptons_phi[lepInd2]',             ';2nd Lepton@#phi;',                30,      -3.2,   3.2     ),
-    'lep2Eta':           ('selLeptons_eta[lepInd2]',             ';2nd Lepton@#eta;',                30,      -3,     3       ),
+    'lep2Pt':            ('selLeptons_pt_[lepInd2]',              ';2nd Lepton@p_{T};',               30,      0,      150     ),
+    'lep2Phi':           ('selLeptons_phi_[lepInd2]',             ';2nd Lepton@#phi;',                30,      -3.2,   3.2     ),
+    'lep2Eta':           ('selLeptons_eta_[lepInd2]',             ';2nd Lepton@#eta;',                30,      -3,     3       ),
     'lep2IDMu':          ('selLeptons_looseIdPOG[lepInd2]',      ';2nd Lepton mu ID;',               6,      -1.5,    4.5     ),
     'lep2IDEl':          ('selLeptons_eleMVAIdSppring16GenPurp[lepInd2]', ';2nd Lepton ele ID;',     6,      -1.5,    4.5     ),
 }
