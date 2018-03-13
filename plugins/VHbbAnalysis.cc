@@ -3166,16 +3166,16 @@ TLorentzVector VHbbAnalysis::getNu4Momentum(const TLorentzVector& TLepton, const
         //std::cout<<"a "<<EquationA << " b " << EquationB  <<" c "<< EquationC <<" d "<< EquationD << std::endl;
 
         //if(usePxMinusSolutions_){
-//Luca          for( int i =0; i< (int)solutions.size();++i){
-//Luca          if(solutions[i]<0 ) continue;
-//Luca          double p_x = (solutions[i]*solutions[i]-mW*mW)/(4*pxlep);
-//Luca          double p_y = ( mW*mW*pylep + 2*pxlep*pylep*p_x -mW*ptlep*solutions[i])/(2*pxlep*pxlep);
-//Luca          double Delta2 = (p_x-metpx)*(p_x-metpx)+(p_y-metpy)*(p_y-metpy);
-//Luca
-//Luca                //std::cout<<"intermediate solution1 met x "<<metpx << " min px " << p_x  <<" met y "<<metpy <<" min py "<< p_y << std::endl;
-//Luca
-//Luca               //std::cout<<"solution1 met x "<<metpx << " min px " << minPx  <<" met y "<<metpy <<" min py "<< minPy << std::endl;
-//Luca          }
+//          for( int i =0; i< (int)solutions.size();++i){
+//          if(solutions[i]<0 ) continue;
+//          double p_x = (solutions[i]*solutions[i]-mW*mW)/(4*pxlep);
+//          double p_y = ( mW*mW*pylep + 2*pxlep*pylep*p_x -mW*ptlep*solutions[i])/(2*pxlep*pxlep);
+//          double Delta2 = (p_x-metpx)*(p_x-metpx)+(p_y-metpy)*(p_y-metpy);
+//
+//                //std::cout<<"intermediate solution1 met x "<<metpx << " min px " << p_x  <<" met y "<<metpy <<" min py "<< p_y << std::endl;
+//
+//               //std::cout<<"solution1 met x "<<metpx << " min px " << minPx  <<" met y "<<metpy <<" min py "<< minPy << std::endl;
+//          }
         //}
 
 
