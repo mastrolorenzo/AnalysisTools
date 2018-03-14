@@ -27,7 +27,11 @@ class VHbbAnalysis : public AnalysisManager {
 
 	std::string taggerName;
 	void SetTaggerName(float taggerType);
-		
+
+	TH1D* hist_wp; 
+	TH1D* hist_wm;
+	TH1D* hist_zll;
+
         std::pair<int,int> HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut);
         std::pair<int,int> HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso);
         bool ElectronSelection(int);
