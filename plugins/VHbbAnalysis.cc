@@ -2121,6 +2121,9 @@ void VHbbAnalysis::FinishEvent() {
 	}else if( mInt("sampleIndex") == -12502 ){
 	  float V_pt =  m("GenVbosons_pt",0);
 	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_zll );
+	}else if( mInt("sampleIndex") == -12504 ){
+	  float V_pt =  m("GenVbosons_pt",0);
+	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_znn );
 	}else{
 	  VHCorrFactor[0] = 1.0;
 	}
