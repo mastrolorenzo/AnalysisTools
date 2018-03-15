@@ -23,19 +23,23 @@ void VHbbAnalysis::InitAnalysis() {
     //SetupBDT();
     
     /* Open the files with the EWK correction factor */
-    TFile* wpfile = new TFile("../scripts/VHSignalCorrections/Wp_nloEWK_weight_unnormalized.root","READ");
+    TFile* wpfile = new TFile("../VHbbAnalysis/aux/Wp_nloEWK_weight_unnormalized.root","READ");
     TH1D* hist_wp = (TH1D*)wpfile->Get("SignalWeight_nloEWK");
-    TFile* wmfile = new TFile("../scripts/VHSignalCorrections/Wm_nloEWK_weight_unnormalized.root","READ");
+    TFile* wmfile = new TFile("../VHbbAnalysis/aux/Wm_nloEWK_weight_unnormalized.root","READ");
     TH1D* hist_wm = (TH1D*)wmfile->Get("SignalWeight_nloEWK");
-    TFile* zllfile = new TFile("../scripts/VHSignalCorrections/Zll_nloEWK_weight_unnormalized.root","READ");
+    TFile* zllfile = new TFile("../VHbbAnalysis/aux/Zll_nloEWK_weight_unnormalized.root","READ");
     TH1D* hist_zll = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
-  
+    TFile* znnfile = new TFile("../VHbbAnalysis/aux/Znn_nloEWK_weight_unnormalized.root","READ");
+    TH1D* hist_znn = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
+    
     hist_wp->Rebin(4);
     hist_wp->Scale(1./4.);
     hist_wm->Rebin(4);
     hist_wm->Scale(1./4.);
     hist_zll->Rebin(4);
     hist_zll->Scale(1./4.);
+    hist_znn->Rebin(4);
+    hist_znn->Scale(1./4.);
 
     return;
 }
