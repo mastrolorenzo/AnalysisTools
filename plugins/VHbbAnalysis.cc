@@ -21,6 +21,26 @@ VHbbAnalysis::~VHbbAnalysis() {
 //probably want to do bdtSetup here
 void VHbbAnalysis::InitAnalysis() {
     //SetupBDT();
+    
+    /* Open the files with the EWK correction factor */
+    TFile* wpfile = new TFile("../VHbbAnalysis/aux/Wp_nloEWK_weight_unnormalized.root","READ");
+    TH1D* hist_wp = (TH1D*)wpfile->Get("SignalWeight_nloEWK");
+    TFile* wmfile = new TFile("../VHbbAnalysis/aux/Wm_nloEWK_weight_unnormalized.root","READ");
+    TH1D* hist_wm = (TH1D*)wmfile->Get("SignalWeight_nloEWK");
+    TFile* zllfile = new TFile("../VHbbAnalysis/aux/Zll_nloEWK_weight_unnormalized.root","READ");
+    TH1D* hist_zll = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
+    TFile* znnfile = new TFile("../VHbbAnalysis/aux/Znn_nloEWK_weight_unnormalized.root","READ");
+    TH1D* hist_znn = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
+    
+    hist_wp->Rebin(4);
+    hist_wp->Scale(1./4.);
+    hist_wm->Rebin(4);
+    hist_wm->Scale(1./4.);
+    hist_zll->Rebin(4);
+    hist_zll->Scale(1./4.);
+    hist_znn->Rebin(4);
+    hist_znn->Scale(1./4.);
+
     return;
 }
 
@@ -44,6 +64,21 @@ void VHbbAnalysis::SetTaggerName( float taggerType ){
 
 }
 
+//function used to get the EWK correction factor
+float getVHCorrFactor( float V_pt, TH1D* hist ){
+        
+  int ibin = hist->GetXaxis()->FindBin(V_pt);
+  
+  if (ibin < 1){ 
+    return hist->GetBinContent(1); 
+  }
+  if (ibin > hist->GetNbinsX()){ 
+    return hist->GetBinContent(hist->GetNbinsX()); 
+  }
+    
+  return hist->GetBinContent(ibin);
+    
+}
 
 // Check if events pass preselection.
 // Returns true for events passing the preselection and false otherwise.
@@ -2148,6 +2183,36 @@ void VHbbAnalysis::FinishEvent() {
             *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("Lep_SF");
         }
         
+	/* APPLY ELECTROWEAK CORRECTION */
+	
+	float VHCorrFactor[1] = {0.0};
+
+	outputTree->Branch("VHCorrFactor", VHCorrFactor, "VHCorrFactor/D");
+	
+	if( mInt("nGenVbosons",0) != 1 ){
+	  VHCorrFactor[0] = 1.0;
+	}else if( mInt("sampleIndex") == -12500 ){
+	  float V_pt = m("LeadGenVBoson_pt",0);
+	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_wp );
+	}else if( mInt("sampleIndex") == -12501 ){
+	  float V_pt =  m("LeadGenVBoson_pt",0);
+	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_wm );
+	}else if( mInt("sampleIndex") == -12502 ){
+	  float V_pt =  m("LeadGenVBoson_pt",0);
+	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_zll );
+	}else if( mInt("sampleIndex") == -12504 ){
+	  float V_pt =  m("LeadGenVBoson_pt",0);
+	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_znn );
+	}else{
+	  VHCorrFactor[0] = 1.0;
+	}
+    
+	outputTree->Fill();
+	
+	ofile->cd();
+
+	/* ELECTROWEAK CORRECTION APPLIED*/
+
         // Add NLO to LO W+jet re-weighting from Z(ll)H(bb)
         // FIXME need a flag for LO vs NLO
         int sampleIndex = mInt("sampleIndex");
