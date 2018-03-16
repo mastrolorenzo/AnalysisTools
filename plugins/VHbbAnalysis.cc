@@ -2192,16 +2192,16 @@ void VHbbAnalysis::FinishEvent() {
 	if( mInt("nGenVbosons",0) != 1 ){
 	  VHCorrFactor[0] = 1.0;
 	}else if( mInt("sampleIndex") == -12500 ){
-	  float V_pt = m("GenVbosons_pt",0);
+	  float V_pt = m("LeadGenVBoson_pt",0);
 	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_wp );
 	}else if( mInt("sampleIndex") == -12501 ){
-	  float V_pt =  m("GenVbosons_pt",0);
+	  float V_pt =  m("LeadGenVBoson_pt",0);
 	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_wm );
 	}else if( mInt("sampleIndex") == -12502 ){
-	  float V_pt =  m("GenVbosons_pt",0);
+	  float V_pt =  m("LeadGenVBoson_pt",0);
 	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_zll );
 	}else if( mInt("sampleIndex") == -12504 ){
-	  float V_pt =  m("GenVbosons_pt",0);
+	  float V_pt =  m("LeadGenVBoson_pt",0);
 	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_znn );
 	}else{
 	  VHCorrFactor[0] = 1.0;
