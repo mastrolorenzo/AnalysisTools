@@ -28,9 +28,10 @@ class VHbbAnalysis : public AnalysisManager {
         std::string taggerName;
         void SetTaggerName(float taggerType);
 
-        TH1D* hist_wp; 
-        TH1D* hist_wm;
-        TH1D* hist_zll;
+        TH1D* ewkCorrHist_wp; 
+        TH1D* ewkCorrHist_wm;
+        TH1D* ewkCorrHist_zll;
+        TH1D* ewkCorrHist_znn;
 
         std::pair<int,int> HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut);
         std::pair<int,int> HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso);
@@ -53,6 +54,7 @@ class VHbbAnalysis : public AnalysisManager {
         float ptWeightEWK(int nGenVbosons=0, float GenVbosons_pt=0., int VtypeSim=0, int GenVbosons_pdgId=0);
         TLorentzVector getNu4Momentum(const TLorentzVector& TLepton, const TLorentzVector& TMET);
         double LOtoNLOWeightBjetSplitEtabb(double etabb=10., int njets=0);
+        float GetVHEWKCorrFactor( float V_pt, TH1D* hist );
         float getVPtCorrFactor(float V_pt=0.);
         float getVPtCorrFactorUp(float V_pt=0.);
         float getVPtCorrFactorDown(float V_pt=0.);

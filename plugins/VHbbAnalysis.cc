@@ -24,60 +24,24 @@ void VHbbAnalysis::InitAnalysis() {
     
     /* Open the files with the EWK correction factor */
     TFile* wpfile = new TFile("../VHbbAnalysis/aux/Wp_nloEWK_weight_unnormalized.root","READ");
-    TH1D* hist_wp = (TH1D*)wpfile->Get("SignalWeight_nloEWK");
+    ewkCorrHist_wp = (TH1D*)wpfile->Get("SignalWeight_nloEWK");
     TFile* wmfile = new TFile("../VHbbAnalysis/aux/Wm_nloEWK_weight_unnormalized.root","READ");
-    TH1D* hist_wm = (TH1D*)wmfile->Get("SignalWeight_nloEWK");
+    ewkCorrHist_wm = (TH1D*)wmfile->Get("SignalWeight_nloEWK");
     TFile* zllfile = new TFile("../VHbbAnalysis/aux/Zll_nloEWK_weight_unnormalized.root","READ");
-    TH1D* hist_zll = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
+    ewkCorrHist_zll = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
     TFile* znnfile = new TFile("../VHbbAnalysis/aux/Znn_nloEWK_weight_unnormalized.root","READ");
-    TH1D* hist_znn = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
+    ewkCorrHist_znn = (TH1D*)znnfile->Get("SignalWeight_nloEWK");
     
-    hist_wp->Rebin(4);
-    hist_wp->Scale(1./4.);
-    hist_wm->Rebin(4);
-    hist_wm->Scale(1./4.);
-    hist_zll->Rebin(4);
-    hist_zll->Scale(1./4.);
-    hist_znn->Rebin(4);
-    hist_znn->Scale(1./4.);
+    ewkCorrHist_wp->Rebin(4);
+    ewkCorrHist_wp->Scale(1./4.);
+    ewkCorrHist_wm->Rebin(4);
+    ewkCorrHist_wm->Scale(1./4.);
+    ewkCorrHist_zll->Rebin(4);
+    ewkCorrHist_zll->Scale(1./4.);
+    ewkCorrHist_znn->Rebin(4);
+    ewkCorrHist_znn->Scale(1./4.);
 
     return;
-}
-
-//Member of VHbbAnalysis that convert the tagger type specified in the settings_2016.txt into the corresponding string
-void VHbbAnalysis::SetTaggerName( float taggerType ){
- 
-  std::string name; 
-
-  if( m("taggerType")==0 ){ 
-    name.append("Jet_btagDeepB");
-  }else if(  m("taggerType")==1 ){
-    name.append("Jet_btagCMVA");
-  }else if( m("taggerType")==2 ){
-    name.append("Jet_btagCSVV2");
-  }else{
-    std::cout << "Invalid tagger type, setting the tagger name to its defauld value: CMVA" << std::endl;
-      name.append("Jet_btagCMVA");
-  }
-  
-  taggerName = name;
-
-}
-
-//function used to get the EWK correction factor
-float getVHCorrFactor( float V_pt, TH1D* hist ){
-        
-  int ibin = hist->GetXaxis()->FindBin(V_pt);
-  
-  if (ibin < 1){ 
-    return hist->GetBinContent(1); 
-  }
-  if (ibin > hist->GetNbinsX()){ 
-    return hist->GetBinContent(hist->GetNbinsX()); 
-  }
-    
-  return hist->GetBinContent(ibin);
-    
 }
 
 // Check if events pass preselection.
@@ -224,7 +188,7 @@ bool VHbbAnalysis::Preselection() {
         fatJetPtCut       = std::min(m("fatJetPtCut_0lepchan")      ,m("fatJetPtCut_1lepchan"));
         fatJetPtCut       = std::min((double)fatJetPtCut            ,m("fatJetPtCut_2lepchan"));
         
-        for(unsigned int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
+        for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
             if(m("FatJet_pt",iFatJet)>fatJetPtCut){
                 atLeastOnePreselFatJet=true;
                 break;
@@ -1471,7 +1435,6 @@ void VHbbAnalysis::FinishEvent() {
     }
 
     *f["weight_ptQCD"] = 1.0;
-    *f["weight_ptEWK"] = 1.0;
 
     if(mInt("sampleIndex")!=0){
         if (m("doICHEP") != 1) {
@@ -1491,8 +1454,7 @@ void VHbbAnalysis::FinishEvent() {
         if (mInt("nGenTop")==0 && mInt("nGenVbosons")>0) {
             // only apply to Z/W+jet samples
             *f["weight_ptQCD"]=ptWeightQCD(mInt("nGenVbosons"), m("LHE_HT"), mInt("LeadGenVBoson_pdgId"));
-            *f["weight_ptEWK"]=ptWeightEWK(mInt("nGenVbosons"), m("LeadGenVBoson_pt"), m("Vtype"), mInt("LeadGenVBoson_pdgId"));
-	}
+        }
     } else {
         *f["weight_PU"]=1;
         *f["weight_PUUp"]=1;
@@ -2176,6 +2138,32 @@ void VHbbAnalysis::FinishEvent() {
            }
         }
 
+        /* GET ELECTROWEAK CORRECTION */
+        
+        *f["weight_ptEWK"] = 1.0;
+        if(mInt("sampleIndex")<0){
+            if( mInt("nGenVbosons",0) == 1 ){
+                TH1D* thisHist;
+                if( mInt("sampleIndex") == -12500 ){        
+                    thisHist=ewkCorrHist_wp ;
+                } else if( mInt("sampleIndex") == -12501 ){  
+                    thisHist=ewkCorrHist_wm ;
+                } else if( mInt("sampleIndex") == -12502 ){  
+                    thisHist=ewkCorrHist_zll ;
+                } else if( mInt("sampleIndex") == -12504 ){  
+                    thisHist=ewkCorrHist_znn ;
+                }
+                if(thisHist){
+                    *f["weight_ptEWK"] = GetVHEWKCorrFactor( m("V_pt"), thisHist );
+                }
+                if(debug>1000) std::cout<<"weight_ptEWK V_pt "<< m("V_pt")<<" "<<*f["weight_ptEWK"]<<std::endl;
+            }
+        }
+        // FIXME this is what was done before;  shall we remove the method?
+        //*f["weight_ptEWK"]=ptWeightEWK(mInt("nGenVbosons"), m("LeadGenVBoson_pt"), m("Vtype"), mInt("LeadGenVBoson_pdgId"));
+
+        /* ELECTROWEAK CORRECTION APPLIED*/
+
         if (m("doCutFlow")>0 && m("cutFlow")<5) {
             // lepton scale factor calculation will break for some events in the cutflow before lepton selection
             *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK");
@@ -2183,36 +2171,6 @@ void VHbbAnalysis::FinishEvent() {
             *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("Lep_SF");
         }
         
-	/* APPLY ELECTROWEAK CORRECTION */
-	
-	float VHCorrFactor[1] = {0.0};
-
-	outputTree->Branch("VHCorrFactor", VHCorrFactor, "VHCorrFactor/D");
-	
-	if( mInt("nGenVbosons",0) != 1 ){
-	  VHCorrFactor[0] = 1.0;
-	}else if( mInt("sampleIndex") == -12500 ){
-	  float V_pt = m("LeadGenVBoson_pt",0);
-	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_wp );
-	}else if( mInt("sampleIndex") == -12501 ){
-	  float V_pt =  m("LeadGenVBoson_pt",0);
-	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_wm );
-	}else if( mInt("sampleIndex") == -12502 ){
-	  float V_pt =  m("LeadGenVBoson_pt",0);
-	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_zll );
-	}else if( mInt("sampleIndex") == -12504 ){
-	  float V_pt =  m("LeadGenVBoson_pt",0);
-	  VHCorrFactor[0] = getVHCorrFactor( V_pt, hist_znn );
-	}else{
-	  VHCorrFactor[0] = 1.0;
-	}
-    
-	outputTree->Fill();
-	
-	ofile->cd();
-
-	/* ELECTROWEAK CORRECTION APPLIED*/
-
         // Add NLO to LO W+jet re-weighting from Z(ll)H(bb)
         // FIXME need a flag for LO vs NLO
         int sampleIndex = mInt("sampleIndex");
@@ -2277,7 +2235,7 @@ void VHbbAnalysis::FatJetSelection(){
 
         float highestPt=0;  // I'm assuming highest fat jet pt is best... maybe not?
         float tau2OverTau1=100;
-        for(unsigned int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
+        for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
             tau2OverTau1=m("FatJet_tau2",iFatJet)/m("FatJet_tau1",iFatJet);
             if(m("FatJet_pt",iFatJet)>fatJetPtCut 
                     && m("FatJet_btagHbb",iFatJet)>fatJetBBTaggerCut
@@ -2301,7 +2259,7 @@ void VHbbAnalysis::BoostedSelection(){
             *f["nLooseBtagsDR1p0"]=0;
             *f["nLooseBtagsDR0p8"]=0;
 
-            for(unsigned int iJet=0;iJet<mInt("nJet");iJet++){
+            for(int iJet=0;iJet<mInt("nJet");iJet++){
                 if(m(taggerName,iJet)>m("tagWPL")){
                     TLorentzVector looseBJet;
                     looseBJet.SetPtEtaPhiM(m("Jet_bReg",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_bReg",iJet) / m("Jet_pt",iJet) ) );
@@ -2319,7 +2277,7 @@ void VHbbAnalysis::BoostedSelection(){
             // not including h mass window selection.  can do with ntuples
             if(m("FatJetVdPhi")>2.9 && m("V_pt")>230){
                 bool closeJetVeto=false;
-                for(unsigned int iJet=0;iJet<mInt("nJet");iJet++){
+                for(int iJet=0;iJet<mInt("nJet");iJet++){
                     if(m("Jet_Pt",iJet)>25){
                         TLorentzVector aJet;
                         aJet.SetPtEtaPhiM(m("Jet_Pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_Pt",iJet) / m("Jet_pt",iJet) ) );
@@ -2700,6 +2658,38 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
         std::cout<<"What is this?  Run 1?  Run 3?  2018? "<<std::endl;
     }
     return true;
+}
+
+//Member of VHbbAnalysis that convert the tagger type specified in settings.txt into the corresponding string
+void VHbbAnalysis::SetTaggerName( float taggerType ){
+    std::string name; 
+    
+    if( m("taggerType")==0 ){ 
+        name.append("Jet_btagDeepB");
+    } else if(  m("taggerType")==1 ){
+        name.append("Jet_btagCMVA");
+    } else if( m("taggerType")==2 ){
+        name.append("Jet_btagCSVV2");
+    } else {
+        std::cout << "Invalid tagger type, setting the tagger name to its defauld value: CMVA" << std::endl;
+        name.append("Jet_btagCMVA");
+    }
+    
+    taggerName = name;
+}
+
+//function used to get the EWK correction factor
+float VHbbAnalysis::GetVHEWKCorrFactor( float V_pt, TH1D* hist ){
+    int ibin = hist->GetXaxis()->FindBin(V_pt);
+    
+    if (ibin < 1){ 
+        return hist->GetBinContent(1); 
+    }
+    if (ibin > hist->GetNbinsX()){ 
+        return hist->GetBinContent(hist->GetNbinsX()); 
+    }
+      
+    return hist->GetBinContent(ibin);
 }
 
 std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
