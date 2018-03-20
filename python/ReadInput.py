@@ -75,7 +75,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 #print "Reading",sample["name"],"with",len(sample["files"]),"files"
                 for filename in sample["files"]:
                     #print filename,filesToRun
-                    if sample["type"]==0 and len(filesToRun)!=0:
+                    if sample["type"]==0 and len(filesToRun)!=0 and len(filesToRun[0])!=0:
                         if filename not in filesToRun:
                             continue
                         else:
