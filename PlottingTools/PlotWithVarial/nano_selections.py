@@ -83,10 +83,10 @@ cs_1lep_sel = no_sel + [
 # this dictionary is used for setting up the plotting tools
 the_category_dict = {
 #   region block     categories               sel.         histograms
-    'AllRegions':   [cats_all_regions,        no_sel,      nano_plotvariables.vars_used_in_selections],
-    'CR_2LeptLO':   [cats_CR_2Lepton_lowVpt,  no_sel,      nano_plotvariables.vars_2lepCR],
+  #  'AllRegions':   [cats_all_regions,        no_sel,      nano_plotvariables.vars_used_in_selections],
+  #  'CR_2LeptLO':   [cats_CR_2Lepton_lowVpt,  no_sel,      nano_plotvariables.vars_2lepCR],
     'CR_2LeptHI':   [cats_CR_2Lepton_highVpt, no_sel,      nano_plotvariables.vars_2lepCR],
-    'CR_1Lepton':   [cats_CR_1Lepton,         cs_1lep_sel, nano_plotvariables.vars_1lepCR],
-    'CR_0Lepton':   [cats_CR_0Lepton,         no_sel,      nano_plotvariables.vars_used_in_selections],
-    'SR':           [cats_SR,                 sr_sel,      nano_plotvariables.vars_used_in_selections],
+  #  'CR_1Lepton':   [cats_CR_1Lepton,         cs_1lep_sel, nano_plotvariables.vars_1lepCR],
+  #  'CR_0Lepton':   [cats_CR_0Lepton,         no_sel,      nano_plotvariables.vars_used_in_selections],
+  #  'SR':           [cats_SR,                 sr_sel,      nano_plotvariables.vars_used_in_selections],
 }
