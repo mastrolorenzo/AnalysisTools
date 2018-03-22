@@ -23,13 +23,13 @@ void VHbbAnalysis::InitAnalysis() {
     //SetupBDT();
     
     /* Open the files with the EWK correction factor */
-    TFile* wpfile = new TFile("../VHbbAnalysis/aux/Wp_nloEWK_weight_unnormalized.root","READ");
+    TFile* wpfile = new TFile("./aux/Wp_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_wp = (TH1D*)wpfile->Get("SignalWeight_nloEWK");
-    TFile* wmfile = new TFile("../VHbbAnalysis/aux/Wm_nloEWK_weight_unnormalized.root","READ");
+    TFile* wmfile = new TFile("./aux/Wm_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_wm = (TH1D*)wmfile->Get("SignalWeight_nloEWK");
-    TFile* zllfile = new TFile("../VHbbAnalysis/aux/Zll_nloEWK_weight_unnormalized.root","READ");
+    TFile* zllfile = new TFile("./aux/Zll_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_zll = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
-    TFile* znnfile = new TFile("../VHbbAnalysis/aux/Znn_nloEWK_weight_unnormalized.root","READ");
+    TFile* znnfile = new TFile("./aux/Znn_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_znn = (TH1D*)znnfile->Get("SignalWeight_nloEWK");
     
     ewkCorrHist_wp->Rebin(4);
