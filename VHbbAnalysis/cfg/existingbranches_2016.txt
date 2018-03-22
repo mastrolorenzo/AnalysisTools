@@ -23,11 +23,11 @@ type=2  name=Pileup_nTrueInt                            onlyMC=1
 type=2  name=Pileup_nPU                                 onlyMC=1
 type=2  name=genWeight                                  onlyMC=1
 type=1  name=nGenJet                                    onlyMC=1
-type=7  name=GenJet_pt                          max=20  onlyMC=1
-type=7  name=GenJet_eta                         max=20  onlyMC=1
-type=7  name=GenJet_phi                         max=20  onlyMC=1
-type=7  name=GenJet_mass                        max=20  onlyMC=1
-type=1  name=GenJet_hadronFlavour               max=20  onlyMC=1
+type=7  name=GenJet_pt                          max=30  onlyMC=1 lengthBranch=nGenJet
+type=7  name=GenJet_eta                         max=30  onlyMC=1 lengthBranch=nGenJet
+type=7  name=GenJet_phi                         max=30  onlyMC=1 lengthBranch=nGenJet
+type=7  name=GenJet_mass                        max=30  onlyMC=1 lengthBranch=nGenJet
+type=1  name=GenJet_hadronFlavour               max=30  onlyMC=1 lengthBranch=nGenJet
 
 type=2  name=LHE_Nc  onlyMC=1
 
@@ -214,9 +214,9 @@ type=6  name=Jet_jetId                        max=100     lengthBranch=nJet
 #type=6  name=Jet_puId                         max=100     lengthBranch=nJet
 
 type=1  name=nSoftActivityJet
-type=7  name=SoftActivityJet_pt              max=50
-type=7  name=SoftActivityJet_eta             max=50
-type=7  name=SoftActivityJetHT               max=50
+type=7  name=SoftActivityJet_pt              max=50    lengthBranch=nSoftActivityJet
+type=7  name=SoftActivityJet_eta             max=50    lengthBranch=nSoftActivityJet
+type=7  name=SoftActivityJetHT               max=50    lengthBranch=nSoftActivityJet
 type=1 name=SoftActivityJetNjets10 
 type=1 name=SoftActivityJetNjets5 
 type=1 name=SoftActivityJetNjets2 
@@ -254,15 +254,15 @@ type=6  name=Jet_hadronFlavour                max=100     lengthBranch=nJet  onl
 ##type=7  name=Jet_ctagVsB                      max=100     lengthBranch=nJet
 
 type=0  name=nFatJet                 
-type=7  name=FatJet_btagHbb                   max=10
-type=7  name=FatJet_eta                       max=10
-type=7  name=FatJet_phi                       max=10
-type=7  name=FatJet_pt                        max=10
-type=7  name=FatJet_mass                      max=10
-type=7  name=FatJet_tau1                      max=10
-type=7  name=FatJet_tau2                      max=10
-type=7  name=FatJet_tau3                      max=10
-type=7  name=FatJet_tau4                      max=10
+type=7  name=FatJet_btagHbb                   max=10 lengthBranch=nFatJet
+type=7  name=FatJet_eta                       max=10 lengthBranch=nFatJet
+type=7  name=FatJet_phi                       max=10 lengthBranch=nFatJet
+type=7  name=FatJet_pt                        max=10 lengthBranch=nFatJet
+type=7  name=FatJet_mass                      max=10 lengthBranch=nFatJet
+type=7  name=FatJet_tau1                      max=10 lengthBranch=nFatJet
+type=7  name=FatJet_tau2                      max=10 lengthBranch=nFatJet
+type=7  name=FatJet_tau3                      max=10 lengthBranch=nFatJet
+type=7  name=FatJet_tau4                      max=10 lengthBranch=nFatJet
 
 ##type=1  name=nGenBQuarkFromH                  onlyMC=1
 ##type=7  name=GenBQuarkFromH_pt        max=10  onlyMC=1

@@ -118,6 +118,7 @@ public :
     void            ResetBranches();
     void            SetBranches();
     void            PrintBranches();
+    void            CheckBranchLengths(Long64_t entry,bool isData=false);
     void            GetEarlyEntries(Long64_t entry,bool isData=false);
     std::vector<std::string>      ListSampleNames();
     void            PrintBDTInfoValues(BDTInfo* bdt);

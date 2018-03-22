@@ -392,6 +392,36 @@ void AnalysisManager::SetNewBranches(){
     }
 }
 
+//CheckBranchLengths reads in all "early" and "existing" integer branches (branches which could be a lengthBranch),
+//then checks that the maximum length set for "early" and "existing" branches is greater than the value of a specified lengthBranch.
+//If not, the program exits cleanly.
+void AnalysisManager::CheckBranchLengths(Long64_t entry, bool isData){
+    for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
+            ibranch!=branchInfos.end(); ++ibranch){
+        if( !(isData && ibranch->second->onlyMC) && (ibranch->second->prov=="early"||ibranch->second->prov=="existing") && ibranch->second->type<2){
+            if(fChain->GetBranchStatus((ibranch->first).c_str())){
+                branches[ibranch->first]->GetEntry(entry);
+            } else if (!(ibranch->second->allowMissingBranch)){
+               std::cout<<"Branch "<<ibranch->first<<" is missing and allowMissingBranch is not set. Exiting..."<<std::endl;
+               std::exit(0);
+            }
+        }
+    }
+    for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
+            ibranch!=branchInfos.end(); ++ibranch){
+        if( !(isData && ibranch->second->onlyMC) && (ibranch->second->prov=="early"||ibranch->second->prov=="existing") && ibranch->second->type>4){
+            if((ibranch->second->lengthBranch)!=""){
+                if(ibranch->second->length < mInt((ibranch->second->lengthBranch).c_str())){
+                    std::cout<<"Branch "<<ibranch->first<< " has max length "<<ibranch->second->length<< " but lengthBranch " <<ibranch->second->lengthBranch <<" is "<<mInt((ibranch->second->lengthBranch).c_str())<<std::endl;
+                    std::cout<<"Exiting...."<<std::endl;
+                    std::exit(0);
+                 }
+            }
+        }
+     }
+}
+
+
 void AnalysisManager::GetEarlyEntries(Long64_t entry, bool isData){
     for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
             ibranch!=branchInfos.end(); ++ibranch){
@@ -536,6 +566,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                 //if((jentry%10000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
 
 
+                CheckBranchLengths(jentry, cursample->sampleNum==0);
                 GetEarlyEntries(jentry, cursample->sampleNum==0);
                 bool anyPassing=false;
                 for(unsigned iSyst=0; iSyst<systematics.size(); iSyst++){
