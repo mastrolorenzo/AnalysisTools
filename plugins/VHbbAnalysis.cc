@@ -23,13 +23,13 @@ void VHbbAnalysis::InitAnalysis() {
     //SetupBDT();
     
     /* Open the files with the EWK correction factor */
-    TFile* wpfile = new TFile("../VHbbAnalysis/aux/Wp_nloEWK_weight_unnormalized.root","READ");
+    TFile* wpfile = new TFile("aux/Wp_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_wp = (TH1D*)wpfile->Get("SignalWeight_nloEWK");
-    TFile* wmfile = new TFile("../VHbbAnalysis/aux/Wm_nloEWK_weight_unnormalized.root","READ");
+    TFile* wmfile = new TFile("aux/Wm_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_wm = (TH1D*)wmfile->Get("SignalWeight_nloEWK");
-    TFile* zllfile = new TFile("../VHbbAnalysis/aux/Zll_nloEWK_weight_unnormalized.root","READ");
+    TFile* zllfile = new TFile("aux/Zll_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_zll = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
-    TFile* znnfile = new TFile("../VHbbAnalysis/aux/Znn_nloEWK_weight_unnormalized.root","READ");
+    TFile* znnfile = new TFile("aux/Znn_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_znn = (TH1D*)znnfile->Get("SignalWeight_nloEWK");
     
     ewkCorrHist_wp->Rebin(4);
@@ -871,15 +871,15 @@ bool VHbbAnalysis::Analyze() {
     if(debug>1000) std::cout<<"about to apply control region selection"<<std::endl;
 
     // Control Samples
-    float absDeltaPhiHiggsMet = m("HVdPhi");   // fabs(EvalDeltaPhi(*f["HCMVAV2_reg_phi"], *f["V_phi"]));
-    float higgsJet1BTagged = m(taggerName,mInt("hJetInd1"));
-    float higgsJet2BTagged = m(taggerName,mInt("hJetInd2"));
-    float minBTagged = std::min(higgsJet1BTagged, higgsJet2BTagged);
-    float maxBTagged = std::max(higgsJet1BTagged, higgsJet2BTagged);
-
-    float V_mass = m("V_mass"), H_mass = m("H_mass");
 
     if(m("twoResolvedJets")){
+        float absDeltaPhiHiggsMet = m("HVdPhi");   // fabs(EvalDeltaPhi(*f["HCMVAV2_reg_phi"], *f["V_phi"]));
+        float higgsJet1BTagged = m(taggerName,mInt("hJetInd1"));
+        float higgsJet2BTagged = m(taggerName,mInt("hJetInd2"));
+        float minBTagged = std::min(higgsJet1BTagged, higgsJet2BTagged);
+        float maxBTagged = std::max(higgsJet1BTagged, higgsJet2BTagged);
+
+        float V_mass = m("V_mass"), H_mass = m("H_mass");
         // 0-lepton
         bool base0LepCSSelection = (
             // Vector Boson Cuts
@@ -1048,8 +1048,7 @@ bool VHbbAnalysis::Analyze() {
         // end of 2-lepton
     }
 
-
-    if (doCutFlow && mInt("cutFlow") >= mInt("doCutFlow")) {
+    if (doCutFlow && mInt("cutFlow") >= m("doCutFlow")) {
         // keep all preselected events for cutflow
         return true;
     } else {
