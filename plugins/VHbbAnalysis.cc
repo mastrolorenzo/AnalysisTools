@@ -1732,7 +1732,7 @@ void VHbbAnalysis::FinishEvent() {
             *in["bGenJetBSum"]=mInt("bGenJetBSum")+mInt("GenJet_numBHadrons",indGJ);
         }*/
         for(int indGJ=0; indGJ<mInt("nGenJet"); indGJ++){
-            if (mInt("GenJet_hadronFlavour",indGJ) == 5) {
+            if (mInt("GenJet_hadronFlavour",indGJ) == 5 && m("GenJet_pt",indGJ)>20 && fabs(m("GenJet_eta",indGJ)<2.4)) {
                 *in["bGenBJetSum"]=mInt("bGenBJetSum") + 1;
             }
         }

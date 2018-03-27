@@ -207,8 +207,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             for sf in sfs:
                 print "add scale factor"
                 am.AddScaleFactor(sf)
-                am.SetupNewBranch(sf.branchname, 7, 10)
-                am.SetupNewBranch(sf.branchname+"_err", 7, 10)
+                am.SetupNewBranch(sf.branchname, 8, 10)
+                am.SetupNewBranch(sf.branchname+"_err", 8, 10)
                 print "added scale factor"
 
         if settings.has_key("btagscalefactors"):
