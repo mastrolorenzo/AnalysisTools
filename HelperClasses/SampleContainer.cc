@@ -56,47 +56,56 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
     sampleChain->Add(fname);
     //std::cout<<nProFromFile<<std::endl; 
     if(nProFromFile) {
-        if (doSkim == 0 && files.size() > 1) return; // skimmed files already have the summed count histograms
+        if (doSkim != 1 && files.size() > 1) return; // skimmed files already have the summed count histograms
         TFile *file = TFile::Open(fname);
         if (file->IsZombie()) return;
-        //TH1F* counter = (TH1F*)file.Get("Count");
-        //processedEvents+=counter->GetBinContent(1);
-        //TH1F* counterPos = (TH1F*)file->Get("CountPosWeight");
-        //TH1F* counterNeg = (TH1F*)file->Get("CountNegWeight");
-        /*TH1F* counter = (TH1F*)file->Get("CountWeighted");
-        TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
-        //int nEffective = counterPos->GetBinContent(1) - counterNeg->GetBinContent(1); 
-        float nEffective = counter->GetBinContent(1);
-        if(sampleNum==49 or sampleNum==491) {
-            //special prescription for WJets_BGenFilter sample weighting
+        if (doSkim == 2) {
+            // doSkim == 2 -> running on skimmed samples by AT
+            // for now our skimmed ntuples we preserve the counting by histogram structure
+            // from Heppy, since this is how the datacard maker is set up. We may want to eventually
+            // change this.
+            
+            //TH1F* counter = (TH1F*)file.Get("Count");
+            //processedEvents+=counter->GetBinContent(1);
+            //TH1F* counterPos = (TH1F*)file->Get("CountPosWeight");
+            //TH1F* counterNeg = (TH1F*)file->Get("CountNegWeight");
+            TH1F* counter = (TH1F*)file->Get("CountWeighted");
             //TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
-            nEffective = counterFullWeight->GetBinContent(1); 
+            //int nEffective = counterPos->GetBinContent(1) - counterNeg->GetBinContent(1); 
+            float nEffective = counter->GetBinContent(1);
+            //if(sampleNum==49 or sampleNum==491) {
+            //    //special prescription for WJets_BGenFilter sample weighting
+            //    //TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
+            //    nEffective = counterFullWeight->GetBinContent(1); 
+            //}
+            CountWeighted->Add(counter);
+            //CountFullWeighted->Add(counterFullWeight);
+            std::cout<<"pe = "<<processedEvents<<std::endl;
+            processedEvents += nEffective;
+            std::cout<<"pe = "<<processedEvents<<std::endl;
+            //TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightScale");
+            //TH1F* CountWeightedLHEWeightPdf_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightPdf");
+            //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
+            //CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
+            //CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
+            //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
         }
-        CountWeighted->Add(counter);
-        CountFullWeighted->Add(counterFullWeight);
-        std::cout<<"pe = "<<processedEvents<<std::endl;
-        processedEvents += nEffective;
-        std::cout<<"pe = "<<processedEvents<<std::endl;
-        TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightScale");
-        TH1F* CountWeightedLHEWeightPdf_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightPdf");
-        std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
-        CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
-        CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
-        std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;*/
 
-        // totally different setup for grabbing event count in nanoAOD
-        TTree *Runs = (TTree*) file->Get("Runs");
-        Long64_t genEventCount = 0;
-        Runs->SetBranchAddress("genEventCount",&genEventCount);
-        // one entry in Runs tree per input NanoAOD file
-        int nNanoInputFiles = Runs->GetEntries();
-        for (int i=0; i < nNanoInputFiles; i++) {
-            Runs->GetEntry(i);
-            std::cout<<fname<<" genEventCount: "<<genEventCount<<std::endl;
-            CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventCount);
-            processedEvents += genEventCount;
+        else {
+             // totally different setup for grabbing event count in nanoAOD
+             TTree *Runs = (TTree*) file->Get("Runs");
+             Long64_t genEventCount = 0;
+             Runs->SetBranchAddress("genEventCount",&genEventCount);
+             // one entry in Runs tree per input NanoAOD file
+             int nNanoInputFiles = Runs->GetEntries();
+             for (int i=0; i < nNanoInputFiles; i++) {
+                 Runs->GetEntry(i);
+                 std::cout<<fname<<" genEventCount: "<<genEventCount<<std::endl;
+                 CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventCount);
+                 processedEvents += genEventCount;
+             }
+             file->Close();
         }
-        file->Close();
     }
     
 }

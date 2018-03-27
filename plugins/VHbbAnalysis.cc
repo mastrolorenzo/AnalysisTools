@@ -354,7 +354,7 @@ bool VHbbAnalysis::Analyze() {
         if(mInt("sampleIndex")==0){//Data
             passMetFilters = passMetFilters&&m("Flag_eeBadScFilter");
         }
-        if (m("MET_pt") > m("metcut_0lepchan")
+        if (m("MET_Pt") > m("metcut_0lepchan")
             && passMetFilters) {
             *in["isZnn"] = 1;
         } else {
@@ -522,12 +522,12 @@ bool VHbbAnalysis::Analyze() {
         }
 
         // Reconstruct Higgs
-        HJ1.SetPtEtaPhiM(m("Jet_bReg",mInt("hJetInd1")), m("Jet_eta",mInt("hJetInd1")), m("Jet_phi",mInt("hJetInd1")), m("Jet_mass",mInt("hJetInd1")) * (m("Jet_bReg",mInt("hJetInd1")) / m("Jet_pt",mInt("hJetInd1"))));
-        HJ2.SetPtEtaPhiM(m("Jet_bReg",mInt("hJetInd2")), m("Jet_eta",mInt("hJetInd2")), m("Jet_phi",mInt("hJetInd2")), m("Jet_mass",mInt("hJetInd2")) * (m("Jet_bReg",mInt("hJetInd2")) / m("Jet_pt",mInt("hJetInd2"))));
+        HJ1.SetPtEtaPhiM(m("Jet_bReg",mInt("hJetInd1")), m("Jet_eta",mInt("hJetInd1")), m("Jet_phi",mInt("hJetInd1")), m("Jet_mass",mInt("hJetInd1")) * (m("Jet_bReg",mInt("hJetInd1")) / m("Jet_Pt",mInt("hJetInd1"))));
+        HJ2.SetPtEtaPhiM(m("Jet_bReg",mInt("hJetInd2")), m("Jet_eta",mInt("hJetInd2")), m("Jet_phi",mInt("hJetInd2")), m("Jet_mass",mInt("hJetInd2")) * (m("Jet_bReg",mInt("hJetInd2")) / m("Jet_Pt",mInt("hJetInd2"))));
         Hbb = HJ1 + HJ2;
 
-        HJ1_noreg.SetPtEtaPhiM(m("Jet_pt",mInt("hJetInd1")), m("Jet_eta",mInt("hJetInd1")), m("Jet_phi",mInt("hJetInd1")), m("Jet_mass",mInt("hJetInd1")));
-        HJ2_noreg.SetPtEtaPhiM(m("Jet_pt",mInt("hJetInd2")), m("Jet_eta",mInt("hJetInd2")), m("Jet_phi",mInt("hJetInd2")), m("Jet_mass",mInt("hJetInd2")));
+        HJ1_noreg.SetPtEtaPhiM(m("Jet_Pt",mInt("hJetInd1")), m("Jet_eta",mInt("hJetInd1")), m("Jet_phi",mInt("hJetInd1")), m("Jet_mass",mInt("hJetInd1")));
+        HJ2_noreg.SetPtEtaPhiM(m("Jet_Pt",mInt("hJetInd2")), m("Jet_eta",mInt("hJetInd2")), m("Jet_phi",mInt("hJetInd2")), m("Jet_mass",mInt("hJetInd2")));
         Hbb_noreg = HJ1_noreg + HJ2_noreg;
 
         *f["H_pt"] = Hbb.Pt();
@@ -605,7 +605,7 @@ bool VHbbAnalysis::Analyze() {
                       << std::endl;
         }
 
-        *f["lepMetDPhi"] = fabs(EvalDeltaPhi(m("selLeptons_phi_0"), m("MET_phi")));
+        *f["lepMetDPhi"] = fabs(EvalDeltaPhi(m("selLeptons_phi_0"), m("MET_Phi")));
 
         if (mInt("isWmunu") && m("lepMetDPhi") > m("muMetDPhiCut")) {
             *in["controlSample"] = -1;
@@ -624,10 +624,10 @@ bool VHbbAnalysis::Analyze() {
         TLorentzVector Lep, MET;
         // Reconstruct W
         if (debug > 1000) {
-            std::cout << "met " << m("MET_pt") << " " << m("MET_phi") << std::endl;
+            std::cout << "met " << m("MET_Pt") << " " << m("MET_Phi") << std::endl;
         }
 
-        MET.SetPtEtaPhiM(m("MET_pt"), 0., m("MET_phi"), 0.); // Eta/M don't affect calculation of W.pt and W.phi
+        MET.SetPtEtaPhiM(m("MET_Pt"), 0., m("MET_Phi"), 0.); // Eta/M don't affect calculation of W.pt and W.phi
         Lep.SetPtEtaPhiM(m("selLeptons_pt_0"), m("selLeptons_eta_0"), m("selLeptons_phi_0"), m("selLeptons_mass_0"));
         double cosPhi12 = (Lep.Px()*MET.Px() + Lep.Py()*MET.Py()) / (Lep.Pt() * MET.Pt()); // cos of the angle between the lepton and the missing energy
         *f["V_mt"] = TMath::Sqrt(2*Lep.Pt()*MET.Pt() * (1 - cosPhi12));
@@ -647,7 +647,7 @@ bool VHbbAnalysis::Analyze() {
         *f["Top1_mass_fromLepton_regPT_w4MET"] = GetRecoTopMass(Lep, false, 2, true); // construct top mass from closest jet to lepton
     } else if (mInt("isZnn") == 1) {
         TLorentzVector MET;
-        MET.SetPtEtaPhiM(m("MET_pt"), 0., m("MET_phi"), 0.); // Eta/M don't affect calculation of V.pt and V.phi
+        MET.SetPtEtaPhiM(m("MET_Pt"), 0., m("MET_Phi"), 0.); // Eta/M don't affect calculation of V.pt and V.phi
         V = MET;
     } else {
         std::cerr << "not any selection... can I go now?" << std::endl;  // haha, this is a good one.
@@ -871,15 +871,15 @@ bool VHbbAnalysis::Analyze() {
     if(debug>1000) std::cout<<"about to apply control region selection"<<std::endl;
 
     // Control Samples
-    float absDeltaPhiHiggsMet = m("HVdPhi");   // fabs(EvalDeltaPhi(*f["HCMVAV2_reg_phi"], *f["V_phi"]));
-    float higgsJet1BTagged = m(taggerName,mInt("hJetInd1"));
-    float higgsJet2BTagged = m(taggerName,mInt("hJetInd2"));
-    float minBTagged = std::min(higgsJet1BTagged, higgsJet2BTagged);
-    float maxBTagged = std::max(higgsJet1BTagged, higgsJet2BTagged);
-
-    float V_mass = m("V_mass"), H_mass = m("H_mass");
 
     if(m("twoResolvedJets")){
+        float absDeltaPhiHiggsMet = m("HVdPhi");   // fabs(EvalDeltaPhi(*f["HCMVAV2_reg_phi"], *f["V_phi"]));
+        float higgsJet1BTagged = m(taggerName,mInt("hJetInd1"));
+        float higgsJet2BTagged = m(taggerName,mInt("hJetInd2"));
+        float minBTagged = std::min(higgsJet1BTagged, higgsJet2BTagged);
+        float maxBTagged = std::max(higgsJet1BTagged, higgsJet2BTagged);
+
+        float V_mass = m("V_mass"), H_mass = m("H_mass");
         // 0-lepton
         bool base0LepCSSelection = (
             // Vector Boson Cuts
@@ -964,7 +964,7 @@ bool VHbbAnalysis::Analyze() {
             && (mInt("isWmunu") || mInt("isWenu"))
             && m("Jet_bReg",mInt("hJetInd1")) > m("j1ptCut_1lepchan")
             && m("Jet_bReg",mInt("hJetInd2")) > m("j2ptCut_1lepchan")
-            && m("MET_pt") > m("metcut_1lepchan")
+            && m("MET_Pt") > m("metcut_1lepchan")
             && mInt("nAddLeptons") == 0
             && m("V_pt") > m("vptcut")
             && H_mass < 250
@@ -975,8 +975,8 @@ bool VHbbAnalysis::Analyze() {
         // htJet30 is not currenty in nanoAOD, need to calculate it
         *f["htJet30"] = 0.;
         for (int i=0; i<mInt("nJet");i++) {
-            if (m("Jet_pt",i)>30. && m("Jet_lepFilter",i) && m("Jet_puId",i)) {
-                *f["htJet30"] = m("htJet30") + m("Jet_pt",i);
+            if (m("Jet_Pt",i)>30. && m("Jet_lepFilter",i) && m("Jet_puId",i)) {
+                *f["htJet30"] = m("htJet30") + m("Jet_Pt",i);
             }
         }
         for (int i=0; i<mInt("nMuon"); i++) {
@@ -994,10 +994,10 @@ bool VHbbAnalysis::Analyze() {
             if (maxBTagged > taggerWP_T){ //ttbar or W+HF
                 if (mInt("nAddJets252p9_puid") > 1.5) { //ttbar
                     *in["controlSample"] = 11;
-                } else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
+                } else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
                     *in["controlSample"] = 13;
                 }
-            }else if (maxBTagged > taggerWP_L && maxBTagged < taggerWP_M && m("MET_pt")/sqrt(m("htJet30")) > 2.) { //W+LF
+            }else if (maxBTagged > taggerWP_L && maxBTagged < taggerWP_M && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
                 *in["controlSample"] = 12;
             }
 
@@ -1005,7 +1005,7 @@ bool VHbbAnalysis::Analyze() {
                 std::cout << "data CS event " << mInt("controlSample")
 	                  << " maxBTagged " << maxBTagged
                           << " nAddJets252p9_puid " << mInt("nAddJets252p9_puid")
-                          << " MET_pt " << m("MET_pt")
+                          << " MET_Pt " << m("MET_Pt")
                           << " MET_sumEt " << m("MET_sumEt")
                           << " H_mass " << m("H_mass")
                           << std::endl;
@@ -1037,7 +1037,7 @@ bool VHbbAnalysis::Analyze() {
             } else if (/////////////////// Z + HF
 	        maxBTagged > taggerWP_T
                 && minBTagged > taggerWP_L
-                && m("MET_pt") < 60
+                && m("MET_Pt") < 60
                 && absDeltaPhiHiggsMet > 2.5
                 && (V_mass > 85 && V_mass <= 97)
                 && (H_mass <= 90 || H_mass > 150)
@@ -1048,8 +1048,7 @@ bool VHbbAnalysis::Analyze() {
         // end of 2-lepton
     }
 
-
-    if (doCutFlow && mInt("cutFlow") >= mInt("doCutFlow")) {
+    if (doCutFlow && mInt("cutFlow") >= m("doCutFlow")) {
         // keep all preselected events for cutflow
         return true;
     } else {
@@ -1318,7 +1317,7 @@ void VHbbAnalysis::FinishEvent() {
         for (int i = 0; i < mInt("nJet"); i++) {
             in["Jet_genJetMatchId"][i] = 0; // 0 if no gen match, 1 for pt-leading b-jet, 2 for pt sub-leading b-jet, 3 if matched to jet from hadronic W decay
             TLorentzVector Jet;
-            Jet.SetPtEtaPhiM(m("Jet_bReg",i), m("Jet_eta",i), m("Jet_phi",i), m("Jet_mass",i) * (m("Jet_bReg",i) / m("Jet_pt",i)));
+            Jet.SetPtEtaPhiM(m("Jet_bReg",i), m("Jet_eta",i), m("Jet_phi",i), m("Jet_mass",i) * (m("Jet_bReg",i) / m("Jet_Pt",i)));
 
             //double dR1 = Jet.DeltaR(GenHJ1);
             //double dR2 = Jet.DeltaR(GenHJ2);
@@ -1366,7 +1365,7 @@ void VHbbAnalysis::FinishEvent() {
         {
             if (m("Jet_puId", i) > 0
                 && m("Jet_lepFilter", i) > 0
-                && m("Jet_pt", i)>m("JetPtPresel")
+                && m("Jet_Pt", i)>m("JetPtPresel")
                 && fabs(m("Jet_eta", i))<=m("JetEtaCut"))
             {
                 int hadron_flav = mInt("Jet_hadronFlavour", i);
@@ -1378,7 +1377,7 @@ void VHbbAnalysis::FinishEvent() {
                     "central",
                     flav,
                     fabs(m("Jet_eta", i)),
-                    m("Jet_pt", i),
+                    m("Jet_Pt", i),
                     m(taggerName, i)
 
                 );
@@ -2045,8 +2044,8 @@ void VHbbAnalysis::FinishEvent() {
 
         *f["Jet1_pt_reg"] = r1Pt;
         *f["Jet2_pt_reg"] = r2Pt;
-        hJ1_reg.SetPtEtaPhiM(r1Pt, m("Jet_eta",mInt("hJetInd1")), m("Jet_phi",mInt("hJetInd1")), m("Jet_mass",mInt("hJetInd1")) * (r1Pt/m("Jet_pt",mInt("hJetInd1"))) );
-        hJ2_reg.SetPtEtaPhiM(r2Pt, m("Jet_eta",mInt("hJetInd2")), m("Jet_phi",mInt("hJetInd2")), m("Jet_mass",mInt("hJetInd2")) * (r2Pt/m("Jet_pt",mInt("hJetInd2"))) );
+        hJ1_reg.SetPtEtaPhiM(r1Pt, m("Jet_eta",mInt("hJetInd1")), m("Jet_phi",mInt("hJetInd1")), m("Jet_mass",mInt("hJetInd1")) * (r1Pt/m("Jet_Pt",mInt("hJetInd1"))) );
+        hJ2_reg.SetPtEtaPhiM(r2Pt, m("Jet_eta",mInt("hJetInd2")), m("Jet_phi",mInt("hJetInd2")), m("Jet_mass",mInt("hJetInd2")) * (r2Pt/m("Jet_Pt",mInt("hJetInd2"))) );
 
         //*f["hJets_mt_0"] = hJ1_reg.Mt();
         //*f["hJets_mt_1"] = hJ2_reg.Mt();
@@ -2262,7 +2261,7 @@ void VHbbAnalysis::BoostedSelection(){
             for(int iJet=0;iJet<mInt("nJet");iJet++){
                 if(m(taggerName,iJet)>m("tagWPL")){
                     TLorentzVector looseBJet;
-                    looseBJet.SetPtEtaPhiM(m("Jet_bReg",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_bReg",iJet) / m("Jet_pt",iJet) ) );
+                    looseBJet.SetPtEtaPhiM(m("Jet_bReg",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_bReg",iJet) / m("Jet_Pt",iJet) ) );
                     float dR = fatJetCand.DeltaR(looseBJet);
                     if(dR>1.5) *f["nLooseBtagsDR1p5"]=m("nLooseBtagsDR1p5")+1;
                     if(dR>1.0) *f["nLooseBtagsDR1p0"]=m("nLooseBtagsDR1p0")+1;
@@ -2280,7 +2279,7 @@ void VHbbAnalysis::BoostedSelection(){
                 for(int iJet=0;iJet<mInt("nJet");iJet++){
                     if(m("Jet_Pt",iJet)>25){
                         TLorentzVector aJet;
-                        aJet.SetPtEtaPhiM(m("Jet_Pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_Pt",iJet) / m("Jet_pt",iJet) ) );
+                        aJet.SetPtEtaPhiM(m("Jet_Pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_Pt",iJet) / m("Jet_Pt",iJet) ) );
                         if(fatJetCand.DeltaR(aJet)<0.6){
                             closeJetVeto=true;
                             break;
@@ -2319,11 +2318,11 @@ void VHbbAnalysis::ComputeBoostedVariables(){
         *f["nJets25_dR06"]=0;
         for(int iJet=0; iJet<mInt("nJet"); iJet++){
             if(m("Jet_lepFilter",iJet)==0) continue;
-            if(m("Jet_pt",iJet)>30 && fabs(m("Jet_eta",iJet))<2.4){ 
+            if(m("Jet_Pt",iJet)>30 && fabs(m("Jet_eta",iJet))<2.4){ 
                 if(m("Jet_puId",iJet)>3) *f["nJets30_0lep"]=m("nJets30_0lep")+1;
                 if(iJet!=mInt("hJetInd2")&&iJet!=mInt("hJetInd1")&&m("Jet_puId",iJet)==7) *f["nJets30_2lep"]=m("nJets30_2lep")+1;
             }
-            if(m("Jet_pt",iJet)>25 && fabs(m("Jet_eta",iJet))<2.5 && m("Jet_puId",iJet)>0) {
+            if(m("Jet_Pt",iJet)>25 && fabs(m("Jet_eta",iJet))<2.5 && m("Jet_puId",iJet)>0) {
                 TLorentzVector aJet;
                 aJet.SetPtEtaPhiM(m("Jet_Pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_Pt",iJet) / m("Jet_pt",iJet) ) );
                 if(fatJetCand.DeltaR(aJet)>0.6){
@@ -2393,7 +2392,7 @@ bool VHbbAnalysis::ElectronSelection(int nLep){
         std::cout<<"d[\"selLeptons_pt\"][0] "<<f["selLeptons_pt"][0]<<std::endl;
         std::cout<<"in[\"selLeptons_pdgId\"] "<<in["selLeptons_pdgId"][0]<<std::endl;
         std::cout<<"d[\"selLeptons_relIso03\"] "<<f["selLeptons_relIso03"][0]<<std::endl;
-        std::cout<<"*f[\"MET_pt\"] "<<*f["MET_pt"]<<std::endl;
+        std::cout<<"*f[\"MET_Pt\"] "<<*f["MET_Pt"]<<std::endl;
         std::cout<<"*f[selLeptons_eleSieie_0] = "<<*f["selLeptons_eleSieie_0"]<<std::endl;
         std::cout<<"*f[hJets_pt_1] = "<<*f["hJets_pt_1"]<<std::endl;
     }
@@ -2462,7 +2461,7 @@ bool VHbbAnalysis::MuonSelection(int nLep){
         std::cout<<"d[\"selLeptons_pt\"][0] "<<f["selLeptons_pt"][0]<<std::endl;
         std::cout<<"in[\"selLeptons_pdgId\"] "<<in["selLeptons_pdgId"][0]<<std::endl;
         std::cout<<"d[\"selLeptons_relIso04\"] "<<f["selLeptons_relIso04"][0]<<std::endl;
-        std::cout<<"*d[\"MET_pt\"] "<<*f["MET_pt"]<<std::endl;
+        std::cout<<"*d[\"MET_Pt\"] "<<*f["MET_Pt"]<<std::endl;
     }
 
     // there is only one selected electron for Vtype == 3 which is the electron tag
@@ -2701,7 +2700,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
             && m("Jet_btagCSVV2",i)>m("j1ptBtag")&&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
                 pair.first = i;
-            } else if(m("Jet_bReg",pair.first)<m("Jet_pt",i)){
+            } else if(m("Jet_bReg",pair.first)<m("Jet_bReg",i)){
                 pair.first = i;
             }
         }
@@ -2714,7 +2713,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
             && m("Jet_btagCSVV2",i)>m("j2ptBtag")&&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {
                 pair.second = i;
-            } else if(m("Jet_bReg",pair.second)<m("Jet_pt",i)){
+            } else if(m("Jet_bReg",pair.second)<m("Jet_bReg",i)){
                 pair.second = i;
             }
         }
@@ -2972,11 +2971,11 @@ double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, 
         if(regPT){
             thisPT=m("Jet_bReg",i);
         } else {
-            thisPT=m("Jet_pt",i);
+            thisPT=m("Jet_Pt",i);
         }
         if (thisPT< 30 || m(taggerName,i) < 0.5) continue; // only consider jets with some minimal preselection
         TLorentzVector j;
-        j.SetPtEtaPhiM(thisPT, m("Jet_eta",i), m("Jet_phi",i), m("Jet_mass",i) * (m("Jet_bReg",i) / m("Jet_pt",i) )  );
+        j.SetPtEtaPhiM(thisPT, m("Jet_eta",i), m("Jet_phi",i), m("Jet_mass",i) * (m("Jet_bReg",i) / m("Jet_Pt",i) )  );
         double d1 = j.DeltaR(Obj);
         if (d1 <= minDR) {
             minDR = d1;
@@ -2986,9 +2985,9 @@ double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, 
     if (ObjClosestIndex!=-1) {
         if(regPT){
             thisPT=m("Jet_bReg",ObjClosestIndex);
-            Obj2.SetPtEtaPhiM(thisPT, m("Jet_eta",ObjClosestIndex), m("Jet_phi",ObjClosestIndex), m("Jet_mass",ObjClosestIndex) * (thisPT / m("Jet_pt",ObjClosestIndex) ) );
+            Obj2.SetPtEtaPhiM(thisPT, m("Jet_eta",ObjClosestIndex), m("Jet_phi",ObjClosestIndex), m("Jet_mass",ObjClosestIndex) * (thisPT / m("Jet_Pt",ObjClosestIndex) ) );
         } else {
-            thisPT=m("Jet_pt",ObjClosestIndex);
+            thisPT=m("Jet_Pt",ObjClosestIndex);
             Obj2.SetPtEtaPhiM(thisPT, m("Jet_eta",ObjClosestIndex), m("Jet_phi",ObjClosestIndex), m("Jet_mass",ObjClosestIndex));
         }
     } else return -999;
@@ -3002,14 +3001,14 @@ double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, 
         // try top = lep + jet + met
         // two-particle Mt = sqrt(Et**2 - pt**2)
         TLorentzVector MET;
-        MET.SetPtEtaPhiM(m("MET_pt"),0.,m("MET_phi"),0.);
+        MET.SetPtEtaPhiM(m("MET_Pt"),0.,m("MET_Phi"),0.);
         TLorentzVector Obj_transverse, Obj2_transverse; // can only consider transverse (x-y plane) 4-vector components if using MET
         Obj_transverse.SetPxPyPzE(Obj.Px(),Obj.Py(),0,TMath::Sqrt(TMath::Power(Obj.M(),2) + TMath::Power(Obj.Pt(),2)));
         Obj2_transverse.SetPxPyPzE(Obj2.Px(),Obj2.Py(),0,TMath::Sqrt(TMath::Power(Obj2.M(),2) + TMath::Power(Obj2.Pt(),2)));
         Top = Obj_transverse + Obj2_transverse + MET;
     }else if (useMET==2) {
         TLorentzVector MET;
-        MET.SetPtEtaPhiM(m("MET_pt"),0.,m("MET_phi"),0.);
+        MET.SetPtEtaPhiM(m("MET_Pt"),0.,m("MET_Phi"),0.);
         TLorentzVector lep, jet;
         if (isJet) {
             lep = Obj2;
@@ -3523,7 +3522,7 @@ void VHbbAnalysis::smearJets(float JERScale) {
         f["Jet_corr_JERDown"][i] = 1 + JERScale * (m("Jet_corr_JERDown",i)-1);
         //std::cout<<"smearing jet "<<JERScale<<" times the nominal JER by factor "<<(f["Jet_corr_JER"][i] / corr_nominal)<<std::endl;
         //std::cout<<"Jet_pt = "<<f["Jet_pt"][i]<<std::endl;
-        f["Jet_pt"][i] = m("Jet_pt",i) * ( m("Jet_corr_JER",i) / corr_nominal);
+        f["Jet_Pt"][i] = m("Jet_Pt",i) * ( m("Jet_corr_JER",i) / corr_nominal);
         // std::cout<<"Re-smeared jet_pt = "<<f["Jet_pt"][i]<<std::endl;
 
         // re-evaluate jet energy regression on re-smeared jets
@@ -3536,10 +3535,10 @@ void VHbbAnalysis::smearJets(float JERScale) {
 
 float VHbbAnalysis::evaluateRegression(int i) {
     if (m("Jet_bReg",i) == -99) { return -99; }
-    *f["hJets_pt_0"] = m("Jet_pt",i);
+    *f["hJets_pt_0"] = m("Jet_Pt",i);
     *f["hJets_eta_0"] = m("Jet_eta",i);
     TLorentzVector tmp;
-    tmp.SetPtEtaPhiM(m("Jet_pt",i),m("Jet_eta",i),m("Jet_phi",i),m("Jet_mass",i));
+    tmp.SetPtEtaPhiM(m("Jet_Pt",i),m("Jet_eta",i),m("Jet_phi",i),m("Jet_mass",i));
     *f["hJets_mt_0"] = tmp.Mt();
     //std::cout<<"4-vector Mt() is "<<tmp.Mt()<<std::endl;
     //float mt = TMath::Sqrt( TMath::Power(tmp.Et(),2) - TMath::Power(tmp.Pt(),2) );
@@ -3600,11 +3599,11 @@ void VHbbAnalysis::SetupFactorizedJECs(std::string variation) {
         float corr_nominal = m("Jet_corr",j);
         float scaleShift = Jet_corr_var / corr_nominal;
         f["Jet_corr_"+variation+"_ratio"][j] = scaleShift;
-        float Jet_pt_nom = m("Jet_pt",j);
+        float Jet_pt_nom = m("Jet_Pt",j);
         float Jet_pt_reg_nom = evaluateRegression(j); // probably safer to re-evaluate the nominal in case there is any residual bias in re-implementating of reg.
-        f["Jet_pt"][j] = m("Jet_pt",j) * scaleShift;
+        f["Jet_Pt"][j] = m("Jet_Pt",j) * scaleShift;
         float Jet_pt_reg_var = evaluateRegression(j); // re-evaluate regression on top of variation
-        f["Jet_pt"][j] = Jet_pt_nom;
+        f["Jet_Pt"][j] = Jet_pt_nom;
         f["Jet_pt_reg_corr"+variation+"_ratio"][j] = Jet_pt_reg_var / Jet_pt_reg_nom;
     }
 

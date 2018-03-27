@@ -76,7 +76,7 @@ type=2  name=eletacut           val=2.5
 type=2  name=muetacut           val=2.4
 
 type=2  name=metcut_0lepchan    val=170
-type=2  name=metcut_1lepchan    val=100
+type=2  name=metcut_1lepchan    val=0
 
 # type=2  name=erelisocut         val=0.06
 type=2  name=elrelisocut_1lepchan val=0.06

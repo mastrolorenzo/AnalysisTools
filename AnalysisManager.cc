@@ -891,7 +891,7 @@ void AnalysisManager::ApplySystematics(bool early){
 
 
 double AnalysisManager::m(std::string key, int index){
-    if(debug>1000) std::cout<<"looking for key "<<key<<" with index "<<index<<std::endl;
+    if(debug>100000) std::cout<<"looking for key "<<key<<" with index "<<index<<std::endl;
     if(branchInfos.count(key)==0){
         std::cout<<"There is no branch with name "<<key<<std::endl;
         if(safemode){
@@ -902,7 +902,7 @@ double AnalysisManager::m(std::string key, int index){
             return -999;
         }
     } else {
-        if(debug>1000) std::cout<<"here is where I should return the right branch value"<<std::endl;
+        if(debug>100000) std::cout<<"here is where I should return the right branch value"<<std::endl;
         if(branchInfos[key]->type>4&&index<0){
             std::cout<<"No valid index ("<<index<<") specified for branch "<<key<<std::endl;
             std::cout<<"Exiting..."<<std::endl;
@@ -911,34 +911,34 @@ double AnalysisManager::m(std::string key, int index){
         switch(branchInfos[key]->type)
         {
         case 0:
-            if(debug>1000) std::cout<<"unsigned int "<<*ui[key]<<std::endl;
+            if(debug>100000) std::cout<<"unsigned int "<<*ui[key]<<std::endl;
             return (double)*ui[key];
         case 1:
-            if(debug>1000) std::cout<<"int "<<*in[key]<<std::endl;
+            if(debug>100000) std::cout<<"int "<<*in[key]<<std::endl;
             return (double)*in[key];
         case 2:
-            if(debug>1000) std::cout<<"float "<<*f[key]<<std::endl;
+            if(debug>100000) std::cout<<"float "<<*f[key]<<std::endl;
             return (double)*f[key];
         case 3:
-            if(debug>1000) std::cout<<"double "<<*d[key]<<std::endl;
+            if(debug>100000) std::cout<<"double "<<*d[key]<<std::endl;
             return (double)*d[key];
         case 4:
-            if(debug>1000) std::cout<<"boolean "<<*b[key]<<std::endl;
+            if(debug>100000) std::cout<<"boolean "<<*b[key]<<std::endl;
             return (double)*b[key];
         case 5:
-            if(debug>1000) std::cout<<"unsigned int "<<ui[key][index]<<std::endl;
+            if(debug>100000) std::cout<<"unsigned int "<<ui[key][index]<<std::endl;
             return (double)ui[key][index];
         case 6:
-            if(debug>1000) std::cout<<"int "<<in[key][index]<<std::endl;
+            if(debug>100000) std::cout<<"int "<<in[key][index]<<std::endl;
             return (double)in[key][index];
         case 7:
-            if(debug>1000) std::cout<<"float "<<f[key][index]<<std::endl;
+            if(debug>100000) std::cout<<"float "<<f[key][index]<<std::endl;
             return (double)f[key][index];
         case 8:
-            if(debug>1000) std::cout<<"double "<<d[key][index]<<std::endl;
+            if(debug>100000) std::cout<<"double "<<d[key][index]<<std::endl;
             return (double)d[key][index];
         case 9:
-            if(debug>1000) std::cout<<"boolean "<<b[key][index]<<std::endl;
+            if(debug>100000) std::cout<<"boolean "<<b[key][index]<<std::endl;
             return (double)b[key][index];
         default:
             if(debug>10) std::cout<<"I don't know type "<<branchInfos[key]->type<<" yet..."<<std::endl;
@@ -948,7 +948,7 @@ double AnalysisManager::m(std::string key, int index){
 }
 
 int AnalysisManager::mInt(std::string key, int index){
-    if(debug>1000) std::cout<<"looking for key "<<key<<" with index "<<index<<std::endl;
+    if(debug>100000) std::cout<<"looking for key "<<key<<" with index "<<index<<std::endl;
     if(branchInfos.count(key)==0){
         std::cout<<"There is no branch with name "<<key<<std::endl;
         if(safemode){
@@ -959,7 +959,7 @@ int AnalysisManager::mInt(std::string key, int index){
             return -999;
         }
     } else {
-        if(debug>1000) std::cout<<"here is where I should return the right branch value"<<std::endl;
+        if(debug>100000) std::cout<<"here is where I should return the right branch value"<<std::endl;
         if(branchInfos[key]->type%5==2 || branchInfos[key]->type%5==3){
             std::cout<<"Key "<<key<<" of type "<<branchInfos[key]->type<<", please use AnalysisManager::m() instead."<<std::endl;
             std::cout<<"Exiting"<<std::endl;
@@ -973,22 +973,22 @@ int AnalysisManager::mInt(std::string key, int index){
         switch(branchInfos[key]->type)
         {
         case 0:
-            if(debug>1000) std::cout<<"unsigned int "<<*ui[key]<<std::endl;
+            if(debug>100000) std::cout<<"unsigned int "<<*ui[key]<<std::endl;
             return (int)*ui[key];
         case 1:
-            if(debug>1000) std::cout<<"int "<<*in[key]<<std::endl;
+            if(debug>100000) std::cout<<"int "<<*in[key]<<std::endl;
             return (int)*in[key];
         case 4:
-            if(debug>1000) std::cout<<"boolean "<<*b[key]<<std::endl;
+            if(debug>100000) std::cout<<"boolean "<<*b[key]<<std::endl;
             return (int)*b[key];
         case 5:
-            if(debug>1000) std::cout<<"unsigned int "<<ui[key][index]<<std::endl;
+            if(debug>100000) std::cout<<"unsigned int "<<ui[key][index]<<std::endl;
             return (int)ui[key][index];
         case 6:
-            if(debug>1000) std::cout<<"int "<<in[key][index]<<std::endl;
+            if(debug>100000) std::cout<<"int "<<in[key][index]<<std::endl;
             return (int)in[key][index];
         case 9:
-            if(debug>1000) std::cout<<"boolean "<<b[key][index]<<std::endl;
+            if(debug>100000) std::cout<<"boolean "<<b[key][index]<<std::endl;
             return (int)b[key][index];
         default:
             if(debug>10) std::cout<<"I don't know type "<<branchInfos[key]->type<<" yet..."<<std::endl;
