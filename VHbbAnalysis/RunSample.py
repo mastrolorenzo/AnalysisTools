@@ -2,9 +2,9 @@ import ROOT
 import sys
 import ReadInput
 
-if (len(sys.argv) != 3 and len(sys.argv) != 5):
+if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv) !=6):
     print "Please give two arguments:  the cfg file and the sample name"
-    print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file"
+    print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus optional last argument RunOnSkim)"
     sys.exit(0)
 
 # do stuff :)
@@ -14,11 +14,18 @@ ROOT.gSystem.Load("AnalysisDict.so")
 samplesToRun = []
 samplesToRun.append(sys.argv[2])
 filesToRun = []
-if len(sys.argv) == 5:
+if len(sys.argv) >= 5:
     for item in sys.argv[3].split(','):
         filesToRun.append(item)
 
-am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun)
+print sys.argv
+RunOnSkim = False
+if len(sys.argv)>=6:
+    if sys.argv[5] == "1":
+        RunOnSkim = True
+print "RunOnSkim = ",RunOnSkim
+
+am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, 0, False, RunOnSkim)
 #am.debug=20000
 am.debug=2
 

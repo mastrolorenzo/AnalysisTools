@@ -21,6 +21,7 @@ parser.add_option("-d","--doData", dest="doData", default=-1, type=int, help="If
 parser.add_option("--site","--site", dest="site", default="FNAL", type=str, help="If running on lxplus include option --site CERN, otherwise assumes you are running on FNAL")
 parser.add_option("--useSGE","--useSGE", dest="useSGE", default=0, type=int, help="If 0 (default) use condor, if 1 use SGE job submission")
 parser.add_option("--doSkim","--doSkim", dest="doSkim", default=0, type=int, help="If 0 (default) run analysis jobs, if 1 run skimming jobs")
+parser.add_option("--runOnSkim","--runOnSkim", dest="runOnSkim", default=1, type=int, help="If 1 (default) run analysis jobs assuming the input files are already skimmed by AT, if 0 assume running directly on post-processed NanoAOD. If doSkim is 1 then this variable is assumed to be always 0.")
 parser.add_option("--submitJobs","--submitJobs", dest="submitJobs", default=1, type=int, help="If 1 (default) submit jobs to batch queue, if 0 then only create submission files")
 (options, args) = parser.parse_args()
 
@@ -31,14 +32,20 @@ if (options.sample != ""):
     samplesToSubmit = options.sample.split(',')
 else:
     samplesToSubmit = [] # if empty run on all samples
-am=ReadInput.ReadTextFile(options.configFile, "cfg", samplesToSubmit,"",options.runBatch)
-am.debug=2
-
 doData = options.doData
 site = options.site
 useSGE = options.useSGE
 doSkim = options.doSkim
+runOnSkim = str(options.runOnSkim)
 submitJobs = options.submitJobs
+
+runOnSkim_bool = False
+if runOnSkim == "1" and not options.doSkim==1:
+    runOnSkim_bool = True
+
+am=ReadInput.ReadTextFile(options.configFile, "cfg", samplesToSubmit,"",options.runBatch, doSkim, runOnSkim_bool)
+am.debug=2
+
 
 if (options.runBatch == False):
     print "Running locally over all samples"
@@ -73,7 +80,8 @@ else:
             site = 'CERN'
 
     if site == "FNAL":
-        output_dir = "/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples" # parent directory in user's EOS space to store all output files
+        #output_dir = "/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples" # parent directory in user's EOS space to store all output files
+        output_dir = "/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/" # parent directory in user's EOS space to store all output files
     elif site == "CERN":
         output_dir = "/eos/cms/store/user/scoopers/VHbbAnalysisNtuples"
     elif site == "DESY":
@@ -187,6 +195,7 @@ else:
     runfile = "RunSample.py"
     if doSkim:
         runfile = "RunSkim.py"
+        runOnSkim = "" # doesn't make sense to runOnSkim if running the skim!
     if useSGE:
         copy_string = ''' cp -r %s/cfg .
         cp -r %s/aux .
@@ -238,12 +247,12 @@ else:
 
         echo "running %s"
         echo $ORIG_DIR/$4
-        python %s $1 $2 $3 $ORIG_DIR/$4
+        python %s $1 $2 $3 $ORIG_DIR/$4 %s
         echo "done running, now copying output to EOS"
         ###xrdcp -f $ORIG_DIR/$4 root://cmseos.fnal.gov//store/user/sbc01/VHbbAnalysisNtuples/%s/$2
         %s
         rm $ORIG_DIR/$4
-        echo "all done!" ''' % (os.getcwd(),scram_arch,patch_rel,cmssw_version, os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), copy_string, runfile, runfile, jobName, xrdcp_string )
+        echo "all done!" ''' % (os.getcwd(),scram_arch,patch_rel,cmssw_version, os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), copy_string, runfile, runfile,runOnSkim, jobName, xrdcp_string )
 
     condor_runscript_text_desy = '''
 

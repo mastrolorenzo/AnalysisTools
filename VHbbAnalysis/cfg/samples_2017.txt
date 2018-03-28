@@ -1,12 +1,13 @@
 prefix=/pnfs/desy.de/cms/tier2/store/user/htholen/VHbbPostNano2017_V1/
 prefix_desy=/pnfs/desy.de/cms/tier2/store/user/htholen/VHbbPostNano2017_V1/
 prefix_cern=/store/group/phys_higgs/hbb/ntuples/VHbbPostNano2017_V1/
-prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/V1/2017/
+#prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/2017/V2/
+prefix_fnal=/store/user/sbc01/SkimmedAnalysisNtuples/2017V2_March21_skim/
 
 ############################ DATA ###########################################################
-name=Run2017_Ele_ReMiniAOD        dir=SingleElectron/   type=0 xsec=1   lepFlav=1
-name=Run2017_Mu_ReMiniAOD         dir=SingleMuon/       type=0 xsec=1   lepFlav=0
-name=Run2017_MET_MiniAOD          dir=MET/              type=0 xsec=1   lepFlav=0
+#name=Run2017_Ele_ReMiniAOD        dir=SingleElectron/   type=0 xsec=1   lepFlav=1
+#name=Run2017_Mu_ReMiniAOD         dir=SingleMuon/       type=0 xsec=1   lepFlav=0
+#name=Run2017_MET_MiniAOD          dir=MET/              type=0 xsec=1   lepFlav=0
 name=Run2017_DoubleEle_ReMiniAOD  dir=DoubleEG/         type=0 xsec=1   lepFlav=1
 name=Run2017_DoubleMu_ReMiniAOD   dir=DoubleMuon/       type=0 xsec=1   lepFlav=0
 
@@ -15,21 +16,21 @@ name=Run2017_DoubleMu_ReMiniAOD   dir=DoubleMuon/       type=0 xsec=1   lepFlav=
 
 #=========>>>>% Signal sample: Higgs boson produced in association with an electroweak vector boson
 
-name=WplusH130_powheg         dir=WplusH_HToBB_WToLNu_M130_13TeV_powheg_pythia8/   type=-13000   xsec=0.1249 
-name=WminusH130_powheg        dir=WminusH_HToBB_WToLNu_M130_13TeV_powheg_pythia8/  type=-13001   xsec=0.0895
-#name=WplusH125_powheg         dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/   type=-12500   xsec=0.165  
-#name=WminusH125_powheg        dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/  type=-12501   xsec=0.105
-name=WplusH125_herwig         dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/  type=-12510   xsec=0.165  
-name=WminusH125_herwig        dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/ type=-12511   xsec=0.105
-#name=ZH125_ZLL_powheg         dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/        type=-12502   xsec=0.01496
-name=ZH120_ZLL_powheg         dir=ZH_HToBB_ZToLL_M120_13TeV_powheg_pythia8/        type=-12002   xsec=0.019046
-name=ZH125_ZLL_herwig         dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_herwigpp/       type=-12512   xsec=0.01496
-#name=ggZH125_ZLL_powheg       dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/      type=-12503   xsec=0.00241
-name=ggZH125_ZLL_herwig       dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_herwigpp/     type=-12513   xsec=0.00241
-#name=ZH125_ZNuNu_powheg       dir=ZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8/      type=-12504   xsec=0.0891
-name=ZH130_ZNuNu_powheg       dir=ZH_HToBB_ZToNuNu_M130_13TeV_powheg_pythia8/      type=-13004   xsec=0.0763
-#name=ggZH125_ZNuNu_powheg     dir=ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8/    type=-12505   xsec=0.0143 
-name=ggZH125_ZNuNu_herwig     dir=ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_herwigpp/   type=-12515   xsec=0.0143 
+##name=WplusH130_powheg         dir=WplusH_HToBB_WToLNu_M130_13TeV_powheg_pythia8/   type=-13000   xsec=0.1249 
+##name=WminusH130_powheg        dir=WminusH_HToBB_WToLNu_M130_13TeV_powheg_pythia8/  type=-13001   xsec=0.0895
+###name=WplusH125_powheg         dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/   type=-12500   xsec=0.165  
+###name=WminusH125_powheg        dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/  type=-12501   xsec=0.105
+##name=WplusH125_herwig         dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/  type=-12510   xsec=0.165  
+##name=WminusH125_herwig        dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/ type=-12511   xsec=0.105
+###name=ZH125_ZLL_powheg         dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/        type=-12502   xsec=0.01496
+##name=ZH120_ZLL_powheg         dir=ZH_HToBB_ZToLL_M120_13TeV_powheg_pythia8/        type=-12002   xsec=0.019046
+##name=ZH125_ZLL_herwig         dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_herwigpp/       type=-12512   xsec=0.01496
+###name=ggZH125_ZLL_powheg       dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/      type=-12503   xsec=0.00241
+##name=ggZH125_ZLL_herwig       dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_herwigpp/     type=-12513   xsec=0.00241
+##name=ZH125_ZNuNu_powheg       dir=ZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8/      type=-12504   xsec=0.0891
+##name=ZH130_ZNuNu_powheg       dir=ZH_HToBB_ZToNuNu_M130_13TeV_powheg_pythia8/      type=-13004   xsec=0.0763
+###name=ggZH125_ZNuNu_powheg     dir=ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8/    type=-12505   xsec=0.0143 
+##name=ggZH125_ZNuNu_herwig     dir=ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_herwigpp/   type=-12515   xsec=0.0143 
 
 #from
 #https://twiki.cern.ch/twiki/bin/view/LHCPhysics/CERNYellowReportPageAt13TeV
@@ -67,7 +68,7 @@ name=DYToLL_HT600to800_madgraph           dir=DYJetsToLL_M-50_HT-600to800_TuneCP
 name=DYToLL_HT800to1200_madgraph          dir=DYJetsToLL_M-50_HT-800to1200_TuneCP5_13TeV-madgraphMLM-pythia8/   type=65    xsec=0.6304    doJetFlavorSplit=1
 #name=DYToLL_HT1200to2500_madgraph         dir=DYJetsToLL_M-50_HT-1200to2500_TuneCP5_13TeV-madgraphMLM-pythia8/  type=66    xsec=0.1514    doJetFlavorSplit=1
 name=DYToLL_HT2500toInf_madgraph          dir=DYJetsToLL_M-50_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8/   type=67    xsec=0.003565  doJetFlavorSplit=1
-name=DYToLL_M4to50_HT70to100_madgraph     dir=DYJetsToLL_M-4to50_HT-70to100_TuneCP5_13TeV-madgraphMLM-pythia8/  type=68    xsec=301.2     doJetFlavorSplit=1
+##name=DYToLL_M4to50_HT70to100_madgraph     dir=DYJetsToLL_M-4to50_HT-70to100_TuneCP5_13TeV-madgraphMLM-pythia8/  type=68    xsec=301.2     doJetFlavorSplit=1
 name=DYToLL_M4to50_HT100to200_madgraph    dir=DYJetsToLL_M-4to50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/ type=69    xsec=224.2     doJetFlavorSplit=1
 name=DYToLL_M4to50_HT200to400_madgraph    dir=DYJetsToLL_M-4to50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/ type=70    xsec=37.2      doJetFlavorSplit=1
 name=DYToLL_M4to50_HT400to600_madgraph    dir=DYJetsToLL_M-4to50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/ type=71    xsec=3.581     doJetFlavorSplit=1
@@ -125,18 +126,18 @@ name=DYToLL_M4to50_HT600toInf_madgraph    dir=DYJetsToLL_M-4to50_HT-600toInf_Tun
 
 
 #=========>>>>% Single-Top
-name=ST_tW_top_5f_noFullHad_PSw     dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/      type=20   xsec=19.56 
-name=ST_tW_antitop_5f_noFullHad_PSw dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/  type=21   xsec=19.56 
-#name=ST_tW_top_5f_noFullHad         dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/                type=20   xsec=19.56 
-#name=ST_tW_antitop_5f_noFullHad     dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/            type=21   xsec=19.56 
+##name=ST_tW_top_5f_noFullHad_PSw     dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/      type=20   xsec=19.56 
+##name=ST_tW_antitop_5f_noFullHad_PSw dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/  type=21   xsec=19.56 
+name=ST_tW_top_5f_noFullHad         dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/                type=20   xsec=19.56 
+name=ST_tW_antitop_5f_noFullHad     dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/            type=21   xsec=19.56 
 #name=ST_tW_top_5f_inc               dir=ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/                      type=20   xsec=35.85 
-#name=ST_tW_antitop_5f_inc           dir=ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/                  type=21   xsec=35.85 
+##name=ST_tW_antitop_5f_inc           dir=ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/                  type=21   xsec=35.85 
 #name=ST_tW_top_5f_inc_PSw           dir=ST_tW_top_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/            type=20   xsec=35.85 
 
-#name=ST_t-c_antitop_4f_inc          dir=ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/(NOT FOUND!!)type=11
-#name=ST_t-c_top_4f_inc              dir=ST_t-channel_top_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/  #(NOT FOUND!!) type=11
-#name=ST_s-c_4f_lep                  dir=ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-amcatnlo-pythia8/                    type=     xsec=3.365 
-name=ST_s-c_4f_lep_PSw              dir=ST_s-channel_4f_leptonDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8/          type=16   xsec=3.365 
+name=ST_t-c_antitop_4f_inc          dir=ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/ type=18 xsec=136.02 #TODO: check xsec (from samples_2016.txt)
+name=ST_t-c_top_4f_inc              dir=ST_t-channel_top_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/     type=17 xsec=80.95 #TODO: check xsec (from samples_2016.txt)
+name=ST_s-c_4f_lep                  dir=ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-amcatnlo-pythia8/                    type=16     xsec=3.365 
+##name=ST_s-c_4f_lep_PSw              dir=ST_s-channel_4f_leptonDecays_TuneCP5_PSweights_13TeV-amcatnlo-pythia8/          type=16   xsec=3.365 
 
 #xsec from
 #(https://twiki.cern.ch/twiki/bin/view/LHCPhysics/SingleTopRefXsec#Single_top_Wt_channel_cross_sect)
@@ -157,11 +158,11 @@ name=TT_DiLep           dir=TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/   
 name=TT_SingleLep       dir=TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/          type=51      xsec=365.34   
 name=TT_AllHadronic     dir=TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8/    type=52      xsec=377.96   
 
-name=TTWLNuJets      dir=TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/   type=14      xsec=0.2043   
-name=TTWQQJets       dir=TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/    type=141     xsec=0.4062   
-name=TTZLLNuNuJets   dir=TTZToLLNuNu_M-10_TuneCP5_13TeV-amcatnlo-pythia8/           type=15      xsec=0.2529
-name=TTZQQJets       dir=TTZToQQ_TuneCP5_13TeV-amcatnlo-pythia8/                    type=151     xsec=0.5297
-name=TTZJets         dir=TTZZ_TuneCP5_13TeV-madgraph-pythia8/                       type=152     xsec=0.001563 
+##name=TTWLNuJets      dir=TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/   type=14      xsec=0.2043   
+##name=TTWQQJets       dir=TTWJetsToQQ_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/    type=141     xsec=0.4062   
+##name=TTZLLNuNuJets   dir=TTZToLLNuNu_M-10_TuneCP5_13TeV-amcatnlo-pythia8/           type=15      xsec=0.2529
+##name=TTZQQJets       dir=TTZToQQ_TuneCP5_13TeV-amcatnlo-pythia8/                    type=151     xsec=0.5297
+##name=TTZJets         dir=TTZZ_TuneCP5_13TeV-madgraph-pythia8/                       type=152     xsec=0.001563 
 
 #xsec from
 #(https://cms-gen-dev.cern.ch/xsdb/?columns=37879808&currentPage=0&pageSize=10&searchQuery=DAS%3DTTTo2L2Nu_TuneCP5)
@@ -177,17 +178,17 @@ name=TTZJets         dir=TTZZ_TuneCP5_13TeV-madgraph-pythia8/                   
 
 
 #=========>>>>% Di-Boson + SingleW+3jets
-name=WW           dir=WW_TuneCP5_13TeV-pythia8/                       type=370  xsec=64.3         doJetFlavorSplit=1 
-name=WZ           dir=WZ_TuneCP5_13TeV-pythia8/                       type=371  xsec=47.13        doJetFlavorSplit=1
-name=ZZ           dir=ZZ_TuneCP5_13TeV-pythia8/                       type=372  xsec=16.523       doJetFlavorSplit=1 
+##name=WW           dir=WW_TuneCP5_13TeV-pythia8/                       type=370  xsec=64.3         doJetFlavorSplit=1 
+##name=WZ           dir=WZ_TuneCP5_13TeV-pythia8/                       type=371  xsec=47.13        doJetFlavorSplit=1
+##name=ZZ           dir=ZZ_TuneCP5_13TeV-pythia8/                       type=372  xsec=16.523       doJetFlavorSplit=1 
 #name=W3Jets       dir=W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/  type=373  xsec=39.17+3.288  doJetFlavorSplit=1 
-name=W3Jets       dir=W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/  type=373  xsec=42.458       doJetFlavorSplit=1 
-name=WW_1L1Nu2Q   dir=WWTo1L1Nu2Q_13TeV_amcatnloFXFX_madspin_pythia8/ type=374  xsec=45.68        doJetFlavorSplit=1 
-name=WW_2L2Nu     dir=WWTo2L2Nu_NNPDF31_TuneCP5_13TeV-powheg-pythia8/ type=375  xsec=12.178       doJetFlavorSplit=1
-name=WW_LNu2Q_nlo dir=WWToLNuQQ_NNPDF31_TuneCP5_13TeV-powheg-pythia8/ type=376  xsec=49.997       doJetFlavorSplit=1
-name=WZ_3LNu      dir=WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8/    type=377  xsec=4.42965      doJetFlavorSplit=1
-name=ZZ_2L2Nu     dir=ZZTo2L2Nu_13TeV_powheg_pythia8/                 type=378  xsec=0.564        doJetFlavorSplit=1
-name=ZZ_4L        dir=ZZTo4L_13TeV_powheg_pythia8/                    type=379  xsec=1.256        doJetFlavorSplit=1
+##name=W3Jets       dir=W3JetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/  type=373  xsec=42.458       doJetFlavorSplit=1 
+##name=WW_1L1Nu2Q   dir=WWTo1L1Nu2Q_13TeV_amcatnloFXFX_madspin_pythia8/ type=374  xsec=45.68        doJetFlavorSplit=1 
+##name=WW_2L2Nu     dir=WWTo2L2Nu_NNPDF31_TuneCP5_13TeV-powheg-pythia8/ type=375  xsec=12.178       doJetFlavorSplit=1
+##name=WW_LNu2Q_nlo dir=WWToLNuQQ_NNPDF31_TuneCP5_13TeV-powheg-pythia8/ type=376  xsec=49.997       doJetFlavorSplit=1
+##name=WZ_3LNu      dir=WZTo3LNu_TuneCP5_13TeV-amcatnloFXFX-pythia8/    type=377  xsec=4.42965      doJetFlavorSplit=1
+##name=ZZ_2L2Nu     dir=ZZTo2L2Nu_13TeV_powheg_pythia8/                 type=378  xsec=0.564        doJetFlavorSplit=1
+##name=ZZ_4L        dir=ZZTo4L_13TeV_powheg_pythia8/                    type=379  xsec=1.256        doJetFlavorSplit=1
 
 
 #xsec from

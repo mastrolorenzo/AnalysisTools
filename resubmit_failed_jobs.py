@@ -15,6 +15,7 @@ parser.add_argument('-o', '--odir',    type=str, default="", help='Directory wit
 parser.add_argument('-d', '--dir',    type=str, default="", help='Directory with submit files to check.')
 parser.add_argument('-m', '--missing', default=True,  help="Resubmit when output ROOT files are missing.  (Default:  True)")
 parser.add_argument('-e', '--empty',   default=False, help="Resubmit when output ROOT files are empty.  (Default:  False)")
+parser.add_argument('-de', '--deleteEmpty',   default=False, help="If True delete the files without an 'Events' tree  (Default:  False)")
 parser.add_argument('-c', '--check',   default=False, help="Just check if output files are present and/or valid.  (Default:  False)")
 parser.add_argument('-z', '--zombieCheck',   default=False, help="Checks input files for being zombie.")
 args = parser.parse_args()
@@ -79,7 +80,7 @@ for subdir, dirs, files in os.walk(args.dir):
                 try:
                     #rootfile = ROOT.TFile("%s/%s" % (subdir, rootfilename), "r")
                     rootfile = ROOT.TFile("%s/%s/%s" % (args.odir,sample,rootfilename),"r")
-                    otree = rootfile.Get("tree")
+                    otree = rootfile.Get("Events")
                     # make sure the proper output ntuple exists in the output root file
                     nentries = otree.GetEntries()
                     #print nentries
@@ -88,7 +89,11 @@ for subdir, dirs, files in os.walk(args.dir):
                     #    filesToResubmit.append(os.path.join(subdir, file) )
                     rootfile.Close()
                 except AttributeError:
-                    print "caught"
+                    print "caught ",rootfilename
+                    if args.deleteEmpty:
+                        print "deleting..."
+                        print("eosrm %s" % os.path.join(args.odir,sample, rootfilename))
+                        os.system("eos root://cmseos.fnal.gov rm %s" % os.path.join(args.odir,sample, rootfilename))
                     filesToResubmit.append(os.path.join(subdir, file) )
 
 print "resubmitting %i failed jobs" % len(filesToResubmit)

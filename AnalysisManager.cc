@@ -25,6 +25,7 @@ void AnalysisManager::Initialize(std::string filename) {
     f.clear();
     d.clear();
     b.clear();
+    uc.clear();
 
     branches.clear();
     branchInfos.clear();
@@ -47,35 +48,35 @@ AnalysisManager::~AnalysisManager()
     if(debug>10000) std::cout<<"uints"<<std::endl;
     for(std::map<std::string,unsigned int*>::iterator uiit=ui.begin();
             uiit!=ui.end();  ++uiit){
-        if(debug>1000) std::cout<<"I'm deleting "<<uiit->first<<std::endl;
+        if(debug>10000) std::cout<<"I'm deleting "<<uiit->first<<std::endl;
         delete uiit->second;
     }
 
     if(debug>10000) std::cout<<"ints"<<std::endl;
     for(std::map<std::string,int*>::iterator iit=in.begin();
             iit!=in.end();  ++iit){
-        if(debug>1000) std::cout<<"I'm deleting "<<iit->first<<std::endl;
+        if(debug>10000) std::cout<<"I'm deleting "<<iit->first<<std::endl;
         delete iit->second;
     }
 
     if(debug>10000) std::cout<<"floats"<<std::endl;
     for(std::map<std::string,float*>::iterator fit=f.begin();
             fit!=f.end();  ++fit){
-        if(debug>1000) std::cout<<"I'm deleting "<<fit->first<<std::endl;
+        if(debug>10000) std::cout<<"I'm deleting "<<fit->first<<std::endl;
         delete fit->second;
     }
 
     if(debug>10000) std::cout<<"doubles"<<std::endl;
     for(std::map<std::string,double*>::iterator dit=d.begin();
             dit!=d.end();  ++dit){
-        if(debug>1000) std::cout<<"I'm deleting "<<dit->first<<std::endl;
+        if(debug>10000) std::cout<<"I'm deleting "<<dit->first<<std::endl;
         delete dit->second;
     }
 
     if(debug>10000) std::cout<<"bools"<<std::endl;
     for(std::map<std::string,bool*>::iterator bit=b.begin();
             bit!=b.end();  ++bit){
-        if(debug>1000) std::cout<<"I'm deleting "<<bit->first<<std::endl;
+        if(debug>10000) std::cout<<"I'm deleting "<<bit->first<<std::endl;
         delete bit->second;
     }
 
@@ -83,7 +84,7 @@ AnalysisManager::~AnalysisManager()
     //delete settingsTree;
     for(std::map<std::string,BDTInfo*>::iterator iterBDT=bdtInfos.begin();
            iterBDT!=bdtInfos.end(); iterBDT++){
-        if(debug>1000) std::cout<<"I'm deleting "<<iterBDT->first<<std::endl;
+        if(debug>10000) std::cout<<"I'm deleting "<<iterBDT->first<<std::endl;
         delete iterBDT->second;;
     }
 }
@@ -187,8 +188,8 @@ void AnalysisManager::SetupBranch(std::string name, int type, int length, int on
     branchInfos[name] = new BranchInfo(name,type,length,onlyMC,prov,-999.,lengthBranch, allowMissingBranch);
     if(debug>10000) std::cout<<"new BranchInfo"<<std::endl;
 
-    // Only 0-9 are setup with types for the moment.
-    if(type>9 || type<0) {
+    // Only 0-11 are setup with types for the moment.
+    if(type>11 || type<0) {
         std::cout<<"Branch "<<name<<" cannot be set to type "<<type<<std::endl;
         return;
     }
@@ -209,31 +210,37 @@ void AnalysisManager::SetupBranch(std::string name, int type, int length, int on
     } else if(type==4) {
         b[name] = new bool;
         fChain->SetBranchAddress(name.c_str(), b[name], &branches[name]);
+    } else if(type==5) {
+        uc[name] = new char;
+        fChain->SetBranchAddress(name.c_str(), uc[name], &branches[name]);
     }
 
 
-    if(type>4 && type<10 && length<0) {
-        std::cout<<"Types 5-9 are arrays and need a length greater than 0... not "
+    if(type>5 && type<11 && length<0) {
+        std::cout<<"Types 6-11 are arrays and need a length greater than 0... not "
             <<length<<" name "<<name.c_str()<<std::endl;
         return;
     }
 
-    if(type==5) {
+    if(type==6) {
         ui[name] = new unsigned int[length];
         fChain->SetBranchAddress(name.c_str(), ui[name], &branches[name]);
-    } else if(type==6) {
+    } else if(type==7) {
         in[name] = new int[length];
         fChain->SetBranchAddress(name.c_str(), in[name], &branches[name]);
-    } else if(type==7) {
+    } else if(type==8) {
         f[name] = new float[length];
         fChain->SetBranchAddress(name.c_str(), f[name], &branches[name]);
-    } else if(type==8) {
+    } else if(type==9) {
         d[name] = new double[length];
         fChain->SetBranchAddress(name.c_str(), d[name], &branches[name]);
-    } else if(type==9) {
+    } else if(type==10) {
         b[name] = new bool[length];
         fChain->SetBranchAddress(name.c_str(), b[name], &branches[name]);
-    }
+    } else if(type==11) {
+        uc[name] = new char[length];
+        fChain->SetBranchAddress(name.c_str(), uc[name], &branches[name]);
+    }       
 
     return;
 }
@@ -271,7 +278,7 @@ void AnalysisManager::SetupNewBranch(std::string name, int type, int length, boo
     if(debug>1000) std::cout<<"BranchInfo instaniated"<<std::endl;
 
 
-    if(type>9 || type<0) {
+    if(type>11 || type<0) {
         std::cout<<"New Branch "<<name<<" cannot be set to type "<<type<<std::endl;
         return;
     }
@@ -291,31 +298,37 @@ void AnalysisManager::SetupNewBranch(std::string name, int type, int length, boo
     } else if(type==4) {
         if(newmem) b[name] = new bool;
         branches[name] = treeptr->Branch(name.c_str(), b[name], Form("%s/O",name.c_str()));
-    }
+    } /*else if(type==5) {
+        if(newmem) uc[name] = new char;
+        branches[name] = treeptr->Branch(name.c_str(), uc[name], Form("%s/C",name.c_str()));
+    }*/
 
 
-    if(type>4 && type<10 && length<0) {
-        std::cout<<"Types 5-9 are arrays and need a length greater than 0... not "
+    if(type>5 && type<12 && length<0) {
+        std::cout<<"Types 6-11 are arrays and need a length greater than 0... not "
             <<length<<" name "<<name.c_str()<<std::endl;
         return;
     }
 
-    if(type==5) {
+    if(type==6) {
         if(newmem) ui[name] = new unsigned int[length];
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), ui[name], Form("%s[%i]/i",name.c_str(),length));
-    } else if(type==6) {
+    } else if(type==7) {
         if(newmem) in[name] = new int[length];
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), in[name], Form("%s[%i]/I",name.c_str(),length));
-    } else if(type==7) {
+    } else if(type==8) {
         if(newmem) f[name] = new float[length];
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), f[name], Form("%s[%i]/F",name.c_str(),length));
-    } else if(type==8) {
+    } else if(type==9) {
         if(newmem) d[name] = new double[length];
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), d[name], Form("%s[%i]/D",name.c_str(),length));
-    } else if(type==9) {
+    } else if(type==10) {
         if(newmem) b[name] = new bool[length];
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), b[name], Form("%s[%i]/O",name.c_str(),length));
-    }
+    } /*else if(type==11) {
+        if(newmem) uc[name] = new char[length];
+        branches[name] = treeptr->Branch(Form("%s",name.c_str()), uc[name], Form("%s[%i]/C",name.c_str(),length));
+    }*/
 
     return;
 }
@@ -327,20 +340,22 @@ void AnalysisManager::ResetBranches(){
         if(debug>100) std::cout<<"Branch "<<biit->second->name<<" of type, prov "<<biit->second->type<<" "<<biit->second->prov<<std::endl;
         if(biit->second->prov == "existing" || biit->second->prov == "early"){
             std::string name(biit->first);
-            if(biit->second->type>9 || biit->second->type<0){
+            if(biit->second->type>11 || biit->second->type<0){
                 std::cout<<"Branch "<<name<<" of unknown type "<<biit->second->type<<std::endl;
                 continue;
             }
-            if(biit->second->type%5==0) {
+            if(biit->second->type%6==0) {
                 fChain->SetBranchAddress(name.c_str(), ui[name], &branches[name]);
-            } else if(biit->second->type%5==1) {
+            } else if(biit->second->type%6==1) {
                 fChain->SetBranchAddress(name.c_str(), in[name], &branches[name]);
-            } else if(biit->second->type%5==2) {
+            } else if(biit->second->type%6==2) {
                 fChain->SetBranchAddress(name.c_str(), f[name], &branches[name]);
-            } else if(biit->second->type%5==3) {
+            } else if(biit->second->type%6==3) {
                 fChain->SetBranchAddress(name.c_str(), d[name], &branches[name]);
-            } else if(biit->second->type%5==4) {
+            } else if(biit->second->type%6==4) {
                 fChain->SetBranchAddress(name.c_str(), b[name], &branches[name]);
+            } else if(biit->second->type%6==5) {
+                fChain->SetBranchAddress(name.c_str(), uc[name], &branches[name]);
             }
         }
     }
@@ -391,6 +406,36 @@ void AnalysisManager::SetNewBranches(){
         }
     }
 }
+
+//CheckBranchLengths reads in all "early" and "existing" integer branches (branches which could be a lengthBranch),
+//then checks that the maximum length set for "early" and "existing" branches is greater than the value of a specified lengthBranch.
+//If not, the program exits cleanly.
+void AnalysisManager::CheckBranchLengths(Long64_t entry, bool isData){
+    for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
+            ibranch!=branchInfos.end(); ++ibranch){
+        if( !(isData && ibranch->second->onlyMC) && (ibranch->second->prov=="early"||ibranch->second->prov=="existing") && ibranch->second->type<2){
+            if(fChain->GetBranchStatus((ibranch->first).c_str())){
+                branches[ibranch->first]->GetEntry(entry);
+            } else if (!(ibranch->second->allowMissingBranch)){
+               std::cout<<"Branch "<<ibranch->first<<" is missing and allowMissingBranch is not set. Exiting..."<<std::endl;
+               std::exit(0);
+            }
+        }
+    }
+    for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
+            ibranch!=branchInfos.end(); ++ibranch){
+        if( !(isData && ibranch->second->onlyMC) && (ibranch->second->prov=="early"||ibranch->second->prov=="existing") && ibranch->second->type>5){
+            if((ibranch->second->lengthBranch)!=""){
+                if(ibranch->second->length < mInt((ibranch->second->lengthBranch).c_str())){
+                    std::cout<<"Branch "<<ibranch->first<< " has max length "<<ibranch->second->length<< " but lengthBranch " <<ibranch->second->lengthBranch <<" is "<<mInt((ibranch->second->lengthBranch).c_str())<<std::endl;
+                    std::cout<<"Exiting...."<<std::endl;
+                    std::exit(0);
+                 }
+            }
+        }
+     }
+}
+
 
 void AnalysisManager::GetEarlyEntries(Long64_t entry, bool isData){
     for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
@@ -535,7 +580,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                 if((jentry%1000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
                 //if((jentry%10000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
 
-
+                CheckBranchLengths(jentry, cursample->sampleNum==0);
                 GetEarlyEntries(jentry, cursample->sampleNum==0);
                 bool anyPassing=false;
                 for(unsigned iSyst=0; iSyst<systematics.size(); iSyst++){
@@ -872,7 +917,12 @@ double AnalysisManager::m(std::string key, int index){
         }
     } else {
         if(debug>100000) std::cout<<"here is where I should return the right branch value"<<std::endl;
-        if(branchInfos[key]->type>4&&index<0){
+        if(branchInfos[key]->type%6==5){
+            std::cout<<"Key "<<key<<" of type "<<branchInfos[key]->type<<", please use AnalysisManager::mInt() instead."<<std::endl;
+            std::cout<<"Exiting"<<std::endl;
+            std::exit(0); 
+        }
+        if(branchInfos[key]->type>5&&index<0){
             std::cout<<"No valid index ("<<index<<") specified for branch "<<key<<std::endl;
             std::cout<<"Exiting..."<<std::endl;
             std::exit(0);
@@ -894,19 +944,19 @@ double AnalysisManager::m(std::string key, int index){
         case 4:
             if(debug>100000) std::cout<<"boolean "<<*b[key]<<std::endl;
             return (double)*b[key];
-        case 5:
+        case 6:
             if(debug>100000) std::cout<<"unsigned int "<<ui[key][index]<<std::endl;
             return (double)ui[key][index];
-        case 6:
+        case 7:
             if(debug>100000) std::cout<<"int "<<in[key][index]<<std::endl;
             return (double)in[key][index];
-        case 7:
+        case 8:
             if(debug>100000) std::cout<<"float "<<f[key][index]<<std::endl;
             return (double)f[key][index];
-        case 8:
+        case 9:
             if(debug>100000) std::cout<<"double "<<d[key][index]<<std::endl;
             return (double)d[key][index];
-        case 9:
+        case 10:
             if(debug>100000) std::cout<<"boolean "<<b[key][index]<<std::endl;
             return (double)b[key][index];
         default:
@@ -929,12 +979,12 @@ int AnalysisManager::mInt(std::string key, int index){
         }
     } else {
         if(debug>100000) std::cout<<"here is where I should return the right branch value"<<std::endl;
-        if(branchInfos[key]->type%5==2 || branchInfos[key]->type%5==3){
+        if(branchInfos[key]->type%6==2 || branchInfos[key]->type%6==3){
             std::cout<<"Key "<<key<<" of type "<<branchInfos[key]->type<<", please use AnalysisManager::m() instead."<<std::endl;
             std::cout<<"Exiting"<<std::endl;
             std::exit(0); 
         }
-        if(branchInfos[key]->type>4&&index<0){
+        if(branchInfos[key]->type>5&&index<0){
             std::cout<<"No valid index specified for branch "<<key<<std::endl;
             std::cout<<"Exiting..."<<std::endl;
             std::exit(0);
@@ -951,14 +1001,20 @@ int AnalysisManager::mInt(std::string key, int index){
             if(debug>100000) std::cout<<"boolean "<<*b[key]<<std::endl;
             return (int)*b[key];
         case 5:
+            if(debug>100000) std::cout<<"char "<<*uc[key]<<std::endl;
+            return (int)*uc[key]; //character form of an int always has '0' appended
+        case 6:
             if(debug>100000) std::cout<<"unsigned int "<<ui[key][index]<<std::endl;
             return (int)ui[key][index];
-        case 6:
+        case 7:
             if(debug>100000) std::cout<<"int "<<in[key][index]<<std::endl;
             return (int)in[key][index];
-        case 9:
+        case 10:
             if(debug>100000) std::cout<<"boolean "<<b[key][index]<<std::endl;
             return (int)b[key][index];
+        case 11:
+            if(debug>100000) std::cout<<"char "<<uc[key][index]<<std::endl;
+            return (int)uc[key][index];
         default:
             if(debug>10) std::cout<<"I don't know type "<<branchInfos[key]->type<<" yet..."<<std::endl;
             return -999;

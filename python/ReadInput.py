@@ -11,15 +11,16 @@ from ROOT import TH2F
 #ROOT.gSystem.Load("VHbbTrigger_h.so")
 ROOT.gSystem.Load("AnalysisDict.so")
 
-debug=2
+debug=200
 
-def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, doSkim=False):
+def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, doSkim=False, runOnSkim=False):
     if debug > 100:
          print "filetype is ", filetype
          print "filename is ", filename
          print "samplesToRun is ", samplesToRun
          print "filesToRun is ", filesToRun
          print "doSkim is ", doSkim
+         print "runOnSkim is ", runOnSkim
 
     runSelectedSamples = False
     if (len(samplesToRun) > 0):
@@ -42,7 +43,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
         #print "samplesToRun",samplesToRun
         if settings.has_key("samples"):
             aminitialized=0
-            samples=ReadTextFile(settings["samples"], "samplefile",samplesToRun)
+            samples=ReadTextFile(settings["samples"], "samplefile",samplesToRun,filesToRun,isBatch,doSkim,runOnSkim)
             for name in samples:
                 addedAtLeastOneFile=False
                 #print "is name in samplesToRun?",name,(name in samplesToRun)
@@ -107,7 +108,10 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         #    testfile = ROOT.TFile.Open(filename)
                         #    testfile.Recover()
                         #if (testfile.isZombie()): continue
-                        samplecon.AddFile(filename,isBatch,int(doSkim))
+                        if not runOnSkim:
+                            samplecon.AddFile(filename,isBatch,int(doSkim))
+                        else:
+                            samplecon.AddFile(filename,isBatch,2)
                         addedAtLeastOneFile=True
                     except:
                         print "Can't add",filename
@@ -203,8 +207,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             for sf in sfs:
                 print "add scale factor"
                 am.AddScaleFactor(sf)
-                am.SetupNewBranch(sf.branchname, 7, 10)
-                am.SetupNewBranch(sf.branchname+"_err", 7, 10)
+                am.SetupNewBranch(sf.branchname, 8, 10)
+                am.SetupNewBranch(sf.branchname+"_err", 8, 10)
                 print "added scale factor"
 
         if settings.has_key("btagscalefactors"):
@@ -213,7 +217,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
 
         return am
     elif filetype is "samplefile":
-        samples=MakeSampleMap(filelines,samplesToRun)
+        samples=MakeSampleMap(filelines,samplesToRun,runOnSkim)
         #print "writing samples to pickle file"
         #import pickle
         #with open('samples.pickle', 'wb') as fp:
@@ -271,7 +275,7 @@ def MakeConfigMap(lines):
     return settings
 
 
-def MakeSampleMap(lines,samplesToRun):
+def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
     if debug > 100: print "Reading samples"
     samples={}
 
@@ -333,8 +337,13 @@ def MakeSampleMap(lines,samplesToRun):
                     site = "CERN"
                     value = value.replace("CERN:","")
                 if value.find(',') is not 0:
-                    for dirname in value.split(','):
-                        samplepaths.extend(findAllRootFiles(globalPrefix+dirname,site))
+                    if not runOnSkim:
+                        for dirname in value.split(','):
+                            samplepaths.extend(findAllRootFiles(globalPrefix+dirname,site))
+                    else:
+                        # after skimming the sample directory name has been changed to sample name 
+                        print "right here, ",sample["name"] 
+                        samplepaths.extend(findAllRootFiles(globalPrefix+sample["name"],site))
                 else:
                     samplepaths = findAllRootFiles(globalPrefix+value,site)
                 #print value

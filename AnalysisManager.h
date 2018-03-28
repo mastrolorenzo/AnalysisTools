@@ -94,6 +94,7 @@ public :
     std::map<std::string,float*> f;
     std::map<std::string,double*> d;
     std::map<std::string,bool*> b;
+    std::map<std::string,char*> uc;
     double m(std::string key,int index=-1); // scaffold for function to get values from maps
     int mInt(std::string key,int index=-1); 
 
@@ -118,6 +119,7 @@ public :
     void            ResetBranches();
     void            SetBranches();
     void            PrintBranches();
+    void            CheckBranchLengths(Long64_t entry,bool isData=false);
     void            GetEarlyEntries(Long64_t entry,bool isData=false);
     std::vector<std::string>      ListSampleNames();
     void            PrintBDTInfoValues(BDTInfo* bdt);

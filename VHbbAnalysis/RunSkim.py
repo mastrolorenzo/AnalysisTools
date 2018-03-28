@@ -2,7 +2,7 @@ import ROOT
 import sys
 import ReadInput
 
-if (len(sys.argv) != 3 and len(sys.argv) != 5):
+if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv) != 6):
     print "Please give two arguments:  the cfg file and the sample name"
     print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file"
     sys.exit(0)
