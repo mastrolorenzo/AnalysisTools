@@ -72,7 +72,6 @@ filenames = collections.OrderedDict(
 def make_weight_string(index):
     if isinstance(index, str):
         # specify cutstring to classify sample
-        print config.weight + '*(%s)' % index
         return config.weight + '*(%s)' % index
     else:
         # use sampleIndex 
