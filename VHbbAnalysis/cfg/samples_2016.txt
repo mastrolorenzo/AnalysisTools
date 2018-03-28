@@ -6,9 +6,9 @@ prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/V1/2016/
 #DATA
 name=Run2016BToG_DoubleEle_ReMiniAOD  dir=DoubleEG/              type=0 xsec=1 lepFlav=1
 name=Run2016BToG_DoubleMu_ReMiniAOD   dir=DoubleMuon/            type=0 xsec=1 lepFlav=0
-name=Run2016BToG_Ele_ReMiniAOD        dir=SingleElectron/        type=0 xsec=1 lepFlav=1
-name=Run2016BToG_Mu_ReMiniAOD         dir=SingleMuon/            type=0 xsec=1 lepFlav=0
-name=Run2016BToG_MET_ReMiniAOD        dir=MET/                   type=0 xsec=1 lepFlav=0
+name=Run2016BToG_Ele_ReMiniAOD        dir=SingleElectron/        type=0 xsec=1 lepFlav=3
+name=Run2016BToG_Mu_ReMiniAOD         dir=SingleMuon/            type=0 xsec=1 lepFlav=2
+name=Run2016BToG_MET_ReMiniAOD        dir=MET/                   type=0 xsec=1 lepFlav=4
 
 
 #SIGNAL

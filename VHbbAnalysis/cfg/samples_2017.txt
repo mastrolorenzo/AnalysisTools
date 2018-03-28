@@ -4,9 +4,9 @@ prefix_cern=/store/group/phys_higgs/hbb/ntuples/VHbbPostNano2017_V1/
 prefix_fnal=/store/user/sbc01/SkimmedAnalysisNtuples/2017V2_March21_skim/
 
 ############################ DATA ###########################################################
-name=Run2017_Ele_ReMiniAOD        dir=SingleElectron/   type=0 xsec=1   lepFlav=1
-name=Run2017_Mu_ReMiniAOD         dir=SingleMuon/       type=0 xsec=1   lepFlav=0
-name=Run2017_MET_MiniAOD          dir=MET/              type=0 xsec=1   lepFlav=0
+name=Run2017_Ele_ReMiniAOD        dir=SingleElectron/   type=0 xsec=1   lepFlav=3
+name=Run2017_Mu_ReMiniAOD         dir=SingleMuon/       type=0 xsec=1   lepFlav=2
+name=Run2017_MET_MiniAOD          dir=MET/              type=0 xsec=1   lepFlav=4
 name=Run2017_DoubleEle_ReMiniAOD  dir=DoubleEG/         type=0 xsec=1   lepFlav=1
 name=Run2017_DoubleMu_ReMiniAOD   dir=DoubleMuon/       type=0 xsec=1   lepFlav=0
 

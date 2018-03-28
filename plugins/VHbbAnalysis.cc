@@ -313,7 +313,7 @@ bool VHbbAnalysis::Analyze() {
         } else {
             *in["controlSample"] = -1;
         }
-    } else if (mInt("Vtype") == 2 && (cursample->lepFlav == -1 || cursample->lepFlav == 0)) {
+    } else if (mInt("Vtype") == 2 && (cursample->lepFlav == -1 || cursample->lepFlav == 2)) {
         std::pair<int,int> good_muons_1lep = HighestPtGoodMuonsOppCharge(    m("muptcut_1lepchan"), m("murelisocut_1lepchan"));
         if (good_muons_1lep.first > -1) {
             *in["isWmunu"] = 1;
@@ -322,7 +322,7 @@ bool VHbbAnalysis::Analyze() {
         } else {
             *in["controlSample"] = -1;
         }
-    } else if (mInt("Vtype") == 3 && (cursample->lepFlav == -1 || cursample->lepFlav == 1)) {
+    } else if (mInt("Vtype") == 3 && (cursample->lepFlav == -1 || cursample->lepFlav == 3)) {
         std::pair<int,int> good_elecs_1lep = HighestPtGoodElectronsOppCharge(m("elptcut_1lepchan"), m("elrelisocut_1lepchan"), m("elidcut_1lepchan"));
         if (good_elecs_1lep.first > -1) {
             *in["isWenu"] = 1;
@@ -331,7 +331,7 @@ bool VHbbAnalysis::Analyze() {
         } else {
             *in["controlSample"] = -1;
         }
-    } else if (mInt("Vtype") == 4) {
+    } else if (mInt("Vtype") == 4 && (cursample->lepFlav == -1 || cursample->lepFlav == 4)) {
         bool passMetFilters;
         if (m("dataYear")==2016){
                 passMetFilters = 
