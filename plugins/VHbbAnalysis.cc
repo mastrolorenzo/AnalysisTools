@@ -886,9 +886,10 @@ bool VHbbAnalysis::Analyze() {
             // (*f["Vtype"] == 2 || *f["Vtype"] == 3 || *f["Vtype"] == 4)
             (mInt("isWmunu") || mInt("isWenu") ||mInt("isZnn"))
             && mInt("cutFlow") >= 2
-            && m("V_pt") > 170
+            && m("MET_Pt") > m("metcut_0lepchan")
             // Higgs Boson Cuts
             && H_mass < 500
+            && m("H_pt") > m("hptcut_0lepchan")
             //&& *f["HCMVAV2_pt"] > 120 CP REMOVED
             // Higgs Jet Cuts
             && m("Jet_bReg",mInt("hJetInd1")) > 60
@@ -925,6 +926,7 @@ bool VHbbAnalysis::Analyze() {
         if (base0LepCSSelection) {
             if (mInt("isWmunu") || mInt("isWenu")) {
                 if (minAbsDeltaPhiHiggsJetsMet < 1.57 && higgsJet1BTagged > taggerWP_M && nJetsCentral >= 4 && absDeltaPhiHiggsMet > 2) {
+                    if (m("MET_Pt") < m("metcut_0lepchan")) { std::cout<<"caught an event with bugged 0lep selection!!"<<std::endl; }
                     *in["controlSample"] = 1; // TTbar Control Sample Index
                 }
             } else if (mInt("isZnn")) {
@@ -992,7 +994,7 @@ bool VHbbAnalysis::Analyze() {
 
         if (base1LepCSSelection) {
             if (maxBTagged > taggerWP_T){ //ttbar or W+HF
-                if (mInt("nAddJets252p9_puid") > 1.5) { //ttbar
+                if (mInt("nAddJets252p9_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
                 } else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
                     *in["controlSample"] = 13;
