@@ -24,6 +24,7 @@ sys.dont_write_bytecode = True
 cwd = os.getcwd()
 full_cfg_path = sys.argv[1]
 cfg_path, cfg = os.path.split(full_cfg_path.replace('.py', ''))
+cfg_path = "."
 try:
     os.chdir(cfg_path)
     config = __import__(cfg)
@@ -69,10 +70,16 @@ filenames = collections.OrderedDict(
 )
 
 def make_weight_string(index):
-    if index == 0:  # Data
-        return '(sampleIndex==0)'
-    if index != None:
-        return config.weight + '*(sampleIndex==%i)' % index
+    if isinstance(index, str):
+        # specify cutstring to classify sample
+        print config.weight + '*(%s)' % index
+        return config.weight + '*(%s)' % index
+    else:
+        # use sampleIndex 
+        if index == 0:  # Data
+            return '(sampleIndex==0)'
+        if index != None:
+            return config.weight + '*(sampleIndex==%i)' % index
     return config.weight
 
 # make sample weights_dict
