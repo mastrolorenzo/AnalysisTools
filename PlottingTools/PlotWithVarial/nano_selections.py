@@ -80,8 +80,6 @@ cs_1lep_sel = no_sel + [
 #    #'H_pt>120',
 #]
 
-]
-
 # CS 2lep
 # cs_2lep_sel = no_sel + [
 #     'H_pt>100',

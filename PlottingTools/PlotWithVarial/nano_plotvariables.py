@@ -4,6 +4,8 @@ muon_pt_safe = 'lepInd1 > -1 && nMuon > lepInd1 ? Muon_pt[lepInd1] : -1.'
 electron_pt_safe = 'lepInd1 > -1 && nElectron > lepInd1 ? Electron_pt[lepInd1] : -1.'
 DeepCSVmax = 'Jet_btagDeepB[hJetInd1] > Jet_btagDeepB[hJetInd2] ? Jet_btagDeepB[hJetInd1] : Jet_btagDeepB[hJetInd2]'
 DeepCSVmin = 'Jet_btagDeepB[hJetInd1] > Jet_btagDeepB[hJetInd2] ? Jet_btagDeepB[hJetInd2] : Jet_btagDeepB[hJetInd1]'
+CMVAmax = 'Jet_btagCMVA[hJetInd1] > Jet_btagCMVA[hJetInd2] ? Jet_btagCMVA[hJetInd1] : Jet_btagCMVA[hJetInd2]'
+CMVAmin = 'Jet_btagCMVA[hJetInd1] > Jet_btagCMVA[hJetInd2] ? Jet_btagCMVA[hJetInd2] : Jet_btagCMVA[hJetInd1]'
 lepRelIso1_safe = 'isWmunu || isWenu || isZmm || isZee ? selLeptons_relIso_0 : -1'
 lepRelIso2_safe = 'isZmm || isZee ? selLeptons_relIso_1 : -1'
 
@@ -35,6 +37,9 @@ vars_used_in_selections = {
     'DeepCSVmax':          (DeepCSVmax,                               ';DeepCSV_{max};',                 60,      0.,     1       ),
     'DeepCSVmin':          (DeepCSVmin,                               ';DeepCSV_{min};',                 60,      0.,     1       ),
     'leadjetDeepCSVZoom':  ('Jet_btagDeepB[hJetInd1]',              ';Jet1@DeepCSV;',                  20,      0.94,   1       ),
+    'CMVAmax':          (CMVAmax,                               ';CMVA_{max};',                 60,      -1.,     1       ),
+    'CMVAmin':          (CMVAmin,                               ';CMVA_{min};',                 60,      -1.,     1       ),
+    'leadjetCMVAZoom':  ('Jet_btagCMVA[hJetInd1]',              ';Jet1@CMVA;',                  20,      0.94,   1       ),
     'nAddJets':         ('nAddJets252p9_puid',                  ';nAddJets252p9_puid;',         11,      -.5,    10.5    ),
     'nAddLeptons':      ('nAddLeptons',                         ';nAddLeptons;',                11,      -.5,    10.5    ),
     'met_pt':           ('MET_Pt',                              ';MET@p_{T}@GeV;',              30,      0,      500     ),
@@ -122,6 +127,8 @@ vars_2lepCR_only = {
     'mjj':              ('H_mass',      ';Regressed m(jj) [GeV];',          17,      0,      255    ),
     'DeepCSVmax':          (DeepCSVmax,       ';DeepCSV_{max};',                     20,      0.,     1      ),
     'DeepCSVmin':          (DeepCSVmin,       ';DeepCSV_{min};',                     20,      0.,     1      ),
+    'CMVAmax':          (CMVAmax,       ';CMVA_{max};',                     20,      -1.,     1      ),
+    'CMVAmin':          (CMVAmin,       ';CMVA_{min};',                     20,      -1.,     1      ),
     'HVdPhi':           ('HVdPhi',      ';HVdPhi [rad];',                   30,      -3.2,   3.2    ),
     'jjWPtBal':         ('H_pt/V_pt',   ';p_{T} balance after regression;', 25,      0,      2.     ),
     'drjj':             ('HJ1_HJ2_dR',  ';reg. Delta R(jj);',               30,      0,      6      ),
