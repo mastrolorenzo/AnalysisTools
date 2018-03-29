@@ -21,6 +21,12 @@ VHbbAnalysis::~VHbbAnalysis() {
 //probably want to do bdtSetup here
 void VHbbAnalysis::InitAnalysis() {
     //SetupBDT();
+    /*Get the corrections workspace */
+    TFile* wsp_file = new TFile("./aux/vhbb_metsf.root","READ");
+    RooWorkspace *wsp = (RooWorkspace*)wsp_file->Get("w");
+    wsp_file->Close();
+    met_trigger_sf120_func = wsp->function("met_trig_sf120")->functor(wsp->argSet("met_mht"));
+    met_trigger_eff_2016data_func = wsp->function("data_nominal_110OR170")->functor(wsp->argSet("met_mht"));
     
     /* Open the files with the EWK correction factor */
     TFile* wpfile = new TFile("./aux/Wp_nloEWK_weight_unnormalized.root","READ");
@@ -1388,7 +1394,26 @@ void VHbbAnalysis::FinishEvent() {
         *f["bTagWeight"] = bTagWeight;
     }
 
-
+    //MET trigger efficiency
+    *f["weight_mettrigSF"] = 1.0;
+    if ( mInt("Vtype") == 4 && mInt("sampleIndex")!=0) {
+        double met_mht = std::min(m("MET_pt"),m("MHT_pt"));
+        auto args = std::vector<double>{met_mht};
+        double met_trigger_sf=1.0;
+        if (m("dataYear")==2017){
+            if(met_mht > 500) met_mht=500;
+            if(met_mht >= 100) {
+                met_trigger_sf = met_trigger_sf120_func->eval(args.data());
+            } else met_trigger_sf=0.;
+        }
+        if (m("dataYear")==2016){
+            if(met_mht > 500) met_mht=500;
+            if(met_mht >= 120){
+                met_trigger_sf = met_trigger_eff_2016data_func->eval(args.data());
+            } else met_trigger_sf=0.;
+        }
+        *f["weight_mettrigSF"] = met_trigger_sf;
+    }
     //if (bool(*f["doCutFlow"])) {
     //    ofile->cd();
     //    outputTree->Fill();
@@ -2167,9 +2192,9 @@ void VHbbAnalysis::FinishEvent() {
 
         if (m("doCutFlow")>0 && m("cutFlow")<5) {
             // lepton scale factor calculation will break for some events in the cutflow before lepton selection
-            *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK");
+            *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("weight_mettrigSF");
         } else {
-            *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("Lep_SF");
+            *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("Lep_SF") * m("weight_mettrigSF");
         }
         
         // Add NLO to LO W+jet re-weighting from Z(ll)H(bb)
@@ -2599,8 +2624,8 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
             }
         }
     } else if (m("dataYear") == 2016) {
-        // 0-lepton
-        if (vtype == 4
+        // 0-lepton - no MC efficiencies available, so apply trigger in data only
+        if (vtype == 4 && mInt("sampleIndex") == 0 
             && mInt("HLT_PFMET110_PFMHT110_IDTight")     != 1
             && mInt("HLT_PFMET120_PFMHT120_IDTight")     != 1
             && mInt("HLT_PFMET170_NoiseCleaned")         != 1
@@ -2609,6 +2634,7 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
            ) {
             return false;
         }
+
         // 1-lepton
         if ((vtype == 2 || vtype == 3)
             && mInt("HLT_Ele27_eta2p1_WPTight_Gsf")!= 1
@@ -2630,8 +2656,8 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
     } else if (m("dataYear") == 2017) {
         // 0-lepton
         if (vtype == 4
-            && mInt("HLT_PFMET110_PFMHT110_IDTight") != 1
-            && mInt("HLT_PFMETTypeOne120_PFMHT120_IDTight") != 1
+            && mInt("HLT_PFMET120_PFMHT120_IDTight") != 1
+            && mInt("HLT_PFMET120_PFMHT120_IDTight_PFHT60") != 1
            ) {
             return false;
         }

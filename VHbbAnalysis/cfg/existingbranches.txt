@@ -174,6 +174,7 @@ type=2  name=V_phi
 type=2  name=V_mass
 type=2  name=MET_sumEt
 type=2  name=TkMET_phi
+type=2  name=MHT_pt
 
 #type=1  name=nGenLep                                    onlyMC=1
 #type=8  name=GenLep_pt                          max=10  onlyMC=1

@@ -182,6 +182,7 @@ type=2  name=V_mass
 type=2  name=MET_sumEt
 type=2  name=MET_pt
 type=2  name=MET_phi
+# includes JER smearing
 type=2  name=MET_Phi
 
 #type=1  name=nGenLep                                    onlyMC=1
@@ -261,6 +262,7 @@ type=8  name=FatJet_eta                       max=10 lengthBranch=nFatJet
 type=8  name=FatJet_phi                       max=10 lengthBranch=nFatJet
 type=8  name=FatJet_pt                        max=10 lengthBranch=nFatJet
 type=8  name=FatJet_mass                      max=10 lengthBranch=nFatJet
+type=8  name=FatJet_msoftdrop                 max=10 lengthBranch=nFatJet
 type=8  name=FatJet_tau1                      max=10 lengthBranch=nFatJet
 type=8  name=FatJet_tau2                      max=10 lengthBranch=nFatJet
 type=8  name=FatJet_tau3                      max=10 lengthBranch=nFatJet

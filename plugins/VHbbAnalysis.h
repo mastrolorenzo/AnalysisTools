@@ -11,6 +11,9 @@
 #include <iostream>
 #include "TLorentzVector.h"
 #include "../AnalysisManager.h"
+#include "RooWorkspace.h"
+#include "RooRealVar.h"
+#include "RooFunctor.h"
 
 
 class VHbbAnalysis : public AnalysisManager {
@@ -32,6 +35,9 @@ class VHbbAnalysis : public AnalysisManager {
         TH1D* ewkCorrHist_wm;
         TH1D* ewkCorrHist_zll;
         TH1D* ewkCorrHist_znn;
+
+        RooFunctor* met_trigger_sf120_func;
+        RooFunctor* met_trigger_eff_2016data_func;
 
         std::pair<int,int> HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut);
         std::pair<int,int> HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso);

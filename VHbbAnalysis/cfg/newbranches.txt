@@ -56,6 +56,7 @@ type=2  name=nProcEvents
 type=2  name=nPVs_f
 type=2  name=WJetStitchWeight
 type=2  name=htJet30
+type=2  name=weight_mettrigSF
 
 type=2  name=bTagWeight
 type=2  name=bTagWeight_HFUp
