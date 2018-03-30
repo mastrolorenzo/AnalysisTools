@@ -8,9 +8,9 @@ type=1  name=nJet
 type=8  name=Jet_pt           max=100     lengthBranch=nJet
 type=8  name=Jet_Pt           max=100     lengthBranch=nJet
 type=8  name=Jet_bReg         max=100     lengthBranch=nJet
-type=2  name=LHE_HT           onlyMC=1
-type=1  name=LHE_Nb           onlyMC=1
-type=2  name=LHE_Vpt          onlyMC=1
+type=2  name=LHE_HT           onlyMC=1   allowMissingBranch=1
+type=1  name=LHE_Nb           onlyMC=1   allowMissingBranch=1
+type=2  name=LHE_Vpt          onlyMC=1   allowMissingBranch=1
 #type=1  name=nGenStatus2bHad  onlyMC=1
 
 # includes JER smearing
