@@ -140,29 +140,31 @@ for pltr1, pltr2 in pltr_combos:
 # plotting...
 # ===========
 
-def titlebox_func(wrp, _):
+def catbox_func(wrp, _):
     '''
-    This function is executed when plotting is almost complete.
+    catbox.... Schroedings' favorite!
 
+    This function is executed when plotting is almost complete.
     ``wrp`` is an instance of ``varial.wrappers.CanvasWrapper``.
     '''
     text = varial.ana.cwd.split('/')[-2]
-    titlebox = varial.ROOT.TPaveText(0.2, 0.85, 0., 0.95, 'brNDC')
-    titlebox.AddText(text)
-    titlebox.SetTextSize(0.042)
-    titlebox.SetFillStyle(0)
-    titlebox.SetBorderSize(0)
-    #titlebox.SetTextAlign(31)
-    titlebox.SetTextAlign(21)
-    titlebox.SetMargin(0.0)
-    titlebox.SetFillColor(0)
+    catbox = varial.ROOT.TPaveText(0.2, 0.85, 0.7, 0.95, 'brNDC')
+    catbox.AddText(text)
+    catbox.SetTextSize(0.042)
+    catbox.SetFillStyle(0)
+    catbox.SetBorderSize(0)
+    #catbox.SetTextAlign(31)
+    catbox.SetTextAlign(21)
+    catbox.SetMargin(0.0)
+    catbox.SetFillColor(0)
     wrp.canvas.cd()
-    titlebox.Draw('SAME')
+    catbox.Draw('SAME')
     wrp.main_pad.cd()
-    wrp.titlebox = titlebox
+    wrp.catbox = catbox
     return wrp
 
-varial.rnd.post_build_funcs += [titlebox_func]
+if getattr(config, 'do_simple_categorybox', True):
+    varial.rnd.post_build_funcs += [catbox_func]
 varial.settings.colors.update(config.sample_colors)
 
 
