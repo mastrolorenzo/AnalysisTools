@@ -282,7 +282,7 @@ else:
 
         echo "running %s"
         echo $4
-        python %s $1 $2 $3 $4
+        python %s $1 $2 $3 $4 %s
         echo "done running, now copying output to EOS"
 
         echo "copying output (%s)"
@@ -293,7 +293,7 @@ else:
         rm -r $tmp_dir
 
         echo "all done!"
-    ''' % (' '.join(inputs_to_transfer), scram_arch, patch_rel, cmssw_version, runfile, runfile, xrdcp_string, xrdcp_string)
+    ''' % (' '.join(inputs_to_transfer), scram_arch, patch_rel, cmssw_version, runfile, runfile, runOnSkim, xrdcp_string, xrdcp_string)
 
     runscript = open("%s/condor_runscript.sh" % (jobName) , "w")
     runscript.write(condor_runscript_text_desy if site=='DESY' else condor_runscript_text)
