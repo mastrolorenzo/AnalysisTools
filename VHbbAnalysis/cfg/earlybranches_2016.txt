@@ -12,22 +12,24 @@ type=2  name=LHE_HT           onlyMC=1
 type=1  name=LHE_Nb           onlyMC=1
 type=2  name=LHE_Vpt          onlyMC=1
 #type=1  name=nGenStatus2bHad  onlyMC=1
-type=2  name=MET_pt
-type=2  name=MET_phi
+
+# includes JER smearing
+type=2  name=MET_Pt
+
 type=8  name=Jet_btagDeepB                    max=100     lengthBranch=nJet
 type=8  name=Jet_btagCSVV2                    max=100     lengthBranch=nJet
 type=8  name=Jet_btagCMVA                     max=100     lengthBranch=nJet
 type=2  name=V_pt
 
-type=1  name=nGenPart                                    onlyMC=1
-type=8  name=GenPart_pt                          max=250  onlyMC=1 lengthBranch=nGenPart
-type=8  name=GenPart_eta                         max=250  onlyMC=1 lengthBranch=nGenPart
-type=8  name=GenPart_phi                         max=250  onlyMC=1 lengthBranch=nGenPart
-type=7  name=GenPart_statusFlags                 max=250  onlyMC=1 lengthBranch=nGenPart
-type=7  name=GenPart_status                      max=250  onlyMC=1 lengthBranch=nGenPart
-type=7  name=GenPart_pdgId                       max=250  onlyMC=1 lengthBranch=nGenPart
-type=7  name=GenPart_genPartIdxMother            max=250  onlyMC=1 lengthBranch=nGenPart
-type=8  name=GenPart_mass                        max=250  onlyMC=1 lengthBranch=nGenPart
+type=1  name=nGenPart                                     onlyMC=1
+type=8  name=GenPart_pt                          max=300  onlyMC=1 lengthBranch=nGenPart
+type=8  name=GenPart_eta                         max=300  onlyMC=1 lengthBranch=nGenPart
+type=8  name=GenPart_phi                         max=300  onlyMC=1 lengthBranch=nGenPart
+type=7  name=GenPart_statusFlags                 max=300  onlyMC=1 lengthBranch=nGenPart
+type=7  name=GenPart_status                      max=300  onlyMC=1 lengthBranch=nGenPart
+type=7  name=GenPart_pdgId                       max=300  onlyMC=1 lengthBranch=nGenPart
+type=7  name=GenPart_genPartIdxMother            max=300  onlyMC=1 lengthBranch=nGenPart
+type=8  name=GenPart_mass                        max=300  onlyMC=1 lengthBranch=nGenPart
 
 #type=4  name=HLT_PFMET110_PFMHT110_IDTight  
 #type=4  name=HLT_PFMET120_PFMHT120_IDTight
@@ -44,7 +46,7 @@ type=8  name=GenPart_mass                        max=250  onlyMC=1 lengthBranch=
 type=4  name=HLT_PFMET110_PFMHT110_IDTight  
 type=4  name=HLT_PFMET120_PFMHT120_IDTight
 type=4  name=HLT_PFMET170_NoiseCleaned       allowMissingBranch=1
-type=4  name=HLT_PFMET170_BeamHaloCleaned
+type=4  name=HLT_PFMET170_BeamHaloCleaned    allowMissingBranch=1	
 type=4  name=HLT_PFMET170_HBHECleaned         
 type=4  name=HLT_Ele27_eta2p1_WPTight_Gsf
 type=4  name=HLT_IsoMu24
