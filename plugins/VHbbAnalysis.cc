@@ -1896,6 +1896,14 @@ void VHbbAnalysis::FinishEvent() {
             if(thisBDTInfo != bdtInfos.end()){
                 bdtNames.push_back("bdt_0lep_vzbb");
             }
+            thisBDTInfo = bdtInfos.find("bdt_0lep_massless");
+            if(thisBDTInfo != bdtInfos.end()){
+                float logMjj = log(m("H_mass"));
+                *f["H_pt_overLogM"] = m("H_pt")/logMjj;
+                *f["hJets_leadingPt_overLogM"]    = m("hJets_leadingPt")/logMjj;
+                *f["hJets_subleadingPt_overLogM"] = m("hJets_subleadingPt")/logMjj;
+                bdtNames.push_back("bdt_0lep_massless");
+            }
         }
 
         if(*b["oneMergedJet"]){
@@ -2169,7 +2177,7 @@ void VHbbAnalysis::FinishEvent() {
         *f["weight_ptEWK"] = 1.0;
         if(mInt("sampleIndex")<0){
             if( mInt("nGenVbosons",0) == 1 ){
-                TH1D* thisHist;
+                TH1D* thisHist = NULL;
                 if( mInt("sampleIndex") == -12500 ){        
                     thisHist=ewkCorrHist_wp ;
                 } else if( mInt("sampleIndex") == -12501 ){  
@@ -2179,7 +2187,7 @@ void VHbbAnalysis::FinishEvent() {
                 } else if( mInt("sampleIndex") == -12504 ){  
                     thisHist=ewkCorrHist_znn ;
                 }
-                if(thisHist){
+                if(thisHist!=NULL){
                     *f["weight_ptEWK"] = GetVHEWKCorrFactor( m("V_pt"), thisHist );
                 }
                 if(debug>1000) std::cout<<"weight_ptEWK V_pt "<< m("V_pt")<<" "<<*f["weight_ptEWK"]<<std::endl;
@@ -2707,8 +2715,15 @@ void VHbbAnalysis::SetTaggerName( float taggerType ){
 
 //function used to get the EWK correction factor
 float VHbbAnalysis::GetVHEWKCorrFactor( float V_pt, TH1D* hist ){
+    if(debug>10000){
+        std::cout<<"GetVHEWKCorrFactor V_pt"<<V_pt<<std::endl;
+        std::cout<<"name of hist "<<hist->GetName()<<std::endl;
+    }
     int ibin = hist->GetXaxis()->FindBin(V_pt);
-    
+    if(debug>10000){
+        std::cout<<"ibin "<<ibin<<std::endl;
+        std::cout<<"nbins "<< hist->GetNbinsX()<<std::endl;
+    }
     if (ibin < 1){ 
         return hist->GetBinContent(1); 
     }
