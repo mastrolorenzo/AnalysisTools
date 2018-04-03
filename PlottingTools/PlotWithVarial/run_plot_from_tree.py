@@ -125,7 +125,7 @@ treeplotters = varial.tools.ToolChainParallel(
     n_workers=getattr(config, 'n_parallel_treeplotters', 1),
 )
 
-# protect against category override:
+# protect against category override (i.e. two categories with the same name):
 pltr_combos = itertools.combinations(treeplotters.tool_chain, 2)
 for pltr1, pltr2 in pltr_combos:
     sections1 = set(s for s, _, _ in pltr1.sec_sel_weight)
@@ -136,8 +136,35 @@ for pltr1, pltr2 in pltr_combos:
             'In config "%s": the blocks "%s" and "%s" have common sections: %s' % (
                 full_cfg_path, pltr1.name, pltr2.name, intersect))
 
+
 # plotting...
+# ===========
+
+def titlebox_func(wrp, _):
+    '''
+    This function is executed when plotting is almost complete.
+
+    ``wrp`` is an instance of ``varial.wrappers.CanvasWrapper``.
+    '''
+    text = varial.ana.cwd.split('/')[-2]
+    titlebox = varial.ROOT.TPaveText(0.2, 0.85, 0., 0.95, 'brNDC')
+    titlebox.AddText(text)
+    titlebox.SetTextSize(0.042)
+    titlebox.SetFillStyle(0)
+    titlebox.SetBorderSize(0)
+    #titlebox.SetTextAlign(31)
+    titlebox.SetTextAlign(21)
+    titlebox.SetMargin(0.0)
+    titlebox.SetFillColor(0)
+    wrp.canvas.cd()
+    titlebox.Draw('SAME')
+    wrp.main_pad.cd()
+    wrp.titlebox = titlebox
+    return wrp
+
+varial.rnd.post_build_funcs += [titlebox_func]
 varial.settings.colors.update(config.sample_colors)
+
 
 def input_hook(wrps):
     '''Histograms are wrapped. This function sets some meta data.'''
