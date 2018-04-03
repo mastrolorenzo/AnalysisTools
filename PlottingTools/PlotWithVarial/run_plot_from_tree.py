@@ -73,12 +73,12 @@ def make_weight_string(index):
     if isinstance(index, str):
         # specify cutstring to classify sample
         return config.weight + '*(%s)' % index
-    else:
-        # use sampleIndex 
-        if index == 0:  # Data
-            return '(sampleIndex==0)'
-        if index != None:
-            return config.weight + '*(sampleIndex==%i)' % index
+
+    # otherwise assume sampleIndex to be an integer
+    if index == 0:  # Data
+        return '(sampleIndex==0)'
+    if index != None:
+        return config.weight + '*(sampleIndex==%i)' % index
     return config.weight
 
 # make sample weights_dict
