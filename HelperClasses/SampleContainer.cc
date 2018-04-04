@@ -48,15 +48,12 @@ inline SampleContainer::SampleContainer()
 
 inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) {
     files.push_back(fname);
-    std::cout<<"in SC "<<fname<<std::endl;
-    std::cout<<"isBatch "<<isBatch<<std::endl;
-    
     if( isBatch==1 ) return;
     
     sampleChain->Add(fname);
-    //std::cout<<nProFromFile<<std::endl; 
+    //std::cout<<"nProFromFile "<<nProFromFile<<" doSkim "<<doSkim<<std::endl; 
     if(nProFromFile) {
-        if (doSkim != 1 && files.size() > 1) return; // skimmed files already have the summed count histograms
+        if (doSkim == 2 && files.size() > 1) return; // skimmed files already have the summed count histograms
         TFile *file = TFile::Open(fname);
         if (file->IsZombie()) return;
         if (doSkim == 2) {
@@ -73,6 +70,7 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
             //TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
             //int nEffective = counterPos->GetBinContent(1) - counterNeg->GetBinContent(1); 
             float nEffective = counter->GetBinContent(1);
+            std::cout<<"nEffective "<<nEffective<<std::endl;
             //if(sampleNum==49 or sampleNum==491) {
             //    //special prescription for WJets_BGenFilter sample weighting
             //    //TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
@@ -89,22 +87,23 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
             //CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
             //CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
             //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
-        }
-
-        else {
-             // totally different setup for grabbing event count in nanoAOD
-             TTree *Runs = (TTree*) file->Get("Runs");
-             Long64_t genEventCount = 0;
-             Runs->SetBranchAddress("genEventCount",&genEventCount);
-             // one entry in Runs tree per input NanoAOD file
-             int nNanoInputFiles = Runs->GetEntries();
-             for (int i=0; i < nNanoInputFiles; i++) {
-                 Runs->GetEntry(i);
-                 std::cout<<fname<<" genEventCount: "<<genEventCount<<std::endl;
-                 CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventCount);
-                 processedEvents += genEventCount;
-             }
-             file->Close();
+        } else {
+            // totally different setup for grabbing event count in nanoAOD
+            //std::cout<<"TOTALLY DIFFERENT"<<std::endl;
+            TTree *Runs = (TTree*) file->Get("Runs");
+            Long64_t genEventCount = 0;
+            Runs->SetBranchAddress("genEventCount",&genEventCount);
+            // one entry in Runs tree per input NanoAOD file
+            int nNanoInputFiles = Runs->GetEntries();
+            std::cout<<"From Runs tree, processedEvents is (before) "<<processedEvents<<std::endl;
+            for (int i=0; i < nNanoInputFiles; i++) {
+                Runs->GetEntry(i);
+                std::cout<<fname<<" genEventCount: "<<genEventCount<<std::endl;
+                CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventCount);
+                processedEvents += genEventCount;
+            }
+            std::cout<<"From Runs tree, processedEvents is (after)  "<<processedEvents<<std::endl;
+            file->Close();
         }
     }
     
