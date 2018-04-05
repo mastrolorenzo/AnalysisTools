@@ -37,7 +37,7 @@ type=8  name=GenPart_mass                        max=250  onlyMC=1 lengthBranch=
 
 type=4  name=HLT_PFMET110_PFMHT110_IDTight  
 type=4  name=HLT_PFMET120_PFMHT120_IDTight
-type=4  name=HLT_PFMET120_PFMHT120_IDTight_PFHT60
+type=4  name=HLT_PFMET120_PFMHT120_IDTight_PFHT60 allowMissingBranch=1
 type=4  name=HLT_Ele32_WPTight_Gsf_L1DoubleEG
 ##type=4  name=HLT_Ele32_WPTight_Gsf
 type=4  name=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL
