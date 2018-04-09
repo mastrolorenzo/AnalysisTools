@@ -197,6 +197,9 @@ def input_hook(wrps):
         varial.op.int_r,
     )
 
+    if getattr(config, 'additional_input_hook', False):
+        wrps = config.additional_input_hook(wrps)
+
     return wrps
 
 
