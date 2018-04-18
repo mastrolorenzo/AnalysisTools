@@ -73,6 +73,12 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                     samplecon.procEff = sample["procEff"]
                 if sample.has_key("lepFlav"):
                     samplecon.lepFlav = sample["lepFlav"]
+                if sample.has_key("puhist"):
+                    print "found puhist name in samples"
+                    samplecon.PUHistName = sample["puhist"]
+                elif settings.has_key("mcpuhistname"):
+                    print "found puhist name in settings"
+                    samplecon.PUHistName = settings["mcpuhistname"]
                 #print "Reading",sample["name"],"with",len(sample["files"]),"files"
                 for filename in sample["files"]:
                     #print filename,filesToRun
@@ -215,6 +221,36 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             print "adding btag scale factors"
             am.InitializeBTagSF(settings["btagscalefactors"])
 
+        if settings.has_key("putarget"):
+            try:
+                tfile=ROOT.TFile.Open(settings["putarget"])
+                puhist=tfile.Get("pileup")
+                am.SetGlobalPUTarget(puhist)
+                print "setting putarget"
+                tfile.Close()
+            except:
+                print "something went wrong with",settings["putarget"]
+
+        if settings.has_key("puUPtarget"):
+            try:
+                tfile=ROOT.TFile.Open(settings["puUPtarget"])
+                puhist=tfile.Get("pileup")
+                am.SetGlobalPUTarget(puhist,1)
+                print "setting puUPtarget"
+                tfile.Close()
+            except:
+                print "something went wrong with",settings["puUPtarget"]
+
+        if settings.has_key("puDOWNtarget"):
+            try:
+                tfile=ROOT.TFile.Open(settings["puDOWNtarget"])
+                puhist=tfile.Get("pileup")
+                am.SetGlobalPUTarget(puhist,-1)
+                print "setting puDOWNtarget"
+                tfile.Close()
+            except:
+                print "something went wrong with",settings["puDOWNtarget"]
+        
         return am
     elif filetype is "samplefile":
         samples=MakeSampleMap(filelines,samplesToRun,runOnSkim)
@@ -314,6 +350,7 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
         samplexsec=-1
         samplekfac=1
         samplescale=1
+        samplepuhist=""
         sample={}
 
         dontRun = False
@@ -331,6 +368,8 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
                 sample["name"]=str(value)
             if name.find("file") is 0:
                 samplepaths.append(globalPrefix+str(value))
+            if name.find("puhist") is 0:
+                sample["puhist"]=str(value)
             if name.find("dir") is 0:
                 site = "FNAL"
                 if value.find("CERN") is 0:

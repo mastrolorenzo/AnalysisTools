@@ -20,7 +20,7 @@ type=2  name=puWeight                              onlyMC=1
 #FIXME Need to add back b-tag weights
 
 type=2  name=Pileup_nTrueInt                            onlyMC=1
-type=2  name=Pileup_nPU                                 onlyMC=1
+type=1  name=Pileup_nPU                                 onlyMC=1
 type=2  name=genWeight                                  onlyMC=1
 type=1  name=nGenJet                                    onlyMC=1
 type=8  name=GenJet_pt                          max=60  onlyMC=1 lengthBranch=nGenJet

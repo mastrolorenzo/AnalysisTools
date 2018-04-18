@@ -43,6 +43,8 @@ inline SampleContainer::SampleContainer()
     CountWeightedLHEWeightPdf = new TH1F("CountWeightedLHEWeightPdf","CountWeightedLHEWeightPdf",103,-0.5,102.5);
     CountWeighted = new TH1F("CountWeighted","CountWeighted",1,0.,2.0);
     CountFullWeighted = new TH1F("CountFullWeighted","CountFullWeighted",1,0.,2.0);
+    InputPU = NULL;
+    PUHistName = "";
     lepFlav = -1;
 }
 
@@ -52,23 +54,34 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
     
     sampleChain->Add(fname);
     //std::cout<<"nProFromFile "<<nProFromFile<<" doSkim "<<doSkim<<std::endl; 
+    TFile *file;
+    bool openTFile=(nProFromFile || !(PUHistName.empty()));
+   
+    if(openTFile){
+        file = TFile::Open(fname);
+        if (file->IsZombie()) return;
+    }
+   
+    if(!PUHistName.empty()){
+        TH1D* thisFilePUHist=(TH1D*)((TH1D*)file->Get(PUHistName.c_str()))->Clone("thisFilePUHist");
+        if(InputPU == NULL){
+            InputPU=(TH1D*)(thisFilePUHist->Clone("PUTarget"));
+        } else {
+            InputPU->Add(thisFilePUHist);
+        }
+        InputPU->SetDirectory(0);
+        delete thisFilePUHist;
+    }
+    
     if(nProFromFile) {
         if (doSkim == 2 && files.size() > 1) return; // skimmed files already have the summed count histograms
-        TFile *file = TFile::Open(fname);
-        if (file->IsZombie()) return;
         if (doSkim == 2) {
             // doSkim == 2 -> running on skimmed samples by AT
             // for now our skimmed ntuples we preserve the counting by histogram structure
             // from Heppy, since this is how the datacard maker is set up. We may want to eventually
             // change this.
             
-            //TH1F* counter = (TH1F*)file.Get("Count");
-            //processedEvents+=counter->GetBinContent(1);
-            //TH1F* counterPos = (TH1F*)file->Get("CountPosWeight");
-            //TH1F* counterNeg = (TH1F*)file->Get("CountNegWeight");
             TH1F* counter = (TH1F*)file->Get("CountWeighted");
-            //TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
-            //int nEffective = counterPos->GetBinContent(1) - counterNeg->GetBinContent(1); 
             float nEffective = counter->GetBinContent(1);
             std::cout<<"nEffective "<<nEffective<<std::endl;
             //if(sampleNum==49 or sampleNum==491) {
@@ -77,7 +90,6 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
             //    nEffective = counterFullWeight->GetBinContent(1); 
             //}
             CountWeighted->Add(counter);
-            //CountFullWeighted->Add(counterFullWeight);
             std::cout<<"pe = "<<processedEvents<<std::endl;
             processedEvents += nEffective;
             std::cout<<"pe = "<<processedEvents<<std::endl;
@@ -89,7 +101,6 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
             //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
         } else {
             // totally different setup for grabbing event count in nanoAOD
-            //std::cout<<"TOTALLY DIFFERENT"<<std::endl;
             TTree *Runs = (TTree*) file->Get("Runs");
             Long64_t genEventCount = 0;
             Runs->SetBranchAddress("genEventCount",&genEventCount);
@@ -103,10 +114,11 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
                 processedEvents += genEventCount;
             }
             std::cout<<"From Runs tree, processedEvents is (after)  "<<processedEvents<<std::endl;
-            file->Close();
         }
     }
-    
+    if(openTFile){
+        file->Close();
+    }
 }
 
 inline void SampleContainer::ComputeWeight(float intL) {

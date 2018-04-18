@@ -559,6 +559,16 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
         cursample = &samples[i];
         cursample->ComputeWeight(*f["intL"]);
 
+        if(cursample->InputPU != NULL){
+            EvaluatePUReweighting(cursample->InputPU);
+            if(globalPUTargetUP!= NULL){
+                EvaluatePUReweighting(cursample->InputPU,1);
+            }
+            if(globalPUTargetDOWN!= NULL){
+                EvaluatePUReweighting(cursample->InputPU,-1);
+            }
+        }
+
         for(int ifile=0; ifile<(int)(cursample->files.size()); ifile++){
             if(std::find(readFiles.begin(), readFiles.end(), cursample->files[ifile]) != readFiles.end() ) {
                 // file has already been processed, skip it
@@ -903,6 +913,159 @@ void AnalysisManager::ApplySystematics(bool early){
     }
 }
 
+double   AnalysisManager::GetPUWeight(int thisPU, int puType){
+    float thisWeight=1.0;
+    if(thisPU<0){
+        if(debug>10){
+            std::cout<<"thisPU is negative..."<<thisPU<<std::endl;
+        }
+        return thisWeight;
+    }
+    
+    TH1D** pointerToReweightingPointer=NULL;
+
+    if(puType==0){
+        pointerToReweightingPointer=&PUReWeighting;
+    }else if(puType==-1){
+        pointerToReweightingPointer=&PUReWeightingDOWN;
+    }else if(puType==1){
+        pointerToReweightingPointer=&PUReWeightingUP;
+    }else{
+        std::cout<<"GetPUWeight not set for puType "<<puType<<std::endl;
+        return 1.0;
+    }
+
+    if((*pointerToReweightingPointer)==NULL){
+        if(debug>10){
+            std::cout<<"PU reweighting histogram is NULL."<<std::endl;
+        }
+        return thisWeight;
+    }
+
+    unsigned int nBins = (*pointerToReweightingPointer)->GetNbinsX();
+    float thisLowEdge=-1;
+    float nextLowEdge=-1;
+    int bestBin=-1;
+    for(unsigned int iBin=0;iBin<nBins; iBin++){
+        thisLowEdge=(*pointerToReweightingPointer)->GetBinLowEdge(iBin);
+        nextLowEdge=(*pointerToReweightingPointer)->GetBinLowEdge(iBin+1);
+        if(thisPU>=thisLowEdge && thisPU<nextLowEdge){
+            bestBin=iBin;
+            break;
+        }
+    }
+    if(bestBin!=-1){
+        if(debug>100000) std::cout<<"thisPU last thisLowEdge nextLowEdge "<<thisPU<<" "<<thisLowEdge<<" "<<nextLowEdge<<std::endl;
+        thisWeight=(*pointerToReweightingPointer)->GetBinContent(bestBin);
+    } else {
+        if(debug>100000) std::cout<<"bestBin is -1.  PU is "<<thisPU<<std::endl;
+    }
+    return thisWeight;
+}
+
+bool     AnalysisManager::EvaluatePUReweighting(TH1D* inputPU, int puType){
+    bool success=false;
+    TH1D** pointerToTargetPointer=NULL;
+
+    if(puType==0){
+        pointerToTargetPointer=&globalPUTarget;
+    }else if(puType==-1){
+        pointerToTargetPointer=&globalPUTargetDOWN;
+    }else if(puType==1){
+        pointerToTargetPointer=&globalPUTargetUP;
+    }else{
+        std::cout<<"EvaluatePUReweighting not set for puType "<<puType<<std::endl;
+        return success;
+    }
+
+    if((*pointerToTargetPointer)==NULL || inputPU==NULL){
+        if(debug>10) std::cout<<"(*pointerToTargetPointer) or inputPU is NULL"<<std::endl;
+    } else {
+        inputPU->Scale(1./inputPU->Integral());
+       
+        if((*pointerToTargetPointer)->GetNbinsX()!=inputPU->GetNbinsX()){
+            int maxBins=std::max((*pointerToTargetPointer)->GetNbinsX(),inputPU->GetNbinsX());
+            float minPU=std::min((*pointerToTargetPointer)->GetBinLowEdge(1),inputPU->GetBinLowEdge(1));
+            float maxPU=std::max((*pointerToTargetPointer)->GetBinLowEdge((*pointerToTargetPointer)->GetNbinsX()+1),inputPU->GetBinLowEdge(inputPU->GetNbinsX()+1));
+            if(debug>10) std::cout<<"maxBins "<<maxBins<<"  maxPU  "<<maxPU<<"  minPU  "<<minPU<<std::endl;
+            if((*pointerToTargetPointer)->GetNbinsX()!=maxBins || (*pointerToTargetPointer)->GetBinLowEdge(1)!=minPU || (*pointerToTargetPointer)->GetBinLowEdge((*pointerToTargetPointer)->GetNbinsX()+1)!=maxPU){
+                TH1D * PUTargetReplacement= new TH1D("PUTarget",";nPU:Fraction",maxBins,minPU,maxPU);
+                for(int iBin=0;iBin<maxBins+1; iBin++){
+                    if(iBin<=(*pointerToTargetPointer)->GetNbinsX()+1){
+                        PUTargetReplacement->Fill(iBin,(*pointerToTargetPointer)->GetBinContent(iBin));
+                    } else {
+                        PUTargetReplacement->Fill(iBin,(*pointerToTargetPointer)->GetBinContent((*pointerToTargetPointer)->GetNbinsX()+1));
+                    }
+                }
+                (*pointerToTargetPointer)=(TH1D*)PUTargetReplacement->Clone();
+                (*pointerToTargetPointer)->SetDirectory(0);
+                (*pointerToTargetPointer)->Scale(1./(*pointerToTargetPointer)->Integral());
+            }
+            
+            if(inputPU->GetNbinsX()!=maxBins || inputPU->GetBinLowEdge(1)!=minPU || inputPU->GetBinLowEdge(inputPU->GetNbinsX()+1)!=maxPU){
+                TH1D * PUInputReplacement= new TH1D("PUInput",";nPU:Fraction",maxBins,minPU,maxPU);
+                for(int iBin=0;iBin<maxBins+1; iBin++){
+                    if(iBin<=inputPU->GetNbinsX()+1){
+                        PUInputReplacement->Fill(iBin,inputPU->GetBinContent(iBin));
+                    } else {
+                        PUInputReplacement->Fill(iBin,inputPU->GetBinContent(inputPU->GetNbinsX()+1));
+                    }
+                }
+                inputPU=(TH1D*)PUInputReplacement->Clone();
+                inputPU->SetDirectory(0);
+                inputPU->Scale(1./inputPU->Integral());
+            }
+        }
+        TH1D** pointerToReweightingPointer=NULL;
+
+        if(puType==0){
+            pointerToReweightingPointer=&PUReWeighting;
+        }else if(puType==-1){
+            pointerToReweightingPointer=&PUReWeightingDOWN;
+        }else if(puType==1){
+            pointerToReweightingPointer=&PUReWeightingUP;
+        }else{
+            std::cout<<"EvaluatePUReweighting not set for puType "<<puType<<std::endl;
+            return success;
+        }
+
+        (*pointerToReweightingPointer)=(TH1D*)(*pointerToTargetPointer)->Clone("PUReWeighting");
+        (*pointerToReweightingPointer)->Divide(inputPU);
+       
+        if(debug>100){ 
+            for(int iBin=0;iBin<(*pointerToTargetPointer)->GetNbinsX()+1; iBin++){
+                std::cout<<"iBin "<<iBin<<" input "<<inputPU->GetBinContent(iBin)<<" target "<<(*pointerToTargetPointer)->GetBinContent(iBin)<<" weight "<<PUReWeighting->GetBinContent(iBin)<<std::endl; 
+            }
+        }
+        success=true;
+    }
+    return success;
+}
+
+void     AnalysisManager::SetGlobalPUTarget(TH1D targetHist, int puType){
+    TH1D** pointerToTargetPointer=NULL;
+
+    if(puType==0){
+        pointerToTargetPointer=&globalPUTarget;
+    }else if(puType==-1){
+        pointerToTargetPointer=&globalPUTargetDOWN;
+    }else if(puType==1){
+        pointerToTargetPointer=&globalPUTargetUP;
+    }else{
+        std::cout<<"SetGlobalPUTarget not set for puType "<<puType<<std::endl;
+        return;
+    }
+
+    (*pointerToTargetPointer)=(TH1D*)targetHist.Clone("globalPUTarget"); 
+    (*pointerToTargetPointer)->SetDirectory(0);
+    (*pointerToTargetPointer)->Scale(1./(*pointerToTargetPointer)->Integral());
+}
+
+void     AnalysisManager::SetGlobalPUInput(TH1D inputHist){
+    globalPUInput=(TH1D*)inputHist.Clone("globalPUInput"); 
+    globalPUInput->SetDirectory(0);
+    globalPUInput->Scale(1./globalPUInput->Integral());
+}
 
 double AnalysisManager::m(std::string key, int index){
     if(debug>100000) std::cout<<"looking for key "<<key<<" with index "<<index<<std::endl;

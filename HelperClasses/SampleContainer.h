@@ -10,6 +10,7 @@
 #include <TChain.h>
 #include <TFile.h>
 #include <TH1F.h>
+#include <TH1D.h>
 
 class SampleContainer {
 	
@@ -36,6 +37,8 @@ class SampleContainer {
     TH1F *CountWeightedLHEWeightPdf;
     TH1F *CountWeighted;
     TH1F *CountFullWeighted;
+    TH1D *InputPU;
+    std::string PUHistName;
     int lepFlav; // if 0 only select Wmunu events, if 1 only select Wenu events
  
     void AddFile(const char* fname, int isBatch=0, int doSkim=0);

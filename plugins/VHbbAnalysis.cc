@@ -1176,22 +1176,44 @@ void VHbbAnalysis::FinishEvent() {
        VBosonIndices.clear();
        std::vector<int> LeptonIndices;
        LeptonIndices.clear();
+       *ui["nW"]=0;
+       *ui["nWlep"]=0;
+       std::vector<unsigned int> WBosonIndices;
+       std::vector<unsigned int> WBosonLeptonicIndices;
+       WBosonIndices.clear();
+       WBosonLeptonicIndices.clear();
+
        for (int i = 0; i< mInt("nGenPart"); i++){
            if((fabs(mInt("GenPart_pdgId",i))==24) && (mInt("GenPart_statusFlags",i) & 8192)==8192 ){
                VBosonIndices.push_back(i);
+               WBosonIndices.push_back(i);
            }
            if((fabs(mInt("GenPart_pdgId",i))==23) && (mInt("GenPart_statusFlags",i) & 8192)==8192 ){
                VBosonIndices.push_back(i);
            }
        }
        *in["nGenVbosons"] = VBosonIndices.size();
+       if(VBosonIndices.size()>0){
+            for (int i = 0; i<mInt("nGenPart"); i++){
+                if(fabs(mInt("GenPart_pdgId",i))>=11 && fabs(mInt("GenPart_pdgId",i))<=16 && mInt("GenPart_genPartIdxMother",i)>-1){
+                    if(abs(mInt("GenPart_pdgId",mInt("GenPart_genPartIdxMother",i)))==24&& (mInt("GenPart_statusFlags",mInt("GenPart_genPartIdxMother",i)) & 8192)==8192 ){
+                        if(std::find(WBosonLeptonicIndices.begin(), WBosonLeptonicIndices.end(), mInt("GenPart_genPartIdxMother",i)) == WBosonLeptonicIndices.end()){
+                            WBosonLeptonicIndices.push_back(mInt("GenPart_genPartIdxMother",i));
+                        }
+                    }
+                }
+            }
+       }
        if(VBosonIndices.size()==0 && (mInt("sampleIndex")==23 || mInt("sampleIndex")==61 || mInt("sampleIndex")==62 || mInt("sampleIndex")==63 || mInt("sampleIndex")==64 || mInt("sampleIndex")==65 || mInt("sampleIndex")==66 || mInt("sampleIndex")==67 || mInt("sampleIndex")==68 || mInt("sampleIndex")==69 || mInt("sampleIndex")==70 || mInt("sampleIndex")==71 || mInt("sampleIndex")==72 || mInt("sampleIndex")==73 || mInt("sampleIndex")==74 || mInt("sampleIndex")==75 || mInt("sampleIndex")==76 || mInt("sampleIndex")==77 ||mInt("sampleIndex")==230) ){ 
-          for (int i = 0; i<mInt("nGenPart"); i++){
-              if((fabs(mInt("GenPart_pdgId",i))>=11 && fabs(mInt("GenPart_pdgId",i))<=16 && mInt("GenPart_status",i)==1 && (mInt("GenPart_statusFlags",i)&1)==1) || (fabs(mInt("GenPart_pdgId",i))==15 && (mInt("GenPart_statusFlags",i)&1)==1 && (mInt("GenPart_statusFlags",i)&2)==2) ){ 
-                 LeptonIndices.push_back(i);
-              }
-          }
+            for (int i = 0; i<mInt("nGenPart"); i++){
+                if((fabs(mInt("GenPart_pdgId",i))>=11 && fabs(mInt("GenPart_pdgId",i))<=16 && mInt("GenPart_status",i)==1 && (mInt("GenPart_statusFlags",i)&1)==1) || (fabs(mInt("GenPart_pdgId",i))==15 && (mInt("GenPart_statusFlags",i)&1)==1 && (mInt("GenPart_statusFlags",i)&2)==2) ){ 
+                    LeptonIndices.push_back(i);
+                }
+            }
        } 
+       *ui["nW"]   =WBosonIndices.size();
+       *ui["nWlep"]=WBosonLeptonicIndices.size();
+       
        if (LeptonIndices.size()>1){
            std::sort(LeptonIndices.begin(),LeptonIndices.end(),[=](const int i1, const int i2){
                 return f["GenPart_pt"][i1] > f["GenPart_pt"][i2];
@@ -1463,19 +1485,27 @@ void VHbbAnalysis::FinishEvent() {
     *f["weight_ptQCD"] = 1.0;
 
     if(mInt("sampleIndex")!=0){
-        if (m("doICHEP") != 1) {
-            *f["weight_PU"] = m("puWeight");
-            //TEMPORARY SOLUTION: REMEMBER TO FIX IT BACK ONCE weightUP/DOWN WILL BE IN NANOAOD
-            //  *f["weight_PUUp"] = m("puWeightUp") / m("puWeight");
-            *f["weight_PUUp"] = m("puWeight");
-            //  *f["weight_PUDown"] = m("puWeightDown") / m("puWeight");
-            *f["weight_PUDown"] = m("puWeight");
-        } else {
-            //*f["weight_PU"] = *f["puWeight"];
-            //*f["weight_PU"]=ReWeightMC(int(*f["nTrueInt"])+0.5); // it is now a float (continuous distribution?) so we round to the nearest int
-            *f["weight_PU"]=puWeight_ichep(int(m("nTrueInt"))); // it is now a float (continuous distribution?) so we round to the nearest int
-            *f["weight_PUUp"]=(puWeight_ichep_up(int(m("nTrueInt")))) / m("weight_PU"); // it is now a float (continuous distribution?) so we round to the nearest int
-            *f["weight_PUDown"]=(puWeight_ichep_down(int(m("nTrueInt")))) / m("weight_PU"); // it is now a float (continuous distribution?) so we round to the nearest int
+        if (m("dataYear")==2016){
+            if (m("doICHEP") != 1) {
+                *f["weight_PU"] = m("puWeight");
+                //TEMPORARY SOLUTION: REMEMBER TO FIX IT BACK ONCE weightUP/DOWN WILL BE IN NANOAOD
+                //  *f["weight_PUUp"] = m("puWeightUp") / m("puWeight");
+                *f["weight_PUUp"] = m("puWeight");
+                //  *f["weight_PUDown"] = m("puWeightDown") / m("puWeight");
+                *f["weight_PUDown"] = m("puWeight");
+            } else {
+                //*f["weight_PU"] = *f["puWeight"];
+                //*f["weight_PU"]=ReWeightMC(int(*f["nTrueInt"])+0.5); // it is now a float (continuous distribution?) so we round to the nearest int
+                *f["weight_PU"]=puWeight_ichep(int(m("nTrueInt"))); // it is now a float (continuous distribution?) so we round to the nearest int
+                *f["weight_PUUp"]=(puWeight_ichep_up(int(m("nTrueInt")))) / m("weight_PU"); // it is now a float (continuous distribution?) so we round to the nearest int
+                *f["weight_PUDown"]=(puWeight_ichep_down(int(m("nTrueInt")))) / m("weight_PU"); // it is now a float (continuous distribution?) so we round to the nearest int
+            }
+        }
+        if (m("dataYear")==2017){
+            //*f["weight_PU"] = m("puWeight");
+            *f["weight_PU"] = GetPUWeight(m("Pileup_nTrueInt"));
+            *f["weight_PUUp"] = GetPUWeight(m("Pileup_nTrueInt"),1);
+            *f["weight_PUDown"] = GetPUWeight(m("Pileup_nTrueInt"),-1);
         }
         if (mInt("nGenTop")==0 && mInt("nGenVbosons")>0) {
             // only apply to Z/W+jet samples

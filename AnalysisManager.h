@@ -98,17 +98,6 @@ public :
     double m(std::string key,int index=-1); // scaffold for function to get values from maps
     int mInt(std::string key,int index=-1); 
 
-    //Special branches
-    // derived variables used in BDT training
-    float testMass; //what is this?!?!
-    HiggsInfo H;
-    TrackInfo V;
-    METInfo METtype1corr;
-
-    TBranch* b_H;
-    TBranch* b_V;
-    TBranch* b_METtype1corr;
-
     Int_t           GetEntry(Long64_t entry);
     Long64_t        LoadTree(Long64_t entry);
     void            InitChain(std::string filename);
@@ -149,7 +138,19 @@ public :
     float           EvaluateRegression(BDTInfo* bdtInfo);
     void            SetupSystematicsBranches();
     void            ApplySystematics(bool early=false);
-
+    
+                    //0 is nominal, -1 is down, 1 is up
+    double          GetPUWeight(int thisPU, int puType=0);
+    bool            EvaluatePUReweighting(TH1D* inputPU, int puType=0);
+    void            SetGlobalPUTarget(TH1D targetPU, int puType=0); 
+    void            SetGlobalPUInput(TH1D globalInputPU);
+    TH1D*           PUReWeighting;
+    TH1D*           PUReWeightingUP;
+    TH1D*           PUReWeightingDOWN;
+    TH1D*           globalPUTarget;
+    TH1D*           globalPUTargetUP;
+    TH1D*           globalPUTargetDOWN;
+    TH1D*           globalPUInput;
 };
 
 #endif

@@ -1,6 +1,9 @@
 # types:  unsigned int=0, int=1, float=2, double=3, bool=4, char=5
 #     array +6;   vector +12;
 
+type=0  name=nW
+type=0  name=nWlep
+
 type=2  name=minMetjDPhi
 type=2  name=MetTkMetDPhi
 
