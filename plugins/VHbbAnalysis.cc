@@ -1468,15 +1468,18 @@ void VHbbAnalysis::FinishEvent() {
     //cout<<f["LHE_weights_pdf_normwgt"][5]<<endl;
 
     if(mInt("sampleIndex")!=0){
-        if (m("genWeight") > 0) {
-            *f["weight"] = cursample->intWeight;
-        } else {
-            *f["weight"] = cursample->intWeight * -1;
-        }
-        if (cursample->sampleNum == 49 || cursample->sampleNum == 491) {
-            // special prescription for WJets_BGenFilter sample
-            *f["weight"] = m("weight")*fabs(m("genWeight"));
-        }
+        //if (m("genWeight") > 0) {
+        //    *f["weight"] = cursample->intWeight;
+        //} else {
+        //    *f["weight"] = cursample->intWeight * -1;
+       // }
+        //if (cursample->sampleNum == 49 || cursample->sampleNum == 491) {
+        //    // special prescription for WJets_BGenFilter sample
+        //    *f["weight"] = m("weight")*fabs(m("genWeight"));
+        //}
+        // with NanoAOD we use genEventSumw to normalize which includes absolute value
+        // of genWeight
+        *f["weight"] = m("weight") * cursample->intWeight * m("genWeight");
     }
     else {
         *f["weight"] = 1.0;

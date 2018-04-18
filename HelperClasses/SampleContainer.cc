@@ -102,16 +102,16 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
         } else {
             // totally different setup for grabbing event count in nanoAOD
             TTree *Runs = (TTree*) file->Get("Runs");
-            Long64_t genEventCount = 0;
-            Runs->SetBranchAddress("genEventCount",&genEventCount);
+            Double_t genEventSumw = 0;
+            Runs->SetBranchAddress("genEventSumw",&genEventSumw);
             // one entry in Runs tree per input NanoAOD file
             int nNanoInputFiles = Runs->GetEntries();
             std::cout<<"From Runs tree, processedEvents is (before) "<<processedEvents<<std::endl;
             for (int i=0; i < nNanoInputFiles; i++) {
                 Runs->GetEntry(i);
-                std::cout<<fname<<" genEventCount: "<<genEventCount<<std::endl;
-                CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventCount);
-                processedEvents += genEventCount;
+                std::cout<<fname<<" genEventSumw: "<<genEventSumw<<std::endl;
+                CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventSumw);
+                processedEvents += genEventSumw;
             }
             std::cout<<"From Runs tree, processedEvents is (after)  "<<processedEvents<<std::endl;
         }
