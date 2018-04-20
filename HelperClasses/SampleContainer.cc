@@ -62,7 +62,7 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
         if (file->IsZombie()) return;
     }
    
-    if(!PUHistName.empty()){
+    if(!PUHistName.empty() && sampleNum != 0){
         TH1D* thisFilePUHist=(TH1D*)((TH1D*)file->Get(PUHistName.c_str()))->Clone("thisFilePUHist");
         if(InputPU == NULL){
             InputPU=(TH1D*)(thisFilePUHist->Clone("PUTarget"));
