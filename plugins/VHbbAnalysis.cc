@@ -761,10 +761,10 @@ bool VHbbAnalysis::Analyze() {
             std::replace(eta_cut.begin(), eta_cut.end(), '.', 'p');
             for (int k = 0; k < mInt("nJet"); k++) {
                 if (k == mInt("hJetInd1") || k == mInt("hJetInd2")) continue;
-                if (m("Jet_bReg",k) > ptCuts[i] && fabs(m("Jet_eta",k)) < etaCuts[j] && m("Jet_puId",k) > 0) {
+                if (m("Jet_Pt",k) > ptCuts[i] && fabs(m("Jet_eta",k)) < etaCuts[j] && m("Jet_puId",k) > 0) {
                     nAddJet_tmp++;
-                    if (m("Jet_bReg",k) > maxPt) {
-                        maxPt = m("Jet_bReg",k);
+                    if (m("Jet_Pt",k) > maxPt) {
+                        maxPt = m("Jet_Pt",k);
                         *f[Form("AddJets%i%s_puid_leadJet_pt", ptCuts[i], eta_cut.c_str())] = maxPt;
                         *f[Form("AddJets%i%s_puid_leadJet_eta", ptCuts[i], eta_cut.c_str())] = m("Jet_eta",k);
                         *f[Form("AddJets%i%s_puid_leadJet_phi", ptCuts[i], eta_cut.c_str())] = m("Jet_phi",k);
@@ -1002,7 +1002,8 @@ bool VHbbAnalysis::Analyze() {
             if (maxBTagged > taggerWP_T){ //ttbar or W+HF
                 if (mInt("nAddJets252p9_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
-                } else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
+                //} else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
+                } else if (mInt("nAddJets252p9_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
                     *in["controlSample"] = 13;
                 }
             }else if (maxBTagged > taggerWP_L && maxBTagged < taggerWP_M && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
@@ -1479,10 +1480,13 @@ void VHbbAnalysis::FinishEvent() {
         //}
         // with NanoAOD we use genEventSumw to normalize which includes absolute value
         // of genWeight
-        *f["weight"] = m("weight") * cursample->intWeight * m("genWeight");
+        *f["intWeight"] = cursample->intWeight;
+        *f["weight"] = cursample->intWeight * m("genWeight");
+        //std::cout<"intWeight = "<<std::endl;
     }
     else {
         *f["weight"] = 1.0;
+        *f["intWeight"] = 1.0;
     }
 
     *f["weight_ptQCD"] = 1.0;
