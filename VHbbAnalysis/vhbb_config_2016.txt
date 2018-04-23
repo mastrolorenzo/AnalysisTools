@@ -23,6 +23,7 @@ bdt_1lep_vzbb=cfg/bdt_1lep_vzbb.txt
 #bdt_bjetreg=cfg/reg1_settings.txt
 settings=cfg/settings_2016.txt
 
+#systematics=cfg/systematics_facJECsNano2016.txt
 systematics=cfg/systematics.txt
 scalefactors=cfg/scalefactors.txt
 btagscalefactors=aux/cMVAv2_Moriond17_B_H.csv

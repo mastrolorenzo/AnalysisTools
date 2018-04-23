@@ -589,11 +589,10 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
             for (Long64_t jentry=0; jentry<nentries;jentry++) {
                 if((jentry%1000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
                 //if((jentry%10000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
-
                 CheckBranchLengths(jentry, cursample->sampleNum==0);
-                GetEarlyEntries(jentry, cursample->sampleNum==0);
                 bool anyPassing=false;
                 for(unsigned iSyst=0; iSyst<systematics.size(); iSyst++){
+                    GetEarlyEntries(jentry, cursample->sampleNum==0);
                     cursyst=&(systematics[iSyst]);
                     if (cursample->sampleNum == 0 && cursyst->name != "nominal") continue;
                     //ApplySystematics(true);
@@ -822,6 +821,7 @@ void AnalysisManager::SetupSystematicsBranches(){
 // applies scales to floats and doubles (and arrays)
 // smearing can be added; other types can be added.
 void AnalysisManager::ApplySystematics(bool early){
+
     for(unsigned iBrnch=0; iBrnch<cursyst->branchesToEdit.size(); iBrnch++){
         //std::cout<<"iBrnch "<<iBrnch<<std::endl;
         std::string oldBranchName(cursyst->branchesToEdit[iBrnch]);
@@ -849,64 +849,136 @@ void AnalysisManager::ApplySystematics(bool early){
                 // scale the current branch
                 if (cursyst->scaleVar[iBrnch] == "") {
                     // flat scaling
-                    *f[oldBranchName.c_str()]=*f[oldBranchName.c_str()] * cursyst->scales[iBrnch];
+                    *f[systBranchName.c_str()]=*f[oldBranchName.c_str()] * cursyst->scales[iBrnch];
                 }
                 else {
-                    // dynamic scaling
-                    *f[oldBranchName.c_str()]=*f[oldBranchName.c_str()] * *f[cursyst->scaleVar[iBrnch]];
+                    if (cursyst->scaleVarRef[iBrnch] == ""){
+                        // dynamic scaling
+                        *f[systBranchName.c_str()]=*f[oldBranchName.c_str()] * *f[cursyst->scaleVar[iBrnch]];
+                    } else if (cursyst->scaleVarRef[iBrnch] == "None"){
+                        *f[systBranchName.c_str()] = *f[cursyst->scaleVar[iBrnch]];
+                    } else {
+                        *f[systBranchName.c_str()] = *f[oldBranchName.c_str()] * (*f[cursyst->scaleVar[iBrnch]]/ *f[cursyst->scaleVarRef[iBrnch]]);
+                    }
                 }
                 // copy the value to the new branch
-                *f[systBranchName.c_str()]=*f[oldBranchName.c_str()];
+                //*f[systBranchName.c_str()]=*f[oldBranchName.c_str()];
             } else if(thisType==3){
                 // scale the current branch
                 if (cursyst->scaleVar[iBrnch] == "") {
                     // flat scaling
-                    *d[oldBranchName.c_str()]=*d[oldBranchName.c_str()] * cursyst->scales[iBrnch];
+                    *d[systBranchName.c_str()]=*d[oldBranchName.c_str()] * cursyst->scales[iBrnch];
                 }
                 else {
-                    // dynamic scaling
-                    *d[oldBranchName.c_str()]=*d[oldBranchName.c_str()] * *d[cursyst->scaleVar[iBrnch]];
+                    if (cursyst->scaleVarRef[iBrnch] == ""){
+                        // dynamic scaling
+                        *d[systBranchName.c_str()]=*d[oldBranchName.c_str()] * *d[cursyst->scaleVar[iBrnch]];
+                    } else if (cursyst->scaleVarRef[iBrnch] == "None"){
+                        *d[systBranchName.c_str()] = *d[cursyst->scaleVar[iBrnch]];
+                    } else {
+                        *d[systBranchName.c_str()] = *d[oldBranchName.c_str()] * (*d[cursyst->scaleVar[iBrnch]]/ *d[cursyst->scaleVarRef[iBrnch]]);
+                    }
                 }
                 // copy the value to the new branch
-                *d[systBranchName.c_str()]=*d[oldBranchName.c_str()];
-            } else if(thisType==7){
+               // *d[systBranchName.c_str()]=*d[oldBranchName.c_str()];
+            } else if(thisType==8){
                 //std::cout<<"length branch "<<existingBranchInfo->lengthBranch<<std::endl;
                 //std::cout<<"length "<<*in[existingBranchInfo->lengthBranch]<<std::endl;
                 for(int ind=0; ind<*in[existingBranchInfo->lengthBranch]; ind++){// scale the current branch
                     //std::cout<<"Jet pt, eta: "<<f["Jet_pt_reg"][ind]<<", "<<f["Jet_eta"][ind]<<std::endl;
                     //std::cout<<"old val "<<f[oldBranchName.c_str()][ind]<<std::endl;
                     // FIXME: we are assuming that the only array variables we scale are jet variables, we should in principle make this more generic
-                    if (ptSplit==0 || (ptSplit==1 && f["Jet_pt_reg"][ind]<jetPtSplit) || (ptSplit==2 && f["Jet_pt_reg"][ind]>jetPtSplit)) {
+                    // Here we have special treatment of Jet_bReg, as we need to make sure the systematic variation branch has the smearing applied, while the main variable should not have this incorporated as it will be applied again in Analyze()
+                        double jet_reg = m("Jet_bReg",ind)*m("Jet_Pt",ind)/m("Jet_pt",ind);
+                    if (ptSplit==0 || (ptSplit==1 && jet_reg<jetPtSplit) || (ptSplit==2 && jet_reg>jetPtSplit)) {
                         if (etaSplit==0 || (etaSplit==1 && fabs(f["Jet_eta"][ind])<jetEtaSplit) || (etaSplit==2 && fabs(f["Jet_eta"][ind])>jetEtaSplit)) {
+
                             //std::cout<<"got through"<<std::endl;
                             if (cursyst->scaleVar[iBrnch] == "") {
                                 // flat scaling
-                                f[oldBranchName.c_str()][ind]=f[oldBranchName.c_str()][ind] * cursyst->scales[iBrnch];
+                                if((oldBranchName).compare("Jet_bReg")==0){
+                                    f[oldBranchName.c_str()][ind] = f[oldBranchName.c_str()][ind] * cursyst->scales[iBrnch];
+                                    f[systBranchName.c_str()][ind]=f[oldBranchName.c_str()][ind] * cursyst->scales[iBrnch]*(m("Jet_Pt",ind)/m("Jet_pt",ind));
+                                } else {
+                                    f[systBranchName.c_str()][ind]=f[oldBranchName.c_str()][ind] * cursyst->scales[iBrnch];
+                                }
                             }
                             else {
-                                //std::cout<<f[oldBranchName.c_str()][ind]<<" * "<<f[cursyst->scaleVar[iBrnch]][ind]<<std::endl;
-                                // dynamic scaling
-                                f[oldBranchName.c_str()][ind]=f[oldBranchName.c_str()][ind] * f[cursyst->scaleVar[iBrnch]][ind];
+                                if (cursyst->scaleVarRef[iBrnch] == ""){
+                                    // dynamic scaling
+                                    if((oldBranchName).compare("Jet_bReg")==0){
+                                        f[oldBranchName.c_str()][ind] = f[oldBranchName.c_str()][ind] * f[cursyst->scaleVar[iBrnch]][ind];
+                                        f[systBranchName.c_str()][ind]=f[oldBranchName.c_str()][ind] * f[cursyst->scaleVar[iBrnch]][ind]*(m("Jet_Pt",ind)/m("Jet_pt",ind));
+                                    } else {
+                                        f[systBranchName.c_str()][ind]=f[oldBranchName.c_str()][ind] * f[cursyst->scaleVar[iBrnch]][ind];
+                                    }
+                                } else if (cursyst->scaleVarRef[iBrnch] == "None"){
+                                    if((oldBranchName).compare("Jet_bReg")==0){
+                                        f[oldBranchName.c_str()][ind] = f[cursyst->scaleVar[iBrnch]][ind];
+                                        f[systBranchName.c_str()][ind]= f[cursyst->scaleVar[iBrnch]][ind]*(m("Jet_Pt",ind)/m("Jet_pt",ind));
+                                    } else {
+                                        f[systBranchName.c_str()][ind] = f[cursyst->scaleVar[iBrnch]][ind];
+                                    }
+                                } else {
+                                    if((oldBranchName).compare("Jet_bReg")==0){
+                                        f[oldBranchName.c_str()][ind] = f[oldBranchName.c_str()][ind] * (f[cursyst->scaleVar[iBrnch]][ind]/f[cursyst->scaleVarRef[iBrnch]][ind]);
+                                        f[systBranchName.c_str()][ind] = f[oldBranchName.c_str()][ind] * (f[cursyst->scaleVar[iBrnch]][ind]/f[cursyst->scaleVarRef[iBrnch]][ind])*(m("Jet_Pt",ind)/m("Jet_pt",ind));
+                                    } else {
+                                        f[systBranchName.c_str()][ind] = f[oldBranchName.c_str()][ind] * (f[cursyst->scaleVar[iBrnch]][ind]/ f[cursyst->scaleVarRef[iBrnch]][ind]);
+                                    }
+                                }
                             }
                             //std::cout<<"new val "<<f[oldBranchName.c_str()][ind]<<std::endl;
                             // copy the value to the new branch
-                            f[systBranchName.c_str()][ind]=f[oldBranchName.c_str()][ind];
+                            //f[systBranchName.c_str()][ind]=f[oldBranchName.c_str()][ind];
                             //std::cout<<"new branch "<<f[systBranchName.c_str()][ind]<<std::endl;
                         }
                     }
                 }
-            } else if(thisType==8){
+            } else if(thisType==9){
                 for(int ind=0; ind<*in[existingBranchInfo->lengthBranch]; ind++){// scale the current branch
                     if (cursyst->scaleVar[iBrnch] == "") {
                          // flat scaling
-                        d[oldBranchName.c_str()][ind]=d[oldBranchName.c_str()][ind] * cursyst->scales[iBrnch];
+                        d[systBranchName.c_str()][ind]=d[oldBranchName.c_str()][ind] * cursyst->scales[iBrnch];
                     }
                     else {
-                        // dynamic scaling
-                        d[oldBranchName.c_str()][ind]=d[oldBranchName.c_str()][ind] * d[cursyst->scaleVar[iBrnch]][ind];
+                        if (cursyst->scaleVarRef[iBrnch] == ""){
+                            // dynamic scaling
+                            d[systBranchName.c_str()][ind]=d[oldBranchName.c_str()][ind] * d[cursyst->scaleVar[iBrnch]][ind];
+                        } else if (cursyst->scaleVarRef[iBrnch] == "None"){
+                            d[systBranchName.c_str()][ind] = d[cursyst->scaleVar[iBrnch]][ind];
+                        } else {
+                            d[systBranchName.c_str()][ind] = d[oldBranchName.c_str()][ind] * (d[cursyst->scaleVar[iBrnch]][ind]/ d[cursyst->scaleVarRef[iBrnch]][ind]);
+                        }
                     }
                     // copy the value to the new branch
-                    d[systBranchName.c_str()][ind]=d[oldBranchName.c_str()][ind];
+                    //d[systBranchName.c_str()][ind]=d[oldBranchName.c_str()][ind];
+                }
+            }
+        }
+    }
+
+    //Loop again to set the nominal value of the branch to the updated value just for analyze() to work correctly
+    for(unsigned iBrnch=0; iBrnch<cursyst->branchesToEdit.size(); iBrnch++){
+        std::string oldBranchName(cursyst->branchesToEdit[iBrnch]);
+        BranchInfo* existingBranchInfo = branchInfos[oldBranchName.c_str()];
+        if(!early || (early && branchInfos[cursyst->branchesToEdit[iBrnch]]->prov == "early")){
+            std::string systBranchName(oldBranchName);
+            systBranchName.append("_");
+            systBranchName.append(cursyst->name);
+            int thisType=existingBranchInfo->type;
+            if(thisType==2){
+                *f[oldBranchName.c_str()]=*f[systBranchName.c_str()]; 
+            } else if(thisType==2){
+                *d[oldBranchName.c_str()]=*d[systBranchName.c_str()]; 
+            } else if(thisType==8 && oldBranchName.compare("Jet_bReg")!=0){
+                //For Jet_bReg we have already correctly organised the various branches above
+                for(int ind=0; ind<*in[existingBranchInfo->lengthBranch]; ind++){
+                    f[oldBranchName.c_str()][ind]=f[systBranchName.c_str()][ind];
+                }
+            } else if(thisType==9){
+                for(int ind=0; ind<*in[existingBranchInfo->lengthBranch]; ind++){
+                    d[oldBranchName.c_str()][ind]=d[systBranchName.c_str()][ind];
                 }
             }
         }
@@ -1066,6 +1138,7 @@ void     AnalysisManager::SetGlobalPUInput(TH1D inputHist){
     globalPUInput->SetDirectory(0);
     globalPUInput->Scale(1./globalPUInput->Integral());
 }
+
 
 double AnalysisManager::m(std::string key, int index){
     if(debug>100000) std::cout<<"looking for key "<<key<<" with index "<<index<<std::endl;

@@ -543,6 +543,9 @@ def SetupSyst(lines):
             elif key=="scaleVar":
                 for scalevar in value.split(","):
                     syst.AddScaleVar(scalevar)
+            elif key=="scaleVarRef":
+                for scalevarref in value.split(","):
+                    syst.AddScaleVarRef(scalevarref)
             else:
                 print "In systematics file, what is:",item
 

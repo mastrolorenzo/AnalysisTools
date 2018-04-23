@@ -1917,6 +1917,7 @@ void VHbbAnalysis::FinishEvent() {
     // Channel specific BDT inputs
     ComputeBoostedVariables();
    
+    std::string bdt_branch_label;
     if(mInt("isZnn")) {
         if(debug>10000) {
             std::cout<<"setting up bdt inputs for isZnn"<<std::endl;
@@ -1981,11 +1982,12 @@ void VHbbAnalysis::FinishEvent() {
                     PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
                     std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
                 }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
                 if (cursyst->name != "nominal") {
-                    bdtname.append("_");
-                    bdtname.append(cursyst->name);
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
                 }
-                *f[bdtInfos[bdtNames[iBDT]]->bdtname] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
             }
         }
 
@@ -2023,11 +2025,12 @@ void VHbbAnalysis::FinishEvent() {
                     PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
                     std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
                 }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
                 if (cursyst->name != "nominal") {
-                    bdtname.append("_");
-                    bdtname.append(cursyst->name);
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
                 }
-                *f[bdtInfos[bdtNames[iBDT]]->bdtname] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
             }
         }
     } else if(mInt("isZee") || mInt("isZmm")) {
@@ -2079,11 +2082,12 @@ void VHbbAnalysis::FinishEvent() {
                     PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
                     std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
                 }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
                 if (cursyst->name != "nominal") {
-                    bdtname.append("_");
-                    bdtname.append(cursyst->name);
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
                 }
-                *f[bdtInfos[bdtNames[iBDT]]->bdtname] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
             }
         }
     } else {
