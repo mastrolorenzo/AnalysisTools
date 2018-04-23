@@ -43,6 +43,7 @@ type=1  name=sampleIndex_GenJetSum
 type=1  name=sampleIndex_GenBJetSum
 type=1  name=sampleIndex_GenJetSumNB
 type=2  name=weight
+type=2  name=intWeight
 type=2  name=weight_PU
 type=2  name=weight_PUUp
 type=2  name=weight_PUDown
