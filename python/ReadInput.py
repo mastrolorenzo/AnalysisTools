@@ -102,6 +102,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                             continue
                         am.Initialize(filename)
                         if (am.fChain.GetEntries() == 0):
+                            print "File has am.fChain.GetEntries() == 0: %s" % filename
                             continue
                         aminitialized=1
                         # FIXME can this go elsewhere?
@@ -168,7 +169,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 am.SetupNewBranch(branch,branches[branch][0], branches[branch][1], True, "settings", branches[branch][2])
         else:
             print "There are no settings branches in the config file."
-      
+
         #find BDT settings
         bdtsettings=[]
         for key in settings:
@@ -199,7 +200,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             am.SetupNewBranch(bdtsetting, 2, -1, 1, "settings", 1)
             am.AddBDT(bdtsetting, bdtInfo)
             print "added BDT to analysis manager"
-        
+
         if settings.has_key("systematics"):
             systs = ReadTextFile(settings["systematics"], "systematics")
             for syst in systs:
@@ -250,7 +251,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 tfile.Close()
             except:
                 print "something went wrong with",settings["puDOWNtarget"]
-        
+
         return am
     elif filetype is "samplefile":
         samples=MakeSampleMap(filelines,samplesToRun,runOnSkim)
@@ -380,8 +381,8 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
                         for dirname in value.split(','):
                             samplepaths.extend(findAllRootFiles(globalPrefix+dirname,site))
                     else:
-                        # after skimming the sample directory name has been changed to sample name 
-                        print "right here, ",sample["name"] 
+                        # after skimming the sample directory name has been changed to sample name
+                        print "right here, ",sample["name"]
                         samplepaths.extend(findAllRootFiles(globalPrefix+sample["name"],site))
                 else:
                     samplepaths = findAllRootFiles(globalPrefix+value,site)
