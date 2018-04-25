@@ -84,7 +84,7 @@ bool VHbbAnalysis::Preselection() {
         *in["nGenStatus2bHad"] = 0;
         for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
             if(mInt("GenPart_status",indGP)!=2) continue;
-            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/100)%10==5)){
+            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
               *in["nGenStatus2bHad"]=mInt("nGenStatus2bHad")+1;
             }
         }
