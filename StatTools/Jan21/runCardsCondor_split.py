@@ -1,13 +1,15 @@
 import os
 import sys
 
-samples = ["ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","VVHF","VVLF","Zj0b","Zj1b","Zj2b","data_obs"]
+#samples = ["ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","VVHF","VVLF","Zj0b","Zj1b","Zj2b","data_obs"]
+samples = ["ZH_hbb","s_Top","TT","Zj0b","Zj1b","Zj2b","data_obs"]
 
 cwd = os.getcwd()
 ifile = open(sys.argv[1])
 jobname = ""
 doEWK = False
 
+samples_to_run = []
 if (len(sys.argv)>2):
     jobname = sys.argv[2]
 if (len(sys.argv)>3):
@@ -39,7 +41,7 @@ Output     = stdout_%s_%i_%s
 Error      = stderr_%s_%i_%s
 Log        = log_%s_%i_%s
 Notification     = never
-transfer_input_files = ../../splitSamples.py,../../systematics_ewk_Wmn.txt,../../systematics_ewk_Wen.txt,../../systematics_Wmn_demo.txt
+transfer_input_files = ../../splitSamples.py,../../systematics_ewk_Wmn.txt,../../systematics_ewk_Wen.txt,../../systematics_Wmn_demo.txt,../../../python/nano_samples.py
 WhenToTransferOutput=On_Exit
 Queue      1
         ''' % (jobname,nJobs,sample,jobname,nJobs,sample,jobname,nJobs,sample,jobname,nJobs,sample)

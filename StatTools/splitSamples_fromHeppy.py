@@ -92,11 +92,9 @@ print set_of_weights
 #weight_string = "weight*(bTagWeightEF/bTagWeight)*(1+isWenu*(-1+(SF_HLT_Ele23_WPLoose[lepInd]/EffHLT_Ele27_WPLoose_Eta2p1[lepInd])))"
 #weight_string = "(1./CS_SF)*weight*(1 + (sampleIndex==120)*(-1 + 0.5))"
 if args.reweightTT:
-    weight_string = "weight*(1 + (sampleIndex==120)*(-1 + 0.5))"
+    weight_string = "(1./CS_SF)*weight*(1 + (sampleIndex==120)*(-1 + 0.5))"
 else:
-    # HACK because I screwed up the norm on the NLO Z+jets samples...
-    #weight_string = "weight*(1+(sampleIndex==200)*(-1+(0.0002014*abs(genWeight))))*(1+(sampleIndex==201)*(-1+(0.01679*abs(genWeight))))*(1+(sampleIndex==202)*(-1+(0.1387*abs(genWeight))))*(1+(sampleIndex==203)*(-1+(1.148*abs(genWeight))))*(1+(sampleIndex==204)*(-1+(0.0003781*abs(genWeight))))*(1+(sampleIndex==205)*(-1+(0.01439*abs(genWeight))))*(1+(sampleIndex==206)*(-1+(0.119579*abs(genWeight))))*(1+(sampleIndex==207)*(-1+(1.007*abs(genWeight))))"
-    weight_string = "weight"
+    weight_string = "(1./CS_SF)*weight"
 #weight_string = "(1./CS_SF)*weight*(1 + (sampleIndex==17)*(-1 + 3.07))"
 #weight_string = "(1./CS_SF)*(bTagWeightICHEP/bTagWeight)*weight"
 #weight_string = "(1./CS_SF)*weight*(1+isWenu*(-1+(SF_HLT_Ele23_WPLoose[lepInd]/EffHLT_Ele27_WPLoose_Eta2p1[lepInd])))"
@@ -112,8 +110,8 @@ for weight in set_of_weights:
     weight_string += "*" + weight
 print weight_string
 
-tree_mc = ROOT.TChain("Events")
-#tree_mc = ifile.Get("Events")
+tree_mc = ROOT.TChain("tree")
+#tree_mc = ifile.Get("tree")
 #bdtname = "BDT_wMass_Dec14_3000_5"
 #bdtname = "BDT_wMass_Dec4"
 #bdtname = "CMS_vhbb_BDT_Wln_13TeV"
@@ -128,20 +126,89 @@ tolerance = args.tolerance
 
 sampleMap = {} # map sampleNames to list of sampleIndex's
 sampleMapAltModel = {} # alternate MC samples for model shape systematics
+
+#sampleMap["data_obs"] = [16,17,10,11,20,21,50,51,52,2200,2201,2202,2300,2301,2302,3500,3501,3502,4400,4401,4402,4500,4501,4502,4600,4601,4602,4700,4701,4702,24,25,26,27,28,29,30,31] # dummy filler until we unblind
+#sampleMap["data_obs"] = [50,51,52]
+sampleMap["data_obs"] = [0]
+sampleMapAltModel["TT"] = [50,51,52]
+sampleMap["TT"] = [120]
+#sampleMap["s_Top"] = [16,17,20,21]
+sampleMap["s_Top"] = [16,17,17,20,21]
+#sampleMap["WH_hbb"] = [-12501]
+sampleMap["WH_hbb"] = [-12500,-12501]
+sampleMapAltModel["WH_hbb"] = [-125010, -125011]
+sampleMap["ZH_hbb"] = [-12502]
+#sampleMap["Wj0b"] = [2200,4100,4200,4300,4400,4500,4600,4700]
+if not args.doNLOWJets:
+    sampleMap["Wj0b"] = [2200,4100,4200,4300,4400,4500,4600,4700,4800,4900,48100,49100]
+    sampleMapAltModel["Wj0b"] = [6000]
+    #sampleMap["Wj1b"] = [2201,4101,4201,4301,4401,4501,4601,4701]
+    sampleMap["Wj1b"] = [2201,4101,4201,4301,4401,4501,4601,4701,4801,4901,48101,49101]
+    sampleMapAltModel["Wj1b"] = [6001]
+    #sampleMap["Wj2b"] = [2202,4102,4202,4302,4402,4502,4602,4702]
+    sampleMap["Wj2b"] = [2202,4102,4202,4302,4402,4502,4602,4702,4802,4902,48102,49102]
+    sampleMapAltModel["Wj2b"] = [6002]
+else:
+    sampleMap["Wj0b"] = [7100,7200,7300,8000,8100,8200]
+    #sampleMap["Wj0b"] = [8000,8100,8200]
+    sampleMap["Wj1b"] = [7101,7201,7301,8001,8101,8201]
+    #sampleMap["Wj1b"] = [8001,8101,8201]
+    sampleMap["Wj2b"] = [7102,7202,7302,8002,8102,8202]
+    #sampleMap["Wj2b"] = [8002,8102,8202]
+    sampleMapAltModel["Wj0b"] = [6000]
+    sampleMapAltModel["Wj1b"] = [6001]
+    sampleMapAltModel["Wj2b"] = [6002]
+#sampleMap["VVHF"] = [35000,36000,37000,35001,36001,37001,35002,36002,37002]
+#sampleMap["VVLF"] = [35000,36000,37000,35001,36001,37001,35002,36002,37002]
+sampleMap["VVHF"] = [3400,3600,3700,3401,3601,3701,3402,3602,3702]
+sampleMap["VVLF"] = [3400,3600,3700,3401,3601,3701,3402,3602,3702]
+#sampleMap["VVHF"] = [3500,3600,3700,3501,3601,3701,3502,3602,3702]
+#sampleMap["VVLF"] = [3500,3600,3700,3501,3601,3701,3502,3602,3702]
+#sampleMap["VVHF"] = [3501,3502,3601,3602,3701,3702]
+#sampleMap["VVLF"] = [3500,3600,3700]
+sampleMap["QCD"]  = [24,25,26,27,28,29,30,31]
+sampleMap["Zj0b"] = [2300,6100,6200,6300,6400,6500,6600,6700]
+sampleMap["Zj1b"] = [2301,6101,6201,6301,6401,6501,6601,6701]
+sampleMap["Zj2b"] = [2302,6102,6202,6302,6402,6502,6602,6702]
+#sampleMapAltModel["Zj0b"] = [23000]
+#sampleMapAltModel["Zj1b"] = [23001]
+#sampleMapAltModel["Zj2b"] = [23002]
+
 sampleNameMap = {}
-
-from nano_samples import the_samples_dict
-for sample in the_samples_dict:
-    sampleMap[the_samples_dict[sample][2]] = []
-    sampleNameMap[the_samples_dict[sample][2]] = []
-for sample in the_samples_dict:
-    sampleMap[the_samples_dict[sample][2]].append(the_samples_dict[sample][0])
-    sampleNameMap[the_samples_dict[sample][2]].extend(the_samples_dict[sample][3])
-print "sampleMap = "
-print sampleMap
-print "sampleNameMap = "
-print sampleNameMap
-
+sampleNameMap["TT"] = ["TT_powheg"]
+sampleNameMap["s_Top"] = ["TToLeptons_s","TToLeptons_t_powheg","TBarToLeptons_t_powheg","T_tW","Tbar_tW"]
+#sampleNameMap["s_Top"] = ["TToLeptons_s","TToLeptons_t","T_tW","Tbar_tW"]
+#sampleNameMap["WH_hbb"] = ["WH125_powheg"]
+sampleNameMap["WH_hbb"] = ["WplusH125_powheg","WminusH125_powheg"]
+sampleNameMap["ZH_hbb"] = ["ZH125_powheg"]
+if not args.doNLOWJets:
+    #sampleNameMap["Wj0b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800"]
+    #sampleNameMap["Wj0b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800","WBJets","WJets_BGenFilter"]
+    sampleNameMap["Wj0b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800","WBJets-Pt100To200","WJets_BGenFilter-Pt100To200","WBJets-Pt200ToInf","WJets_BGenFilter-Pt200ToInf"]
+    #sampleNameMap["Wj1b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800"]
+    #sampleNameMap["Wj1b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800","WBJets","WJets_BGenFilter"]
+    sampleNameMap["Wj1b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800","WBJets-Pt100To200","WJets_BGenFilter-Pt100To200","WBJets-Pt200ToInf","WJets_BGenFilter-Pt200ToInf"]
+    #sampleNameMap["Wj2b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800","WBJets","WJets_BGenFilter"]
+    sampleNameMap["Wj2b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800","WBJets-Pt100To200","WJets_BGenFilter-Pt100To200","WBJets-Pt200ToInf","WJets_BGenFilter-Pt200ToInf"]
+    #sampleNameMap["Wj2b"] = ["WJets_madgraph","WJets-HT800To1200","WJets-HT1200To2500","WJets-HT2500ToInf","WJets-HT100To200","WJets-HT200To400","WJets-HT400To600","WJets-HT600To800"]
+else:
+    sampleNameMap["Wj0b"] = ["WJets-Pt100To250","WJets-Pt250To400","WJets-Pt400To600","WJets_0J","WJets_1J","WJets_2J"]
+    #sampleNameMap["Wj0b"] = ["WJets-Pt100To250","WJets-Pt250To400","WJets-Pt400To600","WJets-Pt600ToInf","WJets_0J","WJets_1J","WJets_2J"]
+    #sampleNameMap["Wj0b"] = ["WJets_0J","WJets_1J","WJets_2J"]
+    sampleNameMap["Wj1b"] = ["WJets-Pt100To250","WJets-Pt250To400","WJets-Pt400To600","WJets_0J","WJets_1J","WJets_2J"]
+    #sampleNameMap["Wj1b"] = ["WJets-Pt100To250","WJets-Pt250To400","WJets-Pt400To600","WJets-Pt600ToInf","WJets_0J","WJets_1J","WJets_2J"]
+    #sampleNameMap["Wj1b"] = ["WJets_0J","WJets_1J","WJets_2J"]
+    sampleNameMap["Wj2b"] = ["WJets-Pt100To250","WJets-Pt250To400","WJets-Pt400To600","WJets_0J","WJets_1J","WJets_2J"]
+    #sampleNameMap["Wj2b"] = ["WJets-Pt100To250","WJets-Pt250To400","WJets-Pt400To600","WJets-Pt600ToInf","WJets_0J","WJets_1J","WJets_2J"]
+    #sampleNameMap["Wj2b"] = ["WJets_0J","WJets_1J","WJets_2J"]
+#sampleNameMap["VVHF"] = ["WZ","WW","ZZ"]
+#sampleNameMap["VVLF"] = ["WZ","WW","ZZ"]
+sampleNameMap["VVHF"] = ["WZ_fil","WW_fil","ZZ_fil"]
+sampleNameMap["VVLF"] = ["WZ_fil","WW_fil","ZZ_fil"]
+sampleNameMap["QCD"]  = []
+sampleNameMap["Zj0b"] = ["DYToLL_madgraph","DYToLL_HT100to200","DYToLL_HT200to400","DYToLL_HT400to600","DYToLL_HT600to800","DYToLL_HT800to1200","DYToLL_HT1200to2500","DYToLL_HT2500toInf"]
+sampleNameMap["Zj1b"] = ["DYToLL_madgraph","DYToLL_HT100to200","DYToLL_HT200to400","DYToLL_HT400to600","DYToLL_HT600to800","DYToLL_HT800to1200","DYToLL_HT1200to2500","DYToLL_HT2500toInf"]
+sampleNameMap["Zj2b"] = ["DYToLL_madgraph","DYToLL_HT100to200","DYToLL_HT200to400","DYToLL_HT400to600","DYToLL_HT600to800","DYToLL_HT800to1200","DYToLL_HT1200to2500","DYToLL_HT2500toInf"]
 
 allSampInd = [] # list of all indices for all backgrounds
 sigSamps = ["WH_hbb","ZH_hbb"]
@@ -160,9 +227,15 @@ if not args.doData:
 
 def makeCutString(sample, sMap):
     cutString = presel + "&&("
+    if (sample == "VVHF"):
+        cutString = presel + "&&Sum$(abs(GenWZQuark_pdgId)==5)>=2&&("
+    if (sample == "VVLF"):
+        cutString = presel + "&&Sum$(abs(GenWZQuark_pdgId)==5)<2&&("
     for index in sMap[sample]:
-            if isinstance(index,str):
-                cutString += "(%s)||" % index
+            #if (index == 4900 or index == 4901 or index == 4902): continue # HACK HACK FIXME
+            #cutString += "(sampleIndex==%i)||" % index
+            if args.oldSI:
+                cutString += "(sampleIndex_GenJetSum==%i)||" % index
             else:
                 cutString += "(sampleIndex==%i)||" % index
     cutString = cutString[0:len(cutString)-2]
@@ -173,90 +246,96 @@ print "Bkg string = ",makeCutString("Bkg", sampleMap)
 #print "Wj0b string = ",makeCutString("Wj0b", sampleMap)
 print "Thank you for your attention!"
 
+# first rebin the histogram so that the first and last bins are not empty and have less than 35% stat. uncertainty
+hBkg = ROOT.TH1F("hBkg","hBkg",nBinsFine,args.xlow,args.xhigh)
+hSig = ROOT.TH1F("hSig","hSig",nBinsFine,args.xlow,args.xhigh)
+#tree.Draw("%s>>hBkg" % bdtname,"((%s)&&sampleIndex>0)*weight*(2.2/1.28)" % presel)
+bkgCutString = makeCutString("Bkg", sampleMap)
+print bkgCutString
+if args.doVV:
+    sigCutString = makeCutString("VVHF", sampleMap)
+else:
+    sigCutString = makeCutString("WH_hbb", sampleMap)
+
+fnames = [] # avoid adding the same tree twice
+tree_sig = ROOT.TChain("tree")
+tree_bkg = ROOT.TChain("tree")
+for sample in sampleNameMap:
+    if sample in sigSamps:
+        for sname in sampleNameMap[sample]:
+            #fname = ipath + "/sum_" + sname + "_3.root"
+            #fname = ipath + "/sum_" + sname + "_weighted2.root"
+            fname = ipath + "/sum_" + sname + ".root"
+            tree_sig.Add(fname)
+    elif sample != "data_obs":
+        for sname in sampleNameMap[sample]:
+            #fname = ipath + "/sum_" + sname + "_3.root"
+            #fname = ipath + "/sum_" + sname + "_weighted2.root"
+            fname = ipath + "/sum_" + sname + ".root"
+            if fname not in fnames:
+                print "adding  %s for background" % fname
+                tree_bkg.Add(fname)
+                fnames.append(fname)
+         
+tree_bkg.Draw("%s>>hBkg" % bdtname,"((%s)&&(%s))*%s" % (presel,bkgCutString,weight_string))
+tree_sig.Draw("%s>>hSig" % bdtname,"((%s)&&(%s))*%s" % (presel,sigCutString,weight_string))
+
+#ifile.cd()
+
+print "total signal, total background:",hSig.Integral(),", ",hBkg.Integral()
+
 binBoundaries = numpy.zeros(nBins+1,dtype=float)
 binBoundaries[0] = args.xlow
 binBoundaries[nBins] = args.xhigh
-hBkg = ROOT.TH1F("hBkg","hBkg",nBinsFine,args.xlow,args.xhigh)
-hSig = ROOT.TH1F("hSig","hSig",nBinsFine,args.xlow,args.xhigh)
-if args.doRebin:
-    # first rebin the histogram so that the first and last bins are not empty and have less than 35% stat. uncertainty
-    #tree.Draw("%s>>hBkg" % bdtname,"((%s)&&sampleIndex>0)*weight*(2.2/1.28)" % presel)
-    bkgCutString = makeCutString("Bkg", sampleMap)
-    print bkgCutString
-    if args.doVV:
-        sigCutString = makeCutString("VVHF", sampleMap)
-    else:
-        sigCutString = makeCutString("WH_hbb", sampleMap)
+foundLowBinEdge = False
+foundHighBinEdge = False
+if (args.binlow != -1):
+    foundLowBinEdge = True
+    binBoundaries[1] = args.binlow
+if (args.binhigh != 1):
+    foundHighBinEdge = True
+    binBoundaries[nBins-1] = args.binhigh
+B_err2_low = 0.
+B_err2_high = 0.
+for ibin in range(1,nBinsFine):
+    if not foundLowBinEdge:
+        B_low = hBkg.Integral(1,ibin)
+        B_err2_low += pow(hBkg.GetBinError(ibin),2) 
+        #S_low = hSig.Integral(1,ibin)
+        #print "edge = ",hBkg.GetBinLowEdge(ibin+1)
+        #print "B_low = ",B_low
+        #if (B_low > 0):
+        #    print "1./sqrt(B_low) = ",1./sqrt(B_low)
+        #print B_low,ibin,hBkg.Integral(),args.xlow,args.xhigh
+        #print "B_low,sqrt(B_err2_low)",B_low,sqrt(B_err2_low)
+        #if (B_low > 0 and 1./sqrt(B_low) < 0.35):
+        if (B_low > 0 and sqrt(B_err2_low)/B_low < 0.35):
+            binBoundaries[1] = hBkg.GetBinLowEdge(ibin+1)
+            foundLowBinEdge = True
+            #print "found low bin!",ibin
+    if not foundHighBinEdge:
+        B_high = hBkg.Integral(nBinsFine-ibin+1, nBinsFine) 
+        B_err2_high += pow(hBkg.GetBinError(nBinsFine-ibin+1),2)
+        S_high = hSig.Integral(nBinsFine-ibin+1, nBinsFine) 
+        #S_high = hSig.Integral(nBinsFine-ibin+1, nBinsFine) 
+        #print "B_high,sqrt(B_err2_high)",B_high,sqrt(B_err2_high)
+        #if (B_high > 0 and 1./sqrt(B_high) < 0.35):
+        #if (B_high > 0 and sqrt(B_err2_high)/B_high < 0.35 and S_high >= 1.0 and abs(hBkg.GetBinLowEdge(nBinsFine-ibin+1)-0.608)<0.001):
+        #if (B_high > 0 and sqrt(B_err2_high)/B_high < 0.35 and S_high >= 1.0):
+        #if (B_high > 0 and sqrt(B_err2_high)/B_high < 0.35 and S_high >= 6.0):
+        if (B_high > 0 and sqrt(B_err2_high)/B_high < 0.35):
+            binBoundaries[nBins-1] = hBkg.GetBinLowEdge(nBinsFine-ibin+1)
+            foundHighBinEdge = True
+            #print "found high bin!",(nBinsFine-ibin+1)
+# split the middle bins equidistantly
+## HACK FIXME
+#binBoundaries[nBins-2] = 0.376
+#for i in range(2,nBins-2):
+#    binBoundaries[i] = binBoundaries[1] + (i-1)*((binBoundaries[nBins-2] - binBoundaries[1])/(nBins-3)) 
+for i in range(2,nBins-1):
+    binBoundaries[i] = binBoundaries[1] + (i-1)*((binBoundaries[nBins-1] - binBoundaries[1])/(nBins-2)) 
 
-    fnames = [] # avoid adding the same tree twice
-    tree_sig = ROOT.TChain("Events")
-    tree_bkg = ROOT.TChain("Events")
-    for sample in sampleNameMap:
-        if sample in sigSamps:
-            for sname in sampleNameMap[sample]:
-                #fname = ipath + "/sum_" + sname + "_3.root"
-                #fname = ipath + "/sum_" + sname + "_weighted2.root"
-                fname = ipath + "/sum_" + sname + ".root"
-                tree_sig.Add(fname)
-        elif sample != "data_obs":
-            for sname in sampleNameMap[sample]:
-                #fname = ipath + "/sum_" + sname + "_3.root"
-                #fname = ipath + "/sum_" + sname + "_weighted2.root"
-                fname = ipath + "/sum_" + sname + ".root"
-                if fname not in fnames:
-                    print "adding  %s for background" % fname
-                    tree_bkg.Add(fname)
-                    fnames.append(fname)
-         
-    tree_bkg.Draw("%s>>hBkg" % bdtname,"((%s)&&(%s))*%s" % (presel,bkgCutString,weight_string))
-    tree_sig.Draw("%s>>hSig" % bdtname,"((%s)&&(%s))*%s" % (presel,sigCutString,weight_string))
-
-    print "total signal, total background:",hSig.Integral(),", ",hBkg.Integral()
-
-    foundLowBinEdge = False
-    foundHighBinEdge = False
-    if (args.binlow != -1):
-        foundLowBinEdge = True
-        binBoundaries[1] = args.binlow
-    if (args.binhigh != 1):
-        foundHighBinEdge = True
-        binBoundaries[nBins-1] = args.binhigh
-    B_err2_low = 0.
-    B_err2_high = 0.
-    for ibin in range(1,nBinsFine):
-        if not foundLowBinEdge:
-            B_low = hBkg.Integral(1,ibin)
-            B_err2_low += pow(hBkg.GetBinError(ibin),2) 
-            #S_low = hSig.Integral(1,ibin)
-            #print "edge = ",hBkg.GetBinLowEdge(ibin+1)
-            #print "B_low = ",B_low
-            #if (B_low > 0):
-            #    print "1./sqrt(B_low) = ",1./sqrt(B_low)
-            #print B_low,ibin,hBkg.Integral(),args.xlow,args.xhigh
-            #print "B_low,sqrt(B_err2_low)",B_low,sqrt(B_err2_low)
-            #if (B_low > 0 and 1./sqrt(B_low) < 0.35):
-            if (B_low > 0 and sqrt(B_err2_low)/B_low < 0.35):
-                binBoundaries[1] = hBkg.GetBinLowEdge(ibin+1)
-                foundLowBinEdge = True
-                #print "found low bin!",ibin
-        if not foundHighBinEdge:
-            B_high = hBkg.Integral(nBinsFine-ibin+1, nBinsFine) 
-            B_err2_high += pow(hBkg.GetBinError(nBinsFine-ibin+1),2)
-            S_high = hSig.Integral(nBinsFine-ibin+1, nBinsFine) 
-            #S_high = hSig.Integral(nBinsFine-ibin+1, nBinsFine) 
-            #print "B_high,sqrt(B_err2_high)",B_high,sqrt(B_err2_high)
-            #if (B_high > 0 and 1./sqrt(B_high) < 0.35):
-            #if (B_high > 0 and sqrt(B_err2_high)/B_high < 0.35 and S_high >= 1.0 and abs(hBkg.GetBinLowEdge(nBinsFine-ibin+1)-0.608)<0.001):
-            #if (B_high > 0 and sqrt(B_err2_high)/B_high < 0.35 and S_high >= 1.0):
-            #if (B_high > 0 and sqrt(B_err2_high)/B_high < 0.35 and S_high >= 6.0):
-            if (B_high > 0 and sqrt(B_err2_high)/B_high < 0.35):
-                binBoundaries[nBins-1] = hBkg.GetBinLowEdge(nBinsFine-ibin+1)
-                foundHighBinEdge = True
-                #print "found high bin!",(nBinsFine-ibin+1)
-    # split the middle bins equidistantly
-    for i in range(2,nBins-1):
-        binBoundaries[i] = binBoundaries[1] + (i-1)*((binBoundaries[nBins-1] - binBoundaries[1])/(nBins-2)) 
-
+#if True:
 if not args.doRebin:
     for i in range(1,nBins):
         binBoundaries[i] = binBoundaries[0] + (i)*((binBoundaries[nBins] - binBoundaries[0])/(nBins))
@@ -276,8 +355,8 @@ if args.binstats == "":
     otextfile = open("binStats_%s.txt" % catName, "w")
 else:
     otextfile = open(args.binstats,"w")
-tree = ROOT.TChain("Events")
-#tree = ROOT.TTree("Events","Events")
+tree = ROOT.TChain("tree")
+#tree = ROOT.TTree("tree","tree")
 #hBkg.Write()
 for sample in sampleMap:
     if (args.sample != "" and sample != args.sample): continue
@@ -288,11 +367,11 @@ for sample in sampleMap:
     #if (sample != "Bkg"): continue
     #if (args.ttbarTree != "" and (sample == "TT" or sample == "Bkg")): 
     #    ifile_tt = ROOT.TFile.Open(args.ttbarTree,"r")
-    #    tree_tt = ifile_tt.Get("Events")
+    #    tree_tt = ifile_tt.Get("tree")
     #    if (sample == "TT"):
     #        tree = tree_tt
     #    else:
-    #        chain = ROOT.TChain("Events")
+    #        chain = ROOT.TChain("tree")
     #        chain.Add(args.inputfile)
     #        chain.Add(args.ttbarTree)
     #        tree = chain
@@ -300,24 +379,23 @@ for sample in sampleMap:
     #    #ifile_tt.Close()
     #elif (sample == "WH_hbb" or sample == "ZH_hbb"):
     #    ifile_sig = ROOT.TFile.Open(args.inputfile.replace("output_mc","output_signal"))
-    #    tree_sig = ifile_sig.Get("Events")
+    #    tree_sig = ifile_sig.Get("tree")
     #    tree = tree_sig
     #elif (sample == "VVHF" or sample == "VVLF"):
     #    ifile_vv = ROOT.TFile.Open(args.inputfile.replace("output_mc","output_vv"))
-    #    tree_vv = ifile_vv.Get("Events")
+    #    tree_vv = ifile_vv.Get("tree")
     #    tree = tree_vv
     #elif (args.wjetsTree != "" and (sample == "Wj0b" or sample == "Wj1b" or sample=="Wj2b")):
     #    ifile_wjets = ROOT.TFile.Open(args.wjetsTree)
-    #    tree_wjets = ifile_wjets.Get("Events")
+    #    tree_wjets = ifile_wjets.Get("tree")
     #    tree = tree_wjets
     #elif (args.vzTree != "" and (sample == "VVHF" or sample == "VVLF")):
     #    ifile_vz = ROOT.TFile.Open(args.vzTree)
-    #    tree_vz = ifile_vz.Get("Events")
+    #    tree_vz = ifile_vz.Get("tree")
     #    tree = tree_vz
     #else:
     #    tree = tree_mc 
-    ##if sample != "Bkg" and sample != "data_obs": 
-    if sample != "Bkg": 
+    if sample != "Bkg" and sample != "data_obs": 
         for sname in sampleNameMap[sample]:
             fname = ipath + "/sum_" + sname + ".root"
             #fname = ipath + "/sum_" + sname + "_weighted2.root"
@@ -348,14 +426,14 @@ for sample in sampleMap:
     #tree.Draw("%s>>%s" % (bdtname, sample),"(%s)*weight" % cutString)
     #tree.Draw("%s>>%s" % (bdtname, sample),"(%s)*weight*(2.2/1.28)" % cutString)  
     if (sample == "data_obs" and args.doData):
-        #ifile_data = ROOT.TFile.Open(args.dataTree,"r")
-        #tree_data = ifile_data.Get("Events")
+        ifile_data = ROOT.TFile.Open(args.dataTree,"r")
+        tree_data = ifile_data.Get("tree")
         ofile.cd()
         # make sure we don't weight actual data by puWeight, SF's, etc.
         #tree_data.Draw("%s>>%s" % (bdtname, sample),"((%s)&&Pass_nominal)*sb_weight3" % (cutString)) ## FIXME
-        tree.Draw("%s>>%s" % (bdtname, sample),"((%s)&&Pass_nominal)" % (cutString)) 
+        tree_data.Draw("%s>>%s" % (bdtname, sample),"((%s)&&Pass_nominal)" % (cutString)) 
         #tree_data.Draw("BDT_V25_March27_400_5>>%s" % (sample),"((%s)&&Pass_nominal)" % (cutString)) # HACK FIXME PLEASE!!
-        #ifile_data.Close()
+        ifile_data.Close()
     elif (sample == "data_obs"):
         # fake data which is sum of all MC
         #hBkg.Write(sample)
@@ -366,7 +444,7 @@ for sample in sampleMap:
     #elif (sample == "TT" and args.ttbarTree != ""):
     #    print "got here"
     #    ifile_tt = ROOT.TFile.Open(args.ttbarTree,"r")
-    #    tree_tt = ifile_tt.Get("Events")
+    #    tree_tt = ifile_tt.Get("tree")
     #    ofile.cd()
     #    # make sure we don't weight actual data by puWeight, SF's, etc.
     #    tree_tt.Draw("%s>>%s" % (bdtname, sample),"((%s)&&Pass_nominal)*%s" % (cutString,weight_string)) 

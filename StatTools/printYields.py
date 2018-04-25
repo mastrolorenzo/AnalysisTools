@@ -28,7 +28,9 @@ dc_string = "" # write datacard
 #samples = ["ZH_hbb","WH_hbb","s_Top","Zj1b","TT","Zj0b","Wj0b","Wj1b","Wj2b","Zj2b"]
 #samples = ["ZH_hbb","WH_hbb","s_Top","Zj1b","TT","Zj0b","Wj0b","Wj1b","Wj2b","Zj2b"]
 #samples = ["ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","VVHF","VVLF","QCD","Zj0b","Zj1b","Zj2b"]
-samples = ["ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","VVHF","VVLF","Zj0b","Zj1b","Zj2b"]
+samples = ["ZH_hbb","s_Top","TT","Zj0b","Zj1b","Zj2b"]
+#samples = ["ZH_hbb","s_Top","TT","Zj0b","Zj1b","Zj2b"]
+####samples = ["ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","VVHF","VVLF","Zj0b","Zj1b","Zj2b"]
 #samples = ["ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","Zj0b","Zj1b","Zj2b"]
 #samples = ["ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","VVHF","VVLF","Zj0b","Zj1b","Zj2b","QCD"]
 #samples = ["ZH_hbb","WH_hbb","Bkg"]
@@ -60,6 +62,11 @@ if args.samples != "":
         samples.append(sample)
 print "samples = ",samples
 
+# count the number of signal processes to have indexing correct later
+nSig = 0
+for sample in samples:
+    if sample.find("_hbb")!=-1:
+        nSig = nSig + 1
 
 # It probably makes sense to just run this script once per channel and
 # then combine the datacards with combineDatacard.py, but the code is set
@@ -255,7 +262,7 @@ for label in cat_labels:
         if (args.doVV or args.doEWK):
             dc_string += str(i)
         else:
-            dc_string += str(i-1)
+            dc_string += str(i-(nSig-1))
         if (i < 10): dc_string += "           "
         else: dc_string += "          "
 dc_string += "\n"
