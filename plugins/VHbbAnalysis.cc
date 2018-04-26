@@ -53,7 +53,7 @@ void VHbbAnalysis::InitAnalysis() {
 // Check if events pass preselection.
 // Returns true for events passing the preselection and false otherwise.
 bool VHbbAnalysis::Preselection() {
- 
+
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
 
     *b["twoResolvedJets"]=false;
@@ -84,7 +84,7 @@ bool VHbbAnalysis::Preselection() {
         *in["nGenStatus2bHad"] = 0;
         for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
             if(mInt("GenPart_status",indGP)!=2) continue;
-            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/100)%10==5)){
+            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
               *in["nGenStatus2bHad"]=mInt("nGenStatus2bHad")+1;
             }
         }
@@ -464,14 +464,13 @@ bool VHbbAnalysis::Analyze() {
  
    // put B-Tagger cuts out of selection functions
     if (bjets_bestTagger.first != -1 && bjets_bestTagger.second != -1) {
+        *b["twoResolvedJets"]=true; // jets don't need to be b-tagged to be "resolved"
+        *in["hJetInd1"] = bjets_bestTagger.first;
+        *in["hJetInd2"] = bjets_bestTagger.second;
         if (m(taggerName,bjets_bestTagger.first) < j1ptBtag) {
             *in["controlSample"] = -1;
         } else if (m(taggerName,bjets_bestTagger.second) < m("j2ptBtag")) {  // 2nd jet B-Tagged is the same in all SR's
             *in["controlSample"] = -1;
-        } else {
-            *in["hJetInd1"] = bjets_bestTagger.first;
-            *in["hJetInd2"] = bjets_bestTagger.second;
-            *b["twoResolvedJets"]=true;
         }
     }
 

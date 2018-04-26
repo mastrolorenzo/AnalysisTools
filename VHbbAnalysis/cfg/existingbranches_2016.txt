@@ -29,7 +29,7 @@ type=8  name=GenJet_phi                         max=60  onlyMC=1 lengthBranch=nG
 type=8  name=GenJet_mass                        max=60  onlyMC=1 lengthBranch=nGenJet
 type=11  name=GenJet_hadronFlavour              max=60  onlyMC=1 lengthBranch=nGenJet
 
-type=2  name=LHE_Nc  onlyMC=1   allowMissingBranch=1
+type=5  name=LHE_Nc  onlyMC=1   allowMissingBranch=1
 
 #type=7  name=GenJet_pdgId                       max=20  onlyMC=1
 #type=7  name=GenJet_numBHadrons                 max=20  onlyMC=1
