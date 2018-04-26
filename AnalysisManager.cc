@@ -562,9 +562,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
         cursample->ComputeWeight(*f["intL"]);
 
         if(cursample->InputPU != NULL){
-            std::cout<<"asdfjasdfas"<<std::endl;
             TH1D * puhist_to_save = cursample->InputPU;
-            std::cout<<"CD"<<std::endl;
             ofile->cd();
             puhist_to_save->Write();
             EvaluatePUReweighting(cursample->InputPU);
@@ -593,7 +591,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
             Long64_t nbytes = 0, nb = 0;
             int saved=0;
             // FIXME need a loop over systematics
-            for (Long64_t jentry=0; jentry<2000;jentry++) {
+            for (Long64_t jentry=0; jentry<nentries;jentry++) {
                 if((jentry%1000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
                 //if((jentry%10000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
                 CheckBranchLengths(jentry, cursample->sampleNum==0);
