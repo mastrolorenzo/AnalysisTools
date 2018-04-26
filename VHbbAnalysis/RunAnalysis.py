@@ -22,8 +22,13 @@ parser.add_option("--site","--site", dest="site", default="FNAL", type=str, help
 parser.add_option("--useSGE","--useSGE", dest="useSGE", default=0, type=int, help="If 0 (default) use condor, if 1 use SGE job submission")
 parser.add_option("--doSkim","--doSkim", dest="doSkim", default=0, type=int, help="If 0 (default) run analysis jobs, if 1 run skimming jobs")
 parser.add_option("--runOnSkim","--runOnSkim", dest="runOnSkim", default=1, type=int, help="If 1 (default) run analysis jobs assuming the input files are already skimmed by AT, if 0 assume running directly on post-processed NanoAOD. If doSkim is 1 then this variable is assumed to be always 0.")
+parser.add_option("--doKinFit","--doKinFit", dest="doKinFit", default=0, type=int, help="If 1 (default=0) runs the kinematic fit after the analysis job (Automatically turned off when doSkim is 1).")
 parser.add_option("--submitJobs","--submitJobs", dest="submitJobs", default=1, type=int, help="If 1 (default) submit jobs to batch queue, if 0 then only create submission files")
 (options, args) = parser.parse_args()
+
+if len(sys.argv) == 1:
+    print parser.format_help()
+    exit(-1)
 
 ROOT.gSystem.Load("AnalysisDict.so")
 
@@ -35,15 +40,14 @@ else:
 doData = options.doData
 site = options.site
 useSGE = options.useSGE
-doSkim = options.doSkim
-runOnSkim = str(options.runOnSkim)
 submitJobs = options.submitJobs
 
-runOnSkim_bool = False
-if runOnSkim == "1" and not options.doSkim==1:
-    runOnSkim_bool = True
+if options.doSkim:
+    options.doKinFit = False
+    options.runOnSkim = False
 
-am=ReadInput.ReadTextFile(options.configFile, "cfg", samplesToSubmit,"",options.runBatch, doSkim, runOnSkim_bool)
+
+am=ReadInput.ReadTextFile(options.configFile, "cfg", samplesToSubmit,"",options.runBatch, options.doSkim, options.runOnSkim)
 am.debug=2
 
 
@@ -86,7 +90,7 @@ else:
         output_dir = "/eos/cms/store/user/scoopers/VHbbAnalysisNtuples"
     elif site == "DESY":
         output_dir = "/nfs/dust/cms/user/%s/VHbbAnalysisNtuples" % os.getlogin()
-    if doSkim:
+    if options.doSkim:
         output_dir = output_dir.replace("VHbbAnalysisNtuples","SkimmedAnalysisNtuples")
 
     if options.outputDir:
@@ -105,13 +109,13 @@ else:
     #for sampleName in am.ListSampleNames():
     inputs_to_transfer = [
         options.configFile,
-        'RunSkim.py',
         'RunSample.py',
         '../AnalysisDict.so',
         '../env.sh',
         'cfg',
         'aux',
         '../python/ReadInput.py',
+        '../python/kinfitter.py',
         '../AnalysisDict_rdict.pcm',
         '../HelperClasses',
         '../AnalysisManager.h',
@@ -123,7 +127,9 @@ else:
         # prepend paths with '../' for the condor jobs
         inputs_to_transfer = list('../'+p if not p.startswith('../') else p for p in inputs_to_transfer)
         inputs_to_transfer.remove('../python/ReadInput.py')
+        inputs_to_transfer.remove('../python/kinfitter.py')
         inputs_to_transfer.append('../ReadInput.py')
+        inputs_to_transfer.append('../kinfitter.py')
     else:
         inputs_to_transfer = list('../../'+p for p in inputs_to_transfer)
 
@@ -158,12 +164,15 @@ else:
             if (filesToRun == ""): continue
 
             nProcJobs += 1
+            RunSample_args = "runOnSkim" if options.runOnSkim else ""
+            RunSample_args += ",doSkim" if options.doSkim else ""
+            RunSample_args += ",doKinFit" if options.doKinFit else ""
             if not useSGE:
                 fname = "%s/%s/job%i.submit" % (jobName, sampleName,nProcJobs)
                 submitFile = open(fname, "w")
                 content =  "universe = vanilla\n"
                 content += "Executable = %s/condor_runscript.sh\n" % jobName
-                content += "Arguments = %s %s %s output_%s_%i.root\n" % (options.configFile, sampleName, filesToRun,sampleName, nProcJobs)
+                content += "Arguments = %s %s %s output_%s_%i.root %s\n" % (options.configFile, sampleName, filesToRun,sampleName, nProcJobs, RunSample_args)
                 #content += "Arguments = %s %s %s %i\n" % (options.configFile, sampleName, filename, nProcJobs)
                 #content += "Requirements   =  OpSys == 'LINUX' && (Arch =='INTEL' || Arch =='x86_64')\n"
                 content += "initialdir = %s/%s\n" % (jobName,sampleName)
@@ -179,7 +188,7 @@ else:
             else:
                 fname = "%s/%s/job%iSubmit.sh" % (jobName, sampleName,nProcJobs)
                 submitFile = open(fname, "w")
-                content = "source %s/%s/condor_runscript.sh %s %s %s output_%s_%i.root\n" % (os.getcwd(),jobName,options.configFile, sampleName, filesToRun,sampleName, nProcJobs)
+                content = "source %s/%s/condor_runscript.sh %s %s %s output_%s_%i.root %s\n" % (os.getcwd(),jobName,options.configFile, sampleName, filesToRun,sampleName, nProcJobs, RunSample_args)
             #print content
             submitFile.write(content)
             submitFile.close()
@@ -192,17 +201,12 @@ else:
         local_path = "%s/%s" % (output_dir,jobName)
         xrdcp_string = "mkdir -p %s/$2; cp -vf $4 %s/$2" % (local_path, local_path)
     copy_string = "" # not sure how to automatically transfer files to SGE job nodes, for now do it manually
-    runfile = "RunSample.py"
-    if doSkim:
-        runfile = "RunSkim.py"
-        runOnSkim = "" # doesn't make sense to runOnSkim if running the skim!
     if useSGE:
-        copy_string = ''' cp -r %s/cfg .
-        cp -r %s/aux .
-        cp %s/%s .
-        cp %s/../AnalysisDict.so .
-        cp -r %s/*.txt . ''' % (os.getcwd(),os.getcwd(),os.getcwd(),runfile,os.getcwd(),os.getcwd())
-
+        copy_string = ''' cp -r {0}/cfg .
+        cp -r {0}/aux .
+        cp {0}/RunSample.py .
+        cp {0}/../AnalysisDict.so .
+        cp -r {0}/*.txt . '''.format(os.getcwd())
 
     #Set a few variables that we will need to identify the correct CMSSW release to source from cvmfs
     scram_arch = os.environ['SCRAM_ARCH']
@@ -245,21 +249,21 @@ else:
         #cp -r %s/*.txt .
         %s
 
-        echo "running %s"
+        echo "running RunSample.py"
         echo $ORIG_DIR/$4
-        python %s $1 $2 $3 $ORIG_DIR/$4 %s
+        python RunSample.py $1 $2 $3 $ORIG_DIR/$4 $5
         echo "done running, now copying output to EOS"
         ###xrdcp -f $ORIG_DIR/$4 root://cmseos.fnal.gov//store/user/sbc01/VHbbAnalysisNtuples/%s/$2
         %s
         rm $ORIG_DIR/$4
-        echo "all done!" ''' % (os.getcwd(),scram_arch,patch_rel,cmssw_version, os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), copy_string, runfile, runfile,runOnSkim, jobName, xrdcp_string )
+        echo "all done!" ''' % (os.getcwd(),scram_arch,patch_rel,cmssw_version, os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), copy_string, jobName, xrdcp_string )
 
     condor_runscript_text_desy = '''
 
         export PATH=/afs/desy.de/common/passwd:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/cvmfs/grid.cern.ch/emi3ui-latest/bin:/cvmfs/grid.cern.ch/emi3ui-latest/sbin:/cvmfs/grid.cern.ch/emi3ui-latest/usr/bin:/cvmfs/grid.cern.ch/emi3ui-latest/usr/sbin:$PATH
         echo "echo PATH:"
         echo $PATH
-        echo "arguments: " $1 $2 $3 $4
+        echo "arguments: " $1 $2 $3 $4 $5
         echo "username and group"
         id -n -u
         id -n -g
@@ -280,9 +284,9 @@ else:
         pwd
         ls
 
-        echo "running %s"
+        echo "running RunSample.py"
         echo $4
-        python %s $1 $2 $3 $4 %s
+        python RunSample.py $1 $2 $3 $4 $5
         echo "done running, now copying output to EOS"
 
         echo "copying output (%s)"
@@ -293,7 +297,7 @@ else:
         rm -r $tmp_dir
 
         echo "all done!"
-    ''' % (' '.join(inputs_to_transfer), scram_arch, patch_rel, cmssw_version, runfile, runfile, runOnSkim, xrdcp_string, xrdcp_string)
+    ''' % (' '.join(inputs_to_transfer), scram_arch, patch_rel, cmssw_version, xrdcp_string, xrdcp_string)
 
     runscript = open("%s/condor_runscript.sh" % (jobName) , "w")
     runscript.write(condor_runscript_text_desy if site=='DESY' else condor_runscript_text)
