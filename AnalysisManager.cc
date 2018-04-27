@@ -617,11 +617,11 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                 //nbytes += nb;
 
                 anyPassing=false;
-                for(unsigned iSyst=0; iSyst<systematics.size(); iSyst++){
-                    nb = fChain->GetEntry(jentry);
-                    nbytes += nb;
+                if(!doSkim){
+                    for(unsigned iSyst=0; iSyst<systematics.size(); iSyst++){
+                        nb = fChain->GetEntry(jentry);
+                        nbytes += nb;
 
-                    if (!doSkim) {
                         // set bdt inputs and output to std value before evaluating/saving the event
                         for(std::map<std::string,BDTInfo*>::iterator itBDTInfo=bdtInfos.begin(); itBDTInfo!=bdtInfos.end(); itBDTInfo++){
                             InitializeBDTVariables(itBDTInfo->second);
@@ -666,12 +666,11 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                             if(cursyst->name=="nominal") saved++;
                         }
                     }
-                    else {
-                        // running skim
-                        ofile->cd();
-                        outputTree->Fill();
-                        saved++;
-                    }
+                 } else {
+                     // running skim
+                     ofile->cd();
+                     outputTree->Fill();
+                     saved++;
                 }
             } // end event loop
         } // end file loop
