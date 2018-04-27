@@ -1,5 +1,6 @@
 import ROOT
 import sys
+import math
 import ReadInput
 from optparse import OptionParser
 import os
@@ -14,7 +15,7 @@ parser.add_option("-b", "--batch", dest="runBatch", default=0, type=int,
 parser.add_option("-n", "--jobName", dest="jobName", default="condor_jobs",
                   help="Specify label for condor jobs. Only to be used when running batch jobs"
 )
-parser.add_option("-f", "--nFilesPerJob", dest="nFilesPerJob", default=10, type=int, help="Number of input files per batch job")
+parser.add_option("-f", "--nFilesPerJob", dest="nFilesPerJob", default=10, type=float, help="Number of input files per batch job")
 parser.add_option("-o", "--outputDir",    dest="outputDir",    default="", type=str, help="Output directory for the jobs")
 parser.add_option("-s","--sample", dest="sample", default="", type=str, help="Run on only a specific sample (can be comma-separated list)")
 parser.add_option("-d","--doData", dest="doData", default=-1, type=int, help="If -1 run all samples, if 0 run only MC, if 1 run only data")
@@ -152,14 +153,26 @@ else:
         os.system("mkdir -p %s/%s/%s" % (output_dir,jobName,sampleName))
         nProcJobs = 0
         nFiles = len(sample.files)
-        nJobs = nFiles / nFilesPerJob + 1
+        if nFilesPerJob <1 :
+            if not math.ceil(1./nFilesPerJob)==1./nFilesPerJob:
+                nFilesPerJob=1/(math.ceil(1./nFilesPerJob))
+        nJobs = int (( nFiles // nFilesPerJob ) + 1)
         #for filename in sample.files:
+        start_event_frac=0
+        end_event_frac=1
         for i in range(nJobs):
             filesToRun = ""
-            for j in range(nFilesPerJob):
-                index = i*nFilesPerJob + j
+            if nFilesPerJob >= 1:
+                for j in range(int(nFilesPerJob)):
+                    index = i*nFilesPerJob + j
+                    if (index >= nFiles): continue
+                    filesToRun += "%s," % sample.files[int(index)]
+            else :
+                index=math.floor(i*nFilesPerJob)
+                start_event_frac = i*nFilesPerJob-math.floor(i*nFilesPerJob)
+                end_event_frac = start_event_frac+nFilesPerJob
                 if (index >= nFiles): continue
-                filesToRun += "%s," % sample.files[index]
+                filesToRun += "%s," % sample.files[int(index)]
             filesToRun = filesToRun[:-1] # remove trailing ','
             if (filesToRun == ""): continue
 
@@ -172,7 +185,7 @@ else:
                 submitFile = open(fname, "w")
                 content =  "universe = vanilla\n"
                 content += "Executable = %s/condor_runscript.sh\n" % jobName
-                content += "Arguments = %s %s %s output_%s_%i.root %s\n" % (options.configFile, sampleName, filesToRun,sampleName, nProcJobs, RunSample_args)
+                content += "Arguments = %s %s %s output_%s_%i.root %f %f %s\n" % (options.configFile, sampleName, filesToRun,sampleName, nProcJobs, start_event_frac, end_event_frac, RunSample_args)
                 #content += "Arguments = %s %s %s %i\n" % (options.configFile, sampleName, filename, nProcJobs)
                 #content += "Requirements   =  OpSys == 'LINUX' && (Arch =='INTEL' || Arch =='x86_64')\n"
                 content += "initialdir = %s/%s\n" % (jobName,sampleName)
@@ -188,7 +201,7 @@ else:
             else:
                 fname = "%s/%s/job%iSubmit.sh" % (jobName, sampleName,nProcJobs)
                 submitFile = open(fname, "w")
-                content = "source %s/%s/condor_runscript.sh %s %s %s output_%s_%i.root %s\n" % (os.getcwd(),jobName,options.configFile, sampleName, filesToRun,sampleName, nProcJobs, RunSample_args)
+                content = "source %s/%s/condor_runscript.sh %s %s %s output_%s_%i.root %f %f %s\n" % (os.getcwd(),jobName,options.configFile, sampleName, filesToRun,sampleName, nProcJobs, start_event_frac, end_event_frac, RunSample_args)
             #print content
             submitFile.write(content)
             submitFile.close()
@@ -251,7 +264,7 @@ else:
 
         echo "running RunSample.py"
         echo $ORIG_DIR/$4
-        python RunSample.py $1 $2 $3 $ORIG_DIR/$4 $5
+        python RunSample.py $1 $2 $3 $ORIG_DIR/$4 $5 $6 $7 
         echo "done running, now copying output to EOS"
         ###xrdcp -f $ORIG_DIR/$4 root://cmseos.fnal.gov//store/user/sbc01/VHbbAnalysisNtuples/%s/$2
         %s
@@ -263,7 +276,7 @@ else:
         export PATH=/afs/desy.de/common/passwd:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/cvmfs/grid.cern.ch/emi3ui-latest/bin:/cvmfs/grid.cern.ch/emi3ui-latest/sbin:/cvmfs/grid.cern.ch/emi3ui-latest/usr/bin:/cvmfs/grid.cern.ch/emi3ui-latest/usr/sbin:$PATH
         echo "echo PATH:"
         echo $PATH
-        echo "arguments: " $1 $2 $3 $4 $5
+        echo "arguments: " $1 $2 $3 $4 $5 $6 $7
         echo "username and group"
         id -n -u
         id -n -g
@@ -286,7 +299,7 @@ else:
 
         echo "running RunSample.py"
         echo $4
-        python RunSample.py $1 $2 $3 $4 $5
+        python RunSample.py $1 $2 $3 $4 $5 $6 $7 
         echo "done running, now copying output to EOS"
 
         echo "copying output (%s)"

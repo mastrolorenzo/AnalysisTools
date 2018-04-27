@@ -3,9 +3,10 @@ import sys
 import os
 import ReadInput
 
-if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv) !=6):
+if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv)!=6 and len(sys.argv)!=7 and len(sys.argv) !=8):
     print "Please give two arguments:  the cfg file and the sample name"
     print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus comma-separated options: doSkim,runOnSkim,doKinFit)"
+    print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,doKinFit"
     sys.exit(0)
 
 # do stuff :)
@@ -22,6 +23,11 @@ if len(sys.argv) >= 5:
 print sys.argv
 if len(sys.argv)==6:
     options = sys.argv[5].split(',')
+    print "options:", options
+    if "doSkim" in options and "runOnSkim" in options:
+        raise RuntimeError("Cannot doSkim and runOnSkim at the same time.")
+elif len(sys.argv)==8:
+    options = sys.argv[7].split(',')
     print "options:", options
     if "doSkim" in options and "runOnSkim" in options:
         raise RuntimeError("Cannot doSkim and runOnSkim at the same time.")
@@ -43,7 +49,9 @@ print "Done printing branches, now to loop"
 
 if (len(sys.argv) == 3):
     am.Loop(sys.argv[2])
-else:
+elif (len(sys.argv) > 6):
+    am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]))
+else :
     am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
 
 if "doKinFit" in options:
