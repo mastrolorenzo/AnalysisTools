@@ -2,6 +2,7 @@ prefix_desy=/pnfs/desy.de/cms/tier2/store/user/adewit/VHbbPostNano2017/V2/
 prefix_cern=/store/group/phys_higgs/hbb/ntuples/VHbbPostNano2017_V1/
 #prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/2017/V2/
 prefix_fnal=/store/user/sbc01/SkimmedAnalysisNtuples/2017V2_March21_skim/
+# prefix_skim=/enter/path/to/favourite/skim/here/
 
 ############################ DATA ###########################################################
 name=Run2017_Ele_ReMiniAOD        dir=SingleElectron/   type=0 xsec=1   lepFlav=3
