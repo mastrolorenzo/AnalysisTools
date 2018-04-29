@@ -325,7 +325,10 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
     )
     import socket
     hostname = socket.gethostname()
-    if hostname.endswith('.desy.de') and 'prefix_desy' in prefix_lines:
+    if runOnSkim and 'prefix_skim' in prefix_lines:
+        globalPrefix = prefix_lines['prefix_skim']
+        print "Using globalPrefix for SKIM", globalPrefix
+    elif hostname.endswith('.desy.de') and 'prefix_desy' in prefix_lines:
         globalPrefix = prefix_lines['prefix_desy']
         print "Using globalPrefix for DESY", globalPrefix
     elif hostname.endswith('.cern.ch') and 'prefix_cern' in prefix_lines:

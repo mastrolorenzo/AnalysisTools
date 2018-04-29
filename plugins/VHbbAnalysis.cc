@@ -53,7 +53,7 @@ void VHbbAnalysis::InitAnalysis() {
 // Check if events pass preselection.
 // Returns true for events passing the preselection and false otherwise.
 bool VHbbAnalysis::Preselection() {
- 
+
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
 
     //Set the b-tagger
@@ -75,6 +75,31 @@ bool VHbbAnalysis::Preselection() {
     // stitch ZJets inclusive sample to HT-binned samples
     if (cursample->sampleNum == 110 && m("LHE_HT") > 100) return false;
 
+    // use W+jets b-enriched samples but make sure all samples are orthogonal
+    int nGenStatus2bHad = 0;
+    if (cursample->sampleNum >= 40 && cursample->sampleNum <=54){
+        for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
+            if(mInt("GenPart_status",indGP)!=2) continue;
+            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
+              nGenStatus2bHad+=1;
+            }
+        }
+    }
+    if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
+        if (m("LHE_Vpt") > 100) {
+            if (mInt("LHE_Nb") != 0 || nGenStatus2bHad != 0) return false;
+        }
+    } else if (cursample->sampleNum == 50) {
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
+    } else if (cursample->sampleNum == 51) {
+        if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
+    } else if (cursample->sampleNum == 53) {
+        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
+    } else if (cursample->sampleNum == 54) {
+        //if (m("LHE_Vpt") < 200) return false;
+        if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
+    }
 
     //if (cursample->sampleNum == 0) {
     //    //if (*f["json"] != 1 && !doCutFlowInPresel) return false;
@@ -159,33 +184,6 @@ bool VHbbAnalysis::Preselection() {
     }
     
     if (nPreselJets < 2 && !atLeastOnePreselFatJet) return false;
-
-    // use W+jets b-enriched samples but make sure all samples are orthogonal
-    int nGenStatus2bHad = 0;
-    if (cursample->sampleNum >= 40 && cursample->sampleNum <=54){
-        for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
-            if(mInt("GenPart_status",indGP)!=2) continue;
-            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
-              nGenStatus2bHad+=1;
-            }
-        }
-    }
-    if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
-        if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || nGenStatus2bHad != 0) return false;
-        }
-    } else if (cursample->sampleNum == 50) {
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
-    } else if (cursample->sampleNum == 51) {
-        if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
-    } else if (cursample->sampleNum == 53) {
-        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
-    } else if (cursample->sampleNum == 54) {
-        //if (m("LHE_Vpt") < 200) return false;
-        if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
-    }
-
 
     return true;
 }
@@ -452,14 +450,13 @@ bool VHbbAnalysis::Analyze() {
  
    // put B-Tagger cuts out of selection functions
     if (bjets_bestTagger.first != -1 && bjets_bestTagger.second != -1) {
+        *b["twoResolvedJets"]=true; // jets don't need to be b-tagged to be "resolved"
+        *in["hJetInd1"] = bjets_bestTagger.first;
+        *in["hJetInd2"] = bjets_bestTagger.second;
         if (m(taggerName,bjets_bestTagger.first) < j1ptBtag) {
             *in["controlSample"] = -1;
         } else if (m(taggerName,bjets_bestTagger.second) < m("j2ptBtag")) {  // 2nd jet B-Tagged is the same in all SR's
             *in["controlSample"] = -1;
-        } else {
-            *in["hJetInd1"] = bjets_bestTagger.first;
-            *in["hJetInd2"] = bjets_bestTagger.second;
-            *b["twoResolvedJets"]=true;
         }
     }
 

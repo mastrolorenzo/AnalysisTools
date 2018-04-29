@@ -1,10 +1,12 @@
 import ROOT
 import sys
+import os
 import ReadInput
 
-if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv) !=6):
+if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv)!=6 and len(sys.argv)!=7 and len(sys.argv) !=8):
     print "Please give two arguments:  the cfg file and the sample name"
-    print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus optional last argument RunOnSkim)"
+    print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus comma-separated options: doSkim,runOnSkim,doKinFit)"
+    print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,doKinFit"
     sys.exit(0)
 
 # do stuff :)
@@ -19,13 +21,20 @@ if len(sys.argv) >= 5:
         filesToRun.append(item)
 
 print sys.argv
-RunOnSkim = False
-if len(sys.argv)>=6:
-    if sys.argv[5] == "1":
-        RunOnSkim = True
-print "RunOnSkim = ",RunOnSkim
+if len(sys.argv)==6:
+    options = sys.argv[5].split(',')
+    print "options:", options
+    if "doSkim" in options and "runOnSkim" in options:
+        raise RuntimeError("Cannot doSkim and runOnSkim at the same time.")
+elif len(sys.argv)==8:
+    options = sys.argv[7].split(',')
+    print "options:", options
+    if "doSkim" in options and "runOnSkim" in options:
+        raise RuntimeError("Cannot doSkim and runOnSkim at the same time.")
+else:
+    options = []
 
-am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, 0, False, RunOnSkim)
+am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, 0, "doSkim" in options, "runOnSkim" in options)
 #am.debug=20000
 am.debug=2
 
@@ -40,5 +49,22 @@ print "Done printing branches, now to loop"
 
 if (len(sys.argv) == 3):
     am.Loop(sys.argv[2])
-else:
-    am.Loop(sys.argv[2], sys.argv[3], sys.argv[4])
+elif (len(sys.argv) > 6):
+    am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]))
+else :
+    am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
+
+if "doKinFit" in options:
+    import kinfitter
+
+    # mv the previous output_file to a new name, so that the final output name is the same
+    output_file = sys.argv[4]
+    input_file = output_file.replace('.root', '_before_kinfit.root')
+    os.system('mv %s %s' % (output_file, input_file))
+
+    kinfitter.apply_kinfit(
+        input_file,
+        output_file,
+        am.mInt("sampleIndex") == 0,
+        am.m("dataYear"),
+    )
