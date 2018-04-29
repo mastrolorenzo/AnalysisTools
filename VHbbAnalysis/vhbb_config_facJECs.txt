@@ -13,4 +13,4 @@ bdt_bjetreg=cfg/reg1_settings.txt
 settings=cfg/settings.txt
 
 systematics=cfg/systematics_facJECs.txt
-scalefactors=cfg/scalefactors.txt
+scalefactors=cfg/scalefactors_2016.txt

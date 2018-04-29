@@ -25,5 +25,5 @@ settings=cfg/settings_2016.txt
 
 #systematics=cfg/systematics_facJECsNano2016.txt
 systematics=cfg/systematics.txt
-scalefactors=cfg/scalefactors.txt
+scalefactors=cfg/scalefactors_2016.txt
 btagscalefactors=aux/cMVAv2_Moriond17_B_H.csv

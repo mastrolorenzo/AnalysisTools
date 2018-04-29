@@ -1,7 +1,7 @@
 prefix_desy=/pnfs/desy.de/cms/tier2/store/user/adewit/VHbbPostNano2017/V2/
 prefix_cern=/store/group/phys_higgs/hbb/ntuples/VHbbPostNano2017_V1/
-#prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/2017/V2/
-prefix_fnal=/store/user/sbc01/SkimmedAnalysisNtuples/2017V2_March21_skim/
+prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/2017/V2/
+#prefix_fnal=/store/user/sbc01/SkimmedAnalysisNtuples/2017V2_March21_skim/
 # prefix_skim=/enter/path/to/favourite/skim/here/
 
 ############################ DATA ###########################################################
@@ -17,7 +17,7 @@ name=Run2017_DoubleMu_ReMiniAOD   dir=DoubleMuon/       type=0 xsec=1   lepFlav=
 #=========>>>>% Signal sample: Higgs boson produced in association with an electroweak vector boson
 
 ##name=WplusH130_powheg         dir=WplusH_HToBB_WToLNu_M130_13TeV_powheg_pythia8/   type=-13000   xsec=0.1249 
-##name=WminusH130_powheg        dir=WminusH_HToBB_WToLNu_M130_13TeV_powheg_pythia8/  type=-13001   xsec=0.0895
+name=WminusH130_powheg        dir=WminusH_HToBB_WToLNu_M130_13TeV_powheg_pythia8/  type=-13001   xsec=0.0895
 ###name=WplusH125_powheg         dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/   type=-12500   xsec=0.165  
 ###name=WminusH125_powheg        dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/  type=-12501   xsec=0.105
 ##name=WplusH125_herwig         dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_herwigpp/  type=-12510   xsec=0.165  

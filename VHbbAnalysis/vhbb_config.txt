@@ -24,7 +24,7 @@ settings=cfg/settings.txt
 
 #systematics=cfg/systematics_facJECsNano.txt
 systematics=cfg/systematics.txt
-scalefactors=cfg/scalefactors.txt
+scalefactors=cfg/scalefactors_2017.txt
 btagscalefactors=aux/DeepCSV_94XSF_V1_B_F.csv
 
 putarget=aux/pileup_Cert_294927-306462_13TeV_PromptReco_Collisions17_JSON.txt.root
