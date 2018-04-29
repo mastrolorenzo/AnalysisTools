@@ -1,4 +1,0 @@
-type=4  name=twoResolvedJets
-type=4  name=oneMergedJet
-type=1  name=boostedBBIndex
-type=1  name=nGenStatus2bHad

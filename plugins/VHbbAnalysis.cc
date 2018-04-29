@@ -56,10 +56,6 @@ bool VHbbAnalysis::Preselection() {
  
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
 
-    *b["twoResolvedJets"]=false;
-    *b["oneMergedJet"]=false;
-    *in["boostedBBIndex"]=-1;
-
     //Set the b-tagger
     SetTaggerName(m("taggerType"));
 
@@ -79,33 +75,6 @@ bool VHbbAnalysis::Preselection() {
     // stitch ZJets inclusive sample to HT-binned samples
     if (cursample->sampleNum == 110 && m("LHE_HT") > 100) return false;
 
-    // Store number of gen b hadrons with status 2:
-    if (cursample->sampleNum != 0) {
-        *in["nGenStatus2bHad"] = 0;
-        for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
-            if(mInt("GenPart_status",indGP)!=2) continue;
-            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/100)%10==5)){
-              *in["nGenStatus2bHad"]=mInt("nGenStatus2bHad")+1;
-            }
-        }
-    }
-      
-    // use W+jets b-enriched samples but make sure all samples are orthogonal
-    if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
-        if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || mInt("nGenStatus2bHad") != 0) return false;
-        }
-    } else if (cursample->sampleNum == 50) {
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
-    } else if (cursample->sampleNum == 51) {
-        if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
-    } else if (cursample->sampleNum == 53) {
-        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("nGenStatus2bHad") == 0) return false;
-    } else if (cursample->sampleNum == 54) {
-        //if (m("LHE_Vpt") < 200) return false;
-        if (m("LHE_Vpt") < 200 || mInt("nGenStatus2bHad") == 0) return false;
-    }
 
     //if (cursample->sampleNum == 0) {
     //    //if (*f["json"] != 1 && !doCutFlowInPresel) return false;
@@ -146,16 +115,6 @@ bool VHbbAnalysis::Preselection() {
             if (JERScale != 1.0) {
                 smearJets(JERScale);
             }
-
-            // not sure about these names -- won't do just now FIXME
-            //f["Jet_corr_JERUp_ratio"][i] = f["Jet_corr_JERUp"][i] / f["Jet_corr_JER"][i] ;
-            //f["Jet_corr_JERDown_ratio"][i] = f["Jet_corr_JERDown"][i] / f["Jet_corr_JER"][i] ;
-            //f["Jet_corr_JECUp_ratio"][i] = f["Jet_corr_JECUp"][i] / f["Jet_corr"][i] ;
-            //f["Jet_corr_JECDown_ratio"][i] = f["Jet_corr_JECDown"][i] / f["Jet_corr"][i] ;
-            //f["Jet_pt_reg_corrJECUp_ratio"][i] = f["Jet_pt_reg_corrJECUp"][i] / f["Jet_bReg"][i] ;
-            //f["Jet_pt_reg_corrJECDown_ratio"][i] = f["Jet_pt_reg_corrJECDown"][i] / f["Jet_bReg"][i] ;
-            //f["Jet_pt_reg_corrJERUp_ratio"][i] = f["Jet_pt_reg_corrJERUp"][i] / f["Jet_bReg"][i] ;
-            //f["Jet_pt_reg_corrJERDown_ratio"][i] = f["Jet_pt_reg_corrJERDown"][i] / f["Jet_bReg"][i] ;
         }
     }
 
@@ -201,6 +160,33 @@ bool VHbbAnalysis::Preselection() {
     
     if (nPreselJets < 2 && !atLeastOnePreselFatJet) return false;
 
+    // use W+jets b-enriched samples but make sure all samples are orthogonal
+    int nGenStatus2bHad = 0;
+    if (cursample->sampleNum >= 40 && cursample->sampleNum <=54){
+        for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
+            if(mInt("GenPart_status",indGP)!=2) continue;
+            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
+              nGenStatus2bHad+=1;
+            }
+        }
+    }
+    if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
+        if (m("LHE_Vpt") > 100) {
+            if (mInt("LHE_Nb") != 0 || nGenStatus2bHad != 0) return false;
+        }
+    } else if (cursample->sampleNum == 50) {
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
+    } else if (cursample->sampleNum == 51) {
+        if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
+    } else if (cursample->sampleNum == 53) {
+        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
+    } else if (cursample->sampleNum == 54) {
+        //if (m("LHE_Vpt") < 200) return false;
+        if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
+    }
+
+
     return true;
 }
 
@@ -211,7 +197,9 @@ bool VHbbAnalysis::Analyze() {
     bool doOnlySignalRegion = bool(m("doOnlySignalRegion"));
     *in["controlSample"] = 0;
     *in["cutFlow"] = 0;
-
+    *b["twoResolvedJets"]=false;
+    *b["oneMergedJet"]=false;
+    *in["boostedBBIndex"]=-1;
 
     // Retrieve b-tagger working points
     float taggerWP_T = m("tagWPT"), taggerWP_M = m("tagWPM"), taggerWP_L = m("tagWPL");
@@ -1078,6 +1066,15 @@ void VHbbAnalysis::FinishEvent() {
 
     // Compare gen kinematics for b jets for signal vs. ttbar
     if (mInt("sampleIndex") != 0) {
+        // Store number of gen b hadrons with status 2:
+        *in["nGenStatus2bHad"] = 0;
+        for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
+            if(mInt("GenPart_status",indGP)!=2) continue;
+            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
+              *in["nGenStatus2bHad"]=mInt("nGenStatus2bHad")+1;
+            }
+        }
+
         //first check for Higgs bosons:
         TLorentzVector GenBJ1, GenBJ2, GenBJJ;
         int mother_index=-1;
@@ -1746,6 +1743,9 @@ void VHbbAnalysis::FinishEvent() {
 
     // for now we don't do stitching since the W+jets b-enriched statistics are very high
     *f["WJetStitchWeight"] = WJetStitchWeight;
+
+      
+
 
     // we need to just save the bTagWeight since we only want to apply it
     // for the nominal shape
