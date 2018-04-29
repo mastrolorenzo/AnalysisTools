@@ -29,6 +29,7 @@ void AnalysisManager::Initialize(std::string filename) {
 
     branches.clear();
     branchInfos.clear();
+    existingBranches.clear();
 
     debug=0;
     if(outputTreeName==""){
@@ -414,7 +415,7 @@ void AnalysisManager::CheckBranchLengths(Long64_t entry, bool isData){
     for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
             ibranch!=branchInfos.end(); ++ibranch){
         if( !(isData && ibranch->second->onlyMC) && (ibranch->second->prov=="early"||ibranch->second->prov=="existing") && ibranch->second->type<2){
-            if(fChain->GetBranchStatus((ibranch->first).c_str())){
+            if(BranchExists(ibranch->first)){
                 branches[ibranch->first]->GetEntry(entry);
             } else if (!(ibranch->second->allowMissingBranch)){
                std::cout<<"Branch "<<ibranch->first<<" is missing and allowMissingBranch is not set. Exiting..."<<std::endl;
@@ -441,7 +442,7 @@ void AnalysisManager::GetEarlyEntries(Long64_t entry, bool isData){
     for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
             ibranch!=branchInfos.end(); ++ibranch){
         if(ibranch->second->prov == "early" && !(isData && ibranch->second->onlyMC)) {
-            if(fChain->GetBranchStatus((ibranch->first).c_str())){
+            if(BranchExists(ibranch->first)){
                 if(debug>100000) std::cout<<"Getting entry for early branch "<<ibranch->first<<std::endl;
                 branches[ibranch->first]->GetEntry(entry);
                 if(debug>100000) std::cout<<"Got entry for early branch "<<ibranch->first<<std::endl;
@@ -450,6 +451,16 @@ void AnalysisManager::GetEarlyEntries(Long64_t entry, bool isData){
                std::exit(0);
             }
         }
+    }
+}
+
+bool AnalysisManager::BranchExists(std::string branchName){
+    if( existingBranches.find(branchName) != existingBranches.end()){
+        return existingBranches.find(branchName)->second;
+    } else {
+        bool branchstatus = fChain->GetBranchStatus(branchName.c_str());
+        existingBranches[branchName] = branchstatus;
+        return branchstatus;
     }
 }
 
