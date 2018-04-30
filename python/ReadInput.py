@@ -171,35 +171,36 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             print "There are no settings branches in the config file."
 
         #find BDT settings
-        bdtsettings=[]
-        for key in settings:
-            if key.find("bdt") != -1:
-                bdtsettings.append(key)
+        if not doSkim:
+            bdtsettings=[]
+            for key in settings:
+                if key.find("bdt") != -1:
+                    bdtsettings.append(key)
 
 
-        for bdtsetting in bdtsettings:
-            print "Adding a BDT configuration...",bdtsetting
-            bdtInfo=ReadTextFile(settings[bdtsetting], "bdt",list())
-            print "read the BDT settings text file for BDT %s" % bdtInfo.bdtname
-            # now set up any of the branches if they don't exist yet (must be floats for BDT)
-            for bdtvar in bdtInfo.bdtVars:
-                if (bdtvar.isExisting):
-                    am.SetupBranch(bdtvar.localVarName, 2, -1, 0, "early")
-                else:
-                    am.SetupNewBranch(bdtvar.localVarName, 2)
+            for bdtsetting in bdtsettings:
+                print "Adding a BDT configuration...",bdtsetting
+                bdtInfo=ReadTextFile(settings[bdtsetting], "bdt",list())
+                print "read the BDT settings text file for BDT %s" % bdtInfo.bdtname
+                # now set up any of the branches if they don't exist yet (must be floats for BDT)
+                for bdtvar in bdtInfo.bdtVars:
+                    if (bdtvar.isExisting):
+                        am.SetupBranch(bdtvar.localVarName, 2, -1, 0, "early")
+                    else:
+                        am.SetupNewBranch(bdtvar.localVarName, 2)
 
-            # create new branches for all inputs
-            iBDTvar=0
-            for bdtvar in bdtInfo.bdtVars:
-                bdtVarPrefix="bdtInput_"+bdtInfo.bdtname+"_"
-                am.SetupNewBranch(bdtVarPrefix+bdtvar.localVarName, 2)
-                #bdtInfo.bdtVars[iBDTvar].localVarName=bdtVarPrefix+bdtvar.localVarName
-                #bdtInfo.bdtVars[iBDTvar].isExisting=False
-                iBDTvar=iBDTvar+1
-            am.SetupNewBranch(bdtInfo.bdtname, 2)
-            am.SetupNewBranch(bdtsetting, 2, -1, 1, "settings", 1)
-            am.AddBDT(bdtsetting, bdtInfo)
-            print "added BDT to analysis manager"
+                # create new branches for all inputs
+                iBDTvar=0
+                for bdtvar in bdtInfo.bdtVars:
+                    bdtVarPrefix="bdtInput_"+bdtInfo.bdtname+"_"
+                    am.SetupNewBranch(bdtVarPrefix+bdtvar.localVarName, 2)
+                    #bdtInfo.bdtVars[iBDTvar].localVarName=bdtVarPrefix+bdtvar.localVarName
+                    #bdtInfo.bdtVars[iBDTvar].isExisting=False
+                    iBDTvar=iBDTvar+1
+                am.SetupNewBranch(bdtInfo.bdtname, 2)
+                am.SetupNewBranch(bdtsetting, 2, -1, 1, "settings", 1)
+                am.AddBDT(bdtsetting, bdtInfo)
+                print "added BDT to analysis manager"
 
         if settings.has_key("systematics"):
             systs = ReadTextFile(settings["systematics"], "systematics")

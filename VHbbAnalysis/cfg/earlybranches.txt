@@ -15,10 +15,10 @@ type=2  name=LHE_Vpt          onlyMC=1    allowMissingBranch=1
 type=2  name=MET_pt
 type=2  name=MET_phi
 type=2  name=MET_Pt #includes JER smearing
-type=2  name=MET_pt_jesTotalDown #includes JER smearing
-type=2  name=MET_pt_jesTotalUp #includes JER smearing
-type=2  name=MET_pt_unclustEnUp #includes JER smearing
-type=2  name=MET_pt_unclustEnDown #includes JER smearing
+type=2  name=MET_pt_jesTotalDown  onlyMC=1 #includes JER smearing
+type=2  name=MET_pt_jesTotalUp    onlyMC=1 #includes JER smearing
+type=2  name=MET_pt_unclustEnUp   onlyMC=1 #includes JER smearing
+type=2  name=MET_pt_unclustEnDown onlyMC=1 #includes JER smearing
 type=2  name=MET_Phi # includes JER smearing
 type=8  name=Jet_btagDeepB                    max=250     lengthBranch=nJet
 type=8  name=Jet_btagCSVV2                    max=250     lengthBranch=nJet
