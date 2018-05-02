@@ -44,11 +44,15 @@ type=1  name=sampleIndex_GenBJetSum
 type=1  name=sampleIndex_GenJetSumNB
 type=2  name=weight
 type=2  name=intWeight
+type=2  name=weight_PU_2016to2017
 type=2  name=weight_PU
 type=2  name=weight_PUUp
 type=2  name=weight_PUDown
 type=2  name=weight_ptQCD
 type=2  name=weight_ptEWK
+type=2  name=recoWReWeight
+type=2  name=recoWReWeightUp
+type=2  name=recoWReWeightDown
 type=1  name=isWenu
 type=1  name=isWmunu
 type=1  name=isZmm
