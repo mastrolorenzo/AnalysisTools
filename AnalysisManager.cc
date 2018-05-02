@@ -687,6 +687,8 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                         }
                     }
                  } else {
+                     nb = fChain->GetEntry(jentry);
+                     nbytes += nb;
                      // running skim
                      ofile->cd();
                      outputTree->Fill();
