@@ -59,6 +59,7 @@ type=4  name=HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL
 type=4  name=HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ
 type=4  name=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ 
 
+type=6  name=Jet_genJetIdx                      max=100     lengthBranch=nJet onlyMC=1
 ##type=8  name=Jet_corr                         max=100     lengthBranch=nJet
 ##type=8  name=Jet_corr_JERUp                         max=100     lengthBranch=nJet onlyMC=1
 ##type=8  name=Jet_corr_JERDown                         max=100     lengthBranch=nJet onlyMC=1

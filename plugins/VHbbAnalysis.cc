@@ -150,6 +150,7 @@ bool VHbbAnalysis::Preselection() {
 
     // add smearing on top of regression-->replace Jet_bReg
     for (int i = 0; i < mInt("nJet"); i++) {
+        if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) continue;
         f["Jet_bReg"][i] = m("Jet_bReg",i) * m("Jet_Pt",i)/ m("Jet_pt",i);
     }
 
@@ -393,6 +394,7 @@ bool VHbbAnalysis::Analyze() {
             f["Jet_bReg"][i] = m("Jet_Pt",i);
         } else {
             // add smearing on top of regression-->replace Jet_bReg
+            if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) continue;
             f["Jet_bReg"][i] = m("Jet_bReg",i) * m("Jet_Pt",i)/ m("Jet_pt",i);
         }
 
