@@ -81,6 +81,11 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                     samplecon.PUHistName = settings["mcpuhistname"]
                 #print "Reading",sample["name"],"with",len(sample["files"]),"files"
                 for filename in sample["files"]:
+                    #Reset pu hist name for every sample
+                    if sample.has_key("puhist"):
+                        samplecon.PUHistName = sample["puhist"]
+                    elif settings.has_key("mcpuhistname"):
+                        samplecon.PUHistName = settings["mcpuhistname"]
                     #print filename,filesToRun
                     if sample["type"]==0 and len(filesToRun)!=0 and len(filesToRun[0])!=0:
                         if filename not in filesToRun:
