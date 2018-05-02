@@ -86,6 +86,7 @@ public :
 
     //Branch management
     std::map<std::string,BranchInfo* > branchInfos;
+    std::map<std::string,bool> existingBranches;
 
     std::map<std::string,TBranch*> branches;
 
@@ -111,10 +112,11 @@ public :
     void            CheckBranchLengths(Long64_t entry,bool isData=false);
     void            GetEarlyEntries(Long64_t entry,bool isData=false);
     std::vector<std::string>      ListSampleNames();
+    bool            BranchExists(std::string branchName);
     void            PrintBDTInfoValues(BDTInfo* bdt);
 
     //void            Loop(std::string sampleName="", std::string filename="", int fNum=1 );
-    void            Loop(std::string sampleName="", std::string filename="", std::string ofilename="test.root", bool doSkim=false );
+    void            Loop(std::string sampleName="", std::string filename="", std::string ofilename="test.root", bool doSkim=false, float startFrac=0., float endFrac=1. );
     //virtual void     WriteBDTs(std::string indirname, std::string infilename, std::string outdirname, std::string outfilename, std::string cutstring);
     //Value            RetrieveValue(std::string key);
 

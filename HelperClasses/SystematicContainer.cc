@@ -29,6 +29,11 @@ inline void SystematicContainer::AddScaleVar(std::string newScaleVar){
     scaleVar.push_back(newScaleVar);
 }
 
+inline void SystematicContainer::AddScaleVarRef(std::string newScaleVarRef){
+    scaleVarRef.push_back(newScaleVarRef);
+}
+
+
 inline void SystematicContainer::AddSmear(float newSmear){
     smears.push_back(newSmear);
 }

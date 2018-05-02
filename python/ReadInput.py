@@ -102,6 +102,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                             continue
                         am.Initialize(filename)
                         if (am.fChain.GetEntries() == 0):
+                            print "File has am.fChain.GetEntries() == 0: %s" % filename
                             continue
                         aminitialized=1
                         # FIXME can this go elsewhere?
@@ -168,38 +169,39 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 am.SetupNewBranch(branch,branches[branch][0], branches[branch][1], True, "settings", branches[branch][2])
         else:
             print "There are no settings branches in the config file."
-      
+
         #find BDT settings
-        bdtsettings=[]
-        for key in settings:
-            if key.find("bdt") != -1:
-                bdtsettings.append(key)
+        if not doSkim:
+            bdtsettings=[]
+            for key in settings:
+                if key.find("bdt") != -1:
+                    bdtsettings.append(key)
 
 
-        for bdtsetting in bdtsettings:
-            print "Adding a BDT configuration...",bdtsetting
-            bdtInfo=ReadTextFile(settings[bdtsetting], "bdt",list())
-            print "read the BDT settings text file for BDT %s" % bdtInfo.bdtname
-            # now set up any of the branches if they don't exist yet (must be floats for BDT)
-            for bdtvar in bdtInfo.bdtVars:
-                if (bdtvar.isExisting):
-                    am.SetupBranch(bdtvar.localVarName, 2, -1, 0, "early")
-                else:
-                    am.SetupNewBranch(bdtvar.localVarName, 2)
+            for bdtsetting in bdtsettings:
+                print "Adding a BDT configuration...",bdtsetting
+                bdtInfo=ReadTextFile(settings[bdtsetting], "bdt",list())
+                print "read the BDT settings text file for BDT %s" % bdtInfo.bdtname
+                # now set up any of the branches if they don't exist yet (must be floats for BDT)
+                for bdtvar in bdtInfo.bdtVars:
+                    if (bdtvar.isExisting):
+                        am.SetupBranch(bdtvar.localVarName, 2, -1, 0, "early")
+                    else:
+                        am.SetupNewBranch(bdtvar.localVarName, 2)
 
-            # create new branches for all inputs
-            iBDTvar=0
-            for bdtvar in bdtInfo.bdtVars:
-                bdtVarPrefix="bdtInput_"+bdtInfo.bdtname+"_"
-                am.SetupNewBranch(bdtVarPrefix+bdtvar.localVarName, 2)
-                #bdtInfo.bdtVars[iBDTvar].localVarName=bdtVarPrefix+bdtvar.localVarName
-                #bdtInfo.bdtVars[iBDTvar].isExisting=False
-                iBDTvar=iBDTvar+1
-            am.SetupNewBranch(bdtInfo.bdtname, 2)
-            am.SetupNewBranch(bdtsetting, 2, -1, 1, "settings", 1)
-            am.AddBDT(bdtsetting, bdtInfo)
-            print "added BDT to analysis manager"
-        
+                # create new branches for all inputs
+                iBDTvar=0
+                for bdtvar in bdtInfo.bdtVars:
+                    bdtVarPrefix="bdtInput_"+bdtInfo.bdtname+"_"
+                    am.SetupNewBranch(bdtVarPrefix+bdtvar.localVarName, 2)
+                    #bdtInfo.bdtVars[iBDTvar].localVarName=bdtVarPrefix+bdtvar.localVarName
+                    #bdtInfo.bdtVars[iBDTvar].isExisting=False
+                    iBDTvar=iBDTvar+1
+                am.SetupNewBranch(bdtInfo.bdtname, 2)
+                am.SetupNewBranch(bdtsetting, 2, -1, 1, "settings", 1)
+                am.AddBDT(bdtsetting, bdtInfo)
+                print "added BDT to analysis manager"
+
         if settings.has_key("systematics"):
             systs = ReadTextFile(settings["systematics"], "systematics")
             for syst in systs:
@@ -250,7 +252,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 tfile.Close()
             except:
                 print "something went wrong with",settings["puDOWNtarget"]
-        
+
         return am
     elif filetype is "samplefile":
         samples=MakeSampleMap(filelines,samplesToRun,runOnSkim)
@@ -323,7 +325,10 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
     )
     import socket
     hostname = socket.gethostname()
-    if hostname.endswith('.desy.de') and 'prefix_desy' in prefix_lines:
+    if runOnSkim and 'prefix_skim' in prefix_lines:
+        globalPrefix = prefix_lines['prefix_skim']
+        print "Using globalPrefix for SKIM", globalPrefix
+    elif hostname.endswith('.desy.de') and 'prefix_desy' in prefix_lines:
         globalPrefix = prefix_lines['prefix_desy']
         print "Using globalPrefix for DESY", globalPrefix
     elif hostname.endswith('.cern.ch') and 'prefix_cern' in prefix_lines:
@@ -380,8 +385,8 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
                         for dirname in value.split(','):
                             samplepaths.extend(findAllRootFiles(globalPrefix+dirname,site))
                     else:
-                        # after skimming the sample directory name has been changed to sample name 
-                        print "right here, ",sample["name"] 
+                        # after skimming the sample directory name has been changed to sample name
+                        print "right here, ",sample["name"]
                         samplepaths.extend(findAllRootFiles(globalPrefix+sample["name"],site))
                 else:
                     samplepaths = findAllRootFiles(globalPrefix+value,site)
@@ -543,6 +548,9 @@ def SetupSyst(lines):
             elif key=="scaleVar":
                 for scalevar in value.split(","):
                     syst.AddScaleVar(scalevar)
+            elif key=="scaleVarRef":
+                for scalevarref in value.split(","):
+                    syst.AddScaleVarRef(scalevarref)
             else:
                 print "In systematics file, what is:",item
 

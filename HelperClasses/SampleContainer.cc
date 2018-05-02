@@ -63,9 +63,15 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
     }
    
     if(!PUHistName.empty() && sampleNum != 0){
+        if(doSkim==2) PUHistName+="skim";
         TH1D* thisFilePUHist=(TH1D*)((TH1D*)file->Get(PUHistName.c_str()))->Clone("thisFilePUHist");
         if(InputPU == NULL){
-            InputPU=(TH1D*)(thisFilePUHist->Clone("PUTarget"));
+            if(doSkim==1){
+                PUHistName+="skim";
+                InputPU=(TH1D*)(thisFilePUHist->Clone(PUHistName.c_str()));
+            } else {
+                InputPU=(TH1D*)(thisFilePUHist->Clone("PUTarget"));
+            }
         } else {
             InputPU->Add(thisFilePUHist);
         }

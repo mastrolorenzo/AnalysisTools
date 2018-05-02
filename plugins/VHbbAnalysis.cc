@@ -53,12 +53,7 @@ void VHbbAnalysis::InitAnalysis() {
 // Check if events pass preselection.
 // Returns true for events passing the preselection and false otherwise.
 bool VHbbAnalysis::Preselection() {
-
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
-
-    *b["twoResolvedJets"]=false;
-    *b["oneMergedJet"]=false;
-    *in["boostedBBIndex"]=-1;
 
     //Set the b-tagger
     SetTaggerName(m("taggerType"));
@@ -75,39 +70,34 @@ bool VHbbAnalysis::Preselection() {
     }
 
     // stitch WJets inclusive sample to HT-binned samples
-    if (cursample->sampleNum == 22 && m("LHE_HT") > 100) return false;
+    if (cursample->sampleNum == 40 && m("LHE_HT") > 100) return false;
     // stitch ZJets inclusive sample to HT-binned samples
-    if (cursample->sampleNum == 23 && m("LHE_HT") > 100) return false;
+    if (cursample->sampleNum == 110 && m("LHE_HT") > 100) return false;
 
-    // Store number of gen b hadrons with status 2:
-    if (cursample->sampleNum != 0) {
-        *in["nGenStatus2bHad"] = 0;
+    // use W+jets b-enriched samples but make sure all samples are orthogonal
+    int nGenStatus2bHad = 0;
+    if (cursample->sampleNum >= 40 && cursample->sampleNum <=54){
         for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
             if(mInt("GenPart_status",indGP)!=2) continue;
             if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
-              *in["nGenStatus2bHad"]=mInt("nGenStatus2bHad")+1;
+              nGenStatus2bHad+=1;
             }
         }
     }
-      
-    // use W+jets b-enriched samples but make sure all samples are orthogonal
-    if (   cursample->sampleNum == 22 || cursample->sampleNum == 41 || cursample->sampleNum == 42
-        || cursample->sampleNum == 43 || cursample->sampleNum == 44 || cursample->sampleNum == 45
-        || cursample->sampleNum == 46 || cursample->sampleNum == 47
-       ) {
+    if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
         if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || mInt("nGenStatus2bHad") != 0) return false;
+            if (mInt("LHE_Nb") != 0 || nGenStatus2bHad != 0) return false;
         }
-    } else if (cursample->sampleNum == 48) {
+    } else if (cursample->sampleNum == 50) {
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
-    } else if (cursample->sampleNum == 481) {
+    } else if (cursample->sampleNum == 51) {
         if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
-    } else if (cursample->sampleNum == 49) {
+    } else if (cursample->sampleNum == 53) {
         //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("nGenStatus2bHad") == 0) return false;
-    } else if (cursample->sampleNum == 491) {
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
+    } else if (cursample->sampleNum == 54) {
         //if (m("LHE_Vpt") < 200) return false;
-        if (m("LHE_Vpt") < 200 || mInt("nGenStatus2bHad") == 0) return false;
+        if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
     }
 
     //if (cursample->sampleNum == 0) {
@@ -149,16 +139,6 @@ bool VHbbAnalysis::Preselection() {
             if (JERScale != 1.0) {
                 smearJets(JERScale);
             }
-
-            // not sure about these names -- won't do just now FIXME
-            //f["Jet_corr_JERUp_ratio"][i] = f["Jet_corr_JERUp"][i] / f["Jet_corr_JER"][i] ;
-            //f["Jet_corr_JERDown_ratio"][i] = f["Jet_corr_JERDown"][i] / f["Jet_corr_JER"][i] ;
-            //f["Jet_corr_JECUp_ratio"][i] = f["Jet_corr_JECUp"][i] / f["Jet_corr"][i] ;
-            //f["Jet_corr_JECDown_ratio"][i] = f["Jet_corr_JECDown"][i] / f["Jet_corr"][i] ;
-            //f["Jet_pt_reg_corrJECUp_ratio"][i] = f["Jet_pt_reg_corrJECUp"][i] / f["Jet_bReg"][i] ;
-            //f["Jet_pt_reg_corrJECDown_ratio"][i] = f["Jet_pt_reg_corrJECDown"][i] / f["Jet_bReg"][i] ;
-            //f["Jet_pt_reg_corrJERUp_ratio"][i] = f["Jet_pt_reg_corrJERUp"][i] / f["Jet_bReg"][i] ;
-            //f["Jet_pt_reg_corrJERDown_ratio"][i] = f["Jet_pt_reg_corrJERDown"][i] / f["Jet_bReg"][i] ;
         }
     }
 
@@ -214,7 +194,9 @@ bool VHbbAnalysis::Analyze() {
     bool doOnlySignalRegion = bool(m("doOnlySignalRegion"));
     *in["controlSample"] = 0;
     *in["cutFlow"] = 0;
-
+    *b["twoResolvedJets"]=false;
+    *b["oneMergedJet"]=false;
+    *in["boostedBBIndex"]=-1;
 
     // Retrieve b-tagger working points
     float taggerWP_T = m("tagWPT"), taggerWP_M = m("tagWPM"), taggerWP_L = m("tagWPL");
@@ -1080,6 +1062,15 @@ void VHbbAnalysis::FinishEvent() {
 
     // Compare gen kinematics for b jets for signal vs. ttbar
     if (mInt("sampleIndex") != 0) {
+        // Store number of gen b hadrons with status 2:
+        *in["nGenStatus2bHad"] = 0;
+        for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
+            if(mInt("GenPart_status",indGP)!=2) continue;
+            if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
+              *in["nGenStatus2bHad"]=mInt("nGenStatus2bHad")+1;
+            }
+        }
+
         //first check for Higgs bosons:
         TLorentzVector GenBJ1, GenBJ2, GenBJJ;
         int mother_index=-1;
@@ -1204,12 +1195,13 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
        }
-       if(VBosonIndices.size()==0 && (mInt("sampleIndex")==23 || mInt("sampleIndex")==61 || mInt("sampleIndex")==62 || mInt("sampleIndex")==63 || mInt("sampleIndex")==64 || mInt("sampleIndex")==65 || mInt("sampleIndex")==66 || mInt("sampleIndex")==67 || mInt("sampleIndex")==68 || mInt("sampleIndex")==69 || mInt("sampleIndex")==70 || mInt("sampleIndex")==71 || mInt("sampleIndex")==72 || mInt("sampleIndex")==73 || mInt("sampleIndex")==74 || mInt("sampleIndex")==75 || mInt("sampleIndex")==76 || mInt("sampleIndex")==77 ||mInt("sampleIndex")==230) ){ 
-            for (int i = 0; i<mInt("nGenPart"); i++){
-                if((fabs(mInt("GenPart_pdgId",i))>=11 && fabs(mInt("GenPart_pdgId",i))<=16 && mInt("GenPart_status",i)==1 && (mInt("GenPart_statusFlags",i)&1)==1) || (fabs(mInt("GenPart_pdgId",i))==15 && (mInt("GenPart_statusFlags",i)&1)==1 && (mInt("GenPart_statusFlags",i)&2)==2) ){ 
-                    LeptonIndices.push_back(i);
-                }
-            }
+       //Check for W+Jet sample indices (40-99), DY->ellell sample indices (100-149) and Z->nunu sample indices (150-199)
+       if(VBosonIndices.size()==0 && ( (mInt("sampleIndex")>=40 && mInt("sampleIndex")<=99) || (mInt("sampleIndex")>=100 && mInt("sampleIndex")<=149) || (mInt("sampleIndex")>=150 && mInt("sampleIndex")<=199) ) ){ 
+           for (int i = 0; i<mInt("nGenPart"); i++){
+               if((fabs(mInt("GenPart_pdgId",i))>=11 && fabs(mInt("GenPart_pdgId",i))<=16 && mInt("GenPart_status",i)==1 && (mInt("GenPart_statusFlags",i)&1)==1) || (fabs(mInt("GenPart_pdgId",i))==15 && (mInt("GenPart_statusFlags",i)&1)==1 && (mInt("GenPart_statusFlags",i)&2)==2) ){ 
+                   LeptonIndices.push_back(i);
+               }
+           }
        } 
        *ui["nW"]   =WBosonIndices.size();
        *ui["nWlep"]=WBosonLeptonicIndices.size();
@@ -1231,8 +1223,7 @@ void VHbbAnalysis::FinishEvent() {
            });
            *f["LeadGenVBoson_pt"] = m("GenPart_pt",VBosonIndices.at(0));
            *in["LeadGenVBoson_pdgId"] = m("GenPart_pdgId",VBosonIndices.at(0));
-           if(VBosonIndices.size()==1 && (mInt("sampleIndex")==34 || mInt("sampleIndex")==35 || mInt("sampleIndex")==36 || mInt("sampleIndex")==37 || mInt("sampleIndex")==350 || mInt("sampleIndex")==360 || 
-              (mInt("sampleIndex")>=370 && mInt("sampleIndex")<=379))) *in["nGenVbosons"]=2; // Hack to make sure EWK/QCD reweighting doesn't get applied to diboson samples
+           if(VBosonIndices.size()==1 && ( (mInt("sampleIndex")>=30 && mInt("sampleIndex")<=39) || (mInt("sampleIndex")>=340 && mInt("sampleIndex")<=350 ) ) ) *in["nGenVbosons"]=2; // Hack to make sure EWK/QCD reweighting doesn't get applied to diboson samples
        }       
        for (int i = 0; i < mInt("nGenPart"); i++) {
            //Continue if not a final-state electron or muon which is either prompt or from a tau decay.
@@ -1443,7 +1434,7 @@ void VHbbAnalysis::FinishEvent() {
     //}
     // General use variables
 
-    if (cursample->sampleNum == 49 || cursample->sampleNum == 491) {
+    if (cursample->sampleNum == 53 || cursample->sampleNum == 54) {
         *f["nProcEvents"] = cursample->CountWeighted->GetBinContent(1);
     }
     else {
@@ -1618,11 +1609,10 @@ void VHbbAnalysis::FinishEvent() {
 
     // stitch together W b-enriched samples with HT-binned samples in order to maximize statistical power
     float WJetStitchWeight = 1.0;
-    if (cursample->sampleNum==22 || cursample->sampleNum==44 || cursample->sampleNum==45 || cursample->sampleNum==46 || cursample->sampleNum==47
-        || cursample->sampleNum==48 || cursample->sampleNum==49 || cursample->sampleNum==41 || cursample->sampleNum==42 || cursample->sampleNum==43) {
+    if ( (cursample->sampleNum>=40 && cursample->sampleNum<=47) || (cursample->sampleNum>=50 && cursample->sampleNum<=54) ) {
         if (m("LHE_HT")>100 && m("LHE_HT")<200) {
             if (m("LHE_Vpt") > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
-                if (cursample->sampleNum == 48) {
+                if (cursample->sampleNum == 50) {
                     WJetStitchWeight = (1 - weightWBjetsHT100);
                 }
                 else {
@@ -1630,7 +1620,7 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
             else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
-                if (cursample->sampleNum == 49) {
+                if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT100);
                 }
                 else {
@@ -1640,7 +1630,7 @@ void VHbbAnalysis::FinishEvent() {
         }
         if (m("LHE_HT")>200 && m("LHE_HT")<400) {
             if (m("LHE_Vpt") > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
-                if (cursample->sampleNum == 48) {
+                if (cursample->sampleNum == 50) {
                     WJetStitchWeight = (1 - weightWBjetsHT200);
                 }
                 else {
@@ -1648,7 +1638,7 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
             else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
-                if (cursample->sampleNum == 49) {
+                if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT200);
                 }
                 else {
@@ -1658,7 +1648,7 @@ void VHbbAnalysis::FinishEvent() {
         }
         if (m("LHE_HT")>400 && m("LHE_HT")<600) {
             if (m("LHE_Vpt") > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
-                if (cursample->sampleNum == 48) {
+                if (cursample->sampleNum == 50) {
                     WJetStitchWeight = (1 - weightWBjetsHT400);
                 }
                 else {
@@ -1666,7 +1656,7 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
             else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
-                if (cursample->sampleNum == 49) {
+                if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT400);
                 }
                 else {
@@ -1676,7 +1666,7 @@ void VHbbAnalysis::FinishEvent() {
         }
         if (m("LHE_HT")>600 && m("LHE_HT")<800) {
             if (m("LHE_Vpt")  > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
-                if (cursample->sampleNum == 48) {
+                if (cursample->sampleNum == 50) {
                     WJetStitchWeight = (1 - weightWBjetsHT600);
                 }
                 else {
@@ -1684,7 +1674,7 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
         else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
-                if (cursample->sampleNum == 49) {
+                if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT600);
                 }
                 else {
@@ -1694,7 +1684,7 @@ void VHbbAnalysis::FinishEvent() {
         }
         if (m("LHE_HT")>800 && m("LHE_HT")<1200) {
             if (m("LHE_Vpt") > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
-                if (cursample->sampleNum == 48) {
+                if (cursample->sampleNum == 50) {
                     WJetStitchWeight = (1 - weightWBjetsHT800);
                 }
                 else {
@@ -1702,7 +1692,7 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
             else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
-                if (cursample->sampleNum == 49) {
+                if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT800);
                 }
                 else {
@@ -1712,7 +1702,7 @@ void VHbbAnalysis::FinishEvent() {
         }
         if (m("LHE_HT")>1200 && m("LHE_HT")<2500) {
             if (m("LHE_Vpt") > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
-                if (cursample->sampleNum == 48) {
+                if (cursample->sampleNum == 50) {
                     WJetStitchWeight = (1 - weightWBjetsHT1200);
                 }
                 else {
@@ -1720,7 +1710,7 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
             else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
-                if (cursample->sampleNum == 49) {
+                if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT1200);
                 }
                 else {
@@ -1730,7 +1720,7 @@ void VHbbAnalysis::FinishEvent() {
         }
         if (m("LHE_HT")>2500) {
             if (m("LHE_Vpt") > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
-                if (cursample->sampleNum == 48) {
+                if (cursample->sampleNum == 50) {
                     WJetStitchWeight = (1 - weightWBjetsHT2500);
                 }
                 else {
@@ -1738,7 +1728,7 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
             else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
-                if (cursample->sampleNum == 49) {
+                if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT2500);
                 }
                 else {
@@ -1751,6 +1741,9 @@ void VHbbAnalysis::FinishEvent() {
 
     // for now we don't do stitching since the W+jets b-enriched statistics are very high
     *f["WJetStitchWeight"] = WJetStitchWeight;
+
+      
+
 
     // we need to just save the bTagWeight since we only want to apply it
     // for the nominal shape
@@ -1918,6 +1911,7 @@ void VHbbAnalysis::FinishEvent() {
     // Channel specific BDT inputs
     ComputeBoostedVariables();
    
+    std::string bdt_branch_label;
     if(mInt("isZnn")) {
         if(debug>10000) {
             std::cout<<"setting up bdt inputs for isZnn"<<std::endl;
@@ -1982,11 +1976,12 @@ void VHbbAnalysis::FinishEvent() {
                     PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
                     std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
                 }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
                 if (cursyst->name != "nominal") {
-                    bdtname.append("_");
-                    bdtname.append(cursyst->name);
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
                 }
-                *f[bdtInfos[bdtNames[iBDT]]->bdtname] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
             }
         }
 
@@ -2024,11 +2019,12 @@ void VHbbAnalysis::FinishEvent() {
                     PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
                     std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
                 }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
                 if (cursyst->name != "nominal") {
-                    bdtname.append("_");
-                    bdtname.append(cursyst->name);
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
                 }
-                *f[bdtInfos[bdtNames[iBDT]]->bdtname] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
             }
         }
     } else if(mInt("isZee") || mInt("isZmm")) {
@@ -2080,11 +2076,12 @@ void VHbbAnalysis::FinishEvent() {
                     PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
                     std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
                 }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
                 if (cursyst->name != "nominal") {
-                    bdtname.append("_");
-                    bdtname.append(cursyst->name);
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
                 }
-                *f[bdtInfos[bdtNames[iBDT]]->bdtname] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
             }
         }
     } else {
@@ -2136,19 +2133,19 @@ void VHbbAnalysis::FinishEvent() {
     // add control sample fitted scale factor (already computed)
     // FIXME beautify later.  maybe put into scale factor container?
     *f["CS_SF"] = 1.0;
-    if (mInt("sampleIndex")==2200 || mInt("sampleIndex")==4400 || mInt("sampleIndex")==4500 || mInt("sampleIndex")==4600 || mInt("sampleIndex")==4700 || mInt("sampleIndex")==4800 || mInt("sampleIndex")==4900 || mInt("sampleIndex") == 48100 || mInt("sampleIndex") == 49100 || mInt("sampleIndex")==4100 || mInt("sampleIndex")==4200 || mInt("sampleIndex")==4300) {
+    if (mInt("sampleIndex")==4000 || mInt("sampleIndex")==4100 || mInt("sampleIndex")==4200 || mInt("sampleIndex")==4300 || mInt("sampleIndex")==4400 || mInt("sampleIndex")==4500 || mInt("sampleIndex")==4600 || mInt("sampleIndex") == 4700 || mInt("sampleIndex") == 5000 || mInt("sampleIndex")==5100 || mInt("sampleIndex")==5300 || mInt("sampleIndex")==5400) {
         *f["CS_SF"] = m("SF_Wj0b");
     }
     /*else if (*in["sampleIndex"]==2201 || *in["sampleIndex"]==4401 || *in["sampleIndex"]==4501 || *in["sampleIndex"]==4601 || *in["sampleIndex"]==4701 || *in["sampleIndex"]==4801 || *in["sampleIndex"]==4901 || *in["sampleIndex"]==2202 || *in["sampleIndex"]==4402 || *in["sampleIndex"]==4502 || *in["sampleIndex"]==4602 || *in["sampleIndex"]==4702 || *in["sampleIndex"]==4802 || *in["sampleIndex"]==4902) {
         *f["CS_SF"] = *f["SF_WHF"];
     }*/
-    else if (mInt("sampleIndex")==2201 || mInt("sampleIndex")==4401 || mInt("sampleIndex")==4501 || mInt("sampleIndex")==4601 || mInt("sampleIndex")==4701 || mInt("sampleIndex")==4801 || mInt("sampleIndex")==4901 || mInt("sampleIndex") == 48101 || mInt("sampleIndex") == 49101 || mInt("sampleIndex")==4101 || mInt("sampleIndex")==4201 || mInt("sampleIndex")==4301) {
+    else if (mInt("sampleIndex")==4001 || mInt("sampleIndex")==4101 || mInt("sampleIndex")==4201 || mInt("sampleIndex")==4301 || mInt("sampleIndex")==4401 || mInt("sampleIndex")==4501 || mInt("sampleIndex")==4601 || mInt("sampleIndex") == 4701 || mInt("sampleIndex") == 5001 || mInt("sampleIndex")==5101 || mInt("sampleIndex")==5301 || mInt("sampleIndex")==5401) {
         *f["CS_SF"] = m("SF_Wj1b");
     }
-    else if (mInt("sampleIndex")==2202 || mInt("sampleIndex")==4402 || mInt("sampleIndex")==4502 || mInt("sampleIndex")==4602 || mInt("sampleIndex")==4702 || mInt("sampleIndex")==4802 || mInt("sampleIndex")==4902 || mInt("sampleIndex") == 48102 || mInt("sampleIndex") == 49102 || mInt("sampleIndex")==4102 || mInt("sampleIndex")==4202 || mInt("sampleIndex")==4302) {
+    else if (mInt("sampleIndex")==4002 || mInt("sampleIndex")==4102 || mInt("sampleIndex")==4202 || mInt("sampleIndex")==4302 || mInt("sampleIndex")==4402 || mInt("sampleIndex")==4502 || mInt("sampleIndex")==4602 || mInt("sampleIndex") == 4702 || mInt("sampleIndex") == 5002 || mInt("sampleIndex")==5102 || mInt("sampleIndex")==5302 || mInt("sampleIndex")==5402) {
         *f["CS_SF"] = m("SF_Wj2b");
     }
-    else if (mInt("sampleIndex")==50 || mInt("sampleIndex")==51 || mInt("sampleIndex")==52 || mInt("sampleIndex")==12 || mInt("sampleIndex")==120 || mInt("sampleIndex")==500) {
+    else if (mInt("sampleIndex")>=200 && mInt("sampleIndex")<=210 ) {
         *f["CS_SF"] = m("SF_TT");
     }
 
@@ -2259,18 +2256,24 @@ void VHbbAnalysis::FinishEvent() {
         int sampleIndex = mInt("sampleIndex");
         float WJetNLOWeight = 1.0;
         float weight_ptQCD = m("weight_ptQCD");
-        if (sampleIndex<4100 || sampleIndex>4902) { WJetNLOWeight = 1.0; }
+        if (sampleIndex<4000 || sampleIndex>4702) { WJetNLOWeight = 1.0; }
         else if(m("twoResolvedJets")) {
             float deta_bb = fabs(m("Jet_eta",mInt("hJetInd1")) - m("Jet_eta",mInt("hJetInd2")));
-            if(sampleIndex==4100 || sampleIndex==4200 || sampleIndex==4300 || sampleIndex==4400 || sampleIndex==4500 || sampleIndex==4600 || sampleIndex==4700 || sampleIndex==4800 || sampleIndex==4900 || sampleIndex==48100 || sampleIndex==49100) {
+            if(sampleIndex==4000 || sampleIndex==4100 || sampleIndex==4200 || sampleIndex==4300 || sampleIndex==4400 || sampleIndex==4500 || sampleIndex==4600 || sampleIndex==4700 || sampleIndex==5000 || sampleIndex==5100 || sampleIndex==5300 || sampleIndex==5400
+               || sampleIndex==11000 || sampleIndex==11100 || sampleIndex == 11200 || sampleIndex == 11300 ||sampleIndex==11400 || sampleIndex==11500 || sampleIndex==11600 ||sampleIndex==11700
+               || sampleIndex==15000 || sampleIndex==15100 || sampleIndex == 15200 || sampleIndex == 15300 || sampleIndex == 15400 || sampleIndex==15500|| sampleIndex==15600) {
                 WJetNLOWeight = LOtoNLOWeightBjetSplitEtabb(deta_bb, 0);
                 WJetNLOWeight = (WJetNLOWeight/weight_ptQCD)*1.21;
             }
-            else if (sampleIndex==4101 || sampleIndex==4201 || sampleIndex==4301 || sampleIndex==4401 || sampleIndex==4501 || sampleIndex==4601 || sampleIndex==4701 || sampleIndex==4801 || sampleIndex==4901 || sampleIndex==48101 || sampleIndex==49101) {
+            else if(sampleIndex==4001 || sampleIndex==4101 || sampleIndex==4201 || sampleIndex==4301 || sampleIndex==4401 || sampleIndex==4501 || sampleIndex==4601 || sampleIndex==4701 || sampleIndex==5001 || sampleIndex==5101 || sampleIndex==5301 || sampleIndex==5401
+               || sampleIndex==11001 || sampleIndex==11101 || sampleIndex==11201 || sampleIndex==11301 || sampleIndex==11401 || sampleIndex==11501 || sampleIndex==11601 ||sampleIndex==11701
+               || sampleIndex==15001 || sampleIndex==15101 || sampleIndex==15201 || sampleIndex==15301 || sampleIndex==15401 || sampleIndex==15501|| sampleIndex==15601) {
                 WJetNLOWeight = LOtoNLOWeightBjetSplitEtabb(deta_bb, 1);
                 WJetNLOWeight = (WJetNLOWeight/weight_ptQCD)*1.21;
             }
-            else if (sampleIndex==4102 || sampleIndex==4202 || sampleIndex==4302 || sampleIndex==4402 || sampleIndex==4502 || sampleIndex==4602 || sampleIndex==4702 || sampleIndex==4802 || sampleIndex==4902 || sampleIndex==48102 || sampleIndex==49102) {
+            else if(sampleIndex==4002 || sampleIndex==4102 || sampleIndex==4202 || sampleIndex==4302 || sampleIndex==4402 || sampleIndex==4502 || sampleIndex==4602 || sampleIndex==4702 || sampleIndex==5002 || sampleIndex==5102 || sampleIndex==5302 || sampleIndex==5402
+               || sampleIndex==11002 || sampleIndex==11102 || sampleIndex==11202 || sampleIndex==11302 || sampleIndex==11402 || sampleIndex==11502 || sampleIndex==11602 ||sampleIndex==11702
+               || sampleIndex==15002 || sampleIndex==15102 || sampleIndex==15202 || sampleIndex==15302 || sampleIndex==15402 || sampleIndex==15502|| sampleIndex==15602) {
                 WJetNLOWeight = LOtoNLOWeightBjetSplitEtabb(deta_bb, 2);
                 WJetNLOWeight = (WJetNLOWeight/weight_ptQCD)*1.21;
             }
