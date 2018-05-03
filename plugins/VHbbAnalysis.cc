@@ -733,8 +733,8 @@ bool VHbbAnalysis::Analyze() {
     // 15 to 30 by 1 GeV, 1.5 to 3 w/ 0.1 in eta
     //std::vector<int> ptCuts = {15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
     //std::vector<double> etaCuts = {1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.4,3.5};
-    std::vector<int> ptCuts = {25};
-    std::vector<double> etaCuts = {2.9};
+    std::vector<int> ptCuts = {25,30};
+    std::vector<double> etaCuts = {2.9,2.5};
 
     for (int i = 0; i < (int) ptCuts.size(); i++) {
         for (int j = 0; j < (int) etaCuts.size(); j++) {
@@ -744,7 +744,7 @@ bool VHbbAnalysis::Analyze() {
             std::replace(eta_cut.begin(), eta_cut.end(), '.', 'p');
             for (int k = 0; k < mInt("nJet"); k++) {
                 if (k == mInt("hJetInd1") || k == mInt("hJetInd2")) continue;
-                if (m("Jet_Pt",k) > ptCuts[i] && fabs(m("Jet_eta",k)) < etaCuts[j] && m("Jet_puId",k) > 0) {
+                if (m("Jet_lepFilter",k) && m("Jet_Pt",k) > ptCuts[i] && fabs(m("Jet_eta",k)) < etaCuts[j] && m("Jet_puId",k) > 0) {
                     nAddJet_tmp++;
                     if (m("Jet_Pt",k) > maxPt) {
                         maxPt = m("Jet_Pt",k);
@@ -787,7 +787,7 @@ bool VHbbAnalysis::Analyze() {
         *in["cutFlow"] += 1; // additional lepton veto
     }
 
-    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && mInt("nAddJets252p9_puid") >= m("nAddJetsCut")) {
+    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && mInt("nAddJets302p5_puid") >= m("nAddJetsCut")) { // is this also the definition for additional jets in Z(vv)?
         *in["controlSample"] = -1;
     } else if (sel && mInt("controlSample") > -1) {
         *in["cutFlow"] += 1; // additional jet veto
@@ -983,10 +983,10 @@ bool VHbbAnalysis::Analyze() {
 
         if (base1LepCSSelection) {
             if (maxBTagged > taggerWP_T){ //ttbar or W+HF
-                if (mInt("nAddJets252p9_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
+                if (mInt("nAddJets302p5_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
                 //} else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
-                } else if (mInt("nAddJets252p9_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
+                } else if (mInt("nAddJets302p5_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<90 || H_mass>150)) {
                     *in["controlSample"] = 13;
                 }
             }else if (maxBTagged > taggerWP_L && maxBTagged < taggerWP_M && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
@@ -996,7 +996,7 @@ bool VHbbAnalysis::Analyze() {
             if (mInt("sampleIndex") == 0 && debug>10) {
                 std::cout << "data CS event " << mInt("controlSample")
 	                  << " maxBTagged " << maxBTagged
-                          << " nAddJets252p9_puid " << mInt("nAddJets252p9_puid")
+                          << " nAddJets302p5_puid " << mInt("nAddJets302p5_puid")
                           << " MET_Pt " << m("MET_Pt")
                           << " MET_sumEt " << m("MET_sumEt")
                           << " H_mass " << m("H_mass")
@@ -2067,7 +2067,7 @@ void VHbbAnalysis::FinishEvent() {
                 if(iJet==mInt("hJetInd1")) continue;
                 if(iJet==mInt("hJetInd2")) continue;
                 if(mInt("Jet_lepFilter",iJet)==0) continue;
-                if(mInt("Jet_puId",iJet)==7 && m("Jet_bReg",iJet)>30 && abs(m("Jet_eta",iJet))<2.4 ){
+                if(mInt("Jet_puId",iJet)==7 && m("Jet_bReg",iJet)>30 && abs(m("Jet_eta",iJet))<2.4 ){ // should not be regressed pT!! are we sure this is how it was calculated before?
                     *f["nAddJets_2lep"]=m("nAddJets_2lep")+1;
                 }
             }
