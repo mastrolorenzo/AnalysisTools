@@ -2152,9 +2152,12 @@ void VHbbAnalysis::FinishEvent() {
 
     if (mInt("sampleIndex")!=0) {
         *f["Lep_SF"] = 1.0;
-        //if (mInt("isZmm") == 1) {
-        //    
-        //}else 
+        if (mInt("isZmm") == 1) {
+            if(m("dataYear") == 2017) {
+                *f["Lep_SF"] = m("SF_DoubleMuId",mInt("lepInd1")) * m("SF_DoubleMuIso",mInt("lepInd1")) *  m("SF_DoubleMuId",mInt("lepInd2")) * m("SF_DoubleMuIso",mInt("lepInd2"));
+                //m("SF_DoubleMuTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleMuTriggerLeg2",mInt("lepInd2")); 
+            }
+        }else 
         if (mInt("isZee") == 1) {
             if(m("dataYear") == 2017) {
                 *f["Lep_SF"] = m("SF_DoubleElIdIso",mInt("lepInd1")) * m("SF_DoubleElIdIso",mInt("lepInd2")) * m("SF_DoubleElTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleElTriggerLeg2",mInt("lepInd2")); 
@@ -2173,11 +2176,11 @@ void VHbbAnalysis::FinishEvent() {
                 *f["Lep_SFDown"] = m("Lep_SFDown") / m("Lep_SF");
             } else if(m("dataYear") == 2017) {
                 // keeping 2016 tracking efficiency but not its error
-                *f["Lep_SF"] = m("SF_SingleMuTrigger",mInt("lepInd1")) * m("SF_SingleMuIdIso",mInt("lepInd1")) * ( (20.1/36.4) * m("SF_MuTrackerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTrackerGH",mInt("lepInd1")));
+                *f["Lep_SF"] = m("SF_SingleMuTrigger",mInt("lepInd1")) * m("SF_SingleMuIso",mInt("lepInd1")) * m("SF_SingleMuId",mInt("lepInd1")) * ( (20.1/36.4) * m("SF_MuTrackerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTrackerGH",mInt("lepInd1")));
                
-                *f["Lep_SFUp"] = (m("SF_SingleMuTrigger",mInt("lepInd1")) + m("SF_SingleMuTrigger_err",mInt("lepInd1")) )* (m("SF_SingleMuIdIso",mInt("lepInd1")) + m("SF_SingleMuIdIso_err",mInt("lepInd1")) );
+                *f["Lep_SFUp"] = (m("SF_SingleMuTrigger",mInt("lepInd1")) + m("SF_SingleMuTrigger_err",mInt("lepInd1")) )* (m("SF_SingleMuIso",mInt("lepInd1")) + m("SF_SingleMuIso_err",mInt("lepInd1")) )* (m("SF_SingleMuId",mInt("lepInd1")) + m("SF_SingleMuId_err",mInt("lepInd1")) );
                 *f["Lep_SFUp"] = m("Lep_SFUp") / m("Lep_SF");
-                *f["Lep_SFDown"] = (m("SF_SingleMuTrigger",mInt("lepInd1")) - m("SF_SingleMuTrigger_err",mInt("lepInd1")) )* (m("SF_SingleMuIdIso",mInt("lepInd1")) - m("SF_SingleMuIdIso_err",mInt("lepInd1")) ) ;
+                *f["Lep_SFDown"] = (m("SF_SingleMuTrigger",mInt("lepInd1")) - m("SF_SingleMuTrigger_err",mInt("lepInd1")) )* (m("SF_SingleMuIso",mInt("lepInd1")) - m("SF_SingleMuIso_err",mInt("lepInd1")) ) * (m("SF_SingleMuId",mInt("lepInd1")) - m("SF_SingleMuId_err",mInt("lepInd1")) ) ;
                 *f["Lep_SFDown"] = m("Lep_SFDown") / m("Lep_SF");
             }
         } else if (mInt("isWenu") == 1) {

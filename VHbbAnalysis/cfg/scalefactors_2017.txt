@@ -10,8 +10,11 @@ json=aux/VHbb2ElectronTriggerLeg22017.json  name=doubleEleTriggerLeg2  binning=e
 
 
 json=aux/VHbb1MuonTrigger2017.json          name=NUM_IsoMu27_DEN_empty                   binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuTrigger  length=nMuon
-json=aux/VHbb1MuonIDISO2017.json            name=NUM_UltraTightIso4_DEN_TightIDandIPCut  binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuIdIso    length=nMuon
+json=aux/VHbb1MuonIDISO2017.json            name=NUM_UltraTightIso4_DEN_TightIDandIPCut  binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuIso      length=nMuon
 #from 2016
 json=aux/trk_SF_RunBCDEF.json name=Graph binning=pt_eta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTrackerBCDEF length=nMuon
 json=aux/trk_SF_RunGH.json name=Graph binning=pt_eta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTrackerGH length=nMuon
 
+json=aux/MuonID_Z_2017.json                 name=NUM_TightID_DEN_genTracks               binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuId       length=nMuon
+json=aux/MuonID_Z_2017.json                 name=NUM_LooseID_DEN_genTracks               binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_DoubleMuId       length=nMuon
+json=aux/MuonISO_Z_2017.json                name=NUM_LooseRelIso_DEN_LooseID             binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_DoubleMuIso      length=nMuon
