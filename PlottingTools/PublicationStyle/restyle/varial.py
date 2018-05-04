@@ -6,7 +6,7 @@ import cms_figure
 
 
 __all__ = [
-    'restyle',
+    'restyle_varial',
 ]
 
 
@@ -33,7 +33,7 @@ def _restyle_upper_pad(pad):
         titles.append(hist.GetTitle())
         colors.append(hist.GetFillColor())
         hist.SetLineColor(1)
-    stack.SetMaximum(1.5 * stack.GetMaximum())
+    y_max_stack = stack.GetMaximum()
     x_axis, y_axis = stack.GetXaxis(), stack.GetYaxis()
     x_axis.SetNdivisions(510)
     x_axis.SetLabelSize(0)
@@ -58,15 +58,23 @@ def _restyle_upper_pad(pad):
     primitives.Add(mc_unc_new, '2SAME')
     # and the data points.
     data = primitives[3]
+    y_max_data = data.GetMaximum()
     data_new = data.Clone()
     data_new.SetMarkerSize(0.9)
     data.Reset()
     primitives.Add(data_new, 'E1SAME')
+    # Adjust the y-axis for better viewing.
+    if y_max_data > y_max_stack:
+        stack.SetMaximum(1.7 * y_max_data)
+    else:
+        stack.SetMaximum(1.7 * y_max_stack)
 
     # Finally, add two legends...
     legend1 = ROOT.TLegend(0.52, 0.56, 0.77, 0.88, '', 'nbNDC')
+    legend1.SetFillColor(0)
     legend1.SetTextSize(0.035)
     legend2 = ROOT.TLegend(0.69, 0.56, 0.94, 0.88, '', 'nbNDC')
+    legend2.SetFillColor(0)
     legend2.SetTextSize(0.035)
     # and fill them with entries.
     legend1.AddEntry(data_new, 'Data', 'ep')
@@ -208,3 +216,4 @@ def restyle_varial(canvas, width=800, height=800, lumi_text='', cms_position='le
                 exts = [exts]
             for ext in exts:
                 new_canvas.SaveAs(os.path.join(dst, name + ext))
+
