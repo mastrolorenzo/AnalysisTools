@@ -46,6 +46,7 @@ class VHbbAnalysis : public AnalysisManager {
         int UpdatedVType();
         bool PassVTypeAndTrigger(int vtype);
         float ReWeightMC(int nPU=0);
+        float puWeight_2016to2017(int i=0);
         float puWeight_ichep(int i=0);
         float puWeight_ichep_up(int i=0);
         float puWeight_ichep_down(int i=0);
@@ -61,9 +62,7 @@ class VHbbAnalysis : public AnalysisManager {
         TLorentzVector getNu4Momentum(const TLorentzVector& TLepton, const TLorentzVector& TMET);
         double LOtoNLOWeightBjetSplitEtabb(double etabb=10., int njets=0);
         float GetVHEWKCorrFactor( float V_pt, TH1D* hist );
-        float getVPtCorrFactor(float V_pt=0.);
-        float getVPtCorrFactorUp(float V_pt=0.);
-        float getVPtCorrFactorDown(float V_pt=0.);
+        float getVPtCorrFactor(float V_pt=0., int si=0, int sysVar=0);
         void  smearJets(float JERScale=1.0);
         float evaluateRegression(int i=0);
         void SetupFactorizedJECs(std::string variation="nominal");

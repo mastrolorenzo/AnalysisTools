@@ -53,7 +53,6 @@ void VHbbAnalysis::InitAnalysis() {
 // Check if events pass preselection.
 // Returns true for events passing the preselection and false otherwise.
 bool VHbbAnalysis::Preselection() {
-
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
 
     //Set the b-tagger
@@ -151,6 +150,7 @@ bool VHbbAnalysis::Preselection() {
 
     // add smearing on top of regression-->replace Jet_bReg
     for (int i = 0; i < mInt("nJet"); i++) {
+        if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) continue;
         f["Jet_bReg"][i] = m("Jet_bReg",i) * m("Jet_Pt",i)/ m("Jet_pt",i);
     }
 
@@ -394,6 +394,7 @@ bool VHbbAnalysis::Analyze() {
             f["Jet_bReg"][i] = m("Jet_Pt",i);
         } else {
             // add smearing on top of regression-->replace Jet_bReg
+            if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) continue;
             f["Jet_bReg"][i] = m("Jet_bReg",i) * m("Jet_Pt",i)/ m("Jet_pt",i);
         }
 
@@ -732,8 +733,8 @@ bool VHbbAnalysis::Analyze() {
     // 15 to 30 by 1 GeV, 1.5 to 3 w/ 0.1 in eta
     //std::vector<int> ptCuts = {15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
     //std::vector<double> etaCuts = {1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.4,3.5};
-    std::vector<int> ptCuts = {25};
-    std::vector<double> etaCuts = {2.9};
+    std::vector<int> ptCuts = {25,30};
+    std::vector<double> etaCuts = {2.9,2.5};
 
     for (int i = 0; i < (int) ptCuts.size(); i++) {
         for (int j = 0; j < (int) etaCuts.size(); j++) {
@@ -743,7 +744,7 @@ bool VHbbAnalysis::Analyze() {
             std::replace(eta_cut.begin(), eta_cut.end(), '.', 'p');
             for (int k = 0; k < mInt("nJet"); k++) {
                 if (k == mInt("hJetInd1") || k == mInt("hJetInd2")) continue;
-                if (m("Jet_Pt",k) > ptCuts[i] && fabs(m("Jet_eta",k)) < etaCuts[j] && m("Jet_puId",k) > 0) {
+                if (m("Jet_lepFilter",k) && m("Jet_Pt",k) > ptCuts[i] && fabs(m("Jet_eta",k)) < etaCuts[j] && m("Jet_puId",k) > 0) {
                     nAddJet_tmp++;
                     if (m("Jet_Pt",k) > maxPt) {
                         maxPt = m("Jet_Pt",k);
@@ -786,7 +787,7 @@ bool VHbbAnalysis::Analyze() {
         *in["cutFlow"] += 1; // additional lepton veto
     }
 
-    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && mInt("nAddJets252p9_puid") >= m("nAddJetsCut")) {
+    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && mInt("nAddJets302p5_puid") >= m("nAddJetsCut")) { // is this also the definition for additional jets in Z(vv)?
         *in["controlSample"] = -1;
     } else if (sel && mInt("controlSample") > -1) {
         *in["cutFlow"] += 1; // additional jet veto
@@ -982,10 +983,10 @@ bool VHbbAnalysis::Analyze() {
 
         if (base1LepCSSelection) {
             if (maxBTagged > taggerWP_T){ //ttbar or W+HF
-                if (mInt("nAddJets252p9_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
+                if (mInt("nAddJets302p5_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
                 //} else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
-                } else if (mInt("nAddJets252p9_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
+                } else if (mInt("nAddJets302p5_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<90 || H_mass>150)) {
                     *in["controlSample"] = 13;
                 }
             }else if (maxBTagged > taggerWP_L && maxBTagged < taggerWP_M && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
@@ -995,7 +996,7 @@ bool VHbbAnalysis::Analyze() {
             if (mInt("sampleIndex") == 0 && debug>10) {
                 std::cout << "data CS event " << mInt("controlSample")
 	                  << " maxBTagged " << maxBTagged
-                          << " nAddJets252p9_puid " << mInt("nAddJets252p9_puid")
+                          << " nAddJets302p5_puid " << mInt("nAddJets302p5_puid")
                           << " MET_Pt " << m("MET_Pt")
                           << " MET_sumEt " << m("MET_sumEt")
                           << " H_mass " << m("H_mass")
@@ -1481,8 +1482,10 @@ void VHbbAnalysis::FinishEvent() {
     }
 
     *f["weight_ptQCD"] = 1.0;
-
+ 
+    *f["weight_PU_2016to2017"] = 1.0;
     if(mInt("sampleIndex")!=0){
+        *f["weight_PU_2016to2017"] = puWeight_2016to2017(m("Pileup_nTrueInt"));
         if (m("dataYear")==2016){
             if (m("doICHEP") != 1) {
                 *f["weight_PU"] = m("puWeight");
@@ -2064,7 +2067,7 @@ void VHbbAnalysis::FinishEvent() {
                 if(iJet==mInt("hJetInd1")) continue;
                 if(iJet==mInt("hJetInd2")) continue;
                 if(mInt("Jet_lepFilter",iJet)==0) continue;
-                if(mInt("Jet_puId",iJet)==7 && m("Jet_bReg",iJet)>30 && abs(m("Jet_eta",iJet))<2.4 ){
+                if(mInt("Jet_puId",iJet)==7 && m("Jet_bReg",iJet)>30 && abs(m("Jet_eta",iJet))<2.4 ){ // should not be regressed pT!! are we sure this is how it was calculated before?
                     *f["nAddJets_2lep"]=m("nAddJets_2lep")+1;
                 }
             }
@@ -2237,6 +2240,17 @@ void VHbbAnalysis::FinishEvent() {
             *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("weight_mettrigSF");
         } else {
             *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("Lep_SF") * m("weight_mettrigSF");
+        }
+
+        // 2016 pT(W) re-weighting from fit to data
+        *f["recoWReWeight"] = 1.0;
+        *f["recoWReWeightUp"] = 1.0;
+        *f["recoWReWeightDown"] = 1.0;
+        if (m("dataYear") == 2016) {
+            *f["recoWReWeight"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), 0);
+            *f["recoWReWeightUp"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), 1);
+            *f["recoWReWeightDown"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), -1);
+            *f["weight"] = m("weight") * m("recoWReWeight");
         }
         
         // Add NLO to LO W+jet re-weighting from Z(ll)H(bb)
@@ -3279,6 +3293,89 @@ return puw[i];
 
 }
 
+float VHbbAnalysis::puWeight_2016to2017(int i){
+double puw[75]={0.351171,
+                1.020525,
+                0.956480,
+                1.003314,
+                0.914853,
+                1.012825,
+                0.643938,
+                0.231796,
+                0.178580,
+                0.227180,
+                0.217812,
+                0.223676,
+                0.218336,
+                0.223980,
+                0.241786,
+                0.270820,
+                0.318400,
+                0.378066,
+                0.432400,
+                0.478011,
+                0.520014,
+                0.558275,
+                0.601169,
+                0.649210,
+                0.708200,
+                0.788037,
+                0.888684,
+                1.001937,
+                1.129693,
+                1.269717,
+                1.394521,
+                1.538883,
+                1.660589,
+                1.774132,
+                1.862991,
+                1.927538,
+                1.959004,
+                1.976609,
+                1.981554,
+                2.006673,
+                2.022258,
+                2.087826,
+                2.247218,
+                2.493959,
+                2.908338,
+                3.437898,
+                4.003752,
+                4.796440,
+                5.631103,
+                6.577854,
+                7.446925,
+                8.388868,
+                9.230176,
+                9.786471,
+                10.952979,
+                12.161871,
+                12.581994,
+                13.092740,
+                13.610222,
+                13.219221,
+                14.640417,
+                13.127559,
+                10.518075,
+                7.657630,
+                5.728162,
+                3.748675,
+                2.364398,
+                1.473255,
+                0.963583,
+                0.623496,
+                0.406713,
+                0.267636,
+                0.177675,
+                0.119636,
+                0.079882
+};
+if (i < 0) return 1.;
+if (i > 74) return puw[74];
+
+return puw[i];
+}
+
 float VHbbAnalysis::puWeight_ichep_up(int i){
 
 double puw[38]={0.000168728884,
@@ -3584,14 +3681,55 @@ double VHbbAnalysis::LOtoNLOWeightBjetSplitEtabb(double etabb, int njets){
     return SF;
 }
 
-float VHbbAnalysis::getVPtCorrFactor(float V_pt) {
-    return (1.15 - 0.00086*V_pt);
-}
-float VHbbAnalysis::getVPtCorrFactorUp(float V_pt) {
-    return (1.24 - 0.0017*V_pt);
-}
-float VHbbAnalysis::getVPtCorrFactorDown(float V_pt) {
-    return (1.16 - 0.000068*V_pt);
+float VHbbAnalysis::getVPtCorrFactor(float V_pt, int sn, int sysVar) {
+    // get reco pT(W) linear correction obtained from fit to 2016 data.
+    // Separate corrections derived for TT, W+LF, and combination W+HF + single top
+    // sysVar: -1 for down, 0 nominal, 1 up
+    float yint = 1.0;
+    float slope = 0.0;
+    if (sn==120 || sn==50 || sn==51 || sn==52) {
+        // ttbar
+        yint = 1.064;
+        if (sysVar==0) {
+            // nominal
+            slope = -0.000380;
+        }
+        else if (sysVar==1) {
+            slope = -0.000469;
+        }
+        else if (sysVar==-1) {
+            slope = -0.000291;
+        }
+    }
+    else if (sn==2200 || sn==4100 || sn==4200 || sn==4300 || sn==4400 || sn==4500 || sn==4600 || sn==4700 || sn==4800 || sn==4900 || sn==48100 || sn==49100) {
+        // W+LF
+        yint = 1.097;
+        if (sysVar==0) {
+            // nominal
+            slope = -0.000575;
+        }
+        else if (sysVar==1) {
+            slope = -0.000621;
+        }
+        else if (sysVar==-1) {
+            slope = -0.000529;
+        }
+    }
+    else if (sn==2201 || sn==4101 || sn==4201 || sn==4301 || sn==4401 || sn==4501 || sn==4601 || sn==4701 || sn==4801 || sn==4901 || sn==48101 || sn==49101 || sn==2202 || sn==4102 || sn==4202 || sn==4302 || sn==4402 || sn==4502 || sn==4602 || sn==4702 || sn==4802 || sn==4902 || sn==48102 || sn==49102 || sn==16 || sn==17 || sn==20 || sn==21 || sn==18) {
+        // W+HF + single top
+        yint = 1.259;
+        if (sysVar==0) {
+            // nominal
+            slope = -0.00167;
+        }
+        else if (sysVar==1) {
+            slope = -0.00180;
+        }
+        else if (sysVar==-1) {
+            slope = -0.00154;
+        }
+    }
+    return (yint + V_pt*slope);
 }
 
 
