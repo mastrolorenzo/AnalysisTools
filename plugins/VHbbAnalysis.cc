@@ -151,6 +151,16 @@ bool VHbbAnalysis::Preselection() {
     // add smearing on top of regression-->replace Jet_bReg
     for (int i = 0; i < mInt("nJet"); i++) {
         if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) {
+            float jet_cosPhi = TMath::Cos(m("Jet_phi",i));
+            float jet_sinPhi = TMath::Sin(m("Jet_phi",i));
+            float met_cosPhi = TMath::Cos(m("MET_Phi",i));
+            float met_sinPhi = TMath::Sin(m("MET_Phi",i));
+            float met_px = met_cosPhi * m("MET_Pt"); 
+            float met_py = met_sinPhi * m("MET_Pt"); 
+            met_px = met_px - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
+            met_py = met_py - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
+            *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
+            *f["MET_Phi"] = TMath::ATan2(met_py, met_px);
             f["Jet_Pt"][i] = m("Jet_pt",i);
         }
         else {
@@ -399,6 +409,16 @@ bool VHbbAnalysis::Analyze() {
         } else {
             // add smearing on top of regression-->replace Jet_bReg
             if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) {
+                float jet_cosPhi = TMath::Cos(m("Jet_phi",i));
+                float jet_sinPhi = TMath::Sin(m("Jet_phi",i));
+                float met_cosPhi = TMath::Cos(m("MET_Phi",i));
+                float met_sinPhi = TMath::Sin(m("MET_Phi",i));
+                float met_px = met_cosPhi * m("MET_Pt"); 
+                float met_py = met_sinPhi * m("MET_Pt"); 
+                met_px = met_px - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
+                met_py = met_py - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
+                *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
+                *f["MET_Phi"] = TMath::ATan2(met_py, met_px);
                 f["Jet_Pt"][i] = m("Jet_pt",i);
             }
             else {
