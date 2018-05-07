@@ -20,5 +20,5 @@ bdt_1lep_vzbb=cfg/bdt_1lep_vzbb.txt
 settings=cfg/settings_HIG16044.txt
 
 systematics=cfg/systematics.txt
-scalefactors=cfg/scalefactors.txt
+scalefactors=cfg/scalefactors_2016.txt
 btagscalefactors=aux/cMVAv2_Moriond17_B_H.csv

@@ -665,9 +665,8 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                                 if (cursample->sampleNum != 0) {
                                     for (int j=0; j < mInt(sf.length); j++) {
                                         if (sf.binning.find("abs") < 0) {  
-					    f[sf.branchname][j] = sf.getScaleFactor(m(sf.branches[0],j) , m(sf.branches[1],j), sf_err);
-				        }
-                                        else {
+                                            f[sf.branchname][j] = sf.getScaleFactor(m(sf.branches[0],j) , m(sf.branches[1],j), sf_err);
+                                        }else {
                                             f[sf.branchname][j] = sf.getScaleFactor(fabs(m(sf.branches[0],j)) , fabs(m(sf.branches[1],j)), sf_err);
                                         }
                                         f[Form("%s_err",sf.branchname.c_str())][j] = sf_err;

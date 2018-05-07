@@ -2161,39 +2161,47 @@ void VHbbAnalysis::FinishEvent() {
 
     if (mInt("sampleIndex")!=0) {
         *f["Lep_SF"] = 1.0;
-        if (mInt("isWmunu") == 1) {
+        if (mInt("isZmm") == 1) {
+            if(m("dataYear") == 2017) {
+                *f["Lep_SF"] = m("SF_DoubleMuId",mInt("lepInd1")) * m("SF_DoubleMuIso",mInt("lepInd1")) *  m("SF_DoubleMuId",mInt("lepInd2")) * m("SF_DoubleMuIso",mInt("lepInd2"));
+                //m("SF_DoubleMuTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleMuTriggerLeg2",mInt("lepInd2")); 
+            }
+        }else 
+        if (mInt("isZee") == 1) {
+            if(m("dataYear") == 2017) {
+                *f["Lep_SF"] = m("SF_DoubleElIdIso",mInt("lepInd1")) * m("SF_DoubleElIdIso",mInt("lepInd2")) * m("SF_DoubleElTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleElTriggerLeg2",mInt("lepInd2")); 
+                *f["Lep_SFUp"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))+m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))+m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))+m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))+m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2"))); 
+                *f["Lep_SFDown"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))-m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))-m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))-m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))-m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2"))); 
+            }
+        }else if (mInt("isWmunu") == 1) {
             if (m("do2015") == 1) {
                 // used for 2015 analysis
                 *f["Lep_SF"] = m("selLeptons_SF_IsoTight",mInt("lepInd1")) * m("selLeptons_SF_IdCutTight",mInt("lepInd1")) * m("selLeptons_SF_HLT_RunD4p3",mInt("lepInd1"));
-            } else if (m("dataYear") == 2016 && *f["doICHEP"] == 1) {
-                // for 2016 analysis
-                // old V23 prescription
-                //*f["Lep_SF"] = f["SF_MuIDLoose"][*in["lepInd1"]] * f["SF_MuIsoTight"][*in["lepInd1"]] * (0.0673 * f["SF_SMuTrig_Block1"][*in["lepInd1"]] + 0.9327 * f["SF_SMuTrig_Block2"][*in["lepInd1"]] );
-
-                *f["Lep_SF"] = m("selLeptons_SF_IdCutTight",mInt("lepInd1")) * m("selLeptons_SF_IsoTight",mInt("lepInd1")) * m("selLeptons_SF_trk_eta",mInt("lepInd1")) * (0.945*m("selLeptons_SF_HLT_RunD4p3",mInt("lepInd1")) + 0.055*m("selLeptons_SF_HLT_RunD4p2",mInt("lepInd1")))  ;
-
             } else if(m("dataYear") == 2016) {
-                //*f["Lep_SF"] = ( (20.1/36.4) * f["SF_MuIDTightBCDEF"][*in["lepInd"]] + (16.3/36.4) * f["SF_MuIDTightGH"][*in["lepInd"]]) * ( (20.1/36.4) * f["SF_MuIsoTightBCDEF"][*in["lepInd"]] + (16.3/36.4) * f["SF_MuIsoTightGH"][*in["lepInd"]] ) ;
                 *f["Lep_SF"] = ( (20.1/36.4) * m("SF_MuIDTightBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuIDTightGH",mInt("lepInd1"))) * ( (20.1/36.4) * m("SF_MuIsoTightBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuIsoTightGH",mInt("lepInd1")) ) *  ( (20.1/36.4) * m("SF_MuTriggerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTriggerGH",mInt("lepInd1"))) * ( (20.1/36.4) * m("SF_MuTrackerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTrackerGH",mInt("lepInd1")));
                 *f["Lep_SFUp"] = ( (20.1/36.4) * (m("SF_MuIDTightBCDEF",mInt("lepInd1")) + m("SF_MuIDTightBCDEF_err",mInt("lepInd1"))) + (16.3/36.4) * (m("SF_MuIDTightGH",mInt("lepInd1")) + m("SF_MuIDTightGH_err",mInt("lepInd1"))) ) * ( (20.1/36.4) * (m("SF_MuIsoTightBCDEF",mInt("lepInd1")) + m("SF_MuIsoTightBCDEF_err",mInt("lepInd1")) ) + (16.3/36.4) * (m("SF_MuIsoTightGH",mInt("lepInd1")) + m("SF_MuIsoTightGH_err",mInt("lepInd1"))) ) *  ( (20.1/36.4) * (m("SF_MuTriggerBCDEF",mInt("lepInd1")) + m("SF_MuTriggerBCDEF_err",mInt("lepInd1")) )+ (16.3/36.4) * (m("SF_MuTriggerGH",mInt("lepInd1"))) + m("SF_MuTriggerGH_err",mInt("lepInd1"))) * ( (20.1/36.4) * (m("SF_MuTrackerBCDEF",mInt("lepInd1")) + m("SF_MuTrackerBCDEF_err",mInt("lepInd1")))+ (16.3/36.4) * (m("SF_MuTrackerGH",mInt("lepInd1")) + m("SF_MuTrackerGH_err",mInt("lepInd1")) ));
                 *f["Lep_SFUp"] = m("Lep_SFUp")/ m("Lep_SF");
                 *f["Lep_SFDown"] = ( (20.1/36.4) * (m("SF_MuIDTightBCDEF",mInt("lepInd1")) - m("SF_MuIDTightBCDEF_err",mInt("lepInd1"))) + (16.3/36.4) * (m("SF_MuIDTightGH",mInt("lepInd1")) - m("SF_MuIDTightGH_err",mInt("lepInd1"))) ) * ( (20.1/36.4) * (m("SF_MuIsoTightBCDEF",mInt("lepInd1")) - m("SF_MuIsoTightBCDEF_err",mInt("lepInd1")) ) + (16.3/36.4) * (m("SF_MuIsoTightGH",mInt("lepInd1")) - m("SF_MuIsoTightGH_err",mInt("lepInd1"))) ) *  ( (20.1/36.4) * (m("SF_MuTriggerBCDEF",mInt("lepInd1")) - m("SF_MuTriggerBCDEF_err",mInt("lepInd1")) )+ (16.3/36.4) * (m("SF_MuTriggerGH",mInt("lepInd1"))) - m("SF_MuTriggerGH_err",mInt("lepInd1"))) * ( (20.1/36.4) * (m("SF_MuTrackerBCDEF",mInt("lepInd1")) - m("SF_MuTrackerBCDEF_err",mInt("lepInd1")))+ (16.3/36.4) * (m("SF_MuTrackerGH",mInt("lepInd1")) - m("SF_MuTrackerGH_err",mInt("lepInd1")) ));
+                *f["Lep_SFDown"] = m("Lep_SFDown") / m("Lep_SF");
+            } else if(m("dataYear") == 2017) {
+                // keeping 2016 tracking efficiency but not its error
+                *f["Lep_SF"] = m("SF_SingleMuTrigger",mInt("lepInd1")) * m("SF_SingleMuIso",mInt("lepInd1")) * m("SF_SingleMuId",mInt("lepInd1")) * ( (20.1/36.4) * m("SF_MuTrackerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTrackerGH",mInt("lepInd1")));
+               
+                *f["Lep_SFUp"] = (m("SF_SingleMuTrigger",mInt("lepInd1")) + m("SF_SingleMuTrigger_err",mInt("lepInd1")) )* (m("SF_SingleMuIso",mInt("lepInd1")) + m("SF_SingleMuIso_err",mInt("lepInd1")) )* (m("SF_SingleMuId",mInt("lepInd1")) + m("SF_SingleMuId_err",mInt("lepInd1")) );
+                *f["Lep_SFUp"] = m("Lep_SFUp") / m("Lep_SF");
+                *f["Lep_SFDown"] = (m("SF_SingleMuTrigger",mInt("lepInd1")) - m("SF_SingleMuTrigger_err",mInt("lepInd1")) )* (m("SF_SingleMuIso",mInt("lepInd1")) - m("SF_SingleMuIso_err",mInt("lepInd1")) ) * (m("SF_SingleMuId",mInt("lepInd1")) - m("SF_SingleMuId_err",mInt("lepInd1")) ) ;
                 *f["Lep_SFDown"] = m("Lep_SFDown") / m("Lep_SF");
             }
         } else if (mInt("isWenu") == 1) {
            if (m("do2015") == 1) {
                // used for 2015 analysis
                *f["Lep_SF"] = m("selLeptons_SF_IsoTight",mInt("lepInd1")) * m("selLeptons_SF_IdMVATight",mInt("lepInd1")) * m("SF_HLT_Ele23_WPLoose",mInt("lepInd1"));
-           } else if (m("dataYear") == 2016 && m("doICHEP") ==1) {
-               // for 2016 analysis
-               // old for V23
-               //*f["Lep_SF"] =   f["SF_ElIdMVATrigWP80"][*in["lepInd1"]] * f["SF_HLT_Ele23_WPLoose"][*in["lepInd1"]];
-               *f["Lep_SF"] = m("SF_ElIdMVATrigWP80",mInt("lepInd1")) * m("EffHLT_Ele27_WPLoose_Eta2p1",mInt("lepInd1")) * m("SF_egammaEffi_tracker",mInt("lepInd1"));
-           } else if(m("dataYear") == 2016){
-               *f["Lep_SF"] = m("SF_SingleElTrigger",mInt("lepInd1")) * m("SF_ElIdIso",mInt("lepInd1")) *  m("SF_egammaEffi_tracker",mInt("lepInd1"));
-               *f["Lep_SFUp"] = (m("SF_SingleElTrigger",mInt("lepInd1")) + m("SF_SingleElTrigger_err",mInt("lepInd1")) )* (m("SF_ElIdIso",mInt("lepInd1")) + m("SF_ElIdIso_err",mInt("lepInd1")) ) *  (m("SF_egammaEffi_tracker",mInt("lepInd1")) + m("SF_egammaEffi_tracker_err",mInt("lepInd1")) );
-                *f["Lep_SFUp"] = m("Lep_SFUp") / m("Lep_SF");
-               *f["Lep_SFDown"] = (m("SF_SingleElTrigger",mInt("lepInd1")) - m("SF_SingleElTrigger_err",mInt("lepInd1")) )* (m("SF_ElIdIso",mInt("lepInd1")) - m("SF_ElIdIso_err",mInt("lepInd1")) ) *  (m("SF_egammaEffi_tracker",mInt("lepInd1")) - m("SF_egammaEffi_tracker_err",mInt("lepInd1")) );
+           } else if(m("dataYear") == 2016 || m("dataYear") == 2017){
+               *f["Lep_SF"] = m("SF_SingleElTrigger",mInt("lepInd1")) * m("SF_SingleElIdIso",mInt("lepInd1")) *  m("SF_egammaEffi_tracker",mInt("lepInd1"));
+               
+               *f["Lep_SFUp"] = (m("SF_SingleElTrigger",mInt("lepInd1")) + m("SF_SingleElTrigger_err",mInt("lepInd1")) )* (m("SF_SingleElIdIso",mInt("lepInd1")) + m("SF_SingleElIdIso_err",mInt("lepInd1")) ) *  (m("SF_egammaEffi_tracker",mInt("lepInd1")) + m("SF_egammaEffi_tracker_err",mInt("lepInd1")) );
+               *f["Lep_SFUp"] = m("Lep_SFUp") / m("Lep_SF");
+               *f["Lep_SFDown"] = (m("SF_SingleElTrigger",mInt("lepInd1")) - m("SF_SingleElTrigger_err",mInt("lepInd1")) )* (m("SF_SingleElIdIso",mInt("lepInd1")) - m("SF_SingleElIdIso_err",mInt("lepInd1")) ) *  (m("SF_egammaEffi_tracker",mInt("lepInd1")) - m("SF_egammaEffi_tracker_err",mInt("lepInd1")) );
                 *f["Lep_SFDown"] = m("Lep_SFDown") / m("Lep_SF");
 
                // failing SF to correct for data/MC differences in lepton veto yields
@@ -2211,9 +2219,6 @@ void VHbbAnalysis::FinishEvent() {
                        break; // apply for highest pT lepton besides selected one
                    }
                }
-
-               //*f["Lep_SF"] = f["SF_ElIdMVATrigWP80"][*in["lepInd1"]] * f["SF_egammaEffi_tracker"][*in["lepInd1"]];
-               //*f["Lep_SF"] = 1.0;
            }
         }
 

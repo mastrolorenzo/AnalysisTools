@@ -564,6 +564,7 @@ def SetupSyst(lines):
         systs.append(syst)
     return systs
 
+
 def SetupSF(lines):
     SFs=[]
     for line in lines:
@@ -693,6 +694,8 @@ def SetupSF(lines):
             for j in range(1, nY+1):
                 print "eta: ",sfmap.GetYaxis().GetBinLowEdge(j),": ",sfmap.GetBinContent(i,j)
     return SFs
+
+
 def findAllRootFiles(value, site):
     samplepaths = []
     if value.find("/store") is 0:
