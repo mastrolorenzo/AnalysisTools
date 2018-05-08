@@ -212,6 +212,7 @@ bool VHbbAnalysis::Analyze() {
     *b["twoResolvedJets"]=false;
     *b["oneMergedJet"]=false;
     *in["boostedBBIndex"]=-1;
+    *f["MET_Pt_Nano"] = m("MET_Pt");
 
     // Retrieve b-tagger working points
     float taggerWP_T = m("tagWPT"), taggerWP_M = m("tagWPM"), taggerWP_L = m("tagWPL");
@@ -415,8 +416,8 @@ bool VHbbAnalysis::Analyze() {
                 float met_sinPhi = TMath::Sin(m("MET_Phi",i));
                 float met_px = met_cosPhi * m("MET_Pt"); 
                 float met_py = met_sinPhi * m("MET_Pt"); 
-                met_px = met_px - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
-                met_py = met_py - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
+                met_px = met_px + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
+                met_py = met_py + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
                 *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
                 *f["MET_Phi"] = TMath::ATan2(met_py, met_px);
                 f["Jet_Pt"][i] = m("Jet_pt",i);
