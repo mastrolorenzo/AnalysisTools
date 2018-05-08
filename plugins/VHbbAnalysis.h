@@ -39,7 +39,7 @@ class VHbbAnalysis : public AnalysisManager {
         RooFunctor* met_trigger_sf120_func;
         RooFunctor* met_trigger_eff_2016data_func;
 
-        std::pair<int,int> HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut);
+        std::pair<int,int> HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut, bool isOneLepton, bool use2017);
         std::pair<int,int> HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso);
         bool ElectronSelection(int);
         bool MuonSelection(int);
