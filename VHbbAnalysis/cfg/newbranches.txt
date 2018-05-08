@@ -33,7 +33,6 @@ type=1  name=muInd1
 type=1  name=muInd2
 type=1  name=lepInd1
 type=1  name=lepInd2
-type=1  name=boostedBBIndex  
 type=1  name=nHJetsMatched
 type=1  name=eventClass
 type=2  name=lepMetDPhi
@@ -230,6 +229,7 @@ type=2  name=nJets30_2lep
 type=2  name=nJets25_dR06                     
 
 type=2  name=FatJetCand_pt               
+type=2  name=FatJetCand_nVtx             
 type=2  name=FatJetCand_tau21                 
 type=2  name=FatJetCand_tau32                 
 type=2  name=FatJetCand_doubleB              
@@ -237,6 +237,7 @@ type=2  name=FatJetCand_Msoftdrop_corrected
 type=2  name=FatJetCand_tau1
 type=2  name=FatJetCand_tau2
 type=2  name=FatJetCand_tau3
+type=1  name=FatJetCand_index
 
 type=2  name=FatJetVdPhi
 type=2  name=FatJetVdEta

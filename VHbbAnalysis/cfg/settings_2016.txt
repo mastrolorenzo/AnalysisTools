@@ -23,8 +23,8 @@ type=2  name=doVPtReweighting   val=0
 type=2  name=fatJetPtCut_0lepchan         val=250
 type=2  name=fatJetBBTaggerCut_0lepchan   val=0.6
 type=2  name=tau2OverTau1Cut_0lepchan     val=0.65
-type=2  name=fatJetPtCut_1lepchan         val=300
-type=2  name=fatJetBBTaggerCut_1lepchan   val=0.8
+type=2  name=fatJetPtCut_1lepchan         val=225
+type=2  name=fatJetBBTaggerCut_1lepchan   val=0.3
 type=2  name=tau2OverTau1Cut_1lepchan     val=0.65
 type=2  name=fatJetPtCut_2lepchan         val=250
 type=2  name=fatJetBBTaggerCut_2lepchan   val=0.3

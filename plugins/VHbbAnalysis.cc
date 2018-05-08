@@ -55,6 +55,12 @@ void VHbbAnalysis::InitAnalysis() {
 bool VHbbAnalysis::Preselection() {
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
 
+
+    *b["twoResolvedJets"]=false;
+    *b["oneMergedJet"]=false;
+    *in["FatJetCand_index"]=-1;
+
+  
     //Set the b-tagger
     SetTaggerName(m("taggerType"));
 
@@ -498,7 +504,7 @@ bool VHbbAnalysis::Analyze() {
         FatJetSelection();
         
         //FIXME should we do this differently...
-        if(mInt("boostedBBIndex")>-1){
+        if(mInt("FatJetCand_index")>-1){
             *in["controlSample"] = 0;
             *b["oneMergedJet"]=true;
         }
@@ -553,11 +559,11 @@ bool VHbbAnalysis::Analyze() {
         *f["H_pt"] = Hbb.Pt();
         
         if (mInt("isZnn") && m("H_pt") < m("hptcut_0lepchan")) {
-            if (int(m("doBoost")) == 0 || mInt("boostedBBIndex")==-1) {//FIXME
+            if (int(m("doBoost")) == 0 || mInt("FatJetCand_index")==-1) {//FIXME
                 *in["controlSample"] = -1;
             }
         } else if ((m("isWmunu") || m("isWenu")) && m("H_pt") < m("hptcut_1lepchan")) {
-            if (int(m("doBoost")) == 0 || mInt("boostedBBIndex")==-1) {//FIXME
+            if (int(m("doBoost")) == 0 || mInt("FatJetCand_index")==-1) {//FIXME
                 *in["controlSample"] = -1;
             }
         } else if (sel && mInt("controlSample") > -1) {
@@ -2365,19 +2371,19 @@ void VHbbAnalysis::FatJetSelection(){
                     && m("FatJet_btagHbb",iFatJet)>fatJetBBTaggerCut
                     && tau2OverTau1<tau2OverTau1Cut){
                 if(m("FatJet_pt",iFatJet)>highestPt){
-                    *in["boostedBBIndex"]=iFatJet;
+                    *in["FatJetCand_index"]=iFatJet;
                 }
             }
         }
-        if(*in["boostedBBIndex"]>-1){
-            fatJetCand.SetPtEtaPhiM(m("FatJet_pt",mInt("boostedBBIndex")),m("FatJet_eta",mInt("boostedBBIndex")),m("FatJet_phi",mInt("boostedBBIndex")),m("FatJet_mass",mInt("boostedBBIndex")));
+        if(*in["FatJetCand_index"]>-1){
+            fatJetCand.SetPtEtaPhiM(m("FatJet_pt",mInt("FatJetCand_index")),m("FatJet_eta",mInt("FatJetCand_index")),m("FatJet_phi",mInt("FatJetCand_index")),m("FatJet_mass",mInt("FatJetCand_index")));
         }
     }
 }
 
 void VHbbAnalysis::BoostedSelection(){
     //bb-tag, tau2/1 and FatJetPT applied in FatJetSelection... is that ok?
-    if(mInt("boostedBBIndex")>-1){
+    if(mInt("FatJetCand_index")>-1){
         if(m("isZnn")==1){
             *f["nLooseBtagsDR1p5"]=0;
             *f["nLooseBtagsDR1p0"]=0;
@@ -2394,36 +2400,49 @@ void VHbbAnalysis::BoostedSelection(){
                 }
             }
             if(m("nLooseBtagsDR1p5")>0){ 
-                *in["boostedBBIndex"]=-1;
+                *in["FatJetCand_index"]=-1;
                 *b["oneMergedJet"]=false;
             }
         } else if(m("isWmunu")==1 || m("isWenu")==1){
             // not including h mass window selection.  can do with ntuples
             if(m("FatJetVdPhi")>2.9 && m("V_pt")>230){
-                bool closeJetVeto=false;
+                unsigned int nAddJets=0;
+                *f["Jet_btagCMVA_max1_dR06"]=-99;
+                *f["Jet_btagCMVA_max2_dR06"]=-99;
                 for(int iJet=0;iJet<mInt("nJet");iJet++){
-                    if(m("Jet_Pt",iJet)>25){
-                        TLorentzVector aJet;
-                        aJet.SetPtEtaPhiM(m("Jet_Pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_Pt",iJet) / m("Jet_Pt",iJet) ) );
-                        if(fatJetCand.DeltaR(aJet)<0.6){
-                            closeJetVeto=true;
-                            break;
+                    if(m("Jet_lepFilter",iJet)==0) continue;
+                    TLorentzVector aJet;
+                    aJet.SetPtEtaPhiM(m("Jet_pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet));
+                    if(fatJetCand.DeltaR(aJet)>0.6){
+                        if(m("Jet_Pt",iJet)>25 && abs(m("Jet_eta",iJet))<2.5){
+                            nAddJets++;
+                        }
+                    } else {
+                        float thisBTag=m(taggerName,iJet);
+                        if(thisBTag>m("Jet_btagCMVA_max1_dR06")){
+                            *f["Jet_btagCMVA_max2_dR06"]=m("Jet_btagCMVA_max1_dR06");
+                            *f["Jet_btagCMVA_max1_dR06"]=thisBTag;
+                        }else if(thisBTag>m("Jet_btagCMVA_max2_dR06")){
+                            *f["Jet_btagCMVA_max2_dR06"]=thisBTag;
                         }
                     }
                 }
-                if(closeJetVeto){
-                    *in["boostedBBIndex"]=-1;
+                
+                if(nAddJets>1){
+                    *in["FatJetCand_index"]=-1;
                     *b["oneMergedJet"]=false;
                     return;
+                } else {
+                    *f["nJets25_dR06"]=nAddJets;
                 }
             } else {
-                *in["boostedBBIndex"]=-1;
+                *in["FatJetCand_index"]=-1;
                 *b["oneMergedJet"]=false;
             }
         } else if(m("isZmm")==1 || m("isZee")==1){
             // not including h mass window selection.  can do with ntuples
             if( !(m("V_mass")>75 && m("V_mass")<105 && m("V_pt")>100)){  //since all precomputed, invert selection to cut
-                *in["boostedBBIndex"]=-1;
+                *in["FatJetCand_index"]=-1;
                 *b["oneMergedJet"]=false;
             }
         
@@ -2433,7 +2452,7 @@ void VHbbAnalysis::BoostedSelection(){
 
 
 void VHbbAnalysis::ComputeBoostedVariables(){
-    if(mInt("boostedBBIndex")>-1){
+    if(mInt("FatJetCand_index")>-1){
         *f["nFatJets200"]=0;
         for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
             if(m("FatJet_pt",iFatJet)>200 && fabs(m("FatJet_eta",iFatJet))<2.4) *f["nFatJets200"]=m("nFatJets200")+1;
@@ -2447,22 +2466,15 @@ void VHbbAnalysis::ComputeBoostedVariables(){
                 if(m("Jet_puId",iJet)>3) *f["nJets30_0lep"]=m("nJets30_0lep")+1;
                 if(iJet!=mInt("hJetInd2")&&iJet!=mInt("hJetInd1")&&m("Jet_puId",iJet)==7) *f["nJets30_2lep"]=m("nJets30_2lep")+1;
             }
-            if(m("Jet_Pt",iJet)>25 && fabs(m("Jet_eta",iJet))<2.5 && m("Jet_puId",iJet)>0) {
-                TLorentzVector aJet;
-                aJet.SetPtEtaPhiM(m("Jet_Pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet) * (m("Jet_Pt",iJet) / m("Jet_pt",iJet) ) );
-                if(fatJetCand.DeltaR(aJet)>0.6){
-                    *f["nJets25_dR06"]=m("nJets25_dR06")+1;
-                }
-            }
         }
-        *f["FatJetCand_pt"]=m("FatJet_pt",mInt("boostedBBIndex"));
-        *f["FatJetCand_tau21"]=m("FatJet_tau2",mInt("boostedBBIndex"))/m("FatJet_tau1",mInt("boostedBBIndex"));
-        *f["FatJetCand_tau32"]=m("FatJet_tau3",mInt("boostedBBIndex"))/m("FatJet_tau2",mInt("boostedBBIndex"));
-        *f["FatJetCand_tau1"]=m("FatJet_tau1",mInt("boostedBBIndex"));
-        *f["FatJetCand_tau2"]=m("FatJet_tau2",mInt("boostedBBIndex"));
-        *f["FatJetCand_tau3"]=m("FatJet_tau3",mInt("boostedBBIndex"));
-        *f["FatJetCand_doubleB"]=m("FatJet_btagHbb",mInt("boostedBBIndex"));
-        *f["FatJetCand_Msoftdrop_corrected"]=m("FatJet_msoftdrop",mInt("boostedBBIndex"));
+        *f["FatJetCand_pt"]=m("FatJet_pt",mInt("FatJetCand_index"));
+        *f["FatJetCand_tau21"]=m("FatJet_tau2",mInt("FatJetCand_index"))/m("FatJet_tau1",mInt("FatJetCand_index"));
+        *f["FatJetCand_tau32"]=m("FatJet_tau3",mInt("FatJetCand_index"))/m("FatJet_tau2",mInt("FatJetCand_index"));
+        *f["FatJetCand_tau1"]=m("FatJet_tau1",mInt("FatJetCand_index"));
+        *f["FatJetCand_tau2"]=m("FatJet_tau2",mInt("FatJetCand_index"));
+        *f["FatJetCand_tau3"]=m("FatJet_tau3",mInt("FatJetCand_index"));
+        *f["FatJetCand_doubleB"]=m("FatJet_btagHbb",mInt("FatJetCand_index"));
+        *f["FatJetCand_Msoftdrop_corrected"]=m("FatJet_msoftdrop",mInt("FatJetCand_index"));
     }
 }
 
