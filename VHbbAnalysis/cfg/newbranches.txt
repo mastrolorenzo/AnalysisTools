@@ -100,6 +100,7 @@ type=8  name=LHE_weights_pdf_normwgt                        max=110 onlyMC=1 len
 type=2  name=isWenu_f
 type=2  name=isWmunu_f
 
+type=2  name=MET_Pt_Nano
 type=2  name=V_mt
 type=2  name=HVdPhi
 type=2  name=HVdEta
