@@ -217,7 +217,7 @@ bool VHbbAnalysis::Analyze() {
     *in["cutFlow"] = 0;
     *b["twoResolvedJets"]=false;
     *b["oneMergedJet"]=false;
-    *in["boostedBBIndex"]=-1;
+    *in["FatJetCand_index"]=-1;
     *f["MET_Pt_Nano"] = m("MET_Pt");
 
     // Retrieve b-tagger working points
