@@ -186,8 +186,6 @@ type=2  name=TkMET_phi
 type=2  name=MHT_pt
 type=2  name=MET_pt
 type=2  name=MET_phi
-# includes JER smearing
-type=2  name=MET_Phi
 
 #type=1  name=nGenLep                                    onlyMC=1
 #type=8  name=GenLep_pt                          max=10  onlyMC=1
