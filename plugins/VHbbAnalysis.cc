@@ -27,7 +27,7 @@ void VHbbAnalysis::InitAnalysis() {
     wsp_file->Close();
     met_trigger_sf120_func = wsp->function("met_trig_sf120")->functor(wsp->argSet("met_mht"));
     met_trigger_eff_2016data_func = wsp->function("data_nominal_110OR170")->functor(wsp->argSet("met_mht"));
-    
+
     /* Open the files with the EWK correction factor */
     TFile* wpfile = new TFile("./aux/Wp_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_wp = (TH1D*)wpfile->Get("SignalWeight_nloEWK");
@@ -37,7 +37,7 @@ void VHbbAnalysis::InitAnalysis() {
     ewkCorrHist_zll = (TH1D*)zllfile->Get("SignalWeight_nloEWK");
     TFile* znnfile = new TFile("./aux/Znn_nloEWK_weight_unnormalized.root","READ");
     ewkCorrHist_znn = (TH1D*)znnfile->Get("SignalWeight_nloEWK");
-    
+
     ewkCorrHist_wp->Rebin(4);
     ewkCorrHist_wp->Scale(1./4.);
     ewkCorrHist_wm->Rebin(4);
@@ -190,11 +190,11 @@ bool VHbbAnalysis::Preselection() {
 
     atLeastOnePreselFatJet = false;
     if(int(m("doBoost"))==1){
-        //take min pt 
+        //take min pt
         float fatJetPtCut;
         fatJetPtCut       = std::min(m("fatJetPtCut_0lepchan")      ,m("fatJetPtCut_1lepchan"));
         fatJetPtCut       = std::min((double)fatJetPtCut            ,m("fatJetPtCut_2lepchan"));
-        
+
         for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
             if(m("FatJet_pt",iFatJet)>fatJetPtCut){
                 atLeastOnePreselFatJet=true;
@@ -202,7 +202,7 @@ bool VHbbAnalysis::Preselection() {
             }
         }
     }
-    
+
     if (nPreselJets < 2 && !atLeastOnePreselFatJet) return false;
 
     return true;
@@ -346,14 +346,14 @@ bool VHbbAnalysis::Analyze() {
     } else if (mInt("Vtype") == 4 && (cursample->lepFlav == -1 || cursample->lepFlav == 4)) {
         bool passMetFilters;
         if (m("dataYear")==2016){
-                passMetFilters = 
+                passMetFilters =
                 ( m("Flag_goodVertices")
                 && m("Flag_globalTightHalo2016Filter")
                 && m("Flag_HBHENoiseFilter")
                 && m("Flag_HBHENoiseIsoFilter")
-                && m("Flag_EcalDeadCellTriggerPrimitiveFilter")); 
-        } else if (m("dataYear")==2017){         
-                passMetFilters = 
+                && m("Flag_EcalDeadCellTriggerPrimitiveFilter"));
+        } else if (m("dataYear")==2017){
+                passMetFilters =
                 ( m("Flag_goodVertices")
                 && m("Flag_globalTightHalo2016Filter")
                 && m("Flag_HBHENoiseFilter")
@@ -361,7 +361,7 @@ bool VHbbAnalysis::Analyze() {
                 && m("Flag_EcalDeadCellTriggerPrimitiveFilter")
                 && m("Flag_BadPFMuonFilter")
                 && m("Flag_BadChargedCandidateFilter")
-                && m("Flag_ecalBadCalibFilter")); 
+                && m("Flag_ecalBadCalibFilter"));
         }
         if(mInt("sampleIndex")==0){//Data
             passMetFilters = passMetFilters&&m("Flag_eeBadScFilter");
@@ -485,7 +485,7 @@ bool VHbbAnalysis::Analyze() {
 
     // the jet selection algorithm we actually use for the rest of the analysis chain
     std::pair<int, int> bjets_bestTagger =  HighestTaggerValueBJets(j1ptCut, j2ptCut, taggerName);
- 
+
    // put B-Tagger cuts out of selection functions
     if (bjets_bestTagger.first != -1 && bjets_bestTagger.second != -1) {
         *b["twoResolvedJets"]=true; // jets don't need to be b-tagged to be "resolved"
@@ -502,14 +502,14 @@ bool VHbbAnalysis::Analyze() {
         // need to do some filtering on b-tagging for events that we won't use in the boosted analysis
         // (i.e. there is no fat jet) or file size for W+jets is ridiculous for boosted analysis
         FatJetSelection();
-        
+
         //FIXME should we do this differently...
         if(mInt("FatJetCand_index")>-1){
             *in["controlSample"] = 0;
             *b["oneMergedJet"]=true;
         }
     }
-   
+
     //if(m("oneMergedJet")==0 && m("twoResolvedJets")==0){
     //    return false;
     //}
@@ -557,7 +557,7 @@ bool VHbbAnalysis::Analyze() {
         Hbb_noreg = HJ1_noreg + HJ2_noreg;
 
         *f["H_pt"] = Hbb.Pt();
-        
+
         if (mInt("isZnn") && m("H_pt") < m("hptcut_0lepchan")) {
             if (int(m("doBoost")) == 0 || mInt("FatJetCand_index")==-1) {//FIXME
                 *in["controlSample"] = -1;
@@ -690,8 +690,8 @@ bool VHbbAnalysis::Analyze() {
     // Calculate V, H and, V+H kinematics
 
     *f["V_pt"] = V.Pt();
-    
-    // FIXME this should be ok because the vpt cut in the resolved analysis is 
+
+    // FIXME this should be ok because the vpt cut in the resolved analysis is
     // looser than in the boosted, right?
     if (m("V_pt") < m("vptcut")) {
         *in["controlSample"] = -1;
@@ -716,7 +716,7 @@ bool VHbbAnalysis::Analyze() {
         *f["HJ1_HJ2_dEta"] = fabs(HJ1.Eta() - HJ2.Eta());
         *f["HJ1_HJ2_dR"] = HJ1.DeltaR(HJ2);
         *f["JJEtaBal"] = (fabs(m("Jet_eta",mInt("hJetInd1")) + m("Jet_eta",mInt("hJetInd2")))) / (fabs(m("Jet_eta",mInt("hJetInd1")) - m("Jet_eta",mInt("hJetInd2"))));
-        
+
 
         *f["H_mass_step2"] = m("H_mass"); // FIXME do we need this?
         *f["H_mass_noreg"] = Hbb_noreg.M();
@@ -725,7 +725,7 @@ bool VHbbAnalysis::Analyze() {
             *f[Form("H_mass_%s", cursyst->name.c_str())] = Hbb.M();
             *f[Form("H_pt_%s", cursyst->name.c_str())] = Hbb.Pt();
         }
-    
+
         // Now we can calculate whatever we want (transverse) with V and H four-vectors
         *f["jjVPtRatio"] = m("H_pt") / m("V_pt");
         *f["HVdPhi"] = fabs(Hbb.DeltaPhi(V));
@@ -735,17 +735,17 @@ bool VHbbAnalysis::Analyze() {
             *f["HVdEta_4MET"] = fabs(Hbb.Eta() -  W_withNuFromMWCon.Eta());
         }
     }
-    
+
     if (cursyst->name != "nominal") {
         *in[Form("nAddJets252p9_puid_%s", cursyst->name.c_str())] = mInt("nAddJets252p9_puid");
     }
-    
+
     if(m("oneMergedJet")==1){
         *f["FatJetVPtRatio"] = fatJetCand.Pt() / m("V_pt");
         *f["FatJetVdPhi"] = fabs(fatJetCand.DeltaPhi(V));
         *f["FatJetVdEta"] = fabs(fatJetCand.Eta() - V.Eta());
         *f["FatJetVdR"]   = fatJetCand.DeltaR(V);
-        
+
         BoostedSelection();
     }
 
@@ -937,7 +937,7 @@ bool VHbbAnalysis::Analyze() {
             && m("Flag_HBHENoiseIsoFilter")
             && m("Flag_EcalDeadCellTriggerPrimitiveFilter")
         );
-      
+
         if(m("dataYear") == 2017){
             base0LepCSSelection = (base0LepCSSelection
             && m("Flag_BadPFMuonFilter")
@@ -946,7 +946,7 @@ bool VHbbAnalysis::Analyze() {
         }
 
         if(mInt("sampleIndex")==0){//Data
-            base0LepCSSelection = base0LepCSSelection&&m("Flag_eeBadScFilter"); 
+            base0LepCSSelection = base0LepCSSelection&&m("Flag_eeBadScFilter");
         }
 
         if (base0LepCSSelection) {
@@ -1060,18 +1060,27 @@ bool VHbbAnalysis::Analyze() {
                 && minBTagged < taggerWP_L
                 && absDeltaPhiHiggsMet > 2.5
                 && (V_mass > 75 && V_mass < 105)
-                && (H_mass > 90 && H_mass <= 150)
             ) {
-                *in["controlSample"] = 22;
+                if (H_mass > 90 && H_mass <= 150) {
+                    *in["controlSample"] = 22;  // normal Z + LF CR
+                } else if (m("V_pt") > 150) {
+                    *in["controlSample"] = 24;  // keep these event for kinematic fit
+                }
             } else if (/////////////////// Z + HF
 	        maxBTagged > taggerWP_T
                 && minBTagged > taggerWP_L
                 && m("MET_Pt") < 60
                 && absDeltaPhiHiggsMet > 2.5
                 && (V_mass > 85 && V_mass <= 97)
-                && (H_mass <= 90 || H_mass > 150)
             ) {
-                *in["controlSample"] = 23;
+                if (H_mass <= 90 || H_mass > 150) {
+                    *in["controlSample"] = 23;  // normal Z + HF CR
+                } else if (
+                    *in["controlSample"] != 0 // don't steal SR events
+                    && m("V_pt") > 150
+                ) {
+                    *in["controlSample"] = 25;  // keep these event for kinematic fit
+                }
             }
         }
         // end of 2-lepton
@@ -1149,7 +1158,7 @@ void VHbbAnalysis::FinishEvent() {
                     } else if(top_index_1>-1){
                         top_index_2=indGP;
                     } else {
-                        top_index_1=indGP; 
+                        top_index_1=indGP;
                     }
                 }
             }
@@ -1174,7 +1183,7 @@ void VHbbAnalysis::FinishEvent() {
             GenBJ2.SetPtEtaPhiM(m("GenPart_pt",dau2_index),m("GenPart_eta",dau2_index),m("GenPart_phi",dau2_index),4.2);
         }
 
-     
+
        *f["GenBJ1_pt"] = GenBJ1.Pt();
        *f["GenBJ1_eta"] = GenBJ1.Eta();
        *f["GenBJ1_phi"] = GenBJ1.Phi();
@@ -1235,16 +1244,16 @@ void VHbbAnalysis::FinishEvent() {
             }
        }
        //Check for W+Jet sample indices (40-99), DY->ellell sample indices (100-149) and Z->nunu sample indices (150-199)
-       if(VBosonIndices.size()==0 && ( (mInt("sampleIndex")>=40 && mInt("sampleIndex")<=99) || (mInt("sampleIndex")>=100 && mInt("sampleIndex")<=149) || (mInt("sampleIndex")>=150 && mInt("sampleIndex")<=199) ) ){ 
+       if(VBosonIndices.size()==0 && ( (mInt("sampleIndex")>=40 && mInt("sampleIndex")<=99) || (mInt("sampleIndex")>=100 && mInt("sampleIndex")<=149) || (mInt("sampleIndex")>=150 && mInt("sampleIndex")<=199) ) ){
            for (int i = 0; i<mInt("nGenPart"); i++){
-               if((fabs(mInt("GenPart_pdgId",i))>=11 && fabs(mInt("GenPart_pdgId",i))<=16 && mInt("GenPart_status",i)==1 && (mInt("GenPart_statusFlags",i)&1)==1) || (fabs(mInt("GenPart_pdgId",i))==15 && (mInt("GenPart_statusFlags",i)&1)==1 && (mInt("GenPart_statusFlags",i)&2)==2) ){ 
+               if((fabs(mInt("GenPart_pdgId",i))>=11 && fabs(mInt("GenPart_pdgId",i))<=16 && mInt("GenPart_status",i)==1 && (mInt("GenPart_statusFlags",i)&1)==1) || (fabs(mInt("GenPart_pdgId",i))==15 && (mInt("GenPart_statusFlags",i)&1)==1 && (mInt("GenPart_statusFlags",i)&2)==2) ){
                    LeptonIndices.push_back(i);
                }
            }
-       } 
+       }
        *ui["nW"]   =WBosonIndices.size();
        *ui["nWlep"]=WBosonLeptonicIndices.size();
-       
+
        if (LeptonIndices.size()>1){
            std::sort(LeptonIndices.begin(),LeptonIndices.end(),[=](const int i1, const int i2){
                 return f["GenPart_pt"][i1] > f["GenPart_pt"][i2];
@@ -1263,7 +1272,7 @@ void VHbbAnalysis::FinishEvent() {
            *f["LeadGenVBoson_pt"] = m("GenPart_pt",VBosonIndices.at(0));
            *in["LeadGenVBoson_pdgId"] = m("GenPart_pdgId",VBosonIndices.at(0));
            if(VBosonIndices.size()==1 && ( (mInt("sampleIndex")>=30 && mInt("sampleIndex")<=39) || (mInt("sampleIndex")>=340 && mInt("sampleIndex")<=350 ) ) ) *in["nGenVbosons"]=2; // Hack to make sure EWK/QCD reweighting doesn't get applied to diboson samples
-       }       
+       }
        for (int i = 0; i < mInt("nGenPart"); i++) {
            //Continue if not a final-state electron or muon which is either prompt or from a tau decay.
            if(!((fabs(mInt("GenPart_pdgId",i))==11||fabs(mInt("GenPart_pdgId",i))==13)&& mInt("GenPart_status",i)==1 && ((mInt("GenPart_statusFlags",i)&1)==1 || (mInt("GenPart_statusFlags",i)&32)==32  ))) continue;
@@ -1347,7 +1356,7 @@ void VHbbAnalysis::FinishEvent() {
                     w_index_2=indGP;
                 } else w_index_1=indGP;
             }
-        } 
+        }
         if(w_index_1>-1){
             GenW1.SetPtEtaPhiM(m("GenPart_pt",w_index_1), m("GenPart_eta",w_index_1), m("GenPart_phi",w_index_1), m("GenPart_mass",w_index_1));
             *f["GenW_GenBJJ_dPhi"] = GenW1.DeltaPhi(GenBJJ);
@@ -1362,7 +1371,7 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         std::vector<TLorentzVector> genWQuarks; // gen quarks from hadronic gen W decay
-        if(w_index_1>-1||w_index_2>-1){       
+        if(w_index_1>-1||w_index_2>-1){
             for (int i = 0; i < mInt("nGenPart"); i++) {
                 if( ( (w_index_1 > -1 && mInt("GenPart_genPartIdxMother",i)==w_index_1) ||(w_index_2>-1 && mInt("GenPart_genPartIdxMother",i)==w_index_2) ) && fabs(mInt("GenPart_pdgId",i))>=1&&fabs(mInt("GenPart_pdgId",i))<=6){
                     TLorentzVector v;
@@ -1429,7 +1438,7 @@ void VHbbAnalysis::FinishEvent() {
                 && fabs(m("Jet_eta", i))<=m("JetEtaCut"))
             {
                 int hadron_flav = mInt("Jet_hadronFlavour", i);
-               
+
                 auto flav = (hadron_flav==5) ? BTagEntry::FLAV_B :
                             (hadron_flav==4) ? BTagEntry::FLAV_C :
                             BTagEntry::FLAV_UDSG;
@@ -1519,7 +1528,7 @@ void VHbbAnalysis::FinishEvent() {
     }
 
     *f["weight_ptQCD"] = 1.0;
- 
+
     *f["weight_PU_2016to2017"] = 1.0;
     if(mInt("sampleIndex")!=0){
         *f["weight_PU_2016to2017"] = puWeight_2016to2017(m("Pileup_nTrueInt"));
@@ -1781,7 +1790,7 @@ void VHbbAnalysis::FinishEvent() {
     // for now we don't do stitching since the W+jets b-enriched statistics are very high
     *f["WJetStitchWeight"] = WJetStitchWeight;
 
-      
+
 
 
     // we need to just save the bTagWeight since we only want to apply it
@@ -1824,7 +1833,7 @@ void VHbbAnalysis::FinishEvent() {
             *in["bGenJetSum"]=mInt("bGenJetSum")+1;
         }
 
-        /*FIXME we might want to add this back in - do the pruned gen parts store enough information to do this?,  
+        /*FIXME we might want to add this back in - do the pruned gen parts store enough information to do this?,
         for(int indGJ=0; indGJ<mInt("nGenJet"); indGJ++){
             *in["bGenJetBSum"]=mInt("bGenJetBSum")+mInt("GenJet_numBHadrons",indGJ);
         }*/
@@ -1931,7 +1940,7 @@ void VHbbAnalysis::FinishEvent() {
     //*f["H_mass_f"] = (float) *f["H_mass"];
     //*f["H_pt_f"] = (float) *f["H_pt"];
     //*f["V_pt_f"] = (float) *f["V_pt"];
-    
+
     // General BDT inputs
 
     *f["hJets_btagged_0"] = (float) m(taggerName,mInt("hJetInd1"));
@@ -1945,11 +1954,11 @@ void VHbbAnalysis::FinishEvent() {
     *f["hJets_pt_1"] = (float) m("Jet_bReg",mInt("hJetInd2"));
     *f["hJets_leadingPt"]    = std::max(*f["hJets_pt_0"],*f["hJets_pt_1"]);
     *f["hJets_subleadingPt"] = std::min(*f["hJets_pt_0"],*f["hJets_pt_1"]);
-    
+
 
     // Channel specific BDT inputs
     ComputeBoostedVariables();
-   
+
     std::string bdt_branch_label;
     if(mInt("isZnn")) {
         if(debug>10000) {
@@ -1957,7 +1966,7 @@ void VHbbAnalysis::FinishEvent() {
         }
         std::vector<std::string> bdtNames;
         bdtNames.clear();
-        
+
         if(m("twoResolvedJets")){
             thisBDTInfo = bdtInfos.find("bdt_0lep");
             if(thisBDTInfo != bdtInfos.end()){
@@ -1983,12 +1992,12 @@ void VHbbAnalysis::FinishEvent() {
                 bdtNames.push_back("bdt_0lep_boosted");
             }
         }
-       
+
         if(bdtNames.size()>0){
             //loop through jets for best of other variables
             *f["otherJetsBestBtag"]    = -99;
             *f["otherJetsHighestPt"]   = -99;
-            *f["minDPhiFromOtherJets"] = 99; 
+            *f["minDPhiFromOtherJets"] = 99;
             for(int iJet=0; iJet<mInt("nJet"); iJet++){
                 if(iJet==mInt("hJetInd1")) continue;
                 if(iJet==mInt("hJetInd2")) continue;
@@ -2071,7 +2080,7 @@ void VHbbAnalysis::FinishEvent() {
         std::vector<std::string> bdtNames;
         bdtNames.clear();
         thisBDTInfo = bdtInfos.find("bdt_2lep_highPt");
-        
+
         if(m("twoResolvedJets")){
             if(thisBDTInfo != bdtInfos.end()){
                 if(m("V_pt")>=150){
@@ -2193,14 +2202,14 @@ void VHbbAnalysis::FinishEvent() {
         if (mInt("isZmm") == 1) {
             if(m("dataYear") == 2017) {
                 *f["Lep_SF"] = m("SF_DoubleMuId",mInt("lepInd1")) * m("SF_DoubleMuIso",mInt("lepInd1")) *  m("SF_DoubleMuId",mInt("lepInd2")) * m("SF_DoubleMuIso",mInt("lepInd2"));
-                //m("SF_DoubleMuTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleMuTriggerLeg2",mInt("lepInd2")); 
+                //m("SF_DoubleMuTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleMuTriggerLeg2",mInt("lepInd2"));
             }
-        }else 
+        }else
         if (mInt("isZee") == 1) {
             if(m("dataYear") == 2017) {
-                *f["Lep_SF"] = m("SF_DoubleElIdIso",mInt("lepInd1")) * m("SF_DoubleElIdIso",mInt("lepInd2")) * m("SF_DoubleElTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleElTriggerLeg2",mInt("lepInd2")); 
-                *f["Lep_SFUp"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))+m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))+m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))+m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))+m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2"))); 
-                *f["Lep_SFDown"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))-m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))-m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))-m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))-m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2"))); 
+                *f["Lep_SF"] = m("SF_DoubleElIdIso",mInt("lepInd1")) * m("SF_DoubleElIdIso",mInt("lepInd2")) * m("SF_DoubleElTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleElTriggerLeg2",mInt("lepInd2"));
+                *f["Lep_SFUp"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))+m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))+m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))+m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))+m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2")));
+                *f["Lep_SFDown"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))-m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))-m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))-m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))-m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2")));
             }
         }else if (mInt("isWmunu") == 1) {
             if (m("do2015") == 1) {
@@ -2215,7 +2224,7 @@ void VHbbAnalysis::FinishEvent() {
             } else if(m("dataYear") == 2017) {
                 // keeping 2016 tracking efficiency but not its error
                 *f["Lep_SF"] = m("SF_SingleMuTrigger",mInt("lepInd1")) * m("SF_SingleMuIso",mInt("lepInd1")) * m("SF_SingleMuId",mInt("lepInd1")) * ( (20.1/36.4) * m("SF_MuTrackerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTrackerGH",mInt("lepInd1")));
-               
+
                 *f["Lep_SFUp"] = (m("SF_SingleMuTrigger",mInt("lepInd1")) + m("SF_SingleMuTrigger_err",mInt("lepInd1")) )* (m("SF_SingleMuIso",mInt("lepInd1")) + m("SF_SingleMuIso_err",mInt("lepInd1")) )* (m("SF_SingleMuId",mInt("lepInd1")) + m("SF_SingleMuId_err",mInt("lepInd1")) );
                 *f["Lep_SFUp"] = m("Lep_SFUp") / m("Lep_SF");
                 *f["Lep_SFDown"] = (m("SF_SingleMuTrigger",mInt("lepInd1")) - m("SF_SingleMuTrigger_err",mInt("lepInd1")) )* (m("SF_SingleMuIso",mInt("lepInd1")) - m("SF_SingleMuIso_err",mInt("lepInd1")) ) * (m("SF_SingleMuId",mInt("lepInd1")) - m("SF_SingleMuId_err",mInt("lepInd1")) ) ;
@@ -2227,7 +2236,7 @@ void VHbbAnalysis::FinishEvent() {
                *f["Lep_SF"] = m("selLeptons_SF_IsoTight",mInt("lepInd1")) * m("selLeptons_SF_IdMVATight",mInt("lepInd1")) * m("SF_HLT_Ele23_WPLoose",mInt("lepInd1"));
            } else if(m("dataYear") == 2016 || m("dataYear") == 2017){
                *f["Lep_SF"] = m("SF_SingleElTrigger",mInt("lepInd1")) * m("SF_SingleElIdIso",mInt("lepInd1")) *  m("SF_egammaEffi_tracker",mInt("lepInd1"));
-               
+
                *f["Lep_SFUp"] = (m("SF_SingleElTrigger",mInt("lepInd1")) + m("SF_SingleElTrigger_err",mInt("lepInd1")) )* (m("SF_SingleElIdIso",mInt("lepInd1")) + m("SF_SingleElIdIso_err",mInt("lepInd1")) ) *  (m("SF_egammaEffi_tracker",mInt("lepInd1")) + m("SF_egammaEffi_tracker_err",mInt("lepInd1")) );
                *f["Lep_SFUp"] = m("Lep_SFUp") / m("Lep_SF");
                *f["Lep_SFDown"] = (m("SF_SingleElTrigger",mInt("lepInd1")) - m("SF_SingleElTrigger_err",mInt("lepInd1")) )* (m("SF_SingleElIdIso",mInt("lepInd1")) - m("SF_SingleElIdIso_err",mInt("lepInd1")) ) *  (m("SF_egammaEffi_tracker",mInt("lepInd1")) - m("SF_egammaEffi_tracker_err",mInt("lepInd1")) );
@@ -2252,18 +2261,18 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         /* GET ELECTROWEAK CORRECTION */
-        
+
         *f["weight_ptEWK"] = 1.0;
         if(mInt("sampleIndex")<0){
             if( mInt("nGenVbosons",0) == 1 ){
                 TH1D* thisHist = NULL;
-                if( mInt("sampleIndex") == -12500 ){        
+                if( mInt("sampleIndex") == -12500 ){
                     thisHist=ewkCorrHist_wp ;
-                } else if( mInt("sampleIndex") == -12501 ){  
+                } else if( mInt("sampleIndex") == -12501 ){
                     thisHist=ewkCorrHist_wm ;
-                } else if( mInt("sampleIndex") == -12502 ){  
+                } else if( mInt("sampleIndex") == -12502 ){
                     thisHist=ewkCorrHist_zll ;
-                } else if( mInt("sampleIndex") == -12504 ){  
+                } else if( mInt("sampleIndex") == -12504 ){
                     thisHist=ewkCorrHist_znn ;
                 }
                 if(thisHist!=NULL){
@@ -2294,7 +2303,7 @@ void VHbbAnalysis::FinishEvent() {
             *f["recoWReWeightDown"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), -1);
             *f["weight"] = m("weight") * m("recoWReWeight");
         }
-        
+
         // Add NLO to LO W+jet re-weighting from Z(ll)H(bb)
         // FIXME need a flag for LO vs NLO
         int sampleIndex = mInt("sampleIndex");
@@ -2367,7 +2376,7 @@ void VHbbAnalysis::FatJetSelection(){
         float tau2OverTau1=100;
         for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
             tau2OverTau1=m("FatJet_tau2",iFatJet)/m("FatJet_tau1",iFatJet);
-            if(m("FatJet_pt",iFatJet)>fatJetPtCut 
+            if(m("FatJet_pt",iFatJet)>fatJetPtCut
                     && m("FatJet_btagHbb",iFatJet)>fatJetBBTaggerCut
                     && tau2OverTau1<tau2OverTau1Cut){
                 if(m("FatJet_pt",iFatJet)>highestPt){
@@ -2399,6 +2408,7 @@ void VHbbAnalysis::BoostedSelection(){
                     if(dR>0.8) *f["nLooseBtagsDR0p8"]=m("nLooseBtagsDR0p8")+1;
                 }
             }
+
             if(m("nLooseBtagsDR1p5")>0){ 
                 *in["FatJetCand_index"]=-1;
                 *b["oneMergedJet"]=false;
@@ -2445,7 +2455,7 @@ void VHbbAnalysis::BoostedSelection(){
                 *in["FatJetCand_index"]=-1;
                 *b["oneMergedJet"]=false;
             }
-        
+
         }
     }
 }
@@ -2462,7 +2472,7 @@ void VHbbAnalysis::ComputeBoostedVariables(){
         *f["nJets25_dR06"]=0;
         for(int iJet=0; iJet<mInt("nJet"); iJet++){
             if(m("Jet_lepFilter",iJet)==0) continue;
-            if(m("Jet_Pt",iJet)>30 && fabs(m("Jet_eta",iJet))<2.4){ 
+            if(m("Jet_Pt",iJet)>30 && fabs(m("Jet_eta",iJet))<2.4){
                 if(m("Jet_puId",iJet)>3) *f["nJets30_0lep"]=m("nJets30_0lep")+1;
                 if(iJet!=mInt("hJetInd2")&&iJet!=mInt("hJetInd1")&&m("Jet_puId",iJet)==7) *f["nJets30_2lep"]=m("nJets30_2lep")+1;
             }
@@ -2749,7 +2759,7 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
         }
     } else if (m("dataYear") == 2016) {
         // 0-lepton - no MC efficiencies available, so apply trigger in data only
-        if (vtype == 4 && mInt("sampleIndex") == 0 
+        if (vtype == 4 && mInt("sampleIndex") == 0
             && mInt("HLT_PFMET110_PFMHT110_IDTight")     != 1
             && mInt("HLT_PFMET120_PFMHT120_IDTight")     != 1
             && mInt("HLT_PFMET170_NoiseCleaned")         != 1
@@ -2813,9 +2823,9 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
 
 //Member of VHbbAnalysis that convert the tagger type specified in settings.txt into the corresponding string
 void VHbbAnalysis::SetTaggerName( float taggerType ){
-    std::string name; 
-    
-    if( m("taggerType")==0 ){ 
+    std::string name;
+
+    if( m("taggerType")==0 ){
         name.append("Jet_btagDeepB");
     } else if(  m("taggerType")==1 ){
         name.append("Jet_btagCMVA");
@@ -2825,7 +2835,7 @@ void VHbbAnalysis::SetTaggerName( float taggerType ){
         std::cout << "Invalid tagger type, setting the tagger name to its defauld value: CMVA" << std::endl;
         name.append("Jet_btagCMVA");
     }
-    
+
     taggerName = name;
 }
 
@@ -2840,13 +2850,13 @@ float VHbbAnalysis::GetVHEWKCorrFactor( float V_pt, TH1D* hist ){
         std::cout<<"ibin "<<ibin<<std::endl;
         std::cout<<"nbins "<< hist->GetNbinsX()<<std::endl;
     }
-    if (ibin < 1){ 
-        return hist->GetBinContent(1); 
+    if (ibin < 1){
+        return hist->GetBinContent(1);
     }
-    if (ibin > hist->GetNbinsX()){ 
-        return hist->GetBinContent(hist->GetNbinsX()); 
+    if (ibin > hist->GetNbinsX()){
+        return hist->GetBinContent(hist->GetNbinsX());
     }
-      
+
     return hist->GetBinContent(ibin);
 }
 

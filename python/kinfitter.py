@@ -7,9 +7,9 @@ import os
 
 
 # constants
-llbb_pxy_var = 6.83**2  # with no additional jets above pt > 20 GeV and no eta cut
+llbb_pxy_var = 8**2  # with no additional jets above pt > 20 GeV and no eta cut
 hh4b_res_scale = 0.62
-z_width = 1.7
+z_width = 1.7 * 3
 
 
 # resolution functions from HH4b analysis
@@ -125,12 +125,17 @@ def get_sel_leptons(e):
     else:
         return mk_el_lv_ind(e, e.lepInd1), mk_el_lv_ind(e, e.lepInd2)
 
-def mk_fit_particle_lepton(v):
+def mk_fit_particle_lepton(e, v, ind):
     cov = ROOT.TMatrixD(3, 3)
     cov.Zero()
-    cov[0][0] = 5.    # pt: about right?  TODO estimate from lepton resolutions
-    cov[1][1] = 0.001 # eta: too small
-    cov[2][2] = 0.001 # phi: too small
+    cov[1][1] = 0.0001 # eta: too small
+    cov[2][2] = 0.0001 # phi: too small
+
+    if e.isZmm:
+        cov[0][0] = (e.Muon_ptErr[ind])**2
+    else:
+        cov[0][0] = (e.Electron_energyErr[ind])**2
+
     return v, cov[0][0], ROOT.TFitParticleEtEtaPhi(v, cov)
 
 
@@ -146,6 +151,7 @@ class VarContainer(object):
             'hj12_pt',       'hj12_eta',       'hj12_phi',       'hj12_mass',
             'hj1_gen_pt',    'hj1_gen_eta',    'hj1_gen_phi',    'hj1_gen_mass',
             'hj2_gen_pt',    'hj2_gen_eta',    'hj2_gen_phi',    'hj2_gen_mass',
+            'hj12_gen_pt',   'hj12_gen_eta',   'hj12_gen_phi',   'hj12_gen_mass',
             'hj1_reg_pt',    'hj1_reg_eta',    'hj1_reg_phi',    'hj1_reg_mass',
             'hj2_reg_pt',    'hj2_reg_eta',    'hj2_reg_phi',    'hj2_reg_mass',
             'hj12_reg_pt',   'hj12_reg_eta',   'hj12_reg_phi',   'hj12_reg_mass',
@@ -163,15 +169,18 @@ class VarContainer(object):
             'hj2_jme_res',
 
             # leptons
-            'zl1_pt',        'zl1_eta',        'zl1_phi',        'zl1_mass',
-            'zl2_pt',        'zl2_eta',        'zl2_phi',        'zl2_mass',
+            'l1_pt',        'l1_eta',        'l1_phi',        'l1_mass',
+            'l2_pt',        'l2_eta',        'l2_phi',        'l2_mass',
             'V_eta',
-            'zl1_fit_pt',    'zl1_fit_eta',    'zl1_fit_phi',    'zl1_fit_mass',
-            'zl2_fit_pt',    'zl2_fit_eta',    'zl2_fit_phi',    'zl2_fit_mass',
+            'l1_gen_pt',    'l1_gen_eta',    'l1_gen_phi',    'l1_gen_mass',
+            'l2_gen_pt',    'l2_gen_eta',    'l2_gen_phi',    'l2_gen_mass',
+            'l12_gen_pt',   'l12_gen_eta',   'l12_gen_phi',   'l12_gen_mass',
+            'l1_fit_pt',    'l1_fit_eta',    'l1_fit_phi',    'l1_fit_mass',
+            'l2_fit_pt',    'l2_fit_eta',    'l2_fit_phi',    'l2_fit_mass',
             'V_pt_fit',      'V_eta_fit',      'V_phi_fit',      'V_mass_fit',
 
-            'zl1_res',
-            'zl2_res',
+            'l1_res',
+            'l2_res',
 
             # llbb system / recoil jet
             # 'recoil_pt',     'recoil_eta',     'recoil_phi',     'recoil_mass',
@@ -179,13 +188,17 @@ class VarContainer(object):
 
             # 'llbb_px',       'llbb_py',
             'llbb_fit_px',   'llbb_fit_py',
-            # 'llbb_gen_px', 'llbb_gen_py',
+            # 'llbbr_fit_px',  'llbbr_fit_py',
+            'llbb_gen_px',   'llbb_gen_py',
+            'll_gen_mass',
 
             # aux
             'kinfit_fit',
             'kinfit_getNDF',
             'kinfit_getS',
             'kinfit_getF',
+
+            'H_mass_fit_fallback',
         ]
 
         for var in self.tree_vars:
@@ -201,6 +214,7 @@ class VarContainer(object):
         getattr(self, token+'_eta' )[0] = vec.Eta()
         getattr(self, token+'_phi' )[0] = vec.Phi()
         getattr(self, token+'_mass')[0] = vec.M()
+
 
 def apply_fit_to_event(e, c):
 
@@ -224,48 +238,34 @@ def apply_fit_to_event(e, c):
 
     c.n_hj_matched[0] = 0
     if deltaR(c.hj1_reg_eta[0], c.hj1_reg_phi[0], e.GenBJ1_eta, e.GenBJ1_phi) < 0.2:
-        c.hj1_gen_pt[0]   = e.GenBJ1_pt
-        c.hj1_gen_eta[0]  = e.GenBJ1_eta
-        c.hj1_gen_phi[0]  = e.GenBJ1_phi
-        c.hj1_gen_mass[0] = e.GenBJ1_mass
+        v1_gen = mk_lv(e.GenBJ1_pt,e.GenBJ1_eta,e.GenBJ1_phi,e.GenBJ1_mass)
+        c.fill_pt_eta_phi_mass('hj1_gen', v1_gen)
         c.n_hj_matched[0] += 1
     elif deltaR(c.hj1_reg_eta[0], c.hj1_reg_phi[0], e.GenBJ2_eta, e.GenBJ2_phi) < 0.2:
-        c.hj1_gen_pt[0]   = e.GenBJ2_pt
-        c.hj1_gen_eta[0]  = e.GenBJ2_eta
-        c.hj1_gen_phi[0]  = e.GenBJ2_phi
-        c.hj1_gen_mass[0] = e.GenBJ2_mass
+        v1_gen = mk_lv(e.GenBJ2_pt,e.GenBJ2_eta,e.GenBJ2_phi,e.GenBJ2_mass)
+        c.fill_pt_eta_phi_mass('hj1_gen', v1_gen)
         c.n_hj_matched[0] += 1
-    else:
-        c.hj1_gen_pt[0]   = -1
-        c.hj1_gen_eta[0]  = -1
-        c.hj1_gen_phi[0]  = -1
-        c.hj1_gen_mass[0] = -1
 
     if deltaR(c.hj2_reg_eta[0], c.hj2_reg_phi[0], e.GenBJ1_eta, e.GenBJ1_phi) < 0.2:
-        c.hj2_gen_pt[0]   = e.GenBJ1_pt
-        c.hj2_gen_eta[0]  = e.GenBJ1_eta
-        c.hj2_gen_phi[0]  = e.GenBJ1_phi
-        c.hj2_gen_mass[0] = e.GenBJ1_mass
+        v2_gen = mk_lv(e.GenBJ1_pt,e.GenBJ1_eta,e.GenBJ1_phi,e.GenBJ1_mass)
+        c.fill_pt_eta_phi_mass('hj2_gen', v2_gen)
         c.n_hj_matched[0] += 1
     elif deltaR(c.hj2_reg_eta[0], c.hj2_reg_phi[0], e.GenBJ2_eta, e.GenBJ2_phi) < 0.2:
-        c.hj2_gen_pt[0]   = e.GenBJ2_pt
-        c.hj2_gen_eta[0]  = e.GenBJ2_eta
-        c.hj2_gen_phi[0]  = e.GenBJ2_phi
-        c.hj2_gen_mass[0] = e.GenBJ2_mass
+        v2_gen = mk_lv(e.GenBJ2_pt,e.GenBJ2_eta,e.GenBJ2_phi,e.GenBJ2_mass)
+        c.fill_pt_eta_phi_mass('hj2_gen', v2_gen)
         c.n_hj_matched[0] += 1
-    else:
-        c.hj2_gen_pt[0]   = -1
-        c.hj2_gen_eta[0]  = -1
-        c.hj2_gen_phi[0]  = -1
-        c.hj2_gen_mass[0] = -1
+
+    if c.n_hj_matched[0] == 2:
+        v12_gen = v1_gen + v2_gen
+        c.fill_pt_eta_phi_mass('hj12_gen', v12_gen)
 
     jme_p1 = ROOT.JME.JetParameters().setRho(e.fixedGridRhoFastjetAll).setJetPt(c.hj1_reg_pt[0]).setJetEta(c.hj1_reg_eta[0])
     jme_p2 = ROOT.JME.JetParameters().setRho(e.fixedGridRhoFastjetAll).setJetPt(c.hj2_reg_pt[0]).setJetEta(c.hj2_reg_eta[0])
     c.hj1_jme_res[0] = ak4pfchs_ptres.getResolution(jme_p1) * c.hj1_reg_pt[0]
     c.hj2_jme_res[0] = ak4pfchs_ptres.getResolution(jme_p2) * c.hj2_reg_pt[0]
 
-    c.hj1_hh4b_res[0] = ROOT.TMath.Sqrt(v1_pt_var)
-    c.hj2_hh4b_res[0] = ROOT.TMath.Sqrt(v2_pt_var)
+    c.hj1_hh4b_res[0] = v1_pt_var**.5
+    c.hj2_hh4b_res[0] = v2_pt_var**.5
 
     # TODO hj1_reg_res, hj2_reg_res
 
@@ -273,20 +273,19 @@ def apply_fit_to_event(e, c):
     cov_recoil = ROOT.TMatrixD(4, 4)
     cov_recoil.Zero()
     cov_recoil[0][0] = llbb_pxy_var
-    cov_recoil[1][0] = 0
-    cov_recoil[0][1] = 0
     cov_recoil[1][1] = llbb_pxy_var
     cov_recoil[2][2] = 1
     cov_recoil[3][3] = 1e12
 
     # recoil vector and covariance additions
-    recoil_jet_idxs = tuple(
+    recoil_jet_idxs = (
         i
         for i in xrange(e.nJet)
         if (
             i not in (e.hJetInd1, e.hJetInd2)
-
             and e.Jet_puId[i] > 1
+            and e.Jet_jetId[i] > 1
+            and e.Jet_lepFilter[i] > 0
             and e.Jet_Pt[i] > 20
             # and abs(e.Jet_eta) < 2.5
         )
@@ -304,14 +303,15 @@ def apply_fit_to_event(e, c):
 
     vl1, vl2 = get_sel_leptons(e)
     vl12 = vl1 + vl2
-    _, vl1_pt_var, pl1 = mk_fit_particle_lepton(vl1)
-    _, vl2_pt_var, pl2 = mk_fit_particle_lepton(vl2)
+    _, vl1_pt_var, pl1 = mk_fit_particle_lepton(e, vl1, e.lepInd1)
+    _, vl2_pt_var, pl2 = mk_fit_particle_lepton(e, vl2, e.lepInd2)
 
-    c.fill_pt_eta_phi_mass('zl1', vl1)
-    c.fill_pt_eta_phi_mass('zl2', vl2)
+    c.fill_pt_eta_phi_mass('l1', vl1)
+    c.fill_pt_eta_phi_mass('l2', vl2)
     c.V_eta[0] = vl12.Eta()
 
-    # TODO zl1_res, zl2_res
+    c.l1_res[0] = vl1_pt_var**.5
+    c.l2_res[0] = vl2_pt_var**.5
 
     # constraints
     cons_MZ = ROOT.TFitConstraintMGaus('cons_MZ', '', None, None, 91., z_width)
@@ -359,8 +359,8 @@ def apply_fit_to_event(e, c):
     vl2 = fitter.get4Vec(3)
     vl12 = vl1 + vl2
 
-    c.fill_pt_eta_phi_mass('zl1_fit', vl1)
-    c.fill_pt_eta_phi_mass('zl2_fit', vl2)
+    c.fill_pt_eta_phi_mass('l1_fit', vl1)
+    c.fill_pt_eta_phi_mass('l2_fit', vl2)
     c.V_pt_fit[0] = vl12.Pt()
     c.V_eta_fit[0] = vl12.Eta()
     c.V_phi_fit[0] = vl12.Phi()
@@ -370,21 +370,54 @@ def apply_fit_to_event(e, c):
     vllbb = v12 + vl12
     c.llbb_fit_px[0] = vllbb.X()
     c.llbb_fit_py[0] = vllbb.Y()
+    # vr = fitter.get4Vec(4)
+    # vllbbr = vllbb + vr
+    # c.llbbr_fit_px[0] = vllbbr.X()
+    # c.llbbr_fit_py[0] = vllbbr.Y()
 
     # HV variables
     c.HVdPhi_fit[0] = deltaPhi(v12.Phi(), vl12.Phi())
     c.HVdR_fit[0]   = deltaR(v12.Eta(), v12.Phi(), vl12.Eta(), vl12.Phi())
     c.HVdEta_fit[0] = abs(v12.Eta() - vl12.Eta())
 
+    if (c.kinfit_fit[0] != 1
+        or c.H_mass_fit[0] < 0
+    ):
+        c.H_mass_fit_fallback[0] = c.hj12_reg_mass[0]
+    else:
+        c.H_mass_fit_fallback[0] = c.H_mass_fit[0]
+
     # generator
-    # not now..... get this to work again later TODO!!
-    # if e.nGenVbosons:
-    #     gen_H = mk_lv(e.GenBJJ_pt, e.GenBJJ_eta, e.GenBJJ_phi, e.GenBJJ_mass,)
-    #     gen_Z = mk_lv(e.LeadGenVBoson_pt, e.LeadGenVBoson_eta, e.LeadGenVBoson_phi, e.LeadGenVBoson_mass,)
-    #     gen_ZH = gen_H + gen_Z
-    #     c.llbb_gen_px[0] = gen_ZH.X()
-    #     c.llbb_gen_py[0] = gen_ZH.Y()
-    #     c.ll_gen_mass[0] = e.GenVbosons_mass[0]
+    if (e.GetBranch('nGenPart')
+        and e.GenLepIndex1 > -1
+        and e.GenLepIndex2 > -1
+    ):
+        # recalculate, since H jets are not always matched
+        gen_H = mk_lv(e.GenBJJ_pt, e.GenBJJ_eta, e.GenBJJ_phi, e.GenBJJ_mass,)
+        gen_l1 = mk_lv(
+            e.GenPart_pt[e.GenLepIndex1],
+            e.GenPart_eta[e.GenLepIndex1],
+            e.GenPart_phi[e.GenLepIndex1],
+            e.GenPart_mass[e.GenLepIndex1],
+        )
+        gen_l2 = mk_lv(
+            e.GenPart_pt[e.GenLepIndex2],
+            e.GenPart_eta[e.GenLepIndex2],
+            e.GenPart_phi[e.GenLepIndex2],
+            e.GenPart_mass[e.GenLepIndex2],
+        )
+        if (deltaR(gen_l1.Eta(), gen_l1.Phi(), vl1.Eta(), vl1.Phi())
+          > deltaR(gen_l1.Eta(), gen_l1.Phi(), vl2.Eta(), vl2.Phi())):
+            gen_l1, gen_l2 = gen_l2, gen_l1
+        gen_Z = gen_l1 + gen_l2
+        c.fill_pt_eta_phi_mass('l1_gen', gen_l1)
+        c.fill_pt_eta_phi_mass('l2_gen', gen_l2)
+        c.fill_pt_eta_phi_mass('l12_gen', gen_Z)
+
+        gen_ZH = gen_H + gen_Z
+        c.llbb_gen_px[0] = gen_ZH.X()
+        c.llbb_gen_py[0] = gen_ZH.Y()
+        c.ll_gen_mass[0] = gen_Z.M()
 
 
 def apply_kinfit(input_file, output_file, is_data, data_year):
@@ -401,29 +434,32 @@ def apply_kinfit(input_file, output_file, is_data, data_year):
     # else:
     #     raise RuntimeError('data_year is not 2016 or 2017.')
 
-    f = ROOT.TFile(input_file)
-    if f.IsZombie():
-        raise RuntimeError('input file is zombie, not running kinfit: ' + input_file)
-    f_other_objects = list((key.GetName(), f.Get(key.GetName()))
-                     for key in f.GetListOfKeys()
-                     if key.GetName() != 'Events')
-    t = f.Get('Events')
+    if isinstance(input_file, ROOT.TChain):
+        t = input_file
+        of = ROOT.TFile(output_file, 'RECREATE')
+    else:
+        f = ROOT.TFile(input_file)
+        if f.IsZombie():
+            raise RuntimeError('input file is zombie, not running kinfit: ' + input_file)
+        f_other_objects = list((key.GetName(), f.Get(key.GetName()))
+                         for key in f.GetListOfKeys()
+                         if key.GetName() != 'Events')
+        t = f.Get('Events')
 
-    # mk new file and copy all other objects
-    of = ROOT.TFile(output_file, 'RECREATE')
-    for name, obj in f_other_objects:
-        if isinstance(obj, ROOT.TTree):
-            obj.CloneTree(-1, 'fast')
-        else:
-            obj.Clone(name)
-        obj.Write(name)
+        # mk new file and copy all other objects
+        of = ROOT.TFile(output_file, 'RECREATE')
+        for name, obj in f_other_objects:
+            if isinstance(obj, ROOT.TTree):
+                obj.CloneTree(-1, 'fast')
+            else:
+                obj.Clone(name)
+            obj.Write(name)
 
     # prepare new tree and new variables
     ot = t.CloneTree(0)
     c = VarContainer(ot)
     n_events = 0
     n_fitted = 0
-    vals_are_zero = True
 
     print 'starting kinfit loop'
     start_time = time.ctime()
@@ -431,26 +467,20 @@ def apply_kinfit(input_file, output_file, is_data, data_year):
         n_events += 1
 
         if n_events % 1000 == 1:
-            print 'at event', n_events
-
-        # values should always be zero'd at start
-        if not vals_are_zero:
-            c.set_vals_to_zero()
-            vals_are_zero = True
+            print 'at event %i' % n_events
 
         if (
             e.V_pt >= 150
             and e.twoResolvedJets
             and (e.isZmm or e.isZee)
         ):
-            vals_are_zero = False
             apply_fit_to_event(e, c)
             ot.Fill()
+            c.set_vals_to_zero()  # zero values after filling the tree
             n_fitted += 1
         else:
             # don't run kinfit, just write
             ot.Fill()
-            continue
 
     ot.Write()
     of.Close()
