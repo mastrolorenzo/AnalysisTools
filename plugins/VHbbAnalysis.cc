@@ -807,7 +807,7 @@ bool VHbbAnalysis::Analyze() {
     }
 
     for (int i = 0; i < mInt("nElectron"); i++) {
-        if(m("Electron_pt",i) > 6.5 && fabs(m("Electron_eta",i))<2.5 && m("Electron_pfRelIso03_all",i) < 0.4 && fabs(m("Electron_dz",i))<0.2 && fabs(m("Electron_dxy",i))<0.05 && m("Electron_lostHits",i)<1.0) nVetoLeptons++;
+        if(m("Electron_pt",i) > 6.5 && fabs(m("Electron_eta",i))<2.5 && m("Electron_pfRelIso03_all",i) < 0.4 && fabs(m("Electron_dz",i))<0.2 && fabs(m("Electron_dxy",i))<0.05 && mInt("Electron_lostHits",i)<1.0) nVetoLeptons++;
         if (i == mInt("elInd1")) continue; // don't look at the lepton we've selected from the W
         if (i == mInt("elInd2")) continue; // don't look at the lepton we've selected from the Z
         if (m("Electron_pt",i) > 15 && fabs(m("Electron_eta",i)) < 2.5 && m("Electron_pfRelIso03_all",i) < 0.1) {
