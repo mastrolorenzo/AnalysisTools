@@ -382,7 +382,7 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
                 sample["puhist"]=str(value)
             if name.find("dir") is 0:
                 site = "FNAL"
-                if value.find("CERN") is 0:
+                if hostname.endswith(".cern.ch"):
                     site = "CERN"
                     value = value.replace("CERN:","")
                 if value.find(',') is not 0:
@@ -701,8 +701,8 @@ def findAllRootFiles(value, site):
     if value.find("/store") is 0:
         import subprocess
         siteIP = "root://cmseos.fnal.gov"
-        if (site == "CERN"):
-            siteIP = "root://188.184.38.46:1094"
+        if site == "CERN":
+            siteIP = "root://eoscms.cern.ch"
         #onlyFiles = subprocess.check_output(["/cvmfs/cms.cern.ch/slc6_amd64_gcc491/cms/cmssw/CMSSW_7_4_14/external/slc6_amd64_gcc491/bin/xrdfs", siteIP, "ls", value]).split('\n')
         onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
         for filepath in onlyFiles:
