@@ -2109,11 +2109,12 @@ void VHbbAnalysis::FinishEvent() {
 
 
         if(bdtNames.size()>0){
+            *f["nAddJets_2lep"] = 0;
             for(int iJet=0; iJet<mInt("nJet"); iJet++){
                 if(iJet==mInt("hJetInd1")) continue;
                 if(iJet==mInt("hJetInd2")) continue;
                 if(mInt("Jet_lepFilter",iJet)==0) continue;
-                if(mInt("Jet_puId",iJet)==7 && m("Jet_bReg",iJet)>30 && abs(m("Jet_eta",iJet))<2.4 ){ // should not be regressed pT!! are we sure this is how it was calculated before?
+                if(mInt("Jet_puId",iJet)==7 && m("Jet_Pt",iJet)>30 && abs(m("Jet_eta",iJet))<2.4 ){ // should not be regressed pT!! are we sure this is how it was calculated before?
                     *f["nAddJets_2lep"]=m("nAddJets_2lep")+1;
                 }
             }
