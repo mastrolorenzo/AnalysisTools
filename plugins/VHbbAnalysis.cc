@@ -690,6 +690,9 @@ bool VHbbAnalysis::Analyze() {
     // Calculate V, H and, V+H kinematics
 
     *f["V_pt"] = V.Pt();
+    if (cursyst->name != "nominal") {
+        *f[Form("V_pt_%s", cursyst->name.c_str())] = V.Pt();
+    }
 
     // FIXME this should be ok because the vpt cut in the resolved analysis is
     // looser than in the boosted, right?
@@ -1085,6 +1088,10 @@ bool VHbbAnalysis::Analyze() {
         }
         // end of 2-lepton
     }
+    if (cursyst->name != "nominal") {
+        *in[Form("controlSample_%s", cursyst->name.c_str())] = mInt("controlSample");
+    }
+
 
     if (doCutFlow && mInt("cutFlow") >= m("doCutFlow")) {
         // keep all preselected events for cutflow
@@ -2310,7 +2317,7 @@ void VHbbAnalysis::FinishEvent() {
         int sampleIndex = mInt("sampleIndex");
         float WJetNLOWeight = 1.0;
         float weight_ptQCD = m("weight_ptQCD");
-        if (sampleIndex<4000 || sampleIndex>4702) { WJetNLOWeight = 1.0; }
+        if ((sampleIndex<4000 || sampleIndex>4702) && (sampleIndex<5000||sampleIndex>5402) && (sampleIndex<11000 || sampleIndex>11702) && (sampleIndex<15000 || sampleIndex>15002)) { WJetNLOWeight = 1.0; }
         else if(m("twoResolvedJets")) {
             float deta_bb = fabs(m("Jet_eta",mInt("hJetInd1")) - m("Jet_eta",mInt("hJetInd2")));
             if(sampleIndex==4000 || sampleIndex==4100 || sampleIndex==4200 || sampleIndex==4300 || sampleIndex==4400 || sampleIndex==4500 || sampleIndex==4600 || sampleIndex==4700 || sampleIndex==5000 || sampleIndex==5100 || sampleIndex==5300 || sampleIndex==5400
@@ -2334,7 +2341,9 @@ void VHbbAnalysis::FinishEvent() {
         }
         *f["weight"] = m("weight") * WJetNLOWeight;
         *f["WJetNLOWeight"] = WJetNLOWeight;
-
+        if (cursyst->name != "nominal") {
+            *f[Form("weight_%s", cursyst->name.c_str())] = m("weight");
+        }
     }
 
     // FIXME nominal must be last

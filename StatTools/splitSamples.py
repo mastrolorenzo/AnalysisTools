@@ -38,6 +38,7 @@ parser.add_argument('-donlo','--doNLOWJets', type=bool, default=False, help="If 
 parser.add_argument('-rwtt','--reweightTT', type=bool, default=False, help="If true assume full TT statistics, if false use only half (default False)")
 parser.add_argument('-si','--oldSI', type=bool, default=False, help="If true use old sampleIndex def., if false use new (correct) definition (default False)")
 parser.add_argument('-sa', '--sample', type=str, default="", help="Specify to run on only one particular sample")
+parser.add_argument('--drawFromNom', type=bool, default=False, help="If true, do not try to draw args.varname_systname but simply use nominal args.varname")
 args = parser.parse_args()
 print args
 
@@ -429,25 +430,33 @@ for sample in sampleMap:
         hBDTSystDown = ROOT.TH1F("BDT_%s_%s_%sDown" % (catName,sample,syst), "%s_%sDown" % (sample,syst),nBins,binBoundaries)
         sysBDTNameUp = bdtname
         sysBDTNameDown = bdtname
-        passSys = "Pass_nominal"
+        passSysup = "Pass_nominal"
+        passSysdown = "Pass_nominal"
+        cutStringdown = cutString
+        cutStringup = cutString
         if (sysName != ""):
-            if (bdtname.find('[') != -1):
-                # drawing an array variable
-                sysBDTNameUp = bdtname[:bdtname.find('[')] + "_" + sysName + "Up" + bdtname[bdtname.find('['):] 
-            else:
-                sysBDTNameUp += "_%sUp" % sysName
-                sysBDTNameDown += "_%sDown" % sysName
-            pasSys = "Pass_%s" % sysName
+            if not args.drawFromNom:
+                if (bdtname.find('[') != -1):
+                    # drawing an array variable
+                    sysBDTNameUp = bdtname[:bdtname.find('[')] + "_" + sysName + "Up" + bdtname[bdtname.find('['):] 
+                else:
+                    sysBDTNameUp += "_%sUp" % sysName
+                    sysBDTNameDown += "_%sDown" % sysName
+
+            passSysup = "Pass_%sUp" % sysName
+            passSysdown = "Pass_%sDown" % sysName
+            cutStringup = cutString.replace("controlSample","controlSample_%sUp"%sysName)
+            cutStringdown = cutString.replace("controlSample","controlSample_%sDown"%sysName)
         if (sysWeight != "1.0" and sysWeight.find(".root") == -1):
             if (sysWeight.find(',') == -1):
                 if (sysWeight.find("bTagWeight") != -1):
                     bTagWeightNom = sysWeight[:sysWeight.find('_')]
                     print "bTagWeightNom = "+bTagWeightNom
-                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./%s)*%s*(%sUp)" % (cutString,passSys,bTagWeightNom,weight_string,sysWeight))   
-                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./%s)*%s*(%sDown)" % (cutString,passSys,bTagWeightNom,weight_string,sysWeight))  
+                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./%s)*%s*(%sUp)" % (cutStringup,passSysup,bTagWeightNom,weight_string,sysWeight))   
+                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./%s)*%s*(%sDown)" % (cutStringdown,passSysdown,bTagWeightNom,weight_string,sysWeight))  
                 elif (sysWeight.find("VPtCorrFactorSplit") != -1):
-                     tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sUp)" % (cutString,passSys,weight_string,sysWeight)) 
-                     tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sDown)" % (cutString,passSys,weight_string,sysWeight))
+                     tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sUp)" % (cutStringup,passSysup,weight_string,sysWeight)) 
+                     tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_string,sysWeight))
                      #if hBDTSystUp.Integral() > 0:
                      #    hBDTSystUp.Scale(hBDT.Integral()/hBDTSystUp.Integral())                
                      #if hBDTSystDown.Integral() > 0: 
@@ -466,8 +475,8 @@ for sample in sampleMap:
                 #    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./puWeight)*%s*(%sUp)" % (cutString,passSys,weight_string,sysWeight))   
                 #    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./puWeight)*%s*(%sDown)" % (cutString,passSys,weight_string,sysWeight))   
                 else:
-                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%sUp)" % (cutString,passSys,weight_string,sysWeight))   
-                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%sDown)" % (cutString,passSys,weight_string,sysWeight))  
+                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%sUp)" % (cutStringup,passSysup,weight_string,sysWeight))   
+                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_string,sysWeight))  
             else:
                 # separate branches for up/down variation
                 sysWeightUp = sysWeight.split(',')[0]
@@ -591,10 +600,10 @@ for sample in sampleMap:
                 #print sysWeightUp,sysWeightDown 
                       
                 #print "tree.Draw(\"%s>>BDT_%s_%s_%sUp\",\"((%s)&&%s)*%s*(%s)\")" % (sysBDTNameUp, catName,sample, syst,cutString,passSys,weight_string,sysWeightUp)
-                tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%s)" % (cutString,passSys,weight_string,sysWeightUp)) 
+                tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%s)" % (cutStringup,passSysup,weight_string,sysWeightUp)) 
                 #print hBDTSystUp.Integral() 
                 #print "tree.Draw(\"%s>>BDT_%s_%s_%sUp\",\"((%s)&&%s)*%s*(%s)\")" % (sysBDTNameDown, catName,sample, syst,cutString,passSys,weight_string,sysWeightDown)
-                tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%s)" % (cutString,passSys,weight_string,sysWeightDown))  
+                tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%s)" % (cutStringdown,passSysdown,weight_string,sysWeightDown))  
                 #print hBDTSystDown.Integral()
                 
                 if (syst.find("LHE_weights_pdf")!=-1): 
@@ -634,15 +643,17 @@ for sample in sampleMap:
         else:
             #tree.Draw("%s>>%s_%sUp" % (sysBDTNameUp, sample, syst),"(%s)*weight*(2.2/1.28)" % (cutString))   
             #tree.Draw("%s>>%s_%sUp" % (sysBDTNameUp, sample, syst),"((%s)&&%s)*%s" % (cutString,passSys,weight_string))   
-            tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s" % (cutString,passSys,weight_string))   
+            print passSysup
+            tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s" % (cutStringup,passSysup,weight_string))   
             #tree.Draw("%s>>%s_%sDown" % (sysBDTNameDown, sample, syst),"(%s)*weight*(2.2/1.28)" % (cutString))   
             #tree.Draw("%s>>%s_%sDown" % (sysBDTNameDown, sample, syst),"((%s)&&%s)*%s" % (cutString,passSys,weight_string))   
-            tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName,sample, syst),"((%s)&&%s)*%s" % (cutString,passSys,weight_string))   
+            print passSysdown
+            tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName,sample, syst),"((%s)&&%s)*%s" % (cutStringdown,passSysdown,weight_string))   
             if (syst.find("Model") != -1):
                 # shape from different sample (amc@NLO vs. POWHEG, for example)
                 cutStringAltModel = makeCutString(sample,sampleMapAltModel)
                 hBDTAltModel = ROOT.TH1F("%s_%sAltModel" % (sample,syst), "%s_%sAltModel" % (sample,syst),nBins,binBoundaries)
-                tree.Draw("%s>>%s_%sAltModel" % (sysBDTNameUp, sample, syst),"((%s)&&%s)*%s" % (cutStringAltModel,passSys,weight_string))
+                tree.Draw("%s>>%s_%sAltModel" % (sysBDTNameUp, sample, syst),"((%s)&&%s)*%s" % (cutStringAltModel,passSysup,weight_string))
                 if (hBDTAltModel.Integral() != 0):
                     hBDTAltModel.Scale(hBDT.Integral()/hBDTAltModel.Integral())
                 # hnom + (hnom - halt) = 2*hnom - halt

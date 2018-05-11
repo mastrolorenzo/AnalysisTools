@@ -642,12 +642,19 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                         nb = fChain->GetEntry(jentry);
                         nbytes += nb;
 
+                        cursyst=&(systematics[iSyst]);
                         // set bdt inputs and output to std value before evaluating/saving the event
                         for(std::map<std::string,BDTInfo*>::iterator itBDTInfo=bdtInfos.begin(); itBDTInfo!=bdtInfos.end(); itBDTInfo++){
                             InitializeBDTVariables(itBDTInfo->second);
+                            std::string bdt_syst_name = itBDTInfo->second->bdtname;
+                            if(cursyst->name != "nominal"){
+                                bdt_syst_name.append("_");
+                                bdt_syst_name.append(cursyst->name);
+                                *f[bdt_syst_name] = -99;
+                            }
                         }
 
-                        cursyst=&(systematics[iSyst]);
+
                         if (cursample->sampleNum == 0 && cursyst->name != "nominal") continue;
                         ApplySystematics();
                         if(debug>1000) std::cout<<"running analysis"<<std::endl;
@@ -837,7 +844,10 @@ void AnalysisManager::SetupSystematicsBranches(){
         if (systematics[iSyst].name != "nominal") {
             SetupNewBranch(Form("H_mass_%s", systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("H_pt_%s", systematics[iSyst].name.c_str()), 2);
-            SetupNewBranch(Form("Jet_btagCSV_%s", systematics[iSyst].name.c_str()), 7, 100);
+            SetupNewBranch(Form("V_pt_%s", systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("controlSample_%s", systematics[iSyst].name.c_str()), 1);
+            SetupNewBranch(Form("weight_%s", systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("Jet_btagCSV_%s", systematics[iSyst].name.c_str()), 8, 250);
             SetupNewBranch(Form("nAddJets252p9_puid_%s", systematics[iSyst].name.c_str()), 1);
         }
     }
