@@ -7,7 +7,7 @@ except ImportError:
     print 'Checkout https://github.com/HeinerTholen/Varial'
     exit(-1)
 
-from varial_ext.treeprojector import TreeProjector
+from varial_ext.treeprojector import TreeProjectorFileBased
 from varial.util import iterableize
 import collections
 import itertools
@@ -112,7 +112,7 @@ def mk_tree_projector(region_block):
     )
 
     # create and feed the tool for the plot-from-tree step
-    TP_class = getattr(config, 'TreeProjector', TreeProjector)
+    TP_class = getattr(config, 'TreeProjector', TreeProjectorFileBased)
     return TP_class(
         filenames, params, sec_sel_weight,
         name=region_block,
