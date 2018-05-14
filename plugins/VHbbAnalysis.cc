@@ -260,6 +260,48 @@ bool VHbbAnalysis::Analyze() {
 //                    _|
 //                    _|
 
+    //Corrections to MET needed before first instance of MET_Pt selection. FIXME should be moved back to original location once full switch to nanoV3 is possible
+    if (debug > 1000) std::cout << "Looping over jets" << std::endl;
+    for (int i = 0; i < mInt("nJet"); i++) {
+        if (int(m("doReg")) == 0) {
+            // don't apply the regression. The easiest way to do this is to just reset the value of
+            // the regressed jet pt to the nominal jet pt, since we build everything later from the
+            // jet pt's
+            f["Jet_bReg"][i] = m("Jet_Pt",i);
+        } else {
+            // add smearing on top of regression-->replace Jet_bReg
+            if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) {
+                float jet_cosPhi = TMath::Cos(m("Jet_phi",i));
+                float jet_sinPhi = TMath::Sin(m("Jet_phi",i));
+                float met_cosPhi = TMath::Cos(m("MET_Phi",i));
+                float met_sinPhi = TMath::Sin(m("MET_Phi",i));
+                float met_px = met_cosPhi * m("MET_Pt"); 
+                float met_py = met_sinPhi * m("MET_Pt"); 
+                met_px = met_px + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
+                met_py = met_py + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
+                *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
+                *f["MET_Phi"] = TMath::ATan2(met_py, met_px);
+                f["Jet_Pt"][i] = m("Jet_pt",i);
+            }
+            else {
+                f["Jet_bReg"][i] = m("Jet_bReg",i) * m("Jet_Pt",i)/ m("Jet_pt",i);
+            }
+        }
+
+        if (int(m("doCMVA")) != 0) {
+           // use CMVAv2 discriminator instead of CSV
+           f["Jet_btagCSVV2"][i] = m("Jet_btagCMVA",i);
+        }
+
+        // Do this in pre-selection
+        //// apply JER smearing x times the nominal smearing amount
+        //float JERScale = *f["JERScale"];
+        //if (JERScale != 1.0) {
+        //    smearJets(JERScale);
+        //} else if (int(*f["reReg"]) != 0) {
+        //    f["Jet_bReg"][i] = evaluateRegression(i);
+        //}
+    }
     // leptons have to be selected before bjets, since we need to know which channel we're in
     *in["lepInd1"] = *in["muInd1"] = *in["elInd1"] = -1;
     *in["lepInd2"] = *in["muInd2"] = *in["elInd2"] = -1;
@@ -408,47 +450,8 @@ bool VHbbAnalysis::Analyze() {
 
 
     // leptons had to be selected before bjets, since we need to know which channel we're in
-    if (debug > 1000) std::cout << "Looping over jets" << std::endl;
-    for (int i = 0; i < mInt("nJet"); i++) {
-        if (int(m("doReg")) == 0) {
-            // don't apply the regression. The easiest way to do this is to just reset the value of
-            // the regressed jet pt to the nominal jet pt, since we build everything later from the
-            // jet pt's
-            f["Jet_bReg"][i] = m("Jet_Pt",i);
-        } else {
-            // add smearing on top of regression-->replace Jet_bReg
-            if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) {
-                float jet_cosPhi = TMath::Cos(m("Jet_phi",i));
-                float jet_sinPhi = TMath::Sin(m("Jet_phi",i));
-                float met_cosPhi = TMath::Cos(m("MET_Phi",i));
-                float met_sinPhi = TMath::Sin(m("MET_Phi",i));
-                float met_px = met_cosPhi * m("MET_Pt"); 
-                float met_py = met_sinPhi * m("MET_Pt"); 
-                met_px = met_px + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
-                met_py = met_py + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
-                *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
-                *f["MET_Phi"] = TMath::ATan2(met_py, met_px);
-                f["Jet_Pt"][i] = m("Jet_pt",i);
-            }
-            else {
-                f["Jet_bReg"][i] = m("Jet_bReg",i) * m("Jet_Pt",i)/ m("Jet_pt",i);
-            }
-        }
 
-        if (int(m("doCMVA")) != 0) {
-           // use CMVAv2 discriminator instead of CSV
-           f["Jet_btagCSVV2"][i] = m("Jet_btagCMVA",i);
-        }
 
-        // Do this in pre-selection
-        //// apply JER smearing x times the nominal smearing amount
-        //float JERScale = *f["JERScale"];
-        //if (JERScale != 1.0) {
-        //    smearJets(JERScale);
-        //} else if (int(*f["reReg"]) != 0) {
-        //    f["Jet_bReg"][i] = evaluateRegression(i);
-        //}
-    }
 
     // keep track of each jet selection method separately
     float j1ptCut, j2ptCut, j1ptBtag;
