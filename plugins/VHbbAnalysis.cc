@@ -55,11 +55,6 @@ void VHbbAnalysis::InitAnalysis() {
 bool VHbbAnalysis::Preselection() {
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
 
-
-    *b["twoResolvedJets"]=false;
-    *b["oneMergedJet"]=false;
-    *in["FatJetCand_index"]=-1;
-
   
     //Set the b-tagger
     SetTaggerName(m("taggerType"));
