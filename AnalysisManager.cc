@@ -109,13 +109,9 @@ void AnalysisManager::AddScaleFactor(SFContainer sf) {
 
 void AnalysisManager::InitializeBTagSF(const std::string & bTagCalibFile) {
 
-    // TODO uncertainties:
-    // lf: {"up_jes", "down_jes", "up_hf", "down_hf", "up_lfstats1", "down_lfstats1", "up_lfstats2", "down_lfstats2"}
-    // c:  {"up_cferr1", "down_cferr1", "up_cferr2", "down_cferr2"}
-    // hf: {"up_jes", "down_jes", "up_lf", "down_lf", "up_hfstats1", "down_hfstats1", "up_hfstats2", "down_hfstats2"}
-
     BTagCalibration calib("taggernamedoesntmatter", bTagCalibFile);
-    bTagCalibReader.reset(new BTagCalibrationReader(BTagEntry::OP_RESHAPING, "central"));
+    bTagCalibReader.reset(new BTagCalibrationReader(BTagEntry::OP_RESHAPING, "central",{"up_jes","down_jes","up_lf","down_lf","up_hf","down_hf","up_hfstats1","down_hfstats1","up_hfstats2","down_hfstats2","up_lfstats1","down_lfstats1","up_lfstats2","down_lfstats2","up_cferr1","down_cferr1","up_cferr2","down_cferr2"}));
+
     bTagCalibReader->load(calib, BTagEntry::FLAV_B,     "iterativeFit");
     bTagCalibReader->load(calib, BTagEntry::FLAV_C,     "iterativeFit");
     bTagCalibReader->load(calib, BTagEntry::FLAV_UDSG,  "iterativeFit");

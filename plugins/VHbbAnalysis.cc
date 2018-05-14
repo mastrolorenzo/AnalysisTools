@@ -1432,11 +1432,49 @@ void VHbbAnalysis::FinishEvent() {
 
     // b tag weights
     *f["bTagWeight"] = 1.0; // we still need a default value of this even if we don't evaluate it
+    *f["bTagWeight_JESUp"] = 1.0;
+    *f["bTagWeight_JESDown"] = 1.0;
+    *f["bTagWeight_HFUp"] = 1.0;
+    *f["bTagWeight_HFDown"] = 1.0;
+    *f["bTagWeight_LFUp"] = 1.0;
+    *f["bTagWeight_LFDown"] = 1.0;
+    *f["bTagWeight_LFStats1Up"] = 1.0;
+    *f["bTagWeight_LFStats1Down"] = 1.0;
+    *f["bTagWeight_LFStats2Up"] = 1.0;
+    *f["bTagWeight_LFStats2Down"] = 1.0;
+    *f["bTagWeight_HFStats1Up"] = 1.0;
+    *f["bTagWeight_HFStats1Down"] = 1.0;
+    *f["bTagWeight_HFStats2Up"] = 1.0;
+    *f["bTagWeight_HFStats2Down"] = 1.0;
+    *f["bTagWeight_cErr1Up"] = 1.0;
+    *f["bTagWeight_cErr1Down"] = 1.0;
+    *f["bTagWeight_cErr2Up"] = 1.0;
+    *f["bTagWeight_cErr2Down"] = 1.0;
+
     if (bTagCalibReader) {
         if (debug>101) std::cout<<"evaluating btag scale factors"<<std::endl;
 
         // TODO uncertainties
         float bTagWeight = 1.;
+        float bTagWeight_jes_up = 1.;
+        float bTagWeight_jes_down = 1.;
+        float bTagWeight_hf_up = 1.;
+        float bTagWeight_hf_down = 1.;
+        float bTagWeight_lf_up = 1.;
+        float bTagWeight_lf_down = 1.;
+        float bTagWeight_lfstats1_up = 1.;
+        float bTagWeight_lfstats1_down = 1.;
+        float bTagWeight_lfstats2_up = 1.;
+        float bTagWeight_lfstats2_down = 1.;
+        float bTagWeight_hfstats1_up = 1.;
+        float bTagWeight_hfstats1_down = 1.;
+        float bTagWeight_hfstats2_up = 1.;
+        float bTagWeight_hfstats2_down = 1.;
+        float bTagWeight_cferr1_up = 1.;
+        float bTagWeight_cferr1_down = 1.;
+        float bTagWeight_cferr2_up = 1.;
+        float bTagWeight_cferr2_down = 1.;
+
         for (int i=0; i<mInt("nJet"); i++)
         {
             if (m("Jet_puId", i) > 0
@@ -1457,9 +1495,73 @@ void VHbbAnalysis::FinishEvent() {
                     m(taggerName, i)
 
                 );
+                if(hadron_flav==5){
+                    bTagWeight_jes_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_jes_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_lf_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_lf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_lf_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_lf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_hfstats1_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_hfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_hfstats1_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_hfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_hfstats2_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_hfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_hfstats2_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_hfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                } else if (hadron_flav==4){
+                    bTagWeight_cferr1_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_cferr1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_cferr1_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_cferr1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_cferr2_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_cferr2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_cferr2_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_cferr2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                } else {
+                    bTagWeight_jes_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_jes_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_hf_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_hf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_hf_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_hf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_lfstats1_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_lfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_lfstats1_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_lfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_lfstats2_up *= bTagCalibReader->eval_auto_bounds(
+                        "up_lfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                    bTagWeight_lfstats2_down *= bTagCalibReader->eval_auto_bounds(
+                        "down_lfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                }
+
             }
         }
         *f["bTagWeight"] = bTagWeight;
+        *f["bTagWeight_JESUp"] = bTagWeight_jes_up/bTagWeight;
+        *f["bTagWeight_JESDown"] = bTagWeight_jes_down/bTagWeight;
+        *f["bTagWeight_HFUp"] = bTagWeight_hf_up/bTagWeight;
+        *f["bTagWeight_HFDown"] = bTagWeight_hf_down/bTagWeight;
+        *f["bTagWeight_LFUp"] = bTagWeight_lf_up/bTagWeight;
+        *f["bTagWeight_LFDown"] = bTagWeight_lf_down/bTagWeight;
+        *f["bTagWeight_LFStats1Up"] = bTagWeight_lfstats1_up/bTagWeight;
+        *f["bTagWeight_LFStats1Down"] = bTagWeight_lfstats1_down/bTagWeight;
+        *f["bTagWeight_LFStats2Up"] = bTagWeight_lfstats2_up/bTagWeight;
+        *f["bTagWeight_LFStats2Down"] = bTagWeight_lfstats2_down/bTagWeight;
+        *f["bTagWeight_HFStats1Up"] = bTagWeight_hfstats1_up/bTagWeight;
+        *f["bTagWeight_HFStats1Down"] = bTagWeight_hfstats1_down/bTagWeight;
+        *f["bTagWeight_HFStats2Up"] = bTagWeight_hfstats2_up/bTagWeight;
+        *f["bTagWeight_HFStats2Down"] = bTagWeight_hfstats2_down/bTagWeight;
+        *f["bTagWeight_cErr1Up"] = bTagWeight_cferr1_up/bTagWeight;
+        *f["bTagWeight_cErr1Down"] = bTagWeight_cferr1_down/bTagWeight;
+        *f["bTagWeight_cErr2Up"] = bTagWeight_cferr2_up/bTagWeight;
+        *f["bTagWeight_cErr2Down"] = bTagWeight_cferr2_down/bTagWeight;
+
     }
 
     //MET trigger efficiency
