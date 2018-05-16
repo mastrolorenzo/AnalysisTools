@@ -44,6 +44,7 @@ type=4  name=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL
 type=4  name=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL
 type=4  name=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ
 type=4  name=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 allowMissingBranch=1
+type=4  name=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8 allowMissingBranch=1
 type=4  name=HLT_IsoMu24
 type=4  name=HLT_IsoMu27
 type=4  name=HLT_PFMET110_PFMHT110_IDTight
