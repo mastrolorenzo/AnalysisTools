@@ -193,22 +193,22 @@ void AnalysisManager::SetupBranch(std::string name, int type, int length, int on
     if(debug>10000) std::cout<<"checking type and setting branch address.  type "<<type<<std::endl;
 
     if(type==0) {
-        ui[name] = new unsigned int;
+        ui[name] = new unsigned int();
         fChain->SetBranchAddress(name.c_str(), ui[name], &branches[name]);
     } else if(type==1) {
-        in[name] = new int;
+        in[name] = new int();
         fChain->SetBranchAddress(name.c_str(), in[name], &branches[name]);
     } else if(type==2) {
-        f[name] = new float;
+        f[name] = new float();
         fChain->SetBranchAddress(name.c_str(), f[name], &branches[name]);
     } else if(type==3) {
-        d[name] = new double;
+        d[name] = new double();
         fChain->SetBranchAddress(name.c_str(), d[name], &branches[name]);
     } else if(type==4) {
-        b[name] = new bool;
+        b[name] = new bool();
         fChain->SetBranchAddress(name.c_str(), b[name], &branches[name]);
     } else if(type==5) {
-        uc[name] = new char;
+        uc[name] = new char();
         fChain->SetBranchAddress(name.c_str(), uc[name], &branches[name]);
     }
 
@@ -220,22 +220,22 @@ void AnalysisManager::SetupBranch(std::string name, int type, int length, int on
     }
 
     if(type==6) {
-        ui[name] = new unsigned int[length];
+        ui[name] = new unsigned int[length]();
         fChain->SetBranchAddress(name.c_str(), ui[name], &branches[name]);
     } else if(type==7) {
-        in[name] = new int[length];
+        in[name] = new int[length]();
         fChain->SetBranchAddress(name.c_str(), in[name], &branches[name]);
     } else if(type==8) {
-        f[name] = new float[length];
+        f[name] = new float[length]();
         fChain->SetBranchAddress(name.c_str(), f[name], &branches[name]);
     } else if(type==9) {
-        d[name] = new double[length];
+        d[name] = new double[length]();
         fChain->SetBranchAddress(name.c_str(), d[name], &branches[name]);
     } else if(type==10) {
-        b[name] = new bool[length];
+        b[name] = new bool[length]();
         fChain->SetBranchAddress(name.c_str(), b[name], &branches[name]);
     } else if(type==11) {
-        uc[name] = new char[length];
+        uc[name] = new char[length]();
         fChain->SetBranchAddress(name.c_str(), uc[name], &branches[name]);
     }       
 
@@ -281,19 +281,19 @@ void AnalysisManager::SetupNewBranch(std::string name, int type, int length, boo
     }
 
     if(type==0) {
-        if(newmem) ui[name] = new unsigned int;
+        if(newmem) ui[name] = new unsigned int();
         branches[name] = treeptr->Branch(name.c_str(), ui[name], Form("%s/i",name.c_str()));
     } else if(type==1) {
-        if(newmem) in[name] = new int;
+        if(newmem) in[name] = new int();
         branches[name] = treeptr->Branch(name.c_str(), in[name], Form("%s/I",name.c_str()));
     } else if(type==2) {
-        if(newmem) f[name] = new float;
+        if(newmem) f[name] = new float();
         branches[name] = treeptr->Branch(name.c_str(), f[name], Form("%s/F",name.c_str()));
     } else if(type==3) {
-        if(newmem) d[name] = new double;
+        if(newmem) d[name] = new double();
         branches[name] = treeptr->Branch(name.c_str(), d[name], Form("%s/D",name.c_str()));
     } else if(type==4) {
-        if(newmem) b[name] = new bool;
+        if(newmem) b[name] = new bool();
         branches[name] = treeptr->Branch(name.c_str(), b[name], Form("%s/O",name.c_str()));
     } /*else if(type==5) {
         if(newmem) uc[name] = new char;
@@ -308,22 +308,22 @@ void AnalysisManager::SetupNewBranch(std::string name, int type, int length, boo
     }
 
     if(type==6) {
-        if(newmem) ui[name] = new unsigned int[length];
+        if(newmem) ui[name] = new unsigned int[length]();
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), ui[name], Form("%s[%i]/i",name.c_str(),length));
     } else if(type==7) {
-        if(newmem) in[name] = new int[length];
+        if(newmem) in[name] = new int[length]();
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), in[name], Form("%s[%i]/I",name.c_str(),length));
     } else if(type==8) {
-        if(newmem) f[name] = new float[length];
+        if(newmem) f[name] = new float[length]();
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), f[name], Form("%s[%i]/F",name.c_str(),length));
     } else if(type==9) {
-        if(newmem) d[name] = new double[length];
+        if(newmem) d[name] = new double[length]();
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), d[name], Form("%s[%i]/D",name.c_str(),length));
     } else if(type==10) {
-        if(newmem) b[name] = new bool[length];
+        if(newmem) b[name] = new bool[length]();
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), b[name], Form("%s[%i]/O",name.c_str(),length));
     } /*else if(type==11) {
-        if(newmem) uc[name] = new char[length];
+        if(newmem) uc[name] = new char[length]();
         branches[name] = treeptr->Branch(Form("%s",name.c_str()), uc[name], Form("%s[%i]/C",name.c_str(),length));
     }*/
 
