@@ -2915,6 +2915,7 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
         // 2-lepton
         if ((vtype == 0 || vtype == 1)
             && mInt("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8") != 1
+            && mInt("HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8") != 1
             && mInt("HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL") != 1
            ) {
             return false;
