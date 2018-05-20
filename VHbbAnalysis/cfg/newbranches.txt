@@ -48,7 +48,6 @@ type=2  name=weight_PU_2016to2017
 type=2  name=weight_PU
 type=2  name=weight_PUUp
 type=2  name=weight_PUDown
-type=2  name=weight_ptQCD
 type=2  name=weight_ptEWK
 type=2  name=recoWReWeight
 type=2  name=recoWReWeightUp

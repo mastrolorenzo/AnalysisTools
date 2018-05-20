@@ -1635,7 +1635,6 @@ void VHbbAnalysis::FinishEvent() {
         *f["intWeight"] = 1.0;
     }
 
-    *f["weight_ptQCD"] = 1.0;
 
     *f["weight_PU_2016to2017"] = 1.0;
     if(mInt("sampleIndex")!=0){
@@ -1662,10 +1661,10 @@ void VHbbAnalysis::FinishEvent() {
             *f["weight_PUUp"] = GetPUWeight(m("Pileup_nTrueInt"),1);
             *f["weight_PUDown"] = GetPUWeight(m("Pileup_nTrueInt"),-1);
         }
-        if (mInt("nGenTop")==0 && mInt("nGenVbosons")>0) {
+        /*if (mInt("nGenTop")==0 && mInt("nGenVbosons")>0) {
             // only apply to Z/W+jet samples
             *f["weight_ptQCD"]=ptWeightQCD(mInt("nGenVbosons"), m("LHE_HT"), mInt("LeadGenVBoson_pdgId"));
-        }
+        }*/
     } else {
         *f["weight_PU"]=1;
         *f["weight_PUUp"]=1;
@@ -2389,17 +2388,17 @@ void VHbbAnalysis::FinishEvent() {
                 }
                 if(debug>1000) std::cout<<"weight_ptEWK V_pt "<< m("V_pt")<<" "<<*f["weight_ptEWK"]<<std::endl;
             }
+        } else if(mInt("sampleIndex")>0 && mInt("nGenTop")==0 && mInt("nGenVbosons")>0){
+            *f["weight_ptEWK"]=ptWeightEWK(mInt("nGenVbosons"), m("LeadGenVBoson_pt"), m("Vtype"), mInt("LeadGenVBoson_pdgId"));
         }
-        // FIXME this is what was done before;  shall we remove the method?
-        //*f["weight_ptEWK"]=ptWeightEWK(mInt("nGenVbosons"), m("LeadGenVBoson_pt"), m("Vtype"), mInt("LeadGenVBoson_pdgId"));
 
         /* ELECTROWEAK CORRECTION APPLIED*/
 
         if (m("doCutFlow")>0 && m("cutFlow")<5) {
             // lepton scale factor calculation will break for some events in the cutflow before lepton selection
-            *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("weight_mettrigSF");
+            *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptEWK") * m("weight_mettrigSF");
         } else {
-            *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptQCD") * m("weight_ptEWK") * m("Lep_SF") * m("weight_mettrigSF");
+            *f["weight"] = m("weight") * m("weight_PU") * m("bTagWeight") * m("weight_ptEWK") * m("Lep_SF") * m("weight_mettrigSF");
         }
 
         // 2016 pT(W) re-weighting from fit to data
@@ -2417,27 +2416,26 @@ void VHbbAnalysis::FinishEvent() {
         // FIXME need a flag for LO vs NLO
         int sampleIndex = mInt("sampleIndex");
         float WJetNLOWeight = 1.0;
-        float weight_ptQCD = m("weight_ptQCD");
-        if ((sampleIndex<4000 || sampleIndex>4702) && (sampleIndex<5000||sampleIndex>5402) && (sampleIndex<11000 || sampleIndex>11702) && (sampleIndex<15000 || sampleIndex>15002)) { WJetNLOWeight = 1.0; }
+        if ((sampleIndex<4000 || sampleIndex>4702) && (sampleIndex<5000||sampleIndex>5402) && (sampleIndex<11000 || sampleIndex>11702) && (sampleIndex<15000 || sampleIndex>15602)) { WJetNLOWeight = 1.0; }
         else if(m("twoResolvedJets")) {
             float deta_bb = fabs(m("Jet_eta",mInt("hJetInd1")) - m("Jet_eta",mInt("hJetInd2")));
             if(sampleIndex==4000 || sampleIndex==4100 || sampleIndex==4200 || sampleIndex==4300 || sampleIndex==4400 || sampleIndex==4500 || sampleIndex==4600 || sampleIndex==4700 || sampleIndex==5000 || sampleIndex==5100 || sampleIndex==5300 || sampleIndex==5400
                || sampleIndex==11000 || sampleIndex==11100 || sampleIndex == 11200 || sampleIndex == 11300 ||sampleIndex==11400 || sampleIndex==11500 || sampleIndex==11600 ||sampleIndex==11700
                || sampleIndex==15000 || sampleIndex==15100 || sampleIndex == 15200 || sampleIndex == 15300 || sampleIndex == 15400 || sampleIndex==15500|| sampleIndex==15600) {
                 WJetNLOWeight = LOtoNLOWeightBjetSplitEtabb(deta_bb, 0);
-                WJetNLOWeight = (WJetNLOWeight/weight_ptQCD)*1.21;
+                WJetNLOWeight = WJetNLOWeight*1.153;
             }
             else if(sampleIndex==4001 || sampleIndex==4101 || sampleIndex==4201 || sampleIndex==4301 || sampleIndex==4401 || sampleIndex==4501 || sampleIndex==4601 || sampleIndex==4701 || sampleIndex==5001 || sampleIndex==5101 || sampleIndex==5301 || sampleIndex==5401
                || sampleIndex==11001 || sampleIndex==11101 || sampleIndex==11201 || sampleIndex==11301 || sampleIndex==11401 || sampleIndex==11501 || sampleIndex==11601 ||sampleIndex==11701
                || sampleIndex==15001 || sampleIndex==15101 || sampleIndex==15201 || sampleIndex==15301 || sampleIndex==15401 || sampleIndex==15501|| sampleIndex==15601) {
                 WJetNLOWeight = LOtoNLOWeightBjetSplitEtabb(deta_bb, 1);
-                WJetNLOWeight = (WJetNLOWeight/weight_ptQCD)*1.21;
+                WJetNLOWeight = WJetNLOWeight*1.153;
             }
             else if(sampleIndex==4002 || sampleIndex==4102 || sampleIndex==4202 || sampleIndex==4302 || sampleIndex==4402 || sampleIndex==4502 || sampleIndex==4602 || sampleIndex==4702 || sampleIndex==5002 || sampleIndex==5102 || sampleIndex==5302 || sampleIndex==5402
                || sampleIndex==11002 || sampleIndex==11102 || sampleIndex==11202 || sampleIndex==11302 || sampleIndex==11402 || sampleIndex==11502 || sampleIndex==11602 ||sampleIndex==11702
                || sampleIndex==15002 || sampleIndex==15102 || sampleIndex==15202 || sampleIndex==15302 || sampleIndex==15402 || sampleIndex==15502|| sampleIndex==15602) {
                 WJetNLOWeight = LOtoNLOWeightBjetSplitEtabb(deta_bb, 2);
-                WJetNLOWeight = (WJetNLOWeight/weight_ptQCD)*1.21;
+                WJetNLOWeight = WJetNLOWeight*1.153;
             }
         }
         *f["weight"] = m("weight") * WJetNLOWeight;
