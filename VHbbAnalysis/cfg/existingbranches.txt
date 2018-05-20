@@ -34,6 +34,11 @@ type=11  name=GenJet_hadronFlavour               max=30  onlyMC=1 lengthBranch=n
 
 type=5  name=LHE_Nc  onlyMC=1     allowMissingBranch=1
 
+type=0  name=nLHEScaleWeight                     onlyMC=1 allowMissingBranch=1
+type=8  name=LHEScaleWeight                      max=10    onlyMC=1   lengthBranch=nLHEScaleWeight allowMissingBranch=1
+type=0  name=nLHEPdfWeight                       onlyMC=1   allowMissingBranch=1
+type=8  name=LHEPdfWeight                        max=110    onlyMC=1   lengthBranch=nLHEPdfWeight allowMissingBranch=1
+
 #type=7  name=GenJet_pdgId                       max=20  onlyMC=1
 #type=7  name=GenJet_numBHadrons                 max=20  onlyMC=1
 #type=7  name=GenJet_numCHadrons                 max=20  onlyMC=1

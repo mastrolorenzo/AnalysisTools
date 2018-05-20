@@ -39,8 +39,8 @@ inline SampleContainer::SampleContainer()
     nProFromFile=false;
     doJetFlavorSplit = false;
     procEff = 1.;
-    CountWeightedLHEWeightScale = new TH1F("CountWeightedLHEWeightScale","CountWeightedLHEWeightScale",6,-0.5,5.5);
-    CountWeightedLHEWeightPdf = new TH1F("CountWeightedLHEWeightPdf","CountWeightedLHEWeightPdf",103,-0.5,102.5);
+    CountWeightedLHEWeightScale = new TH1F("CountWeightedLHEWeightScale","CountWeightedLHEWeightScale",9,-0.5,8.5);
+    CountWeightedLHEWeightPdf = new TH1F("CountWeightedLHEWeightPdf","CountWeightedLHEWeightPdf",120,-0.5,119.5);
     CountWeighted = new TH1F("CountWeighted","CountWeighted",1,0.,2.0);
     CountFullWeighted = new TH1F("CountFullWeighted","CountFullWeighted",1,0.,2.0);
     InputPU = NULL;
@@ -109,7 +109,11 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
             // totally different setup for grabbing event count in nanoAOD
             TTree *Runs = (TTree*) file->Get("Runs");
             Double_t genEventSumw = 0;
+            Double_t lheScales[9];
+            Double_t lhePdfs[120];
             Runs->SetBranchAddress("genEventSumw",&genEventSumw);
+            Runs->SetBranchAddress("LHEScaleSumw",&lheScales);
+            Runs->SetBranchAddress("LHEPdfSumw",&lhePdfs);
             // one entry in Runs tree per input NanoAOD file
             int nNanoInputFiles = Runs->GetEntries();
             std::cout<<"From Runs tree, processedEvents is (before) "<<processedEvents<<std::endl;
@@ -118,6 +122,13 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
                 std::cout<<fname<<" genEventSumw: "<<genEventSumw<<std::endl;
                 CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventSumw);
                 processedEvents += genEventSumw;
+                for (int j=0; j<9; j++) {
+                    CountWeightedLHEWeightScale->SetBinContent(j+1,CountWeightedLHEWeightScale->GetBinContent(j+1)+lheScales[j]);
+                }
+                for (int j=0; j<120; j++) {
+                    CountWeightedLHEWeightPdf->SetBinContent(j+1,CountWeightedLHEWeightPdf->GetBinContent(j+1)+lhePdfs[j]);
+                }
+
             }
             std::cout<<"From Runs tree, processedEvents is (after)  "<<processedEvents<<std::endl;
         }

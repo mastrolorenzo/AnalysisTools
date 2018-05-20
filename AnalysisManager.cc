@@ -700,14 +700,14 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
         } // end file loop
         ofile->cd();
         if (!doSkim) {
-            //cursample->CountWeightedLHEWeightScale->Write(Form("CountWeightedLHEWeightScale_%s",cursample->sampleName.c_str()));
-            //cursample->CountWeightedLHEWeightPdf->Write(Form("CountWeightedLHEWeightPdf_%s",cursample->sampleName.c_str()));
+            cursample->CountWeightedLHEWeightScale->Write(Form("CountWeightedLHEWeightScale_%s",cursample->sampleName.c_str()));
+            cursample->CountWeightedLHEWeightPdf->Write(Form("CountWeightedLHEWeightPdf_%s",cursample->sampleName.c_str()));
             cursample->CountWeighted->Write(Form("CountWeighted_%s",cursample->sampleName.c_str()));
             //cursample->CountFullWeighted->Write(Form("CountFullWeighted_%s",cursample->sampleName.c_str()));
         }
         else {
-            //cursample->CountWeightedLHEWeightScale->Write();
-            //cursample->CountWeightedLHEWeightPdf->Write();
+            cursample->CountWeightedLHEWeightScale->Write();
+            cursample->CountWeightedLHEWeightPdf->Write();
             cursample->CountWeighted->Write();
             //cursample->CountFullWeighted->Write();
         }

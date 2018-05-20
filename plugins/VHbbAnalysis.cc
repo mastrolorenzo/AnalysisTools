@@ -1596,23 +1596,27 @@ void VHbbAnalysis::FinishEvent() {
     else {
         *f["nProcEvents"] = cursample->processedEvents;
     }
-    //if (*in["sampleIndex"] != 0) {
-    //    for (int i=0; i<*in["nLHE_weights_scale"];i++) {
-    //        TH1F *CountWeightedLHEWeightScale = cursample->CountWeightedLHEWeightScale;
-    //        f["LHE_weights_scale_normwgt"][i] = *f["nProcEvents"] / CountWeightedLHEWeightScale->GetBinContent(CountWeightedLHEWeightScale->FindBin(i));
-    //    }
-    //    for (int i=0; i<*in["nLHE_weights_pdf"];i++) {
-    //        TH1F *CountWeightedLHEWeightPdf = cursample->CountWeightedLHEWeightPdf;
-    //        if (CountWeightedLHEWeightPdf->GetBinContent(CountWeightedLHEWeightPdf->FindBin(i)) != 0) {
-    //            f["LHE_weights_pdf_normwgt"][i] = *f["nProcEvents"] / CountWeightedLHEWeightPdf->GetBinContent(CountWeightedLHEWeightPdf->FindBin(i));
-    //        }
-    //        else {
-    //            f["LHE_weights_pdf_normwgt"][i] = 1.0;
-    //        }
-    //        //cout<<f["LHE_weights_pdf_normwgt"][i]<<" = "<<*f["nProcEvents"]<<" / "<<CountWeightedLHEWeightPdf->GetBinContent(CountWeightedLHEWeightPdf->FindBin(i))<<endl;
-    //    }
-    //}
-    //cout<<f["LHE_weights_pdf_normwgt"][5]<<endl;
+    if (*in["sampleIndex"] != 0) {
+        for (int i=0; i<mInt("nLHEScaleWeight");i++) {
+            TH1F *CountWeightedLHEWeightScale = cursample->CountWeightedLHEWeightScale;
+            f["LHE_weights_scale_normwgt"][i] = 1.0 / CountWeightedLHEWeightScale->GetBinContent(CountWeightedLHEWeightScale->FindBin(i));
+            f["LHEScaleWeight"][i] = m("LHEScaleWeight",i)*m("LHE_weights_scale_normwgt",i);
+        }
+        *f["LHE_weights_scale_muRUp"] = m("LHEScaleWeight",7);
+        *f["LHE_weights_scale_muFUp"] = m("LHEScaleWeight",5);
+        *f["LHE_weights_scale_muRDown"] = m("LHEScaleWeight",1);
+        *f["LHE_weights_scale_muFDown"] = m("LHEScaleWeight",3);
+        for (int i=0; i<mInt("nLHEPdfWeight");i++) {
+            TH1F *CountWeightedLHEWeightPdf = cursample->CountWeightedLHEWeightPdf;
+            if (CountWeightedLHEWeightPdf->GetBinContent(CountWeightedLHEWeightPdf->FindBin(i)) != 0) {
+                f["LHE_weights_pdf_normwgt"][i] = 1.0 / CountWeightedLHEWeightPdf->GetBinContent(CountWeightedLHEWeightPdf->FindBin(i));
+                f["LHEPdfWeight"][i] = m("LHEPdfWeight",i)*m("LHE_weights_pdf_normwgt",i);
+            }
+            else {
+                f["LHE_weights_pdf_normwgt"][i] = 1.0;
+            }
+        }
+    }
 
     if(mInt("sampleIndex")!=0){
         //if (m("genWeight") > 0) {

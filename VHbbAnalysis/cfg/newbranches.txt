@@ -95,6 +95,11 @@ type=1  name=bGenJetSum
 
 type=8  name=LHE_weights_scale_normwgt                      max=10  onlyMC=1 lengthBranch=nLHE_weights_scale
 type=8  name=LHE_weights_pdf_normwgt                        max=110 onlyMC=1 lengthBranch=nLHE_weights_pdf
+type=2  name=LHE_weights_scale_muRUp
+type=2  name=LHE_weights_scale_muFUp
+type=2  name=LHE_weights_scale_muRDown
+type=2  name=LHE_weights_scale_muFDown
+
 
 type=2  name=isWenu_f
 type=2  name=isWmunu_f
