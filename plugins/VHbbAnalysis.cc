@@ -55,7 +55,7 @@ void VHbbAnalysis::InitAnalysis() {
 bool VHbbAnalysis::Preselection() {
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
 
-  
+
     //Set the b-tagger
     SetTaggerName(m("taggerType"));
 
@@ -156,8 +156,8 @@ bool VHbbAnalysis::Preselection() {
             float jet_sinPhi = TMath::Sin(m("Jet_phi",i));
             float met_cosPhi = TMath::Cos(m("MET_Phi",i));
             float met_sinPhi = TMath::Sin(m("MET_Phi",i));
-            float met_px = met_cosPhi * m("MET_Pt"); 
-            float met_py = met_sinPhi * m("MET_Pt"); 
+            float met_px = met_cosPhi * m("MET_Pt");
+            float met_py = met_sinPhi * m("MET_Pt");
             met_px = met_px - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
             met_py = met_py - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
             *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
@@ -270,8 +270,8 @@ bool VHbbAnalysis::Analyze() {
                 float jet_sinPhi = TMath::Sin(m("Jet_phi",i));
                 float met_cosPhi = TMath::Cos(m("MET_Phi",i));
                 float met_sinPhi = TMath::Sin(m("MET_Phi",i));
-                float met_px = met_cosPhi * m("MET_Pt"); 
-                float met_py = met_sinPhi * m("MET_Pt"); 
+                float met_px = met_cosPhi * m("MET_Pt");
+                float met_py = met_sinPhi * m("MET_Pt");
                 met_px = met_px + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
                 met_py = met_py + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
                 *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
@@ -381,30 +381,31 @@ bool VHbbAnalysis::Analyze() {
             *in["controlSample"] = -1;
         }
     } else if (mInt("Vtype") == 4 && (cursample->lepFlav == -1 || cursample->lepFlav == 4)) {
-        bool passMetFilters;
-        if (m("dataYear")==2016){
-                passMetFilters =
-                ( m("Flag_goodVertices")
+        bool passMetFilters = false;
+        if (m("dataYear") == 2016) {
+            passMetFilters = (
+                m("Flag_goodVertices")
                 && m("Flag_globalTightHalo2016Filter")
                 && m("Flag_HBHENoiseFilter")
                 && m("Flag_HBHENoiseIsoFilter")
-                && m("Flag_EcalDeadCellTriggerPrimitiveFilter"));
-        } else if (m("dataYear")==2017){
-                passMetFilters =
-                ( m("Flag_goodVertices")
+                && m("Flag_EcalDeadCellTriggerPrimitiveFilter")
+            );
+        } else if (m("dataYear") == 2017) {
+            passMetFilters = (
+                m("Flag_goodVertices")
                 && m("Flag_globalTightHalo2016Filter")
                 && m("Flag_HBHENoiseFilter")
                 && m("Flag_HBHENoiseIsoFilter")
                 && m("Flag_EcalDeadCellTriggerPrimitiveFilter")
                 && m("Flag_BadPFMuonFilter")
                 && m("Flag_BadChargedCandidateFilter")
-                && m("Flag_ecalBadCalibFilter"));
+                && m("Flag_ecalBadCalibFilter")
+            );
         }
-        if(mInt("sampleIndex")==0){//Data
-            passMetFilters = passMetFilters&&m("Flag_eeBadScFilter");
+        if (mInt("sampleIndex") == 0) { // Data
+            passMetFilters = passMetFilters && m("Flag_eeBadScFilter");
         }
-        if (m("MET_Pt") > m("metcut_0lepchan")
-            && passMetFilters) {
+        if ((m("MET_Pt") > m("metcut_0lepchan")) && passMetFilters) {
             *in["isZnn"] = 1;
         } else {
             *in["controlSample"] = -1;
@@ -451,7 +452,7 @@ bool VHbbAnalysis::Analyze() {
     // keep track of each jet selection method separately
     float j1ptCut, j2ptCut, j1ptBtag;
     if (mInt("isZnn")) {
-        j1ptCut = m("j1ptCut_0lepchan");
+        j1ptCut = m("j2ptCut_0lepchan");
         j2ptCut = m("j2ptCut_0lepchan");
         j1ptBtag = m("j1ptBtag_0lepchan");
     } else if (mInt("isWmunu") || mInt("isWenu")) {
@@ -493,6 +494,12 @@ bool VHbbAnalysis::Analyze() {
             *in["controlSample"] = -1;
         } else if (m(taggerName,bjets_bestTagger.second) < m("j2ptBtag")) {  // 2nd jet B-Tagged is the same in all SR's
             *in["controlSample"] = -1;
+        } else if (mInt("isZnn")) { // Higgs jet pT cuts are applied to the pair sorted by pT instead of b-tag value
+            float j1pt = m("Jet_bReg",bjets_bestTagger.first);
+            float j2pt = m("Jet_bReg",bjets_bestTagger.second);
+            if (std::max(j1pt, j2pt) < m("j1ptCut_0lepchan")) {
+                *in["controlSample"] = -1;
+            }
         }
     }
 
@@ -771,8 +778,8 @@ bool VHbbAnalysis::Analyze() {
     // 15 to 30 by 1 GeV, 1.5 to 3 w/ 0.1 in eta
     //std::vector<int> ptCuts = {15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
     //std::vector<double> etaCuts = {1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.4,3.5};
-    std::vector<int> ptCuts = {25,30};
-    std::vector<double> etaCuts = {2.9,2.5};
+    std::vector<int> ptCuts = {25, 30};
+    std::vector<double> etaCuts = {2.9, 2.5};
 
     for (int i = 0; i < (int) ptCuts.size(); i++) {
         for (int j = 0; j < (int) etaCuts.size(); j++) {
@@ -799,7 +806,7 @@ bool VHbbAnalysis::Analyze() {
 
     // count additional leptons (check both collections, which are exclusive)
     for (int i = 0; i < mInt("nMuon"); i++) {
-        if(m("Muon_pt",i) > 4.5 && fabs(m("Muon_eta",i)) < 2.4 && m("Muon_pfRelIso04_all",i) < 0.4 && fabs(m("Muon_dz",i))<0.2 && fabs(m("Muon_dxy",i))<0.05 ) nVetoLeptons++;
+        if (m("Muon_pt",i) > 4.5 && fabs(m("Muon_eta",i)) < 2.4 && m("Muon_pfRelIso04_all",i) < 0.4 && fabs(m("Muon_dz",i))<0.2 && fabs(m("Muon_dxy",i))<0.05 ) nVetoLeptons++;
         if (i == mInt("muInd1")) continue; // don't look at the lepton we've selected from the W
         if (i == mInt("muInd2")) continue; // don't look at the lepton we've selected from the Z
         if (m("Muon_pt",i) > 15 && fabs(m("Muon_eta",i)) < 2.5 && m("Muon_pfRelIso04_all",i) < 0.1) {
@@ -825,7 +832,11 @@ bool VHbbAnalysis::Analyze() {
         *in["cutFlow"] += 1; // additional lepton veto
     }
 
-    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && mInt("nAddJets302p5_puid") >= m("nAddJetsCut")) { // is this also the definition for additional jets in Z(vv)?
+    if (mInt("isZnn") && nVetoLeptons > 0) {
+        *in["controlSample"] = -1;
+    }
+
+    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && mInt("nAddJets302p5_puid") >= m("nAddJetsCut")) {
         *in["controlSample"] = -1;
     } else if (sel && mInt("controlSample") > -1) {
         *in["cutFlow"] += 1; // additional jet veto
@@ -845,46 +856,38 @@ bool VHbbAnalysis::Analyze() {
         return false;
     }
 
-
     // Iterate over the jet collection and count the number of central jets and
     // the number of jets azimuthally within 0.5 radians of the reconstructed
     // Z boson (MET). The latter is used to reject QCD events.
-    int nJetsCloseToMet = 0, nJetsCentral = 0;
+    int nJetsCloseToMET = 0;
     for (int i = 0; i < mInt("nJet"); i++) {
-        if (m("Jet_bReg",i) > 30 && mInt("Jet_puId",i) >= 4) {
-            if (fabs(m("Jet_eta",i)) < 2.4) {
-                nJetsCentral += 1;
-            }
-            float absDeltaPhiJetMet = fabs(EvalDeltaPhi(m("Jet_phi",i), m("V_phi")));
-            if (absDeltaPhiJetMet < 0.5) {
-                nJetsCloseToMet += 1;
+        if (m("Jet_Pt",i) > 30 && mInt("Jet_puId",i) > 0 && m("Jet_lepFilter",i)) {
+            float dPhi_Jet_MET = fabs(EvalDeltaPhi(m("Jet_phi",i), m("MET_Phi")));
+            if (dPhi_Jet_MET < 0.5) {
+                nJetsCloseToMET += 1;
             }
         }
     }
+    *in["nJetsCloseToMET"] = nJetsCloseToMET;
+    if (mInt("isZnn") && mInt("nJetsCloseToMET") != 0) {
+        *in["controlSample"] = -1;
+    }
 
-    float absDeltaPhiHiggsJet1Met =  -99;
-    float absDeltaPhiHiggsJet2Met =  -99;
-    float minAbsDeltaPhiHiggsJetsMet =  -99;
-    float absDeltaPhiMetTrackMet = -99;
-    if(m("twoResolvedJets")){
-        absDeltaPhiHiggsJet1Met = fabs(EvalDeltaPhi(m("Jet_phi",mInt("hJetInd1")), m("V_phi")));
-        absDeltaPhiHiggsJet2Met = fabs(EvalDeltaPhi(m("Jet_phi",mInt("hJetInd2")), m("V_phi")));
-        minAbsDeltaPhiHiggsJetsMet = std::min(absDeltaPhiHiggsJet1Met, absDeltaPhiHiggsJet2Met);
-        absDeltaPhiMetTrackMet = fabs(EvalDeltaPhi(m("V_phi"), m("TkMET_phi")));
-        *f["minMetjDPhi"] = minAbsDeltaPhiHiggsJetsMet;
-        *f["MetTkMetDPhi"] = absDeltaPhiMetTrackMet;
-
-        if (mInt("isZnn") && fabs(m("minMetjDPhi")) < m("minMetjDPhiCut")) {
-            *in["controlSample"] = -1;
-        } else if (mInt("isZnn")&& fabs(m("MetTkMetDPhi")) > m("minMetjDPhiCut")) {
+    float dPhi_hJet1_MET = -99;
+    float dPhi_hJet2_MET = -99;
+    float min_dPhi_hJet_MET = -99;
+    float dPhi_MET_TkMET = -99;
+    if (m("twoResolvedJets")) {
+        dPhi_hJet1_MET = fabs(EvalDeltaPhi(m("Jet_phi",mInt("hJetInd1")), m("MET_Phi")));
+        dPhi_hJet2_MET = fabs(EvalDeltaPhi(m("Jet_phi",mInt("hJetInd2")), m("MET_Phi")));
+        min_dPhi_hJet_MET = std::min(dPhi_hJet1_MET, dPhi_hJet2_MET);
+        dPhi_MET_TkMET = fabs(EvalDeltaPhi(m("MET_Phi"), m("TkMET_phi")));
+        *f["min_dPhi_hJet_MET"] = min_dPhi_hJet_MET;
+        *f["dPhi_MET_TkMET"] = dPhi_MET_TkMET;
+        if (mInt("isZnn") && m("dPhi_MET_TkMET") > m("dPhiMETTkMETCut")) {
             *in["controlSample"] = -1;
         }
     }
-
-    // if selected for the signal region, return here
-    // (if the Hmass cut is not applied, this steals events from the control regions)
-    // if (*in["controlSample"] == 0) return true;
-
 
 
 //                                      _|                          _|                                                    _|
@@ -895,42 +898,40 @@ bool VHbbAnalysis::Analyze() {
 //                                                                                                              _|
 //                                                                                                              _|
 
-    if(debug>1000) std::cout<<"about to apply control region selection"<<std::endl;
+    if (debug>1000) std::cout<<"about to apply control region selection"<<std::endl;
 
     // Control Samples
 
-    if(m("twoResolvedJets")){
-        float absDeltaPhiHiggsMet = m("HVdPhi");   // fabs(EvalDeltaPhi(*f["HCMVAV2_reg_phi"], *f["V_phi"]));
-        float higgsJet1BTagged = m(taggerName,mInt("hJetInd1"));
-        float higgsJet2BTagged = m(taggerName,mInt("hJetInd2"));
-        float minBTagged = std::min(higgsJet1BTagged, higgsJet2BTagged);
-        float maxBTagged = std::max(higgsJet1BTagged, higgsJet2BTagged);
+    if (m("twoResolvedJets")) {
 
-        float V_mass = m("V_mass"), H_mass = m("H_mass");
+        // Set aliases and precalculate quantities of interest.
+        float H_mass = m("H_mass");
+        float H_pt = m("H_pt");
+        float V_mass = m("V_mass");
+        float HVdPhi = m("HVdPhi");
+
+        float hJet1_btag = m(taggerName,mInt("hJetInd1"));
+        float hJet2_btag = m(taggerName,mInt("hJetInd2"));
+        float min_hJet_btag = std::min(hJet1_btag, hJet2_btag);
+        float max_hJet_btag = std::max(hJet1_btag, hJet2_btag);
+
+        float hJet1_bReg = m("Jet_bReg",mInt("hJetInd1"));
+        float hJet2_bReg = m("Jet_bReg",mInt("hJetInd2"));
+        float min_hJet_bReg = std::min(hJet1_bReg, hJet2_bReg);
+        float max_hJet_bReg = std::max(hJet1_bReg, hJet2_bReg);
+
         // 0-lepton
         bool base0LepCSSelection = (
             // Vector Boson Cuts
-            // (*f["Vtype"] == 2 || *f["Vtype"] == 3 || *f["Vtype"] == 4)
-            (mInt("isWmunu") || mInt("isWenu") ||mInt("isZnn"))
+            (mInt("isWmunu") || mInt("isWenu") || mInt("isZnn"))
             && mInt("cutFlow") >= 2
-            && m("MET_Pt") > m("metcut_0lepchan")
             // Higgs Boson Cuts
             && H_mass < 500
-            && m("H_pt") > m("hptcut_0lepchan")
-            //&& *f["HCMVAV2_pt"] > 120 CP REMOVED
+            && H_pt > 120
             // Higgs Jet Cuts
-            && m("Jet_bReg",mInt("hJetInd1")) > 60
-            && m("Jet_bReg",mInt("hJetInd2")) > 35
-            && higgsJet2BTagged > taggerWP_L
-            && fabs(m("Jet_eta",mInt("hJetInd1"))) < 2.4
-            && fabs(m("Jet_eta",mInt("hJetInd2"))) < 2.4
-            //&& in["Jet_id"][*in["hJetInd1"]] >= 4
-            //&& in["Jet_id"][*in["hJetInd2"]] >= 4
-            && mInt("Jet_puId",mInt("hJetInd1")) >= 4
-            && mInt("Jet_puId",mInt("hJetInd2")) >= 4
-            // Leading Jet Cuts
-            //&& in["Jet_id"][0] >= 4
-            && mInt("Jet_puId",0) >= 4
+            && max_hJet_bReg > 60
+            && min_hJet_bReg > 35
+            && hJet2_btag > taggerWP_L
             // MET Filters
             && m("Flag_goodVertices")
             && m("Flag_globalTightHalo2016Filter")
@@ -939,39 +940,39 @@ bool VHbbAnalysis::Analyze() {
             && m("Flag_EcalDeadCellTriggerPrimitiveFilter")
         );
 
-        if(m("dataYear") == 2017){
-            base0LepCSSelection = (base0LepCSSelection
-            && m("Flag_BadPFMuonFilter")
-            && m("Flag_BadChargedCandidateFilter")
-            && m("Flag_ecalBadCalibFilter"));
+        if (m("dataYear") == 2017) {
+            base0LepCSSelection = (
+                base0LepCSSelection
+                && m("Flag_BadPFMuonFilter")
+                && m("Flag_BadChargedCandidateFilter")
+                && m("Flag_ecalBadCalibFilter")
+            );
         }
 
-        if(mInt("sampleIndex")==0){//Data
-            base0LepCSSelection = base0LepCSSelection&&m("Flag_eeBadScFilter");
+        if (mInt("sampleIndex") == 0) { // Data
+            base0LepCSSelection = base0LepCSSelection && m("Flag_eeBadScFilter");
         }
 
         if (base0LepCSSelection) {
-            if (mInt("isWmunu") || mInt("isWenu")) {
-                if (minAbsDeltaPhiHiggsJetsMet < 1.57 && higgsJet1BTagged > taggerWP_M && nJetsCentral >= 4 && absDeltaPhiHiggsMet > 2) {
-                    if (m("MET_Pt") < m("metcut_0lepchan")) { std::cout<<"caught an event with bugged 0lep selection!!"<<std::endl; }
+            if ((mInt("isWmunu") || mInt("isWenu")) && m("MET_Pt") > m("metcut_0lepchan")) {
+                if (min_dPhi_hJet_MET < 1.57 && hJet1_btag > taggerWP_M && mInt("nAddJets302p5_puid") >= 2 && HVdPhi > 2) {
                     *in["controlSample"] = 1; // TTbar Control Sample Index
                 }
             } else if (mInt("isZnn")) {
-                bool vetoHiggsMassWindow = m("H_mass") < 60 || m("H_mass") > 160;
                 // NOTE cut on nVetoLeptons exists for sync purposes only and needs to be re-evaluated for 2017.
-                if(m("dataYear")==2016){
-                    if (nJetsCloseToMet == 0 && absDeltaPhiMetTrackMet < 0.5 && absDeltaPhiHiggsMet > 2 && mInt("nVetoLeptons")==0) {
-	                      if (higgsJet1BTagged < taggerWP_M && nJetsCentral <= 3) {
+                if (m("dataYear") == 2016) {
+                    if (nJetsCloseToMET == 0 && dPhi_MET_TkMET < 0.5 && HVdPhi > 2 && mInt("nVetoLeptons") == 0) {
+	                if (hJet1_btag < taggerWP_M && mInt("nAddJets302p5_puid") < 2) {
                             *in["controlSample"] = 2; // Z+Light Control Sample Index
-                        }else if (higgsJet1BTagged > taggerWP_T && nJetsCentral == 2 && vetoHiggsMassWindow) {
+                        } else if (hJet1_btag > taggerWP_T && mInt("nAddJets302p5_puid") < 2 && (H_mass<60 || H_mass>160)) {
                             *in["controlSample"] = 3; // Z+bb Control Sample Index
                         }
                     }
-                } else if (m("dataYear")==2017){
-                    if (nJetsCloseToMet == 0 && absDeltaPhiMetTrackMet < 0.5 && absDeltaPhiHiggsMet > 2 ) {
-	                      if (higgsJet1BTagged < taggerWP_M && nJetsCentral <= 3) {
+                } else if (m("dataYear") == 2017) {
+                    if (nJetsCloseToMET == 0 && dPhi_MET_TkMET < 0.5 && HVdPhi > 2) {
+	                if (hJet1_btag < taggerWP_M && mInt("nAddJets302p5_puid") < 2) {
                             *in["controlSample"] = 2; // Z+Light Control Sample Index
-                        }else if (higgsJet1BTagged > taggerWP_T && nJetsCentral == 2 && vetoHiggsMassWindow) {
+                        } else if (hJet1_btag > taggerWP_T && mInt("nAddJets302p5_puid") < 2 && (H_mass<60 || H_mass>160)) {
                             *in["controlSample"] = 3; // Z+bb Control Sample Index
                         }
                     }
@@ -997,7 +998,7 @@ bool VHbbAnalysis::Analyze() {
             && mInt("nAddLeptons") == 0
             && m("V_pt") > m("vptcut")
             && H_mass < 250
-            && m("H_pt") > m("hptcut_1lepchan")
+            && H_pt > m("hptcut_1lepchan")
         );
 
 
@@ -1020,20 +1021,20 @@ bool VHbbAnalysis::Analyze() {
         }
 
         if (base1LepCSSelection) {
-            if (maxBTagged > taggerWP_T){ //ttbar or W+HF
+            if (max_hJet_btag > taggerWP_T){ //ttbar or W+HF
                 if (mInt("nAddJets302p5_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
                 //} else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
                 } else if (mInt("nAddJets302p5_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<90 || H_mass>150)) {
                     *in["controlSample"] = 13;
                 }
-            }else if (maxBTagged > taggerWP_L && maxBTagged < taggerWP_M && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
+            }else if (max_hJet_btag > taggerWP_L && max_hJet_btag < taggerWP_M && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
                 *in["controlSample"] = 12;
             }
 
             if (mInt("sampleIndex") == 0 && debug>10) {
                 std::cout << "data CS event " << mInt("controlSample")
-	                  << " maxBTagged " << maxBTagged
+	                  << " max_hJet_btag " << max_hJet_btag
                           << " nAddJets302p5_puid " << mInt("nAddJets302p5_puid")
                           << " MET_Pt " << m("MET_Pt")
                           << " MET_sumEt " << m("MET_sumEt")
@@ -1051,15 +1052,15 @@ bool VHbbAnalysis::Analyze() {
 
         if (base2LepCSSelection) {
             if (////////////////////////// ttbar
-                maxBTagged > taggerWP_T
-                && minBTagged > taggerWP_L
+                max_hJet_btag > taggerWP_T
+                && min_hJet_btag > taggerWP_L
                 && (V_mass > 10 && (V_mass < 75 || V_mass > 120))
             ) {
                 *in["controlSample"] = 21;
             } else if (/////////////////// Z + LF
-	        maxBTagged < taggerWP_L
-                && minBTagged < taggerWP_L
-                && absDeltaPhiHiggsMet > 2.5
+	        max_hJet_btag < taggerWP_L
+                && min_hJet_btag < taggerWP_L
+                && HVdPhi > 2.5
                 && (V_mass > 75 && V_mass < 105)
             ) {
                 if (H_mass > 90 && H_mass <= 150) {
@@ -1068,10 +1069,10 @@ bool VHbbAnalysis::Analyze() {
                     *in["controlSample"] = 24;  // keep these event for kinematic fit
                 }
             } else if (/////////////////// Z + HF
-	        maxBTagged > taggerWP_T
-                && minBTagged > taggerWP_L
+	        max_hJet_btag > taggerWP_T
+                && min_hJet_btag > taggerWP_L
                 && m("MET_Pt") < 60
-                && absDeltaPhiHiggsMet > 2.5
+                && HVdPhi > 2.5
                 && (V_mass > 85 && V_mass <= 97)
             ) {
                 if (H_mass <= 90 || H_mass > 150) {
@@ -2117,9 +2118,9 @@ void VHbbAnalysis::FinishEvent() {
                         *f["otherJetsHighestPt"]=m("Jet_bReg",iJet);
                     }
                 }
-                if(mInt("Jet_puId",iJet)>3 && m("Jet_bReg",iJet)>30){
-                    if(*f["minDPhiFromOtherJets"]>fabs(EvalDeltaPhi(m("V_phi"), m("Jet_phi",iJet)))){
-                        *f["minDPhiFromOtherJets"]=fabs(EvalDeltaPhi(m("V_phi"), m("Jet_phi",iJet)));
+                if(mInt("Jet_puId",iJet)>0 && m("Jet_Pt",iJet)>30){
+                    if(*f["minDPhiFromOtherJets"]>fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)))){
+                        *f["minDPhiFromOtherJets"]=fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)));
                     }
                 }
             }
@@ -2519,7 +2520,7 @@ void VHbbAnalysis::BoostedSelection(){
                 }
             }
 
-            if(m("nLooseBtagsDR1p5")>0){ 
+            if(m("nLooseBtagsDR1p5")>0){
                 *in["FatJetCand_index"]=-1;
                 *b["oneMergedJet"]=false;
             }
@@ -2547,7 +2548,7 @@ void VHbbAnalysis::BoostedSelection(){
                         }
                     }
                 }
-                
+
                 if(nAddJets>1){
                     *in["FatJetCand_index"]=-1;
                     *b["oneMergedJet"]=false;
@@ -2870,11 +2871,11 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
     } else if (m("dataYear") == 2016) {
         // 0-lepton - no MC efficiencies available, so apply trigger in data only
         if (vtype == 4 && mInt("sampleIndex") == 0
-            && mInt("HLT_PFMET110_PFMHT110_IDTight")     != 1
-            && mInt("HLT_PFMET120_PFMHT120_IDTight")     != 1
-            && mInt("HLT_PFMET170_NoiseCleaned")         != 1
-            && mInt("HLT_PFMET170_BeamHaloCleaned")      != 1
-            && mInt("HLT_PFMET170_HBHECleaned")          != 1
+            && mInt("HLT_PFMET110_PFMHT110_IDTight") != 1
+            && mInt("HLT_PFMET120_PFMHT120_IDTight") != 1
+            && mInt("HLT_PFMET170_NoiseCleaned") != 1
+            && mInt("HLT_PFMET170_BeamHaloCleaned") != 1
+            && mInt("HLT_PFMET170_HBHECleaned") != 1
            ) {
             return false;
         }

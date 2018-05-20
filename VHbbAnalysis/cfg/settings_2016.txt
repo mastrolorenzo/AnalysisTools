@@ -120,5 +120,4 @@ type=2  name=SF_TT              val=0.84
 #type=2  name=SF_Wj2b            val=1.03
 #type=2  name=SF_TT              val=0.99
 
-type=2  name=minMetjDPhiCut      val=0.5
-type=2  name=MetTkMetDPhiCut     val=0.5
+type=2  name=dPhiMETTkMETCut     val=0.5

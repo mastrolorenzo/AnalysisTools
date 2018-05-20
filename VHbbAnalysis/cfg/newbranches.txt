@@ -4,8 +4,9 @@
 type=0  name=nW
 type=0  name=nWlep
 
-type=2  name=minMetjDPhi
-type=2  name=MetTkMetDPhi
+type=1  name=nJetsCloseToMET
+type=2  name=min_dPhi_hJet_MET
+type=2  name=dPhi_MET_TkMET
 
 type=4  name=twoResolvedJets
 type=4  name=oneMergedJet
