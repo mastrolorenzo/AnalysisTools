@@ -56,6 +56,7 @@ bool VHbbAnalysis::Preselection() {
     bool doCutFlowInPresel = int(m("doCutFlow")) < 0;
 
 
+
     //Set the b-tagger
     SetTaggerName(m("taggerType"));
 
@@ -719,30 +720,84 @@ bool VHbbAnalysis::Analyze() {
     }
 
     if(m("twoResolvedJets")){
-        // di-jet kinematics
+ 
+        *f["H_mass_step2"] = m("H_mass"); // FIXME do we need this?
+        *f["H_mass_noreg"] = Hbb_noreg.M();
+        
+	//Recovering ISR/FSR
+	bool enableFSRRecovery = int(m("enableFSRRecovery")) > 0;
+	*b["recoFSR"] = false;
+	int nFSRJets = 0;
+
+	if( enableFSRRecovery ){
+	  *b["recoFSR"] = true;
+	  *f["H_mass_noFSR"] = Hbb.M();
+	  *f["H_pt_noFSR"] = Hbb.Pt();	  
+	  // di-jet kinematics
+	  *f["HJ1_HJ2_dPhi_noFSR"] = HJ1.DeltaPhi(HJ2);
+	  *f["HJ1_HJ2_dEta_noFSR"] = fabs(HJ1.Eta() - HJ2.Eta());
+	  *f["HJ1_HJ2_dR_noFSR"] = HJ1.DeltaR(HJ2);
+	  *f["JJEtaBal_noFSR"] = (fabs(m("Jet_eta",mInt("hJetInd1")) + m("Jet_eta",mInt("hJetInd2")))) / (fabs(m("Jet_eta",mInt("hJetInd1")) - m("Jet_eta",mInt("hJetInd2"))));
+
+	  for(int ijet = 0; ijet < mInt("nJet"); ijet++) {
+
+	    if( ijet == mInt("hJetInd1") || ijet == mInt("hJetInd2") ) continue;
+	    
+	    //Select FSR jets
+	    if( m("Jet_Pt", ijet) > 20 && abs(m("Jet_eta", ijet)) < 3.0 && m("Jet_puId", ijet) > 0  && m("Jet_lepFilter", ijet) > 0 ){
+	      //&& m("Jet_id", ijet) > 0 ?
+	      
+	      TLorentzVector Jet_FSR;
+	      Jet_FSR.SetPtEtaPhiM( m("Jet_bReg",ijet), m("Jet_eta",ijet), m("Jet_phi",ijet), m("Jet_mass",ijet) * (m("Jet_bReg",ijet) / m("Jet_Pt",ijet)) );
+	      
+	      if( std::min( Jet_FSR.DeltaR( HJ1 ), Jet_FSR.DeltaR( HJ2 ) ) < 0.8){		
+		if(Jet_FSR.DeltaR( HJ1 )<Jet_FSR.DeltaR( HJ2 )){
+		  
+		  //add FSR to HJ1
+		  nFSRJets++;
+		  HJ1 += Jet_FSR;
+		}else if(Jet_FSR.DeltaR( HJ2 )<Jet_FSR.DeltaR( HJ1 )){
+		  
+		  //add FSR to HJ2
+		  nFSRJets++;
+		  HJ2 += Jet_FSR;
+		}
+	      }
+	    }
+	  }
+	  
+	  //recompute the total Higgs 4-Momentum
+	  Hbb = ( HJ1 + HJ2 );
+	  
+	}// end of FSR recovering
+
+	// di-jet kinematics
+	*f["HJ1_pt"] = HJ1.Pt();
+	*f["HJ2_pt"] = HJ2.Pt();
         *f["HJ1_HJ2_dPhi"] = HJ1.DeltaPhi(HJ2);
         *f["HJ1_HJ2_dEta"] = fabs(HJ1.Eta() - HJ2.Eta());
         *f["HJ1_HJ2_dR"] = HJ1.DeltaR(HJ2);
-        *f["JJEtaBal"] = (fabs(m("Jet_eta",mInt("hJetInd1")) + m("Jet_eta",mInt("hJetInd2")))) / (fabs(m("Jet_eta",mInt("hJetInd1")) - m("Jet_eta",mInt("hJetInd2"))));
+        *f["JJEtaBal"] = ( fabs( HJ1.Eta() + HJ2.Eta() ) / fabs( HJ1.Eta() - HJ2.Eta() ) );
 
-
-        *f["H_mass_step2"] = m("H_mass"); // FIXME do we need this?
-        *f["H_mass_noreg"] = Hbb_noreg.M();
-        *f["H_mass"] = Hbb.M(); // mass window cut? regression applied in FinishEvent
+	// Now we can calculate whatever we want (transverse) with V and H four-vectors
+	*in["nFSRJets"] = nFSRJets;
+	*f["H_mass"] = Hbb.M(); // mass window cut? regression applied in FinishEvent
+        *f["H_pt"] = Hbb.Pt();
         if (cursyst->name != "nominal") {
             *f[Form("H_mass_%s", cursyst->name.c_str())] = Hbb.M();
             *f[Form("H_pt_%s", cursyst->name.c_str())] = Hbb.Pt();
         }
+	
+	*f["jjVPtRatio"] = m("H_pt") / m("V_pt");
+	*f["HVdPhi"] = fabs(Hbb.DeltaPhi(V));
+	*f["HVdEta"] = fabs(Hbb.Eta() - V.Eta());
+	*f["HVdR"]   = Hbb.DeltaR(V);
 
-        // Now we can calculate whatever we want (transverse) with V and H four-vectors
-        *f["jjVPtRatio"] = m("H_pt") / m("V_pt");
-        *f["HVdPhi"] = fabs(Hbb.DeltaPhi(V));
-        *f["HVdEta"] = fabs(Hbb.Eta() - V.Eta());
-        *f["HVdR"]   = Hbb.DeltaR(V);
-        if (mInt("isWmunu") == 1 || mInt("isWenu") == 1) {
-            *f["HVdEta_4MET"] = fabs(Hbb.Eta() -  W_withNuFromMWCon.Eta());
-        }
-    }
+	if (mInt("isWmunu") == 1 || mInt("isWenu") == 1) {
+	  *f["HVdEta_4MET"] = fabs(Hbb.Eta() -  W_withNuFromMWCon.Eta());
+	}
+
+    }// End of two resolved jets computation
 
     if (cursyst->name != "nominal") {
         *in[Form("nAddJets252p9_puid_%s", cursyst->name.c_str())] = mInt("nAddJets252p9_puid");
@@ -2063,9 +2118,15 @@ void VHbbAnalysis::FinishEvent() {
     //*f["absDeltaPullAngle"] = 0.; //FIXME what is this in the new ntuples??
     *f["hJets_pt_0"] = (float) m("Jet_bReg",mInt("hJetInd1"));
     *f["hJets_pt_1"] = (float) m("Jet_bReg",mInt("hJetInd2"));
-    *f["hJets_leadingPt"]    = std::max(*f["hJets_pt_0"],*f["hJets_pt_1"]);
-    *f["hJets_subleadingPt"] = std::min(*f["hJets_pt_0"],*f["hJets_pt_1"]);
 
+    //redefine the leading and subleading jet pt in case of FSR
+    if(!m("recoFSR")){
+      *f["hJets_leadingPt_noFSR"]    = std::max(*f["hJets_pt_0"],*f["hJets_pt_1"]);
+      *f["hJets_subleadingPt_noFSR"] = std::min(*f["hJets_pt_0"],*f["hJets_pt_1"]);
+    }else{
+      *f["hJets_leadingPt"]    = std::max(*f["HJ1_pt"],*f["HJ2_pt"]);
+      *f["hJets_subleadingPt"] = std::min(*f["HJ1_pt"],*f["HJ2_pt"]);
+    }
 
     // Channel specific BDT inputs
     ComputeBoostedVariables();

@@ -71,6 +71,7 @@ class VHbbAnalysis : public AnalysisManager {
         void BoostedSelection();
         void ComputeBoostedVariables();
         bool atLeastOnePreselFatJet;
+	bool enableFSRRecovery;
 
         TLorentzVector Hbb;
         TLorentzVector fatJetCand;
