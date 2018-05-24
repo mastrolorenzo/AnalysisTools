@@ -88,7 +88,7 @@ else:
         #output_dir = "/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples" # parent directory in user's EOS space to store all output files
         output_dir = "/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/" # parent directory in user's EOS space to store all output files
     elif site == "CERN":
-        output_dir = "/eos/cms/store/user/scoopers/VHbbAnalysisNtuples"
+        output_dir = "/eos/cms/store/user/%s/VHbbAnalysisNtuples" % os.getlogin()
     elif site == "DESY":
         output_dir = "/nfs/dust/cms/user/%s/VHbbAnalysisNtuples" % os.getlogin()
     if options.doSkim:
