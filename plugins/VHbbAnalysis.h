@@ -26,7 +26,7 @@ class VHbbAnalysis : public AnalysisManager {
         virtual bool Preselection();
         virtual bool Analyze();
         virtual void FinishEvent();
-        virtual void TermAnalysis();
+        virtual void TermAnalysis(bool skim=false);
 
         std::string taggerName;
         void SetTaggerName(float taggerType);

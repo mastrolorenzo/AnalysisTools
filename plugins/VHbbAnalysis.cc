@@ -2579,7 +2579,8 @@ void VHbbAnalysis::FinishEvent() {
 
     // FIXME nominal must be last
     if(cursyst->name=="nominal"){
-        ofile->cd();
+        tempfile->cd();
+        //ofile->cd();
         if (debug>10000) std::cout<<"filling output tree"<<std::endl;
         outputTree->Fill();
     }
@@ -2587,10 +2588,21 @@ void VHbbAnalysis::FinishEvent() {
     return;
 }
 
-void VHbbAnalysis::TermAnalysis(){
+void VHbbAnalysis::TermAnalysis(bool skim){
     if(debug>10) std::cout<<"START TermAnalysis()"<<std::endl;
     ofile->cd();
-    outputTree->Write();
+    if(m("slimmedOutput")>0.5 && !skim){
+        outputTree->SetBranchStatus("*",0);
+        for(std::map<std::string,BranchInfo*>::iterator ibranch=branchInfos.begin();
+            ibranch!=branchInfos.end(); ++ibranch){
+            if( !(ibranch->second->dropBranch) && ibranch->second->prov!="settings"){
+                outputTree->SetBranchStatus((ibranch->first).c_str(),1);
+            }
+        }
+    }
+    
+    outputTreeSlim = outputTree->CloneTree();
+    outputTreeSlim->Write();
     ofile->Close();
     if(debug>10) std::cout<<"DONE TermAnalysis()"<<std::endl;
     return;

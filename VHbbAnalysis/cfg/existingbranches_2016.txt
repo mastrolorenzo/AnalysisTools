@@ -23,11 +23,11 @@ type=2  name=Pileup_nTrueInt                            onlyMC=1
 type=1  name=Pileup_nPU                                 onlyMC=1
 type=2  name=genWeight                                  onlyMC=1
 type=1  name=nGenJet                                    onlyMC=1
-type=8  name=GenJet_pt                          max=60  onlyMC=1 lengthBranch=nGenJet
-type=8  name=GenJet_eta                         max=60  onlyMC=1 lengthBranch=nGenJet
-type=8  name=GenJet_phi                         max=60  onlyMC=1 lengthBranch=nGenJet
-type=8  name=GenJet_mass                        max=60  onlyMC=1 lengthBranch=nGenJet
-type=11  name=GenJet_hadronFlavour              max=60  onlyMC=1 lengthBranch=nGenJet
+type=8  name=GenJet_pt                          max=60  onlyMC=1 lengthBranch=nGenJet dropBranch=1
+type=8  name=GenJet_eta                         max=60  onlyMC=1 lengthBranch=nGenJet dropBranch=1
+type=8  name=GenJet_phi                         max=60  onlyMC=1 lengthBranch=nGenJet dropBranch=1
+type=8  name=GenJet_mass                        max=60  onlyMC=1 lengthBranch=nGenJet dropBranch=1
+type=11  name=GenJet_hadronFlavour              max=60  onlyMC=1 lengthBranch=nGenJet dropBranch=1
 
 type=5  name=LHE_Nc  onlyMC=1   allowMissingBranch=1
 

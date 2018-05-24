@@ -143,15 +143,15 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 print "getting early branches"
             for branch in branches:
                 if am.debug>10:
-                    print(branch,branches[branch][0], branches[branch][1], branches[branch][3], "early", branches[branch][4], branches[branch][5])
-                am.SetupBranch(branch,branches[branch][0], branches[branch][1], branches[branch][3], "early", branches[branch][4], branches[branch][5])
+                    print(branch,branches[branch][0], branches[branch][1], branches[branch][3], "early", branches[branch][4], branches[branch][5], branches[branch][6])
+                am.SetupBranch(branch,branches[branch][0], branches[branch][1], branches[branch][3], "early", branches[branch][4], branches[branch][5],branches[branch][6])
         else:
             print "There are no early branches in the config file."
 
         if settings.has_key("existingbranches"):
             branches=ReadTextFile(settings["existingbranches"], "branchlist",list())
             for branch in branches:
-                am.SetupBranch(branch,branches[branch][0], branches[branch][1], branches[branch][3], "existing", branches[branch][4], branches[branch][5])
+                am.SetupBranch(branch,branches[branch][0], branches[branch][1], branches[branch][3], "existing", branches[branch][4], branches[branch][5],branches[branch][6])
         else:
             print "There are no existing branches in the config file."
 
@@ -450,6 +450,7 @@ def MakeBranchMap(lines):
         onlyMC=0
         lengthBranch=""
         allowMissingBranch=0
+        dropBranch=0
 
         for item in line.split():
             name,value = item.split("=")
@@ -469,8 +470,11 @@ def MakeBranchMap(lines):
                 lengthBranch=str(value)
             if name.find("allowMissingBranch") is 0:
                 allowMissingBranch=int(value)
+            if name.find("dropBranch") is 0:
+                dropBranch=int(value)
 
-        branches[branchname]= [branchtype,arraylength,val,onlyMC,lengthBranch,allowMissingBranch]
+
+        branches[branchname]= [branchtype,arraylength,val,onlyMC,lengthBranch,allowMissingBranch,dropBranch]
 
     return branches
 

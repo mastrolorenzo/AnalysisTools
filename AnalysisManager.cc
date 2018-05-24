@@ -179,10 +179,10 @@ void AnalysisManager::InitChain(std::string filename)
 }
 
 
-void AnalysisManager::SetupBranch(std::string name, int type, int length, int onlyMC, std::string prov, std::string lengthBranch, int allowMissingBranch){
+void AnalysisManager::SetupBranch(std::string name, int type, int length, int onlyMC, std::string prov, std::string lengthBranch, int allowMissingBranch, int dropBranch){
     branches[name] = new TBranch;
     if(debug>10000) std::cout<<"new TBranch"<<std::endl;
-    branchInfos[name] = new BranchInfo(name,type,length,onlyMC,prov,-999.,lengthBranch, allowMissingBranch);
+    branchInfos[name] = new BranchInfo(name,type,length,onlyMC,prov,-999.,lengthBranch, allowMissingBranch, dropBranch);
     if(debug>10000) std::cout<<"new BranchInfo"<<std::endl;
 
     // Only 0-11 are setup with types for the moment.
@@ -535,7 +535,9 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
     SetBranches();
 
     // add new branches
-    ofile->cd();
+    //ofile->cd();
+    tempfile = new TFile("temp.root","recreate");
+    tempfile->cd();
     //TTree *newtree = fChain->CloneTree(0);
     // for now we will use a default file to set the structure for the output tree
     outputTree = new TTree();
@@ -553,6 +555,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
     }
     // FIXME add branches to settings regarding splitting
     //SetupNewBranch("jobNum", 3, -1, true, "settings", jobNum);
+    ofile->cd();
     settingsTree->Fill();
     settingsTree->Write();
     delete settingsTree;
@@ -692,7 +695,8 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                      nb = fChain->GetEntry(jentry);
                      nbytes += nb;
                      // running skim
-                     ofile->cd();
+                     //ofile->cd();
+                     tempfile->cd();
                      outputTree->Fill();
                      saved++;
                 }
@@ -715,7 +719,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
     if(debug>1000) std::cout<<"Finished looping"<<std::endl;
 
 
-    TermAnalysis();
+    TermAnalysis(doSkim);
 }
 
 
@@ -742,17 +746,19 @@ void AnalysisManager::FinishEvent(){
 
     // FIXME nominal must be last!
     if(cursyst->name=="nominal"){
-        ofile->cd();
+        //ofile->cd();
+        tempfile->cd();
         outputTree->Fill();
     }
     return;
 }
 
 
-void AnalysisManager::TermAnalysis() {
+void AnalysisManager::TermAnalysis(bool skim) {
     // save tree here
     ofile->cd();
-    outputTree->Write();
+    outputTreeSlim = outputTree->CloneTree();
+    outputTreeSlim->Write();
     ofile->Close();
 }
 

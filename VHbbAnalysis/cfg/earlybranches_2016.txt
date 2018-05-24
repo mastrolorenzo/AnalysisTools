@@ -25,15 +25,15 @@ type=2  name=V_pt
 type=0  name=nFatJet
 type=8  name=FatJet_pt                        max=10     lengthBranch=nFatJet
 
-type=1  name=nGenPart                                     onlyMC=1
-type=8  name=GenPart_pt                          max=300  onlyMC=1 lengthBranch=nGenPart
-type=8  name=GenPart_eta                         max=300  onlyMC=1 lengthBranch=nGenPart
-type=8  name=GenPart_phi                         max=300  onlyMC=1 lengthBranch=nGenPart
-type=7  name=GenPart_statusFlags                 max=300  onlyMC=1 lengthBranch=nGenPart
-type=7  name=GenPart_status                      max=300  onlyMC=1 lengthBranch=nGenPart
-type=7  name=GenPart_pdgId                       max=300  onlyMC=1 lengthBranch=nGenPart
-type=7  name=GenPart_genPartIdxMother            max=300  onlyMC=1 lengthBranch=nGenPart
-type=8  name=GenPart_mass                        max=300  onlyMC=1 lengthBranch=nGenPart
+type=1  name=nGenPart                                     onlyMC=1 dropBranch=1
+type=8  name=GenPart_pt                          max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=8  name=GenPart_eta                         max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=8  name=GenPart_phi                         max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=7  name=GenPart_statusFlags                 max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=7  name=GenPart_status                      max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=7  name=GenPart_pdgId                       max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=7  name=GenPart_genPartIdxMother            max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=8  name=GenPart_mass                        max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
 
 #type=4  name=HLT_PFMET110_PFMHT110_IDTight  
 #type=4  name=HLT_PFMET120_PFMHT120_IDTight
@@ -47,132 +47,132 @@ type=8  name=GenPart_mass                        max=300  onlyMC=1 lengthBranch=
 #type=4  name=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ
 
 # 2016
-type=4  name=HLT_PFMET110_PFMHT110_IDTight  
-type=4  name=HLT_PFMET120_PFMHT120_IDTight
-type=4  name=HLT_PFMET170_NoiseCleaned       allowMissingBranch=1
-type=4  name=HLT_PFMET170_BeamHaloCleaned    allowMissingBranch=1	
-type=4  name=HLT_PFMET170_HBHECleaned         
-type=4  name=HLT_Ele27_eta2p1_WPTight_Gsf
-type=4  name=HLT_IsoMu24
-type=4  name=HLT_IsoTkMu24
-type=4  name=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL
-type=4  name=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ
-type=4  name=HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL  
-type=4  name=HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ
-type=4  name=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ 
+type=4  name=HLT_PFMET110_PFMHT110_IDTight   dropBranch=1
+type=4  name=HLT_PFMET120_PFMHT120_IDTight   dropBranch=1
+type=4  name=HLT_PFMET170_NoiseCleaned       allowMissingBranch=1 dropBranch=1
+type=4  name=HLT_PFMET170_BeamHaloCleaned    allowMissingBranch=1 dropBranch=1
+type=4  name=HLT_PFMET170_HBHECleaned        dropBranch=1
+type=4  name=HLT_Ele27_eta2p1_WPTight_Gsf    dropBranch=1
+type=4  name=HLT_IsoMu24                     dropBranch=1
+type=4  name=HLT_IsoTkMu24                   dropBranch=1
+type=4  name=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL dropBranch=1
+type=4  name=HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ dropBranch=1
+type=4  name=HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL  dropBranch=1
+type=4  name=HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ dropBranch=1
+type=4  name=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ  dropBranch=1
 
-type=2  name=MET_pt_jesTotalDown  onlyMC=1 
-type=2  name=MET_pt_jesTotalUp    onlyMC=1 
-type=2  name=MET_phi_jesTotalDown  onlyMC=1 
-type=2  name=MET_phi_jesTotalUp    onlyMC=1 
-type=2  name=MET_pt_unclustEnUp   onlyMC=1 
-type=2  name=MET_pt_unclustEnDown onlyMC=1 
-type=2  name=MET_phi_unclustEnUp   onlyMC=1 
-type=2  name=MET_phi_unclustEnDown onlyMC=1 
-type=2  name=MET_pt_jerUp   onlyMC=1 
-type=2  name=MET_pt_jerDown onlyMC=1 
-type=2  name=MET_phi_jerUp   onlyMC=1 
-type=2  name=MET_phi_jerDown onlyMC=1 
-type=2  name=MET_pt_jesAbsoluteStatUp   onlyMC=1 
-type=2  name=MET_pt_jesAbsoluteStatDown onlyMC=1 
-type=2  name=MET_phi_jesAbsoluteStatUp   onlyMC=1 
-type=2  name=MET_phi_jesAbsoluteStatDown onlyMC=1 
-type=2  name=MET_pt_jesAbsoluteScaleUp   onlyMC=1 
-type=2  name=MET_pt_jesAbsoluteScaleDown onlyMC=1 
-type=2  name=MET_phi_jesAbsoluteScaleUp   onlyMC=1 
-type=2  name=MET_phi_jesAbsoluteScaleDown onlyMC=1 
-type=2  name=MET_pt_jesAbsoluteMPFBiasUp   onlyMC=1 
-type=2  name=MET_pt_jesAbsoluteMPFBiasDown onlyMC=1 
-type=2  name=MET_phi_jesAbsoluteMPFBiasUp   onlyMC=1 
-type=2  name=MET_phi_jesAbsoluteMPFBiasDown onlyMC=1 
-type=2  name=MET_pt_jesFragmentationUp   onlyMC=1 
-type=2  name=MET_pt_jesFragmentationDown onlyMC=1 
-type=2  name=MET_phi_jesFragmentationUp   onlyMC=1 
-type=2  name=MET_phi_jesFragmentationDown onlyMC=1 
-type=2  name=MET_pt_jesSinglePionECALUp   onlyMC=1 
-type=2  name=MET_pt_jesSinglePionECALDown onlyMC=1 
-type=2  name=MET_phi_jesSinglePionECALUp   onlyMC=1 
-type=2  name=MET_phi_jesSinglePionECALDown onlyMC=1 
-type=2  name=MET_pt_jesSinglePionHCALUp   onlyMC=1 
-type=2  name=MET_pt_jesSinglePionHCALDown onlyMC=1 
-type=2  name=MET_phi_jesSinglePionHCALUp   onlyMC=1 
-type=2  name=MET_phi_jesSinglePionHCALDown onlyMC=1 
-type=2  name=MET_pt_jesFlavorQCDUp   onlyMC=1 
-type=2  name=MET_pt_jesFlavorQCDDown onlyMC=1 
-type=2  name=MET_phi_jesFlavorQCDUp   onlyMC=1 
-type=2  name=MET_phi_jesFlavorQCDDown onlyMC=1 
-type=2  name=MET_pt_jesRelativeJEREC1Up   onlyMC=1 
-type=2  name=MET_pt_jesRelativeJEREC1Down onlyMC=1 
-type=2  name=MET_phi_jesRelativeJEREC1Up   onlyMC=1 
-type=2  name=MET_phi_jesRelativeJEREC1Down onlyMC=1 
-type=2  name=MET_pt_jesRelativeJEREC2Up   onlyMC=1 
-type=2  name=MET_pt_jesRelativeJEREC2Down onlyMC=1 
-type=2  name=MET_phi_jesRelativeJEREC2Up   onlyMC=1 
-type=2  name=MET_phi_jesRelativeJEREC2Down onlyMC=1 
-type=2  name=MET_pt_jesRelativeJERHFUp   onlyMC=1 
-type=2  name=MET_pt_jesRelativeJERHFDown onlyMC=1 
-type=2  name=MET_phi_jesRelativeJERHFUp   onlyMC=1 
-type=2  name=MET_phi_jesRelativeJERHFDown onlyMC=1 
-type=2  name=MET_pt_jesRelativePtBBUp   onlyMC=1 
-type=2  name=MET_pt_jesRelativePtBBDown onlyMC=1 
-type=2  name=MET_phi_jesRelativePtBBUp   onlyMC=1 
-type=2  name=MET_phi_jesRelativePtBBDown onlyMC=1 
-type=2  name=MET_pt_jesRelativePtEC1Up   onlyMC=1 
-type=2  name=MET_pt_jesRelativePtEC1Down onlyMC=1 
-type=2  name=MET_phi_jesRelativePtEC1Up   onlyMC=1 
-type=2  name=MET_phi_jesRelativePtEC1Down onlyMC=1 
-type=2  name=MET_pt_jesRelativePtEC2Up   onlyMC=1 
-type=2  name=MET_pt_jesRelativePtEC2Down onlyMC=1 
-type=2  name=MET_phi_jesRelativePtEC2Up   onlyMC=1 
-type=2  name=MET_phi_jesRelativePtEC2Down onlyMC=1 
-type=2  name=MET_pt_jesRelativePtHFUp   onlyMC=1 
-type=2  name=MET_pt_jesRelativePtHFDown onlyMC=1 
-type=2  name=MET_phi_jesRelativePtHFUp   onlyMC=1 
-type=2  name=MET_phi_jesRelativePtHFDown onlyMC=1 
-type=2  name=MET_pt_jesRelativeFSRUp   onlyMC=1 
-type=2  name=MET_pt_jesRelativeFSRDown onlyMC=1 
-type=2  name=MET_phi_jesRelativeFSRUp   onlyMC=1 
-type=2  name=MET_phi_jesRelativeFSRDown onlyMC=1 
-type=2  name=MET_pt_jesRelativeStatFSRUp   onlyMC=1 
-type=2  name=MET_pt_jesRelativeStatFSRDown onlyMC=1 
-type=2  name=MET_phi_jesRelativeStatFSRUp   onlyMC=1 
-type=2  name=MET_phi_jesRelativeStatFSRDown onlyMC=1 
-type=2  name=MET_pt_jesRelativeStatECUp   onlyMC=1 
-type=2  name=MET_pt_jesRelativeStatECDown onlyMC=1 
-type=2  name=MET_phi_jesRelativeStatECUp   onlyMC=1 
-type=2  name=MET_phi_jesRelativeStatECDown onlyMC=1 
-type=2  name=MET_pt_jesPileUpDataMCUp   onlyMC=1 
-type=2  name=MET_pt_jesPileUpDataMCDown onlyMC=1 
-type=2  name=MET_phi_jesPileUpDataMCUp   onlyMC=1 
-type=2  name=MET_phi_jesPileUpDataMCDown onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtRefUp   onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtRefDown onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtRefUp   onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtRefDown onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtBBUp   onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtBBDown onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtBBUp   onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtBBDown onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtEC1Up   onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtEC1Down onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtEC1Up   onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtEC1Down onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtEC2Up   onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtEC2Down onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtEC2Up   onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtEC2Down onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtHFUp   onlyMC=1 
-type=2  name=MET_pt_jesPileUpPtHFDown onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtHFUp   onlyMC=1 
-type=2  name=MET_phi_jesPileUpPtHFDown onlyMC=1 
-type=2  name=MET_pt_jesRelativeBalUp   onlyMC=1 
-type=2  name=MET_pt_jesRelativeBalDown onlyMC=1 
-type=2  name=MET_phi_jesRelativeBalUp   onlyMC=1 
-type=2  name=MET_phi_jesRelativeBalDown onlyMC=1 
-type=2  name=MET_pt_jesTimePtEtaUp   onlyMC=1 
-type=2  name=MET_pt_jesTimePtEtaDown onlyMC=1 
-type=2  name=MET_phi_jesTimePtEtaUp   onlyMC=1 
-type=2  name=MET_phi_jesTimePtEtaDown onlyMC=1 
+type=2  name=MET_pt_jesTotalDown  onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesTotalUp    onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesTotalDown  onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesTotalUp    onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_unclustEnUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_unclustEnDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_unclustEnUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_unclustEnDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jerUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jerDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jerUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jerDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesAbsoluteStatUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesAbsoluteStatDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesAbsoluteStatUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesAbsoluteStatDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesAbsoluteScaleUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesAbsoluteScaleDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesAbsoluteScaleUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesAbsoluteScaleDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesAbsoluteMPFBiasUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesAbsoluteMPFBiasDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesAbsoluteMPFBiasUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesAbsoluteMPFBiasDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesFragmentationUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesFragmentationDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesFragmentationUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesFragmentationDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesSinglePionECALUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesSinglePionECALDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesSinglePionECALUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesSinglePionECALDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesSinglePionHCALUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesSinglePionHCALDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesSinglePionHCALUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesSinglePionHCALDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesFlavorQCDUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesFlavorQCDDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesFlavorQCDUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesFlavorQCDDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeJEREC1Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeJEREC1Down onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeJEREC1Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeJEREC1Down onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeJEREC2Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeJEREC2Down onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeJEREC2Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeJEREC2Down onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeJERHFUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeJERHFDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeJERHFUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeJERHFDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativePtBBUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativePtBBDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativePtBBUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativePtBBDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativePtEC1Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativePtEC1Down onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativePtEC1Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativePtEC1Down onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativePtEC2Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativePtEC2Down onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativePtEC2Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativePtEC2Down onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativePtHFUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativePtHFDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativePtHFUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativePtHFDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeFSRUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeFSRDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeFSRUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeFSRDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeStatFSRUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeStatFSRDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeStatFSRUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeStatFSRDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeStatECUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeStatECDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeStatECUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeStatECDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpDataMCUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpDataMCDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpDataMCUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpDataMCDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtRefUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtRefDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtRefUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtRefDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtBBUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtBBDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtBBUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtBBDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtEC1Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtEC1Down onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtEC1Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtEC1Down onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtEC2Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtEC2Down onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtEC2Up   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtEC2Down onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtHFUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesPileUpPtHFDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtHFUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesPileUpPtHFDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeBalUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesRelativeBalDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeBalUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesRelativeBalDown onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesTimePtEtaUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_pt_jesTimePtEtaDown onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesTimePtEtaUp   onlyMC=1 dropBranch=1 
+type=2  name=MET_phi_jesTimePtEtaDown onlyMC=1 dropBranch=1 
 
 
 type=6  name=Jet_genJetIdx                      max=100     lengthBranch=nJet onlyMC=1
@@ -183,174 +183,174 @@ type=8  name=Jet_pt_jesTotalUp                         max=100     lengthBranch=
 type=8  name=Jet_pt_jesTotalDown                         max=100     lengthBranch=nJet
 type=8  name=Jet_mass_jesTotalUp                         max=100     lengthBranch=nJet
 type=8  name=Jet_mass_jesTotalDown                         max=100     lengthBranch=nJet
-##type=8  name=Jet_corr_JER                     max=100     lengthBranch=nJet  onlyMC=1
+##type=8  name=Jet_corr_JER                     max=100     lengthBranch=nJet  onlyMC=1 dropBranch=1
 ##type=8  name=Jet_pt_reg_corrJECUp             max=100     lengthBranch=nJet
 ##type=8  name=Jet_pt_reg_corrJECDown           max=100     lengthBranch=nJet
 ##type=8  name=Jet_pt_reg_corrJERUp             max=100     lengthBranch=nJet
 ##type=8  name=Jet_pt_reg_corrJERDown           max=100     lengthBranch=nJet
 ##
-type=8  name=Jet_pt_jesAbsoluteStatUp          max=100     lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesAbsoluteStatDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesAbsoluteScaleUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesAbsoluteScaleDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesAbsoluteFlavMapUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesAbsoluteFlavMapDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesAbsoluteMPFBiasUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesAbsoluteMPFBiasDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesFragmentationUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesFragmentationDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesSinglePionECALUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesSinglePionECALDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesSinglePionHCALUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesSinglePionHCALDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesFlavorQCDUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesFlavorQCDDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesTimePtEtaUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesTimePtEtaDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeJEREC1Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeJEREC1Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeJEREC2Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeJEREC2Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeJERHFUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeJERHFDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativePtBBUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativePtBBDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativePtEC1Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativePtEC1Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativePtEC2Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativePtEC2Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativePtHFUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativePtHFDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesAbsoluteStatUp          max=100     lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesAbsoluteStatDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesAbsoluteScaleUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesAbsoluteScaleDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesAbsoluteFlavMapUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesAbsoluteFlavMapDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesAbsoluteMPFBiasUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesAbsoluteMPFBiasDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesFragmentationUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesFragmentationDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesSinglePionECALUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesSinglePionECALDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesSinglePionHCALUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesSinglePionHCALDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesFlavorQCDUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesFlavorQCDDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesTimePtEtaUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesTimePtEtaDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeJEREC1Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeJEREC1Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeJEREC2Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeJEREC2Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeJERHFUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeJERHFDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativePtBBUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativePtBBDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeBalUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeBalDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativePtEC1Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativePtEC1Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativePtEC2Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativePtEC2Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativePtHFUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativePtHFDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeBalUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeBalDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeFSRUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeFSRDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeStatFSRUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeStatFSRDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeStatECUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesRelativeStatECDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeFSRUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeFSRDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeStatFSRUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeStatFSRDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeStatECUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesRelativeStatECDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesRelativeStatHFUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesRelativeStatHFDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpDataMCUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpDataMCDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtRefUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtRefDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtBBUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtBBDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtEC1Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtEC1Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtEC2Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtEC2Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpDataMCUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpDataMCDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtRefUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtRefDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtBBUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtBBDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtEC1Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtEC1Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtEC2Up        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtEC2Down        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtHFUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesPileUpPtHFDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtHFUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesPileUpPtHFDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesTotalUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jesTotalDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesTotalUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jesTotalDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jerUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_pt_jerDown        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jerUp        max=100   lengthBranch=nJet onlyMC=1
-type=8  name=Jet_mass_jerDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesPileUpMuZeroUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesPileUpMuZeroDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesPileUpEnvelopeUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesPileUpEnvelopeDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalPileUpUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalPileUpDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalRelativeUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalRelativeDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalPtUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalPtDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalScaleUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalScaleDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalAbsoluteUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalAbsoluteDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalMCUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesSubTotalMCDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTotalUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTotalDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorZJetUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorZJetDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPhotonJetUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPhotonJetDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPureGluonUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPureGluonDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPureQuarkUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPureQuarkDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPureCharmUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPureCharmDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPureBottomUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesFlavorPureBottomDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTimeRunBCDUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTimeRunBCDDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTimeRunEFUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTimeRunEFDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTimeRunGUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTimeRunGDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTimeRunHUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesTimeRunHDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupMPFInSituUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupMPFInSituDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupIntercalibrationUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupIntercalibrationDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupbJESUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupbJESDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupFlavorUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupFlavorDown        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupUncorrelatedUp        max=100   lengthBranch=nJet onlyMC=1
-##type=8  name=Jet_pt_jesCorrelationGroupUncorrelatedDown        max=100   lengthBranch=nJet onlyMC=1
+type=8  name=Jet_pt_jesAbsoluteStatUp          max=100     lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesAbsoluteStatDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesAbsoluteScaleUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesAbsoluteScaleDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesAbsoluteFlavMapUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesAbsoluteFlavMapDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesAbsoluteMPFBiasUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesAbsoluteMPFBiasDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesFragmentationUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesFragmentationDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesSinglePionECALUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesSinglePionECALDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesSinglePionHCALUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesSinglePionHCALDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesFlavorQCDUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesFlavorQCDDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesTimePtEtaUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesTimePtEtaDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeJEREC1Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeJEREC1Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeJEREC2Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeJEREC2Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeJERHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeJERHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativePtBBUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativePtBBDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativePtEC1Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativePtEC1Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativePtEC2Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativePtEC2Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativePtHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativePtHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesAbsoluteStatUp          max=100     lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesAbsoluteStatDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesAbsoluteScaleUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesAbsoluteScaleDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesAbsoluteFlavMapUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesAbsoluteFlavMapDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesAbsoluteMPFBiasUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesAbsoluteMPFBiasDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesFragmentationUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesFragmentationDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesSinglePionECALUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesSinglePionECALDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesSinglePionHCALUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesSinglePionHCALDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesFlavorQCDUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesFlavorQCDDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesTimePtEtaUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesTimePtEtaDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeJEREC1Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeJEREC1Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeJEREC2Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeJEREC2Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeJERHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeJERHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativePtBBUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativePtBBDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeBalUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeBalDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativePtEC1Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativePtEC1Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativePtEC2Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativePtEC2Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativePtHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativePtHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeBalUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeBalDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeFSRUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeFSRDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeStatFSRUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeStatFSRDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeStatECUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeStatECDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeFSRUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeFSRDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeStatFSRUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeStatFSRDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeStatECUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeStatECDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesRelativeStatHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesRelativeStatHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpDataMCUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpDataMCDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtRefUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtRefDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtBBUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtBBDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtEC1Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtEC1Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtEC2Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtEC2Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpDataMCUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpDataMCDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtRefUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtRefDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtBBUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtBBDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtEC1Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtEC1Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtEC2Up        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtEC2Down        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesPileUpPtHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesPileUpPtHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesTotalUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesTotalDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesTotalUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesTotalDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jerUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jerDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jerUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jerDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesPileUpMuZeroUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesPileUpMuZeroDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesPileUpEnvelopeUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesPileUpEnvelopeDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalPileUpUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalPileUpDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalRelativeUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalRelativeDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalPtUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalPtDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalScaleUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalScaleDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalAbsoluteUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalAbsoluteDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalMCUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesSubTotalMCDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTotalUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTotalDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorZJetUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorZJetDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPhotonJetUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPhotonJetDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPureGluonUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPureGluonDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPureQuarkUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPureQuarkDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPureCharmUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPureCharmDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPureBottomUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesFlavorPureBottomDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTimeRunBCDUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTimeRunBCDDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTimeRunEFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTimeRunEFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTimeRunGUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTimeRunGDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTimeRunHUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesTimeRunHDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupMPFInSituUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupMPFInSituDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupIntercalibrationUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupIntercalibrationDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupbJESUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupbJESDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupFlavorUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupFlavorDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupUncorrelatedUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+##type=8  name=Jet_pt_jesCorrelationGroupUncorrelatedDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
 
 
 

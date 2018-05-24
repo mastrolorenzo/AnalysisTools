@@ -30,7 +30,7 @@ type=2  name=fatJetPtCut_2lepchan         val=250
 type=2  name=fatJetBBTaggerCut_2lepchan   val=0.3
 type=2  name=tau2OverTau1Cut_2lepchan     val=10
 type=2  name=smearOnlyMatchedJets val=0
-
+type=2  name=slimmedOutput      val=1
 
 type=2  name=j1ptCut_0lepchan   val=60
 type=2  name=j1ptCut_1lepchan   val=25

@@ -57,7 +57,9 @@ public :
     TChain                          *fChain;        //!pointer to the analyzed TTree or TChain
     Int_t                           fCurrent;       //!current Tree number in a TChain
     TFile                           *ofile;         // what will be the trees saved here
+    TFile                           *tempfile; 
     TTree                           *outputTree;    // what will be the condensed output tree
+    TTree                           *outputTreeSlim;    // what will be the condensed output tree
     TTree                           *settingsTree;  // contains analysis settings
     std::string                     outputTreeName;
     std::vector<std::string>        readFiles;       // keep track of which files we've already read
@@ -103,7 +105,7 @@ public :
     Long64_t        LoadTree(Long64_t entry);
     void            InitChain(std::string filename);
 
-    void            SetupBranch(std::string name, int type, int length=-1, int onlyMC=0, std::string prov="existing", std::string lengthBranch="", int allowMissingBranch=0);
+    void            SetupBranch(std::string name, int type, int length=-1, int onlyMC=0, std::string prov="existing", std::string lengthBranch="", int allowMissingBranch=0, int dropBranch=0);
     void            SetupNewBranch(std::string name, int type, int length=-1, bool newmem=true, std::string treetype="output", float val=-999);
     void            SetNewBranches();
     void            ResetBranches();
@@ -128,7 +130,7 @@ public :
     virtual bool    Preselection();
     virtual bool    Analyze();
     virtual void    FinishEvent();
-    virtual void    TermAnalysis();
+    virtual void    TermAnalysis(bool skim=false);
 
     // general use functions
     double          EvalDeltaR(double eta0, double phi0, double eta1, double phi1);
