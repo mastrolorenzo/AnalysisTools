@@ -343,8 +343,6 @@ bool VHbbAnalysis::Analyze() {
         return false;  // TODO no channel selected => can return here  CORRECT??
     }
 */
-    bool use2017 = 0;
-    if (m("dataYear")==2017 && m("isV3")==1) use2017=1;
     if (mInt("Vtype") == 0 && (cursample->lepFlav == -1 || cursample->lepFlav == 0)) {
         std::pair<int,int> good_muons_2lep = HighestPtGoodMuonsOppCharge(    m("muptcut_2lepchan"), m("murelisocut_2lepchan"));
         if (good_muons_2lep.second > -1) {
@@ -355,7 +353,7 @@ bool VHbbAnalysis::Analyze() {
             *in["controlSample"] = -1;
         }
     } else if (mInt("Vtype") == 1 && (cursample->lepFlav == -1 || cursample->lepFlav == 1)) {
-        std::pair<int,int> good_elecs_2lep = HighestPtGoodElectronsOppCharge(m("elptcut_2lepchan"), m("elrelisocut_2lepchan"), m("elidcut_2lepchan"),0,use2017);
+        std::pair<int,int> good_elecs_2lep = HighestPtGoodElectronsOppCharge(m("elptcut_2lepchan"), m("elrelisocut_2lepchan"), m("elidcut_2lepchan"),0);
         if (good_elecs_2lep.second > -1) {
             *in["isZee"] = 1;
             *in["lepInd1"] = *in["elInd1"] = good_elecs_2lep.first;
@@ -373,7 +371,7 @@ bool VHbbAnalysis::Analyze() {
             *in["controlSample"] = -1;
         }
     } else if (mInt("Vtype") == 3 && (cursample->lepFlav == -1 || cursample->lepFlav == 3)) {
-        std::pair<int,int> good_elecs_1lep = HighestPtGoodElectronsOppCharge(m("elptcut_1lepchan"), m("elrelisocut_1lepchan"), m("elidcut_1lepchan"),1,use2017);
+        std::pair<int,int> good_elecs_1lep = HighestPtGoodElectronsOppCharge(m("elptcut_1lepchan"), m("elrelisocut_1lepchan"), m("elidcut_1lepchan"),1);
         if (good_elecs_1lep.first > -1) {
             *in["isWenu"] = 1;
             *in["eventClass"] = 1000;   // TODO is this still needed????
@@ -2744,21 +2742,25 @@ void VHbbAnalysis::ComputeBoostedVariables(){
     }
 }
 
-std::pair<int,int> VHbbAnalysis::HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut, bool isOneLepton, bool use2017) {
+std::pair<int,int> VHbbAnalysis::HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut, bool isOneLepton) {
     int first = -1;
     for (int i = 0; i<mInt("nElectron"); i++) {
         bool passEleIDCut = 0;
         if(isOneLepton){
-            if(use2017){
+            if(m("dataYear")==2017){
                 passEleIDCut = m("Electron_mvaFall17Iso_WP80",i) > 0 ;
-            } else {
+            } else if(m("dataYear")==2016){
                 passEleIDCut = m("Electron_mvaSpring16GP_WP80",i) > 0;
+            } else {
+                std::cout<<"In HighestPtGoodElectronsOppCharge... what year is it? "<<m("dataYear")<<std::endl;
             }
         } else {
-            if(use2017){
+            if(m("dataYear")==2017){
                 passEleIDCut = m("Electron_mvaFall17Iso_WP90",i) > 0;
-            } else {
+            } else if(m("dataYear")==2016){
                 passEleIDCut = m("Electron_mvaSpring16GP_WP90",i) >0;
+            } else {
+                std::cout<<"In HighestPtGoodElectronsOppCharge... what year is it? "<<m("dataYear")<<std::endl;
             }
        }
         if (fabs(m("Electron_eta",i)) < m("eletacut")
