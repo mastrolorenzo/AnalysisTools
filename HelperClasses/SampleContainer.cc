@@ -99,11 +99,11 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
             std::cout<<"pe = "<<processedEvents<<std::endl;
             processedEvents += nEffective;
             std::cout<<"pe = "<<processedEvents<<std::endl;
-            //TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightScale");
-            //TH1F* CountWeightedLHEWeightPdf_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightPdf");
+            TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightScale");
+            TH1F* CountWeightedLHEWeightPdf_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightPdf");
             //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
-            //CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
-            //CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
+            CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
+            CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
             //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
         } else {
             // totally different setup for grabbing event count in nanoAOD
@@ -128,7 +128,6 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
                 for (int j=0; j<120; j++) {
                     CountWeightedLHEWeightPdf->SetBinContent(j+1,CountWeightedLHEWeightPdf->GetBinContent(j+1)+lhePdfs[j]);
                 }
-
             }
             std::cout<<"From Runs tree, processedEvents is (after)  "<<processedEvents<<std::endl;
         }

@@ -1719,8 +1719,12 @@ void VHbbAnalysis::FinishEvent() {
         *f["nProcEvents"] = cursample->processedEvents;
     }
     if (*in["sampleIndex"] != 0) {
+        TH1F *CountWeightedLHEWeightScale = cursample->CountWeightedLHEWeightScale;
+        TH1F *CountWeightedLHEWeightPdf = cursample->CountWeightedLHEWeightPdf;
+        //Need to scale CountWeightedLHEWeightScale and CountWeightedLHEWeightPdf:
+        CountWeightedLHEWeightScale->Scale(1./round(CountWeightedLHEWeightScale->GetBinContent(5)));
+        CountWeightedLHEWeightPdf->Scale(1./round(CountWeightedLHEWeightScale->GetBinContent(5)));
         for (int i=0; i<mInt("nLHEScaleWeight");i++) {
-            TH1F *CountWeightedLHEWeightScale = cursample->CountWeightedLHEWeightScale;
             f["LHE_weights_scale_normwgt"][i] = 1.0 / CountWeightedLHEWeightScale->GetBinContent(CountWeightedLHEWeightScale->FindBin(i));
             f["LHEScaleWeight"][i] = m("LHEScaleWeight",i)*m("LHE_weights_scale_normwgt",i);
         }
@@ -1729,7 +1733,6 @@ void VHbbAnalysis::FinishEvent() {
         *f["LHE_weights_scale_muRDown"] = m("LHEScaleWeight",1);
         *f["LHE_weights_scale_muFDown"] = m("LHEScaleWeight",3);
         for (int i=0; i<mInt("nLHEPdfWeight");i++) {
-            TH1F *CountWeightedLHEWeightPdf = cursample->CountWeightedLHEWeightPdf;
             if (CountWeightedLHEWeightPdf->GetBinContent(CountWeightedLHEWeightPdf->FindBin(i)) != 0) {
                 f["LHE_weights_pdf_normwgt"][i] = 1.0 / CountWeightedLHEWeightPdf->GetBinContent(CountWeightedLHEWeightPdf->FindBin(i));
                 f["LHEPdfWeight"][i] = m("LHEPdfWeight",i)*m("LHE_weights_pdf_normwgt",i);
