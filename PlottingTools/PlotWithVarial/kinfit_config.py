@@ -1,17 +1,26 @@
 import varial
 varial.settings.rootfile_postfixes += ['.pdf']
-name = 'VHbbPlotsKinfitV3_2'
-input_pattern = '/nfs/dust/cms/user/tholenhe/VHbbAnalysisNtuples/VHbb2016_NanoAODPostProcV3_Direct1/%s/*.root'
+name = 'VHbbPlots2016KinfitV4_1'
+input_pattern = '/nfs/dust/cms/user/tholenhe/VHbbAnalysisNtuples/VHbb2016_NanoAODPostProcV4_Direct1/%s/*.root'
 #weight = 'genWeight*weight_PU*bTagWeight*weight_ptQCD*weight_ptEWK*Lep_SF*weight_mettrigSF'
-weight = 'weight'
+weight = 'weight*(1./bTagWeight)'
 enable_reuse_step = True  # try to find output on disk and don't run a step if present
 treename = 'Events'
 
 
-from kinfit_samples import *
+from kinfit_samples_2016 import *
+# from kinfit_samples_2017 import *
 
+
+DeepCSVmax = 'Jet_btagDeepB[hJetInd1] > Jet_btagDeepB[hJetInd2] ? Jet_btagDeepB[hJetInd1] : Jet_btagDeepB[hJetInd2]'
+DeepCSVmin = 'Jet_btagDeepB[hJetInd1] > Jet_btagDeepB[hJetInd2] ? Jet_btagDeepB[hJetInd2] : Jet_btagDeepB[hJetInd1]'
 
 plotvars = {
+    'DeepCSVmax':       (DeepCSVmax,        ';DeepCSV_{max};',              60,      0.,     1       ),
+    'DeepCSVmin':       (DeepCSVmin,        ';DeepCSV_{min};',              60,      0.,     1       ),
+    'jetleadpt':        ('Jet_bReg[hJetInd1]', ';Regressed hj1 p_{T} GeV;', 50,      0,      500     ),
+    'jetsubleadpt':     ('Jet_bReg[hJetInd2]', ';Regressed hj2 p_{T} GeV;', 25,      0,      250     ),
+
     'Vpt':              ('V_pt',            ';p_{T}(V) GeV;',               21,      0,      350     ),
     'Vpt_fit':          ('V_pt_fit',        ';fitted p_{T}(V) GeV;',        21,      0,      350     ),
     'Hpt':              ('H_pt',            ';p_{T}(jj) GeV;',              21,      0,      350     ),
@@ -23,6 +32,7 @@ plotvars = {
     'HVdPhi_fit':       ('abs(HVdPhi_fit)', ';fitted HVdPhi;',              16,      0,      3.2     ),
     'jjVPtBal':         ('H_pt/V_pt',       ';jj/V P_{T} Bal;',             30,      0,      2       ),
     'jjVPtBal_fit':     ('H_pt_fit/V_pt',   ';fitted jj/V P_{T} Bal;',      30,      0,      2       ),
+    'jjVPtBal_fit_fit': ('H_pt_fit/V_pt_fit',';fitted jj/ fitted V P_{T} Bal;',30,   0,      2       ),
 
     'kinfit_fit':       ('kinfit_fit',      ';fit result (0:N/A, 1:OK, 2:ERR);',3, -.5,      2.5     ),
     'controlSample':    ('controlSample',   ';controlSample;',              27,   -1.5,      25.5    ),
@@ -58,6 +68,7 @@ cats_CR = {
 cats_debug = {
     'Debug_isZmm': 'isZmm',
     'Debug_isZee': 'isZee',
+    'Debug_all': '1',
 }
 
 no_sel = [
@@ -80,6 +91,3 @@ the_category_dict = {
     'CR':           [cats_CR,    no_sel,      plotvars],
     # 'Debug':        [cats_debug, [],          plotvars],
 }
-
-from varial_ext.treeprojector import TreeProjectorFileBased
-TreeProjector = TreeProjectorFileBased

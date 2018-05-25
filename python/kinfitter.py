@@ -1,3 +1,4 @@
+from ROOT.TMath import Sin, Cos
 from math import pi
 import itertools
 import numpy
@@ -7,9 +8,9 @@ import os
 
 
 # constants
-llbb_pxy_var = 8**2  # with no additional jets above pt > 20 GeV and no eta cut
-hh4b_res_scale = 0.62
-z_width = 1.7 * 3
+LLVV_PXY_VAR = 8**2  # with no additional jets above pt > 20 GeV and no eta cut
+HH4B_RES_SCALE = 0.62
+Z_WIDTH = 1.7 * 3
 
 
 # resolution functions from HH4b analysis
@@ -36,12 +37,6 @@ def ErrPhi_Signal(pT):
     if pT>500: pT=500
     sigmaPhi = 0.038 + (4.1/pT) + (-0.19/pow(pT,0.5))
     return sigmaPhi*sigmaPhi
-
-
-# jet resolutions from jme group
-# https://github.com/cms-jet/JRDatabase
-# https://twiki.cern.ch/twiki/bin/view/CMS/JetResolution
-ak4pfchs_ptres = None
 
 
 # auxillary functions
@@ -72,17 +67,17 @@ def mk_lv(pt, eta, phi, m):
 # functions for covariances and fit particles from jets ...
 def mk_lv_ind(e, ind, regressed=False):
     return mk_lv(
-        e.Jet_bReg[ind] if regressed else e.Jet_Pt[ind],
+        e.Jet_PtReg[ind] if regressed else e.Jet_Pt[ind],
         e.Jet_eta[ind],
         e.Jet_phi[ind],
         e.Jet_mass[ind],
     )
 
-def mk_jet_cart_cov(v, rho):
+def mk_jet_cart_cov(v, rho, jme_res_obj):
     jme_par = ROOT.JME.JetParameters().setRho(rho).setJetPt(v.Pt()).setJetEta(v.Eta())
-    jme_res = ak4pfchs_ptres.getResolution(jme_par) * v.Pt()
-    cos_phi = ROOT.TMath.Cos(v.Phi())
-    sin_phi = ROOT.TMath.Sin(v.Phi())
+    jme_res = jme_res_obj.getResolution(jme_par) * v.Pt()
+    cos_phi = Cos(v.Phi())
+    sin_phi = Sin(v.Phi())
     cov = ROOT.TMatrixD(4, 4)
     cov.Zero()
     cov[0][0] = (jme_res*cos_phi)**2
@@ -96,10 +91,12 @@ def mk_fit_particle(e, ind, res_scale=1.):
     cov = ROOT.TMatrixD(3, 3)
     cov.Zero()
     hh4b_res = ErrpT_Signal(v.Et(), v.Eta())
+    reg_res = (e.Jet_bRegRes[ind]*v.Pt())**2
     cov[0][0] = hh4b_res * res_scale**2
+    #cov[0][0] = reg_res
     cov[1][1] = ErrEta_Signal(v.Et())
     cov[2][2] = ErrPhi_Signal(v.Et())
-    return v, hh4b_res, ROOT.TFitParticleEtEtaPhi(v, cov)
+    return v, hh4b_res, reg_res, ROOT.TFitParticleEtEtaPhi(v, cov)
 
 
 # ... and from leptons as well
@@ -139,13 +136,13 @@ def mk_fit_particle_lepton(e, v, ind):
     return v, cov[0][0], ROOT.TFitParticleEtEtaPhi(v, cov)
 
 
-class VarContainer(object):
-    def __init__(self, output_tree):
+class EventProxy(object):
+    def __init__(self, output_tree, output_postfix=''):
+        self.e = None
         self.tree_vars = [
 
             # higgs jets
             'n_hj_matched',
-
             'hj1_pt',        'hj1_eta',        'hj1_phi',        'hj1_mass',
             'hj2_pt',        'hj2_eta',        'hj2_phi',        'hj2_mass',
             'hj12_pt',       'hj12_eta',       'hj12_phi',       'hj12_mass',
@@ -158,8 +155,13 @@ class VarContainer(object):
             'hj1_fit_pt',    'hj1_fit_eta',    'hj1_fit_phi',    'hj1_fit_mass',
             'hj2_fit_pt',    'hj2_fit_eta',    'hj2_fit_phi',    'hj2_fit_mass',
             'H_pt_fit',      'H_eta_fit',      'H_phi_fit',      'H_mass_fit',
+            'hJets_pt_0_fit',
+            'hJets_pt_1_fit',
+            'H_mass_sigma_fit',
+            'n_fsr_jets',
+            'n_recoil_jets_fit',
 
-            'HVdPhi_fit',    'HVdR_fit',       'HVdEta_fit',
+            'HVdPhi_fit',    'HVdR_fit',       'HVdEta_fit',      'jjVPtRatio_fit',
 
             'hj1_reg_res',
             'hj2_reg_res',
@@ -167,6 +169,9 @@ class VarContainer(object):
             'hj2_hh4b_res',
             'hj1_jme_res',
             'hj2_jme_res',
+            'hj1_fit_err',
+            'hj2_fit_err',
+            'hj12_fit_corr',
 
             # leptons
             'l1_pt',        'l1_eta',        'l1_phi',        'l1_mass',
@@ -177,7 +182,7 @@ class VarContainer(object):
             'l12_gen_pt',   'l12_gen_eta',   'l12_gen_phi',   'l12_gen_mass',
             'l1_fit_pt',    'l1_fit_eta',    'l1_fit_phi',    'l1_fit_mass',
             'l2_fit_pt',    'l2_fit_eta',    'l2_fit_phi',    'l2_fit_mass',
-            'V_pt_fit',      'V_eta_fit',      'V_phi_fit',      'V_mass_fit',
+            'V_pt_fit',     'V_eta_fit',     'V_phi_fit',     'V_mass_fit',
 
             'l1_res',
             'l2_res',
@@ -187,8 +192,8 @@ class VarContainer(object):
             # 'recoil_fit_pt', 'recoil_fit_eta', 'recoil_fit_phi', 'recoil_fit_mass',
 
             # 'llbb_px',       'llbb_py',
-            'llbb_fit_px',   'llbb_fit_py',
-            # 'llbbr_fit_px',  'llbbr_fit_py',
+            'llbb_fit_px',   'llbb_fit_py',   'llbb_fit_pt',
+            'llbbr_fit_px',  'llbbr_fit_py',  'llbbr_fit_pt',
             'llbb_gen_px',   'llbb_gen_py',
             'll_gen_mass',
 
@@ -199,11 +204,30 @@ class VarContainer(object):
             'kinfit_getF',
 
             'H_mass_fit_fallback',
+            'H_pt_fit_fallback',
+            'HVdPhi_fit_fallback',
+            'jjVPtRatio_fit_fallback',
+            'hJets_pt_0_fit_fallback',
+            'hJets_pt_1_fit_fallback',
         ]
 
         for var in self.tree_vars:
             setattr(self, var, numpy.zeros(1,float))
-            output_tree.Branch(var, getattr(self, var), var+'/D')
+            output_tree.Branch(var+output_postfix, getattr(self, var), var+output_postfix+'/D')
+
+    def set_event(self, e):
+        self.e = e
+
+    def apply_fallback(self):
+        self.H_mass_fit_fallback[0] = self.e.H_mass
+        self.H_pt_fit_fallback[0] = self.e.H_pt
+        self.HVdPhi_fit_fallback[0] = self.e.HVdPhi
+        self.jjVPtRatio_fit_fallback[0] = self.e.jjVPtRatio
+        self.hJets_pt_0_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd1]
+        self.hJets_pt_1_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd2]
+
+        self.H_mass_sigma_fit[0] = -1
+        self.n_recoil_jets_fit[0] = -1
 
     def set_vals_to_zero(self):
         for var in self.tree_vars:
@@ -215,106 +239,147 @@ class VarContainer(object):
         getattr(self, token+'_phi' )[0] = vec.Phi()
         getattr(self, token+'_mass')[0] = vec.M()
 
+    def __getattr__(self, attr):
+        # TODO map systematic uncertainty access here
+        return getattr(self.e, attr)
 
-def apply_fit_to_event(e, c):
 
-    # normal jets
-    v1 = mk_lv_ind(e, e.hJetInd1) #e.hJCMVAV2idx[0])
-    v2 = mk_lv_ind(e, e.hJetInd2) #e.hJCMVAV2idx[1])
+
+def apply_fit_to_event(ep, jme_res_obj, do_fsr):
+
+    # normal higgs jets
+    hJidxs = (ep.hJetInd1, ep.hJetInd2)
+    v1 = mk_lv_ind(ep, hJidxs[0])
+    v2 = mk_lv_ind(ep, hJidxs[1])
     v12 = v1 + v2
 
-    c.fill_pt_eta_phi_mass('hj1', v1)
-    c.fill_pt_eta_phi_mass('hj2', v2)
-    c.fill_pt_eta_phi_mass('hj12', v12)
-
+    ep.fill_pt_eta_phi_mass('hj1', v1)
+    ep.fill_pt_eta_phi_mass('hj2', v2)
+    ep.fill_pt_eta_phi_mass('hj12', v12)
 
     # regressed jets and fit particles
-    v1, v1_pt_var, p1 = mk_fit_particle(e, e.hJetInd1, hh4b_res_scale) #e.hJCMVAV2idx[0])
-    v2, v2_pt_var, p2 = mk_fit_particle(e, e.hJetInd2, hh4b_res_scale) #e.hJCMVAV2idx[1])
+    v1, v1_hh4b_var, v1_reg_var, p1 = mk_fit_particle(ep, hJidxs[0], HH4B_RES_SCALE)
+    v2, v2_hh4b_var, v2_reg_var, p2 = mk_fit_particle(ep, hJidxs[1], HH4B_RES_SCALE)
+
+    if do_fsr:
+        jet_idxs_for_fsr = (                     # find indices
+            i
+            for i in xrange(ep.nJet)
+            if (
+                i not in hJidxs  # exclude higgs jets
+                # and ep.Jet_jetId[i] > 0
+                and ep.Jet_lepFilter[i] > 0
+                and ep.Jet_puId[i] > 0
+                and ep.Jet_Pt[i] > 20
+                and abs(ep.Jet_eta[i]) < 3.0
+            )
+        )
+        fsr_jet_idxs_vs = (                      # build Lorentz vectors
+            (i, mk_lv_ind(ep, i))
+            for i in jet_idxs_for_fsr
+        )
+        fsr_jet_idxs_vs = list(                  # filter for the ones close to hj's
+            (i, v)
+            for i, v in fsr_jet_idxs_vs
+            if min(v.DeltaR(v1), v.DeltaR(v2)) < 0.8
+        )
+        for _, v in fsr_jet_idxs_vs:             # add to higgs jets
+            if v.DeltaR(v1) < v.DeltaR(v2):
+                v1 += v
+            else:
+                v2 += v
+        fsr_jet_idxs = list(i for i, _ in fsr_jet_idxs_vs)
+        ep.n_fsr_jets[0] = len(fsr_jet_idxs)
+    else:
+        fsr_jet_idxs = []
+
     v12 = v1 + v2
-    c.fill_pt_eta_phi_mass('hj1_reg', v1)
-    c.fill_pt_eta_phi_mass('hj2_reg', v2)
-    c.fill_pt_eta_phi_mass('hj12_reg', v12)
+    ep.fill_pt_eta_phi_mass('hj1_reg', v1)
+    ep.fill_pt_eta_phi_mass('hj2_reg', v2)
+    ep.fill_pt_eta_phi_mass('hj12_reg', v12)
 
-    c.n_hj_matched[0] = 0
-    if deltaR(c.hj1_reg_eta[0], c.hj1_reg_phi[0], e.GenBJ1_eta, e.GenBJ1_phi) < 0.2:
-        v1_gen = mk_lv(e.GenBJ1_pt,e.GenBJ1_eta,e.GenBJ1_phi,e.GenBJ1_mass)
-        c.fill_pt_eta_phi_mass('hj1_gen', v1_gen)
-        c.n_hj_matched[0] += 1
-    elif deltaR(c.hj1_reg_eta[0], c.hj1_reg_phi[0], e.GenBJ2_eta, e.GenBJ2_phi) < 0.2:
-        v1_gen = mk_lv(e.GenBJ2_pt,e.GenBJ2_eta,e.GenBJ2_phi,e.GenBJ2_mass)
-        c.fill_pt_eta_phi_mass('hj1_gen', v1_gen)
-        c.n_hj_matched[0] += 1
+    # higgs jet matching
+    ep.n_hj_matched[0] = 0
+    if deltaR(ep.hj1_reg_eta[0], ep.hj1_reg_phi[0], ep.GenBJ1_eta, ep.GenBJ1_phi) < 0.2:
+        v1_gen = mk_lv(ep.GenBJ1_pt,ep.GenBJ1_eta,ep.GenBJ1_phi,ep.GenBJ1_mass)
+        ep.fill_pt_eta_phi_mass('hj1_gen', v1_gen)
+        ep.n_hj_matched[0] += 1
+    elif deltaR(ep.hj1_reg_eta[0], ep.hj1_reg_phi[0], ep.GenBJ2_eta, ep.GenBJ2_phi) < 0.2:
+        v1_gen = mk_lv(ep.GenBJ2_pt,ep.GenBJ2_eta,ep.GenBJ2_phi,ep.GenBJ2_mass)
+        ep.fill_pt_eta_phi_mass('hj1_gen', v1_gen)
+        ep.n_hj_matched[0] += 1
 
-    if deltaR(c.hj2_reg_eta[0], c.hj2_reg_phi[0], e.GenBJ1_eta, e.GenBJ1_phi) < 0.2:
-        v2_gen = mk_lv(e.GenBJ1_pt,e.GenBJ1_eta,e.GenBJ1_phi,e.GenBJ1_mass)
-        c.fill_pt_eta_phi_mass('hj2_gen', v2_gen)
-        c.n_hj_matched[0] += 1
-    elif deltaR(c.hj2_reg_eta[0], c.hj2_reg_phi[0], e.GenBJ2_eta, e.GenBJ2_phi) < 0.2:
-        v2_gen = mk_lv(e.GenBJ2_pt,e.GenBJ2_eta,e.GenBJ2_phi,e.GenBJ2_mass)
-        c.fill_pt_eta_phi_mass('hj2_gen', v2_gen)
-        c.n_hj_matched[0] += 1
+    if deltaR(ep.hj2_reg_eta[0], ep.hj2_reg_phi[0], ep.GenBJ1_eta, ep.GenBJ1_phi) < 0.2:
+        v2_gen = mk_lv(ep.GenBJ1_pt,ep.GenBJ1_eta,ep.GenBJ1_phi,ep.GenBJ1_mass)
+        ep.fill_pt_eta_phi_mass('hj2_gen', v2_gen)
+        ep.n_hj_matched[0] += 1
+    elif deltaR(ep.hj2_reg_eta[0], ep.hj2_reg_phi[0], ep.GenBJ2_eta, ep.GenBJ2_phi) < 0.2:
+        v2_gen = mk_lv(ep.GenBJ2_pt,ep.GenBJ2_eta,ep.GenBJ2_phi,ep.GenBJ2_mass)
+        ep.fill_pt_eta_phi_mass('hj2_gen', v2_gen)
+        ep.n_hj_matched[0] += 1
 
-    if c.n_hj_matched[0] == 2:
+    if ep.n_hj_matched[0] == 2:
         v12_gen = v1_gen + v2_gen
-        c.fill_pt_eta_phi_mass('hj12_gen', v12_gen)
+        ep.fill_pt_eta_phi_mass('hj12_gen', v12_gen)
 
-    jme_p1 = ROOT.JME.JetParameters().setRho(e.fixedGridRhoFastjetAll).setJetPt(c.hj1_reg_pt[0]).setJetEta(c.hj1_reg_eta[0])
-    jme_p2 = ROOT.JME.JetParameters().setRho(e.fixedGridRhoFastjetAll).setJetPt(c.hj2_reg_pt[0]).setJetEta(c.hj2_reg_eta[0])
-    c.hj1_jme_res[0] = ak4pfchs_ptres.getResolution(jme_p1) * c.hj1_reg_pt[0]
-    c.hj2_jme_res[0] = ak4pfchs_ptres.getResolution(jme_p2) * c.hj2_reg_pt[0]
-
-    c.hj1_hh4b_res[0] = v1_pt_var**.5
-    c.hj2_hh4b_res[0] = v2_pt_var**.5
-
-    # TODO hj1_reg_res, hj2_reg_res
+    # fill resolutions
+    jme_p1 = ROOT.JME.JetParameters().setRho(ep.fixedGridRhoFastjetAll).setJetPt(ep.hj1_reg_pt[0]).setJetEta(ep.hj1_reg_eta[0])
+    jme_p2 = ROOT.JME.JetParameters().setRho(ep.fixedGridRhoFastjetAll).setJetPt(ep.hj2_reg_pt[0]).setJetEta(ep.hj2_reg_eta[0])
+    ep.hj1_jme_res[0] = jme_res_obj.getResolution(jme_p1) * ep.hj1_reg_pt[0]
+    ep.hj2_jme_res[0] = jme_res_obj.getResolution(jme_p2) * ep.hj2_reg_pt[0]
+    ep.hj1_hh4b_res[0] = v1_hh4b_var**.5
+    ep.hj2_hh4b_res[0] = v2_hh4b_var**.5
+    ep.hj1_reg_res[0] = v1_reg_var**.5
+    ep.hj2_reg_res[0] = v2_reg_var**.5
 
     # base recoil covariance
     cov_recoil = ROOT.TMatrixD(4, 4)
     cov_recoil.Zero()
-    cov_recoil[0][0] = llbb_pxy_var
-    cov_recoil[1][1] = llbb_pxy_var
+    cov_recoil[0][0] = LLVV_PXY_VAR
+    cov_recoil[1][1] = LLVV_PXY_VAR
     cov_recoil[2][2] = 1
     cov_recoil[3][3] = 1e12
 
     # recoil vector and covariance additions
     recoil_jet_idxs = (
         i
-        for i in xrange(e.nJet)
+        for i in xrange(ep.nJet)
         if (
-            i not in (e.hJetInd1, e.hJetInd2)
-            and e.Jet_puId[i] > 1
-            and e.Jet_jetId[i] > 1
-            and e.Jet_lepFilter[i] > 0
-            and e.Jet_Pt[i] > 20
-            # and abs(e.Jet_eta) < 2.5
+            i not in hJidxs             # exclude higgs jets
+            and i not in fsr_jet_idxs   # exclude fsr jets (if fsr is used)
+            and ep.Jet_puId[i] > 1
+            and ep.Jet_jetId[i] > 1
+            and ep.Jet_lepFilter[i] > 0
+            and ep.Jet_Pt[i] > 20
+            # and abs(ep.Jet_eta) < 2.5
         )
     )
     recoil_jet_vs = list(
-        mk_lv_ind(e, i)
+        mk_lv_ind(ep, i)
         for i in recoil_jet_idxs
     )
+    ep.n_recoil_jets_fit[0] = len(recoil_jet_vs)
     v_recoil = sum(recoil_jet_vs, ROOT.TLorentzVector())
     cov_recoil = sum(
-        (mk_jet_cart_cov(v, e.fixedGridRhoFastjetAll) for v in recoil_jet_vs),
+        (mk_jet_cart_cov(v, ep.fixedGridRhoFastjetAll, jme_res_obj) for v in recoil_jet_vs),
         cov_recoil
     )
     p_recoil = ROOT.TFitParticleECart(v_recoil, cov_recoil)
 
-    vl1, vl2 = get_sel_leptons(e)
+    vl1, vl2 = get_sel_leptons(ep)
     vl12 = vl1 + vl2
-    _, vl1_pt_var, pl1 = mk_fit_particle_lepton(e, vl1, e.lepInd1)
-    _, vl2_pt_var, pl2 = mk_fit_particle_lepton(e, vl2, e.lepInd2)
+    _, vl1_pt_var, pl1 = mk_fit_particle_lepton(ep, vl1, ep.lepInd1)
+    _, vl2_pt_var, pl2 = mk_fit_particle_lepton(ep, vl2, ep.lepInd2)
 
-    c.fill_pt_eta_phi_mass('l1', vl1)
-    c.fill_pt_eta_phi_mass('l2', vl2)
-    c.V_eta[0] = vl12.Eta()
+    ep.fill_pt_eta_phi_mass('l1', vl1)
+    ep.fill_pt_eta_phi_mass('l2', vl2)
+    ep.V_eta[0] = vl12.Eta()
 
-    c.l1_res[0] = vl1_pt_var**.5
-    c.l2_res[0] = vl2_pt_var**.5
+    ep.l1_res[0] = vl1_pt_var**.5
+    ep.l2_res[0] = vl2_pt_var**.5
 
     # constraints
-    cons_MZ = ROOT.TFitConstraintMGaus('cons_MZ', '', None, None, 91., z_width)
+    cons_MZ = ROOT.TFitConstraintMGaus('cons_MZ', '', None, None, 91., Z_WIDTH)
     cons_MZ.addParticle1(pl1)
     cons_MZ.addParticle1(pl2)
 
@@ -337,92 +402,118 @@ def apply_fit_to_event(e, c):
     fitter.setVerbosity(3)
 
     # run the fit
-    c.kinfit_fit[0] = fitter.fit() + 1  # 0: not run; 1: fit converged; 2: fit didn't converge
-    c.kinfit_getNDF[0] = fitter.getNDF()
-    c.kinfit_getS[0] = fitter.getS()
-    c.kinfit_getF[0] = fitter.getF()
+    ep.kinfit_fit[0] = fitter.fit() + 1  # 0: not run; 1: fit converged; 2: fit didn't converge
+    ep.kinfit_getNDF[0] = fitter.getNDF()
+    ep.kinfit_getS[0] = fitter.getS()
+    ep.kinfit_getF[0] = fitter.getF()
 
     # higgs jet output vectors
     v1 = fitter.get4Vec(0)
     v2 = fitter.get4Vec(1)
     v12 = v1 + v2
 
-    c.fill_pt_eta_phi_mass('hj1_fit', v1)
-    c.fill_pt_eta_phi_mass('hj2_fit', v2)
-    c.H_pt_fit[0] = v12.Pt()
-    c.H_eta_fit[0] = v12.Eta()
-    c.H_phi_fit[0] = v12.Phi()
-    c.H_mass_fit[0] = v12.M()
+    ep.fill_pt_eta_phi_mass('hj1_fit', v1)
+    ep.fill_pt_eta_phi_mass('hj2_fit', v2)
+    ep.hJets_pt_0_fit[0] = v1.Pt()
+    ep.hJets_pt_1_fit[0] = v2.Pt()
+    ep.H_pt_fit[0] = v12.Pt()
+    ep.H_eta_fit[0] = v12.Eta()
+    ep.H_phi_fit[0] = v12.Phi()
+    ep.H_mass_fit[0] = v12.M()
+
+    # higgs mass uncertainty
+    cov_fit = fitter.getCovMatrixFit()
+    ep.hj1_fit_err[0] = cov_fit(0,0)**.5
+    ep.hj2_fit_err[0] = cov_fit(3,3)**.5
+    ep.hj12_fit_corr[0] = cov_fit(0,3) / ep.hj1_fit_err[0] / ep.hj2_fit_err[0]
+    dmH_by_dpt1 = ( (v12.X())*Cos(v1.Phi()) + (v12.Y())*Sin(v1.Phi()) )/ep.H_mass_fit[0]
+    dmH_by_dpt2 = ( (v12.X())*Cos(v2.Phi()) + (v12.Y())*Sin(v2.Phi()) )/ep.H_mass_fit[0]
+    ep.H_mass_sigma_fit[0] = ( dmH_by_dpt1**2          * cov_fit(0,0)
+                            + dmH_by_dpt2**2          * cov_fit(3,3)
+                            + dmH_by_dpt1*dmH_by_dpt2 * cov_fit(0,3) )**.5
 
     # lepton output vectors
     vl1 = fitter.get4Vec(2)
     vl2 = fitter.get4Vec(3)
     vl12 = vl1 + vl2
 
-    c.fill_pt_eta_phi_mass('l1_fit', vl1)
-    c.fill_pt_eta_phi_mass('l2_fit', vl2)
-    c.V_pt_fit[0] = vl12.Pt()
-    c.V_eta_fit[0] = vl12.Eta()
-    c.V_phi_fit[0] = vl12.Phi()
-    c.V_mass_fit[0] = vl12.M()
+    ep.fill_pt_eta_phi_mass('l1_fit', vl1)
+    ep.fill_pt_eta_phi_mass('l2_fit', vl2)
+    ep.V_pt_fit[0] = vl12.Pt()
+    ep.V_eta_fit[0] = vl12.Eta()
+    ep.V_phi_fit[0] = vl12.Phi()
+    ep.V_mass_fit[0] = vl12.M()
 
     # llbb system
     vllbb = v12 + vl12
-    c.llbb_fit_px[0] = vllbb.X()
-    c.llbb_fit_py[0] = vllbb.Y()
-    # vr = fitter.get4Vec(4)
-    # vllbbr = vllbb + vr
-    # c.llbbr_fit_px[0] = vllbbr.X()
-    # c.llbbr_fit_py[0] = vllbbr.Y()
+    ep.llbb_fit_px[0] = vllbb.X()
+    ep.llbb_fit_py[0] = vllbb.Y()
+    ep.llbb_fit_pt[0] = vllbb.Pt()
+    vr = fitter.get4Vec(4)
+    vllbbr = vllbb + vr
+    ep.llbbr_fit_px[0] = vllbbr.X()
+    ep.llbbr_fit_py[0] = vllbbr.Y()
+    ep.llbbr_fit_pt[0] = vllbbr.Pt()
 
     # HV variables
-    c.HVdPhi_fit[0] = deltaPhi(v12.Phi(), vl12.Phi())
-    c.HVdR_fit[0]   = deltaR(v12.Eta(), v12.Phi(), vl12.Eta(), vl12.Phi())
-    c.HVdEta_fit[0] = abs(v12.Eta() - vl12.Eta())
+    ep.HVdPhi_fit[0] = abs(deltaPhi(v12.Phi(), vl12.Phi()))
+    ep.HVdR_fit[0]   = deltaR(v12.Eta(), v12.Phi(), vl12.Eta(), vl12.Phi())
+    ep.HVdEta_fit[0] = abs(v12.Eta() - vl12.Eta())
+    ep.jjVPtRatio_fit[0] = v12.Pt() / ep.V_pt
 
-    if (c.kinfit_fit[0] != 1
-        or c.H_mass_fit[0] < 0
+    if (ep.kinfit_fit[0] != 1
+        or ep.H_mass_fit[0] < 0
     ):
-        c.H_mass_fit_fallback[0] = c.hj12_reg_mass[0]
+        ep.apply_fallback()
     else:
-        c.H_mass_fit_fallback[0] = c.H_mass_fit[0]
+        ep.H_mass_fit_fallback[0] = ep.H_mass_fit[0]
+        ep.H_pt_fit_fallback[0] = ep.H_pt_fit[0]
+        ep.HVdPhi_fit_fallback[0] = ep.HVdPhi_fit[0]
+        ep.jjVPtRatio_fit_fallback[0] = ep.jjVPtRatio_fit[0]
+        ep.hJets_pt_0_fit_fallback[0] = v1.Pt()
+        ep.hJets_pt_1_fit_fallback[0] = v2.Pt()
+
 
     # generator
-    if (e.GetBranch('nGenPart')
-        and e.GenLepIndex1 > -1
-        and e.GenLepIndex2 > -1
+    if (ep.GetBranch('nGenPart')
+        and ep.GenLepIndex1 > -1
+        and ep.GenLepIndex2 > -1
     ):
         # recalculate, since H jets are not always matched
-        gen_H = mk_lv(e.GenBJJ_pt, e.GenBJJ_eta, e.GenBJJ_phi, e.GenBJJ_mass,)
+        gen_H = mk_lv(ep.GenBJJ_pt, ep.GenBJJ_eta, ep.GenBJJ_phi, ep.GenBJJ_mass,)
         gen_l1 = mk_lv(
-            e.GenPart_pt[e.GenLepIndex1],
-            e.GenPart_eta[e.GenLepIndex1],
-            e.GenPart_phi[e.GenLepIndex1],
-            e.GenPart_mass[e.GenLepIndex1],
+            ep.GenPart_pt[ep.GenLepIndex1],
+            ep.GenPart_eta[ep.GenLepIndex1],
+            ep.GenPart_phi[ep.GenLepIndex1],
+            ep.GenPart_mass[ep.GenLepIndex1],
         )
         gen_l2 = mk_lv(
-            e.GenPart_pt[e.GenLepIndex2],
-            e.GenPart_eta[e.GenLepIndex2],
-            e.GenPart_phi[e.GenLepIndex2],
-            e.GenPart_mass[e.GenLepIndex2],
+            ep.GenPart_pt[ep.GenLepIndex2],
+            ep.GenPart_eta[ep.GenLepIndex2],
+            ep.GenPart_phi[ep.GenLepIndex2],
+            ep.GenPart_mass[ep.GenLepIndex2],
         )
         if (deltaR(gen_l1.Eta(), gen_l1.Phi(), vl1.Eta(), vl1.Phi())
           > deltaR(gen_l1.Eta(), gen_l1.Phi(), vl2.Eta(), vl2.Phi())):
             gen_l1, gen_l2 = gen_l2, gen_l1
         gen_Z = gen_l1 + gen_l2
-        c.fill_pt_eta_phi_mass('l1_gen', gen_l1)
-        c.fill_pt_eta_phi_mass('l2_gen', gen_l2)
-        c.fill_pt_eta_phi_mass('l12_gen', gen_Z)
+        ep.fill_pt_eta_phi_mass('l1_gen', gen_l1)
+        ep.fill_pt_eta_phi_mass('l2_gen', gen_l2)
+        ep.fill_pt_eta_phi_mass('l12_gen', gen_Z)
 
         gen_ZH = gen_H + gen_Z
-        c.llbb_gen_px[0] = gen_ZH.X()
-        c.llbb_gen_py[0] = gen_ZH.Y()
-        c.ll_gen_mass[0] = gen_Z.M()
+        ep.llbb_gen_px[0] = gen_ZH.X()
+        ep.llbb_gen_py[0] = gen_ZH.Y()
+        ep.ll_gen_mass[0] = gen_Z.M()
+
+    return fitter  # needed for development
 
 
-def apply_kinfit(input_file, output_file, is_data, data_year):
-    global ak4pfchs_ptres
+def apply_kinfit(input_file, output_file, is_data, data_year, do_fsr=True, output_postfix=''):
 
+    # jet resolutions from jme group
+    # https://github.com/cms-jet/JRDatabase
+    # https://twiki.cern.ch/twiki/bin/view/CMS/JetResolution
     if is_data:
         ak4pfchs_ptres = ROOT.JME.JetResolution('aux/Spring16_25nsV6_DATA_PtResolution_AK4PFchs.txt')
     else:
@@ -457,7 +548,7 @@ def apply_kinfit(input_file, output_file, is_data, data_year):
 
     # prepare new tree and new variables
     ot = t.CloneTree(0)
-    c = VarContainer(ot)
+    ep = EventProxy(ot, output_postfix)
     n_events = 0
     n_fitted = 0
 
@@ -469,16 +560,17 @@ def apply_kinfit(input_file, output_file, is_data, data_year):
         if n_events % 1000 == 1:
             print 'at event %i' % n_events
 
+        ep.set_event(e)
         if (
-            e.V_pt >= 150
-            and e.twoResolvedJets
+            e.twoResolvedJets
             and (e.isZmm or e.isZee)
         ):
-            apply_fit_to_event(e, c)
+            apply_fit_to_event(ep, ak4pfchs_ptres, do_fsr)
             ot.Fill()
-            c.set_vals_to_zero()  # zero values after filling the tree
+            ep.set_vals_to_zero()  # zero values after filling the tree
             n_fitted += 1
         else:
+            ep.apply_fallback()
             # don't run kinfit, just write
             ot.Fill()
 

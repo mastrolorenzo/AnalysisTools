@@ -284,6 +284,7 @@ bool VHbbAnalysis::Analyze() {
     }
 */
 
+  
     if (mInt("Vtype") == 0 && (cursample->lepFlav == -1 || cursample->lepFlav == 0)) {
         std::pair<int,int> good_muons_2lep = HighestPtGoodMuonsOppCharge(    m("muptcut_2lepchan"), m("murelisocut_2lepchan"));
         if (good_muons_2lep.second > -1) {
@@ -2548,7 +2549,7 @@ void VHbbAnalysis::TermAnalysis(bool skim){
             }
         }
     }
-    
+
     outputTreeSlim = outputTree->CloneTree();
     outputTreeSlim->Write();
     ofile->Close();

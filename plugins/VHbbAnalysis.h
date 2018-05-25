@@ -40,6 +40,7 @@ class VHbbAnalysis : public AnalysisManager {
         RooFunctor* met_trigger_eff_2016data_func;
 
         void UpdateJetPts();
+
         std::pair<int,int> HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut, bool isOneLepton);
         std::pair<int,int> HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso);
         bool ElectronSelection(int);
