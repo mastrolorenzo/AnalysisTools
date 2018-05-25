@@ -1,13 +1,17 @@
-Zerob_str = 'Sum$(GenJet_pt>20 && abs(GenJet_eta)<2.4 && GenJet_hadronFlavour==5)<1'
-Oneb_str = 'Sum$(GenJet_pt>20 && abs(GenJet_eta)<2.4 && GenJet_hadronFlavour==5)==1'
-Twob_str = 'Sum$(GenJet_pt>20 && abs(GenJet_eta)<2.4 && GenJet_hadronFlavour==5)>=2'
-SF_w0b = 1.14
-SF_w1b = 1.66
-SF_w2b = 1.49
-SF_z0b = 1.03
-SF_z1b = 1.28
-SF_z2b = 1.61
-SF_tt = 0.78
+#SF_w0b = 1.14
+#SF_w1b = 1.66
+#SF_w2b = 1.49
+#SF_z0b = 1.03
+#SF_z1b = 1.28
+#SF_z2b = 1.61
+#SF_tt = 0.78
+SF_w0b=1.
+SF_w1b=1.
+SF_w2b=1.
+SF_z0b=1.
+SF_z1b=1.
+SF_z2b=1.
+SF_tt=1.
 
 the_samples_dict = {
 #   name                              index   scale     legend              input tokens (sample name in the previous step)
@@ -48,51 +52,64 @@ the_samples_dict = {
 #    'Z_udcsg_LowMHT100To200':        [6900,   1.,       'Z+udcsg',          ['DYToLL_M4to50_HT100to200_madgraph']],
 #    'Z_b_LowMHT100To200':            [6901,   1.,       'Z+b',              ['DYToLL_M4to50_HT100to200_madgraph']],
 #    'Z_bb_LowMHT100To200':           [6902,   1.,       'Z+bb',             ['DYToLL_M4to50_HT100to200_madgraph']],
-    'Z_udcsg':                       [Zerob_str,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT100To200']],
-    'Z_b':                           [Oneb_str,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT100To200']],
-    'Z_bb':                          [Twob_str,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT100To200']],
-    'Z_udcsg_HT200to400':            [Zerob_str,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT200To400']],
-    'Z_b_HT200to400':                [Oneb_str,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT200To400']],
-    'Z_bb_HT200to400':               [Twob_str,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT200To400']],
-    'Z_udcsg_HT400to600':            [Zerob_str,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT400To600']],
-    'Z_b_HT400to600':                [Oneb_str,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT400To600']],
-    'Z_bb_HT400to600':               [Twob_str,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT400To600']],
-    'Z_udcsg_HT600to800':            [Zerob_str,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT600To800']],
-    'Z_b_HT600to800':                [Oneb_str,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT600To800']],
-    'Z_bb_HT600to800':               [Twob_str,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT600To800']],
-    'Z_udcsg_HT800to1200':            [Zerob_str,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT800To1200']],
-    'Z_b_HT800to1200':                [Oneb_str,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT800To1200']],
-    'Z_bb_HT800to1200':               [Twob_str,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT800To1200']],
-    'Z_udcsg_HT1200to2500':          [Zerob_str,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT1200To2500']],
-    'Z_b_HT1200to2500':              [Oneb_str,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT1200To2500']],
-    'Z_bb_HT1200to2500':             [Twob_str,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT1200To2500']],
-    'Z_udcsg_HT2500toInf':          [Zerob_str,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT2500ToInf']],
-    'Z_b_HT2500toInf':              [Oneb_str,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT2500ToInf']],
-    'Z_bb_HT2500toInf':             [Twob_str,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT2500ToInf']],
-    'W_udcsg':                       [Zerob_str,   SF_w0b,     'W+udcsg',          ['WJets_madgraph']],
-    'W_b':                           [Oneb_str,   SF_w1b,       'W+b',              ['WJets_madgraph']],
-    'W_bb':                          [Twob_str,   SF_w2b,       'W+bb',             ['WJets_madgraph']],
-    'W_udcsg_HT100To200':            [Zerob_str,   SF_w0b,     'W+udcsg',          ['WJets-HT100To200']],
-    'W_b_HT100To200':                [Oneb_str,   SF_w1b,       'W+b',              ['WJets-HT100To200']],
-    'W_bb_HT100To200':               [Twob_str,   SF_w2b,       'W+bb',             ['WJets-HT100To200']],
-    'W_udcsg_HT200To400':            [Zerob_str,   SF_w0b,     'W+udcsg',          ['WJets-HT200To400']],
-    'W_b_HT200To400':                [Oneb_str,   SF_w1b,       'W+b',              ['WJets-HT200To400']],
-    'W_bb_HT200To400':               [Twob_str,   SF_w2b,       'W+bb',             ['WJets-HT200To400']],
-    'W_udcsg_HT400To600':            [Zerob_str,   SF_w0b,     'W+udcsg',          ['WJets-HT400To600']],
-    'W_b_HT400To600':                [Oneb_str,   SF_w1b,       'W+b',              ['WJets-HT400To600']],
-    'W_bb_HT400To600':               [Twob_str,   SF_w2b,       'W+bb',             ['WJets-HT400To600']],
-    'W_udcsg_HT600To800':            [Zerob_str,   SF_w0b,     'W+udcsg',          ['WJets-HT600To800']],
-    'W_b_HT600To800':                [Oneb_str,   SF_w1b,       'W+b',              ['WJets-HT600To800']],
-    'W_bb_HT600To800':               [Twob_str,   SF_w2b,       'W+bb',             ['WJets-HT600To800']],
-    'W_udcsg_HT800To1200':           [Zerob_str,   SF_w0b,     'W+udcsg',          ['WJets-HT800To1200']],
-    'W_b_HT800To1200':               [Oneb_str,   SF_w1b,       'W+b',              ['WJets-HT800To1200']],
-    'W_bb_HT800To1200':              [Twob_str,   SF_w2b,       'W+bb',             ['WJets-HT800To1200']],
-    'W_udcsg_HT1200To2500':          [Zerob_str,   SF_w0b,     'W+udcsg',          ['WJets-HT1200To2500']],
-    'W_b_HT1200To2500':              [Oneb_str,   SF_w1b,       'W+b',              ['WJets-HT1200To2500']],
-    'W_bb_HT1200To2500':             [Twob_str,   SF_w2b,       'W+bb',             ['WJets-HT1200To2500']],
-    'W_udcsg_HT2500ToInf':           [Zerob_str,   SF_w0b,     'W+udcsg',          ['WJets-HT2500ToInf']],
-    'W_b_HT2500ToInf':               [Oneb_str,   SF_w1b,       'W+b',              ['WJets-HT2500ToInf']],
-    'W_bb_HT2500ToInf':              [Twob_str,   SF_w2b,       'W+bb',             ['WJets-HT2500ToInf']],
+    'Z_udcsg':                       [15000,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT100To200']],
+    'Z_b':                           [15001,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT100To200']],
+    'Z_bb':                          [15002,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT100To200']],
+    'Z_udcsg_HT200to400':            [15100,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT200To400']],
+    'Z_b_HT200to400':                [15101,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT200To400']],
+    'Z_bb_HT200to400':               [15102,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT200To400']],
+    'Z_udcsg_HT400to600':            [15200,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT400To600']],
+    'Z_b_HT400to600':                [15201,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT400To600']],
+    'Z_bb_HT400to600':               [15202,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT400To600']],
+    'Z_udcsg_HT600to800':            [15300,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT600To800']],
+    'Z_b_HT600to800':                [15301,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT600To800']],
+    'Z_bb_HT600to800':               [15302,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT600To800']],
+    'Z_udcsg_HT800to1200':            [15400,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT800To1200']],
+    'Z_b_HT800to1200':                [15401,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT800To1200']],
+    'Z_bb_HT800to1200':               [15402,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT800To1200']],
+    'Z_udcsg_HT1200to2500':          [15500,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT1200To2500']],
+    'Z_b_HT1200to2500':              [15501,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT1200To2500']],
+    'Z_bb_HT1200to2500':             [15502,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT1200To2500']],
+    'Z_udcsg_HT2500toInf':          [15600,   SF_z0b,       'Z+udcsg',          ['ZJetsToNuNu_HT2500ToInf']],
+    'Z_b_HT2500toInf':              [15601,   SF_z1b,       'Z+b',              ['ZJetsToNuNu_HT2500ToInf']],
+    'Z_bb_HT2500toInf':             [15602,   SF_z2b,       'Z+bb',             ['ZJetsToNuNu_HT2500ToInf']],
+    'W_udcsg':                       [4000,   SF_w0b,     'W+udcsg',          ['WJets_madgraph']],
+    'W_b':                           [4001,   SF_w1b,       'W+b',              ['WJets_madgraph']],
+    'W_bb':                          [4002,   SF_w2b,       'W+bb',             ['WJets_madgraph']],
+    'W_udcsg_HT100To200':            [4100,   SF_w0b,     'W+udcsg',          ['WJets-HT100To200']],
+    'W_b_HT100To200':                [4101,   SF_w1b,       'W+b',              ['WJets-HT100To200']],
+    'W_bb_HT100To200':               [4102,   SF_w2b,       'W+bb',             ['WJets-HT100To200']],
+    'W_udcsg_HT200To400':            [4200,   SF_w0b,     'W+udcsg',          ['WJets-HT200To400']],
+    'W_b_HT200To400':                [4201,   SF_w1b,       'W+b',              ['WJets-HT200To400']],
+    'W_bb_HT200To400':               [4202,   SF_w2b,       'W+bb',             ['WJets-HT200To400']],
+    'W_udcsg_HT400To600':            [4300,   SF_w0b,     'W+udcsg',          ['WJets-HT400To600']],
+    'W_b_HT400To600':                [4301,   SF_w1b,       'W+b',              ['WJets-HT400To600']],
+    'W_bb_HT400To600':               [4302,   SF_w2b,       'W+bb',             ['WJets-HT400To600']],
+    'W_udcsg_HT600To800':            [4400,   SF_w0b,     'W+udcsg',          ['WJets-HT600To800']],
+    'W_b_HT600To800':                [4401,   SF_w1b,       'W+b',              ['WJets-HT600To800']],
+    'W_bb_HT600To800':               [4402,   SF_w2b,       'W+bb',             ['WJets-HT600To800']],
+    'W_udcsg_HT800To1200':           [4500,   SF_w0b,     'W+udcsg',          ['WJets-HT800To1200']],
+    'W_b_HT800To1200':               [4501,   SF_w1b,       'W+b',              ['WJets-HT800To1200']],
+    'W_bb_HT800To1200':              [4502,   SF_w2b,       'W+bb',             ['WJets-HT800To1200']],
+    'W_udcsg_HT1200To2500':          [4600,   SF_w0b,     'W+udcsg',          ['WJets-HT1200To2500']],
+    'W_b_HT1200To2500':              [4601,   SF_w1b,       'W+b',              ['WJets-HT1200To2500']],
+    'W_bb_HT1200To2500':             [4602,   SF_w2b,       'W+bb',             ['WJets-HT1200To2500']],
+    'W_udcsg_HT2500ToInf':           [4700,   SF_w0b,     'W+udcsg',          ['WJets-HT2500ToInf']],
+    'W_b_HT2500ToInf':               [4701   SF_w1b,       'W+b',              ['WJets-HT2500ToInf']],
+    'W_bb_HT2500ToInf':              [4702,   SF_w2b,       'W+bb',             ['WJets-HT2500ToInf']],
+    'W_udcsg_b100to200':           [5000,   SF_w0b,     'W+udcsg',          ['WBJets-Pt100To200']],
+    'W_b_b100to200':               [5001,   SF_w1b,       'W+b',              ['WBJets-Pt100To200']],
+    'W_bb_b100to200':              [5002,   SF_w2b,       'W+bb',             ['WBJets-Pt100To200']],
+    'W_udcsg_b200toInf':           [5100,   SF_w0b,     'W+udcsg',          ['WBJets-Pt200ToInf']],
+    'W_b_b200toInf':               [5101,   SF_w1b,       'W+b',              ['WBJets-Pt200ToInf']],
+    'W_bb_b200toInf':              [5102,   SF_w2b,       'W+bb',             ['WBJets-Pt200ToInf']],
+    'W_udcsg_bgen100to200':           [5300,   SF_w0b,     'W+udcsg',          ['WJets_BGenFilter-Pt100To200']],
+    'W_b_bgen100to200':               [5301,   SF_w1b,       'W+b',              ['WJets_BGenFilter-Pt100To200']],
+    'W_bb_bgen100to200':              [5302,   SF_w2b,       'W+bb',             ['WJets_BGenFilter-Pt100To200']],
+    'W_udcsg_bgen200toInf':           [5400,   SF_w0b,     'W+udcsg',          ['WJets_BGenFilter-Pt200ToInf']],
+    'W_b_bgen200toInf':               [5401,   SF_w1b,       'W+b',              ['WJets_BGenFilter-Pt200ToInf']],
+    'W_bb_bgen200toInf':              [5402,   SF_w2b,       'W+bb',             ['WJets_BGenFilter-Pt200ToInf']],
+
     #'QCD_HT100to200':                [1,   1.0,       'QCD',          ['QCD_HT100to200']],
     'QCD_HT200to300':                [2,   1.0,       'QCD',          ['QCD_HT200to300']],
     #'QCD_HT300to500':                [3,   1.0,       'QCD',          ['QCD_HT300to500']],
@@ -101,12 +118,12 @@ the_samples_dict = {
    'QCD_HT1000to1500':              [6,   1.0,       'QCD',          ['QCD_HT1000to1500']],
     'QCD_HT1500to2000':              [7,   1.0,       'QCD',          ['QCD_HT1500to2000']],
     'QCD_HT2000toInf':              [8,   1.0,       'QCD',          ['QCD_HT2000toInf']],
-    'WW_lf':                           [Zerob_str, 1.0, 'VV+LF', ['WW']],
-    'ZZ_lf':                           [Zerob_str, 1.0, 'VV+LF', ['ZZ']],
-    'WZ_lf':                           [Zerob_str, 1.0, 'VV+LF', ['WZ']],
-    'WW_hf':                           [(Oneb_str or Twob_str), 1.0, 'VV(bb)', ['WW']],
-    'ZZ_hf':                           [(Oneb_str or Twob_str), 1.0, 'VV(bb)', ['ZZ']],
-    'WZ_hf':                           [(Oneb_str or Twob_str), 1.0, 'VV(bb)', ['WZ']],
+    'WW_lf':                           [3300, 1.0, 'VV+LF', ['WW']],
+    'ZZ_lf':                           [3500, 1.0, 'VV+LF', ['ZZ']],
+    'WZ_lf':                           [3000, 1.0, 'VV+LF', ['WZ']],
+    'WW_hf':                           [(3301 or 3302), 1.0, 'VV(bb)', ['WW']],
+    'ZZ_hf':                           [(3501 or 3502), 1.0, 'VV(bb)', ['ZZ']],
+    'WZ_hf':                           [(3001 or 3002), 1.0, 'VV(bb)', ['WZ']],
 }
 
 sample_colors = {

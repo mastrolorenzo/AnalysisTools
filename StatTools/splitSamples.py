@@ -132,6 +132,7 @@ sampleMapAltModel = {} # alternate MC samples for model shape systematics
 sampleNameMap = {}
 
 from nano_samples import the_samples_dict
+#from nano_samples_znn2016 import the_samples_dict
 for sample in the_samples_dict:
     sampleMap[the_samples_dict[sample][2]] = []
     sampleNameMap[the_samples_dict[sample][2]] = []
@@ -452,8 +453,8 @@ for sample in sampleMap:
                 if (sysWeight.find("bTagWeight") != -1):
                     bTagWeightNom = sysWeight[:sysWeight.find('_')]
                     print "bTagWeightNom = "+bTagWeightNom
-                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./%s)*%s*(%sUp)" % (cutStringup,passSysup,bTagWeightNom,weight_string,sysWeight))   
-                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./%s)*%s*(%sDown)" % (cutStringdown,passSysdown,bTagWeightNom,weight_string,sysWeight))  
+                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%sUp)" % (cutStringup,passSysup,weight_string,sysWeight))   
+                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_string,sysWeight))  
                 elif (sysWeight.find("VPtCorrFactorSplit") != -1):
                      tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sUp)" % (cutStringup,passSysup,weight_string,sysWeight)) 
                      tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_string,sysWeight))
@@ -481,107 +482,6 @@ for sample in sampleMap:
                 # separate branches for up/down variation
                 sysWeightUp = sysWeight.split(',')[0]
                 sysWeightDown = sysWeight.split(',')[1]
-                # special case for LHE scale and pdf variations, we should probably find a way to make this cleaner
-                if (syst.find("LHE_weights_scale")!=-1 or syst.find("LHE_weights_pdf")!=-1):
-                    #if (sample != "TT"):
-                    #    sysWeightUp += "*LHE_weights_scale_normwgt[%s]" % re.findall('\d+', sysWeightUp)[0]
-                    #    sysWeightDown += "*LHE_weights_scale_normwgt[%s]" % re.findall('\d+', sysWeightDown)[0]
-                    #else:
-                    #    # have to do something special here since we didn't hadd everything on the ttbar jobs so that it doesn't take 100 million years to run the jobs
-                    #    ifile_ttpowhegcounts = ROOT.TFile.Open(args.inputfile.replace("output_mc","ttpowheg_counts"))
-                    #    CountWeightedLHEWeightScale_TT_powheg = ifile_ttpowhegcounts.Get("CountWeightedLHEWeightScale_TT_powheg")
-                    #    normweightUp = CountWeightedLHEWeightScale_TT_powheg.GetBinContent(CountWeightedLHEWeightScale_TT_powheg.FindBin(int(re.findall('\d+', sysWeightUp)[0])))
-                    #    normweightDown = CountWeightedLHEWeightScale_TT_powheg.GetBinContent(CountWeightedLHEWeightScale_TT_powheg.FindBin(int(re.findall('\d+', sysWeightDown)[0])))
-                    #    sysWeightUp += "*(nProcEvents/%f)" % normweightUp
-                    #    sysWeightDown += "*(nProcEvents/%f)" % normweightDown
-                    #    ifile_ttpowhegcounts.Close()
-                    #    ofile.cd()
-                    print "doing LHE_weights_scale for sample: ",sample
-                    #if (sample == "TT"):
-                    #    # have to do something special here since we didn't hadd everything on the ttbar jobs so that it doesn't take 100 million years to run the jobs
-                    #    ifile_counts = ROOT.TFile.Open(args.inputfile.replace("output_mc","ttpowheg_counts"))
-                    #elif (sample == "WH_hbb" or sample == "ZH_hbb"):
-                    #    ifile_counts = ROOT.TFile.Open(args.inputfile.replace("output_mc","output_signal"))
-                    #else:
-                    #    ifile_counts = ROOT.TFile.Open(args.inputfile.replace("output_mc","%s/output_%s_1.root" %(sample,sample)))
-                    #    #ifile_counts = ROOT.TFile.Open(args.inputfile)
-                    #print "opened file fine"
-                    #CountWeightedLHEWeightScale = ROOT.TH1F("CountWeightedLHEWeightScale_%s" % sample,"CountWeightedLHEWeightScale_%s" % sample,6,-0.5,5.5)
-                    #CountWeightedLHEWeightPdf = ROOT.TH1F("CountWeightedLHEWeightPdf_%s" % sample,"CountWeightedLHEWeightPdf_%s" % sample,103,-0.5,102.5)
-                    print "initiated histogram"
-                    print "looping through..."
-                    print sampleNameMap[sample]
-                    for i in range(len(sampleNameMap[sample])):
-                        sampleName = sampleNameMap[sample][i]
-                        print sampleName
-                        #if (sampleName == "WJets_madgraph"): continue #HACK FIXME
-                        #if (sample == "TT"):
-                        #    # have to do something special here since we didn't hadd everything on the ttbar jobs so that it doesn't take 100 million years to run the jobs
-                        #    ifile_counts = ROOT.TFile.Open(args.inputfile.replace("output_mc","ttpowheg_counts"))
-                        #elif (sample == "WH_hbb" or sample == "ZH_hbb"):
-                        #    ifile_counts = ROOT.TFile.Open(args.inputfile.replace("output_mc","output_signal"))
-                        #else:
-                        #    print args.inputfile.replace("output_mc","%s/output_%s_1.root" %(sampleName,sampleName))
-                        #    ifile_counts = ROOT.TFile.Open(args.inputfile.replace("output_mc","%s/output_%s_1.root" %(sampleName,sampleName)))
-                        #    #ifile_counts = ROOT.TFile.Open(args.inputfile)
-                        ifilename_counts = ""
-                        #if (sample == "TT"):
-                        #    #print args.inputfile.replace("output_mc.root","TT_Powheg/%s/output_%s_1.root" %(sampleName,sampleName))
-                        #    #ifilename_counts = args.inputfile.replace("output_mc.root","TT_Powheg/%s/output_%s_1.root" %(sampleName,sampleName))
-                        #    print args.inputfile.replace("output_mc.root","ttpowheg_counts.root")
-                        #    ifilename_counts = args.inputfile.replace("output_mc.root","ttpowheg_counts.root")
-                        #elif (sample == "WH_hbb" or sample == "ZH_hbb"):
-                        #     print args.inputfile.replace("output_mc.root","Signal/%s/output_%s_1.root" %(sampleName,sampleName))
-                        #     ifilename_counts = args.inputfile.replace("output_mc.root","Signal/%s/output_%s_1.root" %(sampleName,sampleName))
-                        if (args.wjetsTree != "" and (sample=="Wj0b" or sample=="Wj1b" or sample=="Wj2b")):
-                            #print args.wjetsTree.replace("output_wjets.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                            #ifilename_counts = args.wjetsTree.replace("output_wjets.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                            print args.wjetsTree.replace("output_nlowjets.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                            ifilename_counts = args.wjetsTree.replace("output_nlowjets.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                        if (args.vzTree != "" and (sample=="VVHF" or sample=="VVLF")):
-                            #print args.wjetsTree.replace("output_wjets.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                            #ifilename_counts = args.wjetsTree.replace("output_wjets.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                            print args.vzTree.replace("output_vz.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                            ifilename_counts = args.vzTree.replace("output_vz.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                        else:
-                            #print args.inputfile.replace("output_mc.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                            #ifilename_counts = args.inputfile.replace("output_mc.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                            print args.inputfile.replace("haddjobs","%s/output_%s_1.root" %(sampleName,sampleName))
-                            ifilename_counts = args.inputfile.replace("haddjobs","%s/output_%s_1.root" %(sampleName,sampleName))
-                        #print args.inputfile.replace("output_mc.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                        #ifilename_counts = args.inputfile.replace("output_mc.root","%s/output_%s_1.root" %(sampleName,sampleName))
-                        ifile_counts = ROOT.TFile.Open(ifilename_counts)
-                        #ifile_counts = ROOT.TFile.Open(args.inputfile.replace("output_mc","%s/output_%s_1.root" %(sampleName,sampleName)))
-                        #ifile_counts = ROOT.TFile.Open(args.inputfile)
-                        if (syst.find("LHE_weights_scale")!=-1):
-                            CountWeightedLHEWeightScale = ifile_counts.Get("CountWeightedLHEWeightScale_%s" % sampleName)
-                        else:
-                            CountWeightedLHEWeightScale = ifile_counts.Get("CountWeightedLHEWeightPdf_%s" % sampleName)
-                        print "got tmp histogram"
-                        #CountWeightedLHEWeightPdf_tmp = ifile_counts.Get("CountWeightedLHEWeightPdf_%s" % sampleName)
-                        #CountWeightedLHEWeightScale.Add(CountWeightedLHEWeightScale_tmp)
-                        #print "add tmp histogram"
-                        #CountWeightedLHEWeightPdf.Add(CountWeightedLHEWeightPdf_tmp)
-                        print CountWeightedLHEWeightScale.GetName()
-                        print CountWeightedLHEWeightScale.GetBinContent(1)
-                        print CountWeightedLHEWeightScale.FindBin(int(re.findall('\d+', sysWeightUp)[0]))
-                        normweightUp = CountWeightedLHEWeightScale.GetBinContent(CountWeightedLHEWeightScale.FindBin(int(re.findall('\d+', sysWeightUp)[0])))
-                        normweightDown = CountWeightedLHEWeightScale.GetBinContent(CountWeightedLHEWeightScale.FindBin(int(re.findall('\d+', sysWeightDown)[0])))
-                        print "calculated norm weights: ",normweightUp,", ",normweightDown
-                        sysWeightUp += "*(1 + (sampleIndex==%i)*(-1+(nProcEvents/%f)))" % (int(sampleMap[sample][i]),normweightUp)
-                        sysWeightDown += "*(1 + (sampleIndex==%i)*(-1+(nProcEvents/%f)))" % (int(sampleMap[sample][i]),normweightDown)
-                        CountWeightedLHEWeightScale.Reset()
-                        ifile_counts.Close()
-                    #normweightUp = CountWeightedLHEWeightScale.GetBinContent(CountWeightedLHEWeightScale.FindBin(int(re.findall('\d+', sysWeightUp)[0])))
-                    #normweightDown = CountWeightedLHEWeightScale.GetBinContent(CountWeightedLHEWeightScale.FindBin(int(re.findall('\d+', sysWeightDown)[0])))
-                    #normweightAv = (normweightUp + normweightDown) / 2.
-                    #sysWeightUp += "*(%f/%f)" % (normweightAv,normweightUp)
-                    #sysWeightDown += "*(%f/%f)" % (normweightAv,normweightUp)
-                    #sysWeightUp += "*(nProcEvents/%f)" % normweightUp
-                    #sysWeightDown += "*(nProcEvents/%f)" % normweightDown
-                    #ifile_counts.Close()
-                    ofile.cd()
-                    print "all done"
 
                 #if (syst.find("LHE_weights_pdf")!=-1):
                 #    if (sample != "TT"):

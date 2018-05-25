@@ -40,11 +40,10 @@ vars_used_in_selections = {
     'CMVAmax':          (CMVAmax,                               ';CMVA_{max};',                 60,      -1.,     1       ),
     'CMVAmin':          (CMVAmin,                               ';CMVA_{min};',                 60,      -1.,     1       ),
     'leadjetCMVAZoom':  ('Jet_btagCMVA[hJetInd1]',              ';Jet1@CMVA;',                  20,      0.94,   1       ),
-    'nAddJets':         ('nAddJets252p9_puid',                  ';nAddJets252p9_puid;',         11,      -.5,    10.5    ),
+    'nAddJets':         ('nAddJets302p5_puid',                  ';nAddJets302p5_puid;',         11,      -.5,    10.5    ),
     'nAddLeptons':      ('nAddLeptons',                         ';nAddLeptons;',                11,      -.5,    10.5    ),
     'met_pt':           ('MET_Pt',                              ';MET@p_{T}@GeV;',              30,      0,      500     ),
-    # MetjDPhi not yet in tree
-    'MetTkMetDPhi':     ('MetTkMetDPhi',                        ';MetTkMetDPhi;',               16,      0,      3.2     ),
+    'dPhi_MET_TkMET':    ('dPhi_MET_TkMET',                        ';MetTkMetDPhi;',               16,      0,      3.2     ),
     'lepMetDPhi':       ('lepMetDPhi',                          ';lepMetDPhi;',                 16,      0,      3.2     ),
     #'lepRelIso1':       (lepRelIso1_safe,                       ';1st Lep@Rel@Iso;',            30,      0,      0.3     ),
     #'lepRelIso2':       (lepRelIso2_safe,                       ';2st Lep@Rel@Iso;',            30,      0,      0.3     ),
@@ -52,7 +51,7 @@ vars_used_in_selections = {
 
 # additional from 0-lepton CR selection
     'Vtype':            ('Vtype',                               ';Vtype;',                      10,      -.5,    9.5     ),
-    'minMetjDPhi':      ('minMetjDPhi',                         ';MetjDPhi;',                   16,      0,      3.2     ),
+    'min_dPhi_hJet_MET':      ('min_dPhi_hJet_MET',                         ';MetjDPhi;',                   16,      0,      3.2     ),
 
 # additional from 1-lepton CR selection
     'sigma_met_pt':     ('MET_Pt / sqrt(htJet30)',              ';#sigma(p_{T}^{miss});',       20,      0,      10      ),
