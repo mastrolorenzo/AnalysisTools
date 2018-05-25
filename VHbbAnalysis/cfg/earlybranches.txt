@@ -8,6 +8,7 @@ type=1  name=nJet
 type=8  name=Jet_pt           max=250     lengthBranch=nJet
 type=8  name=Jet_Pt           max=250     lengthBranch=nJet
 type=8  name=Jet_bReg         max=250     lengthBranch=nJet
+type=8  name=Jet_PtReg        max=250     lengthBranch=nJet
 type=2  name=LHE_HT           onlyMC=1    allowMissingBranch=1
 type=5  name=LHE_Nb           onlyMC=1    allowMissingBranch=1
 type=2  name=LHE_Vpt          onlyMC=1    allowMissingBranch=1
@@ -52,7 +53,7 @@ type=4  name=HLT_PFMETTypeOne120_PFMHT120_IDTight dropBranch=1
 type=4  name=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ dropBranch=1
 
 # 2016
-#type=4  name=HLT_PFMET110_PFMHT110_IDTight  
+#type=4  name=HLT_PFMET110_PFMHT110_IDTight
 #type=4  name=HLT_PFMET120_PFMHT120_IDTight
 #type=4  name=HLT_PFMET170_NoiseCleaned         missing
 #type=4  name=HLT_PFMET170_HBHE_BeamHaloCleaned missing
@@ -68,128 +69,251 @@ type=4  name=HLT_Ele27_WPTight_Gsf
 #type=4  name=HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ
 
 
-type=2  name=MET_pt_jesTotalDown  onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesTotalUp    onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesTotalDown  onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesTotalUp    onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_unclustEnUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_unclustEnDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_unclustEnUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_unclustEnDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jerUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jerDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jerUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jerDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesAbsoluteStatUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesAbsoluteStatDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesAbsoluteStatUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesAbsoluteStatDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesAbsoluteScaleUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesAbsoluteScaleDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesAbsoluteScaleUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesAbsoluteScaleDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesAbsoluteMPFBiasUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesAbsoluteMPFBiasDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesAbsoluteMPFBiasUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesAbsoluteMPFBiasDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesFragmentationUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesFragmentationDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesFragmentationUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesFragmentationDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesSinglePionECALUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesSinglePionECALDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesSinglePionECALUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesSinglePionECALDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesSinglePionHCALUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesSinglePionHCALDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesSinglePionHCALUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesSinglePionHCALDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesFlavorQCDUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesFlavorQCDDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesFlavorQCDUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesFlavorQCDDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeJEREC1Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeJEREC1Down onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeJEREC1Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeJEREC1Down onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeJEREC2Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeJEREC2Down onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeJEREC2Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeJEREC2Down onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeJERHFUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeJERHFDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeJERHFUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeJERHFDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativePtBBUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativePtBBDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativePtBBUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativePtBBDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativePtEC1Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativePtEC1Down onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativePtEC1Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativePtEC1Down onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativePtEC2Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativePtEC2Down onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativePtEC2Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativePtEC2Down onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativePtHFUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativePtHFDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativePtHFUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativePtHFDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeFSRUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeFSRDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeFSRUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeFSRDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeStatFSRUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeStatFSRDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeStatFSRUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeStatFSRDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeStatECUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeStatECDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeStatECUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeStatECDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpDataMCUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpDataMCDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpDataMCUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpDataMCDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtRefUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtRefDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtRefUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtRefDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtBBUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtBBDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtBBUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtBBDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtEC1Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtEC1Down onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtEC1Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtEC1Down onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtEC2Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtEC2Down onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtEC2Up   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtEC2Down onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtHFUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesPileUpPtHFDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtHFUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesPileUpPtHFDown onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeBalUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_pt_jesRelativeBalDown onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeBalUp   onlyMC=1 dropBranch=1 
-type=2  name=MET_phi_jesRelativeBalDown onlyMC=1 dropBranch=1 
+<<<<<<< HEAD
+type=2  name=MET_pt_jesTotalDown  onlyMC=1
+type=2  name=MET_pt_jesTotalUp    onlyMC=1
+type=2  name=MET_phi_jesTotalDown  onlyMC=1
+type=2  name=MET_phi_jesTotalUp    onlyMC=1
+type=2  name=MET_pt_unclustEnUp   onlyMC=1
+type=2  name=MET_pt_unclustEnDown onlyMC=1
+type=2  name=MET_phi_unclustEnUp   onlyMC=1
+type=2  name=MET_phi_unclustEnDown onlyMC=1
+type=2  name=MET_pt_jerUp   onlyMC=1
+type=2  name=MET_pt_jerDown onlyMC=1
+type=2  name=MET_phi_jerUp   onlyMC=1
+type=2  name=MET_phi_jerDown onlyMC=1
+type=2  name=MET_pt_jesAbsoluteStatUp   onlyMC=1
+type=2  name=MET_pt_jesAbsoluteStatDown onlyMC=1
+type=2  name=MET_phi_jesAbsoluteStatUp   onlyMC=1
+type=2  name=MET_phi_jesAbsoluteStatDown onlyMC=1
+type=2  name=MET_pt_jesAbsoluteScaleUp   onlyMC=1
+type=2  name=MET_pt_jesAbsoluteScaleDown onlyMC=1
+type=2  name=MET_phi_jesAbsoluteScaleUp   onlyMC=1
+type=2  name=MET_phi_jesAbsoluteScaleDown onlyMC=1
+type=2  name=MET_pt_jesAbsoluteMPFBiasUp   onlyMC=1
+type=2  name=MET_pt_jesAbsoluteMPFBiasDown onlyMC=1
+type=2  name=MET_phi_jesAbsoluteMPFBiasUp   onlyMC=1
+type=2  name=MET_phi_jesAbsoluteMPFBiasDown onlyMC=1
+type=2  name=MET_pt_jesFragmentationUp   onlyMC=1
+type=2  name=MET_pt_jesFragmentationDown onlyMC=1
+type=2  name=MET_phi_jesFragmentationUp   onlyMC=1
+type=2  name=MET_phi_jesFragmentationDown onlyMC=1
+type=2  name=MET_pt_jesSinglePionECALUp   onlyMC=1
+type=2  name=MET_pt_jesSinglePionECALDown onlyMC=1
+type=2  name=MET_phi_jesSinglePionECALUp   onlyMC=1
+type=2  name=MET_phi_jesSinglePionECALDown onlyMC=1
+type=2  name=MET_pt_jesSinglePionHCALUp   onlyMC=1
+type=2  name=MET_pt_jesSinglePionHCALDown onlyMC=1
+type=2  name=MET_phi_jesSinglePionHCALUp   onlyMC=1
+type=2  name=MET_phi_jesSinglePionHCALDown onlyMC=1
+type=2  name=MET_pt_jesFlavorQCDUp   onlyMC=1
+type=2  name=MET_pt_jesFlavorQCDDown onlyMC=1
+type=2  name=MET_phi_jesFlavorQCDUp   onlyMC=1
+type=2  name=MET_phi_jesFlavorQCDDown onlyMC=1
+type=2  name=MET_pt_jesRelativeJEREC1Up   onlyMC=1
+type=2  name=MET_pt_jesRelativeJEREC1Down onlyMC=1
+type=2  name=MET_phi_jesRelativeJEREC1Up   onlyMC=1
+type=2  name=MET_phi_jesRelativeJEREC1Down onlyMC=1
+type=2  name=MET_pt_jesRelativeJEREC2Up   onlyMC=1
+type=2  name=MET_pt_jesRelativeJEREC2Down onlyMC=1
+type=2  name=MET_phi_jesRelativeJEREC2Up   onlyMC=1
+type=2  name=MET_phi_jesRelativeJEREC2Down onlyMC=1
+type=2  name=MET_pt_jesRelativeJERHFUp   onlyMC=1
+type=2  name=MET_pt_jesRelativeJERHFDown onlyMC=1
+type=2  name=MET_phi_jesRelativeJERHFUp   onlyMC=1
+type=2  name=MET_phi_jesRelativeJERHFDown onlyMC=1
+type=2  name=MET_pt_jesRelativePtBBUp   onlyMC=1
+type=2  name=MET_pt_jesRelativePtBBDown onlyMC=1
+type=2  name=MET_phi_jesRelativePtBBUp   onlyMC=1
+type=2  name=MET_phi_jesRelativePtBBDown onlyMC=1
+type=2  name=MET_pt_jesRelativePtEC1Up   onlyMC=1
+type=2  name=MET_pt_jesRelativePtEC1Down onlyMC=1
+type=2  name=MET_phi_jesRelativePtEC1Up   onlyMC=1
+type=2  name=MET_phi_jesRelativePtEC1Down onlyMC=1
+type=2  name=MET_pt_jesRelativePtEC2Up   onlyMC=1
+type=2  name=MET_pt_jesRelativePtEC2Down onlyMC=1
+type=2  name=MET_phi_jesRelativePtEC2Up   onlyMC=1
+type=2  name=MET_phi_jesRelativePtEC2Down onlyMC=1
+type=2  name=MET_pt_jesRelativePtHFUp   onlyMC=1
+type=2  name=MET_pt_jesRelativePtHFDown onlyMC=1
+type=2  name=MET_phi_jesRelativePtHFUp   onlyMC=1
+type=2  name=MET_phi_jesRelativePtHFDown onlyMC=1
+type=2  name=MET_pt_jesRelativeFSRUp   onlyMC=1
+type=2  name=MET_pt_jesRelativeFSRDown onlyMC=1
+type=2  name=MET_phi_jesRelativeFSRUp   onlyMC=1
+type=2  name=MET_phi_jesRelativeFSRDown onlyMC=1
+type=2  name=MET_pt_jesRelativeStatFSRUp   onlyMC=1
+type=2  name=MET_pt_jesRelativeStatFSRDown onlyMC=1
+type=2  name=MET_phi_jesRelativeStatFSRUp   onlyMC=1
+type=2  name=MET_phi_jesRelativeStatFSRDown onlyMC=1
+type=2  name=MET_pt_jesRelativeStatECUp   onlyMC=1
+type=2  name=MET_pt_jesRelativeStatECDown onlyMC=1
+type=2  name=MET_phi_jesRelativeStatECUp   onlyMC=1
+type=2  name=MET_phi_jesRelativeStatECDown onlyMC=1
+type=2  name=MET_pt_jesPileUpDataMCUp   onlyMC=1
+type=2  name=MET_pt_jesPileUpDataMCDown onlyMC=1
+type=2  name=MET_phi_jesPileUpDataMCUp   onlyMC=1
+type=2  name=MET_phi_jesPileUpDataMCDown onlyMC=1
+type=2  name=MET_pt_jesPileUpPtRefUp   onlyMC=1
+type=2  name=MET_pt_jesPileUpPtRefDown onlyMC=1
+type=2  name=MET_phi_jesPileUpPtRefUp   onlyMC=1
+type=2  name=MET_phi_jesPileUpPtRefDown onlyMC=1
+type=2  name=MET_pt_jesPileUpPtBBUp   onlyMC=1
+type=2  name=MET_pt_jesPileUpPtBBDown onlyMC=1
+type=2  name=MET_phi_jesPileUpPtBBUp   onlyMC=1
+type=2  name=MET_phi_jesPileUpPtBBDown onlyMC=1
+type=2  name=MET_pt_jesPileUpPtEC1Up   onlyMC=1
+type=2  name=MET_pt_jesPileUpPtEC1Down onlyMC=1
+type=2  name=MET_phi_jesPileUpPtEC1Up   onlyMC=1
+type=2  name=MET_phi_jesPileUpPtEC1Down onlyMC=1
+type=2  name=MET_pt_jesPileUpPtEC2Up   onlyMC=1
+type=2  name=MET_pt_jesPileUpPtEC2Down onlyMC=1
+type=2  name=MET_phi_jesPileUpPtEC2Up   onlyMC=1
+type=2  name=MET_phi_jesPileUpPtEC2Down onlyMC=1
+type=2  name=MET_pt_jesPileUpPtHFUp   onlyMC=1
+type=2  name=MET_pt_jesPileUpPtHFDown onlyMC=1
+type=2  name=MET_phi_jesPileUpPtHFUp   onlyMC=1
+type=2  name=MET_phi_jesPileUpPtHFDown onlyMC=1
+type=2  name=MET_pt_jesRelativeBalUp   onlyMC=1
+type=2  name=MET_pt_jesRelativeBalDown onlyMC=1
+type=2  name=MET_phi_jesRelativeBalUp   onlyMC=1
+type=2  name=MET_phi_jesRelativeBalDown onlyMC=1
+=======
+type=2  name=MET_pt_jesTotalDown  onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesTotalUp    onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesTotalDown  onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesTotalUp    onlyMC=1 dropBranch=1
+type=2  name=MET_pt_unclustEnUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_unclustEnDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_unclustEnUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_unclustEnDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jerUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jerDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jerUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jerDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesAbsoluteStatUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesAbsoluteStatDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesAbsoluteStatUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesAbsoluteStatDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesAbsoluteScaleUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesAbsoluteScaleDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesAbsoluteScaleUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesAbsoluteScaleDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesAbsoluteMPFBiasUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesAbsoluteMPFBiasDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesAbsoluteMPFBiasUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesAbsoluteMPFBiasDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesFragmentationUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesFragmentationDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesFragmentationUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesFragmentationDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesSinglePionECALUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesSinglePionECALDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesSinglePionECALUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesSinglePionECALDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesSinglePionHCALUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesSinglePionHCALDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesSinglePionHCALUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesSinglePionHCALDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesFlavorQCDUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesFlavorQCDDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesFlavorQCDUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesFlavorQCDDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeJEREC1Up   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeJEREC1Down onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeJEREC1Up   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeJEREC1Down onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeJEREC2Up   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeJEREC2Down onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeJEREC2Up   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeJEREC2Down onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeJERHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeJERHFDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeJERHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeJERHFDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativePtBBUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativePtBBDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativePtBBUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativePtBBDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativePtEC1Up   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativePtEC1Down onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativePtEC1Up   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativePtEC1Down onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativePtEC2Up   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativePtEC2Down onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativePtEC2Up   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativePtEC2Down onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativePtHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativePtHFDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativePtHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativePtHFDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeFSRUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeFSRDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeFSRUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeFSRDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeStatFSRUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeStatFSRDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeStatFSRUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeStatFSRDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeStatECUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeStatECDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeStatECUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeStatECDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpDataMCUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpDataMCDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpDataMCUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpDataMCDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtRefUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtRefDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtRefUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtRefDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtBBUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtBBDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtBBUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtBBDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtEC1Up   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtEC1Down onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtEC1Up   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtEC1Down onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtEC2Up   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtEC2Down onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtEC2Up   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtEC2Down onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesPileUpPtHFDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesPileUpPtHFDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeBalUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeBalDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeBalUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeBalDown onlyMC=1 dropBranch=1
+>>>>>>> upstream/master
 
 type=6  name=Jet_genJetIdx                      max=250     lengthBranch=nJet onlyMC=1
 ##type=8  name=Jet_corr                         max=250     lengthBranch=nJet
 ##type=8  name=Jet_corr_JERUp                         max=250     lengthBranch=nJet onlyMC=1
 ##type=8  name=Jet_corr_JERDown                         max=250     lengthBranch=nJet onlyMC=1
+<<<<<<< HEAD
+type=8  name=Jet_pt_jerUp                         max=250     lengthBranch=nJet  onlyMC=1
+type=8  name=Jet_pt_jerDown                         max=250     lengthBranch=nJet  onlyMC=1
+type=8  name=Jet_mass_jerUp                         max=250     lengthBranch=nJet  onlyMC=1
+type=8  name=Jet_mass_jerDown                         max=250     lengthBranch=nJet onlyMC=1
+type=8  name=Jet_pt_jesTotalUp                         max=250     lengthBranch=nJet  onlyMC=1
+type=8  name=Jet_pt_jesTotalDown                         max=250     lengthBranch=nJet  onlyMC=1
+type=8  name=Jet_mass_jesTotalUp                         max=250     lengthBranch=nJet  onlyMC=1
+type=8  name=Jet_mass_jesTotalDown                         max=250     lengthBranch=nJet onlyMC=1
+##type=8  name=Jet_corr_JER                     max=250     lengthBranch=nJet  onlyMC=1
+=======
 type=8  name=Jet_pt_jerUp                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jerDown                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
-type=8  name=Jet_mass_jerUp                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1 
+type=8  name=Jet_mass_jerUp                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jerDown                         max=250     lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesTotalUp                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesTotalDown                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesTotalUp                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesTotalDown                         max=250     lengthBranch=nJet onlyMC=1 dropBranch=1
 ##type=8  name=Jet_corr_JER                     max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
+>>>>>>> upstream/master
 ##type=8  name=Jet_pt_reg_corrJECUp             max=250     lengthBranch=nJet
 ##type=8  name=Jet_pt_reg_corrJECDown           max=250     lengthBranch=nJet
 ##type=8  name=Jet_pt_reg_corrJERUp             max=250     lengthBranch=nJet

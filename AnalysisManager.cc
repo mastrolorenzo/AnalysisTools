@@ -716,7 +716,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
             //cursample->CountFullWeighted->Write();
         }
     } // end sample loop
-    if(debug>1000) std::cout<<"Finished looping"<<std::endl;
+    std::cout<<"Finished looping"<<std::endl;
 
 
     TermAnalysis(doSkim);

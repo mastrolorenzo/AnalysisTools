@@ -150,25 +150,7 @@ bool VHbbAnalysis::Preselection() {
         }
     }
 
-    // add smearing on top of regression-->replace Jet_bReg
-    for (int i = 0; i < mInt("nJet"); i++) {
-        if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) {
-            float jet_cosPhi = TMath::Cos(m("Jet_phi",i));
-            float jet_sinPhi = TMath::Sin(m("Jet_phi",i));
-            float met_cosPhi = TMath::Cos(m("MET_Phi",i));
-            float met_sinPhi = TMath::Sin(m("MET_Phi",i));
-            float met_px = met_cosPhi * m("MET_Pt");
-            float met_py = met_sinPhi * m("MET_Pt");
-            met_px = met_px - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
-            met_py = met_py - (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
-            *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
-            *f["MET_Phi"] = TMath::ATan2(met_py, met_px);
-            f["Jet_Pt"][i] = m("Jet_pt",i);
-        }
-        else {
-            f["Jet_bReg"][i] = m("Jet_bReg",i) * m("Jet_Pt",i)/ m("Jet_pt",i);
-        }
-    }
+    UpdateJetPts();
 
     // FIXME why removed?
     //SetupFactorizedJECs(cursyst->name);
@@ -256,48 +238,6 @@ bool VHbbAnalysis::Analyze() {
 //                    _|
 //                    _|
 
-    //Corrections to MET needed before first instance of MET_Pt selection. FIXME should be moved back to original location once full switch to nanoV3 is possible
-    if (debug > 1000) std::cout << "Looping over jets" << std::endl;
-    for (int i = 0; i < mInt("nJet"); i++) {
-        if (int(m("doReg")) == 0) {
-            // don't apply the regression. The easiest way to do this is to just reset the value of
-            // the regressed jet pt to the nominal jet pt, since we build everything later from the
-            // jet pt's
-            f["Jet_bReg"][i] = m("Jet_Pt",i);
-        } else {
-            // add smearing on top of regression-->replace Jet_bReg
-            if (m("smearOnlyMatchedJets") != 0 && mInt("Jet_genJetIdx",i) == -1) {
-                float jet_cosPhi = TMath::Cos(m("Jet_phi",i));
-                float jet_sinPhi = TMath::Sin(m("Jet_phi",i));
-                float met_cosPhi = TMath::Cos(m("MET_Phi",i));
-                float met_sinPhi = TMath::Sin(m("MET_Phi",i));
-                float met_px = met_cosPhi * m("MET_Pt");
-                float met_py = met_sinPhi * m("MET_Pt");
-                met_px = met_px + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_cosPhi;
-                met_py = met_py + (m("Jet_Pt",i)-m("Jet_pt",i)) * jet_sinPhi;
-                *f["MET_Pt"] = TMath::Sqrt( met_px*met_px + met_py*met_py );
-                *f["MET_Phi"] = TMath::ATan2(met_py, met_px);
-                f["Jet_Pt"][i] = m("Jet_pt",i);
-            }
-            else {
-                f["Jet_bReg"][i] = m("Jet_bReg",i) * m("Jet_Pt",i)/ m("Jet_pt",i);
-            }
-        }
-
-        if (int(m("doCMVA")) != 0) {
-           // use CMVAv2 discriminator instead of CSV
-           f["Jet_btagCSVV2"][i] = m("Jet_btagCMVA",i);
-        }
-
-        // Do this in pre-selection
-        //// apply JER smearing x times the nominal smearing amount
-        //float JERScale = *f["JERScale"];
-        //if (JERScale != 1.0) {
-        //    smearJets(JERScale);
-        //} else if (int(*f["reReg"]) != 0) {
-        //    f["Jet_bReg"][i] = evaluateRegression(i);
-        //}
-    }
     // leptons have to be selected before bjets, since we need to know which channel we're in
     *in["lepInd1"] = *in["muInd1"] = *in["elInd1"] = -1;
     *in["lepInd2"] = *in["muInd2"] = *in["elInd2"] = -1;
@@ -343,6 +283,7 @@ bool VHbbAnalysis::Analyze() {
         return false;  // TODO no channel selected => can return here  CORRECT??
     }
 */
+
     if (mInt("Vtype") == 0 && (cursample->lepFlav == -1 || cursample->lepFlav == 0)) {
         std::pair<int,int> good_muons_2lep = HighestPtGoodMuonsOppCharge(    m("muptcut_2lepchan"), m("murelisocut_2lepchan"));
         if (good_muons_2lep.second > -1) {
@@ -444,10 +385,16 @@ bool VHbbAnalysis::Analyze() {
 //      _|
 
 
+    if (debug > 1000) std::cout << "Looping over jets" << std::endl;
+    UpdateJetPts();
+    for (int i = 0; i < mInt("nJet"); i++) {
+        if (int(m("doCMVA")) != 0) {
+           // use CMVAv2 discriminator instead of CSV
+           f["Jet_btagCSVV2"][i] = m("Jet_btagCMVA",i);
+        }
+    }
+
     // leptons had to be selected before bjets, since we need to know which channel we're in
-
-
-
     // keep track of each jet selection method separately
     float j1ptCut, j2ptCut, j1ptBtag;
     if (mInt("isZnn")) {
@@ -718,10 +665,10 @@ bool VHbbAnalysis::Analyze() {
     }
 
     if(m("twoResolvedJets")){
- 
+
         *f["H_mass_step2"] = m("H_mass"); // FIXME do we need this?
         *f["H_mass_noreg"] = Hbb_noreg.M();
-        
+
 	//Recovering ISR/FSR
 	bool enableFSRRecovery = int(m("enableFSRRecovery")) > 0;
 	*b["recoFSR"] = false;
@@ -730,7 +677,7 @@ bool VHbbAnalysis::Analyze() {
 	if( enableFSRRecovery ){
 	  *b["recoFSR"] = true;
 	  *f["H_mass_noFSR"] = Hbb.M();
-	  *f["H_pt_noFSR"] = Hbb.Pt();	  
+	  *f["H_pt_noFSR"] = Hbb.Pt();
 	  // di-jet kinematics
 	  *f["HJ1_HJ2_dPhi_noFSR"] = HJ1.DeltaPhi(HJ2);
 	  *f["HJ1_HJ2_dEta_noFSR"] = fabs(HJ1.Eta() - HJ2.Eta());
@@ -740,22 +687,22 @@ bool VHbbAnalysis::Analyze() {
 	  for(int ijet = 0; ijet < mInt("nJet"); ijet++) {
 
 	    if( ijet == mInt("hJetInd1") || ijet == mInt("hJetInd2") ) continue;
-	    
+
 	    //Select FSR jets
 	    if( m("Jet_Pt", ijet) > 20 && abs(m("Jet_eta", ijet)) < 3.0 && m("Jet_puId", ijet) > 0  && m("Jet_lepFilter", ijet) > 0 ){
 	      //&& m("Jet_id", ijet) > 0 ?
-	      
+
 	      TLorentzVector Jet_FSR;
 	      Jet_FSR.SetPtEtaPhiM( m("Jet_bReg",ijet), m("Jet_eta",ijet), m("Jet_phi",ijet), m("Jet_mass",ijet) * (m("Jet_bReg",ijet) / m("Jet_Pt",ijet)) );
-	      
-	      if( std::min( Jet_FSR.DeltaR( HJ1 ), Jet_FSR.DeltaR( HJ2 ) ) < 0.8){		
+
+	      if( std::min( Jet_FSR.DeltaR( HJ1 ), Jet_FSR.DeltaR( HJ2 ) ) < 0.8){
 		if(Jet_FSR.DeltaR( HJ1 )<Jet_FSR.DeltaR( HJ2 )){
-		  
+
 		  //add FSR to HJ1
 		  nFSRJets++;
 		  HJ1 += Jet_FSR;
 		}else if(Jet_FSR.DeltaR( HJ2 )<Jet_FSR.DeltaR( HJ1 )){
-		  
+
 		  //add FSR to HJ2
 		  nFSRJets++;
 		  HJ2 += Jet_FSR;
@@ -763,10 +710,10 @@ bool VHbbAnalysis::Analyze() {
 	      }
 	    }
 	  }
-	  
+
 	  //recompute the total Higgs 4-Momentum
 	  Hbb = ( HJ1 + HJ2 );
-	  
+
 	}// end of FSR recovering
 
 	// di-jet kinematics
@@ -785,7 +732,7 @@ bool VHbbAnalysis::Analyze() {
             *f[Form("H_mass_%s", cursyst->name.c_str())] = Hbb.M();
             *f[Form("H_pt_%s", cursyst->name.c_str())] = Hbb.Pt();
         }
-	
+
 	*f["jjVPtRatio"] = m("H_pt") / m("V_pt");
 	*f["HVdPhi"] = fabs(Hbb.DeltaPhi(V));
 	*f["HVdEta"] = fabs(Hbb.Eta() - V.Eta());
@@ -2742,6 +2689,12 @@ void VHbbAnalysis::ComputeBoostedVariables(){
     }
 }
 
+void VHbbAnalysis::UpdateJetPts() {
+    for (int i = 0; i < mInt("nJet"); i++) {
+        f["Jet_bReg"][i] = m("Jet_PtReg",i);
+    }
+}
+
 std::pair<int,int> VHbbAnalysis::HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut, bool isOneLepton) {
     int first = -1;
     for (int i = 0; i<mInt("nElectron"); i++) {
@@ -2775,6 +2728,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtGoodElectronsOppCharge(float min_pt, f
             } else if (mInt("Electron_charge",i)*mInt("Electron_charge",first) < 0) {
                 return std::make_pair(first, i);
             }
+
         }
     }
     return std::make_pair(first, -1);
