@@ -223,8 +223,11 @@ class EventProxy(object):
         self.H_pt_fit_fallback[0] = self.e.H_pt
         self.HVdPhi_fit_fallback[0] = self.e.HVdPhi
         self.jjVPtRatio_fit_fallback[0] = self.e.jjVPtRatio
-        self.hJets_pt_0_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd1]
-        self.hJets_pt_1_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd2]
+        if self.e.twoResolvedJets:
+            self.hJets_pt_0_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd1]
+            self.hJets_pt_1_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd2]
+        else:
+            print "Not twoResolvedJets. run,event",self.e.run,self.e.event
 
         self.H_mass_sigma_fit[0] = -1
         self.n_recoil_jets_fit[0] = -1
