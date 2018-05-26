@@ -38,6 +38,7 @@ am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, 0, "doSk
 #am.debug=20000
 am.debug=2
 
+print "dataYear",am.m("dataYear")
 print "Read in the input files, now let's run it!"
 if(am.debug>100):
     am.PrintBranches()
@@ -68,3 +69,5 @@ if "doKinFit" in options:
         am.mInt("sampleIndex") == 0,
         am.m("dataYear"),
     )
+
+    os.system('rm '+input_file)
