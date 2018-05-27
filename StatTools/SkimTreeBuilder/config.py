@@ -1,0 +1,86 @@
+## SkimTreeBuilder Configuration File
+
+# The input pattern used to glob for sample output files.
+input_pattern = '/eos/uscms/store/group/lpchbb/VHbbNanoPostProc/2016/NanoNtuples/Analyzed/2016V4_RunALL/%s/output*.root'
+
+# The preprocessing output directory.
+destination = 'samples'
+
+# Additional branches to keep after preprocessing.
+additional_branches = [
+    'hJets_pt_0',
+    'hJets_btagged_0',
+    'hJets_pt_1',
+    'hJets_btagged_1',
+    'HJ1_HJ2_dEta',
+    'V_pt',
+    'V_mass',
+    'HVdPhi',
+    'MET_Pt',
+    'nAddJets_2lep',
+    'SA5',
+    'n_recoil_jets_fit',
+    'H_mass_sigma_fit',
+    'H_pt_fit_fallback',
+    'H_mass_fit_fallback',
+    'jjVPtRatio_fit_fallback',
+    'HVdPhi_fit_fallback',
+]
+
+# The input tokens for the samples to preprocess.
+input_tokens = [
+    'DYBJets-Pt100To200',
+    'DYBJets-Pt200ToInf',
+    'DYJets_1J',
+    'DYJets_2J',
+    'DYJets_3J',
+    'DYToLL_HT100to200',
+    'DYToLL_HT1200to2500',
+    'DYToLL_HT200to400',
+    'DYToLL_HT2500toInf',
+    'DYToLL_HT400to600',
+    'DYToLL_HT600to800',
+    'DYToLL_HT800to1200',
+    'Run2016BToG_DoubleEle_ReMiniAOD',
+    'Run2016BToG_DoubleMu_ReMiniAOD',
+    'Run2016BToG_Ele_ReMiniAOD',
+    'Run2016BToG_MET_ReMiniAOD',
+    'Run2016BToG_Mu_ReMiniAOD',
+    'TBarToLeptons_t_powheg',
+    'TT_powheg',
+    'TToLeptons_s',
+    'T_tW',
+    'Tbar_tW',
+    'WBJets-Pt100To200',
+    'WBJets-Pt200ToInf',
+    'WJets-HT100To200',
+    'WJets-HT1200To2500',
+    'WJets-HT200To400',
+    'WJets-HT2500ToInf',
+    'WJets-HT400To600',
+    'WJets-HT600To800',
+    'WJets-HT800To1200',
+    'WJets_BGenFilter-Pt100To200',
+    'WJets_BGenFilter-Pt200ToInf',
+    'WJets_madgraph',
+    'WW',
+    'WZ',
+    'WZ_fil',
+    'WminusH125_powheg',
+    'WplusH125_powheg',
+    'ZH125_ZLL_powheg',
+    'ZH125_ZNuNu_powheg',
+    'ZJetsToNuNu_HT100To200',
+    'ZJetsToNuNu_HT1200To2500',
+    'ZJetsToNuNu_HT200To400',
+    'ZJetsToNuNu_HT2500ToInf',
+    'ZJetsToNuNu_HT400To600',
+    'ZJetsToNuNu_HT600To800',
+    'ZJetsToNuNu_HT800To1200',
+    'ZZ',
+    'ZZTo2L2Q',
+    'ZZTo2Q2Nu',
+    'ggZH125_ZLL_powheg',
+    'ggZH125_ZNuNu_powheg',
+]
+

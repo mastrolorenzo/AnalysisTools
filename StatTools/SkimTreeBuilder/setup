@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+pip install --user root_pandas
+pip install --user uproot
+
