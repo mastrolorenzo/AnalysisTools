@@ -1,15 +1,16 @@
 import varial
 varial.settings.rootfile_postfixes += ['.pdf']
-name = 'VHbbPlots2016KinfitV4_1'
-input_pattern = '/nfs/dust/cms/user/tholenhe/VHbbAnalysisNtuples/VHbb2016_NanoAODPostProcV4_Direct1/%s/*.root'
+name = 'VHbbPlots2016KinfitV4_3'
+#input_pattern = '/nfs/dust/cms/user/tholenhe/VHbbAnalysisNtuples/VHbb2016_NanoAODPostProcV4_Direct2/%s/*.root'
+input_pattern = '/pnfs/desy.de/cms/tier2/store/user/htholen/VHbbNTuple/2016V4_RunALL_try2/%s/*.root'
 #weight = 'genWeight*weight_PU*bTagWeight*weight_ptQCD*weight_ptEWK*Lep_SF*weight_mettrigSF'
 weight = 'weight*(1./bTagWeight)'
 enable_reuse_step = True  # try to find output on disk and don't run a step if present
 treename = 'Events'
 
 
-from kinfit_samples_2016 import *
-# from kinfit_samples_2017 import *
+from nano_samples_2lep_2016 import *
+# from nano_samples_2lep_2017 import *
 
 
 DeepCSVmax = 'Jet_btagDeepB[hJetInd1] > Jet_btagDeepB[hJetInd2] ? Jet_btagDeepB[hJetInd1] : Jet_btagDeepB[hJetInd2]'

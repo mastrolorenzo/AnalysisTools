@@ -43,7 +43,8 @@ vars_used_in_selections = {
     'nAddJets':         ('nAddJets302p5_puid',                  ';nAddJets302p5_puid;',         11,      -.5,    10.5    ),
     'nAddLeptons':      ('nAddLeptons',                         ';nAddLeptons;',                11,      -.5,    10.5    ),
     'met_pt':           ('MET_Pt',                              ';MET@p_{T}@GeV;',              30,      0,      500     ),
-    'dPhi_MET_TkMET':    ('dPhi_MET_TkMET',                        ';MetTkMetDPhi;',               16,      0,      3.2     ),
+    # MetjDPhi not yet in tree
+    # 'MetTkMetDPhi':     ('MetTkMetDPhi',                        ';MetTkMetDPhi;',               16,      0,      3.2     ),
     'lepMetDPhi':       ('lepMetDPhi',                          ';lepMetDPhi;',                 16,      0,      3.2     ),
     #'lepRelIso1':       (lepRelIso1_safe,                       ';1st Lep@Rel@Iso;',            30,      0,      0.3     ),
     #'lepRelIso2':       (lepRelIso2_safe,                       ';2st Lep@Rel@Iso;',            30,      0,      0.3     ),
@@ -51,7 +52,7 @@ vars_used_in_selections = {
 
 # additional from 0-lepton CR selection
     'Vtype':            ('Vtype',                               ';Vtype;',                      10,      -.5,    9.5     ),
-    'min_dPhi_hJet_MET':      ('min_dPhi_hJet_MET',                         ';MetjDPhi;',                   16,      0,      3.2     ),
+    # 'minMetjDPhi':      ('minMetjDPhi',                         ';MetjDPhi;',                   16,      0,      3.2     ),
 
 # additional from 1-lepton CR selection
     'sigma_met_pt':     ('MET_Pt / sqrt(htJet30)',              ';#sigma(p_{T}^{miss});',       20,      0,      10      ),
@@ -117,43 +118,3 @@ vars_1lepCR_only = {  # copied from plotvariables_CS.dat
 vars_1lepCR = vars_used_in_selections.copy()
 vars_1lepCR.update(vars_1lepCR_only)
 
-vars_2lepCR_only = {
-    # these plot definitions have different binning and overwrite the above for the 2-lepton channel
-    # 'BDT':              ('CMS_vhbb_BDT_Wln_13TeV',              ';BDT@Output;',                 20,      -1,     1       ),
-
-    'Vpt':              ('V_pt',        ';p_{T} (V) [GeV];',                40,      0,      400    ),
-    'Hpt':              ('H_pt',        ';Regressed p_{T} (jj) [GeV];',     40,      0,      400    ),
-    'mjj':              ('H_mass',      ';Regressed m(jj) [GeV];',          17,      0,      255    ),
-    'DeepCSVmax':          (DeepCSVmax,       ';DeepCSV_{max};',                     20,      0.,     1      ),
-    'DeepCSVmin':          (DeepCSVmin,       ';DeepCSV_{min};',                     20,      0.,     1      ),
-    'CMVAmax':          (CMVAmax,       ';CMVA_{max};',                     20,      -1.,     1      ),
-    'CMVAmin':          (CMVAmin,       ';CMVA_{min};',                     20,      -1.,     1      ),
-    'HVdPhi':           ('HVdPhi',      ';HVdPhi [rad];',                   30,      -3.2,   3.2    ),
-    'jjWPtBal':         ('H_pt/V_pt',   ';p_{T} balance after regression;', 25,      0,      2.     ),
-    'drjj':             ('HJ1_HJ2_dR',  ';reg. Delta R(jj);',               30,      0,      6      ),
-    'Vmass':            ('V_mass',                              ';M_{ll}@GeV;',                 50,      0,      250     ),
-
-    'muon1Pt':            ('Muon_pt[lepInd1]',              ';1st Muon@p_{T};',               30,      0,      150     ),
-    'muon1Phi':           ('Muon_phi[lepInd1]',             ';1st Muon@#phi;',                30,      -3.2,   3.2     ),
-    'muon1Eta':           ('Muon_eta[lepInd1]',             ';1st Muon@#eta;',                30,      -3,     3       ),
-    #'muon1ID':          ('Muon_looseIdPOG[lepInd1]',      ';1st Muon mu ID;',               6,      -1.5,    4.5     ),
-
-    'muon2Pt':            ('Muon_pt[lepInd2]',              ';2nd Muon@p_{T};',               30,      0,      150     ),
-    'muon2Phi':           ('Muon_phi[lepInd2]',             ';2nd Muon@#phi;',                30,      -3.2,   3.2     ),
-    'muon2Eta':           ('Muon_eta[lepInd2]',             ';2nd Muon@#eta;',                30,      -3,     3       ),
-    #'muon2ID':          ('Muon_looseIdPOG[lepInd2]',      ';2nd Muon mu ID;',               6,      -1.5,    4.5     ),
-    
-    'electron1Pt':            ('Electron_pt[lepInd1]',              ';1st Electron@p_{T};',               30,      0,      150     ),
-    'electron1Phi':           ('Electron_phi[lepInd1]',             ';1st Electron@#phi;',                30,      -3.2,   3.2     ),
-    'electron1Eta':           ('Electron_eta[lepInd1]',             ';1st Electron@#eta;',                30,      -3,     3       ),
-    #'electron1ID':          ('Electron_looseIdPOG[lepInd1]',      ';1st Electron mu ID;',               6,      -1.5,    4.5     ),
-
-    'electron2Pt':            ('Electron_pt[lepInd2]',              ';2nd Electron@p_{T};',               30,      0,      150     ),
-    'electron2Phi':           ('Electron_phi[lepInd2]',             ';2nd Electron@#phi;',                30,      -3.2,   3.2     ),
-    'electron2Eta':           ('Electron_eta[lepInd2]',             ';2nd Electron@#eta;',                30,      -3,     3       ),
-    #'electron2ID':          ('Electron_looseIdPOG[lepInd2]',      ';2nd Electron mu ID;',               6,      -1.5,    4.5     ),
-    'BDTZllHigh':              ('CMS_vhbb_BDT_Zll_HighPT_13TeV',              ';BDT@Output;',                 30,      -1,     1       ),
-    'BDTZllLow':              ('CMS_vhbb_BDT_Zll_LowPT_13TeV',              ';BDT@Output;',                 30,      -1,     1       ),
-}
-vars_2lepCR = vars_used_in_selections.copy()
-vars_2lepCR.update(vars_2lepCR_only)
