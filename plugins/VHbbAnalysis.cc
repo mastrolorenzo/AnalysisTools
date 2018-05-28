@@ -3011,7 +3011,7 @@ bool VHbbAnalysis::PassVTypeAndTrigger(int vtype) {
         // 1-lepton
         if ((vtype == 2 || vtype == 3)
             && mInt("HLT_Ele32_WPTight_Gsf_L1DoubleEG") != 1
-            && mInt("HLT_IsoMu24") != 1
+            && mInt("HLT_IsoMu27") != 1
            ) {
             return false;
         }
