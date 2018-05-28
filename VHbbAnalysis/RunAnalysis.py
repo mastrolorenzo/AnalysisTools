@@ -20,6 +20,7 @@ parser.add_option("-o", "--outputDir",    dest="outputDir",    default="", type=
 parser.add_option("-s","--sample", dest="sample", default="", type=str, help="Run on only a specific sample (can be comma-separated list)")
 parser.add_option("-d","--doData", dest="doData", default=-1, type=int, help="If -1 run all samples, if 0 run only MC, if 1 run only data")
 parser.add_option("--site","--site", dest="site", default="FNAL", type=str, help="If running on lxplus include option --site CERN, otherwise assumes you are running on FNAL")
+parser.add_option("--sgl" ,dest="oneJobPerCluster", default=False, action="store_true", help="Old style condor submission with one job per cluster")
 parser.add_option("--dcache", dest="dcache", default=False, action="store_true" , help="Copy files to dcache at DESY instead of locally?")
 parser.add_option("--useSGE","--useSGE", dest="useSGE", default=0, type=int, help="If 0 (default) use condor, if 1 use SGE job submission")
 parser.add_option("--doSkim","--doSkim", dest="doSkim", default=0, type=int, help="If 0 (default) run analysis jobs, if 1 run skimming jobs")
@@ -41,6 +42,7 @@ else:
     samplesToSubmit = [] # if empty run on all samples
 doData = options.doData
 site = options.site
+oneJobPerCluster = options.oneJobPerCluster
 dcache = options.dcache
 useSGE = options.useSGE
 submitJobs = options.submitJobs
@@ -168,6 +170,7 @@ else:
         #for filename in sample.files:
         start_event_frac=0
         end_event_frac=1
+        arg_string=""
         for i in range(nJobs):
             filesToRun = ""
             if nFilesPerJob >= 1:
@@ -188,7 +191,15 @@ else:
             RunSample_args = "runOnSkim" if options.runOnSkim else ""
             RunSample_args += ",doSkim" if options.doSkim else ""
             RunSample_args += ",doKinFit" if options.doKinFit else ""
-            if not useSGE:
+            arg_string+="%s %s %s output_%s_%i.root %f %f %s\n"% (options.configFile, sampleName, filesToRun,sampleName, nProcJobs, start_event_frac, end_event_frac, RunSample_args)
+            if useSGE:
+                fname = "%s/%s/job%iSubmit.sh" % (jobName, sampleName,nProcJobs)
+                submitFile = open(fname, "w")
+                content = "source %s/%s/condor_runscript.sh %s %s %s output_%s_%i.root %f %f %s\n" % (os.getcwd(),jobName,options.configFile, sampleName, filesToRun,sampleName, nProcJobs, start_event_frac, end_event_frac, RunSample_args)
+                submitFile.write(content)
+                submitFile.close()
+                submitFiles.append(fname)
+            elif oneJobPerCluster:
                 fname = "%s/%s/job%i.submit" % (jobName, sampleName,nProcJobs)
                 submitFile = open(fname, "w")
                 content =  "universe = vanilla\n"
@@ -208,14 +219,29 @@ else:
                 #content += "transfer_input_files = ../../%s,../../cfg/samples.txt,../../cfg/earlybranches.txt,../../cfg/existingbranches.txt,../../cfg/newbranches.txt,../../cfg/bdtsettings.txt,../../cfg/reg1_settings.txt,../../cfg/reg2_settings.txt,../../cfg/settings.txt,../../aux/TMVARegression_BDTG_ttbar_Nov23.weights.xml,../../aux/TMVA_13TeV_Dec14_3000_5_H125Sig_0b1b2bWjetsTTbarBkg_Mjj_BDT.weights.xml,../../aux/MuonIso_Z_RunCD_Reco74X_Dec1.json,../../aux/SingleMuonTrigger_Z_RunCD_Reco74X_Dec1.json,../../aux/MuonID_Z_RunCD_Reco74X_Dec1.json,../../aux/CutBasedID_TightWP.json,../../aux/CutBasedID_LooseWP.json,../../RunSample.py,../../../AnalysisDict.so,../../cfg/systematics.txt,../../cfg/scalefactors.txt\n" % options.configFile
                 content += "transfer_input_files = %s\n" % ','.join(inputs_to_transfer)
                 content += "Queue  1\n"
-            else:
-                fname = "%s/%s/job%iSubmit.sh" % (jobName, sampleName,nProcJobs)
-                submitFile = open(fname, "w")
-                content = "source %s/%s/condor_runscript.sh %s %s %s output_%s_%i.root %f %f %s\n" % (os.getcwd(),jobName,options.configFile, sampleName, filesToRun,sampleName, nProcJobs, start_event_frac, end_event_frac, RunSample_args)
-            #print content
+                submitFile.write(content)
+                submitFile.close()
+                submitFiles.append(fname)
+        if not oneJobPerCluster:
+            fname = "%s/%s/job%s.submit" % (jobName, sampleName,sampleName)
+            submitFile = open(fname, "w")
+            content =  "universe = vanilla\n"
+            content += "Executable = %s/condor_runscript.sh\n" % jobName
+            content += "initialdir = %s/%s\n" % (jobName,sampleName)
+            content += "Output = $(ProcId).stdout\n"
+            content += "Error  = $(ProcId).stderr\n" 
+            content += "Log    = $(ProcId).log\n"   
+            content += "Notification = never\n"
+            if dcache:
+                content += "x509userproxy = $ENV(X509_USER_PROXY)\n"
+            content += "transfer_input_files = %s\n" % ','.join(inputs_to_transfer)
+            content += "Queue Arguments from (\n"
+            content += "%s" %arg_string
+            content += ")"
             submitFile.write(content)
             submitFile.close()
             submitFiles.append(fname)
+
 
     xrdcp_string = "xrdcp -f $ORIG_DIR/$4 %s/%s/$2" %(output_dir.replace("/eos/uscms","root://cmseos.fnal.gov/"),jobName)
     if site == "CERN":
