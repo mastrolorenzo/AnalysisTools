@@ -32,11 +32,13 @@ type=2  name=j2ptCut_1lepchan   val=25
 type=2  name=j2ptCut_2lepchan   val=20
 type=2  name=j2ptCut            val=25
 
-type=2  name=j1ptBtag_0lepchan   val=0.8001
-type=2  name=j1ptBtag_1lepchan   val=0.8001
-type=2  name=j1ptBtag_2lepchan   val=0.1522
-type=2  name=j1ptBtag            val=0.1522
-type=2  name=j2ptBtag            val=0.1522
+# 0,1,2 means loose, medium, tight WPs
+type=2  name=j1BtagWP_0lepchan val=2
+type=2  name=j1BtagWP_1lepchan val=2
+type=2  name=j1BtagWP_2lepchan val=0
+type=2  name=j1Btag            val=-1
+type=2  name=j2BtagWP          val=0
+type=2  name=j2Btag            val=-1
 type=2  name=JetEtaCut          val=2.5
 
 type=2  name=fatJetPtCut_0lepchan         val=250

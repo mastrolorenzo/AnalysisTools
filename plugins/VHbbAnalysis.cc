@@ -397,19 +397,43 @@ bool VHbbAnalysis::Analyze() {
 
     // leptons had to be selected before bjets, since we need to know which channel we're in
     // keep track of each jet selection method separately
-    float j1ptCut, j2ptCut, j1ptBtag;
+    // FIXME this could be set outside of the event loop
+    float j1ptCut, j2ptCut;
+    int j1BtagWP=-1;
     if (mInt("isZnn")) {
         j1ptCut = m("j2ptCut_0lepchan");
         j2ptCut = m("j2ptCut_0lepchan");
-        j1ptBtag = m("j1ptBtag_0lepchan");
+        j1BtagWP = m("j1BtagWP_0lepchan");
     } else if (mInt("isWmunu") || mInt("isWenu")) {
         j1ptCut = m("j1ptCut_1lepchan");
         j2ptCut = m("j2ptCut_1lepchan");
-        j1ptBtag = m("j1ptBtag_1lepchan");
+        j1BtagWP = m("j1BtagWP_1lepchan");
     } else if (mInt("isZmm") || mInt("isZee")) {
         j1ptCut = m("j1ptCut_2lepchan");
         j2ptCut = m("j2ptCut_2lepchan");
-        j1ptBtag = m("j1ptBtag_2lepchan");
+        j1BtagWP = m("j1BtagWP_2lepchan");
+    }
+
+    if(j1BtagWP==2){
+        *f["j1Btag"]=m("tagWPT");
+    } else if(j1BtagWP==1){
+        *f["j1Btag"]=m("tagWPM");
+    } else if(j1BtagWP==0){
+        *f["j1Btag"]=m("tagWPL");
+    } else {
+        std::cout<<"leading bTag WP not defined; setting to -1."<<std::endl;
+        *f["j1Btag"]=-1;
+    }
+    
+    if(m("j2BtagWP")==2){
+        *f["j2Btag"]=m("tagWPT");
+    } else if(m("j2BtagWP")==1){
+        *f["j2Btag"]=m("tagWPM");
+    } else if(m("j2BtagWP")==0){
+        *f["j2Btag"]=m("tagWPL");
+    } else {
+        std::cout<<"subleading bTag WP not defined; setting to -1."<<std::endl;
+        *f["j2Btag"]=-1;
     }
 
     // for the moment keep also the old function to fill the branches declared in newbranches.txt
@@ -437,9 +461,9 @@ bool VHbbAnalysis::Analyze() {
         *b["twoResolvedJets"]=true; // jets don't need to be b-tagged to be "resolved"
         *in["hJetInd1"] = bjets_bestTagger.first;
         *in["hJetInd2"] = bjets_bestTagger.second;
-        if (m(taggerName,bjets_bestTagger.first) < j1ptBtag) {
+        if (m(taggerName,bjets_bestTagger.first) < m("j1Btag")) {
             *in["controlSample"] = -1;
-        } else if (m(taggerName,bjets_bestTagger.second) < m("j2ptBtag")) {  // 2nd jet B-Tagged is the same in all SR's
+        } else if (m(taggerName,bjets_bestTagger.second) < m("j2Btag")) {  // 2nd jet B-Tagged is the same in all SR's
             *in["controlSample"] = -1;
         } else if (mInt("isZnn")) { // Higgs jet pT cuts are applied to the pair sorted by pT instead of b-tag value
             float j1pt = m("Jet_bReg",bjets_bestTagger.first);
@@ -1475,6 +1499,14 @@ void VHbbAnalysis::FinishEvent() {
         float bTagWeight_cferr2_up = 1.;
         float bTagWeight_cferr2_down = 1.;
 
+        std::string taggerForEvaluation;
+        if(m("dataYear")==2016){
+            taggerForEvaluation.append("Jet_btagCMVA");
+        } else {
+            taggerForEvaluation=taggerName;
+        }
+
+
         for (int i=0; i<mInt("nJet"); i++)
         {
             if (m("Jet_puId", i) > 0
@@ -1492,124 +1524,126 @@ void VHbbAnalysis::FinishEvent() {
                     flav,
                     fabs(m("Jet_eta", i)),
                     m("Jet_Pt", i),
-                    m(taggerName, i)
-
+                    m(taggerForEvaluation, i)
                 );
                 if(hadron_flav==5){
                     bTagWeight_jes_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_jes_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lf_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_lf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_lf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lf_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_lf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_lf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats1_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_hfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_hfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats1_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_hfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_hfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats2_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_hfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_hfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats2_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_hfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_hfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr1_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr1_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr2_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr2_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hf_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hf_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats1_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats1_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats2_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats2_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                 } else if (hadron_flav==4){
                     bTagWeight_jes_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_jes_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lf_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lf_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats1_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats1_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats2_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats2_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr1_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_cferr1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_cferr1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr1_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_cferr1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_cferr1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr2_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_cferr2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_cferr2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr2_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_cferr2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_cferr2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hf_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hf_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats1_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats1_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats2_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats2_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                 } else {
                     bTagWeight_jes_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_jes_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_jes", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hf_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_hf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_hf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hf_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_hf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_hf", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats1_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_lfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_lfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats1_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_lfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_lfstats1", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats2_up *= bTagCalibReader->eval_auto_bounds(
-                        "up_lfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "up_lfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lfstats2_down *= bTagCalibReader->eval_auto_bounds(
-                        "down_lfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "down_lfstats2", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lf_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_lf_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats1_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats1_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats2_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_hfstats2_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr1_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr1_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr2_up *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                     bTagWeight_cferr2_down *= bTagCalibReader->eval_auto_bounds(
-                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerName, i));
+                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                 }
             }
         }
         *f["bTagWeight"] = bTagWeight;
+        if(m("dataYear")==2016){
+            *f["bTagWeight"] = 1.0; //stealing CMVA systematics but not central value
+        }
         *f["bTagWeight_JESUp"] = bTagWeight_jes_up/bTagWeight;
         *f["bTagWeight_JESDown"] = bTagWeight_jes_down/bTagWeight;
         *f["bTagWeight_HFUp"] = bTagWeight_hf_up/bTagWeight;
@@ -3080,7 +3114,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
     for(int i=0; i<mInt("nJet"); i++){
         if(mInt("Jet_puId",i) > 0
             && m("Jet_bReg",i)>m("j1ptCut")
-            && m("Jet_btagCSVV2",i)>m("j1ptBtag")&&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
+            && m("Jet_btagCSVV2",i)>m("j1Btag")&&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
                 pair.first = i;
             } else if(m("Jet_bReg",pair.first)<m("Jet_bReg",i)){
@@ -3093,7 +3127,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
         if(i==pair.first) continue;
         if(mInt("Jet_puId",i) > 0
             && m("Jet_bReg",i)>m("j2ptCut")
-            && m("Jet_btagCSVV2",i)>m("j2ptBtag")&&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
+            && m("Jet_btagCSVV2",i)>m("j2Btag")&&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {
                 pair.second = i;
             } else if(m("Jet_bReg",pair.second)<m("Jet_bReg",i)){
@@ -3304,12 +3338,12 @@ std::pair<int,int> VHbbAnalysis::HighestPtJJBJets(){
     }
     // important to cut on CSV here to kill TTbar
     if(pair.first != -1){
-        if (m("Jet_btagCSVV2",pair.first) < m("j1ptBtag")) {
+        if (m("Jet_btagCSVV2",pair.first) < m("j1Btag")) {
             pair.first = -1;
         }
     }
     if(pair.second != -1){
-        if (m("Jet_btagCSVV2",pair.second) < m("j2ptBtag")) {
+        if (m("Jet_btagCSVV2",pair.second) < m("j2Btag")) {
             pair.second = -1;
         }
     }
