@@ -20,6 +20,7 @@ parser.add_option("-o", "--outputDir",    dest="outputDir",    default="", type=
 parser.add_option("-s","--sample", dest="sample", default="", type=str, help="Run on only a specific sample (can be comma-separated list)")
 parser.add_option("-d","--doData", dest="doData", default=-1, type=int, help="If -1 run all samples, if 0 run only MC, if 1 run only data")
 parser.add_option("--site","--site", dest="site", default="FNAL", type=str, help="If running on lxplus include option --site CERN, otherwise assumes you are running on FNAL")
+parser.add_option("--dcache", dest="dcache", default=False, action="store_true" , help="Copy files to dcache at DESY instead of locally?")
 parser.add_option("--useSGE","--useSGE", dest="useSGE", default=0, type=int, help="If 0 (default) use condor, if 1 use SGE job submission")
 parser.add_option("--doSkim","--doSkim", dest="doSkim", default=0, type=int, help="If 0 (default) run analysis jobs, if 1 run skimming jobs")
 parser.add_option("--runOnSkim","--runOnSkim", dest="runOnSkim", default=1, type=int, help="If 1 (default) run analysis jobs assuming the input files are already skimmed by AT, if 0 assume running directly on post-processed NanoAOD. If doSkim is 1 then this variable is assumed to be always 0.")
@@ -40,6 +41,7 @@ else:
     samplesToSubmit = [] # if empty run on all samples
 doData = options.doData
 site = options.site
+dcache = options.dcache
 useSGE = options.useSGE
 submitJobs = options.submitJobs
 
@@ -90,7 +92,13 @@ else:
     elif site == "CERN":
         output_dir = "/eos/cms/store/user/%s/VHbbAnalysisNtuples" % os.getlogin()
     elif site == "DESY":
-        output_dir = "/nfs/dust/cms/user/%s/VHbbAnalysisNtuples" % os.getlogin()
+        if not dcache:
+            output_dir = "/nfs/dust/cms/user/%s/VHbbAnalysisNtuples" % os.getlogin()
+        else :
+            if os.path.expandvars("$CERNUSERNAME") == '$CERNUSERNAME':
+                print "No username set, exiting"
+                sys.exit(1)
+            output_dir = os.path.expandvars("srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN=/pnfs/desy.de/cms/tier2/store/user/$CERNUSERNAME/VHbbAnalysisNtuples/")
     if options.doSkim:
         output_dir = output_dir.replace("VHbbAnalysisNtuples","SkimmedAnalysisNtuples")
 
@@ -194,6 +202,8 @@ else:
                 content += "Error  = %i.stderr\n" % nProcJobs
                 content += "Log    = %i.log\n"    % nProcJobs
                 content += "Notification = never\n"
+                if dcache:
+                    content += "x509userproxy = $ENV(X509_USER_PROXY)\n"
                 #content += "WhenToTransferOutput=On_Exit\n"
                 #content += "transfer_input_files = ../../%s,../../cfg/samples.txt,../../cfg/earlybranches.txt,../../cfg/existingbranches.txt,../../cfg/newbranches.txt,../../cfg/bdtsettings.txt,../../cfg/reg1_settings.txt,../../cfg/reg2_settings.txt,../../cfg/settings.txt,../../aux/TMVARegression_BDTG_ttbar_Nov23.weights.xml,../../aux/TMVA_13TeV_Dec14_3000_5_H125Sig_0b1b2bWjetsTTbarBkg_Mjj_BDT.weights.xml,../../aux/MuonIso_Z_RunCD_Reco74X_Dec1.json,../../aux/SingleMuonTrigger_Z_RunCD_Reco74X_Dec1.json,../../aux/MuonID_Z_RunCD_Reco74X_Dec1.json,../../aux/CutBasedID_TightWP.json,../../aux/CutBasedID_LooseWP.json,../../RunSample.py,../../../AnalysisDict.so,../../cfg/systematics.txt,../../cfg/scalefactors.txt\n" % options.configFile
                 content += "transfer_input_files = %s\n" % ','.join(inputs_to_transfer)
@@ -212,7 +222,10 @@ else:
         xrdcp_string = "xrdcp -f $ORIG_DIR/$4 root://eoscms.cern.ch:/%s/%s/$2" %(output_dir,jobName)
     if site == "DESY":
         local_path = "%s/%s" % (output_dir,jobName)
-        xrdcp_string = "mkdir -p %s/$2; cp -vf $4 %s/$2" % (local_path, local_path)
+        if not dcache :
+            xrdcp_string = "mkdir -p %s/$2; cp -vf $4 %s/$2" % (local_path, local_path)
+        else:
+            xrdcp_string = "gfal-copy -p file:$4 %s/$2/$4" % (local_path)
     copy_string = "" # not sure how to automatically transfer files to SGE job nodes, for now do it manually
     if useSGE:
         copy_string = ''' cp -r {0}/cfg .
@@ -291,6 +304,7 @@ else:
         eval `scramv1 runtime -sh`
         echo "echo PATH:"
         echo $PATH
+        source /cvmfs/grid.cern.ch/etc/profile.d/setup-cvmfs-ui.sh
 
         echo "changing to tempdir"
         cd $tmp_dir
