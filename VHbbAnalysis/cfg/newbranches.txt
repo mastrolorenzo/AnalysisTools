@@ -119,12 +119,25 @@ type=2  name=HJ1_HJ2_dPhi_noFSR
 type=2  name=HJ1_HJ2_dEta_noFSR
 type=2  name=HJ1_HJ2_dR_noFSR
 type=2  name=JJEtaBal_noFSR
+type=2  name=jjVPtRatio_noFSR
+type=2  name=HVdPhi_noFSR
+type=2  name=HVdEta_noFSR
+type=2  name=HVdR_noFSR
+type=2  name=HVdEta_4MET_noFSR
 type=2  name=H_mass
 type=2  name=H_mass_noreg
 type=2  name=H_mass_noFSR
 type=2  name=H_pt_noFSR
 type=4  name=recoFSR
 type=1  name=nFSRJets
+
+type=2  name=H_mass_fit_fallback         
+type=2  name=H_pt_fit_fallback
+type=2  name=jjVPtRatio_fit_fallback           
+type=2  name=HVdPhi_fit_fallback         
+type=2  name=n_recoil_jets_fit           
+type=2  name=H_mass_sigma_fit 
+
 
 type=2  name=H_pt
 type=2  name=H_pt_highestPt
@@ -218,6 +231,9 @@ type=2  name=hJets_pt_0
 type=2  name=hJets_pt_1
 type=2  name=HJ1_pt
 type=2  name=HJ2_pt
+
+type=2  name=n_recoil_jets_fit
+type=2  name=H_mass_sigma_fit
 
 type=8  name=Jet_genHJetMinDR            max=250
 type=8  name=Jet_genWQuarkDR             max=250

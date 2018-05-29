@@ -704,6 +704,16 @@ bool VHbbAnalysis::Analyze() {
 	  *f["H_mass_noFSR"] = Hbb.M();
 	  *f["H_pt_noFSR"] = Hbb.Pt();
 	  // di-jet kinematics
+
+	  *f["jjVPtRatio_noFSR"] = m("H_pt_noFSR") / m("V_pt");
+	  *f["HVdPhi_noFSR"] = fabs(Hbb.DeltaPhi(V));
+	  *f["HVdEta_noFSR"] = fabs(Hbb.Eta() - V.Eta());
+	  *f["HVdR_noFSR"]   = Hbb.DeltaR(V);
+
+	  if (mInt("isWmunu") == 1 || mInt("isWenu") == 1) {
+	    *f["HVdEta_4MET_noFSR"] = fabs(Hbb.Eta() -  W_withNuFromMWCon.Eta());
+	  }
+
 	  *f["HJ1_HJ2_dPhi_noFSR"] = HJ1.DeltaPhi(HJ2);
 	  *f["HJ1_HJ2_dEta_noFSR"] = fabs(HJ1.Eta() - HJ2.Eta());
 	  *f["HJ1_HJ2_dR_noFSR"] = HJ1.DeltaR(HJ2);
@@ -2264,6 +2274,7 @@ void VHbbAnalysis::FinishEvent() {
         std::vector<std::string> bdtNames;
         bdtNames.clear();
         thisBDTInfo = bdtInfos.find("bdt_1lep");
+
         if(m("twoResolvedJets")){
             if(thisBDTInfo != bdtInfos.end()){
                 bdtNames.push_back("bdt_1lep");
@@ -2302,6 +2313,13 @@ void VHbbAnalysis::FinishEvent() {
         std::vector<std::string> bdtNames;
         bdtNames.clear();
         thisBDTInfo = bdtInfos.find("bdt_2lep_highPt");
+
+	*f["H_mass_fit_fallback"] = m("H_mass");         
+	*f["H_pt_fit_fallback"] = m("H_pt");           
+	*f["jjVPtRatio_fit_fallback"] = m("jjVPtRatio");           
+	*f["HVdPhi_fit_fallback"] = m("HVdPhi");         
+	*f["n_recoil_jets_fit"]=-1.0;           
+	*f["H_mass_sigma_fit"]=-1.0; 
 
         if(m("twoResolvedJets")){
             if(thisBDTInfo != bdtInfos.end()){

@@ -7,12 +7,12 @@ earlybranches=cfg/earlybranches_2016.txt
 existingbranches=cfg/existingbranches_2016.txt
 newbranches=cfg/newbranches.txt
 
-bdt_0lep=cfg/bdt_0lep.txt
+bdt_0lep=cfg/bdt_0lep_2016_ICHEP2018.txt
 bdt_0lep_boosted=cfg/bdt_0lep_boosted.txt
-bdt_1lep=cfg/bdt_1lep.txt
+bdt_1lep=cfg/bdt_1lep_2016_ICHEP2018.txt
 bdt_1lep_boosted=cfg/bdt_1lep_boosted.txt
-bdt_2lep_highPt=cfg/bdt_2lep_highPt.txt
-bdt_2lep_lowPt=cfg/bdt_2lep_lowPt.txt
+bdt_2lep_highPt=cfg/bdt_2lep_highPt_2016_ICHEP2018.txt
+bdt_2lep_lowPt=cfg/bdt_2lep_lowPt_2016_ICHEP2018.txt
 bdt_2lep_boosted=cfg/bdt_2lep_boosted.txt
 
 bdt_0lep_vzbb=cfg/bdt_0lep_vzbb.txt
