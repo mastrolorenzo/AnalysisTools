@@ -4,7 +4,6 @@ vars_2lep_only = {
     # these plot definitions have different binning and overwrite the above for the 2-lepton channel
     'Vpt':                  ('V_pt',        ';p_{T} (V) [GeV];',                            40,      0,      400    ),
     'Hpt':                  ('H_pt',        ';Regressed p_{T} (jj) [GeV];',                 40,      0,      400    ),
-    'mjj':                  ('H_mass',      ';Regressed m(jj) [GeV];',                      17,      0,      255    ),
     'DeepCSVmax':           (DeepCSVmax,       ';DeepCSV_{max};',                           20,      0.,     1      ),
     'DeepCSVmin':           (DeepCSVmin,       ';DeepCSV_{min};',                           20,      0.,     1      ),
     'CMVAmax':              (CMVAmax,       ';CMVA_{max};',                                 20,      -1.,    1      ),

@@ -55,6 +55,7 @@ elif (len(sys.argv) > 6):
 else :
     am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
 
+
 if "doKinFit" in options:
     import kinfitter
 
@@ -66,8 +67,30 @@ if "doKinFit" in options:
     kinfitter.apply_kinfit(
         input_file,
         output_file,
-        am.mInt("sampleIndex") == 0,
-        am.m("dataYear"),
+        None,
+        #event_proxies=(
+        #    kinfitter.EventProxy(),
+        #    kinfitter.ep_mu_up,
+        #    kinfitter.ep_mu_down,
+        #    kinfitter.ep_el_up,
+        #    kinfitter.ep_el_down,
+        #)
+    )
+
+    os.system('rm '+input_file)
+
+
+if am.m("separateMvaEval") > 0.5:
+    import mva_evaluator
+
+    output_file = sys.argv[4]
+    input_file = output_file.replace('.root', '_before_mva_eval.root')
+    os.system('mv %s %s' % (output_file, input_file))
+
+    mva_evaluator.apply_mva_eval(
+        input_file,
+        output_file,
+        am
     )
 
     os.system('rm '+input_file)

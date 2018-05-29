@@ -80,6 +80,7 @@ type=7  name=Electron_charge                max=20    lengthBranch=nElectron
 
 type=0  name=nMuon
 type=8  name=Muon_pt                        max=20    lengthBranch=nMuon
+type=8  name=Muon_pt_corrected              max=20    lengthBranch=nMuon
 type=8  name=Muon_eta                       max=20    lengthBranch=nMuon
 type=8  name=Muon_phi                       max=20    lengthBranch=nMuon
 type=8  name=Muon_dxy                       max=20    lengthBranch=nMuon

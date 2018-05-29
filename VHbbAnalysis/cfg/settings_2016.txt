@@ -20,6 +20,8 @@ type=2  name=doICHEP            val=0
 type=2  name=reReg              val=0
 type=2  name=reVType            val=0
 type=2  name=doVPtReweighting   val=0
+type=2  name=separateMvaEval    val=0
+
 type=2  name=fatJetPtCut_0lepchan         val=250
 type=2  name=fatJetBBTaggerCut_0lepchan   val=0.6
 type=2  name=tau2OverTau1Cut_0lepchan     val=0.65

@@ -87,7 +87,6 @@ vars_1lepCR_only = {  # copied from plotvariables_CS.dat
     'electronEta':      (electron_pt_safe.replace("_pt","_eta"), ';Electron@#eta;',              30,      -3,     3       ),
 
 # DiJet Variables
-    'mjj':              ('H_mass',                              ';M_{jj}@GeV;',                 25,      0,      250     ),
     'mjj_noreg':        ('H_mass_noreg',                        ';M_{jj}@NoReg;',               25,      0,      250     ),
     'Hpt':              ('H_pt',                                ';p_{T}(jj)@GeV;',              21,      0,      350     ),
     'dphijj':           ('HJ1_HJ2_dPhi',                        ';dPhi(jj);',                   20,      -3,     3       ),

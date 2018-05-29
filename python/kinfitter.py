@@ -1,17 +1,84 @@
-from ROOT.TMath import Sin, Cos
-from math import pi
-import itertools
+from ROOT.TMath import Sin, Cos, Pi
 import numpy
 import time
 import ROOT
-import os
 
 
 # constants
+PI = Pi()
 LLVV_PXY_VAR = 8**2  # with no additional jets above pt > 20 GeV and no eta cut
 HH4B_RES_SCALE = 0.62
 Z_WIDTH = 1.7 * 3
+TREE_VARS = {
+    # higgs jets
+    'n_hj_matched',
+    'hj1_pt',        'hj1_eta',        'hj1_phi',        'hj1_mass',
+    'hj2_pt',        'hj2_eta',        'hj2_phi',        'hj2_mass',
+    'hj12_pt',       'hj12_eta',       'hj12_phi',       'hj12_mass',
+    'hj1_gen_pt',    'hj1_gen_eta',    'hj1_gen_phi',    'hj1_gen_mass',
+    'hj2_gen_pt',    'hj2_gen_eta',    'hj2_gen_phi',    'hj2_gen_mass',
+    'hj12_gen_pt',   'hj12_gen_eta',   'hj12_gen_phi',   'hj12_gen_mass',
+    'hj1_reg_pt',    'hj1_reg_eta',    'hj1_reg_phi',    'hj1_reg_mass',
+    'hj2_reg_pt',    'hj2_reg_eta',    'hj2_reg_phi',    'hj2_reg_mass',
+    'hj12_reg_pt',   'hj12_reg_eta',   'hj12_reg_phi',   'hj12_reg_mass',
+    'hj1_fit_pt',    'hj1_fit_eta',    'hj1_fit_phi',    'hj1_fit_mass',
+    'hj2_fit_pt',    'hj2_fit_eta',    'hj2_fit_phi',    'hj2_fit_mass',
+    'H_pt_fit',      'H_eta_fit',      'H_phi_fit',      'H_mass_fit',
+    'hJets_pt_0_fit',
+    'hJets_pt_1_fit',
+    'H_mass_sigma_fit',
+    'n_fsr_jets',
+    'n_recoil_jets_fit',
 
+    'HVdPhi_fit',    'HVdR_fit',       'HVdEta_fit',      'jjVPtRatio_fit',
+
+    'hj1_reg_res',
+    'hj2_reg_res',
+    'hj1_hh4b_res',
+    'hj2_hh4b_res',
+    'hj1_jme_res',
+    'hj2_jme_res',
+    'hj1_fit_err',
+    'hj2_fit_err',
+    'hj12_fit_corr',
+
+    # leptons
+    'l1_pt',        'l1_eta',        'l1_phi',        'l1_mass',
+    'l2_pt',        'l2_eta',        'l2_phi',        'l2_mass',
+    'V_eta',
+    'l1_gen_pt',    'l1_gen_eta',    'l1_gen_phi',    'l1_gen_mass',
+    'l2_gen_pt',    'l2_gen_eta',    'l2_gen_phi',    'l2_gen_mass',
+    'l12_gen_pt',   'l12_gen_eta',   'l12_gen_phi',   'l12_gen_mass',
+    'l1_fit_pt',    'l1_fit_eta',    'l1_fit_phi',    'l1_fit_mass',
+    'l2_fit_pt',    'l2_fit_eta',    'l2_fit_phi',    'l2_fit_mass',
+    'V_pt_fit',     'V_eta_fit',     'V_phi_fit',     'V_mass_fit',
+
+    'l1_res',
+    'l2_res',
+
+    # llbb system / recoil jet
+    # 'recoil_pt',     'recoil_eta',     'recoil_phi',     'recoil_mass',
+    # 'recoil_fit_pt', 'recoil_fit_eta', 'recoil_fit_phi', 'recoil_fit_mass',
+
+    # 'llbb_px',       'llbb_py',
+    'llbb_fit_px',   'llbb_fit_py',   'llbb_fit_pt',
+    'llbbr_fit_px',  'llbbr_fit_py',  'llbbr_fit_pt',
+    'llbb_gen_px',   'llbb_gen_py',
+    'll_gen_mass',
+
+    # aux
+    'kinfit_fit',
+    'kinfit_getNDF',
+    'kinfit_getS',
+    'kinfit_getF',
+
+    'H_mass_fit_fallback',
+    'H_pt_fit_fallback',
+    'HVdPhi_fit_fallback',
+    'jjVPtRatio_fit_fallback',
+    'hJets_pt_0_fit_fallback',
+    'hJets_pt_1_fit_fallback',
+}
 
 # resolution functions from HH4b analysis
 # https://github.com/cvernier/HH4b2016/blob/master/HbbHbb_Component_KinFit.cc
@@ -41,7 +108,7 @@ def ErrPhi_Signal(pT):
 
 # auxillary functions
 def deltaPhi(phi1, phi2):
-    dphi = (phi1 - phi2 + pi) % (2*pi) - pi
+    dphi = (phi1 - phi2 + PI) % (2*PI) - PI
     return dphi
 
 def deltaR(eta1, phi1, eta2, phi2):
@@ -102,7 +169,8 @@ def mk_fit_particle(e, ind, res_scale=1.):
 # ... and from leptons as well
 def mk_mu_lv_ind(e, ind):
     return mk_lv(
-        e.Muon_pt[ind],
+        abs(e.Muon_pt_corrected[ind]),
+        # e.Muon_pt[ind],
         e.Muon_eta[ind],
         e.Muon_phi[ind],
         e.Muon_mass[ind],
@@ -137,86 +205,34 @@ def mk_fit_particle_lepton(e, v, ind):
 
 
 class EventProxy(object):
-    def __init__(self, output_tree, output_postfix=''):
+    '''
+    Arguments:
+    - postfix is added as to the name of all output branches
+    - sys_branch (optional) is the name of the branch that should be replaced
+    - sys_attr_getter (optional) is a function that takes the event as an argument and returns
+      the systematic replacement.
+    '''
+    def __init__(self, postfix='', sys_branch='', sys_attr_getter=None):
+        assert bool(sys_branch) == bool(callable(sys_attr_getter)
+            ), 'I need both, sys_branch and a callable sys_attr_getter, or none of them.'
+        self.output_postfix = postfix
+        self.sys_branch = sys_branch
+        self.sys_attr_getter = sys_attr_getter
         self.e = None
-        self.tree_vars = [
+        self.cache = None
+        self.tree_vars = set()
 
-            # higgs jets
-            'n_hj_matched',
-            'hj1_pt',        'hj1_eta',        'hj1_phi',        'hj1_mass',
-            'hj2_pt',        'hj2_eta',        'hj2_phi',        'hj2_mass',
-            'hj12_pt',       'hj12_eta',       'hj12_phi',       'hj12_mass',
-            'hj1_gen_pt',    'hj1_gen_eta',    'hj1_gen_phi',    'hj1_gen_mass',
-            'hj2_gen_pt',    'hj2_gen_eta',    'hj2_gen_phi',    'hj2_gen_mass',
-            'hj12_gen_pt',   'hj12_gen_eta',   'hj12_gen_phi',   'hj12_gen_mass',
-            'hj1_reg_pt',    'hj1_reg_eta',    'hj1_reg_phi',    'hj1_reg_mass',
-            'hj2_reg_pt',    'hj2_reg_eta',    'hj2_reg_phi',    'hj2_reg_mass',
-            'hj12_reg_pt',   'hj12_reg_eta',   'hj12_reg_phi',   'hj12_reg_mass',
-            'hj1_fit_pt',    'hj1_fit_eta',    'hj1_fit_phi',    'hj1_fit_mass',
-            'hj2_fit_pt',    'hj2_fit_eta',    'hj2_fit_phi',    'hj2_fit_mass',
-            'H_pt_fit',      'H_eta_fit',      'H_phi_fit',      'H_mass_fit',
-            'hJets_pt_0_fit',
-            'hJets_pt_1_fit',
-            'H_mass_sigma_fit',
-            'n_fsr_jets',
-            'n_recoil_jets_fit',
-
-            'HVdPhi_fit',    'HVdR_fit',       'HVdEta_fit',      'jjVPtRatio_fit',
-
-            'hj1_reg_res',
-            'hj2_reg_res',
-            'hj1_hh4b_res',
-            'hj2_hh4b_res',
-            'hj1_jme_res',
-            'hj2_jme_res',
-            'hj1_fit_err',
-            'hj2_fit_err',
-            'hj12_fit_corr',
-
-            # leptons
-            'l1_pt',        'l1_eta',        'l1_phi',        'l1_mass',
-            'l2_pt',        'l2_eta',        'l2_phi',        'l2_mass',
-            'V_eta',
-            'l1_gen_pt',    'l1_gen_eta',    'l1_gen_phi',    'l1_gen_mass',
-            'l2_gen_pt',    'l2_gen_eta',    'l2_gen_phi',    'l2_gen_mass',
-            'l12_gen_pt',   'l12_gen_eta',   'l12_gen_phi',   'l12_gen_mass',
-            'l1_fit_pt',    'l1_fit_eta',    'l1_fit_phi',    'l1_fit_mass',
-            'l2_fit_pt',    'l2_fit_eta',    'l2_fit_phi',    'l2_fit_mass',
-            'V_pt_fit',     'V_eta_fit',     'V_phi_fit',     'V_mass_fit',
-
-            'l1_res',
-            'l2_res',
-
-            # llbb system / recoil jet
-            # 'recoil_pt',     'recoil_eta',     'recoil_phi',     'recoil_mass',
-            # 'recoil_fit_pt', 'recoil_fit_eta', 'recoil_fit_phi', 'recoil_fit_mass',
-
-            # 'llbb_px',       'llbb_py',
-            'llbb_fit_px',   'llbb_fit_py',   'llbb_fit_pt',
-            'llbbr_fit_px',  'llbbr_fit_py',  'llbbr_fit_pt',
-            'llbb_gen_px',   'llbb_gen_py',
-            'll_gen_mass',
-
-            # aux
-            'kinfit_fit',
-            'kinfit_getNDF',
-            'kinfit_getS',
-            'kinfit_getF',
-
-            'H_mass_fit_fallback',
-            'H_pt_fit_fallback',
-            'HVdPhi_fit_fallback',
-            'jjVPtRatio_fit_fallback',
-            'hJets_pt_0_fit_fallback',
-            'hJets_pt_1_fit_fallback',
-        ]
-
+    def init_output(self, output_tree, tree_vars):
+        postfix = '_'+self.output_postfix if self.output_postfix else ''
+        self.tree_vars |= tree_vars
         for var in self.tree_vars:
             setattr(self, var, numpy.zeros(1,float))
-            output_tree.Branch(var+output_postfix, getattr(self, var), var+output_postfix+'/D')
+            output_tree.Branch(var+postfix, getattr(self, var), var+postfix+'/D')
+        self.set_vals_to_zero()
 
     def set_event(self, e):
         self.e = e
+        self.cache = None
 
     def apply_fallback(self):
         self.H_mass_fit_fallback[0] = self.e.H_mass
@@ -226,8 +242,6 @@ class EventProxy(object):
         if self.e.twoResolvedJets:
             self.hJets_pt_0_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd1]
             self.hJets_pt_1_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd2]
-        else:
-            print "Not twoResolvedJets. run,event",self.e.run,self.e.event
 
         self.H_mass_sigma_fit[0] = -1
         self.n_recoil_jets_fit[0] = -1
@@ -242,13 +256,18 @@ class EventProxy(object):
         getattr(self, token+'_phi' )[0] = vec.Phi()
         getattr(self, token+'_mass')[0] = vec.M()
 
-    def __getattr__(self, attr):
-        # TODO map systematic uncertainty access here
-        return getattr(self.e, attr)
+    def __getattr__(self, *args):
+        def make_variation():
+            self.cache = self.sys_attr_getter(self.e)
+            return self.cache
+
+        if self.sys_attr_getter and args[0] == self.sys_branch:
+            return self.cache or make_variation()
+
+        return getattr(self.e, *args)
 
 
-
-def apply_fit_to_event(ep, jme_res_obj, do_fsr):
+def apply_fit_to_event(ep, jme_res_obj):
 
     # normal higgs jets
     hJidxs = (ep.hJetInd1, ep.hJetInd2)
@@ -264,37 +283,35 @@ def apply_fit_to_event(ep, jme_res_obj, do_fsr):
     v1, v1_hh4b_var, v1_reg_var, p1 = mk_fit_particle(ep, hJidxs[0], HH4B_RES_SCALE)
     v2, v2_hh4b_var, v2_reg_var, p2 = mk_fit_particle(ep, hJidxs[1], HH4B_RES_SCALE)
 
-    if do_fsr:
-        jet_idxs_for_fsr = (                     # find indices
-            i
-            for i in xrange(ep.nJet)
-            if (
-                i not in hJidxs  # exclude higgs jets
-                # and ep.Jet_jetId[i] > 0
-                and ep.Jet_lepFilter[i] > 0
-                and ep.Jet_puId[i] > 0
-                and ep.Jet_Pt[i] > 20
-                and abs(ep.Jet_eta[i]) < 3.0
-            )
+    # fsr
+    jet_idxs_for_fsr = (                     # find indices
+        i
+        for i in xrange(ep.nJet)
+        if (
+            i not in hJidxs  # exclude higgs jets
+            # and ep.Jet_jetId[i] > 0
+            and ep.Jet_lepFilter[i] > 0
+            and ep.Jet_puId[i] > 0
+            and ep.Jet_Pt[i] > 20
+            and abs(ep.Jet_eta[i]) < 3.0
         )
-        fsr_jet_idxs_vs = (                      # build Lorentz vectors
-            (i, mk_lv_ind(ep, i))
-            for i in jet_idxs_for_fsr
-        )
-        fsr_jet_idxs_vs = list(                  # filter for the ones close to hj's
-            (i, v)
-            for i, v in fsr_jet_idxs_vs
-            if min(v.DeltaR(v1), v.DeltaR(v2)) < 0.8
-        )
-        for _, v in fsr_jet_idxs_vs:             # add to higgs jets
-            if v.DeltaR(v1) < v.DeltaR(v2):
-                v1 += v
-            else:
-                v2 += v
-        fsr_jet_idxs = list(i for i, _ in fsr_jet_idxs_vs)
-        ep.n_fsr_jets[0] = len(fsr_jet_idxs)
-    else:
-        fsr_jet_idxs = []
+    )
+    fsr_jet_idxs_vs = (                      # build Lorentz vectors
+        (i, mk_lv_ind(ep, i))
+        for i in jet_idxs_for_fsr
+    )
+    fsr_jet_idxs_vs = list(                  # filter for the ones close to hj's
+        (i, v)
+        for i, v in fsr_jet_idxs_vs
+        if min(v.DeltaR(v1), v.DeltaR(v2)) < 0.8
+    )
+    for _, v in fsr_jet_idxs_vs:             # add to higgs jets
+        if v.DeltaR(v1) < v.DeltaR(v2):
+            v1 += v
+        else:
+            v2 += v
+    fsr_jet_idxs = list(i for i, _ in fsr_jet_idxs_vs)
+    ep.n_fsr_jets[0] = len(fsr_jet_idxs)
 
     v12 = v1 + v2
     ep.fill_pt_eta_phi_mass('hj1_reg', v1)
@@ -476,7 +493,6 @@ def apply_fit_to_event(ep, jme_res_obj, do_fsr):
         ep.hJets_pt_0_fit_fallback[0] = v1.Pt()
         ep.hJets_pt_1_fit_fallback[0] = v2.Pt()
 
-
     # generator
     if (ep.GetBranch('nGenPart')
         and ep.GenLepIndex1 > -1
@@ -512,29 +528,13 @@ def apply_fit_to_event(ep, jme_res_obj, do_fsr):
     return fitter  # needed for development
 
 
-def apply_kinfit(input_file, output_file, is_data, data_year, do_fsr=True, output_postfix=''):
-
-    # jet resolutions from jme group
-    # https://github.com/cms-jet/JRDatabase
-    # https://twiki.cern.ch/twiki/bin/view/CMS/JetResolution
-    if is_data:
-        ak4pfchs_ptres = ROOT.JME.JetResolution('aux/Spring16_25nsV6_DATA_PtResolution_AK4PFchs.txt')
-    else:
-        ak4pfchs_ptres = ROOT.JME.JetResolution('aux/Spring16_25nsV6_MC_PtResolution_AK4PFchs.txt')
-
-    # TODO add 2017 resolutions
-    # if data_year == 2016:
-    # elif data_year == 2017:
-    # else:
-    #     raise RuntimeError('data_year is not 2016 or 2017.')
-
+def prepare_io(input_file, output_file):
     if isinstance(input_file, ROOT.TChain):
         t = input_file
         of = ROOT.TFile(output_file, 'RECREATE')
     else:
         f = ROOT.TFile(input_file)
-        if f.IsZombie():
-            raise RuntimeError('input file is zombie, not running kinfit: ' + input_file)
+        assert not f.IsZombie(), 'input file is zombie, not running kinfit: ' + input_file
         f_other_objects = list((key.GetName(), f.Get(key.GetName()))
                          for key in f.GetListOfKeys()
                          if key.GetName() != 'Events')
@@ -549,9 +549,24 @@ def apply_kinfit(input_file, output_file, is_data, data_year, do_fsr=True, outpu
                 obj.Clone(name)
             obj.Write(name)
 
+    return f, t, of
+
+
+def apply_kinfit(input_file, output_file, event_proxies=None):
+
+    # jet resolutions from jme group
+    # https://github.com/cms-jet/JRDatabase
+    # https://twiki.cern.ch/twiki/bin/view/CMS/JetResolution
+
+    # TODO add 2017 resolutions
+    ak4pfchs_ptres = ROOT.JME.JetResolution('aux/Spring16_25nsV6_DATA_PtResolution_AK4PFchs.txt')
+
     # prepare new tree and new variables
+    f, t, of = prepare_io(input_file, output_file)
     ot = t.CloneTree(0)
-    ep = EventProxy(ot, output_postfix)
+    eps = event_proxies or [EventProxy()]
+    for ep in eps:
+        ep.init_output(ot, TREE_VARS)
     n_events = 0
     n_fitted = 0
 
@@ -563,23 +578,34 @@ def apply_kinfit(input_file, output_file, is_data, data_year, do_fsr=True, outpu
         if n_events % 1000 == 1:
             print 'at event %i' % n_events
 
-        ep.set_event(e)
+        for ep in eps:
+            ep.set_event(e)
         if (
             e.twoResolvedJets
             and (e.isZmm or e.isZee)
         ):
-            apply_fit_to_event(ep, ak4pfchs_ptres, do_fsr)
+            for ep in eps:
+                apply_fit_to_event(ep, ak4pfchs_ptres)
             ot.Fill()
-            ep.set_vals_to_zero()  # zero values after filling the tree
+            for ep in eps:
+                ep.set_vals_to_zero()  # zero values after filling the tree
             n_fitted += 1
         else:
-            ep.apply_fallback()
+            for ep in eps:
+                ep.apply_fallback()
             # don't run kinfit, just write
             ot.Fill()
 
     ot.Write()
     of.Close()
+    del f
     print 'started kinfit loop at', start_time
     print 'finished kinfit loop at', time.ctime()
     print 'total number of events processed:    ', n_events
     print 'number of events with kinfit applied:', n_fitted
+
+
+ep_mu_up    = EventProxy('mu_up',   'Muon_pt_corrected', lambda e: list(x*1.02 for x in e.Muon_pt_corrected))
+ep_mu_down  = EventProxy('mu_down', 'Muon_pt_corrected', lambda e: list(x*0.98 for x in e.Muon_pt_corrected))
+ep_el_up    = EventProxy('el_up',   'Electron_pt',       lambda e: list(x*1.02 for x in e.Electron_pt))
+ep_el_down  = EventProxy('el_down', 'Electron_pt',       lambda e: list(x*0.98 for x in e.Electron_pt))
