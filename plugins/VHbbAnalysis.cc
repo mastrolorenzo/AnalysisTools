@@ -2205,190 +2205,188 @@ void VHbbAnalysis::FinishEvent() {
     // Channel specific BDT inputs
     ComputeBoostedVariables();
 
-    if (m("separateMvaEval") < 0.5) {
-        std::string bdt_branch_label;
-        if(mInt("isZnn")) {
-            if(debug>10000) {
-                std::cout<<"setting up bdt inputs for isZnn"<<std::endl;
-            }
-            std::vector<std::string> bdtNames;
-            bdtNames.clear();
-
-            if(m("twoResolvedJets")){
-                thisBDTInfo = bdtInfos.find("bdt_0lep");
-                if(thisBDTInfo != bdtInfos.end()){
-                    bdtNames.push_back("bdt_0lep");
-                }
-                thisBDTInfo = bdtInfos.find("bdt_0lep_vzbb");
-                if(thisBDTInfo != bdtInfos.end()){
-                    bdtNames.push_back("bdt_0lep_vzbb");
-                }
-                thisBDTInfo = bdtInfos.find("bdt_0lep_massless");
-                if(thisBDTInfo != bdtInfos.end()){
-                    float logMjj = log(m("H_mass"));
-                    *f["H_pt_overLogM"] = m("H_pt")/logMjj;
-                    *f["hJets_leadingPt_overLogM"]    = m("hJets_leadingPt")/logMjj;
-                    *f["hJets_subleadingPt_overLogM"] = m("hJets_subleadingPt")/logMjj;
-                    bdtNames.push_back("bdt_0lep_massless");
-                }
-            }
-
-            if(*b["oneMergedJet"]){
-                thisBDTInfo = bdtInfos.find("bdt_0lep_boosted");
-                if(thisBDTInfo != bdtInfos.end()){
-                    bdtNames.push_back("bdt_0lep_boosted");
-                }
-            }
-
-            if(bdtNames.size()>0){
-                //loop through jets for best of other variables
-                *f["otherJetsBestBtag"]    = -99;
-                *f["otherJetsHighestPt"]   = -99;
-                *f["minDPhiFromOtherJets"] = 99;
-                for(int iJet=0; iJet<mInt("nJet"); iJet++){
-                    if(iJet==mInt("hJetInd1")) continue;
-                    if(iJet==mInt("hJetInd2")) continue;
-                    if(mInt("Jet_lepFilter",iJet)==0) continue;
-                    if(mInt("Jet_puId",iJet) > 0 && m("Jet_bReg",iJet)>25){
-                        if(*f["otherJetsBestBtag"]< m(taggerName,iJet)){
-                            *f["otherJetsBestBtag"]=m(taggerName,iJet);
-                        }
-                        if(*f["otherJetsHighestPt"]< m("Jet_bReg",iJet)){
-                            *f["otherJetsHighestPt"]=m("Jet_bReg",iJet);
-                        }
-                    }
-                    if(mInt("Jet_puId",iJet)>0 && m("Jet_Pt",iJet)>30){
-                        if(*f["minDPhiFromOtherJets"]>fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)))){
-                            *f["minDPhiFromOtherJets"]=fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)));
-                        }
-                    }
-                }
-
-                for(unsigned int iBDT=0; iBDT<bdtNames.size(); iBDT++){
-                    std::string bdtname(bdtNames[iBDT]);
-                    if(debug>5000) {
-                        std::cout<<"Evaluating BDT... "<<bdtNames[iBDT]<<std::endl;
-                        PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
-                        std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
-                    }
-                    bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
-                    if (cursyst->name != "nominal") {
-                        bdt_branch_label.append("_");
-                        bdt_branch_label.append(cursyst->name);
-                    }
-                    *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
-                }
-            }
-
-        } else if(mInt("isWenu") || mInt("isWmunu")) {
-            *f["nAddJet_f"] = (float) mInt("nAddJets252p9_puid");
-            *f["nAddLep_f"] = (float) mInt("nAddLeptons");
-            *f["isWenu_f"] = (float) mInt("isWenu");
-            *f["isWmunu_f"] = (float) mInt("isWmunu");
-
-            std::vector<std::string> bdtNames;
-            bdtNames.clear();
-            thisBDTInfo = bdtInfos.find("bdt_1lep");
-
-            if(m("twoResolvedJets")){
-                if(thisBDTInfo != bdtInfos.end()){
-                    bdtNames.push_back("bdt_1lep");
-                }
-                thisBDTInfo = bdtInfos.find("bdt_1lep_vzbb");
-                if(thisBDTInfo != bdtInfos.end()){
-                    bdtNames.push_back("bdt_1lep_vzbb");
-                }
-            }
-
-            if(*b["oneMergedJet"]){
-                thisBDTInfo = bdtInfos.find("bdt_1lep_boosted");
-                if(thisBDTInfo != bdtInfos.end()){
-                    bdtNames.push_back("bdt_1lep_boosted");
-                }
-            }
-
-            if(bdtNames.size()>0){
-                for(unsigned int iBDT=0; iBDT<bdtNames.size(); iBDT++){
-                    std::string bdtname(bdtNames[iBDT]);
-                    if(debug>5000) {
-                        std::cout<<"Evaluating BDT... "<<bdtNames[iBDT]<<std::endl;
-                        PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
-                        std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
-                    }
-                    bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
-                    if (cursyst->name != "nominal") {
-                        bdt_branch_label.append("_");
-                        bdt_branch_label.append(cursyst->name);
-                    }
-                    *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
-                }
-            }
-        } else if(mInt("isZee") || mInt("isZmm")) {
-
-            std::vector<std::string> bdtNames;
-            bdtNames.clear();
-            thisBDTInfo = bdtInfos.find("bdt_2lep_highPt");
-
-
-    	*f["H_mass_fit_fallback"] = m("H_mass");
-    	*f["H_pt_fit_fallback"] = m("H_pt");
-    	*f["jjVPtRatio_fit_fallback"] = m("jjVPtRatio");
-    	*f["HVdPhi_fit_fallback"] = m("HVdPhi");
-    	*f["n_recoil_jets_fit"]=-1.0;
-    	*f["H_mass_sigma_fit"]=-1.0;
-
-            if(m("twoResolvedJets")){
-                if(thisBDTInfo != bdtInfos.end()){
-                    if(m("V_pt")>=150){
-                        bdtNames.push_back("bdt_2lep_highPt");
-                    }
-                }
-                thisBDTInfo = bdtInfos.find("bdt_2lep_lowPt");
-                if(thisBDTInfo != bdtInfos.end()){
-                    if(m("V_pt")<150){
-                        bdtNames.push_back("bdt_2lep_lowPt");
-                    }
-                }
-                thisBDTInfo = bdtInfos.find("bdt_2lep_vzbb");
-                if(thisBDTInfo != bdtInfos.end()){
-                    bdtNames.push_back("bdt_2lep_vzbb");
-                }
-            }
-
-            if(*b["oneMergedJet"]){
-                thisBDTInfo = bdtInfos.find("bdt_2lep_boosted");
-                if(thisBDTInfo != bdtInfos.end()){
-                    bdtNames.push_back("bdt_2lep_boosted");
-                }
-            }
-
-            if(bdtNames.size()>0){
-                for(unsigned int iBDT=0; iBDT<bdtNames.size(); iBDT++){
-                    std::string bdtname(bdtNames[iBDT]);
-                    if(debug>5000) {
-                        std::cout<<"Evaluating BDT... "<<bdtNames[iBDT]<<std::endl;
-                        PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
-                        std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
-                    }
-                    bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
-                    if (cursyst->name != "nominal") {
-                        bdt_branch_label.append("_");
-                        bdt_branch_label.append(cursyst->name);
-                    }
-                    *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
-                }
-            }
-        } else {
-            std::cout << mInt("Vtype") << " "
-                      << mInt("isZnn") << " "
-                      << mInt("isWmunu") << " "
-                      << mInt("isWenu") << " "
-                      << mInt("isZmm") << " "
-                      << mInt("isZee") << " "
-                      << mInt("controlSample")
-                      << std::endl;
-            std::cout<<"ALL CHANNELS APPEAR TO BE FALSE"<<std::endl;
+    std::string bdt_branch_label;
+    if(mInt("isZnn")) {
+        if(debug>10000) {
+            std::cout<<"setting up bdt inputs for isZnn"<<std::endl;
         }
+        std::vector<std::string> bdtNames;
+        bdtNames.clear();
+
+        if(m("twoResolvedJets")){
+            thisBDTInfo = bdtInfos.find("bdt_0lep");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_0lep");
+            }
+            thisBDTInfo = bdtInfos.find("bdt_0lep_vzbb");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_0lep_vzbb");
+            }
+            thisBDTInfo = bdtInfos.find("bdt_0lep_massless");
+            if(thisBDTInfo != bdtInfos.end()){
+                float logMjj = log(m("H_mass"));
+                *f["H_pt_overLogM"] = m("H_pt")/logMjj;
+                *f["hJets_leadingPt_overLogM"]    = m("hJets_leadingPt")/logMjj;
+                *f["hJets_subleadingPt_overLogM"] = m("hJets_subleadingPt")/logMjj;
+                bdtNames.push_back("bdt_0lep_massless");
+            }
+        }
+
+        if(*b["oneMergedJet"]){
+            thisBDTInfo = bdtInfos.find("bdt_0lep_boosted");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_0lep_boosted");
+            }
+        }
+
+        if(bdtNames.size()>0){
+            //loop through jets for best of other variables
+            *f["otherJetsBestBtag"]    = -99;
+            *f["otherJetsHighestPt"]   = -99;
+            *f["minDPhiFromOtherJets"] = 99;
+            for(int iJet=0; iJet<mInt("nJet"); iJet++){
+                if(iJet==mInt("hJetInd1")) continue;
+                if(iJet==mInt("hJetInd2")) continue;
+                if(mInt("Jet_lepFilter",iJet)==0) continue;
+                if(mInt("Jet_puId",iJet) > 0 && m("Jet_bReg",iJet)>25){
+                    if(*f["otherJetsBestBtag"]< m(taggerName,iJet)){
+                        *f["otherJetsBestBtag"]=m(taggerName,iJet);
+                    }
+                    if(*f["otherJetsHighestPt"]< m("Jet_bReg",iJet)){
+                        *f["otherJetsHighestPt"]=m("Jet_bReg",iJet);
+                    }
+                }
+                if(mInt("Jet_puId",iJet)>0 && m("Jet_Pt",iJet)>30){
+                    if(*f["minDPhiFromOtherJets"]>fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)))){
+                        *f["minDPhiFromOtherJets"]=fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)));
+                    }
+                }
+            }
+
+            for(unsigned int iBDT=0; iBDT<bdtNames.size(); iBDT++){
+                std::string bdtname(bdtNames[iBDT]);
+                if(debug>5000) {
+                    std::cout<<"Evaluating BDT... "<<bdtNames[iBDT]<<std::endl;
+                    PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
+                    std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
+                }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
+                if (cursyst->name != "nominal") {
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
+                }
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+            }
+        }
+
+    } else if(mInt("isWenu") || mInt("isWmunu")) {
+        *f["nAddJet_f"] = (float) mInt("nAddJets252p9_puid");
+        *f["nAddLep_f"] = (float) mInt("nAddLeptons");
+        *f["isWenu_f"] = (float) mInt("isWenu");
+        *f["isWmunu_f"] = (float) mInt("isWmunu");
+
+        std::vector<std::string> bdtNames;
+        bdtNames.clear();
+        thisBDTInfo = bdtInfos.find("bdt_1lep");
+
+        if(m("twoResolvedJets")){
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_1lep");
+            }
+            thisBDTInfo = bdtInfos.find("bdt_1lep_vzbb");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_1lep_vzbb");
+            }
+        }
+
+        if(*b["oneMergedJet"]){
+            thisBDTInfo = bdtInfos.find("bdt_1lep_boosted");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_1lep_boosted");
+            }
+        }
+
+        if(bdtNames.size()>0){
+            for(unsigned int iBDT=0; iBDT<bdtNames.size(); iBDT++){
+                std::string bdtname(bdtNames[iBDT]);
+                if(debug>5000) {
+                    std::cout<<"Evaluating BDT... "<<bdtNames[iBDT]<<std::endl;
+                    PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
+                    std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
+                }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
+                if (cursyst->name != "nominal") {
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
+                }
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+            }
+        }
+    } else if(mInt("isZee") || mInt("isZmm")) {
+
+        std::vector<std::string> bdtNames;
+        bdtNames.clear();
+        thisBDTInfo = bdtInfos.find("bdt_2lep_highPt");
+
+
+	*f["H_mass_fit_fallback"] = m("H_mass");
+	*f["H_pt_fit_fallback"] = m("H_pt");
+	*f["jjVPtRatio_fit_fallback"] = m("jjVPtRatio");
+	*f["HVdPhi_fit_fallback"] = m("HVdPhi");
+	*f["n_recoil_jets_fit"]=-1.0;
+	*f["H_mass_sigma_fit"]=-1.0;
+
+        if(m("twoResolvedJets")){
+            if(thisBDTInfo != bdtInfos.end()){
+                if(m("V_pt")>=150){
+                    bdtNames.push_back("bdt_2lep_highPt");
+                }
+            }
+            thisBDTInfo = bdtInfos.find("bdt_2lep_lowPt");
+            if(thisBDTInfo != bdtInfos.end()){
+                if(m("V_pt")<150){
+                    bdtNames.push_back("bdt_2lep_lowPt");
+                }
+            }
+            thisBDTInfo = bdtInfos.find("bdt_2lep_vzbb");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_2lep_vzbb");
+            }
+        }
+
+        if(*b["oneMergedJet"]){
+            thisBDTInfo = bdtInfos.find("bdt_2lep_boosted");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_2lep_boosted");
+            }
+        }
+
+        if(bdtNames.size()>0){
+            for(unsigned int iBDT=0; iBDT<bdtNames.size(); iBDT++){
+                std::string bdtname(bdtNames[iBDT]);
+                if(debug>5000) {
+                    std::cout<<"Evaluating BDT... "<<bdtNames[iBDT]<<std::endl;
+                    PrintBDTInfoValues(bdtInfos[bdtNames[iBDT]]);
+                    std::cout<<"BDT evaluates to: "<<EvaluateMVA(bdtInfos[bdtNames[iBDT]])<<std::endl;
+                }
+                bdt_branch_label = bdtInfos[bdtNames[iBDT]]->bdtname;
+                if (cursyst->name != "nominal") {
+                    bdt_branch_label.append("_");
+                    bdt_branch_label.append(cursyst->name);
+                }
+                *f[bdt_branch_label] = EvaluateMVA(bdtInfos[bdtNames[iBDT]]);
+            }
+        }
+    } else {
+        std::cout << mInt("Vtype") << " "
+                  << mInt("isZnn") << " "
+                  << mInt("isWmunu") << " "
+                  << mInt("isWenu") << " "
+                  << mInt("isZmm") << " "
+                  << mInt("isZee") << " "
+                  << mInt("controlSample")
+                  << std::endl;
+        std::cout<<"ALL CHANNELS APPEAR TO BE FALSE"<<std::endl;
     }
 
     // FIXME For the code to be meaningful it should go far earlier.

@@ -212,22 +212,30 @@ class EventProxy(object):
     - sys_attr_getter (optional) is a function that takes the event as an argument and returns
       the systematic replacement.
     '''
-    def __init__(self, postfix='', sys_branch='', sys_attr_getter=None):
-        assert bool(sys_branch) == bool(callable(sys_attr_getter)
-            ), 'I need both, sys_branch and a callable sys_attr_getter, or none of them.'
+    def __init__(self, postfix='', sys_input_branch='', sys_attr_getter=None):
+        assert bool(sys_input_branch) == bool(callable(sys_attr_getter)
+            ), 'I need both, sys_input_branch and a callable sys_attr_getter, or none of them.'
         self.output_postfix = postfix
-        self.sys_branch = sys_branch
+        self.sys_input_branch = sys_input_branch
         self.sys_attr_getter = sys_attr_getter
         self.e = None
         self.cache = None
         self.tree_vars = set()
+        self.branches = list()
 
     def init_output(self, output_tree, tree_vars):
         postfix = '_'+self.output_postfix if self.output_postfix else ''
         self.tree_vars |= tree_vars
+        existing_branches = set(b.GetName() for b in output_tree.GetListOfBranches())
         for var in self.tree_vars:
-            setattr(self, var, numpy.zeros(1,float))
-            output_tree.Branch(var+postfix, getattr(self, var), var+postfix+'/D')
+            setattr(self, var, numpy.zeros(1, numpy.float32))
+            if var+postfix in existing_branches:
+                branch = ROOT.TBranch()
+                self.branches += [branch]
+                output_tree.SetBranchAddress(var+postfix, getattr(self, var), branch)
+            else:
+                output_tree.Branch(var+postfix, getattr(self, var), var+postfix+'/F')
+
         self.set_vals_to_zero()
 
     def set_event(self, e):
@@ -261,7 +269,7 @@ class EventProxy(object):
             self.cache = self.sys_attr_getter(self.e)
             return self.cache
 
-        if self.sys_attr_getter and args[0] == self.sys_branch:
+        if self.sys_attr_getter and args[0] == self.sys_input_branch:
             return self.cache or make_variation()
 
         return getattr(self.e, *args)
