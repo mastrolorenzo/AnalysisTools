@@ -72,7 +72,7 @@ bool VHbbAnalysis::Preselection() {
     }
 
     // stitch WJets inclusive sample to HT-binned samples
-    if (cursample->sampleNum == 40 && m("LHE_HT") > 100) return false;
+    if (cursample->sampleNum == 40 && m("LHE_HT") > 100 ) return false;
     // stitch ZJets inclusive sample to HT-binned samples
     if (cursample->sampleNum == 110 && m("LHE_HT") > 100) return false;
 
@@ -86,20 +86,22 @@ bool VHbbAnalysis::Preselection() {
             }
         }
     }
-    if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
-        if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || nGenStatus2bHad != 0) return false;
+    if(m("dataYear")==2016){
+        if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
+            if (m("LHE_Vpt") > 100) {
+                if (mInt("LHE_Nb") != 0 || nGenStatus2bHad != 0) return false;
+            }
+        } else if (cursample->sampleNum == 50) {
+            if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
+        } else if (cursample->sampleNum == 51) {
+            if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
+        } else if (cursample->sampleNum == 53) {
+            //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
+            if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
+        } else if (cursample->sampleNum == 54) {
+            //if (m("LHE_Vpt") < 200) return false;
+            if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
         }
-    } else if (cursample->sampleNum == 50) {
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
-    } else if (cursample->sampleNum == 51) {
-        if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
-    } else if (cursample->sampleNum == 53) {
-        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
-    } else if (cursample->sampleNum == 54) {
-        //if (m("LHE_Vpt") < 200) return false;
-        if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
     }
 
     //if (cursample->sampleNum == 0) {
@@ -1021,7 +1023,7 @@ bool VHbbAnalysis::Analyze() {
                     if (nJetsCloseToMET == 0 && dPhi_MET_TkMET < 0.5 && HVdPhi > 2) {
 	                if (hJet1_btag < taggerWP_M && mInt("nAddJets302p5_puid") < 2) {
                             *in["controlSample"] = 2; // Z+Light Control Sample Index
-                        } else if (hJet1_btag > taggerWP_T && mInt("nAddJets302p5_puid") < 2 && (H_mass<60 || H_mass>160)) {
+                        } else if (hJet1_btag > taggerWP_T && mInt("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
                             *in["controlSample"] = 3; // Z+bb Control Sample Index
                         }
                     }
@@ -1897,7 +1899,7 @@ void VHbbAnalysis::FinishEvent() {
 
     // stitch together W b-enriched samples with HT-binned samples in order to maximize statistical power
     float WJetStitchWeight = 1.0;
-    if ( (cursample->sampleNum>=40 && cursample->sampleNum<=47) || (cursample->sampleNum>=50 && cursample->sampleNum<=54) ) {
+    if ( m("dataYear")==2016 && ((cursample->sampleNum>=40 && cursample->sampleNum<=47) || (cursample->sampleNum>=50 && cursample->sampleNum<=54)) ) {
         if (m("LHE_HT")>100 && m("LHE_HT")<200) {
             if (m("LHE_Vpt") > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
                 if (cursample->sampleNum == 50) {

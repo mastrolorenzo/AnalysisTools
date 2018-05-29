@@ -95,7 +95,7 @@ the_samples_dict = {
     'W_b_HT1200To2500':              [4601,   SF_w1b,       'W+b',              ['WJets-HT1200To2500']],
     'W_bb_HT1200To2500':             [4602,   SF_w2b,       'W+bb',             ['WJets-HT1200To2500']],
     'W_udcsg_HT2500ToInf':           [4700,   SF_w0b,     'W+udcsg',          ['WJets-HT2500ToInf']],
-    'W_b_HT2500ToInf':               [4701   SF_w1b,       'W+b',              ['WJets-HT2500ToInf']],
+    'W_b_HT2500ToInf':               [4701,   SF_w1b,       'W+b',              ['WJets-HT2500ToInf']],
     'W_bb_HT2500ToInf':              [4702,   SF_w2b,       'W+bb',             ['WJets-HT2500ToInf']],
     'W_udcsg_b100to200':           [5000,   SF_w0b,     'W+udcsg',          ['WBJets-Pt100To200']],
     'W_b_b100to200':               [5001,   SF_w1b,       'W+b',              ['WBJets-Pt100To200']],
