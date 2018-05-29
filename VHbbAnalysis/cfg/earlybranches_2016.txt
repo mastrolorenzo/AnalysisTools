@@ -142,6 +142,10 @@ type=2  name=MET_pt_jesRelativeStatECUp   onlyMC=1 dropBranch=1
 type=2  name=MET_pt_jesRelativeStatECDown onlyMC=1 dropBranch=1
 type=2  name=MET_phi_jesRelativeStatECUp   onlyMC=1 dropBranch=1
 type=2  name=MET_phi_jesRelativeStatECDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeStatHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeStatHFDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeStatHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeStatHFDown onlyMC=1 dropBranch=1
 type=2  name=MET_pt_jesPileUpDataMCUp   onlyMC=1 dropBranch=1
 type=2  name=MET_pt_jesPileUpDataMCDown onlyMC=1 dropBranch=1
 type=2  name=MET_phi_jesPileUpDataMCUp   onlyMC=1 dropBranch=1
@@ -270,8 +274,10 @@ type=8  name=Jet_mass_jesRelativeStatFSRUp        max=100   lengthBranch=nJet on
 type=8  name=Jet_mass_jesRelativeStatFSRDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesRelativeStatECUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesRelativeStatECDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
-##type=8  name=Jet_pt_jesRelativeStatHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
-##type=8  name=Jet_pt_jesRelativeStatHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeStatHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeStatHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeStatHFUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeStatHFDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesPileUpDataMCUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesPileUpDataMCDown        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesPileUpPtRefUp        max=100   lengthBranch=nJet onlyMC=1 dropBranch=1

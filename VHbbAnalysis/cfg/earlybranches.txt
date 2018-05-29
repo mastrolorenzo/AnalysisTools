@@ -150,6 +150,10 @@ type=2  name=MET_pt_jesRelativeStatECUp   onlyMC=1 dropBranch=1
 type=2  name=MET_pt_jesRelativeStatECDown onlyMC=1 dropBranch=1
 type=2  name=MET_phi_jesRelativeStatECUp   onlyMC=1 dropBranch=1
 type=2  name=MET_phi_jesRelativeStatECDown onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeStatHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_pt_jesRelativeStatHFDown onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeStatHFUp   onlyMC=1 dropBranch=1
+type=2  name=MET_phi_jesRelativeStatHFDown onlyMC=1 dropBranch=1
 type=2  name=MET_pt_jesPileUpDataMCUp   onlyMC=1 dropBranch=1
 type=2  name=MET_pt_jesPileUpDataMCDown onlyMC=1 dropBranch=1
 type=2  name=MET_phi_jesPileUpDataMCUp   onlyMC=1 dropBranch=1
@@ -273,14 +277,16 @@ type=8  name=Jet_pt_jesRelativeStatFSRUp        max=250   lengthBranch=nJet only
 type=8  name=Jet_pt_jesRelativeStatFSRDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesRelativeStatECUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesRelativeStatECDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeStatHFUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_jesRelativeStatHFDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesRelativeFSRUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesRelativeFSRDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesRelativeStatFSRUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesRelativeStatFSRDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesRelativeStatECUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesRelativeStatECDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
-##type=8  name=Jet_pt_jesRelativeStatHFUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
-##type=8  name=Jet_pt_jesRelativeStatHFDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeStatHFUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_pt_jesRelativeStatHFDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesPileUpDataMCUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesPileUpDataMCDown        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesPileUpPtRefUp        max=250   lengthBranch=nJet onlyMC=1 dropBranch=1
