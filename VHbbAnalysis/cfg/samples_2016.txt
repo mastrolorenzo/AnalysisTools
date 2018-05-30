@@ -79,7 +79,7 @@ name=WZ                               dir=WZ_TuneCUETP8M1_13TeV-pythia8/        
 #name=WZ_fil                           dir=WZToLNu2QorQQ2L_aTGC_13TeV-madgraph-pythia8/                                             type=31   xsec=16.305  doJetFlavorSplit=1
 name=WZ_fil                           dir=WZTo1L1Nu2Q_13TeV_amcatnloFXFX_madspin_pythia8/                                          type=32   xsec=10.71   doJetFlavorSplit=1
 name=WW                               dir=WW_TuneCUETP8M1_13TeV-pythia8/                                                           type=33  xsec=113.898 doJetFlavorSplit=1
-#name=WW_fil                           dir=WWTo1L1Nu2Q_13TeV_amcatnloFXFX_madspin_pythia8/                                          type=34   xsec=49.997  doJetFlavorSplit=1
+name=WW_fil                           dir=WWTo1L1Nu2Q_13TeV_amcatnloFXFX_madspin_pythia8/                                          type=34   xsec=49.997  doJetFlavorSplit=1
 name=ZZ                               dir=ZZ_TuneCUETP8M1_13TeV-pythia8/                                                           type=35  xsec=16.523  doJetFlavorSplit=1
 name=ZZTo2L2Q                         dir=ZZTo2L2Q_13TeV_amcatnloFXFX_madspin_pythia8/                                             type=36   xsec=3.22    doJetFlavorSplit=1
 name=ZZTo2Q2Nu                        dir=ZZTo2Q2Nu_13TeV_amcatnloFXFX_madspin_pythia8/                                             type=37   xsec=4.033   doJetFlavorSplit=1
@@ -91,21 +91,20 @@ name=ZZTo2Q2Nu                        dir=ZZTo2Q2Nu_13TeV_amcatnloFXFX_madspin_p
 
 
 #QCD:1-10
-##name=QCD_HT100to200                   dir=QCD_HT100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                      type=1  xsec=2.785e7
-#name=QCD_HT200to300                   dir=QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                      type=2  xsec=1.717e6
-##name=QCD_HT300to500                   dir=QCD_HT300to500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                      type=3  xsec=3.513e5
-#name=QCD_HT300to500                   dir=QCD_HT300to500_GenJets5_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/             type=3  xsec=3.513e5
-#name=QCD_HT500to700                   dir=QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                      type=4  xsec=3.163e4
-#name=QCD_HT700to1000                  dir=QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                     type=5  xsec=6.802e3
-#name=QCD_HT1000to1500                 dir=QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                    type=6  xsec=1.206e3
-#name=QCD_HT1500to2000                 dir=QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                    type=7  xsec=120.4
-#name=QCD_HT2000toInf                  dir=QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                     type=8  xsec=25.24
+name=QCD_HT100to200                   dir=QCD_HT100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                      type=1  xsec=2.785e7
+name=QCD_HT200to300                   dir=QCD_HT200to300_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                      type=2  xsec=1.717e6
+name=QCD_HT300to500                   dir=QCD_HT300to500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                      type=3  xsec=3.513e5
+name=QCD_HT500to700                   dir=QCD_HT500to700_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                      type=4  xsec=3.163e4
+name=QCD_HT700to1000                  dir=QCD_HT700to1000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                     type=5  xsec=6.802e3
+name=QCD_HT1000to1500                 dir=QCD_HT1000to1500_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                    type=6  xsec=1.206e3
+name=QCD_HT1500to2000                 dir=QCD_HT1500to2000_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                    type=7  xsec=120.4
+name=QCD_HT2000toInf                  dir=QCD_HT2000toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                     type=8  xsec=25.24
 
 #Drell-Yan: 100 - 149 reserved
 name=DYJets_1J                         dir=DY1JetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/               type=100  xsec=725                            doJetFlavorSplit=1
 name=DYJets_2J                         dir=DY2JetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/               type=101  xsec=394.5                          doJetFlavorSplit=1
 name=DYJets_3J                         dir=DY3JetsToLL_M-10to50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/               type=102  xsec=96.47                          doJetFlavorSplit=1
-#name=DYToLL_madgraph                   dir=DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                    type=110  xsec=5765.4                         doJetFlavorSplit=1
+name=DYToLL_madgraph                   dir=DYJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/                    type=110  xsec=5765.4                         doJetFlavorSplit=1
 name=DYToLL_HT100to200                 dir=DYJetsToLL_M-50_HT-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/        type=111  xsec=147.40       kfac=1.23         doJetFlavorSplit=1
 name=DYToLL_HT200to400                 dir=DYJetsToLL_M-50_HT-200to400_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/        type=112  xsec=40.99        kfac=1.23         doJetFlavorSplit=1
 name=DYToLL_HT400to600                 dir=DYJetsToLL_M-50_HT-400to600_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/        type=113  xsec=5.678        kfac=1.23         doJetFlavorSplit=1
@@ -116,7 +115,6 @@ name=DYToLL_HT2500toInf                dir=DYJetsToLL_M-50_HT-2500toInf_TuneCUET
 #name=DYBJets                           dir=DYBJetsToLL_M-50_TuneCUETP8M1_13TeV-madgraphMLM-pythia8                    type=120  xsec=71.77        kfac=1.23         doJetFlavorSplit=1
 name=DYBJets-Pt100To200                dir=DYBJetsToLL_M-50_Zpt-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/      type=121 xsec=3.027        kfac=1.23         doJetFlavorSplit=1
 name=DYBJets-Pt200ToInf                dir=DYBJetsToLL_M-50_Zpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8/      type=122 xsec=0.297        kfac=1.23         doJetFlavorSplit=1
-#name=DYToLL                            dir=                                                                            type=123  xsec=6025.2 doJetFlavorSplit=1
 
 ###Zto nunu: 150 to 199 reserved:
 ##name=DYJetsToNuNu_PtZ-50To100_amcatnlo     dir=DYJetsToNuNu_PtZ-50To100_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8   type=160     xsec=237.2
