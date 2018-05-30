@@ -193,7 +193,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         am.SetupBranch(bdtvar.localVarName, 2, -1, 0, "early")
                     else:
                         am.SetupNewBranch(bdtvar.localVarName, 2)
-
+                
                 # create new branches for all inputs
                 iBDTvar=0
                 for bdtvar in bdtInfo.bdtVars:
@@ -484,6 +484,8 @@ def SetupBDT(lines):
     xmlFile = ""
     inputNames = []
     localVarNames = []
+    mvaType = "BDT"
+                  
     vars = {}
 
     for line in lines:
@@ -504,6 +506,9 @@ def SetupBDT(lines):
             #    method=value.replace('@', ' ')
             #    print "method set to %s" % method
             #    break
+            if name.find("mvaType") is 0:
+                mvaType=value
+                break
             if name.find("xmlFile") is 0:
                 xmlFile=value
                 break
@@ -519,7 +524,7 @@ def SetupBDT(lines):
                 if (int(value) == 1): isExisting = True
         vars[order] = (inputName,localVarName,isExisting,isSpec)
 
-    bdt = ROOT.BDTInfo(methodName, bdtname, xmlFile)
+    bdt = ROOT.BDTInfo(methodName, bdtname, xmlFile, mvaType)
 
     keys = vars.keys()
     keys.sort()

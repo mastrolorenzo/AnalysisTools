@@ -11,11 +11,11 @@ public:
   std::string bdtname;
   std::string methodName;
   std::vector<BDTVariable> bdtVars;
-  //std::string method;
   std::string xmlFile;
   TMVA::Reader *reader;
+  std::string mvaType;
 
-  BDTInfo(std::string, std::string, std::string);
+  BDTInfo(std::string, std::string, std::string, std::string="BDT");
   BDTInfo(BDTInfo&);
   BDTInfo();
   void AddVariable(std::string, std::string, bool, bool);

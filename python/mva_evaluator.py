@@ -1,9 +1,11 @@
 from kinfitter import EventProxy, prepare_io, lep_sys_names
+import TensorflowEvaluator
 import ctypes
 import time
 import ROOT
 
 
+VERBOSE = False
 SYS_VARS = (
     'H_mass',
     'H_pt',
@@ -72,25 +74,43 @@ def make_sys_event_proxies(am):
 
 def prep_bdt_variables(bdt_info):
     bdt_info = ROOT.BDTInfo(bdt_info)  # copy bdt info instances => fresh TMVA reader
-    raw_vars = {}
-    for bdtvar in bdt_info.bdtVars:
+
+    def mk_raw_vars(bdtvar):
         raw_var = ctypes.c_float()
-        raw_vars[bdtvar.localVarName] = raw_var
         if bdtvar.isSpec:
             bdt_info.reader.AddSpectator(bdtvar.varName, raw_var)
         else:
             bdt_info.reader.AddVariable(bdtvar.varName, raw_var)
-    bdt_info.raw_vars = raw_vars  # just monkey patch the variables for filling later
-    bdt_info.BookMVA()
+        return bdtvar.localVarName, raw_var
+
+    bdt_info.raw_vars = tuple(  # just monkey patch the variables for filling later (it's a tuple of tuples)
+        mk_raw_vars(bdtvar)
+        for bdtvar in bdt_info.bdtVars
+    )
+
+    if bdt_info.mvaType == "BDT":
+        bdt_info.BookMVA()
+    elif bdt_info.mvaType == "DNN":
+        tokens = str(bdt_info.xmlFile).split(':')
+        assert len(tokens)==3, 'for DNN, I need bdt_info.xmlFile to be in the form "cfg:scaler_dump:chpt" (separated by colons)'
+        cfg, scaler_dump, chpt = tokens
+        bdt_info.tf_evaluator = TensorflowEvaluator.TensorflowEvaluator(
+            cfg, scaler_dump, chpt, n_features=len(bdt_info.raw_vars), verbose=VERBOSE)
+    else:
+        raise RuntimeError("I don't know mvaType %s. Just BDT and DNN." % bdt_info.mvaType)
     return bdt_info
 
 
-def evaluate_bdt(ep, bdt_infos):
+def evaluate_discriminator(ep, bdt_infos):
     for bdt_info in bdt_infos:
-        for varname, raw_var in bdt_info.raw_vars.iteritems():
-            raw_var.value = getattr(ep, varname)
+        if bdt_info.mvaType == "BDT":
+            for varname, raw_var in bdt_info.raw_vars:
+                raw_var.value = getattr(ep, varname)
+            getattr(ep, bdt_info.bdtname)[0] = bdt_info.reader.EvaluateMVA(bdt_info.methodName)
 
-        getattr(ep, bdt_info.bdtname)[0] = bdt_info.reader.EvaluateMVA(bdt_info.methodName)
+        else:
+            raw_vars = tuple(getattr(ep, varname) for varname, _ in bdt_info.raw_vars)
+            getattr(ep, bdt_info.bdtname)[0] = bdt_info.tf_evaluator.EvaluateDNN(raw_vars)
 
 
 def apply_mva_eval(input_file, output_file, am):
@@ -118,7 +138,7 @@ def apply_mva_eval(input_file, output_file, am):
 
         for ep in eps:
             ep.set_event(e)
-            evaluate_bdt(ep, bdt_infos)
+            evaluate_discriminator(ep, bdt_infos)
         ot.Fill()
 
     ot.Write()

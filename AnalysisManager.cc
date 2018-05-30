@@ -781,7 +781,9 @@ void AnalysisManager::SetupBDT(BDTInfo* bdtInfo) {
 
     std::cout<<"booking MVA for bdt with name...  "<<bdtInfo->bdtname<<std::endl;
     //bdtInfo->reader->BookMVA(bdtInfo->bdtmethod, bdtInfo->xmlFile);
-    bdtInfo->BookMVA();
+    if (bdtInfo->mvaType == "BDT") {
+        bdtInfo->BookMVA();
+    }
 }
 
 void AnalysisManager::InitializeBDTVariables(BDTInfo* bdtInfo){
@@ -808,8 +810,11 @@ void AnalysisManager::SetBDTVariables(BDTInfo* bdtInfo){
 }
 
 float AnalysisManager::EvaluateMVA(BDTInfo* bdtInfo){
-    SetBDTVariables(bdtInfo);
-    return bdtInfo->reader->EvaluateMVA(bdtInfo->methodName);
+    if (bdtInfo->mvaType == "BDT") {
+        SetBDTVariables(bdtInfo);
+        return bdtInfo->reader->EvaluateMVA(bdtInfo->methodName);
+    }
+    return -99.;
 }
 
 float AnalysisManager::EvaluateRegression(BDTInfo* bdtInfo){

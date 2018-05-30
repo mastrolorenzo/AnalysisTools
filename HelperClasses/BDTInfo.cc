@@ -1,6 +1,7 @@
 #include "BDTInfo.h"
 
-BDTInfo::BDTInfo(std::string _methodName, std::string _bdtname, std::string _xmlFile) {
+BDTInfo::BDTInfo(std::string _methodName, std::string _bdtname, std::string _xmlFile, std::string _mvaType) {
+    mvaType = _mvaType;
     bdtname = _bdtname;
     methodName = _methodName;
     bdtVars = std::vector<BDTVariable>();
@@ -10,7 +11,9 @@ BDTInfo::BDTInfo(std::string _methodName, std::string _bdtname, std::string _xml
     reader->SetVerbose(kTRUE);
 }
 
+
 BDTInfo::BDTInfo(BDTInfo& _bdtInfo) {
+    mvaType = _bdtInfo.mvaType;
     bdtname = _bdtInfo.bdtname;
     methodName = _bdtInfo.methodName;
     bdtVars = std::vector<BDTVariable>();

@@ -1,0 +1,21 @@
+# isSpec 1 -> Spectator variable
+# isSpec 0 -> Variable used in BDT training
+
+mvaType=DNN
+bdtname=CMS_vhbb_DNN_Znn_HighPT_13TeV
+#modelFile=lionk/to/dnn/model ?
+
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_H_mass                                   lname=H_mass                 isEx=1 isSpec=0 order=1
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_H_pt                                     lname=H_pt                   isEx=1 isSpec=0 order=2
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_HVdPhi                                   lname=HVdPhi                 isEx=0 isSpec=0 order=3
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_V_pt                                     lname=V_pt                   isEx=1 isSpec=0 order=4
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_HJ1_HJ2_dEta                             lname=HJ1_HJ2_dEta           isEx=0 isSpec=0 order=5
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_hJets_btagged_0                          lname=hJets_btagged_0        isEx=0 isSpec=0 order=6
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_hJets_btagged_1                          lname=hJets_btagged_1        isEx=0 isSpec=0 order=7
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_SA5                                      lname=SA5                    isEx=1 isSpec=0 order=8
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_HJ1_HJ2_dPhi                             lname=HJ1_HJ2_dPhi           isEx=0 isSpec=0 order=9
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_hJets_leadingPt                          lname=hJets_leadingPt        isEx=0 isSpec=0 order=10
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_hJets_subleadingPt                       lname=hJets_subleadingPt     isEx=0 isSpec=0 order=11
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_otherJetsBestBtag                        lname=otherJetsBestBtag      isEx=0 isSpec=0 order=12
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_otherJetsHighestPt                       lname=otherJetsHighestPt     isEx=0 isSpec=0 order=13
+name=bdtInput_CMS_vhbb_BDT_Znn_13TeV_minDPhiFromOtherJets                     lname=minDPhiFromOtherJets   isEx=0 isSpec=0 order=14
