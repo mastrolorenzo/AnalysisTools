@@ -29,6 +29,7 @@ if args.odir=="":
     args.odir = args.dir
 
 filesToResubmit = []
+missingFiles = []
 
 rootFiles = {}
 for subdir, dirs, files in os.walk(args.odir):
@@ -75,9 +76,16 @@ for subdir, dirs, files in os.walk(args.dir):
                 elif args.missing:
                     print "root output does not exist",rootfilename
                     filesToResubmit.append(os.path.join(subdir, file) )
+                    missingFiles.append(rootfilename)
                 continue
-
-        if (".log" in file and args.fromMultiJobPerCluster):
+       # if (".submit" in file and args.fromMultiJobPerCluster):
+       #     if "RE" in file:
+       #        os.system("rm %s/%s"%(subdir,file,subdir,file))
+       #        continue
+       #     os.system("cp %s/%s %s/RE%s"%(subdir,file,subdir,file))
+       #     os.system("sed -i 's/(ProcId)./(ProcId)RE./g' %s/RE%s"%(subdir, file))
+       #     print 'copy'
+        if (".log" in file and args.fromMultiJobPerCluster and not 'RE' in file):
             dirpaths = subdir.split('/')
             sample = dirpaths[len(dirpaths)-1]
             jobNum=file.replace(".log","").replace("job","")
@@ -90,6 +98,7 @@ for subdir, dirs, files in os.walk(args.dir):
                 elif args.missing:
                     print "root output does not exist",rootfilename
                     filesToResubmit.append(os.path.join(subdir, file) )
+                    missingFiles.append(rootfilename)
                 continue
 
             if args.empty:
@@ -111,6 +120,25 @@ for subdir, dirs, files in os.walk(args.dir):
                         print("eosrm %s" % os.path.join(args.odir,sample, rootfilename))
                         os.system("eos root://cmseos.fnal.gov rm %s" % os.path.join(args.odir,sample, rootfilename))
                     filesToResubmit.append(os.path.join(subdir, file) )
+                    missingFiles.append(rootfilename)
+    dirpaths = subdir.split('/')
+    sample=dirpaths[len(dirpaths)-1]
+    if len(dirpaths) > 1 and not 'HelperClasses' in sample and not 'cfg' in sample and not 'aux' in subdir and not 'plugins' in sample and not args.check and args.fromMultiJobPerCluster:
+        try :
+            os.remove("%s/REjob%s.submit"%(subdir,sample))
+        except OSError: 
+            pass
+        with open('%s/job%s.submit'%(subdir,sample)) as oldfile, open('%s/REjob%s.submit'%(subdir,sample),'w') as newfile:
+            for line in oldfile:
+                if not ('.root') in line:
+                    newfile.write(line)
+                else:
+                    for missing in missingFiles:
+                        if missing in line:
+                            newfile.write(line)
+        os.system("sed -i 's/(ProcId)./(ProcId)RE./g' %s/REjob%s.submit"%(subdir, sample))
+
+          
 
 print "resubmitting %i failed jobs" % len(filesToResubmit)
 for failed_file in filesToResubmit:
