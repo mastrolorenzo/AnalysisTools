@@ -9,6 +9,8 @@ type=8  name=Jet_pt           max=250     lengthBranch=nJet
 type=8  name=Jet_Pt           max=250     lengthBranch=nJet
 type=8  name=Jet_bReg         max=250     lengthBranch=nJet
 type=8  name=Jet_PtReg        max=250     lengthBranch=nJet
+type=8  name=Jet_PtRegUp        max=250     lengthBranch=nJet
+type=8  name=Jet_PtRegDown        max=250     lengthBranch=nJet
 type=2  name=LHE_HT           onlyMC=1    allowMissingBranch=1
 type=5  name=LHE_Nb           onlyMC=1    allowMissingBranch=1
 type=2  name=LHE_Vpt          onlyMC=1    allowMissingBranch=1
