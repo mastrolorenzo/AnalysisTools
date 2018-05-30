@@ -2587,12 +2587,10 @@ void VHbbAnalysis::FinishEvent() {
         *f["recoWReWeight"] = 1.0;
         *f["recoWReWeightUp"] = 1.0;
         *f["recoWReWeightDown"] = 1.0;
-        if (m("dataYear") == 2016) {
-            *f["recoWReWeight"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), 0);
-            *f["recoWReWeightUp"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), 1);
-            *f["recoWReWeightDown"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), -1);
-            *f["weight"] = m("weight") * m("recoWReWeight");
-        }
+        *f["recoWReWeight"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), 0);
+        *f["recoWReWeightUp"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), 1);
+        *f["recoWReWeightDown"] = getVPtCorrFactor(m("V_pt"), m("sampleIndex"), -1);
+        *f["weight"] = m("weight") * m("recoWReWeight");
 
         // Add NLO to LO W+jet re-weighting from Z(ll)H(bb)
         // FIXME need a flag for LO vs NLO
@@ -4074,46 +4072,91 @@ float VHbbAnalysis::getVPtCorrFactor(float V_pt, int sn, int sysVar) {
     // sysVar: -1 for down, 0 nominal, 1 up
     float yint = 1.0;
     float slope = 0.0;
-    if (sn==120 || sn==50 || sn==51 || sn==52) {
+    if (cursample->sampleName.find("TT_")!=std::string::npos) {
         // ttbar
-        yint = 1.064;
-        if (sysVar==0) {
-            // nominal
-            slope = -0.000380;
+        if (m("dataYear") == 2016) {
+            yint = 1.064;
+            if (sysVar==0) {
+                // nominal
+                slope = -0.000380;
+            }
+            else if (sysVar==1) {
+                slope = -0.000469;
+            }
+            else if (sysVar==-1) {
+                slope = -0.000291;
+            }
         }
-        else if (sysVar==1) {
-            slope = -0.000469;
-        }
-        else if (sysVar==-1) {
-            slope = -0.000291;
+        else if (m("dataYear") == 2017) {
+            yint = 1.103;
+            if (sysVar==0) {
+                // nominal
+                slope = -6.05429e-04;
+            }
+            else if (sysVar==1) {
+                slope = -6.05429e-04 - 8.01886e-05;
+            }
+            else if (sysVar==-1) {
+                slope = -6.05429e-04 + 8.01886e-05;
+            }
         }
     }
-    else if (sn==2200 || sn==4100 || sn==4200 || sn==4300 || sn==4400 || sn==4500 || sn==4600 || sn==4700 || sn==4800 || sn==4900 || sn==48100 || sn==49100) {
+    else if ((mInt("isWmunu")==1||mInt("isWenu")==1)&&cursample->sampleNum%100==0&&(cursample->sampleName.find("WJets-HT")!=std::string::npos || cursample->sampleName.find("WJets_madgraph")!=std::string::npos || cursample->sampleName.find("WBJets_")!=std::string::npos || cursample->sampleName.find("WJets_BGenFilter")!=std::string::npos)){
         // W+LF
-        yint = 1.097;
-        if (sysVar==0) {
-            // nominal
-            slope = -0.000575;
+        if (m("dataYear") == 2016) {
+            yint = 1.097;
+            if (sysVar==0) {
+                // nominal
+                slope = -0.000575;
+            }
+            else if (sysVar==1) {
+                slope = -0.000621;
+            }
+            else if (sysVar==-1) {
+                slope = -0.000529;
+            }
         }
-        else if (sysVar==1) {
-            slope = -0.000621;
-        }
-        else if (sysVar==-1) {
-            slope = -0.000529;
+        else if (m("dataYear") == 2017) {
+            yint = 1.115;
+            if (sysVar==0) {
+                // nominal
+                slope = -6.36789e-04;
+            }
+            else if (sysVar==1) {
+                slope = -6.36789e-04 - 3.87586e-05;
+            }
+            else if (sysVar==-1) {
+                slope = -6.36789e-04 + 3.87586e-05;
+            }
         }
     }
-    else if (sn==2201 || sn==4101 || sn==4201 || sn==4301 || sn==4401 || sn==4501 || sn==4601 || sn==4701 || sn==4801 || sn==4901 || sn==48101 || sn==49101 || sn==2202 || sn==4102 || sn==4202 || sn==4302 || sn==4402 || sn==4502 || sn==4602 || sn==4702 || sn==4802 || sn==4902 || sn==48102 || sn==49102 || sn==16 || sn==17 || sn==20 || sn==21 || sn==18) {
+    else if ((mInt("isWmunu")==1||mInt("isWenu")==1)&&(cursample->sampleNum%100==1||cursample->sampleNum%100==2)&&(cursample->sampleName.find("WJets-HT")!=std::string::npos || cursample->sampleName.find("WJets_madgraph")!=std::string::npos || cursample->sampleName.find("WBJets_")!=std::string::npos || cursample->sampleName.find("WJets_BGenFilter")!=std::string::npos || (cursample->sampleNum>=16&&cursample->sampleNum<=21))){
         // W+HF + single top
-        yint = 1.259;
-        if (sysVar==0) {
-            // nominal
-            slope = -0.00167;
+        if (m("dataYear") == 2016) {
+            yint = 1.259;
+            if (sysVar==0) {
+                // nominal
+                slope = -0.00167;
+            }
+            else if (sysVar==1) {
+                slope = -0.00180;
+            }
+            else if (sysVar==-1) {
+                slope = -0.00154;
+            }
         }
-        else if (sysVar==1) {
-            slope = -0.00180;
-        }
-        else if (sysVar==-1) {
-            slope = -0.00154;
+        if (m("dataYear") == 2017) {
+            yint = 1.337;
+            if (sysVar==0) {
+                // nominal
+                slope = -1.56131e-03;
+            }
+            else if (sysVar==1) {
+                slope = -1.56131e-03 - 1.45980e-04;
+            }
+            else if (sysVar==-1) {
+                slope = -1.56131e-03 + 1.45980e-04;
+            }
         }
     }
     return (yint + V_pt*slope);
