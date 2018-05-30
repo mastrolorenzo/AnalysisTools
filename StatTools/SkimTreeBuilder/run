@@ -3,12 +3,13 @@ import os
 import time
 import sys
 
+from tqdm import tqdm
+
 from utils import SkimTreeBuilder
 
 
 def parse_command_line(argv):
-    """Parse the command line for the configuration file.
-    """
+    """Parse the command line for the configuration file."""
     if argv is None:
         argv = sys.argv
     if len(argv) < 2:
@@ -24,14 +25,15 @@ def parse_command_line(argv):
 
 
 def main(argv=None):
-    sys.dont_write_bytecode=True
+    sys.dont_write_bytecode = True
     config = parse_command_line(argv)
     skim_tree_builder = SkimTreeBuilder(config.input_pattern, config.destination)
-    for input_token in config.input_tokens:
+    for name, args in tqdm(config.samples.items()):
+        scale_factor, input_tokens = args
         start = time.time()
-        skim_tree_builder.run(input_token, config.additional_branches)
+        skim_tree_builder.run(name, input_tokens, config.keep_branches, config.new_branches, scale_factor)
         end = time.time()
-        print 'Finished building skimmed tree for {0} in {1:.2f}s'.format(input_token, end - start)
+        tqdm.write('Finished building skimmed tree for {0} in {1:.2f}s'.format(name, end - start))
 
 
 if __name__ == '__main__':

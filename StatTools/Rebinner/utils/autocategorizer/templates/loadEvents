@@ -1,0 +1,76 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include "TFile.h"
+#include "TTree.h"
+
+#include "Event.h"
+
+
+////////////////////////////////////////////////////////////////////////////////
+/// Load events for the autocategorizer.
+
+void {{ funcname }}(std::vector<Event*>& events, std::vector<std::string>& features, const char* src, const char* treename) {
+  TFile* f = TFile::Open(src);
+  TTree* tree = (TTree*) f->Get(treename);
+
+  std::cout << "  /// Loading training events from " << src << std::endl;
+
+  Int_t bin;
+  {% if aliases['bin'] is defined %}
+  tree->SetBranchAddress("{{ aliases['bin'] }}", &bin);
+  {% else %}
+  tree->SetBranchAddress("bin", &bin);
+  {% endif%}
+
+  Int_t is_signal;
+  {% if aliases['is_signal'] is defined %}
+  tree->SetBranchAddress("{{ aliases['is_signal'] }}", &is_signal);
+  {% else %}
+  tree->SetBranchAddress("is_signal", &is_signal);
+  {% endif%}
+
+  Float_t weight;
+  {% if aliases['weight'] is defined %}
+  tree->SetBranchAddress("{{ aliases['weight'] }}", &weight);
+  {% else %}
+  tree->SetBranchAddress("weight", &weight);
+  {% endif%}
+
+  {% for bname, btype in branchtypes.iteritems() %}
+  {{ btype }} {{ bname|upper }} = -999;
+  tree->SetBranchAddress("{{ bname }}", &{{ bname|upper }});
+  {% endfor %}
+
+  for (Long64_t i = 0; i < tree->GetEntries(); i++) {
+
+    tree->GetEntry(i);
+
+    if (weight > -5) {
+      Event* event = new Event();
+      event->id = i;
+      event->bin = bin;
+      event->trueValue = is_signal;
+      event->weight = weight;
+
+      // Fill the feature vector, reserving the first element for the target.
+      event->data = std::vector<double>();
+      event->data.push_back(0);
+      {% for bname in branchtypes %}
+      event->data.push_back({{ bname|upper }});
+      {% endfor %}
+
+      // Load the event into the vector of training events.
+      events.push_back(event);
+    }
+
+    // Reset the feature branch addresses to the default value.
+    {% for bname in branchtypes %}
+    {{ bname|upper }} = -999;
+    {% endfor %}
+  }
+
+  delete f;
+}
+

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+pip install --user cms_figure
+pip install --user uproot
+pip install --user wurlitzer
+
+pushd utils/autocategorizer
+git clone https://github.com/acarnes/bdt.git
+pushd bdt
+git checkout binned_categorizer
+popd
+make
+popd
+
