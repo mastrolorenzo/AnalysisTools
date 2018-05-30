@@ -84,24 +84,20 @@ TREE_VARS = {
 # https://github.com/cvernier/HH4b2016/blob/master/HbbHbb_Component_KinFit.cc
 def ErrpT_Signal(pT, eta):
     if abs(eta)<1.4:
-        if pT<40: pT=40
-        if pT>550: pT=550
+        pT = 40 if pT<40 else 550 if pT > 550 else pT
         sigmapT = 22.26 - 0.01*pT + 0.00018*pT*pT
     else:
-        if pT<40: pT=40
-        if pT>350: pT=350
+        pT = 40 if pT<40 else 350 if pT > 350 else pT
         sigmapT = 17.11 + 0.058 * pT
     return sigmapT*sigmapT
 
 def ErrEta_Signal(pT):
-    if pT<40: pT=40
-    if pT>500: pT=500
+    pT = 40 if pT<40 else 500 if pT > 500 else pT
     sigmaEta = 0.033 + (4.1/pT) + (-0.17/pow(pT,0.5))
     return sigmaEta*sigmaEta
 
 def ErrPhi_Signal(pT):
-    if pT<40: pT=40
-    if pT>500: pT=500
+    pT = 40 if pT<40 else 500 if pT > 500 else pT
     sigmaPhi = 0.038 + (4.1/pT) + (-0.19/pow(pT,0.5))
     return sigmaPhi*sigmaPhi
 
@@ -208,18 +204,14 @@ class EventProxy(object):
     '''
     Arguments:
     - postfix is added as to the name of all output branches
-    - sys_branch (optional) is the name of the branch that should be replaced
-    - sys_attr_getter (optional) is a function that takes the event as an argument and returns
-      the systematic replacement.
+    - sys_attr_getters (optional) is a dictionary {branchname => function} where the function takes
+      the event as an argument and returns the systematic replacement.
     '''
-    def __init__(self, postfix='', sys_input_branch='', sys_attr_getter=None):
-        assert bool(sys_input_branch) == bool(callable(sys_attr_getter)
-            ), 'I need both, sys_input_branch and a callable sys_attr_getter, or none of them.'
+    def __init__(self, postfix='', sys_attr_getters=None):
         self.output_postfix = postfix
-        self.sys_input_branch = sys_input_branch
-        self.sys_attr_getter = sys_attr_getter
+        self.sys_attr_getters = sys_attr_getters or {}
         self.e = None
-        self.cache = None
+        self.cache = {}
         self.tree_vars = set()
         self.branches = list()
 
@@ -240,7 +232,7 @@ class EventProxy(object):
 
     def set_event(self, e):
         self.e = e
-        self.cache = None
+        self.cache = {}
 
     def apply_fallback(self):
         self.H_mass_fit_fallback[0] = self.e.H_mass
@@ -264,15 +256,51 @@ class EventProxy(object):
         getattr(self, token+'_phi' )[0] = vec.Phi()
         getattr(self, token+'_mass')[0] = vec.M()
 
-    def __getattr__(self, *args):
-        def make_variation():
-            self.cache = self.sys_attr_getter(self.e)
-            return self.cache
+    def make_variation(self, arg):
+        res = self.sys_attr_getters[arg](self.e)
+        self.cache[arg] = res
+        return res
 
-        if self.sys_attr_getter and args[0] == self.sys_input_branch:
-            return self.cache or make_variation()
+    def __getattr__(self, *args):
+        arg = args[0]
+        if arg in self.sys_attr_getters:
+            if arg in self.cache:
+                return self.cache[arg]
+            return self.make_variation(arg)
 
         return getattr(self.e, *args)
+
+
+def make_sys_event_proxies(am):
+    def mk_single_getter(branch, sys_name):
+        # this function gives a local namespace to branch, sys_name
+        return lambda e: getattr(e, branch+'_'+sys_name)
+
+    def mk_sys_attr_getters(amsys):
+        sys_name = amsys.name
+        getters = dict(
+            (branch, mk_single_getter(branch, sys_name))
+            for branch in amsys.branchesToEdit
+        )
+        getters.update({
+            'hJetInd1': lambda e: getattr(e, 'hJetInd1_'+sys_name),
+            'hJetInd2': lambda e: getattr(e, 'hJetInd2_'+sys_name),
+        })
+        return getters
+
+    return list(
+        EventProxy(amsys.name, mk_sys_attr_getters(amsys))
+        for amsys in am.systematics
+        if str(amsys.name) != 'nominal'
+    )
+
+lep_sys_event_proxies = [
+    EventProxy('mu_up',   {'Muon_pt_corrected': lambda e: list(x*1.02 for x in e.Muon_pt_corrected)}),
+    EventProxy('mu_down', {'Muon_pt_corrected': lambda e: list(x*0.98 for x in e.Muon_pt_corrected)}),
+    EventProxy('el_up',   {'Electron_pt':       lambda e: list(x*1.02 for x in e.Electron_pt)}),
+    EventProxy('el_down', {'Electron_pt':       lambda e: list(x*0.98 for x in e.Electron_pt)}),
+]
+lep_sys_names = list(ep.output_postfix for ep in lep_sys_event_proxies)
 
 
 def apply_fit_to_event(ep, jme_res_obj):
@@ -578,7 +606,7 @@ def apply_kinfit(input_file, output_file, event_proxies=None):
     n_events = 0
     n_fitted = 0
 
-    print 'starting kinfit loop'
+    print 'starting kinfit loop with %i systematics' % (len(eps) - 1)
     start_time = time.ctime()
     for e in t:
         n_events += 1
@@ -611,9 +639,3 @@ def apply_kinfit(input_file, output_file, event_proxies=None):
     print 'finished kinfit loop at', time.ctime()
     print 'total number of events processed:    ', n_events
     print 'number of events with kinfit applied:', n_fitted
-
-
-ep_mu_up    = EventProxy('mu_up',   'Muon_pt_corrected', lambda e: list(x*1.02 for x in e.Muon_pt_corrected))
-ep_mu_down  = EventProxy('mu_down', 'Muon_pt_corrected', lambda e: list(x*0.98 for x in e.Muon_pt_corrected))
-ep_el_up    = EventProxy('el_up',   'Electron_pt',       lambda e: list(x*1.02 for x in e.Electron_pt))
-ep_el_down  = EventProxy('el_down', 'Electron_pt',       lambda e: list(x*0.98 for x in e.Electron_pt))

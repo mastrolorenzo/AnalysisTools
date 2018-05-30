@@ -64,17 +64,16 @@ if "doKinFit" in options:
     input_file = output_file.replace('.root', '_before_kinfit.root')
     os.system('mv %s %s' % (output_file, input_file))
 
+    if am.systematics.size():
+        # only do lepton systematics if there are other systematics as well
+        event_proxies=kinfitter.lep_sys_event_proxies + kinfitter.make_sys_event_proxies(am) + [kinfitter.EventProxy()]
+    else:
+        event_proxies=None
+
     kinfitter.apply_kinfit(
         input_file,
         output_file,
-        None,
-        #event_proxies=(
-        #    kinfitter.EventProxy(),
-        #    kinfitter.ep_mu_up,
-        #    kinfitter.ep_mu_down,
-        #    kinfitter.ep_el_up,
-        #    kinfitter.ep_el_down,
-        #)
+        event_proxies=event_proxies,
     )
 
     os.system('rm '+input_file)

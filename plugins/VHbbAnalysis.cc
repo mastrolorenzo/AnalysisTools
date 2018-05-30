@@ -1140,8 +1140,52 @@ bool VHbbAnalysis::Analyze() {
     }
     if (cursyst->name != "nominal") {
         *in[Form("controlSample_%s", cursyst->name.c_str())] = mInt("controlSample");
-    }
 
+        *f[ Form("H_mass_%s",                            cursyst->name.c_str())] = m("H_mass");
+        *f[ Form("H_pt_%s",                              cursyst->name.c_str())] = m("H_pt");
+        *f[ Form("V_pt_%s",                              cursyst->name.c_str())] = m("V_pt");
+        *in[Form("nAddJets252p9_puid_%s",                cursyst->name.c_str())] = mInt("nAddJets252p9_puid");
+
+        *f[ Form("HJ1_HJ2_dEta_%s",                      cursyst->name.c_str())] = m("HJ1_HJ2_dEta");
+        *f[ Form("HJ1_HJ2_dPhi_%s",                      cursyst->name.c_str())] = m("HJ1_HJ2_dPhi");
+        *f[ Form("HJ1_HJ2_dR_%s",                        cursyst->name.c_str())] = m("HJ1_HJ2_dR");
+        *f[ Form("HVdPhi_%s",                            cursyst->name.c_str())] = m("HVdPhi");
+        *f[ Form("HVdR_%s",                              cursyst->name.c_str())] = m("HVdR");
+        *f[ Form("MET_pt_%s",                            cursyst->name.c_str())] = m("MET_pt");
+        *f[ Form("Top1_mass_fromLepton_regPT_w4MET_%s",  cursyst->name.c_str())] = m("Top1_mass_fromLepton_regPT_w4MET");
+        *f[ Form("V_mt_%s",                              cursyst->name.c_str())] = m("V_mt");
+        *f[ Form("hJets_btagged_0_%s",                   cursyst->name.c_str())] = m("hJets_btagged_0");
+        *f[ Form("hJets_btagged_1_%s",                   cursyst->name.c_str())] = m("hJets_btagged_1");
+        *f[ Form("hJets_leadingPt_%s",                   cursyst->name.c_str())] = m("hJets_leadingPt");
+        *f[ Form("hJets_pt_0_%s",                        cursyst->name.c_str())] = m("hJets_pt_0");
+        *f[ Form("hJets_pt_1_%s",                        cursyst->name.c_str())] = m("hJets_pt_1");
+        *f[ Form("hJets_subleadingPt_%s",                cursyst->name.c_str())] = m("hJets_subleadingPt");
+        *f[ Form("jjVPtRatio_%s",                        cursyst->name.c_str())] = m("jjVPtRatio");
+        *f[ Form("lepMetDPhi_%s",                        cursyst->name.c_str())] = m("lepMetDPhi");
+        *f[ Form("minDPhiFromOtherJets_%s",              cursyst->name.c_str())] = m("minDPhiFromOtherJets");
+        *f[ Form("nAddJet_f_%s",                         cursyst->name.c_str())] = m("nAddJet_f");
+        // *f[ Form("nAddJets302p5_puid_%s",                cursyst->name.c_str())] = m("nAddJets302p5_puid_");
+        *f[ Form("nAddJets252p5_puid_%s",                cursyst->name.c_str())] = m("nAddJets252p5_puid");
+        *f[ Form("nAddJets_2lep_%s",                     cursyst->name.c_str())] = m("nAddJets_2lep");
+        *f[ Form("nJets25_dR06_%s",                      cursyst->name.c_str())] = m("nJets25_dR06");
+        *f[ Form("nJets30_0lep_%s",                      cursyst->name.c_str())] = m("nJets30_0lep");
+        *f[ Form("nJets30_2lep_%s",                      cursyst->name.c_str())] = m("nJets30_2lep");
+        *f[ Form("nLooseBtagsDR0p8_%s",                  cursyst->name.c_str())] = m("nLooseBtagsDR0p8");
+        *f[ Form("nLooseBtagsDR1p0_%s",                  cursyst->name.c_str())] = m("nLooseBtagsDR1p0");
+        *f[ Form("otherJetsBestBtag_%s",                 cursyst->name.c_str())] = m("otherJetsBestBtag");
+        // *f[ Form("otherJetsHighestP_%s",                 cursyst->name.c_str())] = m("otherJetsHighestP");
+        *in[Form("hJetInd1_%s",                          cursyst->name.c_str())] = mInt("hJetInd1");
+        *in[Form("hJetInd2_%s",                          cursyst->name.c_str())] = mInt("hJetInd2");
+
+        // *f[ Form("FatJetCand_Msoftdrop_corrected_%s",    cursyst->name.c_str())] = m("FatJetCand_Msoftdrop_corrected");
+        // *f[ Form("FatJetCand_doubleB_%s",                cursyst->name.c_str())] = m("FatJetCand_doubleB");
+        // *f[ Form("FatJetCand_pt_%s",                     cursyst->name.c_str())] = m("FatJetCand_pt");
+        // *f[ Form("FatJetCand_tau21_%s",                  cursyst->name.c_str())] = m("FatJetCand_tau21");
+        // *f[ Form("FatJetCand_tau32_%s",                  cursyst->name.c_str())] = m("FatJetCand_tau32");
+        // *f[ Form("FatJetVPtRatio_%s",                    cursyst->name.c_str())] = m("FatJetVPtRatio");
+        // *f[ Form("FatJetVdPhi_%s",                       cursyst->name.c_str())] = m("FatJetVdPhi");
+        // *in[Form("nFatJets200_%s",                       cursyst->name.c_str())] = mInt("nFatJets200");
+    }
 
     if (doCutFlow && mInt("cutFlow") >= m("doCutFlow")) {
         // keep all preselected events for cutflow

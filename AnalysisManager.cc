@@ -237,7 +237,7 @@ void AnalysisManager::SetupBranch(std::string name, int type, int length, int on
     } else if(type==11) {
         uc[name] = new char[length]();
         fChain->SetBranchAddress(name.c_str(), uc[name], &branches[name]);
-    }       
+    }
 
     return;
 }
@@ -670,7 +670,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                                 float sf_err = 0.0;
                                 if (cursample->sampleNum != 0) {
                                     for (int j=0; j < mInt(sf.length); j++) {
-                                        if (sf.binning.find("abs") < 0) {  
+                                        if (sf.binning.find("abs") < 0) {
                                             f[sf.branchname][j] = sf.getScaleFactor(m(sf.branches[0],j) , m(sf.branches[1],j), sf_err);
                                         }else {
                                             f[sf.branchname][j] = sf.getScaleFactor(fabs(m(sf.branches[0],j)) , fabs(m(sf.branches[1],j)), sf_err);
@@ -685,7 +685,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                                         f[Form("%s_err",sf.branchname.c_str())][j] = 0.0;
                                     }
                                 }
-                            
+
                             }
                             FinishEvent();
                             if(cursyst->name=="nominal") saved++;
@@ -844,13 +844,55 @@ void AnalysisManager::SetupSystematicsBranches(){
             }
         }
         if (systematics[iSyst].name != "nominal") {
-            SetupNewBranch(Form("H_mass_%s", systematics[iSyst].name.c_str()), 2);
-            SetupNewBranch(Form("H_pt_%s", systematics[iSyst].name.c_str()), 2);
-            SetupNewBranch(Form("V_pt_%s", systematics[iSyst].name.c_str()), 2);
-            SetupNewBranch(Form("controlSample_%s", systematics[iSyst].name.c_str()), 1);
-            SetupNewBranch(Form("weight_%s", systematics[iSyst].name.c_str()), 2);
-            SetupNewBranch(Form("Jet_btagCSV_%s", systematics[iSyst].name.c_str()), 8, 250);
-            SetupNewBranch(Form("nAddJets252p9_puid_%s", systematics[iSyst].name.c_str()), 1);
+            SetupNewBranch(Form("controlSample_%s",                       systematics[iSyst].name.c_str()), 1);
+            SetupNewBranch(Form("weight_%s",                              systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("Jet_btagCSV_%s",                         systematics[iSyst].name.c_str()), 8, 250);
+
+            SetupNewBranch(Form("H_mass_%s",                              systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("H_pt_%s",                                systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("V_pt_%s",                                systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nAddJets252p9_puid_%s",                  systematics[iSyst].name.c_str()), 1);
+
+            // all possible BDT inputs as found on the master branch on May 30, 2018, appart from the ones above
+            SetupNewBranch(Form("HJ1_HJ2_dEta_%s",                        systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("HJ1_HJ2_dPhi_%s",                        systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("HJ1_HJ2_dR_%s",                          systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("HVdPhi_%s",                              systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("HVdR_%s",                                systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("MET_pt_%s",                              systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("Top1_mass_fromLepton_regPT_w4MET_%s",    systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("V_mt_%s",                                systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJets_btagged_0_%s",                     systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJets_btagged_1_%s",                     systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJets_leadingPt_%s",                     systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJets_pt_0_%s",                          systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJets_pt_1_%s",                          systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJets_subleadingPt_%s",                  systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("jjVPtRatio_%s",                          systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("lepMetDPhi_%s",                          systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("minDPhiFromOtherJets_%s",                systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nAddJet_f_%s",                           systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("nAddJets302p5_puid_%s",                  systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nAddJets252p5_puid_%s",                  systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nAddJets_2lep_%s",                       systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nJets25_dR06_%s",                        systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nJets30_0lep_%s",                        systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nJets30_2lep_%s",                        systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nLooseBtagsDR0p8_%s",                    systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nLooseBtagsDR1p0_%s",                    systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("otherJetsBestBtag_%s",                   systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("otherJetsHighestP_%s",                   systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJetInd1_%s",                            systematics[iSyst].name.c_str()), 1);
+            SetupNewBranch(Form("hJetInd2_%s",                            systematics[iSyst].name.c_str()), 1);
+
+            // SetupNewBranch(Form("FatJetCand_Msoftdrop_corrected_%s",      systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("FatJetCand_doubleB_%s",                  systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("FatJetCand_pt_%s",                       systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("FatJetCand_tau21_%s",                    systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("FatJetCand_tau32_%s",                    systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("FatJetVPtRatio_%s",                      systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("FatJetVdPhi_%s",                         systematics[iSyst].name.c_str()), 2);
+            // SetupNewBranch(Form("nFatJets200_%s",                         systematics[iSyst].name.c_str()), 1);
         }
     }
 }
@@ -983,9 +1025,9 @@ void AnalysisManager::ApplySystematics(bool early){
             systBranchName.append(cursyst->name);
             int thisType=existingBranchInfo->type;
             if(thisType==2){
-                *f[oldBranchName.c_str()]=*f[systBranchName.c_str()]; 
+                *f[oldBranchName.c_str()]=*f[systBranchName.c_str()];
             } else if(thisType==2){
-                *d[oldBranchName.c_str()]=*d[systBranchName.c_str()]; 
+                *d[oldBranchName.c_str()]=*d[systBranchName.c_str()];
             } else if(thisType==8 ){
                 //For Jet_bReg we have already correctly organised the various branches above
                 for(int ind=0; ind<*in[existingBranchInfo->lengthBranch]; ind++){
@@ -1008,7 +1050,7 @@ double   AnalysisManager::GetPUWeight(int thisPU, int puType){
         }
         return thisWeight;
     }
-    
+
     TH1D** pointerToReweightingPointer=NULL;
 
     if(puType==0){
@@ -1069,7 +1111,7 @@ bool     AnalysisManager::EvaluatePUReweighting(TH1D* inputPU, int puType){
         if(debug>10) std::cout<<"(*pointerToTargetPointer) or inputPU is NULL"<<std::endl;
     } else {
         inputPU->Scale(1./inputPU->Integral());
-       
+
         if((*pointerToTargetPointer)->GetNbinsX()!=inputPU->GetNbinsX()){
             int maxBins=std::max((*pointerToTargetPointer)->GetNbinsX(),inputPU->GetNbinsX());
             float minPU=std::min((*pointerToTargetPointer)->GetBinLowEdge(1),inputPU->GetBinLowEdge(1));
@@ -1088,7 +1130,7 @@ bool     AnalysisManager::EvaluatePUReweighting(TH1D* inputPU, int puType){
                 (*pointerToTargetPointer)->SetDirectory(0);
                 (*pointerToTargetPointer)->Scale(1./(*pointerToTargetPointer)->Integral());
             }
-            
+
             if(inputPU->GetNbinsX()!=maxBins || inputPU->GetBinLowEdge(1)!=minPU || inputPU->GetBinLowEdge(inputPU->GetNbinsX()+1)!=maxPU){
                 TH1D * PUInputReplacement= new TH1D("PUInput",";nPU:Fraction",maxBins,minPU,maxPU);
                 for(int iBin=0;iBin<maxBins+1; iBin++){
@@ -1118,10 +1160,10 @@ bool     AnalysisManager::EvaluatePUReweighting(TH1D* inputPU, int puType){
 
         (*pointerToReweightingPointer)=(TH1D*)(*pointerToTargetPointer)->Clone("PUReWeighting");
         (*pointerToReweightingPointer)->Divide(inputPU);
-       
-        if(debug>100){ 
+
+        if(debug>100){
             for(int iBin=0;iBin<(*pointerToTargetPointer)->GetNbinsX()+1; iBin++){
-                std::cout<<"iBin "<<iBin<<" input "<<inputPU->GetBinContent(iBin)<<" target "<<(*pointerToTargetPointer)->GetBinContent(iBin)<<" weight "<<PUReWeighting->GetBinContent(iBin)<<std::endl; 
+                std::cout<<"iBin "<<iBin<<" input "<<inputPU->GetBinContent(iBin)<<" target "<<(*pointerToTargetPointer)->GetBinContent(iBin)<<" weight "<<PUReWeighting->GetBinContent(iBin)<<std::endl;
             }
         }
         success=true;
@@ -1143,13 +1185,13 @@ void     AnalysisManager::SetGlobalPUTarget(TH1D targetHist, int puType){
         return;
     }
 
-    (*pointerToTargetPointer)=(TH1D*)targetHist.Clone("globalPUTarget"); 
+    (*pointerToTargetPointer)=(TH1D*)targetHist.Clone("globalPUTarget");
     (*pointerToTargetPointer)->SetDirectory(0);
     (*pointerToTargetPointer)->Scale(1./(*pointerToTargetPointer)->Integral());
 }
 
 void     AnalysisManager::SetGlobalPUInput(TH1D inputHist){
-    globalPUInput=(TH1D*)inputHist.Clone("globalPUInput"); 
+    globalPUInput=(TH1D*)inputHist.Clone("globalPUInput");
     globalPUInput->SetDirectory(0);
     globalPUInput->Scale(1./globalPUInput->Integral());
 }
@@ -1171,7 +1213,7 @@ double AnalysisManager::m(std::string key, int index){
         if(branchInfos[key]->type%6==5){
             std::cout<<"Key "<<key<<" of type "<<branchInfos[key]->type<<", please use AnalysisManager::mInt() instead."<<std::endl;
             std::cout<<"Exiting"<<std::endl;
-            std::exit(0); 
+            std::exit(0);
         }
         if(branchInfos[key]->type>5&&index<0){
             std::cout<<"No valid index ("<<index<<") specified for branch "<<key<<std::endl;
@@ -1233,7 +1275,7 @@ int AnalysisManager::mInt(std::string key, int index){
         if(branchInfos[key]->type%6==2 || branchInfos[key]->type%6==3){
             std::cout<<"Key "<<key<<" of type "<<branchInfos[key]->type<<", please use AnalysisManager::m() instead."<<std::endl;
             std::cout<<"Exiting"<<std::endl;
-            std::exit(0); 
+            std::exit(0);
         }
         if(branchInfos[key]->type>5&&index<0){
             std::cout<<"No valid index specified for branch "<<key<<std::endl;

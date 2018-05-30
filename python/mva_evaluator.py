@@ -1,7 +1,73 @@
-from kinfitter import EventProxy, prepare_io
+from kinfitter import EventProxy, prepare_io, lep_sys_names
 import ctypes
 import time
 import ROOT
+
+
+SYS_VARS = (
+    'H_mass',
+    'H_pt',
+    'V_pt',
+    'nAddJets252p9_puid',
+    'HJ1_HJ2_dEta',
+    'HJ1_HJ2_dPhi',
+    'HJ1_HJ2_dR',
+    'HVdPhi',
+    'HVdR',
+    'MET_pt',
+    'Top1_mass_fromLepton_regPT_w4MET',
+    'V_mt',
+    'hJets_btagged_0',
+    'hJets_btagged_1',
+    'hJets_leadingPt',
+    'hJets_pt_0',
+    'hJets_pt_1',
+    'hJets_subleadingPt',
+    'jjVPtRatio',
+    'lepMetDPhi',
+    'minDPhiFromOtherJets',
+    'nAddJet_f',
+    'nAddJets302p5_puid_',
+    'nAddJets252p5_puid',
+    'nAddJets_2lep',
+    'nJets25_dR06',
+    'nJets30_0lep',
+    'nJets30_2lep',
+    'nLooseBtagsDR0p8',
+    'nLooseBtagsDR1p0',
+    'otherJetsBestBtag',
+    'otherJetsHighestP',
+
+    # kin-fit only variables
+    'H_mass_fit_fallback',
+    'H_pt_fit_fallback',
+    'jjVPtRatio_fit_fallback',
+    'HVdPhi_fit_fallback',
+    'n_recoil_jets_fit',
+    'H_mass_sigma_fit',
+)
+
+
+def make_sys_event_proxies(am):
+    def mk_single_getter(branch, sys_name):
+        # this function gives a local namespace to branch, sys_name
+        return lambda e: getattr(e, branch+'_'+sys_name, getattr(e, branch))
+
+    def mk_sys_attr_getters(sys_name):
+        return dict(
+            (sys_var, mk_single_getter(sys_var, sys_name))
+            for sys_var in SYS_VARS
+        )
+
+    sys_names = lep_sys_names + list(
+        amsys.name
+        for amsys in am.systematics
+        if str(amsys.name) != 'nominal'
+    )
+    return list(
+        EventProxy(sys_name, mk_sys_attr_getters(sys_name))
+        for sys_name in sys_names
+    )
 
 
 def prep_bdt_variables(bdt_info):
@@ -37,11 +103,12 @@ def apply_mva_eval(input_file, output_file, am):
     f, t, of = prepare_io(input_file, output_file)
     ot = t.CloneTree(0)
 
-    ep = EventProxy(postfix = '_postMVA')  # FIXME remove postfix for the final thing!
-    ep.init_output(ot, set(str(bdt_info.bdtname) for bdt_info in bdt_infos))
+    eps = make_sys_event_proxies(am) + [EventProxy()]  # the last one is for nominal
+    for ep in eps:
+        ep.init_output(ot, set(str(bdt_info.bdtname) for bdt_info in bdt_infos))
     n_events = 0
 
-    print 'starting mva evaluation loop'
+    print 'starting mva evaluation loop with %i systematics' % (len(eps) - 1)
     start_time = time.ctime()
     for e in t:
         n_events += 1
@@ -49,8 +116,9 @@ def apply_mva_eval(input_file, output_file, am):
         if n_events % 1000 == 1:
             print 'at event %i' % n_events
 
-        ep.set_event(e)
-        evaluate_bdt(ep, bdt_infos)
+        for ep in eps:
+            ep.set_event(e)
+            evaluate_bdt(ep, bdt_infos)
         ot.Fill()
 
     ot.Write()
