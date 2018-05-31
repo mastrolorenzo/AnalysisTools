@@ -672,9 +672,9 @@ bool VHbbAnalysis::Analyze() {
         *f[Form("V_pt_%s", cursyst->name.c_str())] = V.Pt();
     }
 
-    // FIXME this should be ok because the vpt cut in the resolved analysis is
-    // looser than in the boosted, right?
-    if (m("V_pt") < m("vptcut")) {
+    if (m("V_pt") < 50) {                               // V_pt is lower in the 2-lepton channel
+        *in["controlSample"] = -1;
+    } else if (!(mInt("isZee") == 1 || mInt("isZmm") == 1) && m("V_pt") < m("vptcut")) {
         *in["controlSample"] = -1;
     } else if (sel && mInt("controlSample") > -1) {
         *in["cutFlow"] += 1; // pT(W) cut
