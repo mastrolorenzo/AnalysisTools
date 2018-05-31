@@ -1,3 +1,4 @@
+from multiprocessing import Process
 import ROOT
 import sys
 import os
@@ -48,12 +49,17 @@ print "Done printing branches, now to loop"
 # FIXME - need to add the possibility of doing a small portion of files
 #aim.Loop()
 
-if (len(sys.argv) == 3):
-    am.Loop(sys.argv[2])
-elif (len(sys.argv) > 6):
-    am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]))
-else :
-    am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
+def loop_func():
+    if (len(sys.argv) == 3):
+        am.Loop(sys.argv[2])
+    elif (len(sys.argv) > 6):
+        am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]))
+    else :
+        am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
+
+p = Process(target=loop_func, args=tuple())
+p.start()
+p.join()
 os.system('rm temp.root')
 
 
@@ -80,7 +86,7 @@ if "doKinFit" in options:
     # os.system('rm '+input_file)
 
 
-if am.m("separateMvaEval") > 0.5:
+if am.branchInfos['separateMvaEval'].val > 0.5:
 
     # get ready for pickling (which happens when calling subprocess..)
     output_file = sys.argv[4]
@@ -110,7 +116,6 @@ if am.m("separateMvaEval") > 0.5:
         )
         os.system('rm '+input_file)
 
-    from multiprocessing import Process
     for block in blocks:
         p = Process(target=worker_func, args=(input_file, output_file, am, block))
         p.start()
