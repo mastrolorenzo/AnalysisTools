@@ -131,13 +131,6 @@ type=2  name=H_pt_noFSR
 type=4  name=recoFSR
 type=1  name=nFSRJets
 
-type=2  name=H_mass_fit_fallback         
-type=2  name=H_pt_fit_fallback
-type=2  name=jjVPtRatio_fit_fallback           
-type=2  name=HVdPhi_fit_fallback         
-type=2  name=n_recoil_jets_fit           
-type=2  name=H_mass_sigma_fit 
-
 
 type=2  name=H_pt
 type=2  name=H_pt_highestPt
@@ -253,20 +246,20 @@ type=2  name=H_dEta_reg
 type=2  name=Jet1_regWeight
 type=2  name=Jet2_regWeight
 
-type=2  name=nLooseBtagsDR0p8            
-type=2  name=nLooseBtagsDR1p0            
-type=2  name=nLooseBtagsDR1p5            
-type=2  name=nFatJets200                 
+type=2  name=nLooseBtagsDR0p8
+type=2  name=nLooseBtagsDR1p0
+type=2  name=nLooseBtagsDR1p5
+type=2  name=nFatJets200
 type=2  name=nJets30_0lep
 type=2  name=nJets30_2lep
-type=2  name=nJets25_dR06                     
+type=2  name=nJets25_dR06
 
-type=2  name=FatJetCand_pt               
-type=2  name=FatJetCand_nVtx             
-type=2  name=FatJetCand_tau21                 
-type=2  name=FatJetCand_tau32                 
-type=2  name=FatJetCand_doubleB              
-type=2  name=FatJetCand_Msoftdrop_corrected  
+type=2  name=FatJetCand_pt
+type=2  name=FatJetCand_nVtx
+type=2  name=FatJetCand_tau21
+type=2  name=FatJetCand_tau32
+type=2  name=FatJetCand_doubleB
+type=2  name=FatJetCand_Msoftdrop_corrected
 type=2  name=FatJetCand_tau1
 type=2  name=FatJetCand_tau2
 type=2  name=FatJetCand_tau3

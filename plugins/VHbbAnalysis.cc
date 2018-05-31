@@ -2374,14 +2374,6 @@ void VHbbAnalysis::FinishEvent() {
         bdtNames.clear();
         thisBDTInfo = bdtInfos.find("bdt_2lep_highPt");
 
-
-	*f["H_mass_fit_fallback"] = m("H_mass");
-	*f["H_pt_fit_fallback"] = m("H_pt");
-	*f["jjVPtRatio_fit_fallback"] = m("jjVPtRatio");
-	*f["HVdPhi_fit_fallback"] = m("HVdPhi");
-	*f["n_recoil_jets_fit"]=-1.0;
-	*f["H_mass_sigma_fit"]=-1.0;
-
         if(m("twoResolvedJets")){
             if(thisBDTInfo != bdtInfos.end()){
                 if(m("V_pt")>=150){
