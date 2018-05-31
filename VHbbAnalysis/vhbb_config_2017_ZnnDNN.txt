@@ -26,8 +26,8 @@ bdt_1lep_vzbb=cfg/bdt_1lep_vzbb.txt
 
 settings=cfg/settings.txt
 
-#systematics=cfg/systematics_facJECsNano.txt
-systematics=cfg/systematics.txt
+systematics=cfg/systematics_facJECsNano.txt
+#systematics=cfg/systematics.txt
 scalefactors=cfg/scalefactors_2017.txt
 btagscalefactors=aux/DeepCSV_94XSF_V2_B_F.csv
 

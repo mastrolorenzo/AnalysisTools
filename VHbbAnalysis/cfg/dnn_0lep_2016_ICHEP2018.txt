@@ -18,7 +18,7 @@ name=hJets_btagged_0        lname=hJets_btagged_0       isEx=0 isSpec=0 order=8
 name=hJets_btagged_1        lname=hJets_btagged_1       isEx=0 isSpec=0 order=9
 name=hJets_leadingPt        lname=hJets_leadingPt       isEx=0 isSpec=0 order=10
 name=hJets_subleadingPt     lname=hJets_subleadingPt    isEx=0 isSpec=0 order=11
-name=minDPhiFromOtherJets   lname=minDPhiFromOtherJets  isEx=0 isSpec=0 order=11
-name=otherJetsBestBtag      lname=otherJetsBestBtag     isEx=0 isSpec=0 order=11
-name=otherJetsHighestPt     lname=otherJetsHighestPt    isEx=0 isSpec=0 order=11
+name=minDPhiFromOtherJets   lname=minDPhiFromOtherJets  isEx=0 isSpec=0 order=12
+name=otherJetsBestBtag      lname=otherJetsBestBtag     isEx=0 isSpec=0 order=13
+name=otherJetsHighestPt     lname=otherJetsHighestPt    isEx=0 isSpec=0 order=14
 
