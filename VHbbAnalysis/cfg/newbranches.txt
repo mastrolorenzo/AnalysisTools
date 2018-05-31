@@ -1,6 +1,11 @@
 # types:  unsigned int=0, int=1, float=2, double=3, bool=4, char=5
 #     array +6;   vector +12;
 
+
+type=2  name=minDPhiFromOtherJets
+type=2  name=otherJetsBestBtag
+type=2  name=otherJetsHighestP
+
 type=0  name=nW
 type=0  name=nWlep
 

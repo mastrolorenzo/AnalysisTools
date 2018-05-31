@@ -1,4 +1,3 @@
-from multiprocessing import Process
 import ROOT
 import sys
 import os
@@ -49,17 +48,12 @@ print "Done printing branches, now to loop"
 # FIXME - need to add the possibility of doing a small portion of files
 #aim.Loop()
 
-def loop_func():
-    if (len(sys.argv) == 3):
-        am.Loop(sys.argv[2])
-    elif (len(sys.argv) > 6):
-        am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]))
-    else :
-        am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
-
-p = Process(target=loop_func, args=tuple())
-p.start()
-p.join()
+if (len(sys.argv) == 3):
+    am.Loop(sys.argv[2])
+elif (len(sys.argv) > 6):
+    am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]))
+else :
+    am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
 os.system('rm temp.root')
 
 
@@ -116,6 +110,7 @@ if am.branchInfos['postLoopMVAEval'].val > 0.5:
         )
         os.system('rm '+input_file)
 
+    from multiprocessing import Process
     for block in blocks:
         p = Process(target=worker_func, args=(input_file, output_file, am, block))
         p.start()
