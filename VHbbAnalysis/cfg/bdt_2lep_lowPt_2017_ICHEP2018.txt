@@ -1,0 +1,27 @@
+# isSpec 1 -> Spectator variable
+# isSpec 0 -> Variable used in BDT training
+
+bdtmethod=BDTG
+bdtname=CMS_vhbb_BDTG_Zll_LowPT_13TeV
+xmlFile=aux/TMVA_BDT_Hbb13TeV_V5_kinFit_May25_BDTG_2lep_lowVpt_2017.weights.xml
+            
+#bdtmethod=BDT
+#bdtname=CMS_vhbb_BDT_Zll_LowPT_13TeV
+#xmlFile=aux/TMVA_BDT_Hbb13TeV_V5_kinFit_May25_BDTA_2lep_lowVpt_2017.weights.xml
+
+name=H_mass_fit_fallback                                               lname=H_mass_fit_fallback          isEx=0 isSpec=0 order=1
+name=H_pt_fit_fallback                                                 lname=H_pt_fit_fallback            isEx=0 isSpec=0 order=2
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_V_pt                        lname=V_pt                         isEx=1 isSpec=0 order=3
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_hJets_btagged_1             lname=hJets_btagged_1              isEx=0 isSpec=0 order=4
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_hJets_btagged_0             lname=hJets_btagged_0              isEx=0 isSpec=0 order=5
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_nAddJets_2lep               lname=nAddJets_2lep                isEx=0 isSpec=0 order=6
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_SA5                         lname=SA5                          isEx=1 isSpec=0 order=7
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_V_mass                      lname=V_mass                       isEx=1 isSpec=0 order=8
+name=MET_Pt                                                            lname=MET_pt                       isEx=1 isSpec=0 order=9
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_hJets_pt_0                  lname=hJets_pt_0                   isEx=0 isSpec=0 order=10
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_hJets_pt_1                  lname=hJets_pt_1                   isEx=0 isSpec=0 order=11
+name=jjVPtRatio_fit_fallback                                           lname=jjVPtRatio_fit_fallback      isEx=0 isSpec=0 order=12
+name=bdtInput_CMS_vhbb_BDT_Zll_LowPT_13TeV_HJ1_HJ2_dEta                lname=HJ1_HJ2_dEta                 isEx=0 isSpec=0 order=13
+name=HVdPhi_fit_fallback                                               lname=HVdPhi_fit_fallback          isEx=0 isSpec=0 order=14
+name=n_recoil_jets_fit                                                 lname=n_recoil_jets_fit            isEx=0 isSpec=0 order=15
+name=H_mass_sigma_fit                                                  lname=H_mass_sigma_fit             isEx=0 isSpec=0 order=16
