@@ -99,13 +99,14 @@ def build_skim_tree(path, keep_branches=[], new_branches=[], scale_factors=None)
         dataframe['weight'] = dataframe.apply(scale_factors, axis=1)
     dataframe['weight'] = dataframe['weight'].astype(BRANCH_TYPES['F'])
 
-    # Select odd events for training and scale their weights to account for splitting.
+    # Select odd events for training and even events for testing.
     dataframe_train = dataframe.loc[lambda x: x.event % 2 == 1]
-    dataframe_train = dataframe_train.assign(weight=lambda x: x.weight * 2)
-
-    # Select even events for testing and scale their weights to account for splitting.
     dataframe_test = dataframe.loc[lambda x: x.event % 2 == 0]
-    dataframe_test = dataframe_test.assign(weight=lambda x: x.weight * 2)
+    
+    # Scale Monte-Carlo events by a factor of two to account for the splitting.
+    if any(dataframe.sampleIndex != 0):
+        dataframe_train = dataframe_train.assign(weight=lambda x: x.weight * 2)
+        dataframe_test = dataframe_test.assign(weight=lambda x: x.weight * 2)
 
     return dataframe_train, dataframe_test
 
