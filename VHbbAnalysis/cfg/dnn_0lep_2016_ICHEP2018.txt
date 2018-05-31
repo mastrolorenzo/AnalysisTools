@@ -7,11 +7,11 @@ xmlFile=aux/dnn_0lep_2016_ICHEP2018/Zless.cfg:aux/dnn_0lep_2016_ICHEP2018/scaler
 
 
 # this is the order as from Andreas mail
-name=HVdPhi                 lname=HVdPhi                isEx=0 isSpec=0 order=1
-name=H_mass                 lname=H_mass                isEx=1 isSpec=0 order=2
-name=H_pt                   lname=H_pt                  isEx=1 isSpec=0 order=3
-name=HJ1_HJ2_dPhi           lname=HJ1_HJ2_dPhi          isEx=0 isSpec=0 order=4
-name=HJ1_HJ2_dEta           lname=HJ1_HJ2_dEta          isEx=0 isSpec=0 order=5
+name=HJ1_HJ2_dEta           lname=HJ1_HJ2_dEta          isEx=0 isSpec=0 order=1
+name=HJ1_HJ2_dPhi           lname=HJ1_HJ2_dPhi          isEx=0 isSpec=0 order=2
+name=HVdPhi                 lname=HVdPhi                isEx=0 isSpec=0 order=3
+name=H_mass                 lname=H_mass                isEx=1 isSpec=0 order=4
+name=H_pt                   lname=H_pt                  isEx=1 isSpec=0 order=5
 name=SA5                    lname=SA5                   isEx=1 isSpec=0 order=6
 name=V_pt                   lname=V_pt                  isEx=1 isSpec=0 order=7
 name=hJets_btagged_0        lname=hJets_btagged_0       isEx=0 isSpec=0 order=8
