@@ -1,8 +1,7 @@
 import os
 import sys
 
-#samples = ["ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","VVHF","VVLF","Zj0b","Zj1b","Zj2b","data_obs"]
-samples = ["ZH_hbb","s_Top","TT","Zj0b","Zj1b","Zj2b","data_obs"]
+samples = ["ggZH_hbb","ZH_hbb","WH_hbb","s_Top","TT","Wj0b","Wj1b","Wj2b","VVHF","VVLF","Zj0b","Zj1b","Zj2b","data_obs","QCD"]
 
 cwd = os.getcwd()
 ifile = open(sys.argv[1])
@@ -41,7 +40,7 @@ Output     = stdout_%s_%i_%s
 Error      = stderr_%s_%i_%s
 Log        = log_%s_%i_%s
 Notification     = never
-transfer_input_files = ../../splitSamples.py,../../systematics_ewk_Wmn.txt,../../systematics_ewk_Wen.txt,../../systematics_Wmn_demo.txt,../../../python/nano_samples.py
+transfer_input_files = ../../splitSamples.py,../../systematics_ewk_Wmn.txt,../../systematics_ewk_Wen.txt,../../systematics_Wmn_demo.txt,../../systematics_Wlnshapes2016.txt,../../systematics_Znnshapes2016.txt,../../systematics_Zllshapes2016.txt,../../systematics_Wlnshapes2017.txt,../../systematics_Znnshapes2017.txt,../../systematics_Zllshapes2017.txt,../../../python/nano_samples_2016.py,../../../python/nano_samples_znn2016.py,../../../python/nano_samples_znn2017.py,../../../python/nano_samples_2017.py
 WhenToTransferOutput=On_Exit
 Queue      1
         ''' % (jobname,nJobs,sample,jobname,nJobs,sample,jobname,nJobs,sample,jobname,nJobs,sample)

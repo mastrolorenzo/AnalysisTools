@@ -1,5 +1,11 @@
+#CMS_vhbb_eff_m_Wln_13TeV      shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF Lep_SF
+#CMS_vhbb_ptwweights_tt        shape 1.0 TT VPtCorrFactorSplit3
+#CMS_vhbb_ptwweights_wlf        shape 1.0 Wj0b VPtCorrFactorSplit3
+#CMS_vhbb_ptwweights_whf        shape 1.0 Wj1b,Wj2b,s_Top VPtCorrFactorSplit3
 CMS_METUnclustEn  shape  1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 METUnclustEn 
+CMS_vhbb_puWeight         shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  weight_PU
 CMS_res_j_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 JER
+CMS_res_j_reg_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RegJER
 CMS_scale_j_FlavorQCD_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 FlavorQCD
 CMS_scale_j_AbsoluteStat_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteStat
 CMS_scale_j_AbsoluteScale_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteScale
@@ -25,23 +31,15 @@ CMS_scale_j_PileUpPtEC1_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QC
 CMS_scale_j_PileUpPtEC2_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtEC2
 CMS_scale_j_PileUpPtHF_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtHF
 CMS_scale_j_RelativeBal_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeBal
-CMS_scale_j_TimePtEta_13TeV shape 1.0 WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 TimePtEta
-CMS_bTagWeightHF     shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_HF
-CMS_bTagWeightLF     shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_LF
-CMS_bTagWeightHFStats1 shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_HFStats1
-CMS_bTagWeightLFStats1 shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_LFStats1
-CMS_bTagWeightHFStats2 shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_HFStats2
-CMS_bTagWeightLFStats2 shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_LFStats2
-CMS_bTagWeightcErr1  shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_cErr1
-CMS_bTagWeightcErr2  shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_cErr2
-#VHbb_mettrig_data1 shape 1.0 TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_mettrigSF_data_up_1/weight_mettrigSF,weight_mettrigSF_data_down_1/weight_mettrigSF
-#VHbb_mettrig_data2 shape 1.0 TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_mettrigSF_data_up_2/weight_mettrigSF,weight_mettrigSF_data_down_2/weight_mettrigSF
-#VHbb_mettrig_data3 shape 1.0 TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_mettrigSF_data_up_3/weight_mettrigSF,weight_mettrigSF_data_down_3/weight_mettrigSF
-#VHbb_mettrig_data4 shape 1.0 TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_mettrigSF_data_up_4/weight_mettrigSF,weight_mettrigSF_data_down_4/weight_mettrigSF
-#VHbb_mettrig_mc1 shape 1.0 TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_mettrigSF_mc_up_1/weight_mettrigSF,weight_mettrigSF_mc_down_1/weight_mettrigSF
-#VHbb_mettrig_mc2 shape 1.0 TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_mettrigSF_mc_up_2/weight_mettrigSF,weight_mettrigSF_mc_down_2/weight_mettrigSF
-#VHbb_mettrig_mc3 shape 1.0 TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_mettrigSF_mc_up_3/weight_mettrigSF,weight_mettrigSF_mc_down_3/weight_mettrigSF
-#VHbb_mettrig_mc4 shape 1.0 TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_mettrigSF_mc_up_4/weight_mettrigSF,weight_mettrigSF_mc_down_4/weight_mettrigSF
+CMS_bTagWeightDeepBJES_13TeV     shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_JES
+CMS_bTagWeightDeepBHF_13TeV     shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_HF
+CMS_bTagWeightDeepBLF_13TeV     shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_LF
+CMS_bTagWeightDeepBHFStats1_13TeV shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_HFStats1
+CMS_bTagWeightDeepBLFStats1_13TeV shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_LFStats1
+CMS_bTagWeightDeepBHFStats2_13TeV shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_HFStats2
+CMS_bTagWeightDeepBLFStats2_13TeV shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_LFStats2
+CMS_bTagWeightDeepBcErr1_13TeV  shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_cErr1
+CMS_bTagWeightDeepBcErr2_13TeV  shape 1.0  WH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_cErr2
 CMS_LHE_weights_scale_muF_WH shape 1.0 WH_hbb LHE_weights_scale_muFDown,LHE_weights_scale_muFUp
 CMS_LHE_weights_scale_muF_ZH shape 1.0 ZH_hbb LHE_weights_scale_muFDown,LHE_weights_scale_muFUp
 CMS_LHE_weights_scale_muF_TT shape 1.0 TT LHE_weights_scale_muFDown,LHE_weights_scale_muFUp

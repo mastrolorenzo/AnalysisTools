@@ -39,6 +39,8 @@ parser.add_argument('-rwtt','--reweightTT', type=bool, default=False, help="If t
 parser.add_argument('-si','--oldSI', type=bool, default=False, help="If true use old sampleIndex def., if false use new (correct) definition (default False)")
 parser.add_argument('-sa', '--sample', type=str, default="", help="Specify to run on only one particular sample")
 parser.add_argument('--drawFromNom', type=bool, default=False, help="If true, do not try to draw args.varname_systname but simply use nominal args.varname")
+parser.add_argument('--channel', type=str, default="", help="Specify the channel to run (to determine which samples file to read")
+parser.add_argument('--year', type=str, default="2017", help="Specify the year to run")
 args = parser.parse_args()
 print args
 
@@ -131,8 +133,17 @@ sampleMap = {} # map sampleNames to list of sampleIndex's
 sampleMapAltModel = {} # alternate MC samples for model shape systematics
 sampleNameMap = {}
 
-from nano_samples import the_samples_dict
-#from nano_samples_znn2016 import the_samples_dict
+if not 'Znn' in args.channel :
+    if '2016' in args.year:
+        from nano_samples_2016 import the_samples_dict
+    else :
+        from nano_samples_2017 import the_samples_dict
+else:
+    if '2016' in args.year:
+        from nano_samples_znn2016 import the_samples_dict
+    else :
+        from nano_samples_znn2017 import the_samples_dict
+
 for sample in the_samples_dict:
     sampleMap[the_samples_dict[sample][2]] = []
     sampleNameMap[the_samples_dict[sample][2]] = []

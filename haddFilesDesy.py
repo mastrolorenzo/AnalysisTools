@@ -8,12 +8,16 @@ if len(sys.argv) < 2:
     exit(-1)
 
 base_dir = sys.argv[1]
+
 out_dir = join(base_dir, 'haddjobs')
+if len(sys.argv) > 2:
+    out_dir = join(sys.argv[2],'haddjobs')
 print '>    output goes to', out_dir
 os.system('mkdir -p ' + out_dir)
 
 _, sub_dirs, __ = next(os.walk(base_dir))
-sub_dirs.remove('haddjobs')
+if len(sys.argv) < 3:
+    sub_dirs.remove('haddjobs')
 
 for sub_dir in sub_dirs:
     cmd = 'hadd -f %s/sum_%s.root ' % (out_dir, sub_dir)
