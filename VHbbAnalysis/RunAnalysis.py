@@ -127,6 +127,10 @@ else:
         'aux',
         '../python/ReadInput.py',
         '../python/kinfitter.py',
+        '../python/MyStandardScaler.py',
+        '../python/TensorflowEvaluator.py',
+        '../python/TensorflowDNNClassifier.py',
+        '../python/mva_evaluator.py',
         '../AnalysisDict_rdict.pcm',
         '../HelperClasses',
         '../AnalysisManager.h',
@@ -139,8 +143,16 @@ else:
         inputs_to_transfer = list('../'+p if not p.startswith('../') else p for p in inputs_to_transfer)
         inputs_to_transfer.remove('../python/ReadInput.py')
         inputs_to_transfer.remove('../python/kinfitter.py')
+        inputs_to_transfer.remove('../python/MyStandardScaler.py')
+        inputs_to_transfer.remove('../python/TensorflowEvaluator.py')
+        inputs_to_transfer.remove('../python/TensorflowDNNClassifier.py')
+        inputs_to_transfer.remove('../python/mva_evaluator.py')
         inputs_to_transfer.append('../ReadInput.py')
         inputs_to_transfer.append('../kinfitter.py')
+        inputs_to_transfer.append('../MyStandardScaler.py')
+        inputs_to_transfer.append('../TensorflowEvaluator.py')
+        inputs_to_transfer.append('../TensorflowDNNClassifier.py')
+        inputs_to_transfer.append('../mva_evaluator.py')
     else:
         inputs_to_transfer = list('../../'+p for p in inputs_to_transfer)
 
