@@ -86,7 +86,7 @@ if "doKinFit" in options:
     # os.system('rm '+input_file)
 
 
-if am.branchInfos['separateMvaEval'].val > 0.5:
+if am.branchInfos['postLoopMVAEval'].val > 0.5:
 
     # get ready for pickling (which happens when calling subprocess..)
     output_file = sys.argv[4]
