@@ -113,11 +113,12 @@ def evaluate_discriminator(ep, bdt_infos):
             getattr(ep, bdt_info.bdtname)[0] = bdt_info.tf_evaluator.EvaluateDNN(raw_vars)
 
 
-def apply_mva_eval(input_file, output_file, am):
+def apply_mva_eval(input_file, output_file, am, allowed_names):
 
     bdt_infos = list(
         prep_bdt_variables(bdt_info)
-        for _, bdt_info in am.bdtInfos
+        for bdt_name, bdt_info in am.bdtInfos
+        if bdt_name in allowed_names
     )
 
     f, t, of = prepare_io(input_file, output_file)

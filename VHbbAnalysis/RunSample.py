@@ -54,6 +54,7 @@ elif (len(sys.argv) > 6):
     am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]))
 else :
     am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
+os.system('rm temp.root')
 
 
 if "doKinFit" in options:
@@ -76,20 +77,41 @@ if "doKinFit" in options:
         event_proxies=event_proxies,
     )
 
-    os.system('rm '+input_file)
+    # os.system('rm '+input_file)
 
 
 if am.m("separateMvaEval") > 0.5:
-    import mva_evaluator
 
+    # get ready for pickling (which happens when calling subprocess..)
     output_file = sys.argv[4]
     input_file = output_file.replace('.root', '_before_mva_eval.root')
-    os.system('mv %s %s' % (output_file, input_file))
 
-    mva_evaluator.apply_mva_eval(
-        input_file,
-        output_file,
-        am
-    )
+    class Dummy(object): pass
+    am_dummy = Dummy()
+    am_dummy.systematics = list(s for s in am.systematics)
+    am_dummy.bdtInfos = list(b for b in am.bdtInfos)
+    for b in am_dummy.bdtInfos:
+        b.second.DeleteReader()  # the tmva-reader doesn't pickle
 
-    os.system('rm '+input_file)
+    bdt_names = list(name for name, nfo in am_dummy.bdtInfos if nfo.mvaType == 'BDT')
+    dnn_names = list(name for name, nfo in am_dummy.bdtInfos if nfo.mvaType == 'DNN')
+    # the first block contains all bdts and the next ones the individual dnn's
+    blocks = ([bdt_names] if bdt_names else []) + list([name] for name in dnn_names)
+
+
+    def worker_func(input_file, output_file, am, block):
+        import mva_evaluator
+        os.system('mv %s %s' % (output_file, input_file))
+        mva_evaluator.apply_mva_eval(
+            input_file,
+            output_file,
+            am,
+            allowed_names=block
+        )
+        os.system('rm '+input_file)
+
+    from multiprocessing import Process
+    for block in blocks:
+        p = Process(target=worker_func, args=(input_file, output_file, am, block))
+        p.start()
+        p.join()

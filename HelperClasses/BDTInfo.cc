@@ -7,7 +7,7 @@ BDTInfo::BDTInfo(std::string _methodName, std::string _bdtname, std::string _xml
     bdtVars = std::vector<BDTVariable>();
     //method = _method;
     xmlFile = _xmlFile;
-    reader = new TMVA::Reader( "!Color:!Silent:Error" );    
+    reader = std::make_unique<TMVA::Reader>( "!Color:!Silent:Error" );
     reader->SetVerbose(kTRUE);
 }
 
@@ -21,7 +21,7 @@ BDTInfo::BDTInfo(BDTInfo& _bdtInfo) {
         bdtVars.push_back(_bdtInfo.bdtVars[iVar]);
     }
     xmlFile = _bdtInfo.xmlFile;
-    reader = new TMVA::Reader( "!Color:!Silent:Error" );    
+    reader = std::make_unique<TMVA::Reader>( "!Color:!Silent:Error" );
     reader->SetVerbose(kTRUE);
 }
 
