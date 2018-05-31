@@ -16,8 +16,8 @@ name=WplusH125_powheg                 dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_
 name=WminusH125_powheg                dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/             type=-12501 xsec=0.101
 #name=WH125                            dir=WH_HToBB_WToLNu_M125_13TeV_amcatnloFXFX_madspin_pythia8/   type=-125010 xsec=0.25942
 #name=ZH125_powheg                     dir=/store/group/lpch25_13TeV_powheg_pythia8/                  type=-12502  xsec=0.0535
-name=ZH125_ZLL_powheg                 dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/                   type=-12502   xsec=0.01496
-name=ggZH125_ZLL_powheg               dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/                 type=-12503   xsec=0.00241
+name=ZH125_ZLL_powheg                 dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/                   type=-12502   xsec=0.04488
+name=ggZH125_ZLL_powheg               dir=ggZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/                 type=-12503   xsec=0.00723
 name=ZH125_ZNuNu_powheg               dir=ZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8/                 type=-12504   xsec=0.0891
 name=ggZH125_ZNuNu_powheg             dir=ggZH_HToBB_ZToNuNu_M125_13TeV_powheg_pythia8/               type=-12505   xsec=0.0143
 
