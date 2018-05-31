@@ -47,9 +47,11 @@ def main(argv=None):
 
     trial_params = itertools.product(N_BINS, METRICS, N_MINBKG, SMOOTH_BKG, UNC_TOL, WIDTH_TOL)
     for n_bins, metric, n_minbkg, smooth_bkg, unc_tol, width_tol in trial_params:
-        print 'Rebinning with n_bins={0!s}, metric={1}, n_minbkg={2!s}, smooth_bkg={3!r}, unc_tol={4!s}, width_tol={5!s}'.format(n_bins, metric, n_minbkg, smooth_bkg, unc_tol, width_tol)
+        print '\nRebinning with n_bins={0!s}, metric={1}, n_minbkg={2!s}, smooth_bkg={3!r}, unc_tol={4!s}, width_tol={5!s}'.format(n_bins, metric, n_minbkg, smooth_bkg, unc_tol, width_tol)
         try:
-            rebin(events, features, n_bins, metric, n_minbkg, smooth_bkg, unc_tol, [target_min, target_max, width_tol], config.destination)
+            results = rebin(events, features, n_bins, metric, n_minbkg, smooth_bkg, unc_tol, [target_min, target_max, width_tol], config.destination)
+            for key, value in sorted(results.items(), key=lambda x: x[0]):
+                print '{0!s}: {1!r}'.format(key, value)
         except BinUncertaintyError:
             print '... failed relative uncertainty tolerance!'
         except BinWidthError:

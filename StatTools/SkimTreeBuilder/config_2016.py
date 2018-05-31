@@ -6,7 +6,7 @@ from scale_factors_HIG16044 import *
 input_pattern = '/eos/uscms/store/group/lpchbb/VHbbNanoPostProc/2016/NanoNtuples/Analyzed/2016V4_RunALL/%s/output*.root'
 
 # The output directory for skimmed trees.
-destination = 'samples'
+destination = 'samples_2016'
 
 # The list of existing branches to be kept in the skimmed
 # tree in addition to the default subset of branches.
@@ -20,19 +20,18 @@ keep_branches = [
     'V_pt',
     'V_mass',
     'HVdPhi',
+    'MET_pt',
     'MET_Pt',
     'nAddJets_2lep',
     'SA5',
     'n_recoil_jets_fit',
+    '*_fit_fallback',
     'H_mass_sigma_fit',
-    'H_pt_fit_fallback',
-    'H_mass_fit_fallback',
-    'jjVPtRatio_fit_fallback',
-    'HVdPhi_fit_fallback',
 ]
 
 # The list of new branches to be created for the skimmed tree.
 new_branches = [
+    weight_F,
     # 0-lepton rebinner branches
     is_signal_Znn_I,
     bin_index_Znn_I,

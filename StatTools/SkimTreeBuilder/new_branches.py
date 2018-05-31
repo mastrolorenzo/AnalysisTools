@@ -1,5 +1,14 @@
 ## New Branch Definitions
 
+def weight_F(event):
+    """Fix the weight branch for 2016 Zll signal samples."""
+    # ZH125_ZLL_powheg = -12502
+    # ggZH125_ZLL_powheg = -12503
+    if event.sampleIndex in {-12502, -12503}:
+        return event.weight * 3
+    else:
+        return event.weight
+
 def is_signal_Znn_I(event):
     """Flag if the event belongs to a 0-lepton signal sample.
     Used by the rebinner.

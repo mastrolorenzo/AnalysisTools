@@ -1,7 +1,7 @@
 ## Rebinner Configuration File
 
 # The input pattern used to glob for sample files.
-input_pattern = '../SkimTreeBuilder/samples/%s.root'
+input_pattern = '../SkimTreeBuilder/samples_2016/%s.root'
 
 # The rebinner output directory.
 destination = 'rebinning_0lep_scan1'

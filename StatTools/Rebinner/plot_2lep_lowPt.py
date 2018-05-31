@@ -127,7 +127,7 @@ def get_stack_info(stack):
     for i in xrange(1, n_bins + 1):
         s, b = 0, 0
         for hist in stack.GetHists():
-            if hist.GetTitle() == 'WH':
+            if hist.GetTitle() in {'ZH', 'ggZH'}:
                 s += hist.GetBinContent(i)
             else:
                 b += hist.GetBinContent(i)
@@ -149,8 +149,8 @@ def main():
     }
 
     best_significance = {
-        'asimov': 0.20414979601354719,
-        'poisson': 0.20455462724561085,
+        'asimov': 0.6100821891828767,
+        'poisson': 0.613663879114297,
     }
 
     text = ROOT.TLatex()

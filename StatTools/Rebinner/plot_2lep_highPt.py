@@ -127,7 +127,7 @@ def get_stack_info(stack):
     for i in xrange(1, n_bins + 1):
         s, b = 0, 0
         for hist in stack.GetHists():
-            if hist.GetTitle() == 'WH':
+            if hist.GetTitle() in {'ZH', 'ggZH'}:
                 s += hist.GetBinContent(i)
             else:
                 b += hist.GetBinContent(i)
@@ -144,13 +144,13 @@ def main():
     plotter = Plotter('../SkimTreeBuilder/samples/%s.root')
 
     best_bin_edges = {
-        'asimov': [-1, 0.11562984064221382, 0.23582737147808075, 0.3934257924556732, 0.47776202857494354, 0.5407665073871613, 0.6295876502990723, 1],
+        'asimov': [-1, 0.11562984064221382, 0.23582737147808075, 0.3934257924556732, 0.47776202857494354, 0.6295876502990723, 1],
         'poisson': [-1, 0.11562984064221382, 0.23582737147808075, 0.3934257924556732, 0.47776202857494354, 0.5407665073871613, 0.6295876502990723, 1],
     }
 
     best_significance = {
-        'asimov': 0.41126511766041873,
-        'poisson': 0.4136981925475407,
+        'asimov': 1.2139065636672228,
+        'poisson': 1.2410945781037002,
     }
 
     text = ROOT.TLatex()
