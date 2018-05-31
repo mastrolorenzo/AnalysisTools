@@ -33,7 +33,7 @@ SUBMIT_DESCRIPTION = """\
 universe = vanilla
 should_transfer_files = YES
 
-executable = {jobName}/condor_runscript.sh
+executable = {executable}
 arguments = {configFile} {sampleName} {filesToRun} output_{sampleName}_{nProcJobs}.root {start_event_frac} {end_event_frac} {RunSample_args}
 initialdir = {jobName}/{sampleName}
 transfer_input_files = {inputs_to_transfer}
@@ -70,6 +70,32 @@ echo "done running, now copying output to EOS"
 {xrdcp_string}
 echo "all done!"
 """
+
+# The template for the batch exectuable on CMSConnect.
+RUNSCRIPT_CMSCONNECT = """\
+#!/usr/bin/env bash
+# Automatically generated on {timestamp}
+export XrdSecGSISRVNAMES=cmseos.fnal.gov
+export VO_CMS_SW_DIR=/cvmfs/cms.cern.ch
+
+echo "setting up the environment"
+export SCRAM_ARCH="{scram_arch}"
+source $VO_CMS_SW_DIR/cmsset_default.sh
+scram project CMSSW {cmssw_version}
+cd {cmssw_version}/src
+eval "$(scramv1 runtime -sh)"
+cd "$_CONDOR_SCRATCH_DIR"
+echo "successfully set up the enviroment"
+
+{copy_string}
+
+echo "running RunSample.py"
+python RunSample.py $1 $2 $3 "$_CONDOR_SCRATCH_DIR"/$4 $5 $6 $7
+echo "done running, now copying output to EOS"
+{xrdcp_string}
+echo "all done!"
+"""
+
 
 # The template for the batch executable at DESY.
 RUNSCRIPT_DESY = """\
@@ -199,7 +225,7 @@ def main(argv=None):
                 print 'detected site: CERN'
                 site = 'CERN'
 
-        if site not in {"FNAL", "CERN", "DESY"}:
+        if site not in {"FNAL", "CERN", "DESY", "CMSCONNECT"}:
             print "unknown site: %s" % site
             sys.exit(-1)
 
@@ -219,6 +245,8 @@ def main(argv=None):
             output_dir = "/eos/cms/store/user/%s/VHbbAnalysisNtuples" % os.getlogin()
         elif site == "DESY":
             output_dir = "/nfs/dust/cms/user/%s/VHbbAnalysisNtuples" % os.getlogin()
+        elif site == "CMSCONNECT":
+            output_dir = "/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples"
 
         if options.doSkim:
             output_dir = output_dir.replace("VHbbAnalysisNtuples", "SkimmedAnalysisNtuples")
@@ -228,7 +256,11 @@ def main(argv=None):
             output_dir = options.outputDir
 
         os.system("mkdir -p %s" % jobName)
-        os.system("mkdir -p %s/%s" % (output_dir, jobName))
+        if site == "CMSCONNECT":
+            start = output_dir.find('/store')
+            os.system("xrdfs root://cmseos.fnal.gov mkdir -p %s/%s" % (output_dir[start:], jobName))
+        else:
+            os.system("mkdir -p %s/%s" % (output_dir, jobName))
 
         submitFiles = []
 
@@ -262,7 +294,11 @@ def main(argv=None):
             sampleName = sample.sampleName
             print sampleName
             os.system("mkdir -p %s/%s" % (jobName, sampleName))
-            os.system("mkdir -p %s/%s/%s" % (output_dir, jobName, sampleName))
+            if site == "CMSCONNECT":
+                start = output_dir.find('/store')
+                os.system("xrdfs root://cmseos.fnal.gov mkdir -p %s/%s/%s" % (output_dir[start:], jobName, sampleName))
+            else:
+                os.system("mkdir -p %s/%s/%s" % (output_dir, jobName, sampleName))
             nProcJobs = 0
             nFiles = len(sample.files)
             if nFilesPerJob < 1:
@@ -302,8 +338,13 @@ def main(argv=None):
 
                 if not useSGE:
                     submitPath = "%s/%s/job%i.submit" % (jobName, sampleName, nProcJobs)
+                    if site == 'CMSCONNECT':
+                        executable = os.path.abspath("%s/condor_runscript.sh" % jobName)
+                    else:
+                        executable = "%s/condor_runscript.sh" % jobName
                     content = SUBMIT_DESCRIPTION.format(
                         timestamp=time.strftime('%a %b %d %H:%M:%S %Z %Y'),
+                        executable=executable,
                         jobName=jobName,
                         configFile=configFile,
                         sampleName=sampleName,
@@ -345,6 +386,9 @@ def main(argv=None):
             local_path = "%s/%s" % (output_dir, jobName)
             xrdcp_string = "mkdir -p %s/$2; cp -vf $4 %s/$2" % (local_path, local_path)
             runscript_template = RUNSCRIPT_DESY
+        elif site == "CMSCONNECT":
+            xrdcp_string = "xrdcp -f $_CONDOR_SCRATCH_DIR/$4 root://cmseos.fnal.gov/%s/%s/$2" % (output_dir, jobName)
+            runscript_template = RUNSCRIPT_CMSCONNECT
 
         runscript_content = runscript_template.format(
             timestamp=time.strftime('%a %b %d %H:%M:%S %Z %Y'),
