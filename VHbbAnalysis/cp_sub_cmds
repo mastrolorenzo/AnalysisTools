@@ -1,0 +1,4 @@
+python RunAnalysis.py -b 1 -n 2017V5Skim_UpdatedBDTs_WithSyst_May31_Signal -f 1 -o /eos/uscms/store/group/lpchbb/VHbbNanoPostProc/2017/NanoNtuples/Analyzed/ -c vhbb_config_2017_signal.txt  --runOnSkim 1 --doKinFit 1
+python RunAnalysis.py -b 1 -n 2017V5Skim_UpdatedBDTs_WithSyst_May31_Signal -f 2 -o /eos/uscms/store/group/lpchbb/VHbbNanoPostProc/2017/NanoNtuples/Analyzed/ -c vhbb_config_2017_1lepbkgs.txt  --runOnSkim 1 --doKinFit 1
+python RunAnalysis.py -b 1 -n 2017V5Skim_UpdatedBDTs_WithSyst_May31_2lepbkgsNO1lepbkgs -f 1 -o /eos/uscms/store/group/lpchbb/VHbbNanoPostProc/2017/NanoNtuples/Analyzed/ -c vhbb_config_2017_2lepMINUS1lepbkgs.txt  --runOnSkim 1 --doKinFit 1 
+python RunAnalysis.py -b 1 -n 2017V5Skim_UpdatedBDTs_WithSyst_May31_0lepbkgsNO1OR2lepbkgs -f 1 -o /eos/uscms/store/group/lpchbb/VHbbNanoPostProc/2017/NanoNtuples/Analyzed/  -c vhbb_config_2017_0lepMINUS1AND2lepbkgs.txt  --runOnSkim 1 --doKinFit 1 

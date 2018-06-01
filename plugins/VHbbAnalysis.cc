@@ -306,7 +306,7 @@ bool VHbbAnalysis::Analyze() {
             *in["controlSample"] = -1;
         }
     } else if (mInt("Vtype") == 2 && (cursample->lepFlav == -1 || cursample->lepFlav == 2)) {
-        std::pair<int,int> good_muons_1lep = HighestPtGoodMuonsOppCharge(    m("muptcut_1lepchan"), m("murelisocut_1lepchan"));
+        std::pair<int,int> good_muons_1lep = HighestPtGoodMuonsOppCharge(    m("muptcut_1lepchan"), m("murelisocut_1lepchan"), true);
         if (good_muons_1lep.first > -1) {
             *in["isWmunu"] = 1;
             *in["eventClass"] = 0;      // TODO is this still needed????
@@ -2826,14 +2826,14 @@ std::pair<int,int> VHbbAnalysis::HighestPtGoodElectronsOppCharge(float min_pt, f
     return std::make_pair(first, -1);
 }
 
-std::pair<int,int> VHbbAnalysis::HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso) {
+std::pair<int,int> VHbbAnalysis::HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso, bool isOneLepton) {
     int first = -1;
     for (int i = 0; i<mInt("nMuon"); i++) {
         if (fabs(m("Muon_eta",i)) < m("muetacut")
             && m("Muon_pt",i) > min_pt
             && m("Muon_pfRelIso04_all",i) < max_rel_iso
             //&& in["selLeptons_looseIdPOG"][i] >= *f["muidcut"]
-            && m("Muon_mediumId",i) > 0)
+            && ( !isOneLepton || m("Muon_tightId",i) > 0) )
         {
             // leptons are pt sorted
             if (first == -1) {

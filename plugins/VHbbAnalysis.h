@@ -42,7 +42,7 @@ class VHbbAnalysis : public AnalysisManager {
         void UpdateJetPts();
 
         std::pair<int,int> HighestPtGoodElectronsOppCharge(float min_pt, float max_rel_iso, float idcut, bool isOneLepton);
-        std::pair<int,int> HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso);
+        std::pair<int,int> HighestPtGoodMuonsOppCharge(float min_pt, float max_rel_iso,bool isOneLepton=false);
         bool ElectronSelection(int);
         bool MuonSelection(int);
         int UpdatedVType();

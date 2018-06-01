@@ -19,4 +19,6 @@
 #name=JECDown     branches=Jet_pt,Jet_pt_reg,Jet_mass,met_pt  scaleVar=Jet_corr_JECDown_ratio,Jet_corr_JECDown_ratio,Jet_corr_JECDown_ratio,met_pt_JECDown_ratio
 #name=JERUp       branches=Jet_pt,Jet_pt_reg,Jet_mass  scaleVar=Jet_corr_JERUp_ratio,Jet_pt_reg_corrJERUp_ratio,Jet_corr_JERUp_ratio
 #name=JERDown     branches=Jet_pt,Jet_pt_reg,Jet_mass  scaleVar=Jet_corr_JERDown_ratio,Jet_pt_reg_corrJERDown_ratio,Jet_corr_JERDown_ratio
+name=JECUp       branches=Jet_Pt,Jet_PtReg,Jet_mass,MET_Pt,MET_Phi  scaleVar=Jet_pt_jesTotalUp,Jet_pt_jesTotalUp,Jet_mass_jesTotalUp,MET_pt_jesTotalUp,MET_phi_jesTotalUp scaleVarRef=None,Jet_Pt,None,None,None
+name=JECDown     branches=Jet_Pt,Jet_PtReg,Jet_mass,MET_Pt,MET_Phi  scaleVar=Jet_pt_jesTotalDown,Jet_pt_jesTotalDown,Jet_mass_jesTotalDown,MET_pt_jesTotalDown,MET_phi_jesTotalDown scaleVarRef=None,Jet_Pt,None,None,None
 name=nominal
