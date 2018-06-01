@@ -1,4 +1,5 @@
 CMS_METUnclustEn  shape  1.0 WH_hbb,ggZH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 METUnclustEn 
+CMS_vhbb_puWeight  shape  1.0 WH_hbb,ggZH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 weight_PU
 #CMS_res_j_13TeV shape 1.0 WH_hbb,ggZH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 JER
 CMS_scale_j_FlavorQCD_13TeV shape 1.0 WH_hbb,ggZH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 FlavorQCD
 CMS_scale_j_AbsoluteStat_13TeV shape 1.0 WH_hbb,ggZH_hbb,ZH_hbb,TT,s_Top,Wj0b,Wj1b,Wj2b,QCD,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteStat

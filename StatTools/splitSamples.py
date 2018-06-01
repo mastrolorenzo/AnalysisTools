@@ -476,6 +476,9 @@ for sample in sampleMap:
                 elif (sysWeight.find("VPtCorrFactorSplit") != -1):
                      tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
                      tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
+                elif (sysWeight.find("weight_PU") != -1):
+                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(1./weight_PU)*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
+                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(1./weight_PU)*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
                 else:
                     tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
                     tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
