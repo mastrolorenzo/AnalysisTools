@@ -19,6 +19,7 @@ SUBMIT = Template("""\
 universe = vanilla
 should_transfer_files = YES
 notification = never
+x509userproxy = $ENV(X509_USER_PROXY)
 
 executable = condor_runscript.sh
 transfer_input_files = AnalysisTools.tar.gz
@@ -45,6 +46,9 @@ echo "$(date) - $CONDOR_EXEC - INFO - Setting up the environment"
 export XrdSecGSISRVNAMES=cmseos.fnal.gov
 export VO_CMS_SW_DIR=/cvmfs/cms.cern.ch
 
+# Check if the GRID proxy was transferred.
+voms-proxy-info
+
 # Setup the CMS software environment.
 export SCRAM_ARCH="{{ environ['SCRAM_ARCH'] }}"
 source $VO_CMS_SW_DIR/cmsset_default.sh
@@ -68,7 +72,15 @@ echo "$(date) - $CONDOR_EXEC - INFO - Running RunSample.py"
 python RunSample.py $1 $2 $3 $4 $5 $6 $7
 
 echo "$(date) - $CONDOR_EXEC - INFO - Transferring Output File"
-{{ xrdcp_command }}
+for i in {1..10}; do
+    {{ xrdcp_command }}
+    XRDEXIT = $?
+    if [[ $XRDEXIT -eq 0 ]]; then
+        exit $XRDEXIT
+    else
+        echo "xrdcp failed with exit code $XRDEXIT, reattempting the transfer..."
+    fi
+done
 """)
 
 
