@@ -225,6 +225,7 @@ else:
                 content += "Error  = %i.stderr\n" % nProcJobs
                 content += "Log    = %i.log\n"    % nProcJobs
                 content += "Notification = never\n"
+                content += "on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)\n"
                 if dcache:
                     content += "x509userproxy = $ENV(X509_USER_PROXY)\n"
                 #content += "WhenToTransferOutput=On_Exit\n"
@@ -241,9 +242,10 @@ else:
             content += "Executable = %s/condor_runscript.sh\n" % jobName
             content += "initialdir = %s/%s\n" % (jobName,sampleName)
             content += "Output = $(ProcId).stdout\n"
-            content += "Error  = $(ProcId).stderr\n" 
-            content += "Log    = $(ProcId).log\n"   
+            content += "Error  = $(ProcId).stderr\n"
+            content += "Log    = $(ProcId).log\n"
             content += "Notification = never\n"
+            content += "on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)\n"
             if dcache:
                 content += "x509userproxy = $ENV(X509_USER_PROXY)\n"
             content += "transfer_input_files = %s\n" % ','.join(inputs_to_transfer)
@@ -264,6 +266,8 @@ else:
             xrdcp_string = "mkdir -p %s/$2; cp -vf $4 %s/$2" % (local_path, local_path)
         else:
             xrdcp_string = "gfal-copy -p file:$4 %s/$2/$4" % (local_path)
+        if not dcache:
+            xrdcp_string += '\n        python -c "import sys,ROOT; f=ROOT.TFile(\'%s/$2/$4\'); sys.exit(int(f.IsZombie() and 99))"' % local_path
     copy_string = "" # not sure how to automatically transfer files to SGE job nodes, for now do it manually
     if useSGE:
         copy_string = ''' cp -r {0}/cfg .
@@ -315,10 +319,23 @@ else:
 
         echo "running RunSample.py"
         echo $ORIG_DIR/$4
-        python RunSample.py $1 $2 $3 $ORIG_DIR/$4 $5 $6 $7 
+        python RunSample.py $1 $2 $3 $ORIG_DIR/$4 $5 $6 $7
+        rc=$?
+        if [[ $rc != 0 ]]
+        then
+            echo "got exit code from RunSample.py: " $rc
+            exit $rc
+        fi
         echo "done running, now copying output to EOS"
         ###xrdcp -f $ORIG_DIR/$4 root://cmseos.fnal.gov//store/user/sbc01/VHbbAnalysisNtuples/%s/$2
         %s
+        rc=$?
+        if [[ $rc != 0 ]]
+        then
+            echo "copy failed (either bad output from cp or file is Zombie)"
+            exit $rc
+        fi
+
         rm $ORIG_DIR/$4
         echo "all done!" ''' % (os.getcwd(),scram_arch,patch_rel,cmssw_version, os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), os.getcwd(), copy_string, jobName, xrdcp_string )
 
@@ -351,18 +368,30 @@ else:
 
         echo "running RunSample.py"
         echo $4
-        python RunSample.py $1 $2 $3 $4 $5 $6 $7 
+        python RunSample.py $1 $2 $3 $4 $5 $6 $7
+        rc=$?
+        if [[ $rc != 0 ]]
+        then
+            echo "got exit code from RunSample.py: " $rc
+            exit $rc
+        fi
         echo "done running, now copying output to EOS"
 
-        echo "copying output (%s)"
+        echo "copying output"
         %s
+        rc=$?
+        if [[ $rc != 0 ]]
+        then
+            echo "copy failed (either bad output from cp or file is Zombie)"
+            exit $rc
+        fi
 
         echo "delete tmp dir"
         cd $TMP
         rm -r $tmp_dir
 
         echo "all done!"
-    ''' % (' '.join(inputs_to_transfer), scram_arch, patch_rel, cmssw_version, xrdcp_string, xrdcp_string)
+    ''' % (' '.join(inputs_to_transfer), scram_arch, patch_rel, cmssw_version, xrdcp_string)
 
     runscript = open("%s/condor_runscript.sh" % (jobName) , "w")
     runscript.write(condor_runscript_text_desy if site=='DESY' else condor_runscript_text)

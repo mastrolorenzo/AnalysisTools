@@ -415,7 +415,7 @@ void AnalysisManager::CheckBranchLengths(Long64_t entry, bool isData){
                 branches[ibranch->first]->GetEntry(entry);
             } else if (!(ibranch->second->allowMissingBranch)){
                std::cout<<"Branch "<<ibranch->first<<" is missing and allowMissingBranch is not set. Exiting..."<<std::endl;
-               std::exit(0);
+               std::exit(21);
             }
         }
     }
@@ -426,7 +426,7 @@ void AnalysisManager::CheckBranchLengths(Long64_t entry, bool isData){
                 if(ibranch->second->length < mInt((ibranch->second->lengthBranch).c_str())){
                     std::cout<<"Branch "<<ibranch->first<< " has max length "<<ibranch->second->length<< " but lengthBranch " <<ibranch->second->lengthBranch <<" is "<<mInt((ibranch->second->lengthBranch).c_str())<<std::endl;
                     std::cout<<"Exiting...."<<std::endl;
-                    std::exit(0);
+                    std::exit(22);
                  }
             }
         }
@@ -444,7 +444,7 @@ void AnalysisManager::GetEarlyEntries(Long64_t entry, bool isData){
                 if(debug>100000) std::cout<<"Got entry for early branch "<<ibranch->first<<std::endl;
             } else if (!(ibranch->second->allowMissingBranch)){
                std::cout<<"Branch "<<ibranch->first<<" is missing and allowMissingBranch is not set. Exiting..."<<std::endl;
-               std::exit(0);
+               std::exit(31);
             }
         }
     }
@@ -504,10 +504,11 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                         }
                         else {
                             std::cout<<"Analysis Manager tried to run on file "<<filenames[j]<<" in sample "<<sampleName<<", but this file is not in the sample's list of files. Skipping..."<<std::endl;
-                            std::cout<<"Let's print the full list of files for this sample..."<<std::endl;
+                            std::cout<<"Let's print the full list of files for this sample and exit"<<std::endl;
                             for (int k=0; k<(int)sampleFiles.size(); k++) {
                                 std::cout<<sampleFiles[k]<<std::endl;
                             }
+                            std::exit(51);
                         }
                     }
                     //onlySample->processedEvents = processedEvents;
@@ -1208,7 +1209,7 @@ double AnalysisManager::m(std::string key, int index){
         std::cout<<"There is no branch with name "<<key<<std::endl;
         if(safemode){
             std::cout<<"The program must be terminated..."<<std::endl;
-            std::exit(0);
+            std::exit(11);
         } else {
             if(debug>1) std::cout<<"Returning -999 and hoping for the best."<<std::endl;
             return -999;
@@ -1218,12 +1219,12 @@ double AnalysisManager::m(std::string key, int index){
         if(branchInfos[key]->type%6==5){
             std::cout<<"Key "<<key<<" of type "<<branchInfos[key]->type<<", please use AnalysisManager::mInt() instead."<<std::endl;
             std::cout<<"Exiting"<<std::endl;
-            std::exit(0);
+            std::exit(12);
         }
         if(branchInfos[key]->type>5&&index<0){
             std::cout<<"No valid index ("<<index<<") specified for branch "<<key<<std::endl;
             std::cout<<"Exiting..."<<std::endl;
-            std::exit(0);
+            std::exit(13);
         }
         switch(branchInfos[key]->type)
         {
@@ -1270,7 +1271,7 @@ int AnalysisManager::mInt(std::string key, int index){
         std::cout<<"There is no branch with name "<<key<<std::endl;
         if(safemode){
             std::cout<<"The program must be terminated..."<<std::endl;
-            std::exit(0);
+            std::exit(14);
         } else {
             if(debug>1) std::cout<<"Returning -999 and hoping for the best."<<std::endl;
             return -999;
@@ -1280,12 +1281,12 @@ int AnalysisManager::mInt(std::string key, int index){
         if(branchInfos[key]->type%6==2 || branchInfos[key]->type%6==3){
             std::cout<<"Key "<<key<<" of type "<<branchInfos[key]->type<<", please use AnalysisManager::m() instead."<<std::endl;
             std::cout<<"Exiting"<<std::endl;
-            std::exit(0);
+            std::exit(15);
         }
         if(branchInfos[key]->type>5&&index<0){
             std::cout<<"No valid index specified for branch "<<key<<std::endl;
             std::cout<<"Exiting..."<<std::endl;
-            std::exit(0);
+            std::exit(16);
         }
         switch(branchInfos[key]->type)
         {

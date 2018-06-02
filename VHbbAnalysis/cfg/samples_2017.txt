@@ -1,7 +1,7 @@
 prefix_desy=/pnfs/desy.de/cms/tier2/store/user/adewit/VHbbPostNano2017/V5/
 prefix_cern=/store/group/phys_higgs/hbb/ntuples/VHbbPostNano/2017/V5/
-prefix_fnal=/store/group/lpchbb/SkimmedAnalysisNtuples/2017V5_May30_skim/
-prefix=/store/group/lpchbb/SkimmedAnalysisNtuples/2017V5_May30_skim/
+prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/2017/V5/
+prefix=/store/group/lpchbb/VHbbNanoPostProc/2017/V5/
 
 ############################ DATA ###########################################################
 name=Run2017_Ele_ReMiniAOD        dir=SingleElectron/   type=0 xsec=1   lepFlav=3
@@ -61,19 +61,19 @@ name=WJets-HT600To800                 dir=WJetsToLNu_HT-600To800_TuneCP5_13TeV-m
 name=WJets-HT800To1200                dir=WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/             type=45  xsec=5.501 kfac=1.21  doJetFlavorSplit=1
 name=WJets-HT1200To2500               dir=WJetsToLNu_HT-1200To2500_TuneCP5_13TeV-madgraphMLM-pythia8/            type=46  xsec=1.329 kfac=1.21  doJetFlavorSplit=1
 ##name=WJets-HT2500ToInf                dir=WJetsToLNu_HT-2500ToInf_TuneCP5_13TeV-madgraphMLM-pythia8/             type=47  xsec=0.03216 kfac=1.21  doJetFlavorSplit=1
-#name=WJets_0J                         dir=WToLNu_0J_13TeV-amcatnloFXFX-pythia8/                                       type=70   xsec=58440   doJetFlavorSplit=1 (missing)
-#name=WJets_1J                         dir=WToLNu_1J_13TeV-amcatnloFXFX-pythia8/                                       type=71   xsec=8264   doJetFlavorSplit=1 (missing)
-#name=WJets_2J                         dir=WToLNu_2J_13TeV-amcatnloFXFX-pythia8/                                       type=72   xsec=2544    doJetFlavorSplit=1 (missing)
-#name=W1JetsToLNu_LHEWpT50to150         dir=W1JetsToLNu_LHEWpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/       type=73   xsec=2661  doJetFlavourSplit=1
-name=W1JetsToLNu_LHEWpT100to150         dir=W1JetsToLNu_LHEWpT_100-150_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=74   xsec=286.1  doJetFlavourSplit=1
-name=W1JetsToLNu_LHEWpT150to250        dir=W1JetsToLNu_LHEWpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=75   xsec=71.9  doJetFlavourSplit=1
-name=W1JetsToLNu_LHEWpT250to400         dir=W1JetsToLNu_LHEWpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=76   xsec=8.05  doJetFlavourSplit=1
-name=W1JetsToLNu_LHEWpT400toInf         dir=W1JetsToLNu_LHEWpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=77   xsec=0.885 doJetFlavourSplit=1
-#name=W2JetsToLNu_LHEWpT50to150          dir=W2JetsToLNu_LHEWpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/       type=78   xsec=      doJetFlavourSplit=1
-name=W2JetsToLNu_LHEWpT100to150         dir=W2JetsToLNu_LHEWpT_100-150_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=79   xsec=277.7 doJetFlavourSplit=1
-#name=W2JetsToLNu_LHEWpT150to250         dir=W2JetsToLNu_LHEWpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=80   xsec=105.9 doJetFlavourSplit=1
-name=W2JetsToLNu_LHEWpT250to400         dir=W2JetsToLNu_LHEWpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=81   xsec=18.67 doJetFlavourSplit=1
-name=W2JetsToLNu_LHEWpT400toInf         dir=W2JetsToLNu_LHEWpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=82   xsec=3.037 doJetFlavourSplit=1
+##name=WJets_0J                         dir=WToLNu_0J_13TeV-amcatnloFXFX-pythia8/                                       type=70   xsec=58440   doJetFlavorSplit=1 (missing)
+##name=WJets_1J                         dir=WToLNu_1J_13TeV-amcatnloFXFX-pythia8/                                       type=71   xsec=8264   doJetFlavorSplit=1 (missing)
+##name=WJets_2J                         dir=WToLNu_2J_13TeV-amcatnloFXFX-pythia8/                                       type=72   xsec=2544    doJetFlavorSplit=1 (missing)
+##name=W1JetsToLNu_LHEWpT50to150         dir=W1JetsToLNu_LHEWpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/       type=73   xsec=2661  doJetFlavourSplit=1
+#name=W1JetsToLNu_LHEWpT100to150         dir=W1JetsToLNu_LHEWpT_100-150_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=74   xsec=286.1  doJetFlavourSplit=1
+#name=W1JetsToLNu_LHEWpT150to250        dir=W1JetsToLNu_LHEWpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=75   xsec=71.9  doJetFlavourSplit=1
+#name=W1JetsToLNu_LHEWpT250to400         dir=W1JetsToLNu_LHEWpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=76   xsec=8.05  doJetFlavourSplit=1
+#name=W1JetsToLNu_LHEWpT400toInf         dir=W1JetsToLNu_LHEWpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=77   xsec=0.885 doJetFlavourSplit=1
+##name=W2JetsToLNu_LHEWpT50to150          dir=W2JetsToLNu_LHEWpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/       type=78   xsec=      doJetFlavourSplit=1
+#name=W2JetsToLNu_LHEWpT100to150         dir=W2JetsToLNu_LHEWpT_100-150_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=79   xsec=277.7 doJetFlavourSplit=1
+##name=W2JetsToLNu_LHEWpT150to250         dir=W2JetsToLNu_LHEWpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=80   xsec=105.9 doJetFlavourSplit=1
+#name=W2JetsToLNu_LHEWpT250to400         dir=W2JetsToLNu_LHEWpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=81   xsec=18.67 doJetFlavourSplit=1
+#name=W2JetsToLNu_LHEWpT400toInf         dir=W2JetsToLNu_LHEWpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/      type=82   xsec=3.037 doJetFlavourSplit=1
 
 
 #=========>>>>% Drell-Yan
@@ -99,14 +99,14 @@ name=DYToLL_M4to50_HT600toInf_madgraph    dir=DYJetsToLL_M-4to50_HT-600toInf_Tun
 
 #name=DYToEE_highM                         dir=DYToEE_M-50_NNPDF31_13TeV-powheg-pythia8/                         type=129    xsec=1964  doJetFlavorSplit=1
 
-##name=DY1JetsToLL_LHEZpT50to150            dir=DY1JetsToLL_M-50_LHEZpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=131   xsec=312.6  doJetFlavourSplit=1
-name=DY1JetsToLL_LHEZpT150to250           dir=DY1JetsToLL_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=132   xsec=9.56   doJetFlavourSplit=1
-##name=DY1JetsToLL_LHEZpT250to400           dir=DY1JetsToLL_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=133   xsec=1.095  doJetFlavourSplit=1
-name=DY1JetsToLL_LHEZpT400toInf           dir=DY1JetsToLL_M-50_LHEZpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=134   xsec=0.1199 doJetFlavourSplit=1
-name=DY2JetsToLL_LHEZpT50to150            dir=DY2JetsToLL_M-50_LHEZpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=135   xsec=169.7  doJetFlavourSplit=1
-##name=DY2JetsToLL_LHEZpT150to250           dir=DY2JetsToLL_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=136   xsec=15.57   doJetFlavourSplit=1
-name=DY2JetsToLL_LHEZpT250to400           dir=DY2JetsToLL_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=137   xsec=2.736  doJetFlavourSplit=1
-name=DY2JetsToLL_LHEZpT400toInf           dir=DY2JetsToLL_M-50_LHEZpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=138   xsec=0.4501 doJetFlavourSplit=1
+###name=DY1JetsToLL_LHEZpT50to150            dir=DY1JetsToLL_M-50_LHEZpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=131   xsec=312.6  doJetFlavourSplit=1
+#name=DY1JetsToLL_LHEZpT150to250           dir=DY1JetsToLL_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=132   xsec=9.56   doJetFlavourSplit=1
+###name=DY1JetsToLL_LHEZpT250to400           dir=DY1JetsToLL_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=133   xsec=1.095  doJetFlavourSplit=1
+#name=DY1JetsToLL_LHEZpT400toInf           dir=DY1JetsToLL_M-50_LHEZpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=134   xsec=0.1199 doJetFlavourSplit=1
+#name=DY2JetsToLL_LHEZpT50to150            dir=DY2JetsToLL_M-50_LHEZpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=135   xsec=169.7  doJetFlavourSplit=1
+###name=DY2JetsToLL_LHEZpT150to250           dir=DY2JetsToLL_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=136   xsec=15.57   doJetFlavourSplit=1
+#name=DY2JetsToLL_LHEZpT250to400           dir=DY2JetsToLL_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=137   xsec=2.736  doJetFlavourSplit=1
+#name=DY2JetsToLL_LHEZpT400toInf           dir=DY2JetsToLL_M-50_LHEZpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=138   xsec=0.4501 doJetFlavourSplit=1
 
 
 name=ZJetsToNuNu_HT100To200            dir=ZJetsToNuNu_HT-100To200_13TeV-madgraph    type=150  xsec=280.05    kfac=1.23  doJetFlavorSplit=1
@@ -116,9 +116,9 @@ name=ZJetsToNuNu_HT600To800            dir=ZJetsToNuNu_HT-600To800_13TeV-madgrap
 name=ZJetsToNuNu_HT800To1200           dir=ZJetsToNuNu_HT-800To1200_13TeV-madgraph   type=154  xsec=1.1802    kfac=1.23  doJetFlavorSplit=1
 #name=ZJetsToNuNu_HT1200To2500          dir=ZJetsToNuNu_HT-1200To2500_13TeV-madgraph  type=155  xsec=0.28629   kfac=1.23  doJetFlavorSplit=1
 name=ZJetsToNuNu_HT2500ToInf           dir=ZJetsToNuNu_HT-2500ToInf_13TeV-madgraph   type=156  xsec=0.006912  kfac=1.23  doJetFlavorSplit=1
-name=Z1JetsToNuNu_LHEZpT150to250        dir=Z1JetsToNuNu_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=170  xsec=17.91  kfac=1.0 doJetFlavorSplit=1 #Need to determine correct k-factor for NLO->NNLO
-name=Z1JetsToNuNu_LHEZpT250to400        dir=Z1JetsToNuNu_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=171  xsec=2.059  kfac=1.0 doJetFlavorSplit=1 #Need to determine correct k-factor for NLO->NNLO
-name=Z1JetsToNuNu_LHEZpT400toInf        dir=Z1JetsToNuNu_M-50_LHEZpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=172  xsec=0.2246 kfac=1.0 doJetFlavorSplit=1 #Need to determine correct k-factor for NLO->NNLO
+#name=Z1JetsToNuNu_LHEZpT150to250        dir=Z1JetsToNuNu_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=170  xsec=17.91  kfac=1.0 doJetFlavorSplit=1 #Need to determine correct k-factor for NLO->NNLO
+#name=Z1JetsToNuNu_LHEZpT250to400        dir=Z1JetsToNuNu_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=171  xsec=2.059  kfac=1.0 doJetFlavorSplit=1 #Need to determine correct k-factor for NLO->NNLO
+#name=Z1JetsToNuNu_LHEZpT400toInf        dir=Z1JetsToNuNu_M-50_LHEZpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=172  xsec=0.2246 kfac=1.0 doJetFlavorSplit=1 #Need to determine correct k-factor for NLO->NNLO
 ##name=Z2JetsToNuNu_LHEZpT150to250        dir=Z2JetsToNuNu_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=173  xsec=29.62  kfac=1.0 doJetFlavorSplit=1 #Need to determine correct k-factor for NLO->NNLO
 ##name=Z2JetsToNuNu_LHEZpT250to400        dir=Z2JetsToNuNu_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=174  xsec=5.136  kfac=1.0 doJetFlavorSplit=1 #Need to determine correct k-factor for NLO->NNLO
 

@@ -89,6 +89,7 @@ type=8  name=Muon_mass                      max=20    lengthBranch=nMuon
 type=8  name=Muon_pfRelIso04_all            max=20    lengthBranch=nMuon
 type=8  name=Muon_ptErr                     max=20    lengthBranch=nMuon
 type=10  name=Muon_mediumId                  max=20    lengthBranch=nMuon
+type=10  name=Muon_tightId                  max=20    lengthBranch=nMuon
 type=7  name=Muon_charge                    max=20    lengthBranch=nMuon
 
 #type=1  name=nselLeptons
