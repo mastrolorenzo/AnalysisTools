@@ -249,6 +249,10 @@ else:
             if dcache:
                 content += "x509userproxy = $ENV(X509_USER_PROXY)\n"
             content += "transfer_input_files = %s\n" % ','.join(inputs_to_transfer)
+            if site == "FNAL":
+                # Prevent condor from transferring files just because they are new,
+                # e.g. Python bytecode, intermediate kinFit and MVA evaluation files.
+                content += "transfer_output_files = \"\"\n"
             content += "Queue Arguments from (\n"
             content += "%s" %arg_string
             content += ")"
