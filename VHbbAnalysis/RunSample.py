@@ -1,6 +1,7 @@
 from multiprocessing import Process
 import sys
 import os
+import time
 
 if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv)!=6 and len(sys.argv)!=7 and len(sys.argv) !=8):
     print "Please give two arguments:  the cfg file and the sample name"
@@ -29,6 +30,7 @@ print "options:", options
 if "doSkim" in options and "runOnSkim" in options:
     raise RuntimeError("Cannot doSkim and runOnSkim at the same time.")
 
+t0=time.time()
 def loop_func():
     # this is run in the child process
     import ReadInput
@@ -56,10 +58,13 @@ def loop_func():
     else :
         am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
     os.system('rm temp.root')
+    
 
 p = Process(target=loop_func, args=tuple())
 p.start()
 p.join()
+    
+tLoop=time.time()-t0
 
 # load am in the main process only now, in order to keep the memory footprint low
 import ReadInput
@@ -90,6 +95,7 @@ if "doKinFit" in options:
 
     # os.system('rm '+input_file)
 
+tKinFit=time.time()-tLoop-t0
 
 if am.branchInfos['postLoopMVAEval'].val > 0.5:
 
@@ -118,3 +124,7 @@ if am.branchInfos['postLoopMVAEval'].val > 0.5:
         p = Process(target=worker_func, args=(block,))
         p.start()
         p.join()
+
+tMVAEval=time.time()-tKinFit-tLoop-t0
+
+print "tMVAEval,tKinFit,tLoop",tMVAEval,tKinFit,tLoop
