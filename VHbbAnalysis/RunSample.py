@@ -41,7 +41,6 @@ def loop_func():
     #am.debug=20000
     am.debug=2
 
-    tReadFiles=time.time()-t0
     print "dataYear",am.m("dataYear")
     print "Read in the input files, now let's run it!"
     if(am.debug>100):
@@ -60,11 +59,12 @@ def loop_func():
         am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
     os.system('rm temp.root')
     
-    tLoop=time.time()-tReadFiles-t0
 
 p = Process(target=loop_func, args=tuple())
 p.start()
 p.join()
+    
+tLoop=time.time()-t0
 
 # load am in the main process only now, in order to keep the memory footprint low
 import ReadInput
@@ -95,7 +95,7 @@ if "doKinFit" in options:
 
     # os.system('rm '+input_file)
 
-tKinFit=time.time()-tLoop-tReadFiles-t0
+tKinFit=time.time()-tLoop-t0
 
 if am.branchInfos['postLoopMVAEval'].val > 0.5:
 
@@ -125,6 +125,6 @@ if am.branchInfos['postLoopMVAEval'].val > 0.5:
         p.start()
         p.join()
 
-tMVAEval=time.time()-tKinFit-tLoop-tReadFiles-t0
+tMVAEval=time.time()-tKinFit-tLoop-t0
 
-print "tMVAEval,tKinFit,tLoop,tReadFiles",tMVAEval,tKinFit,tLoop,tReadFiles
+print "tMVAEval,tKinFit,tLoop",tMVAEval,tKinFit,tLoop
