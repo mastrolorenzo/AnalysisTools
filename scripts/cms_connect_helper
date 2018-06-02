@@ -1,0 +1,158 @@
+#!/usr/bin/env python
+import glob
+import os
+import sys
+import time
+
+import click
+import jinja2
+
+
+SUMMARY = jinja2.Template("""\
+\nSummary for {{ name }}
+--------------------------------------------------
+Number of Queued Jobs: {{ queueing|count }}
+Number of Running Jobs: {{ running|count }}
+Number of Completed Jobs: {{ completed|count }}
+ |- Number of Successes (Exit Code == 0): {{ succeeded|count }}
+ |- Number of Failures (Exit Code != 0): {{ failed|count }}
+Number of Jobs with Unknown Status {{ unknown|count }}
+""")
+
+RESUB_DISCLAIMER = """\
+A resubmission job file already exists for submission {0}.
+Please remove it if you are sure you want to resubmit.
+"""
+
+RESUB_READY = """\
+A resubmission job file combining the arguments of all
+currently failed jobs under {0} has been generated and
+is ready for submission:
+
+condor_submit {0}/RESUBMIT/re.submit
+
+The log files will be available under {0}/RESUBMIT.
+"""
+
+
+def find_submission_samples(submission):
+    samples = [path for path in os.listdir('{0}'.format(submission))]
+    samples.remove('condor_runscript.sh')
+    if 'RESUBMIT' in samples:
+        samples.remove('RESUBMIT')
+    return samples
+
+
+def find_submission_outdir(submission):
+    with open('{0}/condor_runscript.sh'.format(submission)) as f:
+        for line in reversed(f.readlines()):
+            if line.strip().startswith('xrdcp'):
+               # The last argument is the url but with a "$2" appended.
+               outdir = line.split()[-1][:-2]
+    return outdir
+
+
+def parse_job_arguments(submission, sample):
+    arguments = []
+    with open('{0}/{1}/{1}.submit'.format(submission, sample)) as f:
+        for line in f:
+            if line.startswith('arguments'):
+                arguments.append(line.strip())
+    return arguments
+
+
+def parse_job_logs(submission, sample):
+    job_status = {
+        'name': sample,
+        'queueing': [],
+        'running': [],
+        'completed': [],
+        'succeeded': [],
+        'failed': [],
+        'unknown': [],
+    }
+
+    for path in glob.glob('{0}/{1}/*.log'.format(submission, sample)):
+        job_id = int(os.path.basename(path).rstrip('.log'))
+        with open(path) as f:
+            backwards_lines = list(reversed(f.read().splitlines()))
+            for i, line in enumerate(backwards_lines):
+                if line.startswith('000') or line.startswith('001'):
+                    job_status['queueing'].append(job_id)
+                    break
+                elif line.startswith('006'):
+                    job_status['running'].append(job_id)
+                    break
+                elif line.startswith('005'):
+                    job_status['completed'].append(job_id)
+                    if 'Normal termination (return value 0)' in backwards_lines[i-1]:
+                        job_status['succeeded'].append(job_id)
+                    else:
+			job_status['failed'].append(job_id)
+	            break
+            else:
+                job_status['unknown'].append(job_id)
+    return job_status
+
+
+@click.group(context_settings={'help_option_names': ['-h', '--help']})
+@click.argument('submitdir', type=click.Path(exists=True, file_okay=False))
+@click.pass_context
+def cli(ctx, submitdir):
+    """AnalysisTools CMSConnect Helper
+
+    Run helpful tasks given the path to a job submission directory.
+    """
+    ctx.obj['submission'] = submitdir
+    ctx.obj['samples'] = find_submission_samples(submitdir)
+    ctx.obj['outdir'] = find_submission_outdir(submitdir)
+
+
+@cli.command()
+@click.pass_context
+def status(ctx):
+    """Show the current status of the jobs."""
+    click.echo('Initiating submission status check at {0}'.format(time.strftime('%a %b %d %H:%M:%S %Z %Y')))
+    for sample in ctx.obj['samples']:
+        job_status = parse_job_logs(ctx.obj['submission'], sample)
+        click.echo(SUMMARY.render(**job_status))
+
+
+@cli.command()
+@click.pass_context
+def resubmit(ctx):
+    """Scan for failed jobs and create a resubmission job file."""
+    click.echo('Initiating resubmission check at {0}'.format(time.strftime('%a %b %d %H:%M:%S %Z %Y')))
+    failed_job_arguments = []
+    for sample in ctx.obj['samples']:
+        job_arguments = parse_job_arguments(ctx.obj['submission'], sample)
+        job_status = parse_job_logs(ctx.obj['submission'], sample)
+        for job_id in job_status['failed']:
+            failed_job_arguments.append(job_arguments[job_id])
+    if failed_job_arguments:
+        resubmit_file = os.path.join(ctx.obj['submission'], 'RESUBMIT', 're.submit')
+        if os.path.isfile(resubmit_file):
+            raise RuntimeError(RESUB_DISCLAIMER.format(ctx.obj['submission']))
+        sys.dont_write_bytecode = True
+        try:
+            from RunCMSConnect import SUBMIT
+        except ImportError:
+            raise RuntimeError('Unable to locate submission file templates, please run this script within the VHbbAnalysis directory')
+        os.system('mkdir -p {0}/RESUBMIT'.format(ctx.obj['submission']))
+        with open(os.path.join(ctx.obj['submission'], 'RESUBMIT', 're.submit'), 'w') as f:
+            f.write(SUBMIT.render(
+                timestamp=time.strftime('%a %b %d %H:%M:%S %Z %Y'),
+                scriptpath=os.path.abspath(os.path.join(ctx.obj['submission'], 'condor_runscript.sh')),
+                submission=ctx.obj['submission'],
+                sample='RESUBMIT',
+                arguments=[args.replace('arguments = ', '') for args in failed_job_arguments],
+            ))
+        click.echo(RESUB_READY.format(ctx.obj['submission']))
+    else:
+        click.echo('Nothing to resubmit')
+
+
+if __name__ == '__main__':
+
+    cli(obj={})
+
