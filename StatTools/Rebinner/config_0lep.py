@@ -22,12 +22,11 @@ aliases = {
 
 # Rebinning scheme search settings.
 settings = {
-    'n_bins': range(3, 9),
+    'n_bins': range(3, 10),
     'metrics': ['asimov', 'poisson'],
-    'n_minbkg': [10, 30, 50, 100, 300, 500, 1000],
+    'n_minbkg': [10, 20, 30, 50, 100, 200, 300, 500, 1000],
     'smooth_bkg': [True, False],
     'unc_tol': [0.35],
-    'width_tol': [0.01, 0.025, 0.05],
 }
 
 # The samples from which to load events for rebinning.

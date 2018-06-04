@@ -31,7 +31,6 @@ keep_branches = [
 
 # The list of new branches to be created for the skimmed tree.
 new_branches = [
-    weight_F,
     # 0-lepton rebinner branches
     is_signal_Znn_I,
     bin_index_Znn_I,

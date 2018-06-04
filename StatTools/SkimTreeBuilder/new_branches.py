@@ -1,14 +1,5 @@
 ## New Branch Definitions
 
-def weight_F(event):
-    """Fix the weight branch for 2016 Zll signal samples."""
-    # ZH125_ZLL_powheg = -12502
-    # ggZH125_ZLL_powheg = -12503
-    if event.sampleIndex in {-12502, -12503}:
-        return event.weight * 3
-    else:
-        return event.weight
-
 def is_signal_Znn_I(event):
     """Flag if the event belongs to a 0-lepton signal sample.
     Used by the rebinner.
@@ -78,7 +69,7 @@ def bin_index_Zll_lowPt_I(event):
     """Flag if the event falls within the full range of the 2-lepton BDT
     output [-1, 1] in the 2-lepton low pT(V) signal region. Used by the rebinner.
     """
-    if (event.isZee or event.isZmm) and (50 < event.V_pt < 150) and (90 < event.H_mass < 150) and (-1 < event.CMS_vhbb_BDT_Zll_LowPT_13TeV < 1):
+    if (event.isZee or event.isZmm) and (50 < event.V_pt < 150) and (90 < event.H_mass < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDT_Zll_LowPT_13TeV < 1):
         return 0
     else:
         return -1
@@ -87,7 +78,7 @@ def bin_index_Zll_highPt_I(event):
     """Flag if the event falls within the full range of the 2-lepton BDT
     output [-1, 1] in the 2-lepton high pT(V) signal region. Used by the rebinner.
     """
-    if (event.isZee or event.isZmm) and event.V_pt > 150 and (90 < event.H_mass < 150) and (-1 < event.CMS_vhbb_BDT_Zll_HighPT_13TeV < 1):
+    if (event.isZee or event.isZmm) and event.V_pt > 150 and (90 < event.H_mass < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDT_Zll_HighPT_13TeV < 1):
         return 0
     else:
         return -1
