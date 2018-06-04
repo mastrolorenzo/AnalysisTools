@@ -2,6 +2,7 @@ prefix_desy=/pnfs/desy.de/cms/tier2/store/user/htholen/VHbbPostNano2016/V4/
 prefix_cern=/store/group/phys_higgs/hbb/ntuples/VHbbPostNano/2016/V4/
 prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/2016/V4/
 # prefix_skim=/enter/path/to/favourite/skim/here/
+prefix=/store/group/lpchbb/VHbbNanoPostProc/2016/V4/
 
 #DATA
 name=Run2016BToG_DoubleEle_ReMiniAOD  dir=DoubleEG/              type=0 xsec=1 lepFlav=1

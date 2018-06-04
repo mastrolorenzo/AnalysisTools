@@ -258,6 +258,8 @@ type=2  name=nFatJets200
 type=2  name=nJets30_0lep
 type=2  name=nJets30_2lep
 type=2  name=nJets25_dR06
+type=2  name=Jet_btagCMVA_max1_dR06
+type=2  name=Jet_btagCMVA_max2_dR06
 
 type=2  name=FatJetCand_pt
 type=2  name=FatJetCand_nVtx
