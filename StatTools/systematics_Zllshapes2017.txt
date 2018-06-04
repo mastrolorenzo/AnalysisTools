@@ -1,31 +1,32 @@
-CMS_vhbb_puWeight         shape 1.0  ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF  weight_PU
-CMS_res_j_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 JER
-CMS_res_j_reg_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 JER
-CMS_scale_j_FlavorQCD_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 FlavorQCD
-CMS_scale_j_AbsoluteStat_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteStat
-CMS_scale_j_AbsoluteScale_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteScale
-CMS_scale_j_AbsoluteMPFBias_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteMPFBias
-CMS_scale_j_Fragmentation_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 Fragmentation
-CMS_scale_j_SinglePionECAL_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 SinglePionECAL
-CMS_scale_j_SinglePionHCAL_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 SinglePionHCAL
-CMS_scale_j_RelativeJEREC1_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeJEREC1
-CMS_scale_j_RelativeJEREC2_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeJEREC2
-CMS_scale_j_RelativeJERHF_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeJERHF
-CMS_scale_j_RelativePtBB_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativePtBB
-CMS_scale_j_RelativePtEC1_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativePtEC1
-CMS_scale_j_RelativePtEC2_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativePtEC2
-CMS_scale_j_RelativePtHF_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativePtHF
-CMS_scale_j_RelativeFSR_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeFSR
-CMS_scale_j_RelativeStatFSR_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeStatFSR
-CMS_scale_j_RelativeStatEC_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeStatEC
-CMS_scale_j_RelativeStatHF_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeStatHF
-CMS_scale_j_PileUpDataMC_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpDataMC
-CMS_scale_j_PileUpPtRef_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtRef
-CMS_scale_j_PileUpPtBB_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtBB
-CMS_scale_j_PileUpPtEC1_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtEC1
-CMS_scale_j_PileUpPtEC2_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtEC2
-CMS_scale_j_PileUpPtHF_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtHF
-CMS_scale_j_RelativeBal_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeBal
+CMS_vhbb_puWeight         shape 1.0  ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF weight_PU
+CMS_scale_j_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 JEC
+#CMS_res_j_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 JER
+#CMS_res_j_reg_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 JER
+#CMS_scale_j_FlavorQCD_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 FlavorQCD
+#CMS_scale_j_AbsoluteStat_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteStat
+#CMS_scale_j_AbsoluteScale_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteScale
+#CMS_scale_j_AbsoluteMPFBias_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 AbsoluteMPFBias
+#CMS_scale_j_Fragmentation_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 Fragmentation
+#CMS_scale_j_SinglePionECAL_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 SinglePionECAL
+#CMS_scale_j_SinglePionHCAL_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 SinglePionHCAL
+#CMS_scale_j_RelativeJEREC1_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeJEREC1
+#CMS_scale_j_RelativeJEREC2_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeJEREC2
+#CMS_scale_j_RelativeJERHF_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeJERHF
+#CMS_scale_j_RelativePtBB_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativePtBB
+#CMS_scale_j_RelativePtEC1_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativePtEC1
+#CMS_scale_j_RelativePtEC2_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativePtEC2
+#CMS_scale_j_RelativePtHF_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativePtHF
+#CMS_scale_j_RelativeFSR_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeFSR
+#CMS_scale_j_RelativeStatFSR_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeStatFSR
+#CMS_scale_j_RelativeStatEC_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeStatEC
+#CMS_scale_j_RelativeStatHF_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeStatHF
+#CMS_scale_j_PileUpDataMC_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpDataMC
+#CMS_scale_j_PileUpPtRef_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtRef
+#CMS_scale_j_PileUpPtBB_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtBB
+#CMS_scale_j_PileUpPtEC1_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtEC1
+#CMS_scale_j_PileUpPtEC2_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtEC2
+#CMS_scale_j_PileUpPtHF_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 PileUpPtHF
+#CMS_scale_j_RelativeBal_13TeV shape 1.0 ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF 1.0 RelativeBal
 CMS_bTagWeightDeepBJES_13TeV    shape 1.0  ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_JES
 CMS_bTagWeightDeepBHF_13TeV     shape 1.0  ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_HF
 CMS_bTagWeightDeepBLF_13TeV     shape 1.0  ggZH_hbb,ZH_hbb,TT,s_Top,Zj0b,Zj1b,Zj2b,VVLF,VVHF  bTagWeight_LF

@@ -41,6 +41,7 @@ parser.add_argument('-sa', '--sample', type=str, default="", help="Specify to ru
 parser.add_argument('--drawFromNom', type=bool, default=False, help="If true, do not try to draw args.varname_systname but simply use nominal args.varname")
 parser.add_argument('--channel', type=str, default="", help="Specify the channel to run (to determine which samples file to read")
 parser.add_argument('--year', type=str, default="2017", help="Specify the year to run")
+parser.add_argument('--even',default=False, action="store_true", help="Use only even events for MC")
 args = parser.parse_args()
 print args
 
@@ -100,6 +101,8 @@ else:
     # HACK because I screwed up the norm on the NLO Z+jets samples...
     #weight_string = "weight*(1+(sampleIndex==200)*(-1+(0.0002014*abs(genWeight))))*(1+(sampleIndex==201)*(-1+(0.01679*abs(genWeight))))*(1+(sampleIndex==202)*(-1+(0.1387*abs(genWeight))))*(1+(sampleIndex==203)*(-1+(1.148*abs(genWeight))))*(1+(sampleIndex==204)*(-1+(0.0003781*abs(genWeight))))*(1+(sampleIndex==205)*(-1+(0.01439*abs(genWeight))))*(1+(sampleIndex==206)*(-1+(0.119579*abs(genWeight))))*(1+(sampleIndex==207)*(-1+(1.007*abs(genWeight))))"
     weight_string = "weight"
+    if args.even:
+        weight_string = "2.0*weight"
 #weight_string = "(1./CS_SF)*weight*(1 + (sampleIndex==17)*(-1 + 3.07))"
 #weight_string = "(1./CS_SF)*(bTagWeightICHEP/bTagWeight)*weight"
 #weight_string = "(1./CS_SF)*weight*(1+isWenu*(-1+(SF_HLT_Ele23_WPLoose[lepInd]/EffHLT_Ele27_WPLoose_Eta2p1[lepInd])))"
@@ -171,8 +174,11 @@ print allSampInd
 if not args.doData:
     sampleMap["data_obs"] = allSampInd # fake data as sum of all background MC
 
-def makeCutString(sample, sMap):
-    cutString = presel + "&&("
+def makeCutString(sample, sMap,even=False):
+    if even:
+        cutString = presel + "&&(event%2==0)&&("
+    else:
+        cutString = presel + "&&("
     for index in sMap[sample]:
             if isinstance(index,str):
                 cutString += "(%s)||" % index
@@ -182,7 +188,7 @@ def makeCutString(sample, sMap):
     cutString += ")"
     return cutString
 
-print "Bkg string = ",makeCutString("Bkg", sampleMap)
+print "Bkg string = ",makeCutString("Bkg", sampleMap,args.even)
 #print "Wj0b string = ",makeCutString("Wj0b", sampleMap)
 print "Thank you for your attention!"
 
@@ -194,12 +200,12 @@ hSig = ROOT.TH1F("hSig","hSig",nBinsFine,args.xlow,args.xhigh)
 if args.doRebin:
     # first rebin the histogram so that the first and last bins are not empty and have less than 35% stat. uncertainty
     #tree.Draw("%s>>hBkg" % bdtname,"((%s)&&sampleIndex>0)*weight*(2.2/1.28)" % presel)
-    bkgCutString = makeCutString("Bkg", sampleMap)
+    bkgCutString = makeCutString("Bkg", sampleMap,args.even)
     print bkgCutString
     if args.doVV:
-        sigCutString = makeCutString("VVHF", sampleMap)
+        sigCutString = makeCutString("VVHF", sampleMap,args.even)
     else:
-        sigCutString = makeCutString("WH_hbb", sampleMap)
+        sigCutString = makeCutString("WH_hbb", sampleMap,args.even)
 
     fnames = [] # avoid adding the same tree twice
     tree_sig = ROOT.TChain("Events")
@@ -290,6 +296,10 @@ if args.binstats == "":
 else:
     otextfile = open(args.binstats,"w")
 tree = ROOT.TChain("Events")
+tree.SetAlias("CMS_vhbb_BDTG_Znn_HighPT_13TeV","CMS_vhbb_BDT_Znn_13TeV")
+tree.SetAlias("CMS_vhbb_BDTG_Wln_13TeV","CMS_vhbb_BDT_Wln_13TeV")
+tree.SetAlias("CMS_vhbb_BDTG_Zll_HighPT_13TeV","CMS_vhbb_BDT_Zll_HighPT_13TeV")
+tree.SetAlias("CMS_vhbb_BDTG_Zll_LowPT_13TeV","CMS_vhbb_BDT_Zll_LowPT_13TeV")
 #tree = ROOT.TTree("Events","Events")
 #hBkg.Write()
 for sample in sampleMap:
@@ -354,7 +364,8 @@ for sample in sampleMap:
     #cutString = cutString[0:len(cutString)-2]
     #cutString += ")"
     #print cutString
-    cutString = makeCutString(sample, sampleMap)
+    cutString = makeCutString(sample, sampleMap,args.even)
+    cutStringData = makeCutString(sample, sampleMap)
     print cutString
     #hBDT = ROOT.TH1F(sample,sample,nBins,-1,1)
     hBDT = ROOT.TH1F(sample,sample,nBins,binBoundaries)
@@ -366,7 +377,7 @@ for sample in sampleMap:
         ofile.cd()
         # make sure we don't weight actual data by puWeight, SF's, etc.
         #tree_data.Draw("%s>>%s" % (bdtname, sample),"((%s)&&Pass_nominal)*sb_weight3" % (cutString)) ## FIXME
-        tree.Draw("%s>>%s" % (bdtname, sample),"((%s)&&Pass_nominal)" % (cutString)) 
+        tree.Draw("%s>>%s" % (bdtname, sample),"((%s)&&Pass_nominal)" % (cutStringData)) 
         #tree_data.Draw("BDT_V25_March27_400_5>>%s" % (sample),"((%s)&&Pass_nominal)" % (cutString)) # HACK FIXME PLEASE!!
         #ifile_data.Close()
     elif (sample == "data_obs"):
@@ -530,7 +541,7 @@ for sample in sampleMap:
             tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName,sample, syst),"((%s)&&%s)*%s" % (cutStringdown,passSysdown,weight_stringdown))
             if (syst.find("Model") != -1):
                 # shape from different sample (amc@NLO vs. POWHEG, for example)
-                cutStringAltModel = makeCutString(sample,sampleMapAltModel)
+                cutStringAltModel = makeCutString(sample,sampleMapAltModel,args.even)
                 hBDTAltModel = ROOT.TH1F("%s_%sAltModel" % (sample,syst), "%s_%sAltModel" % (sample,syst),nBins,binBoundaries)
                 tree.Draw("%s>>%s_%sAltModel" % (sysBDTNameUp, sample, syst),"((%s)&&%s)*%s" % (cutStringAltModel,passSysup,weight_string))
                 if (hBDTAltModel.Integral() != 0):

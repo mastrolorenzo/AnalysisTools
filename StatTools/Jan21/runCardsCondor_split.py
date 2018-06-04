@@ -25,6 +25,10 @@ if len(samples_to_run) > 0:
     for sample in samples_to_run:
         samples.append(sample)
 print "samples = ",samples
+
+scram_arch = os.environ['SCRAM_ARCH']
+cmssw_version = os.environ['CMSSW_BASE'].split('/')[-1]
+patch_rel = 'cmssw-patch' if 'patch' in cmssw_version else 'cmssw'
     
 print sys.argv[1],sys.argv[2]
 print jobname
@@ -46,11 +50,11 @@ Queue      1
         ''' % (jobname,nJobs,sample,jobname,nJobs,sample,jobname,nJobs,sample,jobname,nJobs,sample)
         runscript_text = '''export ORIG_DIR=$PWD
 #cd     %s
-cd /cvmfs/cms.cern.ch/slc6_amd64_gcc493/cms/cmssw-patch/CMSSW_7_6_3_patch2/src
+cd /cvmfs/cms.cern.ch/%s/cms/%s/%s/src
 source     /cvmfs/cms.cern.ch/cmsset_default.sh
 eval     `scramv1 runtime -sh`
 cd $ORIG_DIR
- \n''' % cwd
+ \n''' % (cwd,scram_arch,patch_rel,cmssw_version)
         runscript_text += cmd
         submitfile = open("submit_%s_%i_%s.txt" % (jobname,nJobs,sample), "w")
         runscriptfile = open("condor_runscript_%s_%i_%s.sh" % (jobname,nJobs,sample), "w")
