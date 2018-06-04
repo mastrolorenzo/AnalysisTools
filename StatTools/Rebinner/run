@@ -68,6 +68,10 @@ def main(argv=None):
                 print '{0!s}: {1!r}'.format(key, value)
         except BinUncertaintyError:
             print '... failed relative uncertainty tolerance!'
+            filename = 'rebin_{0!s}_{1}_{2!s}_{3!r}_{4!s}'.format(n_bins, metric, n_minbkg, smooth_bkg, unc_tol)
+            filename = filename.replace('.', 'p') + '.xml'
+            outfile = os.path.join(config.destination, filename)
+            os.remove(outfile)
         except xml.etree.ElementTree.ParseError:
             print '... failed to generate XML output file, possible empty bin'
         except Exception:
