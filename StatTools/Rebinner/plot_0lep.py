@@ -20,32 +20,39 @@ class Plotter(object):
             'ZJetsToNuNu_HT400To600',
             'ZJetsToNuNu_HT600To800',
             'ZJetsToNuNu_HT800To1200',
-            'ZJetsToNuNu_HT1200To2500',
-            'ZJetsToNuNu_HT2500ToInf',
         ],
         'WJets': [
+            'WJets_madgraph',
             'WJets-HT100To200',
             'WJets-HT200To400',
             'WJets-HT400To600',
             'WJets-HT600To800',
             'WJets-HT800To1200',
             'WJets-HT1200To2500',
-            'WJets-HT2500ToInf',
-            'WBJets-Pt100To200',
-            'WBJets-Pt200ToInf',
-            'WJets_BGenFilter-Pt100To200',
-            'WJets_BGenFilter-Pt200ToInf',
         ],
-        'TT': ['TT_powheg'],
+        'TT': [
+            'TT_AllHadronic',
+            'TT_DiLep',
+            'TT_SingleLep',
+        ],
         'VV': [
             'WW',
             'WZ',
             'ZZ',
         ],
         'ST': [
-            'TToLeptons_s',
-            'TBarToLeptons_t_powheg',
-            'Tbar_tW',
+            'ST_s-c_4f_lep_PSw',
+            'ST_t-c_top_4f_inc',
+            'ST_tW_antitop_5f_inc',
+            'ST_tW_top_5f_inc_PSw',
+        ],
+        'QCD': [
+            'QCD_HT300to500',
+            'QCD_HT500to700',
+            'QCD_HT700to1000',
+            'QCD_HT1000to1500',
+            'QCD_HT1500to2000',
+            'QCD_HT2000toInf',
         ],
     }
 
@@ -61,7 +68,7 @@ class Plotter(object):
         n_bins = bin_edges.shape[0] - 1
         name = uuid.uuid4().hex
         h = ROOT.TH1F(name, sample, n_bins, bin_edges)
-        getattr(self, sample).Project(name, 'CMS_vhbb_BDT_Znn_13TeV', selection)
+        getattr(self, sample).Project(name, 'CMS_vhbb_BDTG_Znn_HighPT_13TeV', selection)
         h.SetDirectory(0)
         return h
 
@@ -70,6 +77,7 @@ class Plotter(object):
 
         # Because these input trees contain branches following the rebinner's convention, a cheap
         # way to plot signal region events is to select events where the bin index is above -1.
+        histograms['QCD'] = self.get_histogram('QCD', bin_edges, 'weight * (bin_index_Znn>-1)')
         histograms['Single top'] = self.get_histogram('ST', bin_edges, 'weight * (bin_index_Znn>-1)')
         histograms['VV'] = self.get_histogram('VV', bin_edges, 'weight * (bin_index_Znn>-1)')
         histograms['TT'] = self.get_histogram('TT', bin_edges, 'weight * (bin_index_Znn>-1)')
@@ -79,6 +87,7 @@ class Plotter(object):
         histograms['ggZH(b#bar{b})'] = self.get_histogram('ggZH', bin_edges, 'weight * (bin_index_Znn>-1)')
         histograms['ZH(b#bar{b})'] = self.get_histogram('ZH', bin_edges, 'weight * (bin_index_Znn>-1)')
 
+        histograms['QCD'].SetFillColor(613)
         histograms['Single top'].SetFillColor(70)
         histograms['VV'].SetFillColor(17)
         histograms['TT'].SetFillColor(4)
@@ -101,7 +110,7 @@ class Plotter(object):
         legend1.SetTextSize(0.03)
         legend1.SetBorderSize(1)
 
-        legend2 = ROOT.TLegend(0.74, 0.64, 0.96, 0.92)
+        legend2 = ROOT.TLegend(0.74, 0.696, 0.96, 0.92)
         legend2.SetFillColor(0)
         legend2.SetLineColor(0)
         legend2.SetShadowColor(0)
@@ -110,7 +119,7 @@ class Plotter(object):
         legend2.SetBorderSize(1)
 
         for i, name in enumerate(reversed(histograms)):
-            if i < 4:
+            if i < 5:
                 legend1.AddEntry(histograms[name], name, 'f')
             else:
                 legend2.AddEntry(histograms[name], name, 'f')
@@ -143,16 +152,16 @@ def get_stack_info(stack):
 def main():
     ROOT.gROOT.SetBatch(True)
 
-    plotter = Plotter('../SkimTreeBuilder/samples/%s.root')
+    plotter = Plotter('../SkimTreeBuilder/samples_2017/%s.root')
 
     best_bin_edges = {
-        'asimov': [-1, -0.13943498581647873, 0.33239367604255676, 0.7077441811561584, 0.8488226532936096, 0.8753701746463776, 1],
-        'poisson': [-1, 0.33239367604255676, 0.7077441811561584, 0.8488226532936096, 0.8753701746463776, 1],
+        'asimov': [-1, -0.402860626578331, 0.18573252856731415, 0.7018964886665344, 0.8373652994632721, 0.8680202960968018, 1],
+        'poisson': [-1, -0.1868814080953598, 0.33667686581611633, 0.7018964886665344, 0.8373652994632721, 0.8776993453502655, 1],
     }
 
     best_significance = {
-        'asimov': 2.018870456443301,
-        'poisson': 2.0485103058403182,
+        'asimov': 2.685551322461401,
+        'poisson': 2.8071108053828038,
     }
 
     text = ROOT.TLatex()
@@ -175,7 +184,7 @@ def main():
             stack.GetYaxis().SetTitle('Entries')
             legend1.Draw()
             legend2.Draw()
-            cms_figure.draw_labels('35.9 fb^{-1} (13 TeV)', extra_text='Simulation Preliminary')
+            cms_figure.draw_labels('41.53 fb^{-1} (13 TeV)', extra_text='Simulation Preliminary')
             text.SetTextSize(0.025)
             text.DrawLatexNDC(0.2, 0.79, '{0} Significance Score'.format(metric.title()))
             text.DrawLatexNDC(0.2, 0.74, '{0:.2f}'.format(best_significance[metric]))
@@ -201,7 +210,7 @@ def main():
             h_s_over_b.Draw('hist')
             h_s_over_b.GetXaxis().SetTitle('BDT output')
             h_s_over_b.GetYaxis().SetTitle('S / B')
-            cms_figure.draw_labels('35.9 fb^{-1} (13 TeV)', extra_text='Simulation Preliminary')
+            cms_figure.draw_labels('41.53 fb^{-1} (13 TeV)', extra_text='Simulation Preliminary')
             text.DrawLatexNDC(0.2, 0.79, 'Signal Yields')
             text.SetTextSize(0.025)
             for i, value in enumerate(n_signal, start=1):

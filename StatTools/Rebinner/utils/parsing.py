@@ -97,7 +97,7 @@ def parse_rebinning_trees(src, bounds=None):
     ----------
     src : path
         The path to the directory containing the rebinner XML output files.
-    bounds : iterable of numeric, optional
+    bounds : tuple of int, optional
         The minimum and maximum values determining the boundaries of the
         rebinned distribution, which are not saved by the rebinner to the
         output XML file. If these are not provided, the "bin_edges" column
@@ -118,15 +118,13 @@ def parse_rebinning_trees(src, bounds=None):
           either True or False.
         * unc_tol : float64
           The maximum relative statistical uncertainty for background in each bin.
-        * width_tol : float64
-          The minimum width for each bin relative to the total range of the distribution.
         * bin_edges : object (list of floats)
           The list of bin edges determined by the rebinner. This also contains the
           boundaries of the rebinned distribution if the `bounds` argument is provided.
         * total_significance : float64
           The total significance of the rebinning scheme.
     """
-    columns = {x: [] for x in ['n_bins', 'metric', 'n_minbkg', 'smooth_bkg', 'unc_tol', 'width_tol', 'bin_edges', 'total_significance']}
+    columns = {x: [] for x in ['n_bins', 'metric', 'n_minbkg', 'smooth_bkg', 'unc_tol', 'bin_edges', 'total_significance']}
     for path in glob.glob(os.path.join(src, '*.xml')):
         filename, _ = os.path.splitext(os.path.basename(path))
         # Assume that the filenames follow the convention:
@@ -137,7 +135,6 @@ def parse_rebinning_trees(src, bounds=None):
         columns['n_minbkg'].append(int(fields[3]))
         columns['smooth_bkg'].append(True if fields[4] == 'True' else False)
         columns['unc_tol'].append(float(fields[5].replace('p', '.')))
-        columns['width_tol'].append(float(fields[6].replace('p', '.')))
         result = parse_rebinning_tree(path)
         if bounds:
             columns['bin_edges'].append([bounds[0]] + result['bin_edges'] + [bounds[1]])

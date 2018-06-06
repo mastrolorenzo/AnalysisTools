@@ -30,6 +30,7 @@ def main(argv=None):
     skim_tree_builder = SkimTreeBuilder(config.input_pattern, config.destination)
     for name, args in tqdm(config.samples.items()):
         scale_factor, input_tokens = args
+        tqdm.write('About to process the following input tokens: {0}'.format(', '.join(input_tokens)))
         start = time.time()
         skim_tree_builder.run(name, input_tokens, config.keep_branches, config.new_branches, scale_factor)
         end = time.time()
