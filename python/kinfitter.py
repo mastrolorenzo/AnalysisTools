@@ -621,7 +621,12 @@ def apply_kinfit(input_file, output_file, event_proxies=None):
             and (e.isZmm or e.isZee)
         ):
             for ep in eps:
-                apply_fit_to_event(ep, ak4pfchs_ptres)
+                try:
+                    apply_fit_to_event(ep, ak4pfchs_ptres)
+                except IndexError as e:
+                    print 'caught IndexError: ', e
+                    print 'applying fallback...'
+                    ep.apply_fallback()
             ot.Fill()
             for ep in eps:
                 ep.set_vals_to_zero()  # zero values after filling the tree
