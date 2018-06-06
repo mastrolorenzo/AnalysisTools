@@ -17,5 +17,6 @@
 #pragma link C++ defined_in "AnalysisManager.h";
 #pragma link C++ defined_in "plugins/WorkspaceAnalysis.h";
 #pragma link C++ defined_in "HelperClasses/BTagCalibrationStandalone.h";
+#pragma link C++ defined_in "HelperClasses/EnergyScaleCorrection.h";
 
 #endif

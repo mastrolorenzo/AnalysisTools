@@ -1,4 +1,5 @@
 from ROOT.TMath import Sin, Cos, Pi
+import random
 import numpy
 import time
 import ROOT
@@ -294,13 +295,62 @@ def make_sys_event_proxies(am):
         if str(amsys.name) != 'nominal'
     )
 
-lep_sys_event_proxies = [
-    EventProxy('mu_up',   {'Muon_pt_corrected': lambda e: list(x*1.02 for x in e.Muon_pt_corrected)}),
-    EventProxy('mu_down', {'Muon_pt_corrected': lambda e: list(x*0.98 for x in e.Muon_pt_corrected)}),
-    EventProxy('el_up',   {'Electron_pt':       lambda e: list(x*1.02 for x in e.Electron_pt)}),
-    EventProxy('el_down', {'Electron_pt':       lambda e: list(x*0.98 for x in e.Electron_pt)}),
-]
-lep_sys_names = list(ep.output_postfix for ep in lep_sys_event_proxies)
+
+def make_lep_sys_event_proxies(year):
+
+    # Electrons
+    ###########
+    if int(year) == 2017:
+        esc_module = ROOT.EnergyScaleCorrection("aux/Run2017_17Nov2017_v1_ele_unc")
+    else:
+        esc_module = ROOT.EnergyScaleCorrection("aux/Legacy2016_07Aug2017_ele_unc")
+
+    def apply_ele_sys_err(e, factor):
+        return list(
+            pt*(1 + factor*esc_module.scaleCorrUncertkErrStatSystGain(e.run, pt, abs(eta), r9, 12))
+            for pt, eta, r9 in zip(e.Electron_pt, e.Electron_eta, e.Electron_r9)
+        )
+
+    ele_proxies = [
+        EventProxy('el_up',   {'Electron_pt': lambda e: apply_ele_sys_err(e, +1)}),
+        EventProxy('el_down', {'Electron_pt': lambda e: apply_ele_sys_err(e, -1)}),
+    ]
+
+    # Muons
+    #######
+    if int(year) == 2017:
+        def apply_mu_sys_err(e, factor):
+            return list(pt+factor*err for pt, err in zip(e.Muon_pt_corrected, e.Muon_pt_sys_uncert))
+    else:
+        ROOT.gROOT.ProcessLine('.L aux/roccor.2016.v3_mod/RoccoR.cc+')
+        roccor = ROOT.RoccoR('aux/roccor.2016.v3_mod/rcdata.2016.v3')
+
+        def mk_safe(fct, *args):
+            try:
+                return fct(*args)
+            except Exception as e:
+                if any('Error in function boost::math::erf_inv' in arg for arg in e.args):
+                    print 'WARNING: catching exception and returning -1. Exception arguments: %s' % e.args
+                    return -1.
+                else:
+                    raise e
+
+        def apply_mu_sys_err(e, factor):
+            u1 = random.uniform(0.0, 1.0)
+            u2 = random.uniform(0.0, 1.0)
+            muon_inputs = zip(e.Muon_charge, e.Muon_pt_corrected, e.Muon_eta, e.Muon_phi, e.Muon_nTrackerLayers)
+            return list(
+                pt * (1+factor*mk_safe(roccor.kScaleAndSmearMCerror, chrg, pt, eta, phi, nTrkLyrs, u1, u2))
+                for chrg, pt, eta, phi, nTrkLyrs in muon_inputs
+            )
+
+    mu_proxies = [
+        EventProxy('mu_up',   {'Muon_pt_corrected': lambda e: apply_mu_sys_err(e, +1)}),
+        EventProxy('mu_down', {'Muon_pt_corrected': lambda e: apply_mu_sys_err(e, -1)}),
+    ]
+
+    return ele_proxies + mu_proxies
+
 
 
 def apply_fit_to_event(ep, jme_res_obj):

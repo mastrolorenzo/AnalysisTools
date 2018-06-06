@@ -9,6 +9,7 @@ if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv)!=6 and len(sys.a
     print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,doKinFit"
     sys.exit(61)
 
+DEBUG = 2
 # do stuff :)
 
 # reads samples, existing branches and new branches
@@ -37,11 +38,12 @@ def loop_func():
     import ROOT
 
     ROOT.gSystem.Load("AnalysisDict.so")
+    ReadInput.debug = DEBUG
     am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, 0, "doSkim" in options, "runOnSkim" in options)
     #am.debug=20000
-    am.debug=2
+    am.debug=DEBUG
 
-    print "dataYear",am.m("dataYear")
+    print "dataYear", am.branchInfos['dataYear'].val
     print "Read in the input files, now let's run it!"
     if(am.debug>100):
         am.PrintBranches()
@@ -58,21 +60,24 @@ def loop_func():
     else :
         am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
     os.system('rm temp.root')
-    
+
 
 p = Process(target=loop_func, args=tuple())
 p.start()
 p.join()
-    
+
 tLoop=time.time()-t0
 
 # load am in the main process only now, in order to keep the memory footprint low
 import ReadInput
+ReadInput.debug = 0  # we've seen it above
 import ROOT
 ROOT.gSystem.Load("AnalysisDict.so")
 am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, 0, "doSkim" in options, "runOnSkim" in options)
+cursample_container = next(s for s in am.samples if s.sampleName == samplesToRun[0])
+is_data = cursample_container.sampleNum == 0
 
-
+lep_sys_names = []
 if "doKinFit" in options:
     import kinfitter
 
@@ -83,7 +88,12 @@ if "doKinFit" in options:
 
     if am.systematics.size():
         # only do lepton systematics if there are other systematics as well
-        event_proxies=kinfitter.lep_sys_event_proxies + kinfitter.make_sys_event_proxies(am) + [kinfitter.EventProxy()]
+        if is_data:
+            lep_sys_event_proxies = []
+        else:
+            lep_sys_event_proxies = kinfitter.make_lep_sys_event_proxies(am.branchInfos['dataYear'].val)
+        lep_sys_names = list(ep.output_postfix for ep in lep_sys_event_proxies)
+        event_proxies = lep_sys_event_proxies + kinfitter.make_sys_event_proxies(am) + [kinfitter.EventProxy()]
     else:
         event_proxies=None
 
@@ -93,13 +103,12 @@ if "doKinFit" in options:
         event_proxies=event_proxies,
     )
 
-    # os.system('rm '+input_file)
+    os.system('rm '+input_file)
 
 tKinFit=time.time()-tLoop-t0
 
 if am.branchInfos['postLoopMVAEval'].val > 0.5:
 
-    # get ready for pickling (which happens when calling subprocess..)
     output_file = sys.argv[4]
     input_file = output_file.replace('.root', '_before_mva_eval.root')
 
@@ -116,7 +125,8 @@ if am.branchInfos['postLoopMVAEval'].val > 0.5:
             input_file,
             output_file,
             am,
-            allowed_names=block
+            allowed_names=block,
+            lep_sys_names=lep_sys_names,
         )
         os.system('rm '+input_file)
 

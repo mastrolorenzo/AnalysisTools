@@ -14,7 +14,7 @@ ROOT.gSystem.Load("AnalysisDict.so")
 debug=200
 
 def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, doSkim=False, runOnSkim=False):
-    if debug > 100:
+    if debug > 10:
          print "filetype is ", filetype
          print "filename is ", filename
          print "samplesToRun is ", samplesToRun
@@ -39,7 +39,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
 
         if settings.has_key("analysis"):
             am=ROOT.__getattr__(settings["analysis"])()
-            #am.debug=100000
+            #debug=100000
         #print "samplesToRun",samplesToRun
         if settings.has_key("samples"):
             aminitialized=0
@@ -74,10 +74,12 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 if sample.has_key("lepFlav"):
                     samplecon.lepFlav = sample["lepFlav"]
                 if sample.has_key("puhist"):
-                    print "found puhist name in samples"
+                    if debug > 10:
+                        print "found puhist name in samples"
                     samplecon.PUHistName = sample["puhist"]
                 elif settings.has_key("mcpuhistname"):
-                    print "found puhist name in settings"
+                    if debug > 10:
+                        print "found puhist name in settings"
                     samplecon.PUHistName = settings["mcpuhistname"]
                 #print "Reading",sample["name"],"with",len(sample["files"]),"files"
                 for filename in sample["files"]:
@@ -91,7 +93,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         if filename not in filesToRun:
                             continue
                         else:
-                            print "Files match!",filename
+                            if debug > 10:
+                                print "Files match!",filename
 
                     # AnalysisManager needs to be initialized
                     # with one file at the beginning
@@ -103,11 +106,13 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                             tree = ifile.Get(treeName)
                             ifile.Close()
                         except:
-                            print "File: %s : no good, trying with another..." % filename
+                            if debug > 10:
+                                print "File: %s : no good, trying with another..." % filename
                             continue
                         am.Initialize(filename)
                         if (am.fChain.GetEntries() == 0):
-                            print "File has am.fChain.GetEntries() == 0: %s" % filename
+                            if debug > 10:
+                                print "File has am.fChain.GetEntries() == 0: %s" % filename
                             continue
                         aminitialized=1
                         # FIXME can this go elsewhere?
@@ -126,7 +131,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                             samplecon.AddFile(filename,isBatch,2)
                         addedAtLeastOneFile=True
                     except:
-                        print "Can't add",filename
+                        if debug > 10:
+                            print "Can't add",filename
                 if addedAtLeastOneFile:
                     print("Adding sample %s to sample container with %i events " % (samplecon.sampleName, samplecon.processedEvents))
                     am.AddSample(samplecon)
@@ -139,10 +145,10 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             sys.exit(0)
         if settings.has_key("earlybranches"):
             branches=ReadTextFile(settings["earlybranches"], "branchlist",list())
-            if am.debug>10:
+            if debug>10:
                 print "getting early branches"
             for branch in branches:
-                if am.debug>10:
+                if debug>10:
                     print(branch,branches[branch][0], branches[branch][1], branches[branch][3], "early", branches[branch][4], branches[branch][5], branches[branch][6])
                 am.SetupBranch(branch,branches[branch][0], branches[branch][1], branches[branch][3], "early", branches[branch][4], branches[branch][5],branches[branch][6])
         else:
@@ -156,13 +162,13 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             print "There are no existing branches in the config file."
 
         am.ConfigureOutputTree()
-        if am.debug>10:
+        if debug>10:
             print "output tree configured"
 
         if settings.has_key("newbranches"):
             branches=ReadTextFile(settings["newbranches"], "branchlist",list())
             for branch in branches:
-                if am.debug>100:
+                if debug>100:
                     print(branch,branches[branch][0], branches[branch][1])
                 am.SetupNewBranch(branch,branches[branch][0], branches[branch][1])
         else:
@@ -184,16 +190,18 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
 
 
             for bdtsetting in bdtsettings:
-                print "Adding a BDT configuration...",bdtsetting
+                if debug > 10:
+                    print "Adding a BDT configuration...",bdtsetting
                 bdtInfo=ReadTextFile(settings[bdtsetting], "bdt",list())
-                print "read the BDT settings text file for BDT %s" % bdtInfo.bdtname
+                if debug > 10:
+                    print "read the BDT settings text file for BDT %s" % bdtInfo.bdtname
                 # now set up any of the branches if they don't exist yet (must be floats for BDT)
                 for bdtvar in bdtInfo.bdtVars:
                     if (bdtvar.isExisting):
                         am.SetupBranch(bdtvar.localVarName, 2, -1, 0, "early")
                     else:
                         am.SetupNewBranch(bdtvar.localVarName, 2)
-                
+
                 # create new branches for all inputs
                 iBDTvar=0
                 for bdtvar in bdtInfo.bdtVars:
@@ -205,27 +213,33 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 am.SetupNewBranch(bdtInfo.bdtname, 2)
                 am.SetupNewBranch(bdtsetting, 2, -1, 1, "settings", 1)
                 am.AddBDT(bdtsetting, bdtInfo)
-                print "added BDT to analysis manager"
+                if debug > 10:
+                    print "added BDT to analysis manager"
 
         if settings.has_key("systematics"):
             systs = ReadTextFile(settings["systematics"], "systematics")
             for syst in systs:
-                print "add Systematic"
+                if debug > 10:
+                    print "add Systematic"
                 am.AddSystematic(syst)
                 am.SetupNewBranch("Pass_%s" % syst.name, 4)
-                print "added Systematic"
+                if debug > 10:
+                    print "added Systematic"
 
         if settings.has_key("scalefactors"):
             sfs = ReadTextFile(settings["scalefactors"], "scalefactors")
             for sf in sfs:
-                print "add scale factor"
+                if debug > 10:
+                    print "add scale factor"
                 am.AddScaleFactor(sf)
                 am.SetupNewBranch(sf.branchname, 8, 10)
                 am.SetupNewBranch(sf.branchname+"_err", 8, 10)
-                print "added scale factor"
+                if debug > 10:
+                    print "added scale factor"
 
         if settings.has_key("btagscalefactors"):
-            print "adding btag scale factors"
+            if debug > 10:
+                print "adding btag scale factors"
             am.InitializeBTagSF(settings["btagscalefactors"])
 
         if settings.has_key("putarget"):
@@ -233,7 +247,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 tfile=ROOT.TFile.Open(settings["putarget"])
                 puhist=tfile.Get("pileup")
                 am.SetGlobalPUTarget(puhist)
-                print "setting putarget"
+                if debug > 10:
+                    print "setting putarget"
                 tfile.Close()
             except:
                 print "something went wrong with",settings["putarget"]
@@ -243,7 +258,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 tfile=ROOT.TFile.Open(settings["puUPtarget"])
                 puhist=tfile.Get("pileup")
                 am.SetGlobalPUTarget(puhist,1)
-                print "setting puUPtarget"
+                if debug > 10:
+                    print "setting puUPtarget"
                 tfile.Close()
             except:
                 print "something went wrong with",settings["puUPtarget"]
@@ -253,7 +269,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 tfile=ROOT.TFile.Open(settings["puDOWNtarget"])
                 puhist=tfile.Get("pileup")
                 am.SetGlobalPUTarget(puhist,-1)
-                print "setting puDOWNtarget"
+                if debug > 10:
+                    print "setting puDOWNtarget"
                 tfile.Close()
             except:
                 print "something went wrong with",settings["puDOWNtarget"]
@@ -391,7 +408,8 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
                             samplepaths.extend(findAllRootFiles(globalPrefix+dirname,site))
                     else:
                         # after skimming the sample directory name has been changed to sample name
-                        print "right here, ",sample["name"]
+                        if debug > 10:
+                            print "right here, ",sample["name"]
                         samplepaths.extend(findAllRootFiles(globalPrefix+sample["name"],site))
                 else:
                     samplepaths = findAllRootFiles(globalPrefix+value,site)
@@ -434,7 +452,8 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
         if sample.has_key("name"):
             samples[sample["name"]]=sample
         else:
-            print "sample name is empty",samplename,"not filling"
+            if debug > 10:
+                print "sample name is empty",samplename,"not filling"
 
     return samples
 
@@ -485,7 +504,7 @@ def SetupBDT(lines):
     inputNames = []
     localVarNames = []
     mvaType = "BDT"
-                  
+
     vars = {}
 
     for line in lines:
@@ -532,10 +551,11 @@ def SetupBDT(lines):
     for key in keys:
         if (key == -1): continue
         name, lname, isExisting, isSpec = vars[key]
-        if not isSpec:
-            print "adding variable %s (%s) existing: %i " % (name,lname,int(isExisting))
-        else:
-            print "adding spectator variable %s (%s) existing: %i" % (name,lname, int(isExisting))
+        if debug > 10:
+            if not isSpec:
+                print "adding variable %s (%s) existing: %i " % (name,lname,int(isExisting))
+            else:
+                print "adding spectator variable %s (%s) existing: %i" % (name,lname, int(isExisting))
         bdt.AddVariable(name, lname, isExisting, isSpec)
     return bdt
 
@@ -627,11 +647,11 @@ def SetupSF(lines):
                     ptBins.append(ptL)
                     ptBins.append(ptH)
         else:
-            print "got here"
             # categorized first by pt
             for ptKey, values in sorted(res[SF.binning].iteritems()):
-                print ptKey
-                print (ptKey[stripForEta:])
+                if debug > 10:
+                    print ptKey
+                    print (ptKey[stripForEta:])
                 ptL = float(((ptKey[4:]).rstrip(']').split(',')[0]))
                 ptH = float(((ptKey[4:]).rstrip(']').split(',')[1]))
                 ptBins.append(ptL)
@@ -694,14 +714,16 @@ def SetupSF(lines):
                             #print etaL,etaH,ptL,ptH,ibin2,ibin1,SF.scaleMap.GetXaxis().GetBinLowEdge(ibin1),SF.scaleMap.GetYaxis().GetBinLowEdge(ibin2), result["value"], result["error"]
         SFs.append(SF)
     for SF in SFs:
-        print "debugging scalefactor ",SF.name
+        if debug > 10:
+            print "debugging scalefactor ",SF.name
         sfmap = SF.scaleMap
         nX = sfmap.GetNbinsX()
         nY = sfmap.GetNbinsY()
-        for i in range(1,nX+1):
-            print "pt: ",sfmap.GetXaxis().GetBinLowEdge(i)
-            for j in range(1, nY+1):
-                print "eta: ",sfmap.GetYaxis().GetBinLowEdge(j),": ",sfmap.GetBinContent(i,j)
+        if debug > 1000:
+            for i in range(1,nX+1):
+                print "pt: ",sfmap.GetXaxis().GetBinLowEdge(i)
+                for j in range(1, nY+1):
+                    print "eta: ",sfmap.GetYaxis().GetBinLowEdge(j),": ",sfmap.GetBinContent(i,j)
     return SFs
 
 

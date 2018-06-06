@@ -73,6 +73,7 @@ type=8  name=Electron_dxy                   max=20    lengthBranch=nElectron
 type=8  name=Electron_dz                    max=20    lengthBranch=nElectron
 type=8  name=Electron_pfRelIso03_all        max=20    lengthBranch=nElectron
 type=8  name=Electron_energyErr             max=20    lengthBranch=nElectron
+type=8  name=Electron_r9                    max=20    lengthBranch=nElectron
 type=11  name=Electron_lostHits              max=20    lengthBranch=nElectron
 type=10  name=Electron_mvaSpring16GP_WP80    max=20    lengthBranch=nElectron
 type=10  name=Electron_mvaSpring16GP_WP90    max=20    lengthBranch=nElectron
@@ -91,6 +92,7 @@ type=8  name=Muon_ptErr                     max=20    lengthBranch=nMuon
 type=10  name=Muon_mediumId                  max=20    lengthBranch=nMuon
 type=10  name=Muon_tightId                  max=20    lengthBranch=nMuon
 type=7  name=Muon_charge                    max=20    lengthBranch=nMuon
+type=7  name=Muon_nTrackerLayers            max=20    lengthBranch=nMuon
 
 #type=1  name=nselLeptons
 ##type=8  name=selLeptons_eta                     max=20

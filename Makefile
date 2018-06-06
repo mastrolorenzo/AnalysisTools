@@ -6,14 +6,14 @@ HOMEDIR = ${PWD}
 
 all: AnalysisDict.cxx AnalysisDict.so
 
-AnalysisDict.cxx: HelperClasses/SampleContainer.h HelperClasses/InfoStructs.h HelperClasses/BDTInfo.h HelperClasses/BDTVariable.h HelperClasses/SystematicContainer.h HelperClasses/SFContainer.h AnalysisManager.h plugins/VHbbAnalysis.h plugins/VHbbTrigger.h HelperClasses/BTagCalibrationStandalone.h LinkDef.h
+AnalysisDict.cxx: HelperClasses/SampleContainer.h HelperClasses/InfoStructs.h HelperClasses/BDTInfo.h HelperClasses/BDTVariable.h HelperClasses/SystematicContainer.h HelperClasses/SFContainer.h AnalysisManager.h plugins/VHbbAnalysis.h plugins/VHbbTrigger.h HelperClasses/BTagCalibrationStandalone.h HelperClasses/EnergyScaleCorrection.h LinkDef.h
 	rootcint -f $@ -c $^
 
 
-AnalysisDict.so: AnalysisDict.cxx HelperClasses/SampleContainer.cc HelperClasses/BDTInfo.cc HelperClasses/BDTVariable.cc HelperClasses/SystematicContainer.cc HelperClasses/SFContainer.cc AnalysisManager.cc plugins/VHbbAnalysis.cc plugins/VHbbTrigger.cc HelperClasses/EquationSolver.h HelperClasses/BTagCalibrationStandalone.cpp
+AnalysisDict.so: AnalysisDict.cxx HelperClasses/SampleContainer.cc HelperClasses/BDTInfo.cc HelperClasses/BDTVariable.cc HelperClasses/SystematicContainer.cc HelperClasses/SFContainer.cc AnalysisManager.cc plugins/VHbbAnalysis.cc plugins/VHbbTrigger.cc HelperClasses/EquationSolver.h HelperClasses/BTagCalibrationStandalone.cpp HelperClasses/EnergyScaleCorrection.cc
 	g++ -shared -fPIC -Wall -Werror -o $@ ${ROOTFLAGS} ${ROOTLIBS} -lTMVA -I${HOMEDIR} $^
 
-clean: 
+clean:
 	rm AnalysisDict.cxx
 	rm AnalysisDict.h
 	rm AnalysisDict.so

@@ -1,4 +1,4 @@
-from kinfitter import EventProxy, prepare_io, lep_sys_names
+from kinfitter import EventProxy, prepare_io
 import TensorflowEvaluator
 import ctypes
 import time
@@ -50,7 +50,7 @@ SYS_VARS = (
 )
 
 
-def make_sys_event_proxies(am):
+def make_sys_event_proxies(am, lep_sys_names):
     def mk_single_getter(branch, sys_name):
         # this function gives a local namespace to branch, sys_name
         return lambda e: getattr(e, branch+'_'+sys_name, getattr(e, branch))
@@ -113,7 +113,7 @@ def evaluate_discriminator(ep, bdt_infos):
             getattr(ep, bdt_info.bdtname)[0] = bdt_info.tf_evaluator.EvaluateDNN(raw_vars)
 
 
-def apply_mva_eval(input_file, output_file, am, allowed_names):
+def apply_mva_eval(input_file, output_file, am, allowed_names, lep_sys_names=tuple()):
 
     bdt_infos = list(
         prep_bdt_variables(bdt_info)
@@ -124,7 +124,7 @@ def apply_mva_eval(input_file, output_file, am, allowed_names):
     f, t, of = prepare_io(input_file, output_file)
     ot = t.CloneTree(0)
 
-    eps = make_sys_event_proxies(am) + [EventProxy()]  # the last one is for nominal
+    eps = make_sys_event_proxies(am, lep_sys_names) + [EventProxy()]  # the last one is for nominal
     for ep in eps:
         ep.init_output(ot, set(str(bdt_info.bdtname) for bdt_info in bdt_infos))
     n_events = 0
