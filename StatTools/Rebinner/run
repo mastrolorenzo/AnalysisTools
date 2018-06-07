@@ -2,9 +2,11 @@
 import itertools
 import os
 import sys
+import xml.etree.ElementTree
 
-from utils import BinUncertaintyError, BinWidthError, \
-     autocategorizer, parse_rebinning_trees, rebin
+import pandas
+
+from utils import BinUncertaintyError, autocategorizer, parse_rebinning_trees, rebin
 
 
 def parse_command_line(argv):
@@ -26,7 +28,9 @@ def parse_command_line(argv):
 def main(argv=None):
     sys.dont_write_bytecode = True
     config = parse_command_line(argv)
+
     target, target_min, target_max = config.target
+    bounds = (target_min, target_max)
 
     # Create a vector tracking the names of the rebinning features.
     features = autocategorizer.Features(target)
@@ -37,29 +41,45 @@ def main(argv=None):
         autocategorizer.loadEvents(events, features, config.input_pattern % sample, config.treename, config.aliases)
     print '  /// Loaded {0!s} training events'.format(events.size())
 
+    # Load events from each of the samples to form a dataframe of background events.
+    input_pattern_h5 = config.input_pattern.replace('.root', '.h5')
+    bin_ = config.aliases.get('bin') or 'bin'
+    is_signal_ = config.aliases.get('is_signal') or 'is_signal'
+    background = (
+        pandas.concat([pandas.read_hdf(input_pattern_h5 % sample, key='train') for sample in config.samples])
+              .loc[lambda x: x[bin_] > -1]
+              .loc[lambda x: x[is_signal_] == 0]
+              .loc[:, [target, 'weight']]
+    )
+
     # Run the rebinning routine.
     N_BINS = config.settings['n_bins']
     METRICS = config.settings['metrics']
     N_MINBKG = config.settings['n_minbkg']
     SMOOTH_BKG = config.settings['smooth_bkg']
     UNC_TOL = config.settings['unc_tol']
-    WIDTH_TOL = config.settings['width_tol']
 
-    trial_params = itertools.product(N_BINS, METRICS, N_MINBKG, SMOOTH_BKG, UNC_TOL, WIDTH_TOL)
-    for n_bins, metric, n_minbkg, smooth_bkg, unc_tol, width_tol in trial_params:
-        print 'Rebinning with n_bins={0!s}, metric={1}, n_minbkg={2!s}, smooth_bkg={3!r}, unc_tol={4!s}, width_tol={5!s}'.format(n_bins, metric, n_minbkg, smooth_bkg, unc_tol, width_tol)
+    trial_params = itertools.product(N_BINS, METRICS, N_MINBKG, SMOOTH_BKG, UNC_TOL)
+    for n_bins, metric, n_minbkg, smooth_bkg, unc_tol in trial_params:
+        print '\nRebinning with n_bins={0!s}, metric={1}, n_minbkg={2!s}, smooth_bkg={3!r}, unc_tol={4!s}'.format(n_bins, metric, n_minbkg, smooth_bkg, unc_tol)
         try:
-            rebin(events, features, n_bins, metric, n_minbkg, smooth_bkg, unc_tol, [target_min, target_max, width_tol], config.destination)
+            results = rebin(events, features, bounds, n_bins, metric, n_minbkg, smooth_bkg, unc_tol, background, config.destination)
+            for key, value in sorted(results.items(), key=lambda x: x[0]):
+                print '{0!s}: {1!r}'.format(key, value)
         except BinUncertaintyError:
             print '... failed relative uncertainty tolerance!'
-        except BinWidthError:
-            print '... failed relative width tolerance!'
+            filename = 'rebin_{0!s}_{1}_{2!s}_{3!r}_{4!s}'.format(n_bins, metric, n_minbkg, smooth_bkg, unc_tol)
+            filename = filename.replace('.', 'p') + '.xml'
+            outfile = os.path.join(config.destination, filename)
+            os.remove(outfile)
+        except xml.etree.ElementTree.ParseError:
+            print '... failed to generate XML output file, possible empty bin'
         except Exception:
             raise
 
     # Parse the rebinning XML files and report the rebinning
     # schemes with the highest significance scores.
-    results = parse_rebinning_trees(config.destination, bounds=[target_min, target_max])
+    results = parse_rebinning_trees(config.destination, bounds)
 
     best_poisson_index = results.loc[results.metric == 'poisson']['total_significance'].idxmax()
     best_poisson_trial = results.loc[results.metric == 'poisson'].loc[best_poisson_index]
@@ -74,7 +94,6 @@ def main(argv=None):
         print 'Minimum Number of Background Events (Unweighted): {0!s}'.format(trial.n_minbkg)
         print 'Background Smoothing Applied: {0!r}'.format(trial.smooth_bkg)
         print 'Maximum Relative Background Stat. Uncertainty: {0!s}'.format(trial.unc_tol)
-        print 'Minimum Bin Width Relative to Full Range: {0!s}'.format(trial.width_tol)
         print 'Total Significance Score: {0!s}'.format(trial.total_significance)
         print 'Bin Edges: {0!s}'.format(trial.bin_edges)
 

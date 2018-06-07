@@ -101,10 +101,10 @@ void AnalysisManager::AddSystematic(SystematicContainer syst){
 
 void AnalysisManager::AddScaleFactor(SFContainer sf) {
     scaleFactors.push_back(sf);
-    std::cout<<"added sf: "<<sf.name<<", now going to test it"<<std::endl;
+    if (debug>10000) std::cout<<"added sf: "<<sf.name<<", now going to test it"<<std::endl;
     float sf_err = 1.0;
     float sfac = sf.getScaleFactor(100.,1.2,sf_err);
-    std::cout<<sfac<<std::endl;
+    if (debug>10000) std::cout<<sfac<<std::endl;
 }
 
 void AnalysisManager::InitializeBTagSF(const std::string & bTagCalibFile) {

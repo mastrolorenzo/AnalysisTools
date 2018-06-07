@@ -57,7 +57,7 @@ public :
     TChain                          *fChain;        //!pointer to the analyzed TTree or TChain
     Int_t                           fCurrent;       //!current Tree number in a TChain
     TFile                           *ofile;         // what will be the trees saved here
-    TFile                           *tempfile; 
+    TFile                           *tempfile;
     TTree                           *outputTree;    // what will be the condensed output tree
     TTree                           *outputTreeSlim;    // what will be the condensed output tree
     TTree                           *settingsTree;  // contains analysis settings
@@ -99,7 +99,7 @@ public :
     std::map<std::string,bool*> b;
     std::map<std::string,char*> uc;
     double m(std::string key,int index=-1); // scaffold for function to get values from maps
-    int mInt(std::string key,int index=-1); 
+    int mInt(std::string key,int index=-1);
 
     Int_t           GetEntry(Long64_t entry);
     Long64_t        LoadTree(Long64_t entry);
@@ -118,7 +118,7 @@ public :
     void            PrintBDTInfoValues(BDTInfo* bdt);
 
     //void            Loop(std::string sampleName="", std::string filename="", int fNum=1 );
-    void            Loop(std::string sampleName="", std::string filename="", std::string ofilename="test.root", bool doSkim=false, float startFrac=0., float endFrac=1. );
+    void            Loop(std::string sampleName="", std::string filename="", std::string ofilename="test.root", bool doSkim=false, float startFrac=0., float endFrac=1.);
     //virtual void     WriteBDTs(std::string indirname, std::string infilename, std::string outdirname, std::string outfilename, std::string cutstring);
     //Value            RetrieveValue(std::string key);
 
@@ -142,11 +142,11 @@ public :
     float           EvaluateRegression(BDTInfo* bdtInfo);
     void            SetupSystematicsBranches();
     void            ApplySystematics(bool early=false);
-    
+
                     //0 is nominal, -1 is down, 1 is up
     double          GetPUWeight(int thisPU, int puType=0);
     bool            EvaluatePUReweighting(TH1D* inputPU, int puType=0);
-    void            SetGlobalPUTarget(TH1D targetPU, int puType=0); 
+    void            SetGlobalPUTarget(TH1D targetPU, int puType=0);
     void            SetGlobalPUInput(TH1D globalInputPU);
     TH1D*           PUReWeighting;
     TH1D*           PUReWeightingUP;
