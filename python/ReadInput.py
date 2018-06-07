@@ -158,7 +158,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         print "Can't add",filename
                 if addedAtLeastOneFile:
                     print("Adding sample %s to sample container with %i events " % (samplecon.sampleName, samplecon.processedEvents))
-                    if not samplecon.externFileExists and len(filesToRun)>0:
+                    if not samplecon.externFileExists:
                         samplecon.CreateSampleInfoFile()
                         if site=="FNAL":
                             copyToOrigin_command=['xrdcp','-f',samplecon.sampleName+'_sampleInfo.root',samplecon.externFileName]
