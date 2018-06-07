@@ -106,7 +106,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 
                 if samplecon.externFileExists:
                     print "before",samplecon.processedEvents 
-                    samplecon.ReadSampleInfoFile()
+                    samplecon.ReadSampleInfoFile(int(doSkim))
                     print "after",samplecon.processedEvents 
                 
                 for filename in sample["files"]:
@@ -152,6 +152,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         if not runOnSkim:
                             samplecon.AddFile(filename,isBatch,int(doSkim))
                         else:
+                            print "trying AddFile"
                             samplecon.AddFile(filename,isBatch,2)
                         addedAtLeastOneFile=True
                     except:

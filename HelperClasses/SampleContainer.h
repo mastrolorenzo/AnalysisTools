@@ -48,7 +48,7 @@ class SampleContainer {
     void ComputeWeight(float);
 
     void CreateSampleInfoFile();
-    void ReadSampleInfoFile();
+    void ReadSampleInfoFile(int doSkim);
 
   /** adds a lumi section range to 'goodLumis' (typically
       taken from a 'json' file containing the list of 

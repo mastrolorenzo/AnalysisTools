@@ -57,12 +57,46 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
     
     sampleChain->Add(fname);
     if(sampleNum==0) return;
+    
+    bool openTFile=(nProFromFile || !(PUHistName.empty()));
+    TFile *file;
 
-    //std::cout<<"nProFromFile "<<nProFromFile<<" doSkim "<<doSkim<<std::endl; 
-    if(forceOverWriteExtFile || !externFileExists){
-        bool openTFile=(nProFromFile || !(PUHistName.empty()));
-        TFile *file;
-   
+    std::cout<<"nProFromFile "<<nProFromFile<<" doSkim "<<doSkim<<std::endl; 
+    if (doSkim == 2) {
+        if (files.size() > 1) return; // skimmed files already have the summed count histograms
+        // doSkim == 2 -> running on skimmed samples by AT
+        // for now our skimmed ntuples we preserve the counting by histogram structure
+        // from Heppy, since this is how the datacard maker is set up. We may want to eventually
+        // change this.
+        if(openTFile){
+            file = TFile::Open(fname);
+            if (file->IsZombie()) return;
+        }
+        
+        TH1F* counter = (TH1F*)file->Get("CountWeighted");
+        float nEffective = counter->GetBinContent(1);
+        std::cout<<"nEffective "<<nEffective<<std::endl;
+        //if(sampleNum==49 or sampleNum==491) {
+        //    //special prescription for WJets_BGenFilter sample weighting
+        //    //TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
+        //    nEffective = counterFullWeight->GetBinContent(1); 
+        //}
+        CountWeighted->Add(counter);
+        std::cout<<"pe = "<<processedEvents<<std::endl;
+        processedEvents += nEffective;
+        std::cout<<"pe = "<<processedEvents<<std::endl;
+        TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightScale");
+        TH1F* CountWeightedLHEWeightPdf_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightPdf");
+        //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
+        CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
+        CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
+        //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
+        
+        if(openTFile){
+            file->Close();
+        }
+    } else if(forceOverWriteExtFile || !externFileExists){
+  
         if(openTFile){
             file = TFile::Open(fname);
             if (file->IsZombie()) return;
@@ -86,57 +120,30 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
         }
         
         if(nProFromFile) {
-            if (doSkim == 2 && files.size() > 1) return; // skimmed files already have the summed count histograms
-            if (doSkim == 2) {
-                // doSkim == 2 -> running on skimmed samples by AT
-                // for now our skimmed ntuples we preserve the counting by histogram structure
-                // from Heppy, since this is how the datacard maker is set up. We may want to eventually
-                // change this.
-                
-                TH1F* counter = (TH1F*)file->Get("CountWeighted");
-                float nEffective = counter->GetBinContent(1);
-                std::cout<<"nEffective "<<nEffective<<std::endl;
-                //if(sampleNum==49 or sampleNum==491) {
-                //    //special prescription for WJets_BGenFilter sample weighting
-                //    //TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
-                //    nEffective = counterFullWeight->GetBinContent(1); 
-                //}
-                CountWeighted->Add(counter);
-                std::cout<<"pe = "<<processedEvents<<std::endl;
-                processedEvents += nEffective;
-                std::cout<<"pe = "<<processedEvents<<std::endl;
-                TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightScale");
-                TH1F* CountWeightedLHEWeightPdf_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightPdf");
-                //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
-                CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
-                CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
-                //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
-            } else {
-                // totally different setup for grabbing event count in nanoAOD
-                TTree *Runs = (TTree*) file->Get("Runs");
-                Double_t genEventSumw = 0;
-                Double_t lheScales[9];
-                Double_t lhePdfs[120];
-                Runs->SetBranchAddress("genEventSumw",&genEventSumw);
-                Runs->SetBranchAddress("LHEScaleSumw",&lheScales);
-                Runs->SetBranchAddress("LHEPdfSumw",&lhePdfs);
-                // one entry in Runs tree per input NanoAOD file
-                int nNanoInputFiles = Runs->GetEntries();
-                std::cout<<"From Runs tree, processedEvents is (before) "<<processedEvents<<std::endl;
-                for (int i=0; i < nNanoInputFiles; i++) {
-                    Runs->GetEntry(i);
-                    std::cout<<fname<<" genEventSumw: "<<genEventSumw<<std::endl;
-                    CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventSumw);
-                    processedEvents += genEventSumw;
-                    for (int j=0; j<9; j++) {
-                        CountWeightedLHEWeightScale->SetBinContent(j+1,CountWeightedLHEWeightScale->GetBinContent(j+1)+lheScales[j]);
-                    }
-                    for (int j=0; j<120; j++) {
-                        CountWeightedLHEWeightPdf->SetBinContent(j+1,CountWeightedLHEWeightPdf->GetBinContent(j+1)+lhePdfs[j]);
-                    }
+            // totally different setup for grabbing event count in nanoAOD
+            TTree *Runs = (TTree*) file->Get("Runs");
+            Double_t genEventSumw = 0;
+            Double_t lheScales[9];
+            Double_t lhePdfs[120];
+            Runs->SetBranchAddress("genEventSumw",&genEventSumw);
+            Runs->SetBranchAddress("LHEScaleSumw",&lheScales);
+            Runs->SetBranchAddress("LHEPdfSumw",&lhePdfs);
+            // one entry in Runs tree per input NanoAOD file
+            int nNanoInputFiles = Runs->GetEntries();
+            std::cout<<"From Runs tree, processedEvents is (before) "<<processedEvents<<std::endl;
+            for (int i=0; i < nNanoInputFiles; i++) {
+                Runs->GetEntry(i);
+                std::cout<<fname<<" genEventSumw: "<<genEventSumw<<std::endl;
+                CountWeighted->SetBinContent(1,CountWeighted->GetBinContent(1)+genEventSumw);
+                processedEvents += genEventSumw;
+                for (int j=0; j<9; j++) {
+                    CountWeightedLHEWeightScale->SetBinContent(j+1,CountWeightedLHEWeightScale->GetBinContent(j+1)+lheScales[j]);
                 }
-                std::cout<<"From Runs tree, processedEvents is (after)  "<<processedEvents<<std::endl;
+                for (int j=0; j<120; j++) {
+                    CountWeightedLHEWeightPdf->SetBinContent(j+1,CountWeightedLHEWeightPdf->GetBinContent(j+1)+lhePdfs[j]);
+                }
             }
+            std::cout<<"From Runs tree, processedEvents is (after)  "<<processedEvents<<std::endl;
         }
         if(openTFile){
             file->Close();
@@ -176,7 +183,7 @@ inline void SampleContainer::CreateSampleInfoFile(){
     delete sampleInfoFile;
 }
 
-inline void SampleContainer::ReadSampleInfoFile(){
+inline void SampleContainer::ReadSampleInfoFile(int doSkim){
     TFile* sampleInfoFile = TFile::Open(externFileName.c_str());
 
     TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)sampleInfoFile->Get("CountWeightedLHEWeightScale");
@@ -188,6 +195,9 @@ inline void SampleContainer::ReadSampleInfoFile(){
     processedEvents = counter->GetBinContent(1);
             
     TH1D* thisFilePUHist=(TH1D*)((TH1D*)sampleInfoFile->Get("PUTarget"))->Clone("thisFilePUHist");
+    if(doSkim==1){
+        PUHistName+="skim";
+    }
     InputPU=(TH1D*)(thisFilePUHist->Clone(PUHistName.c_str()));
     InputPU->SetDirectory(0);
     
