@@ -1,9 +1,10 @@
 #~ /usr/bin/python
-import sys
+import sys,os
 import ROOT
 import json
 from numpy import array
 from ROOT import TH2F
+import subprocess
 #ROOT.gSystem.Load("SampleContainer_cc.so")
 #ROOT.gSystem.Load("AnalysisManager_cc.so")
 #ROOT.gSystem.Load("VHbbAnalysis_cc.so")
@@ -149,7 +150,14 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         print "Can't add",filename
                 if addedAtLeastOneFile:
                     print("Adding sample %s to sample container with %i events " % (samplecon.sampleName, samplecon.processedEvents))
-                    samplecon.CreateSampleInfoFile()
+                    if not samplecon.externFileExists and len(filesToRun)>0:
+                        samplecon.CreateSampleInfoFile()
+                        if site=="FNAL":
+                            copyToOrigin_command=['xrdcp','-f',samplecon.sampleName+'_sampleInfo.root',samplecon.externFileName]
+                            success=subprocess.check_output(copyToOrigin_command)
+                        else:
+                            copyToOrigin_command=[]
+                            print "Need to fill in and execute copy command for DESY and CERN"
                     am.AddSample(samplecon)
                 else:
                     print("No inputfile could be added for sample %s. Exiting here to avoid seg faults later." % samplecon.sampleName)
@@ -724,7 +732,6 @@ def SetupSF(lines):
 
 def GetFileList(value, site):
     if value.find("/store") is 0:
-        import subprocess
         onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
     else:
         from os import listdir
@@ -737,7 +744,6 @@ def GetFileList(value, site):
 def findAllRootFiles(value, site):
     samplepaths = []
     if value.find("/store") is 0:
-        import subprocess
         #onlyFiles = subprocess.check_output(["/cvmfs/cms.cern.ch/slc6_amd64_gcc491/cms/cmssw/CMSSW_7_4_14/external/slc6_amd64_gcc491/bin/xrdfs", siteIP, "ls", value]).split('\n')
         onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
         for filepath in onlyFiles:
@@ -750,10 +756,10 @@ def findAllRootFiles(value, site):
             elif filepath.find("/log/")==-1:
                 samplepaths.extend(findAllRootFiles(filepath,site))
     else:
-        from os import listdir
-        from os.path import isfile, join, isdir
+        #from os import listdir
+        #from os.path import isfile, join, isdir
         #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
-        onlyFiles = listdir(str(value))
+        onlyFiles = os.listdir(str(value))
         for rootfile in onlyFiles:
             if rootfile.find(".root") != -1:
                 samplepaths.append(str(value)+"/"+str(rootfile))

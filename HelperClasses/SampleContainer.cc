@@ -163,7 +163,13 @@ inline void SampleContainer::CreateSampleInfoFile(){
     CountWeighted->Write();
     CountFullWeighted->Write();
     InputPU->Write();
-     
+    
+    TTree* sampleInfoTree = new TTree("sampleInfo","Sample Info Tree");
+    sampleInfoTree->Branch("processedEvents",&processedEvents,"processedEvents/f");
+    std::cout<<"processedEvents"<<processedEvents<<std::endl;
+    sampleInfoTree->Fill();
+    sampleInfoTree->Write();
+
     sampleInfoFile->Close();
     delete sampleInfoFile;
 }
