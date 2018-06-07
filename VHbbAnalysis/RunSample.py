@@ -16,7 +16,7 @@ if (len(sys.argv) not in allowNArgs):
 
 # reads samples, existing branches and new branches
 samplesToRun = []
-if sys.argv[2] != "":
+if len(sys.argv) >= 3:
     samplesToRun.append(sys.argv[2])
 filesToRun = []
 if len(sys.argv) >= 5:
