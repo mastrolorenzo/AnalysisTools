@@ -3,8 +3,11 @@ import sys
 import os
 import time
 
-if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv)!=6 and len(sys.argv)!=7 and len(sys.argv) !=8):
-    print "Please give two arguments:  the cfg file and the sample name"
+allowNArgs=[2,3,5,6,7,8]
+
+if (len(sys.argv) not in allowNArgs):
+    print "Please give one argument:  the cfg file"
+    print "Or please give two arguments:  the cfg file and the sample name"
     print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus comma-separated options: doSkim,runOnSkim,doKinFit)"
     print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,doKinFit"
     sys.exit(61)
