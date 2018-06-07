@@ -61,7 +61,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             for name in samples:
                 addedAtLeastOneFile=False
                 print site,siteIP
-                samples[name]["externFileName"]=siteIP+"/"+samples[name]["globalPrefix"]+name+"_sampleInfo.root"
+                samples[name]["externFileName"]=samples[name]["globalPrefix"]+name+"_sampleInfo.root"
                 filesInGlobalPrefix=GetFileList(samples[name]["globalPrefix"], site)
                 samples[name]["externFileExists"]=(samples[name]["externFileName"] in filesInGlobalPrefix)
                 print "name externFileExists ",samples[name]["externFileName"],samples[name]["externFileExists"]
@@ -72,7 +72,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 sample=samples[name]
                 #print sample, sampledic[sample]
                 samplecon = ROOT.SampleContainer()
-                samplecon.externFileName=samples[name]["externFileName"]
+                samplecon.externFileName=siteIP+"/"+samples[name]["externFileName"]
                 samplecon.externFileExists=samples[name]["externFileExists"]
                 if sample.has_key("name"):
                     samplecon.sampleName        = sample["name"]
@@ -101,6 +101,12 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                     print "found puhist name in settings"
                     samplecon.PUHistName = settings["mcpuhistname"]
                 #print "Reading",sample["name"],"with",len(sample["files"]),"files"
+                
+                if samplecon.externFileExists:
+                    print "before",samplecon.processedEvents 
+                    samplecon.ReadSampleInfoFile()
+                    print "after",samplecon.processedEvents 
+                
                 for filename in sample["files"]:
                     #Reset pu hist name for every sample
                     if sample.has_key("puhist"):

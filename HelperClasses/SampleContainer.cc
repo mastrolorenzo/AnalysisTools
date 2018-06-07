@@ -161,19 +161,38 @@ inline void SampleContainer::CreateSampleInfoFile(){
     CountWeightedLHEWeightScale->Write();
     CountWeightedLHEWeightPdf->Write();
     CountWeighted->Write();
-    CountFullWeighted->Write();
     InputPU->Write();
-    
-    TTree* sampleInfoTree = new TTree("sampleInfo","Sample Info Tree");
-    sampleInfoTree->Branch("processedEvents",&processedEvents,"processedEvents/f");
-    std::cout<<"processedEvents"<<processedEvents<<std::endl;
-    sampleInfoTree->Fill();
-    sampleInfoTree->Write();
+   
+    // CountWeighted does this already.  Keep for reference...
+    // Maybe a tree will be useful in the future.
+    //TTree* sampleInfoTree = new TTree("sampleInfo","Sample Info Tree");
+    //sampleInfoTree->Branch("processedEvents",&processedEvents,"processedEvents/f");
+    //sampleInfoTree->Fill();
+    //sampleInfoTree->Write();
 
     sampleInfoFile->Close();
     delete sampleInfoFile;
 }
 
+inline void SampleContainer::ReadSampleInfoFile(){
+    TFile* sampleInfoFile = TFile::Open(externFileName.c_str());
+
+    TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)sampleInfoFile->Get("CountWeightedLHEWeightScale");
+    TH1F* CountWeightedLHEWeightPdf_thisfile = (TH1F*)sampleInfoFile->Get("CountWeightedLHEWeightPdf");
+    CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
+    CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
+    
+    TH1F* counter = (TH1F*)sampleInfoFile->Get("CountWeighted");
+    processedEvents = counter->GetBinContent(1);
+            
+    TH1D* thisFilePUHist=(TH1D*)((TH1D*)sampleInfoFile->Get("PUTarget"))->Clone("thisFilePUHist");
+    InputPU=(TH1D*)(thisFilePUHist->Clone(PUHistName.c_str()));
+    InputPU->SetDirectory(0);
+    
+    delete counter;
+    delete thisFilePUHist;
+    delete sampleInfoFile;
+}
 
 /* 
 // ----------------------------------------------------------------------------------------------------------------------
