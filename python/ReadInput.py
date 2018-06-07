@@ -746,7 +746,7 @@ def GetFileList(value, site):
         onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
     else:
         #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
-        onlyFiles = listdir(str(value))
+        onlyFiles = list(join(value,f) for f in listdir(str(value)))
     return onlyFiles
 
 
