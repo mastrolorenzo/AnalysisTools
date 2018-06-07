@@ -1,5 +1,7 @@
 #~ /usr/bin/python
-import sys,os
+import sys
+from os import listdir
+from os.path import isfile, join, isdir
 import ROOT
 import json
 from numpy import array
@@ -743,8 +745,6 @@ def GetFileList(value, site):
     if value.find("/store") is 0:
         onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
     else:
-        from os import listdir
-        from os.path import isfile, join, isdir
         #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
         onlyFiles = listdir(str(value))
     return onlyFiles
@@ -765,8 +765,6 @@ def findAllRootFiles(value, site):
             elif filepath.find("/log/")==-1:
                 samplepaths.extend(findAllRootFiles(filepath,site))
     else:
-        #from os import listdir
-        #from os.path import isfile, join, isdir
         #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
         onlyFiles = os.listdir(str(value))
         for rootfile in onlyFiles:
