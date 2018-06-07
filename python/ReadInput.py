@@ -19,13 +19,13 @@ hostname = socket.gethostname()
 site=""
 if hostname.endswith('.cern.ch'):
     site="CERN"
-    siteIP = "root://eoscms.cern.ch"
+    siteIP = "root://eoscms.cern.ch/"
 elif hostname.endswith('.desy.de'):
     site="DESY"
     siteIP=""
 elif hostname.endswith('.fnal.gov'):
     site="FNAL"
-    siteIP = "root://cmseos.fnal.gov"
+    siteIP = "root://cmseos.fnal.gov/"
 
 def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, doSkim=False, runOnSkim=False):
     if debug > 100:
@@ -72,7 +72,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 sample=samples[name]
                 #print sample, sampledic[sample]
                 samplecon = ROOT.SampleContainer()
-                samplecon.externFileName=siteIP+"/"+samples[name]["externFileName"]
+                samplecon.externFileName=siteIP+samples[name]["externFileName"]
                 samplecon.externFileExists=samples[name]["externFileExists"]
                 if sample.has_key("name"):
                     samplecon.sampleName        = sample["name"]
@@ -161,9 +161,12 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         if site=="FNAL":
                             copyToOrigin_command=['xrdcp','-f',samplecon.sampleName+'_sampleInfo.root',samplecon.externFileName]
                             success=subprocess.check_output(copyToOrigin_command)
+                        elif site=="DESY":
+                            copyToOrigin_command=['gfal-copy','-r',samplecon.sampleName+'_sampleInfo.root','srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN='+samplecon.externFileName]
+                            success=subprocess.check_output(copyToOrigin_command)
                         else:
                             copyToOrigin_command=[]
-                            print "Need to fill in and execute copy command for DESY and CERN"
+                            print "Need to fill in and execute copy command for CERN"
                     am.AddSample(samplecon)
                 else:
                     print("No inputfile could be added for sample %s. Exiting here to avoid seg faults later." % samplecon.sampleName)
@@ -757,7 +760,7 @@ def findAllRootFiles(value, site):
             #filepath = "root://xrootd-cms.infn.it/" + filepath
             #filepath = "root://cmsxrootd.fnal.gov/" + filepath
             if filepath.find(".root") != -1:
-                filepath = siteIP + "/" + filepath
+                filepath = siteIP + filepath
                 samplepaths.append(filepath)
             elif filepath.find("/log/")==-1:
                 samplepaths.extend(findAllRootFiles(filepath,site))

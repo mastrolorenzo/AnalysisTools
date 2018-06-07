@@ -13,7 +13,8 @@ if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv)!=6 and len(sys.a
 
 # reads samples, existing branches and new branches
 samplesToRun = []
-samplesToRun.append(sys.argv[2])
+if sys.argv[2] != "":
+    samplesToRun.append(sys.argv[2])
 filesToRun = []
 if len(sys.argv) >= 5:
     for item in sys.argv[3].split(','):
