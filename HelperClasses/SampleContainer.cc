@@ -56,6 +56,8 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
     if( isBatch==1 ) return;
     
     sampleChain->Add(fname);
+    if(sampleNum==0) return;
+
     //std::cout<<"nProFromFile "<<nProFromFile<<" doSkim "<<doSkim<<std::endl; 
     if(forceOverWriteExtFile || !externFileExists){
         bool openTFile=(nProFromFile || !(PUHistName.empty()));
@@ -66,7 +68,7 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
             if (file->IsZombie()) return;
         }
    
-        if(!PUHistName.empty() && sampleNum != 0){
+        if(!PUHistName.empty()){
             if(doSkim==2) PUHistName+="skim";
             TH1D* thisFilePUHist=(TH1D*)((TH1D*)file->Get(PUHistName.c_str()))->Clone("thisFilePUHist");
             if(InputPU == NULL){
