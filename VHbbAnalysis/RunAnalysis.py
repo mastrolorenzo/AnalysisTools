@@ -25,7 +25,7 @@ parser.add_option("--dcache", dest="dcache", default=False, action="store_true" 
 parser.add_option("--useSGE","--useSGE", dest="useSGE", default=0, type=int, help="If 0 (default) use condor, if 1 use SGE job submission")
 parser.add_option("--doSkim","--doSkim", dest="doSkim", default=0, type=int, help="If 0 (default) run analysis jobs, if 1 run skimming jobs")
 parser.add_option("--runOnSkim","--runOnSkim", dest="runOnSkim", default=1, type=int, help="If 1 (default) run analysis jobs assuming the input files are already skimmed by AT, if 0 assume running directly on post-processed NanoAOD. If doSkim is 1 then this variable is assumed to be always 0.")
-parser.add_option("--doKinFit","--doKinFit", dest="doKinFit", default=0, type=int, help="If 1 (default=0) runs the kinematic fit after the analysis job (Automatically turned off when doSkim is 1).")
+parser.add_option("--onlyMvaEval","--onlyMvaEval", dest="onlyMvaEval", default=0, type=int, help="If 1 (default=0) runs the kinematic fit after the analysis job (Automatically turned off when doSkim is 1). THIS ONLY GIVES MEANINGFULL RESULT WITH -f >= 1!!")
 parser.add_option("--submitJobs","--submitJobs", dest="submitJobs", default=1, type=int, help="If 1 (default) submit jobs to batch queue, if 0 then only create submission files")
 (options, args) = parser.parse_args()
 
@@ -48,8 +48,11 @@ useSGE = options.useSGE
 submitJobs = options.submitJobs
 
 if options.doSkim:
-    options.doKinFit = False
+    options.onlyMvaEval = False
     options.runOnSkim = False
+
+if options.onlyMvaEval:
+    assert options.nFilesPerJob >= 1, 'with onlyMvaEval, nFilesPerJob must be >=1'
 
 
 am=ReadInput.ReadTextFile(options.configFile, "cfg", samplesToSubmit,"",options.runBatch, options.doSkim, options.runOnSkim)
@@ -202,7 +205,7 @@ else:
             nProcJobs += 1
             RunSample_args = "runOnSkim" if options.runOnSkim else ""
             RunSample_args += ",doSkim" if options.doSkim else ""
-            RunSample_args += ",doKinFit" if options.doKinFit else ""
+            RunSample_args += ",onlyMvaEval" if options.onlyMvaEval else ""
             arg_string+="%s %s %s output_%s_%i.root %f %f %s\n"% (options.configFile, sampleName, filesToRun,sampleName, nProcJobs, start_event_frac, end_event_frac, RunSample_args)
             if useSGE:
                 fname = "%s/%s/job%iSubmit.sh" % (jobName, sampleName,nProcJobs)

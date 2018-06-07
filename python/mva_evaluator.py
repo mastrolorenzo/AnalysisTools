@@ -129,8 +129,8 @@ def apply_mva_eval(input_file, output_file, am, allowed_names, lep_sys_names=tup
         ep.init_output(ot, set(str(bdt_info.bdtname) for bdt_info in bdt_infos))
     n_events = 0
 
-    print 'starting mva evaluation loop with %i systematics' % (len(eps) - 1)
     start_time = time.ctime()
+    print 'starting mva evaluation loop with %i systematics on %s' % (len(eps) - 1, start_time)
     for e in t:
         n_events += 1
 

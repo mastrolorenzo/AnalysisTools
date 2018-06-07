@@ -673,8 +673,10 @@ def apply_kinfit(input_file, output_file, event_proxies=None):
             for ep in eps:
                 try:
                     apply_fit_to_event(ep, ak4pfchs_ptres)
-                except IndexError as e:
-                    print 'caught IndexError: ', e
+                except IndexError as ie:
+                    print 'caught IndexError: ', ie
+                    print 'in event, luminosityBlock, run, systematic:'
+                    print e.event, e.luminosityBlock, e.run, ep.output_postfix
                     print 'applying fallback...'
                     ep.apply_fallback()
             ot.Fill()

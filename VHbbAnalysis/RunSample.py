@@ -5,8 +5,8 @@ import time
 
 if (len(sys.argv) != 3 and len(sys.argv) != 5 and len(sys.argv)!=6 and len(sys.argv)!=7 and len(sys.argv) !=8):
     print "Please give two arguments:  the cfg file and the sample name"
-    print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus comma-separated options: doSkim,runOnSkim,doKinFit)"
-    print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,doKinFit"
+    print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus comma-separated options: doSkim,runOnSkim,onlyMvaEval)"
+    print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,onlyMvaEval"
     sys.exit(61)
 
 DEBUG = 2
@@ -17,8 +17,7 @@ samplesToRun = []
 samplesToRun.append(sys.argv[2])
 filesToRun = []
 if len(sys.argv) >= 5:
-    for item in sys.argv[3].split(','):
-        filesToRun.append(item)
+    filesToRun = sys.argv[3].split(',')
 
 print sys.argv
 if len(sys.argv)==6:
@@ -62,9 +61,15 @@ def loop_func():
     os.system('rm temp.root')
 
 
-p = Process(target=loop_func, args=tuple())
-p.start()
-p.join()
+if "onlyMvaEval" in options:
+    cmd = 'hadd -f %s %s' % (sys.argv[4], ' '.join(filesToRun))
+    print 'issuing:'
+    print cmd
+    os.system(cmd)
+else:
+    p = Process(target=loop_func, args=tuple())
+    p.start()
+    p.join()
 
 tLoop=time.time()-t0
 
@@ -78,7 +83,7 @@ cursample_container = next(s for s in am.samples if s.sampleName == samplesToRun
 is_data = cursample_container.sampleNum == 0
 
 lep_sys_names = []
-if "doKinFit" in options:
+if am.branchInfos['doKinFit'].val > 0.5 and "onlyMvaEval" not in options:
     import kinfitter
 
     # mv the previous output_file to a new name, so that the final output name is the same
@@ -107,7 +112,7 @@ if "doKinFit" in options:
 
 tKinFit=time.time()-tLoop-t0
 
-if am.branchInfos['postLoopMVAEval'].val > 0.5:
+if "onlyMvaEval" in options or am.branchInfos['postLoopMVAEval'].val > 0.5:
 
     output_file = sys.argv[4]
     input_file = output_file.replace('.root', '_before_mva_eval.root')
