@@ -4,13 +4,11 @@ import os
 import time
 
 allowNArgs=[2,3,5,6,7,8]
-
 if (len(sys.argv) not in allowNArgs):
     print "Please give one argument:  the cfg file"
     print "Or please give two arguments:  the cfg file and the sample name"
-    print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus comma-separated options: doSkim,runOnSkim,doKinFit)"
-    print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,doKinFit"
-
+    print "Or give four arguments: the cfg file, the sample name, a comma-separated list of input files, and the name of the output root file (plus comma-separated options: doSkim,runOnSkim,onlyMvaEval,kill_if_runtime_above_minutes=XX)"
+    print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,onlyMvaEval,kill_if_runtime_above_minutes=XX"
     sys.exit(61)
 
 DEBUG = 2
@@ -34,6 +32,8 @@ else:
 print "options:", options
 if "doSkim" in options and "runOnSkim" in options:
     raise RuntimeError("Cannot doSkim and runOnSkim at the same time.")
+kill_rt_opt = list(o for o in options if o.startswith('kill_if_runtime_above_minutes'))
+kill_rt_opt = int(kill_rt_opt[0].split('=')[-1]) if kill_rt_opt else -1
 
 t0=time.time()
 def loop_func():
@@ -60,9 +60,9 @@ def loop_func():
     if (len(sys.argv) == 3):
         am.Loop(sys.argv[2])
     elif (len(sys.argv) > 6):
-        am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]))
+        am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4],"doSkim" in options, float(sys.argv[5]), float(sys.argv[6]), kill_rt_opt)
     else :
-        am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options)
+        am.Loop(sys.argv[2], ','.join(filesToRun), sys.argv[4], "doSkim" in options, 0., 1., kill_rt_opt)
     os.system('rm temp.root')
 
 
@@ -75,6 +75,8 @@ else:
     p = Process(target=loop_func, args=tuple())
     p.start()
     p.join()
+    if p.exitcode:
+        sys.exit(p.exitcode)
 
 tLoop=time.time()-t0
 

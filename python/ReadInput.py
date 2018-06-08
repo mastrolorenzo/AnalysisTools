@@ -105,12 +105,12 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         print "found puhist name in settings"
                     samplecon.PUHistName = settings["mcpuhistname"]
                 #print "Reading",sample["name"],"with",len(sample["files"]),"files"
-                
+
                 if samplecon.externFileExists:
-                    print "before",samplecon.processedEvents 
+                    print "before",samplecon.processedEvents
                     samplecon.ReadSampleInfoFile(int(doSkim))
-                    print "after",samplecon.processedEvents 
-                
+                    print "after",samplecon.processedEvents
+
                 for filename in sample["files"]:
                     #Reset pu hist name for every sample
                     if sample.has_key("puhist"):
@@ -789,7 +789,7 @@ def findAllRootFiles(value, site):
                 samplepaths.extend(findAllRootFiles(filepath,site))
     else:
         #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
-        onlyFiles = os.listdir(str(value))
+        onlyFiles = listdir(str(value))
         for rootfile in onlyFiles:
             if rootfile.find(".root") != -1:
                 samplepaths.append(str(value)+"/"+str(rootfile))

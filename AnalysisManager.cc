@@ -6,6 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
+#include <chrono>
 #include <string>
 #include <TFile.h>
 #include <TMath.h>
@@ -471,7 +472,7 @@ std::vector<std::string> AnalysisManager::ListSampleNames() {
 
 
 // Process all input samples and all events
-void AnalysisManager::Loop(std::string sampleName, std::string filename, std::string ofilename, bool doSkim, float startFrac, float endFrac){
+void AnalysisManager::Loop(std::string sampleName, std::string filename, std::string ofilename, bool doSkim, float startFrac, float endFrac, int kill_if_runtime_above_minutes){
     // Specify sample name if we want to run on only a particular sample, specify
     // filenames if we want to run only on specific files from that sample.
     std::vector<std::string> filenames;
@@ -609,11 +610,32 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
             if(debug>1) std::cout<<"looping over "<<nentry_end-nentry_begin<<std::endl;
             Long64_t nbytes = 0, nb = 0;
             int saved=0;
-            // FIXME need a loop over systematics
+            auto start_loop_time = std::chrono::system_clock::now();
             for (Long64_t jentry=nentry_begin; jentry<nentry_end;jentry++) {
             //for (Long64_t jentry=0; jentry<nentries;jentry++) {
                 if((jentry%1000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
                 //if((jentry%10000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
+
+                if (jentry == 2) {
+                    // update at event 2, in case the first event took a long time to load
+                    start_loop_time = std::chrono::system_clock::now(); 
+                }
+                
+                if (jentry == 102 && kill_if_runtime_above_minutes > 0) {
+                    auto time_after_100 = std::chrono::system_clock::now();
+                    std::chrono::duration<double> time_needed_for_100 = time_after_100-start_loop_time;
+                    double minutes_needed_for_1 = time_needed_for_100.count()/60./100.;
+                    if (minutes_needed_for_1*(nentry_end-nentry_begin-100) > kill_if_runtime_above_minutes) {
+                        std::cout << "This is unfortunate...\n"
+                                  << "For 100 events, I needed " << time_needed_for_100.count()/60. <<" minutes.\n"
+                                  << "For the remaining " << nentry_end-nentry_begin-100 << " events, I would need "
+                                  << minutes_needed_for_1*(nentry_end-nentry_begin-100) <<" minutes, which is above "
+                                  << kill_if_runtime_above_minutes << " minutes (kill_if_runtime_above_minutes), "
+                                  << "so I'm going to abort here with std::exit(71).\n";
+                        std::exit(71);
+                    }
+                }
+
                 CheckBranchLengths(jentry, cursample->sampleNum==0);
                 bool anyPassing=false;
                 for(unsigned iSyst=0; iSyst<systematics.size(); iSyst++){

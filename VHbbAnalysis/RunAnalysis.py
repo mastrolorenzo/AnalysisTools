@@ -27,6 +27,7 @@ parser.add_option("--doSkim","--doSkim", dest="doSkim", default=0, type=int, hel
 parser.add_option("--runOnSkim","--runOnSkim", dest="runOnSkim", default=1, type=int, help="If 1 (default) run analysis jobs assuming the input files are already skimmed by AT, if 0 assume running directly on post-processed NanoAOD. If doSkim is 1 then this variable is assumed to be always 0.")
 parser.add_option("--onlyMvaEval","--onlyMvaEval", dest="onlyMvaEval", default=0, type=int, help="If 1 (default=0) runs the kinematic fit after the analysis job (Automatically turned off when doSkim is 1). THIS ONLY GIVES MEANINGFULL RESULT WITH -f >= 1!!")
 parser.add_option("--submitJobs","--submitJobs", dest="submitJobs", default=1, type=int, help="If 1 (default) submit jobs to batch queue, if 0 then only create submission files")
+parser.add_option("--kill_if_runtime_above_minutes","--kill_if_runtime_above_minutes", dest="kill_if_runtime_above_minutes", default=-1, type=int, help="After 100 events it's estimated how long the job would take. The job exits with code 71 if it would take longer than the given amount.")
 (options, args) = parser.parse_args()
 
 if len(sys.argv) == 1:
@@ -54,9 +55,9 @@ if options.doSkim:
 if options.onlyMvaEval:
     assert options.nFilesPerJob >= 1, 'with onlyMvaEval, nFilesPerJob must be >=1'
 
-
+ReadInput.debug = 2
 am=ReadInput.ReadTextFile(options.configFile, "cfg", samplesToSubmit,"",options.runBatch, options.doSkim, options.runOnSkim)
-am.debug=2
+am.debug = 2
 
 
 if (options.runBatch == False):
@@ -206,6 +207,7 @@ else:
             RunSample_args = "runOnSkim" if options.runOnSkim else ""
             RunSample_args += ",doSkim" if options.doSkim else ""
             RunSample_args += ",onlyMvaEval" if options.onlyMvaEval else ""
+            RunSample_args += ",kill_if_runtime_above_minutes=%i" % options.kill_if_runtime_above_minutes if options.kill_if_runtime_above_minutes > 0 else ""
             arg_string+="%s %s %s output_%s_%i.root %f %f %s\n"% (options.configFile, sampleName, filesToRun,sampleName, nProcJobs, start_event_frac, end_event_frac, RunSample_args)
             if useSGE:
                 fname = "%s/%s/job%iSubmit.sh" % (jobName, sampleName,nProcJobs)
@@ -244,9 +246,9 @@ else:
             content =  "universe = vanilla\n"
             content += "Executable = %s/condor_runscript.sh\n" % jobName
             content += "initialdir = %s/%s\n" % (jobName,sampleName)
-            content += "Output = $(ProcId).stdout\n"
-            content += "Error  = $(ProcId).stderr\n"
-            content += "Log    = $(ProcId).log\n"
+            content += "Output = log-$(ClusterId).$(ProcId).stdout\n"
+            content += "Error  = log-$(ClusterId).$(ProcId).stderr\n"
+            content += "Log    = log-$(ClusterId).$(ProcId).log\n"
             content += "Notification = never\n"
             content += "on_exit_hold = (ExitBySignal == True) || (ExitCode != 0)\n"
             if dcache:

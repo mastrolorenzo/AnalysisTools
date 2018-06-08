@@ -118,7 +118,7 @@ public :
     void            PrintBDTInfoValues(BDTInfo* bdt);
 
     //void            Loop(std::string sampleName="", std::string filename="", int fNum=1 );
-    void            Loop(std::string sampleName="", std::string filename="", std::string ofilename="test.root", bool doSkim=false, float startFrac=0., float endFrac=1.);
+    void            Loop(std::string sampleName="", std::string filename="", std::string ofilename="test.root", bool doSkim=false, float startFrac=0., float endFrac=1., int kill_if_runtime_above_minutes=-1);
     //virtual void     WriteBDTs(std::string indirname, std::string infilename, std::string outdirname, std::string outfilename, std::string cutstring);
     //Value            RetrieveValue(std::string key);
 
