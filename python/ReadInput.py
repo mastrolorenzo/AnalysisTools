@@ -1,9 +1,12 @@
 #~ /usr/bin/python
 import sys
+from os import listdir
+from os.path import isfile, join, isdir
 import ROOT
 import json
 from numpy import array
 from ROOT import TH2F
+import subprocess
 #ROOT.gSystem.Load("SampleContainer_cc.so")
 #ROOT.gSystem.Load("AnalysisManager_cc.so")
 #ROOT.gSystem.Load("VHbbAnalysis_cc.so")
@@ -12,6 +15,19 @@ from ROOT import TH2F
 ROOT.gSystem.Load("AnalysisDict.so")
 
 debug=200
+
+import socket
+hostname = socket.gethostname()
+site=""
+if hostname.endswith('.cern.ch'):
+    site="CERN"
+    siteIP = "root://eoscms.cern.ch/"
+elif hostname.endswith('.desy.de'):
+    site="DESY"
+    siteIP=""
+elif hostname.endswith('.fnal.gov'):
+    site="FNAL"
+    siteIP = "root://cmseos.fnal.gov/"
 
 def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, doSkim=False, runOnSkim=False):
     if debug > 10:
@@ -46,6 +62,11 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
             samples=ReadTextFile(settings["samples"], "samplefile",samplesToRun,filesToRun,isBatch,doSkim,runOnSkim)
             for name in samples:
                 addedAtLeastOneFile=False
+                print site,siteIP
+                samples[name]["externFileName"]=samples[name]["globalPrefix"]+name+"_sampleInfo.root"
+                filesInGlobalPrefix=GetFileList(samples[name]["globalPrefix"], site)
+                samples[name]["externFileExists"]=(samples[name]["externFileName"] in filesInGlobalPrefix)
+                print "name externFileExists ",samples[name]["externFileName"],samples[name]["externFileExists"]
                 #print "is name in samplesToRun?",name,(name in samplesToRun)
                 if (runSelectedSamples and name not in samplesToRun):
                     #print "runSelectedSamples is TRUE and",name,"not in",samplesToRun
@@ -53,6 +74,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                 sample=samples[name]
                 #print sample, sampledic[sample]
                 samplecon = ROOT.SampleContainer()
+                samplecon.externFileName=siteIP+samples[name]["externFileName"]
+                samplecon.externFileExists=samples[name]["externFileExists"]
                 if sample.has_key("name"):
                     samplecon.sampleName        = sample["name"]
                 if sample.has_key("type"):
@@ -82,6 +105,12 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         print "found puhist name in settings"
                     samplecon.PUHistName = settings["mcpuhistname"]
                 #print "Reading",sample["name"],"with",len(sample["files"]),"files"
+                
+                if samplecon.externFileExists:
+                    print "before",samplecon.processedEvents 
+                    samplecon.ReadSampleInfoFile(int(doSkim))
+                    print "after",samplecon.processedEvents 
+                
                 for filename in sample["files"]:
                     #Reset pu hist name for every sample
                     if sample.has_key("puhist"):
@@ -128,6 +157,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                         if not runOnSkim:
                             samplecon.AddFile(filename,isBatch,int(doSkim))
                         else:
+                            print "trying AddFile"
                             samplecon.AddFile(filename,isBatch,2)
                         addedAtLeastOneFile=True
                     except:
@@ -135,6 +165,17 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                             print "Can't add",filename
                 if addedAtLeastOneFile:
                     print("Adding sample %s to sample container with %i events " % (samplecon.sampleName, samplecon.processedEvents))
+                    if not samplecon.externFileExists and samplecon.sampleNum!=0:
+                        samplecon.CreateSampleInfoFile()
+                        if site=="FNAL":
+                            copyToOrigin_command=['xrdcp','-f',samplecon.sampleName+'_sampleInfo.root',samplecon.externFileName]
+                            success=subprocess.check_output(copyToOrigin_command)
+                        elif site=="DESY":
+                            copyToOrigin_command=['gfal-copy','-r',samplecon.sampleName+'_sampleInfo.root','srm://dcache-se-cms.desy.de:8443/srm/managerv2?SFN='+samplecon.externFileName]
+                            success=subprocess.check_output(copyToOrigin_command)
+                        else:
+                            copyToOrigin_command=[]
+                            print "Need to fill in and execute copy command for CERN"
                     am.AddSample(samplecon)
                 else:
                     print("No inputfile could be added for sample %s. Exiting here to avoid seg faults later." % samplecon.sampleName)
@@ -345,18 +386,16 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
         for l in lines
         if l.startswith('prefix')
     )
-    import socket
-    hostname = socket.gethostname()
     if runOnSkim and 'prefix_skim' in prefix_lines:
         globalPrefix = prefix_lines['prefix_skim']
         print "Using globalPrefix for SKIM", globalPrefix
-    elif hostname.endswith('.desy.de') and 'prefix_desy' in prefix_lines:
+    elif site=="DESY" and 'prefix_desy' in prefix_lines:
         globalPrefix = prefix_lines['prefix_desy']
         print "Using globalPrefix for DESY", globalPrefix
-    elif hostname.endswith('.cern.ch') and 'prefix_cern' in prefix_lines:
+    elif site=="CERN" and 'prefix_cern' in prefix_lines:
         globalPrefix = prefix_lines['prefix_cern']
         print "Using globalPrefix for CERN", globalPrefix
-    elif hostname.endswith('.fnal.gov') and 'prefix_fnal' in prefix_lines:
+    elif site=="FNAL" and 'prefix_fnal' in prefix_lines:
         globalPrefix = prefix_lines['prefix_fnal']
         print "Using globalPrefix for FNAL", globalPrefix
     elif 'prefix' in prefix_lines:
@@ -379,6 +418,7 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
         samplescale=1
         samplepuhist=""
         sample={}
+        sample["globalPrefix"]=globalPrefix
 
         dontRun = False
         for item in line.split():
@@ -398,9 +438,7 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False):
             if name.find("puhist") is 0:
                 sample["puhist"]=str(value)
             if name.find("dir") is 0:
-                site = "FNAL"
-                if hostname.endswith(".cern.ch"):
-                    site = "CERN"
+                if site == "CERN":
                     value = value.replace("CERN:","")
                 if value.find(',') is not 0:
                     if not runOnSkim:
@@ -726,14 +764,18 @@ def SetupSF(lines):
                     print "eta: ",sfmap.GetYaxis().GetBinLowEdge(j),": ",sfmap.GetBinContent(i,j)
     return SFs
 
+def GetFileList(value, site):
+    if value.find("/store") is 0:
+        onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
+    else:
+        #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
+        onlyFiles = list(join(value,f) for f in listdir(str(value)))
+    return onlyFiles
+
 
 def findAllRootFiles(value, site):
     samplepaths = []
     if value.find("/store") is 0:
-        import subprocess
-        siteIP = "root://cmseos.fnal.gov"
-        if site == "CERN":
-            siteIP = "root://eoscms.cern.ch"
         #onlyFiles = subprocess.check_output(["/cvmfs/cms.cern.ch/slc6_amd64_gcc491/cms/cmssw/CMSSW_7_4_14/external/slc6_amd64_gcc491/bin/xrdfs", siteIP, "ls", value]).split('\n')
         onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
         for filepath in onlyFiles:
@@ -741,16 +783,14 @@ def findAllRootFiles(value, site):
             #filepath = "root://xrootd-cms.infn.it/" + filepath
             #filepath = "root://cmsxrootd.fnal.gov/" + filepath
             if filepath.find(".root") != -1:
-                filepath = siteIP + "/" + filepath
+                filepath = siteIP + filepath
                 samplepaths.append(filepath)
             elif filepath.find("/log/")==-1:
                 samplepaths.extend(findAllRootFiles(filepath,site))
     else:
-        from os import listdir
-        from os.path import isfile, join, isdir
         #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
-        onlyfiles = listdir(str(value))
-        for rootfile in onlyfiles:
+        onlyFiles = os.listdir(str(value))
+        for rootfile in onlyFiles:
             if rootfile.find(".root") != -1:
                 samplepaths.append(str(value)+"/"+str(rootfile))
             elif (isdir(join(str(value),rootfile))):

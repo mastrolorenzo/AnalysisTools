@@ -40,9 +40,15 @@ class SampleContainer {
     TH1D *InputPU;
     std::string PUHistName;
     int lepFlav; // if 0 only select Wmunu events, if 1 only select Wenu events
+    bool forceOverWriteExtFile;
+    std::string externFileName;
+    bool externFileExists;
  
     void AddFile(const char* fname, int isBatch=0, int doSkim=0);
     void ComputeWeight(float);
+
+    void CreateSampleInfoFile();
+    void ReadSampleInfoFile(int doSkim);
 
   /** adds a lumi section range to 'goodLumis' (typically
       taken from a 'json' file containing the list of 
