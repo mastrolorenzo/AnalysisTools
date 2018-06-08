@@ -170,8 +170,10 @@ inline void SampleContainer::CreateSampleInfoFile(){
     CountWeightedLHEWeightScale->Write();
     CountWeightedLHEWeightPdf->Write();
     CountWeighted->Write();
-    InputPU->Write();
-   
+    if(InputPU != NULL){
+        InputPU->Write();
+    }
+
     // CountWeighted does this already.  Keep for reference...
     // Maybe a tree will be useful in the future.
     //TTree* sampleInfoTree = new TTree("sampleInfo","Sample Info Tree");
@@ -194,15 +196,17 @@ inline void SampleContainer::ReadSampleInfoFile(int doSkim){
     TH1F* counter = (TH1F*)sampleInfoFile->Get("CountWeighted");
     processedEvents = counter->GetBinContent(1);
             
-    TH1D* thisFilePUHist=(TH1D*)((TH1D*)sampleInfoFile->Get("PUTarget"))->Clone("thisFilePUHist");
-    if(doSkim==1){
-        PUHistName+="skim";
+    if(!PUHistName.empty()){
+        TH1D* thisFilePUHist=(TH1D*)((TH1D*)sampleInfoFile->Get("PUTarget"))->Clone("thisFilePUHist");
+        if(doSkim==1){
+            PUHistName+="skim";
+        }
+        InputPU=(TH1D*)(thisFilePUHist->Clone(PUHistName.c_str()));
+        InputPU->SetDirectory(0);
+        delete thisFilePUHist;
     }
-    InputPU=(TH1D*)(thisFilePUHist->Clone(PUHistName.c_str()));
-    InputPU->SetDirectory(0);
     
     delete counter;
-    delete thisFilePUHist;
     delete sampleInfoFile;
 }
 
