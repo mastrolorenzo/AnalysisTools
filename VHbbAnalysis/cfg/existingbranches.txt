@@ -187,6 +187,7 @@ type=2  name=H_pt
 type=2  name=V_phi
 type=2  name=V_mass
 type=2  name=MET_sumEt
+type=2  name=MET_significance
 type=2  name=TkMET_phi
 type=2  name=MHT_pt
 

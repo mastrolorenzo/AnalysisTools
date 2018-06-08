@@ -25,7 +25,7 @@ type=8  name=Jet_btagCMVA                     max=250     lengthBranch=nJet
 type=2  name=V_pt
 
 type=0  name=nFatJet
-type=8  name=FatJet_pt                        max=10     lengthBranch=nFatJet
+type=8  name=FatJet_pt                        max=11     lengthBranch=nFatJet
 
 
 type=1  name=nGenPart                                    onlyMC=1 dropBranch=1
