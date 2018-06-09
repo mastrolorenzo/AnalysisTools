@@ -56,7 +56,7 @@ if options.onlyMvaEval:
     assert options.nFilesPerJob >= 1, 'with onlyMvaEval, nFilesPerJob must be >=1'
 
 ReadInput.debug = 2
-am=ReadInput.ReadTextFile(options.configFile, "cfg", samplesToSubmit,"",options.runBatch, options.doSkim, options.runOnSkim)
+am=ReadInput.ReadTextFile(options.configFile, "cfg", samplesToSubmit,"", options.doSkim, options.runOnSkim)
 am.debug = 2
 
 

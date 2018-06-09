@@ -51,9 +51,8 @@ inline SampleContainer::SampleContainer()
     externFileExists = false;
 }
 
-inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) {
+inline void SampleContainer::AddFile(const char* fname,int doSkim) {
     files.push_back(fname);
-    if( isBatch==1 ) return;
     
     sampleChain->Add(fname);
     if(sampleNum==0) return;
@@ -61,9 +60,11 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
     bool openTFile=(nProFromFile || !(PUHistName.empty()));
     TFile *file;
 
-    std::cout<<"nProFromFile "<<nProFromFile<<" doSkim "<<doSkim<<std::endl; 
+    //std::cout<<"nProFromFile "<<nProFromFile<<" doSkim "<<doSkim<<std::endl; 
     if (doSkim == 2) {
-        if (files.size() > 1) return; // skimmed files already have the summed count histograms
+        // skimmed files already have the summed count histograms 
+        // so just read from the first one
+        if (files.size() > 1) return; 
         // doSkim == 2 -> running on skimmed samples by AT
         // for now our skimmed ntuples we preserve the counting by histogram structure
         // from Heppy, since this is how the datacard maker is set up. We may want to eventually
@@ -76,22 +77,19 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
         TH1F* counter = (TH1F*)file->Get("CountWeighted");
         float nEffective = counter->GetBinContent(1);
         std::cout<<"nEffective "<<nEffective<<std::endl;
-        //if(sampleNum==49 or sampleNum==491) {
-        //    //special prescription for WJets_BGenFilter sample weighting
-        //    //TH1F* counterFullWeight = (TH1F*)file->Get("CountFullWeighted");
-        //    nEffective = counterFullWeight->GetBinContent(1); 
-        //}
         CountWeighted->Add(counter);
         std::cout<<"pe = "<<processedEvents<<std::endl;
         processedEvents += nEffective;
         std::cout<<"pe = "<<processedEvents<<std::endl;
         TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightScale");
         TH1F* CountWeightedLHEWeightPdf_thisfile = (TH1F*)file->Get("CountWeightedLHEWeightPdf");
-        //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
         CountWeightedLHEWeightScale->Add(CountWeightedLHEWeightScale_thisfile);
         CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
-        //std::cout<<"lhe = "<<CountWeightedLHEWeightPdf->GetBinContent(1)<<std::endl;
-        
+       
+        if(!PUHistName.empty()){
+            InputPU=(TH1D*)(file->Clone("InputPU"));
+        }
+
         if(openTFile){
             file->Close();
         }
@@ -106,12 +104,7 @@ inline void SampleContainer::AddFile(const char* fname,int isBatch, int doSkim) 
             if(doSkim==2) PUHistName+="skim";
             TH1D* thisFilePUHist=(TH1D*)((TH1D*)file->Get(PUHistName.c_str()))->Clone("thisFilePUHist");
             if(InputPU == NULL){
-                if(doSkim==1){
-                    PUHistName+="skim";
-                    InputPU=(TH1D*)(thisFilePUHist->Clone(PUHistName.c_str()));
-                } else {
-                    InputPU=(TH1D*)(thisFilePUHist->Clone("PUTarget"));
-                }
+                InputPU=(TH1D*)(thisFilePUHist->Clone("InputPU"));
             } else {
                 InputPU->Add(thisFilePUHist);
             }
@@ -185,7 +178,7 @@ inline void SampleContainer::CreateSampleInfoFile(){
     delete sampleInfoFile;
 }
 
-inline void SampleContainer::ReadSampleInfoFile(int doSkim){
+inline void SampleContainer::ReadSampleInfoFile(){
     TFile* sampleInfoFile = TFile::Open(externFileName.c_str());
 
     TH1F* CountWeightedLHEWeightScale_thisfile = (TH1F*)sampleInfoFile->Get("CountWeightedLHEWeightScale");
@@ -194,18 +187,16 @@ inline void SampleContainer::ReadSampleInfoFile(int doSkim){
     CountWeightedLHEWeightPdf->Add(CountWeightedLHEWeightPdf_thisfile);
     
     TH1F* counter = (TH1F*)sampleInfoFile->Get("CountWeighted");
+    CountWeighted->Add(counter);
     processedEvents = counter->GetBinContent(1);
             
     if(!PUHistName.empty()){
-        TH1D* thisFilePUHist=(TH1D*)((TH1D*)sampleInfoFile->Get("PUTarget"))->Clone("thisFilePUHist");
-        if(doSkim==1){
-            PUHistName+="skim";
-        }
-        InputPU=(TH1D*)(thisFilePUHist->Clone(PUHistName.c_str()));
+        TH1D* thisFilePUHist=(TH1D*)((TH1D*)sampleInfoFile->Get("InputPU"))->Clone("thisFilePUHist");
+        InputPU=(TH1D*)(thisFilePUHist->Clone("InputPU"));
         InputPU->SetDirectory(0);
         delete thisFilePUHist;
     }
-    
+   
     delete counter;
     delete sampleInfoFile;
 }

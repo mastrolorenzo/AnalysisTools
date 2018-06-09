@@ -29,7 +29,7 @@ elif hostname.endswith('.fnal.gov'):
     site="FNAL"
     siteIP = "root://cmseos.fnal.gov/"
 
-def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, doSkim=False, runOnSkim=False):
+def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=False, runOnSkim=False):
     if debug > 10:
          print "filetype is ", filetype
          print "filename is ", filename
@@ -59,7 +59,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
         #print "samplesToRun",samplesToRun
         if settings.has_key("samples"):
             aminitialized=0
-            samples=ReadTextFile(settings["samples"], "samplefile",samplesToRun,filesToRun,isBatch,doSkim,runOnSkim)
+            samples=ReadTextFile(settings["samples"], "samplefile",samplesToRun,filesToRun,doSkim,runOnSkim)
             for name in samples:
                 addedAtLeastOneFile=False
                 print site,siteIP
@@ -149,23 +149,17 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], isBatch=0, 
                             am.outputTreeName=settings["outputname"]
                     # if data and fileToRun is not empty then only run that file
                     try:
-                        #print "adding file, isBatch",isBatch
-                        #if not isBatch:
-                        #    testfile = ROOT.TFile.Open(filename)
-                        #    testfile.Recover()
-                        #if (testfile.isZombie()): continue
                         if not runOnSkim:
-                            samplecon.AddFile(filename,isBatch,int(doSkim))
+                            samplecon.AddFile(filename,int(doSkim))
                         else:
-                            print "trying AddFile"
-                            samplecon.AddFile(filename,isBatch,2)
+                            samplecon.AddFile(filename,2)
                         addedAtLeastOneFile=True
                     except:
                         if debug > 10:
                             print "Can't add",filename
                 if addedAtLeastOneFile:
                     print("Adding sample %s to sample container with %i events " % (samplecon.sampleName, samplecon.processedEvents))
-                    if not samplecon.externFileExists and samplecon.sampleNum!=0:
+                    if not samplecon.externFileExists and samplecon.sampleNum!=0 and not runOnSkim:
                         samplecon.CreateSampleInfoFile()
                         if site=="FNAL":
                             copyToOrigin_command=['xrdcp','-f',samplecon.sampleName+'_sampleInfo.root',samplecon.externFileName]

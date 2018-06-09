@@ -43,7 +43,7 @@ def loop_func():
 
     ROOT.gSystem.Load("AnalysisDict.so")
     ReadInput.debug = DEBUG
-    am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, 0, "doSkim" in options, "runOnSkim" in options)
+    am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, "doSkim" in options, "runOnSkim" in options)
     #am.debug=20000
     am.debug=DEBUG
 
@@ -80,12 +80,17 @@ else:
 
 tLoop=time.time()-t0
 
+if "doSkim" in options:
+    print "tLoop",tLoop
+    print "exiting early because of doSkim"
+    sys.exit(0)
+
 # load am in the main process only now, in order to keep the memory footprint low
 import ReadInput
 ReadInput.debug = 0  # we've seen it above
 import ROOT
 ROOT.gSystem.Load("AnalysisDict.so")
-am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, 0, "doSkim" in options, "runOnSkim" in options)
+am=ReadInput.ReadTextFile(sys.argv[1], "cfg", samplesToRun, filesToRun, "doSkim" in options, "runOnSkim" in options)
 cursample_container = next(s for s in am.samples if s.sampleName == samplesToRun[0])
 is_data = cursample_container.sampleNum == 0
 

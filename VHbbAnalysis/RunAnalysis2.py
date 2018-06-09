@@ -203,7 +203,6 @@ def main(argv=None):
         filetype="cfg",
         samplesToRun=samplesToSubmit,
         filesToRun="",
-        isBatch=options.runBatch,
         doSkim=options.doSkim,
         runOnSkim=options.runOnSkim,
     )

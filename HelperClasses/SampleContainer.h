@@ -44,11 +44,11 @@ class SampleContainer {
     std::string externFileName;
     bool externFileExists;
  
-    void AddFile(const char* fname, int isBatch=0, int doSkim=0);
+    void AddFile(const char* fname, int doSkim=0);
     void ComputeWeight(float);
 
     void CreateSampleInfoFile();
-    void ReadSampleInfoFile(int doSkim);
+    void ReadSampleInfoFile();
 
   /** adds a lumi section range to 'goodLumis' (typically
       taken from a 'json' file containing the list of 
