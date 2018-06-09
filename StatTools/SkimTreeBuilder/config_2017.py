@@ -10,36 +10,56 @@ destination = 'samples_2017'
 # The list of existing branches to be kept in the skimmed
 # tree in addition to the default subset of branches.
 keep_branches = [
-    'hJets_pt_0',
+    'hJetInd1',
+    'hJetInd2',
+    'Jet_btagCMVA',
+    'hJets_leadingPt',
+    'hJets_subleadingPt',
     'hJets_btagged_0',
-    'hJets_pt_1',
     'hJets_btagged_1',
     'HJ1_HJ2_dEta',
+    'HJ1_HJ2_dPhi',
+    'HJ1_HJ2_dR',
+    'H_pt',
     'H_mass',
     'V_pt',
     'V_mass',
-    'HVdPhi',
+    'V_mt',
     'MET_pt',
     'MET_Pt',
-    'nAddJets_2lep',
+    'HVdPhi',
+    'jjVPtRatio',
     'SA5',
-    'n_recoil_jets_fit',
+    'otherJetsBestBtag',
+    'otherJetsHighestPt',
+    'minDPhiFromOtherJets',
+    'Top1_mass_fromLepton_regPT_w4MET',
+    'nAddJets252p5_puid',
+    'lepMetDPhi',
     '*_fit_fallback',
+    'nAddJets_2lep',
+    'n_recoil_jets_fit',
     'H_mass_sigma_fit',
 ]
 
 # The list of new branches to be created for the skimmed tree.
 new_branches = [
-    # 0-lepton rebinner branches
-    is_signal_Znn_I,
-    bin_index_Znn_I,
-    # 1-lepton rebinner branches
-    is_signal_Wln_I,
-    bin_index_Wln_I,
-    # 2-lepton rebinner branches
-    is_signal_Zll_I,
-    bin_index_Zll_lowPt_I,
-    bin_index_Zll_highPt_I,
+    hJets_DeepCSV_0_F,
+    hJets_DeepCSV_1_F,
+    hJets_CMVA_0_F,
+    hJets_CMVA_1_F,
+    abs_HJ1_HJ2_dEta_F,
+    abs_HVdPhi_F,
+    ## 0-lepton rebinner branches
+    #is_signal_Znn_I,
+    #bin_index_Znn_I,
+    ## 1-lepton rebinner branches
+    #is_signal_Wln_I,
+    #bin_index_Wln_I,
+    ## 2-lepton rebinner branches
+    #is_signal_Zll_I,
+    #bin_index_Zll_lowPt_I,
+    #bin_index_Zll_highPt_I,
 ]
 
 # The samples for which to build skimmed trees.
@@ -48,7 +68,6 @@ samples = {
     'ZH125_ZNuNu_powheg':                [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/ZH125_ZNuNu_powheg/*.root']],
     'ggZH125_ZNuNu_powheg':              [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/ggZH125_ZNuNu_powheg/*.root']],
     'WminusH125_powheg':                 [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/WminusH125_powheg/*.root']],
-    'WplusH125_herwig':                  [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/WplusH125_herwig/*.root']],
     'WplusH125_powheg':                  [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/WplusH125_powheg/*.root']],
     'ZH125_ZLL_powheg':                  [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/ZH125_ZLL_powheg/*.root']],
     'ggZH125_ZLL_powheg':                [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/ggZH125_ZLL_powheg/*.root']],
@@ -58,6 +77,7 @@ samples = {
     'TT_SingleLep':                      [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/TT_SingleLep/*.root']],
 
     'ST_s-c_4f_lep_PSw':                 [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/ST_s-c_4f_lep_PSw/*.root']],
+    'ST_t-c_antitop_4f_inc':             [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/ST_t-c_antitop_4f_inc/*.root']],
     'ST_t-c_top_4f_inc':                 [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/ST_t-c_top_4f_inc/*.root']],
     'ST_tW_antitop_5f_inc':              [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/ST_tW_antitop_5f_inc/*.root']],
     'ST_tW_top_5f_inc_PSw':              [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/ST_tW_top_5f_inc_PSw/*.root']],
@@ -91,18 +111,7 @@ samples = {
     'ZJetsToNuNu_HT800To1200':           [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/ZJetsToNuNu_HT800To1200/*.root']],
 
     'WW':                                [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/WW/*.root']],
-    'WW_1L1Nu2Q':                        [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/WW_1L1Nu2Q/*.root']],
-    'WW_LNu2Q_nlo':                      [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/WW_LNu2Q_nlo/*.root']],
     'WZ':                                [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/WZ/*.root']],
     'ZZ':                                [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/ZZ/*.root']],
-    'ZZ_4L':                             [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June2/ZZ_4L/*.root']],
-
-    ###'QCD_HT200to300':                    [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/QCD_HT200to300/*.root']],
-    'QCD_HT300to500':                    [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/QCD_HT300to500/*.root']],
-    'QCD_HT500to700':                    [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/QCD_HT500to700/*.root']],
-    'QCD_HT700to1000':                   [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/QCD_HT700to1000/*.root']],
-    'QCD_HT1000to1500':                  [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/QCD_HT1000to1500/*.root']],
-    'QCD_HT1500to2000':                  [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/QCD_HT1500to2000/*.root']],
-    'QCD_HT2000toInf':                   [None, ['/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2017V5_June1_incJES/QCD_HT2000toInf/*.root']],
 }
 

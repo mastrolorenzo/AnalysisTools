@@ -15,8 +15,6 @@ DEFAULT_BRANCHES = [
     'sampleIndex', 'event', 'Pass_nominal', 'cutFlow', 'twoResolvedJets', 'controlSample', 'weight',
     # Channel Indicators
     'isZnn', 'isWenu', 'isWmunu', 'isZee', 'isZmm',
-    # Matching Patterns
-    'CMS_*_BDT*', 'bdtInput*',
 ]
 
 # The following branch types are supported.

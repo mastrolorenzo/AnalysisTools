@@ -1,5 +1,23 @@
 ## New Branch Definitions
 
+def hJets_DeepCSV_0_F(event):
+    return event.hJets_btagged_0
+
+def hJets_DeepCSV_1_F(event):
+    return event.hJets_btagged_1
+
+def hJets_CMVA_0_F(event):
+    return event.Jet_btagCMVA[event.hJetInd1]
+
+def hJets_CMVA_1_F(event):
+    return event.Jet_btagCMVA[event.hJetInd2]
+
+def abs_HVdPhi_F(event):
+    return abs(event.HVdPhi)
+
+def abs_HJ1_HJ2_dEta_F(event):
+    return abs(event.HJ1_HJ2_dEta)
+
 def is_signal_Znn_I(event):
     """Flag if the event belongs to a 0-lepton signal sample.
     Used by the rebinner.
@@ -21,7 +39,7 @@ def bin_index_Znn_I(event):
     """Flag if the event falls within the full range of the 0-lepton BDT
     output [-1, 1] in the 0-lepton signal region. Used by the rebinner.
     """
-    if event.isZnn and (60 < event.H_mass < 160) and (-1 < event.CMS_vhbb_BDTG_Znn_HighPT_13TeV < 1):
+    if event.isZnn and (60 < event.H_mass < 160) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Znn_HighPT_13TeV < 1):
         return 0
     else:
         return -1
@@ -45,7 +63,7 @@ def bin_index_Wln_I(event):
     """Flag if the event falls within the full range of the 1-lepton BDT
     output [-1, 1] in the 1-lepton signal region. Used by the rebinner.
     """
-    if (event.isWenu or event.isWmunu) and (90 < event.H_mass < 150) and (-1 < event.CMS_vhbb_BDTG_Wln_13TeV < 1):
+    if (event.isWenu or event.isWmunu) and (90 < event.H_mass < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Wln_13TeV < 1):
         return 0
     else:
         return -1
@@ -69,7 +87,7 @@ def bin_index_Zll_lowPt_I(event):
     """Flag if the event falls within the full range of the 2-lepton BDT
     output [-1, 1] in the 2-lepton low pT(V) signal region. Used by the rebinner.
     """
-    if (event.isZee or event.isZmm) and (50 < event.V_pt < 150) and (90 < event.H_mass < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Zll_LowPT_13TeV < 1):
+    if (event.isZee or event.isZmm) and (50 < event.V_pt < 150) and (90 < event.H_mass_fit_fallback < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Zll_LowPT_13TeV < 1):
         return 0
     else:
         return -1
@@ -78,7 +96,7 @@ def bin_index_Zll_highPt_I(event):
     """Flag if the event falls within the full range of the 2-lepton BDT
     output [-1, 1] in the 2-lepton high pT(V) signal region. Used by the rebinner.
     """
-    if (event.isZee or event.isZmm) and event.V_pt > 150 and (90 < event.H_mass < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Znn_HighPT_13TeV < 1):
+    if (event.isZee or event.isZmm) and event.V_pt > 150 and (90 < event.H_mass_fit_fallback < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Zll_HighPT_13TeV < 1):
         return 0
     else:
         return -1

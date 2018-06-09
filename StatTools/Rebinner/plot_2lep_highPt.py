@@ -28,15 +28,6 @@ class Plotter(object):
             'DYToLL_M4to50_HT400to600_madgraph',
             'DYToLL_M4to50_HT600toInf_madgraph',
         ],
-        'WJets': [
-            'WJets_madgraph',
-            'WJets-HT100To200',
-            'WJets-HT200To400',
-            'WJets-HT400To600',
-            'WJets-HT600To800',
-            'WJets-HT800To1200',
-            'WJets-HT1200To2500',
-        ],
         'TT': [
             'TT_AllHadronic',
             'TT_DiLep',
@@ -52,14 +43,6 @@ class Plotter(object):
             'ST_t-c_top_4f_inc',
             'ST_tW_antitop_5f_inc',
             'ST_tW_top_5f_inc_PSw',
-        ],
-        'QCD': [
-            'QCD_HT300to500',
-            'QCD_HT500to700',
-            'QCD_HT700to1000',
-            'QCD_HT1000to1500',
-            'QCD_HT1500to2000',
-            'QCD_HT2000toInf',
         ],
     }
 
@@ -84,20 +67,16 @@ class Plotter(object):
 
         # Because these input trees contain branches following the rebinner's convention, a cheap
         # way to plot signal region events is to select events where the bin index is above -1.
-        histograms['QCD'] = self.get_histogram('QCD', bin_edges, 'weight * (bin_index_Zll_highPt>-1)')
         histograms['Single top'] = self.get_histogram('ST', bin_edges, 'weight * (bin_index_Zll_highPt>-1)')
         histograms['VV'] = self.get_histogram('VV', bin_edges, 'weight * (bin_index_Zll_highPt>-1)')
         histograms['TT'] = self.get_histogram('TT', bin_edges, 'weight * (bin_index_Zll_highPt>-1)')
-        histograms['W+Jets'] = self.get_histogram('WJets', bin_edges, 'weight * (bin_index_Zll_highPt>-1)')
         histograms['Z+Jets'] = self.get_histogram('ZJets', bin_edges, 'weight * (bin_index_Zll_highPt>-1)')
         histograms['ggZH(b#bar{b})'] = self.get_histogram('ggZH', bin_edges, 'weight * (bin_index_Zll_highPt>-1)')
         histograms['ZH(b#bar{b})'] = self.get_histogram('ZH', bin_edges, 'weight * (bin_index_Zll_highPt>-1)')
 
-        histograms['QCD'].SetFillColor(613)
         histograms['Single top'].SetFillColor(70)
         histograms['VV'].SetFillColor(17)
         histograms['TT'].SetFillColor(4)
-        histograms['W+Jets'].SetFillColor(81)
         histograms['Z+Jets'].SetFillColor(5)
         histograms['ggZH(b#bar{b})'].SetFillColor(625)
         histograms['ZH(b#bar{b})'].SetFillColor(2)
@@ -124,7 +103,7 @@ class Plotter(object):
         legend2.SetBorderSize(1)
 
         for i, name in enumerate(reversed(histograms)):
-            if i < 4:
+            if i < 3:
                 legend1.AddEntry(histograms[name], name, 'f')
             else:
                 legend2.AddEntry(histograms[name], name, 'f')
@@ -160,13 +139,13 @@ def main():
     plotter = Plotter('../SkimTreeBuilder/samples_2017/%s.root')
 
     best_bin_edges = {
-        'asimov': [-1, -0.31979070603847504, 0.05852319113910198, 0.3765171468257904, 0.6226714849472046, 0.7630408406257629, 0.8527213931083679, 0.8551502227783203, 1],
-        'poisson': [-1, -0.31979070603847504, 0.05852319113910198, 0.38185223937034607, 0.6329663097858429, 0.7630408406257629, 0.8527213931083679, 0.8551502227783203, 1],
+        'asimov': [-1, 0.3000960052013397, 0.5561876893043518, 0.7630408406257629, 0.9243685007095337, 1],
+        'poisson': [-1, 0.3000960052013397, 0.5561876893043518, 0.7630408406257629, 0.9243685007095337, 1],
     }
 
     best_significance = {
-        'asimov': 2.4026997206242706,
-        'poisson': 2.516083199756708,
+        'asimov': 2.436300982331209,
+        'poisson': 2.580327140830674,
     }
 
     text = ROOT.TLatex()
@@ -189,7 +168,7 @@ def main():
             stack.GetYaxis().SetTitle('Entries')
             legend1.Draw()
             legend2.Draw()
-            cms_figure.draw_labels('41.53 fb^{-1} (13 TeV)', extra_text='Simulation Preliminary')
+            cms_figure.draw_labels('41.3 fb^{-1} (13 TeV)', extra_text='Simulation Preliminary')
             text.SetTextSize(0.025)
             text.DrawLatexNDC(0.2, 0.79, '{0} Significance Score'.format(metric.title()))
             text.DrawLatexNDC(0.2, 0.74, '{0:.2f}'.format(best_significance[metric]))
@@ -215,7 +194,7 @@ def main():
             h_s_over_b.Draw('hist')
             h_s_over_b.GetXaxis().SetTitle('BDT output')
             h_s_over_b.GetYaxis().SetTitle('S / B')
-            cms_figure.draw_labels('41.53 fb^{-1} (13 TeV)', extra_text='Simulation Preliminary')
+            cms_figure.draw_labels('41.3 fb^{-1} (13 TeV)', extra_text='Simulation Preliminary')
             text.DrawLatexNDC(0.2, 0.79, 'Signal Yields')
             text.SetTextSize(0.025)
             for i, value in enumerate(n_signal, start=1):
