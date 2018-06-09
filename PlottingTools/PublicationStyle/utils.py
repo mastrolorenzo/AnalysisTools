@@ -1,3 +1,4 @@
+import errno
 import os
 import uuid
 
@@ -10,10 +11,33 @@ __all__ = [
 ]
 
 
+def safe_makedirs(path):
+    """Recursively create a directory without race conditions.
+
+    This borrows from solutions to these Stack Overflow questions:
+    * http://stackoverflow.com/a/5032238
+    * http://stackoverflow.com/a/600612
+
+    Parameters
+    ----------
+    path : path
+        The path of the created directory.
+    """
+    try:
+        os.makedirs(path)
+    except OSError as e:
+        if e.errno == errno.EEXIST and os.path.isdir(path):
+            pass
+        else:
+            raise
+
+
+# Set the maximum number of axis labels digits
+# to match what was used in HIG-16-044.
 ROOT.TGaxis.SetMaxDigits(3)
 
 
-def _restyle_upper_pad(pad):
+def _restyle_upper_pad(pad, logy):
     # Resize the pad.
     pad.SetPad(0.0, 0.301, 1.0, 1.0)
     pad.SetLeftMargin(0.13)
@@ -64,11 +88,14 @@ def _restyle_upper_pad(pad):
     data.Reset()
     primitives.Add(data_new, 'E1SAME')
     # Adjust the y-axis for better viewing.
-    if y_max_data > y_max_stack:
-        stack.SetMaximum(1.7 * y_max_data)
+    if logy:
+        stack.SetMaximum(10**9)
+        stack.SetMinimum(10**-1)
     else:
-        stack.SetMaximum(1.7 * y_max_stack)
-
+        if y_max_data > y_max_stack:
+            stack.SetMaximum(1.75 * y_max_data)
+        else:
+            stack.SetMaximum(1.75 * y_max_stack)
     # Finally, add two legends...
     legend1 = ROOT.TLegend(0.52, 0.56, 0.77, 0.88, '', 'nbNDC')
     legend1.SetFillColor(0)
@@ -141,7 +168,7 @@ def _restyle_lower_pad(pad):
     primitives.Add(legend)
 
 
-def restyle_varial(canvas, width=800, height=800, lumi_text='', cms_position='left', extra_text='', dst=None, exts=None):
+def restyle_varial(canvas, logy=False, width=800, height=800, lumi_text='', cms_position='left', extra_text='', dst=None, exts=None):
     """Restyle an AnalysisTools figure produced by Varial for publication.
 
     The current style conforms to the Publications Committees standards and
@@ -152,6 +179,9 @@ def restyle_varial(canvas, width=800, height=800, lumi_text='', cms_position='le
     canvas : ROOT.TCanvas
         A TCanvas produced by Varial, typically stored in a file called
         "_varial_rootobjects.root.rt".
+    logy : bool
+        Whether the y-axis scale of the restyled plots should be logarithmic.
+        The default is False.
     width : int, optional
         The width of the restyled figure in pixels. The default is 800.
     height : int, optional
@@ -180,7 +210,7 @@ def restyle_varial(canvas, width=800, height=800, lumi_text='', cms_position='le
     """
     if dst is None:
         dst = os.getcwd()
-    name = canvas.GetName().split('_')[0]
+    name = canvas.GetName().rsplit('_', 1)[0]
     primitives = canvas.GetListOfPrimitives()
     upper_pad = primitives[0]
     lower_pad = primitives[1]
@@ -194,7 +224,9 @@ def restyle_varial(canvas, width=800, height=800, lumi_text='', cms_position='le
         new_canvas.SetBottomMargin(0.12)
         new_canvas.SetTopMargin(0.08)
         # Restyle and add the upper pad.
-        _restyle_upper_pad(upper_pad)
+        _restyle_upper_pad(upper_pad, logy)
+        if logy:
+            upper_pad.SetLogy(True)
         upper_pad.Draw()
         upper_pad.cd()
         cms_figure.draw_labels(lumi_text, cms_position, extra_text)

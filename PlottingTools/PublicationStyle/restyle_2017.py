@@ -3,11 +3,10 @@ import os
 import sys
 
 import ROOT
+import click
 
-from restyle import restyle_varial, utils
+from utils import restyle_varial, safe_makedirs
 
-
-ROOT.gROOT.SetBatch(True)
 
 # Varial input file name.
 VARIAL_FILE = '_varial_rootobjects.root.rt'
@@ -18,35 +17,39 @@ HEIGHT = 800
 
 # Basic annotation settings.
 CMS_POSITION = 'left'
-LUMI_TEXT = '35.9 fb^{-1} (13 TeV)'
-EXTRA_TEXT = 'Preliminary'
+LUMI_TEXT = '41.3 fb^{-1} (13 TeV)'
+EXTRA_TEXT = 'Preliminary 2017'
 
 # Output file type settings.
-EXTS = ['.pdf']
+EXTS = ['.C', '.png', '.pdf']
 
 
-def main():
+@click.command()
+@click.argument('src')
+@click.argument('dst')
+@click.option('--logy', is_flag=True, help='Set the y-axis scale of the restyled plots to logarithmic.')
+def main(src, dst, logy):
     """Restyle AnalysisTools figures produced using Varial.
 
-    The positional command line arguments are the Varial output
-    directory and the output directory for the restyled plots.
+    The SRC argument should be the path to a Varial output directory,
+    while DST is the path for the new output directory containing the
+    restyled plots.
     """
-    src = os.path.abspath(sys.argv[1])
-    dst = os.path.abspath(sys.argv[2])
+    ROOT.gROOT.SetBatch(True)
     for dirpath, dirnames, filenames in os.walk(os.path.join(src, 'Plots')):
         if VARIAL_FILE in filenames:
             outdir = os.path.join(dst, os.path.basename(dirpath))
-            utils.safe_makedirs(outdir)
+            safe_makedirs(outdir)
             f = ROOT.TFile.Open(os.path.join(dirpath, VARIAL_FILE))
             dirs = [key.ReadObj() for key in f.GetListOfKeys()]
             canvases = [d.GetListOfKeys()[0].ReadObj() for d in dirs]
             for canvas in canvases:
-                restyle_varial(canvas, WIDTH, HEIGHT, LUMI_TEXT, CMS_POSITION, EXTRA_TEXT, outdir, EXTS)
+                restyle_varial(canvas, logy, WIDTH, HEIGHT, LUMI_TEXT, CMS_POSITION, EXTRA_TEXT, outdir, EXTS)
+                canvas.IsA().Destructor(canvas)
             f.Close()
 
 
 if __name__ == '__main__':
 
-    status = main()
-    sys.exit(status)
+    main()
 
