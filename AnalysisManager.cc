@@ -900,7 +900,7 @@ void AnalysisManager::SetupSystematicsBranches(){
             SetupNewBranch(Form("lepMetDPhi_%s",                          systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("minDPhiFromOtherJets_%s",                systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("nAddJet_f_%s",                           systematics[iSyst].name.c_str()), 2);
-            // SetupNewBranch(Form("nAddJets302p5_puid_%s",                  systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("nAddJets302p5_puid_%s",                  systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("nAddJets252p5_puid_%s",                  systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("nAddJets_2lep_%s",                       systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("nJets25_dR06_%s",                        systematics[iSyst].name.c_str()), 2);

@@ -3,19 +3,24 @@
 
 mvaType=DNN
 bdtname=CMS_vhbb_DNN_Wen_13TeV
-xmlFile=aux/dnn_1lep_el_2016_ICHEP2018/Wless.cfg:aux/dnn_1lep_el_2016_ICHEP2018/scaler.dmp:aux/dnn_1lep_el_2016_ICHEP2018/model.ckpt
+xmlFile=aux/DNNwithCMVAfor2016_ICHEP2018/Wen/config.cfg:aux/DNNwithCMVAfor2016_ICHEP2018/Wen/scaler.dmp:aux/DNNwithCMVAfor2016_ICHEP2018/Wen/model.ckpt
 
 
 # this is the order as from Andreas mail
-name=HVdPhi                 lname=HVdPhi                      isEx=0 isSpec=0 order=1
-name=H_mass                 lname=H_mass                      isEx=1 isSpec=0 order=2
-name=H_pt                   lname=H_pt                        isEx=1 isSpec=0 order=3
-name=met_pt                 lname=MET_pt                      isEx=1 isSpec=0 order=4
-name=softActivityVH_njets5  lname=SA5                         isEx=1 isSpec=0 order=5
-name=Top1_mass_fromLepton_regPT_w4MET lname=Top1_mass_fromLepton_regPT_w4MET  isEx=0 isSpec=0 order=6
-name=V_mt                   lname=V_mt                        isEx=0 isSpec=0 order=7
-name=V_pt                   lname=V_pt                        isEx=1 isSpec=0 order=8
-name=hJets_btagCSV_1        lname=hJets_btagged_1             isEx=0 isSpec=0 order=9
-name=lepMetDPhi             lname=lepMetDPhi                  isEx=0 isSpec=0 order=10
-name=nAddJet_f              lname=nAddJet_f                   isEx=0 isSpec=0 order=11
+name=H_mass                           lname=H_mass                           isEx=1 isSpec=0 order=1
+name=H_pt                             lname=H_pt                             isEx=1 isSpec=0 order=2
+name=jjVPtRatio                       lname=jjVPtRatio                       isEx=0 isSpec=0 order=3
+name=V_pt                             lname=V_pt                             isEx=1 isSpec=0 order=4
+name=hJets_CMVA_0                     lname=hJets_CMVA_0                     isEx=0 isSpec=0 order=5
+name=hJets_CMVA_1                     lname=hJets_CMVA_1                     isEx=0 isSpec=0 order=6
+name=Top1_mass_fromLepton_regPT_w4MET lname=Top1_mass_fromLepton_regPT_w4MET isEx=0 isSpec=0 order=7
+name=abs_HVdPhi                       lname=abs(HVdPhi)                      isEx=0 isSpec=0 order=8
+name=nAddJets302p5_puid               lname=nAddJets302p5_puid               isEx=0 isSpec=0 order=9
+name=SA5                              lname=SA5                              isEx=0 isSpec=0 order=10
+name=lepMetDPhi                       lname=lepMetDPhi                       isEx=0 isSpec=0 order=11
+name=V_mt                             lname=V_mt                             isEx=0 isSpec=0 order=12
+name=MET_Pt                           lname=MET_Pt                           isEx=0 isSpec=0 order=13
+name=hJets_leadingPt                  lname=hJets_leadingPt                  isEx=0 isSpec=0 order=14
+name=hJets_subleadingPt               lname=hJets_subleadingPt               isEx=0 isSpec=0 order=15
+name=abs_HJ1_HJ2_dEta                 lname=abs(HJ1_HJ2_dEta)                isEx=0 isSpec=0 order=16
 

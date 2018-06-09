@@ -863,7 +863,11 @@ bool VHbbAnalysis::Analyze() {
                     }
                 }
             }
-            *in[Form("nAddJets%i%s_puid", ptCuts[i], eta_cut.c_str())] = nAddJet_tmp;
+            if( i==1 && j==1){
+	      *f[Form("nAddJets%i%s_puid", ptCuts[i], eta_cut.c_str())] = nAddJet_tmp;
+	    }else{
+	      *in[Form("nAddJets%i%s_puid", ptCuts[i], eta_cut.c_str())] = nAddJet_tmp;
+	    }
         }
     }
 
@@ -913,7 +917,7 @@ bool VHbbAnalysis::Analyze() {
         *in["controlSample"] = -1;
     }
 
-    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && mInt("nAddJets302p5_puid") >= m("nAddJetsCut")) {
+    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && m("nAddJets302p5_puid") >= m("nAddJetsCut")) {
         *in["controlSample"] = -1;
     } else if (sel && mInt("controlSample") > -1) {
         *in["cutFlow"] += 1; // additional jet veto
@@ -1032,24 +1036,24 @@ bool VHbbAnalysis::Analyze() {
 
         if (base0LepCSSelection) {
             if ((mInt("isWmunu") || mInt("isWenu")) && m("MET_Pt") > m("metcut_0lepchan")) {
-                if (min_dPhi_hJet_MET < 1.57 && hJet1_btag > taggerWP_M && mInt("nAddJets302p5_puid") >= 2 && HVdPhi > 2) {
+                if (min_dPhi_hJet_MET < 1.57 && hJet1_btag > taggerWP_M && m("nAddJets302p5_puid") >= 2 && HVdPhi > 2) {
                     *in["controlSample"] = 1; // TTbar Control Sample Index
                 }
             } else if (mInt("isZnn")) {
                 // NOTE cut on nVetoLeptons exists for sync purposes only and needs to be re-evaluated for 2017.
                 if (m("dataYear") == 2016) {
                     if (nJetsCloseToMET == 0 && dPhi_MET_TkMET < 0.5 && HVdPhi > 2 && mInt("nVetoLeptons") == 0) {
-	                if (hJet1_btag < taggerWP_M && mInt("nAddJets302p5_puid") < 2) {
+	                if (hJet1_btag < taggerWP_M && m("nAddJets302p5_puid") < 2) {
                             *in["controlSample"] = 2; // Z+Light Control Sample Index
-                        } else if (hJet1_btag > taggerWP_T && mInt("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
+                        } else if (hJet1_btag > taggerWP_T && m("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
                             *in["controlSample"] = 3; // Z+bb Control Sample Index
                         }
                     }
                 } else if (m("dataYear") == 2017) {
                     if (nJetsCloseToMET == 0 && dPhi_MET_TkMET < 0.5 && HVdPhi > 2) {
-	                if (hJet1_btag < taggerWP_M && mInt("nAddJets302p5_puid") < 2) {
+	                if (hJet1_btag < taggerWP_M && m("nAddJets302p5_puid") < 2) {
                             *in["controlSample"] = 2; // Z+Light Control Sample Index
-                        } else if (hJet1_btag > taggerWP_T && mInt("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
+                        } else if (hJet1_btag > taggerWP_T && m("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
                             *in["controlSample"] = 3; // Z+bb Control Sample Index
                         }
                     }
@@ -1099,10 +1103,10 @@ bool VHbbAnalysis::Analyze() {
 
         if (base1LepCSSelection) {
             if (max_hJet_btag > taggerWP_T){ //ttbar or W+HF
-                if (mInt("nAddJets302p5_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
+                if (m("nAddJets302p5_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
                 //} else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
-                } else if (mInt("nAddJets302p5_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<90 || H_mass>150)) {
+                } else if (m("nAddJets302p5_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<90 || H_mass>150)) {
                     *in["controlSample"] = 13;
                 }
             }else if (max_hJet_btag > taggerWP_L && max_hJet_btag < taggerWP_M && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
@@ -1112,7 +1116,7 @@ bool VHbbAnalysis::Analyze() {
             if (mInt("sampleIndex") == 0 && debug>10) {
                 std::cout << "data CS event " << mInt("controlSample")
 	                  << " max_hJet_btag " << max_hJet_btag
-                          << " nAddJets302p5_puid " << mInt("nAddJets302p5_puid")
+                          << " nAddJets302p5_puid " << m("nAddJets302p5_puid")
                           << " MET_Pt " << m("MET_Pt")
                           << " MET_sumEt " << m("MET_sumEt")
                           << " H_mass " << m("H_mass")
@@ -2304,6 +2308,7 @@ void VHbbAnalysis::FinishEvent() {
         }
 
     } else if(mInt("isWenu") || mInt("isWmunu")) {
+      //        *f["nAddJets302p5_puid_f"] = (float) mInt("nAddJets302p5_puid");
         *f["nAddJet_f"] = (float) mInt("nAddJets252p9_puid");
         *f["nAddLep_f"] = (float) mInt("nAddLeptons");
         *f["isWenu_f"] = (float) mInt("isWenu");
@@ -2621,7 +2626,7 @@ void VHbbAnalysis::FinishEvent() {
         *f[ Form("lepMetDPhi_%s",                        cursyst->name.c_str())] = m("lepMetDPhi");
         *f[ Form("minDPhiFromOtherJets_%s",              cursyst->name.c_str())] = m("minDPhiFromOtherJets");
         *f[ Form("nAddJet_f_%s",                         cursyst->name.c_str())] = m("nAddJet_f");
-        // *f[ Form("nAddJets302p5_puid_%s",                cursyst->name.c_str())] = m("nAddJets302p5_puid_");
+        *f[ Form("nAddJets302p5_puid_%s",                cursyst->name.c_str())] = m("nAddJets302p5_puid");
         *f[ Form("nAddJets252p5_puid_%s",                cursyst->name.c_str())] = m("nAddJets252p5_puid");
         *f[ Form("nAddJets_2lep_%s",                     cursyst->name.c_str())] = m("nAddJets_2lep");
         *f[ Form("nJets25_dR06_%s",                      cursyst->name.c_str())] = m("nJets25_dR06");
