@@ -1693,9 +1693,9 @@ void VHbbAnalysis::FinishEvent() {
             }
         }
         *f["bTagWeight"] = bTagWeight;
-        if(m("dataYear")==2016){
-            *f["bTagWeight"] = 1.0; //stealing CMVA systematics but not central value
-        }
+        //if(m("dataYear")==2016){
+        //    *f["bTagWeight"] = 1.0; //stealing CMVA systematics but not central value
+       // }
         *f["bTagWeight_JESUp"] = bTagWeight_jes_up/bTagWeight;
         *f["bTagWeight_JESDown"] = bTagWeight_jes_down/bTagWeight;
         *f["bTagWeight_HFUp"] = bTagWeight_hf_up/bTagWeight;
