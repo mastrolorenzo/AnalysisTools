@@ -78,7 +78,7 @@ bool VHbbAnalysis::Preselection() {
 
     // use W+jets b-enriched samples but make sure all samples are orthogonal
     int nGenStatus2bHad = 0;
-    if (cursample->sampleNum >= 40 && cursample->sampleNum <=54){
+    if ( (cursample->sampleNum >= 40 && cursample->sampleNum <=54) || (cursample->sampleNum>=150 && cursample->sampleNum<=163) || (cursample->sampleNum>=110 && cursample->sampleNum<=142)){
         for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
             if(mInt("GenPart_status",indGP)!=2) continue;
             if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
@@ -98,8 +98,34 @@ bool VHbbAnalysis::Preselection() {
         } else if (cursample->sampleNum == 53) {
             //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
             if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
-        } else if (cursample->sampleNum == 54) {
+        } else if (cursample->sampleNum == 54) { 
             //if (m("LHE_Vpt") < 200) return false;
+            if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
+        }
+        if (cursample->sampleNum >= 110 && cursample->sampleNum<=117){
+            if (m("LHE_Vpt") > 100) {
+                if (mInt("LHE_Nb") != 0 || nGenStatus2bHad != 0) return false;
+            }
+        } else if (cursample->sampleNum == 121){
+            if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
+        } else if (cursample->sampleNum == 122){
+            if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
+        } else if (cursample->sampleNum == 141){
+            if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
+        } else if (cursample->sampleNum == 142){
+            if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
+        }
+        if (cursample->sampleNum >= 150 && cursample->sampleNum<=156){
+            if (m("LHE_Vpt") > 100) {
+                if (mInt("LHE_Nb") != 0 || nGenStatus2bHad != 0) return false;
+            }
+       } else if (cursample->sampleNum == 160){
+            if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) return false;
+        } else if (cursample->sampleNum == 161){
+            if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) return false;
+        } else if (cursample->sampleNum == 162){
+            if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
+        } else if (cursample->sampleNum == 163){
             if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
         }
     }

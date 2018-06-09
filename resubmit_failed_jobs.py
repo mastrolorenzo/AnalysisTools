@@ -88,7 +88,8 @@ for subdir, dirs, files in os.walk(args.dir):
         if (".log" in file and args.fromMultiJobPerCluster and not 'RE' in file):
             dirpaths = subdir.split('/')
             sample = dirpaths[len(dirpaths)-1]
-            jobNum=file.replace(".log","").replace("job","")
+            jobAndClustNum=file.replace(".log","").replace("log_","")
+            jobNum=jobAndClustNum.split('.')[-1]
             #jobNum = file[file.find("output_%s" % sample)+7 + len(sample):file.find(".root")]
             rootfilename = "output_%s_%i.root" % (sample, int(jobNum)+1 )
             if (rootfilename not in rootFiles):
@@ -134,7 +135,7 @@ for subdir, dirs, files in os.walk(args.dir):
                     newfile.write(line)
                 else:
                     for missing in missingFiles:
-                        if missing in line:
+                        if ' %s'%missing in line:
                             newfile.write(line)
         os.system("sed -i 's/(ProcId)./(ProcId)RE./g' %s/REjob%s.submit"%(subdir, sample))
 
