@@ -48,6 +48,9 @@ class VHbbAnalysis : public AnalysisManager {
         int UpdatedVType();
         bool PassVTypeAndTrigger(int vtype);
         float ReWeightMC(int nPU=0);
+        float puWeight_2016(int i=0);
+        float puWeight_2016Up(int i=0);
+        float puWeight_2016Down(int i=0);
         float puWeight_2016to2017(int i=0);
         float puWeight_ichep(int i=0);
         float puWeight_ichep_up(int i=0);

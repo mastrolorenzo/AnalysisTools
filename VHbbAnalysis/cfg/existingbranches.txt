@@ -17,8 +17,8 @@ type=4  name=Flag_eeBadScFilter
 #type=1  name=nPVs
 type=2  name=fixedGridRhoFastjetAll
 type=2  name=puWeight                              onlyMC=1
-#type=2  name=puWeightUp                            onlyMC=1
-#type=2  name=puWeightDown                          onlyMC=1
+type=2  name=puWeightUp                            onlyMC=1
+type=2  name=puWeightDown                          onlyMC=1
 
 #FIXME Need to add back b-tag weights
 

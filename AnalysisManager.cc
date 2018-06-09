@@ -639,9 +639,10 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                 CheckBranchLengths(jentry, cursample->sampleNum==0);
                 bool anyPassing=false;
                 for(unsigned iSyst=0; iSyst<systematics.size(); iSyst++){
-                    GetEarlyEntries(jentry, cursample->sampleNum==0);
                     cursyst=&(systematics[iSyst]);
-                    if (cursample->sampleNum == 0 && cursyst->name != "nominal") continue;
+                    if (cursyst->name != "nominal") continue; // don't reinterpret preselection under each systematic variation to save (potentially oodles) of time
+                    //if (cursample->sampleNum == 0 && cursyst->name != "nominal") continue;
+                    GetEarlyEntries(jentry, cursample->sampleNum==0);
                     //ApplySystematics(true);
 
                     if(debug>100000) std::cout<<"checking preselection"<<std::endl;
