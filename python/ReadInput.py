@@ -108,7 +108,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
 
                 if samplecon.externFileExists:
                     print "before",samplecon.processedEvents
-                    samplecon.ReadSampleInfoFile(int(doSkim))
+                    samplecon.ReadSampleInfoFile()
                     print "after",samplecon.processedEvents
 
                 for filename in sample["files"]:
