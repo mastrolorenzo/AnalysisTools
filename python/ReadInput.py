@@ -28,6 +28,9 @@ elif hostname.endswith('.desy.de'):
 elif hostname.endswith('.fnal.gov'):
     site="FNAL"
     siteIP = "root://cmseos.fnal.gov/"
+else:
+    site="FNAL"
+    siteIP = "root://cmseos.fnal.gov/"
 
 def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=False, runOnSkim=False):
     if debug > 10:

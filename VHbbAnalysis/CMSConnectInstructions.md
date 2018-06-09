@@ -236,3 +236,91 @@ The log files will be available under CMSConnect_June2_2017V5/RESUBMIT.
 
 By design, this command does not automatically submit the resubmission job, opting to give the user a chance to check things over before submission. Also, it will only create a resubmission file if one does not already exist to prevent accidental overwrites. One last caveat, resubmitting in this manner assumes the X509\_USER\_PROXY environment variable points to your valid voms-proxy.
 
+
+# Job Submission Campaigns
+
+## June 9, 2016V4 Analysis with Factorized JECs and CMVA
+```bash
+# Data
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 2 -s Run2016BToG_Ele_ReMiniAOD
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 2 -s Run2016BToG_Mu_ReMiniAOD
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 2 -s Run2016BToG_MET_ReMiniAOD
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 2 -s Run2016BToG_DoubleEle_ReMiniAOD
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 2 -s Run2016BToG_DoubleMu_ReMiniAOD
+
+# Signals
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.04 -s ZH125_ZNuNu_powheg
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s ggZH125_ZNuNu_powheg
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s WminusH125_powheg
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s WplusH125_powheg
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s ZH125_ZLL_powheg
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s ggZH125_ZLL_powheg
+
+# W+Jets
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.06 -s WJets_madgraph
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s WJets-HT100To200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s WJets-HT200To400
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s WJets-HT400To600
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s WJets-HT600To800
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s WJets-HT800To1200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s WJets-HT1200To2500
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s WJets-HT2500ToInf
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s WBJets-Pt100To200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.015 -s WBJets-Pt200ToInf
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s WJets_BGenFilter-Pt100To200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.015 -s WJets_BGenFilter-Pt200ToInf
+
+# DY+Jets
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s DYToLL_madgraph
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.015 -s DYToLL_HT100to200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.015 -s DYToLL_HT200to400
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s DYToLL_HT400to600
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s DYToLL_HT600to800
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s DYToLL_HT800to1200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.01 -s DYToLL_HT1200to2500
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s DYToLL_HT2500toInf
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s DYBJets-Pt100To200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s DYBJets-Pt200ToInf
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s DYBJets-Pt100To200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.015 -s DYBJets-Pt200ToInf
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.02 -s DYJets-BGenFilter-Pt100To200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.015 -s DYJets-BGenFilter-Pt200ToInf
+
+# Z+Jets
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s ZJetsToNuNu_HT100To200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s ZJetsToNuNu_HT200To400
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s ZJetsToNuNu_HT400To600
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s ZJetsToNuNu_HT600To800
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s ZJetsToNuNu_HT800To1200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s ZJetsToNuNu_HT1200To2500
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s ZJetsToNuNu_HT2500ToInf
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s ZBJetsToNuNu_Pt-100to200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s ZBJetsToNuNu_Pt-200toInf
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s ZJetsToNuNu_BGenFilter_Pt-100to200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s ZJetsToNuNu_BGenFilter_Pt-200toInf
+
+# QCD
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s QCD_HT100to200
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s QCD_HT200to300
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s QCD_HT300to500
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s QCD_HT500to700
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s QCD_HT700to1000
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s QCD_HT1000to1500
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s QCD_HT1500to2000
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.125 -s QCD_HT2000toInf
+
+# Single Top
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.05 -s TToLeptons_s
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s TToLeptons_t_powheg
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.05 -s TBarToLeptons_t_powheg
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s T_tW
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.05 -s Tbar_tW
+
+# TTbar
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s TT_powheg
+
+# Diboson
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.03 -s WW
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.04 -s WZ
+python RunCMSConnect.py --submitJobs 0 --runOnSkim 0 --doKinFit 1 -b 1 -n CMSConnect_June9_2016V4 -c vhbb_config_2016.txt -f 0.025 -s ZZ
+```
