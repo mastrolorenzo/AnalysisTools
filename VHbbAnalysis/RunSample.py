@@ -103,12 +103,9 @@ if am.branchInfos['doKinFit'].val > 0.5 and "onlyMvaEval" not in options:
     input_file = output_file.replace('.root', '_before_kinfit.root')
     os.system('mv %s %s' % (output_file, input_file))
 
-    if am.systematics.size():
+    if am.systematics.size() and not is_data:
         # only do lepton systematics if there are other systematics as well
-        if is_data:
-            lep_sys_event_proxies = []
-        else:
-            lep_sys_event_proxies = kinfitter.make_lep_sys_event_proxies(am.branchInfos['dataYear'].val)
+        lep_sys_event_proxies = kinfitter.make_lep_sys_event_proxies(am.branchInfos['dataYear'].val)
         lep_sys_names = list(ep.output_postfix for ep in lep_sys_event_proxies)
         event_proxies = lep_sys_event_proxies + kinfitter.make_sys_event_proxies(am) + [kinfitter.EventProxy()]
     else:
@@ -134,7 +131,6 @@ if "onlyMvaEval" in options or am.branchInfos['postLoopMVAEval'].val > 0.5:
     # the first block contains all bdts and the next ones the individual dnn's
     blocks = ([bdt_names] if bdt_names else []) + list([name] for name in dnn_names)
 
-
     def worker_func(block):
         import mva_evaluator
         os.system('mv %s %s' % (output_file, input_file))
@@ -142,6 +138,7 @@ if "onlyMvaEval" in options or am.branchInfos['postLoopMVAEval'].val > 0.5:
             input_file,
             output_file,
             am,
+            is_data=is_data,
             allowed_names=block,
             lep_sys_names=lep_sys_names,
         )

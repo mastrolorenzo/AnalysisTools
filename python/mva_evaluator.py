@@ -113,7 +113,7 @@ def evaluate_discriminator(ep, bdt_infos):
             getattr(ep, bdt_info.bdtname)[0] = bdt_info.tf_evaluator.EvaluateDNN(raw_vars)
 
 
-def apply_mva_eval(input_file, output_file, am, allowed_names, lep_sys_names=tuple()):
+def apply_mva_eval(input_file, output_file, am, is_data, allowed_names, lep_sys_names=tuple()):
 
     bdt_infos = list(
         prep_bdt_variables(bdt_info)
@@ -124,11 +124,15 @@ def apply_mva_eval(input_file, output_file, am, allowed_names, lep_sys_names=tup
     f, t, of = prepare_io(input_file, output_file)
     ot = t.CloneTree(0)
 
-    eps = make_sys_event_proxies(am, lep_sys_names) + [EventProxy()]  # the last one is for nominal
+    if is_data:
+        eps = [EventProxy()]
+    else:
+        eps = make_sys_event_proxies(am, lep_sys_names) + [EventProxy()]  # the last one is for nominal
+
     for ep in eps:
         ep.init_output(ot, set(str(bdt_info.bdtname) for bdt_info in bdt_infos))
-    n_events = 0
 
+    n_events = 0
     start_time = time.ctime()
     print 'starting mva evaluation loop with %i systematics on %s' % (len(eps) - 1, start_time)
     for e in t:
