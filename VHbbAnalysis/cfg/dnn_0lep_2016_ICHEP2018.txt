@@ -13,8 +13,8 @@ name=H_pt                   lname=H_pt                  isEx=1 isSpec=0 order=2
 name=HVdPhi                 lname=HVdPhi                isEx=0 isSpec=0 order=3
 name=V_pt                   lname=V_pt                  isEx=1 isSpec=0 order=4
 name=HJ1_HJ2_dEta           lname=HJ1_HJ2_dEta          isEx=0 isSpec=0 order=5
-name=hJets_CMVA_0           lname=hJets_CMVA_0          isEx=0 isSpec=0 order=6
-name=hJets_CMVA_1           lname=hJets_CMVA_1          isEx=0 isSpec=0 order=7
+name=hJets_CMVA_0           lname=hJets_btagged_0       isEx=0 isSpec=0 order=6
+name=hJets_CMVA_1           lname=hJets_btagged_1       isEx=0 isSpec=0 order=7
 name=SA5                    lname=SA5                   isEx=0 isSpec=0 order=8
 name=HJ1_HJ2_dPhi           lname=HJ1_HJ2_dPhi          isEx=0 isSpec=0 order=9
 name=hJets_leadingPt        lname=hJets_leadingPt       isEx=0 isSpec=0 order=10
