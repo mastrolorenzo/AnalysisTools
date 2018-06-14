@@ -4,19 +4,19 @@
 input_pattern = '../SkimTreeBuilder/samples_2017/%s.root'
 
 # The rebinner output directory.
-destination = 'rebinning_2lep_highPt_BDTG_2017'
+destination = 'rebin_2lep_highPt_DNN_2017'
 
 # The name of the tree from which to load events.
 treename = 'train'
 
 # The name and boundary values of the distribution to rebin.
-target = 'CMS_vhbb_BDTG_Zll_HighPT_13TeV', -1, 1
+target = 'CMS_vhbb_DNN_Zll_HighPT_13TeV', 0, 1
 
 # Aliases for the branches required by the autocategorizer
 # if they have different names than their expected defaults
 # i.e. "bin", "is_signal", and "weight".
 aliases = {
-    'bin': 'bin_index_Zll_highPt',
+    'bin': 'dnn_index_Zll_highPt',
     'is_signal': 'is_signal_Zll',
 }
 

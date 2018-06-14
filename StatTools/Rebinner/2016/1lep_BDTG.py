@@ -1,10 +1,10 @@
 ## Rebinner Configuration File
 
 # The input pattern used to glob for sample files.
-input_pattern = '../SkimTreeBuilder/samples_2017/%s.root'
+input_pattern = '../SkimTreeBuilder/samples_2016/%s.root'
 
 # The rebinner output directory.
-destination = 'rebinning_1lep_BDTG_2017'
+destination = 'rebin_1lep_BDTG_2016'
 
 # The name of the tree from which to load events.
 treename = 'train'
@@ -16,7 +16,7 @@ target = 'CMS_vhbb_BDTG_Wln_13TeV', -1, 1
 # if they have different names than their expected defaults
 # i.e. "bin", "is_signal", and "weight".
 aliases = {
-    'bin': 'bin_index_Wln',
+    'bin': 'bdt_index_Wln',
     'is_signal': 'is_signal_Wln',
 }
 
@@ -34,15 +34,13 @@ samples = [
     'WminusH125_powheg',
     'WplusH125_powheg',
 
-    'TT_AllHadronic',
-    'TT_DiLep',
-    'TT_SingleLep',
+    'TT_powheg',
 
-    'ST_s-c_4f_lep_PSw',
-    'ST_t-c_antitop_4f_inc',
-    'ST_t-c_top_4f_inc',
-    'ST_tW_antitop_5f_inc',
-    'ST_tW_top_5f_inc_PSw',
+    'TToLeptons_s',
+    'TBarToLeptons_t_powheg',
+    'TToLeptons_t_powheg',
+    'Tbar_tW',
+    'T_tW',
 
     'WJets_madgraph',
     'WJets-HT100To200',
@@ -51,6 +49,11 @@ samples = [
     'WJets-HT600To800',
     'WJets-HT800To1200',
     'WJets-HT1200To2500',
+    'WJets-HT2500ToInf',
+    'WBJets-Pt100To200',
+    'WBJets-Pt200ToInf',
+    'WJets_BGenFilter-Pt100To200',
+    'WJets_BGenFilter-Pt200ToInf',
 
     'WW',
     'WZ',

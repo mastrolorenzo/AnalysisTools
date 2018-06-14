@@ -32,7 +32,10 @@ def main(argv=None):
         scale_factor, input_tokens = args
         tqdm.write('About to process the following input tokens: {0}'.format(', '.join(input_tokens)))
         start = time.time()
-        skim_tree_builder.run(name, input_tokens, config.keep_branches, config.new_branches, scale_factor)
+        try:
+            skim_tree_builder.run(name, input_tokens, config.keep_branches, config.new_branches, scale_factor)
+        except EmptySkimError:
+            tqdm.write('Skipping {0} because no events passed the signal region skimming selection'.format(name))
         end = time.time()
         tqdm.write('Finished building skimmed tree for {0} in {1:.2f}s'.format(name, end - start))
 

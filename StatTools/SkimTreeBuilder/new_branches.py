@@ -18,6 +18,26 @@ def abs_HVdPhi_F(event):
 def abs_HJ1_HJ2_dEta_F(event):
     return abs(event.HJ1_HJ2_dEta)
 
+def CMS_vhbb_DNN_Znn_13TeV_F(event):
+    """Convert the DNN score to DNN^3."""
+    return event.CMS_vhbb_DNN_Znn_13TeV**3
+
+def CMS_vhbb_DNN_Wen_13TeV_F(event):
+    """Convert the DNN score to DNN^3."""
+    return event.CMS_vhbb_DNN_Wen_13TeV**3
+
+def CMS_vhbb_DNN_Wmn_13TeV_F(event):
+    """Convert the DNN score to DNN^3."""
+    return event.CMS_vhbb_DNN_Wmn_13TeV**3
+
+def CMS_vhbb_DNN_Zll_LowPT_13TeV_F(event):
+    """Convert the DNN score to DNN^3."""
+    return event.CMS_vhbb_DNN_Zll_LowPT_13TeV**3
+
+def CMS_vhbb_DNN_Zll_HighPT_13TeV_F(event):
+    """Convert the DNN score to DNN^3."""
+    return event.CMS_vhbb_DNN_Zll_HighPT_13TeV**3
+
 def is_signal_Znn_I(event):
     """Flag if the event belongs to a 0-lepton signal sample.
     Used by the rebinner.
@@ -35,11 +55,20 @@ def is_signal_Znn_I(event):
         # These are background events.
         return 0
 
-def bin_index_Znn_I(event):
+def bdt_index_Znn_I(event):
     """Flag if the event falls within the full range of the 0-lepton BDT
     output [-1, 1] in the 0-lepton signal region. Used by the rebinner.
     """
     if event.isZnn and (60 < event.H_mass < 160) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Znn_HighPT_13TeV < 1):
+        return 0
+    else:
+        return -1
+
+def dnn_index_Znn_I(event):
+    """Flag if the event falls within the full range of the 0-lepton DNN
+    output [0, 1] in the 0-lepton signal region. Used by the rebinner.
+    """
+    if event.isZnn and (60 < event.H_mass < 160) and event.hJets_btagged_1 > 0.1522 and (0 < event.CMS_vhbb_DNN_Znn_13TeV < 1):
         return 0
     else:
         return -1
@@ -59,11 +88,29 @@ def is_signal_Wln_I(event):
         # These are background events.
         return 0
 
-def bin_index_Wln_I(event):
+def bdt_index_Wln_I(event):
     """Flag if the event falls within the full range of the 1-lepton BDT
     output [-1, 1] in the 1-lepton signal region. Used by the rebinner.
     """
     if (event.isWenu or event.isWmunu) and (90 < event.H_mass < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Wln_13TeV < 1):
+        return 0
+    else:
+        return -1
+
+def dnn_index_Wen_I(event):
+    """Flag if the event falls within the full range of the 1-lepton (e) DNN
+    output [0, 1] in the 1-lepton signal region. Used by the rebinner.
+    """
+    if event.isWenu and (90 < event.H_mass < 150) and event.hJets_btagged_1 > 0.1522 and (0 < event.CMS_vhbb_DNN_Wen_13TeV < 1):
+        return 0
+    else:
+        return -1
+
+def dnn_index_Wmn_I(event):
+    """Flag if the event falls within the full range of the 1-lepton (mu) DNN
+    output [0, 1] in the 1-lepton signal region. Used by the rebinner.
+    """
+    if event.isWmunu and (90 < event.H_mass < 150) and event.hJets_btagged_1 > 0.1522 and (0 < event.CMS_vhbb_DNN_Wmn_13TeV < 1):
         return 0
     else:
         return -1
@@ -83,7 +130,7 @@ def is_signal_Zll_I(event):
         # These are background events.
         return 0
 
-def bin_index_Zll_lowPt_I(event):
+def bdt_index_Zll_lowPt_I(event):
     """Flag if the event falls within the full range of the 2-lepton BDT
     output [-1, 1] in the 2-lepton low pT(V) signal region. Used by the rebinner.
     """
@@ -92,11 +139,29 @@ def bin_index_Zll_lowPt_I(event):
     else:
         return -1
 
-def bin_index_Zll_highPt_I(event):
+def bdt_index_Zll_highPt_I(event):
     """Flag if the event falls within the full range of the 2-lepton BDT
     output [-1, 1] in the 2-lepton high pT(V) signal region. Used by the rebinner.
     """
     if (event.isZee or event.isZmm) and event.V_pt > 150 and (90 < event.H_mass_fit_fallback < 150) and event.hJets_btagged_1 > 0.1522 and (-1 < event.CMS_vhbb_BDTG_Zll_HighPT_13TeV < 1):
+        return 0
+    else:
+        return -1
+
+def dnn_index_Zll_lowPt_I(event):
+    """Flag if the event falls within the full range of the 2-lepton DNN
+    output [0, 1] in the 2-lepton low pT(V) signal region. Used by the rebinner.
+    """
+    if (event.isZee or event.isZmm) and (50 < event.V_pt < 150) and (90 < event.H_mass_fit_fallback < 150) and event.hJets_btagged_1 > 0.1522 and (0 < event.CMS_vhbb_DNN_Zll_LowPT_13TeV < 1):
+        return 0
+    else:
+        return -1
+
+def dnn_index_Zll_highPt_I(event):
+    """Flag if the event falls within the full range of the 2-lepton DNN
+    output [0, 1] in the 2-lepton high pT(V) signal region. Used by the rebinner.
+    """
+    if (event.isZee or event.isZmm) and event.V_pt > 150 and (90 < event.H_mass_fit_fallback < 150) and event.hJets_btagged_1 > 0.1522 and (0 < event.CMS_vhbb_DNN_Zll_HighPT_13TeV < 1):
         return 0
     else:
         return -1

@@ -5,7 +5,7 @@ from new_branches import *
 input_pattern = '%s'
 
 # The output directory for skimmed trees.
-destination = 'samples_2017'
+destination = 'skims_for_training_2017'
 
 # The list of existing branches to be kept in the skimmed
 # tree in addition to the default subset of branches.
@@ -50,16 +50,6 @@ new_branches = [
     hJets_CMVA_1_F,
     abs_HJ1_HJ2_dEta_F,
     abs_HVdPhi_F,
-    ## 0-lepton rebinner branches
-    #is_signal_Znn_I,
-    #bin_index_Znn_I,
-    ## 1-lepton rebinner branches
-    #is_signal_Wln_I,
-    #bin_index_Wln_I,
-    ## 2-lepton rebinner branches
-    #is_signal_Zll_I,
-    #bin_index_Zll_lowPt_I,
-    #bin_index_Zll_highPt_I,
 ]
 
 # The samples for which to build skimmed trees.

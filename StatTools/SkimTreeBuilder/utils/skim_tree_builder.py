@@ -37,6 +37,10 @@ class TreeNotFoundError(KeyError):
     pass
 
 
+class EmptySkimError(Exception):
+    pass
+
+
 def build_skim_tree(path, keep_branches=[], new_branches=[], scale_factors=None):
     """Build a skimmed tree from an AnalysisTools output file.
 
@@ -134,7 +138,7 @@ class SkimTreeBuilder(object):
         Parameters
         ----------
         name : string
-            The name for the files containing the sample's skimmed trees.
+            The name for the file containing the sample's skimmed trees.
         input_tokens : list of strings
             The specific patterns that are substituted into the input_pattern when globbing
             for sample output files. This is similar to the input_token for PlotWithVarial.
@@ -165,6 +169,10 @@ class SkimTreeBuilder(object):
             if result is not None:
                 dataframes_train.append(result[0])
                 dataframes_test.append(result[1])
+        # Do not create a skim if either of the intermediate dataframe collections are empty,
+        # indicating that none of the events in the sample passed the signal region selection.
+        if not dataframes_train or not dataframes_test:
+            raise EmptySkimError('No events passed the signal region skimming selection for {0}'.format(name))
         # Concatenate the intermediate dataframes together.
         dataframe_train = pandas.concat(dataframes_train)
         dataframe_test = pandas.concat(dataframes_test)

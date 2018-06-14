@@ -5,61 +5,49 @@ from new_branches import *
 input_pattern = '/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2016V4_June4_incJES/%s/output*.root'
 
 # The output directory for skimmed trees.
-destination = 'samples_2016'
+destination = 'skims_for_rebinning_2016'
 
 # The list of existing branches to be kept in the skimmed
 # tree in addition to the default subset of branches.
 keep_branches = [
-    'hJetInd1',
-    'hJetInd2',
-    'Jet_btagCMVA',
-    'hJets_leadingPt',
-    'hJets_subleadingPt',
-    'hJets_btagged_0',
     'hJets_btagged_1',
-    'HJ1_HJ2_dEta',
-    'HJ1_HJ2_dPhi',
-    'HJ1_HJ2_dR',
-    'H_pt',
     'H_mass',
     'V_pt',
-    'V_mass',
-    'V_mt',
-    'MET_pt',
-    'MET_Pt',
-    'HVdPhi',
-    'jjVPtRatio',
-    'SA5',
-    'otherJetsBestBtag',
-    'otherJetsHighestPt',
-    'minDPhiFromOtherJets',
-    'Top1_mass_fromLepton_regPT_w4MET',
-    'nAddJets302p5_puid',
-    'lepMetDPhi',
     '*_fit_fallback',
-    'nAddJets_2lep',
-    'n_recoil_jets_fit',
-    'H_mass_sigma_fit',
+    'CMS_vhbb_BDTG_Znn_HighPT_13TeV',
+    'CMS_vhbb_BDTG_Wln_13TeV',
+    'CMS_vhbb_BDTG_Zll_LowPT_13TeV',
+    'CMS_vhbb_BDTG_Zll_HighPT_13TeV',
+    'CMS_vhbb_DNN_Znn_13TeV',
+    'CMS_vhbb_DNN_Wen_13TeV',
+    'CMS_vhbb_DNN_Wmn_13TeV',
+    'CMS_vhbb_DNN_Zll_LowPT_13TeV',
+    'CMS_vhbb_DNN_Zll_HighPT_13TeV',
 ]
 
 # The list of new branches to be created for the skimmed tree.
 new_branches = [
-    hJets_DeepCSV_0_F,
-    hJets_DeepCSV_1_F,
-    hJets_CMVA_0_F,
-    hJets_CMVA_1_F,
-    abs_HJ1_HJ2_dEta_F,
-    abs_HVdPhi_F,
-    ## 0-lepton rebinner branches
-    #is_signal_Znn_I,
-    #bin_index_Znn_I,
-    ## 1-lepton rebinner branches
-    #is_signal_Wln_I,
-    #bin_index_Wln_I,
-    ## 2-lepton rebinner branches
-    #is_signal_Zll_I,
-    #bin_index_Zll_lowPt_I,
-    #bin_index_Zll_highPt_I,
+    # Convert DNN to DNN^3
+    CMS_vhbb_DNN_Znn_13TeV_F,
+    CMS_vhbb_DNN_Wen_13TeV_F,
+    CMS_vhbb_DNN_Wmn_13TeV_F,
+    CMS_vhbb_DNN_Zll_LowPT_13TeV_F,
+    CMS_vhbb_DNN_Zll_HighPT_13TeV_F,
+    # 0-lepton rebinner branches
+    is_signal_Znn_I,
+    bdt_index_Znn_I,
+    dnn_index_Znn_I,
+    # 1-lepton rebinner branches
+    is_signal_Wln_I,
+    bdt_index_Wln_I,
+    dnn_index_Wen_I,
+    dnn_index_Wmn_I,
+    # 2-lepton rebinner branches
+    is_signal_Zll_I,
+    bdt_index_Zll_lowPt_I,
+    bdt_index_Zll_highPt_I,
+    dnn_index_Zll_lowPt_I,
+    dnn_index_Zll_highPt_I,
 ]
 
 # The samples for which to build skimmed trees.

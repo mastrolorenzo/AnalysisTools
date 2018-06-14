@@ -4,20 +4,20 @@
 input_pattern = '../SkimTreeBuilder/samples_2017/%s.root'
 
 # The rebinner output directory.
-destination = 'rebinning_2lep_lowPt_BDTG_2017'
+destination = 'rebin_1lep_Wen_DNN_2017'
 
 # The name of the tree from which to load events.
 treename = 'train'
 
 # The name and boundary values of the distribution to rebin.
-target = 'CMS_vhbb_BDTG_Zll_LowPT_13TeV', -1, 1
+target = 'CMS_vhbb_DNN_Wen_13TeV', 0, 1
 
 # Aliases for the branches required by the autocategorizer
 # if they have different names than their expected defaults
 # i.e. "bin", "is_signal", and "weight".
 aliases = {
-    'bin': 'bin_index_Zll_lowPt',
-    'is_signal': 'is_signal_Zll',
+    'bin': 'dnn_index_Wen',
+    'is_signal': 'is_signal_Wln',
 }
 
 # Rebinning scheme search settings.
@@ -31,8 +31,8 @@ settings = {
 
 # The samples from which to load events for rebinning.
 samples = [
-    'ZH125_ZLL_powheg',
-    'ggZH125_ZLL_powheg',
+    'WminusH125_powheg',
+    'WplusH125_powheg',
 
     'TT_AllHadronic',
     'TT_DiLep',
@@ -44,20 +44,13 @@ samples = [
     'ST_tW_antitop_5f_inc',
     'ST_tW_top_5f_inc_PSw',
 
-    'DYToLL_madgraph',
-    'DYToLL_HT100to200_madgraph',
-    'DYToLL_HT200to400_madgraph',
-    'DYToLL_HT400to600_madgraph',
-    'DYToLL_HT600to800_madgraph',
-    'DYToLL_HT800to1200_madgraph',
-    'DYToLL_HT1200to2500_madgraph',
-    'DYToLL_HT2500toInf_madgraph',
-
-    'DYToLL_M4to50_HT70to100_madgraph',
-    'DYToLL_M4to50_HT100to200_madgraph',
-    'DYToLL_M4to50_HT200to400_madgraph',
-    'DYToLL_M4to50_HT400to600_madgraph',
-    'DYToLL_M4to50_HT600toInf_madgraph',
+    'WJets_madgraph',
+    'WJets-HT100To200',
+    'WJets-HT200To400',
+    'WJets-HT400To600',
+    'WJets-HT600To800',
+    'WJets-HT800To1200',
+    'WJets-HT1200To2500',
 
     'WW',
     'WZ',

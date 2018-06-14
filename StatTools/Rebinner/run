@@ -16,10 +16,13 @@ def parse_command_line(argv):
     if len(argv) < 2:
         raise RuntimeError('No configuration file provided')
     else:
+        config_dir = os.path.basename(os.path.dirname(sys.argv[1]))
         config_file = os.path.basename(sys.argv[1])
-        module_name, _ = os.path.splitext(config_file)
+        module_name = '{0}.{1}'.format(config_dir, os.path.splitext(config_file)[0])
         try:
-            config = __import__(module_name, globals(), locals(), [])
+            # At least one attribute must be present in the fromlist
+            # to trigger the import below the top level module.
+            config = __import__(module_name, globals(), locals(), ['input_pattern'])
         except ImportError:
             raise
         return config

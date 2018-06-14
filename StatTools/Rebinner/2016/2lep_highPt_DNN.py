@@ -4,25 +4,25 @@
 input_pattern = '../SkimTreeBuilder/samples_2016/%s.root'
 
 # The rebinner output directory.
-destination = 'rebinning_0lep_BDTG_2016'
+destination = 'rebin_2lep_highPt_DNN_2016'
 
 # The name of the tree from which to load events.
 treename = 'train'
 
 # The name and boundary values of the distribution to rebin.
-target = 'CMS_vhbb_BDTG_Znn_HighPT_13TeV', -1, 1
+target = 'CMS_vhbb_DNN_Zll_HighPT_13TeV', 0, 1
 
 # Aliases for the branches required by the autocategorizer
 # if they have different names than their expected defaults
 # i.e. "bin", "is_signal", and "weight".
 aliases = {
-    'bin': 'bin_index_Znn',
-    'is_signal': 'is_signal_Znn',
+    'bin': 'dnn_index_Zll_highPt',
+    'is_signal': 'is_signal_Zll',
 }
 
 # Rebinning scheme search settings.
 settings = {
-    'n_bins': range(3, 7),
+    'n_bins': range(3, 10),
     'metrics': ['asimov', 'poisson'],
     'n_minbkg': [10, 20, 30, 50, 100, 200, 300],
     'smooth_bkg': [True, False],
@@ -31,10 +31,8 @@ settings = {
 
 # The samples from which to load events for rebinning.
 samples = [
-    'ZH125_ZNuNu_powheg',
-    'ggZH125_ZNuNu_powheg',
-    'WminusH125_powheg',
-    'WplusH125_powheg',
+    'ZH125_ZLL_powheg',
+    'ggZH125_ZLL_powheg',
 
     'TT_powheg',
 
@@ -44,28 +42,21 @@ samples = [
     'Tbar_tW',
     'T_tW',
 
-    'WJets_madgraph',
-    'WJets-HT100To200',
-    'WJets-HT200To400',
-    'WJets-HT400To600',
-    'WJets-HT600To800',
-    'WJets-HT800To1200',
-    'WJets-HT1200To2500',
-    'WJets-HT2500ToInf',
-    'WBJets-Pt100To200',
-    'WBJets-Pt200ToInf',
-    'WJets_BGenFilter-Pt100To200',
-    'WJets_BGenFilter-Pt200ToInf',
-
-    'ZJetsToNuNu_HT100To200',
-    'ZJetsToNuNu_HT200To400',
-    'ZJetsToNuNu_HT400To600',
-    'ZJetsToNuNu_HT600To800',
-    'ZJetsToNuNu_HT800To1200',
-    'ZJetsToNuNu_HT1200To2500',
-    'ZJetsToNuNu_HT2500ToInf',
+    'DYToLL_madgraph',
+    'DYToLL_HT100to200',
+    'DYToLL_HT200to400',
+    'DYToLL_HT400to600',
+    'DYToLL_HT600to800',
+    'DYToLL_HT800to1200',
+    'DYToLL_HT1200to2500',
+    'DYToLL_HT2500toInf',
+    'DYBJets-Pt100To200',
+    'DYBJets-Pt200ToInf',
+    'DYJets-BGenFilter-Pt100To200',
+    'DYJets-BGenFilter-Pt200ToInf',
 
     'WW',
     'WZ',
     'ZZ',
 ]
+
