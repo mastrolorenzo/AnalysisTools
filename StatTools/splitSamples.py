@@ -42,6 +42,7 @@ parser.add_argument('--drawFromNom', type=bool, default=False, help="If true, do
 parser.add_argument('--channel', type=str, default="", help="Specify the channel to run (to determine which samples file to read")
 parser.add_argument('--year', type=str, default="2017", help="Specify the year to run")
 parser.add_argument('--even',default=False, action="store_true", help="Use only even events for MC")
+parser.add_argument('--systematic', type=str, default="", help="Specify to run on only particular systematics (comma-separated list)")
 args = parser.parse_args()
 print args
 
@@ -87,6 +88,10 @@ if (args.systematics != ""):
             systematics[paramsToKeep[0]] = (paramsToKeep[4], "", sysSamples)
     
 print systematics
+
+systematics_to_run = []
+if (args.systematic != ""):
+    systematics_to_run = args.systematic.split(',')
 
 set_of_weights = []
 if (args.weights != ""):
@@ -147,6 +152,7 @@ else:
     else :
         from nano_samples_znn2017 import the_samples_dict
 
+scaleFactorMap = {}
 for sample in the_samples_dict:
     sampleMap[the_samples_dict[sample][2]] = []
     sampleNameMap[the_samples_dict[sample][2]] = []
@@ -215,13 +221,13 @@ if args.doRebin:
             for sname in sampleNameMap[sample]:
                 #fname = ipath + "/sum_" + sname + "_3.root"
                 #fname = ipath + "/sum_" + sname + "_weighted2.root"
-                fname = ipath + "/sum_" + sname + ".root"
+                fname = ipath + "/sum_" + sname + "*.root"
                 tree_sig.Add(fname)
         elif sample != "data_obs":
             for sname in sampleNameMap[sample]:
                 #fname = ipath + "/sum_" + sname + "_3.root"
                 #fname = ipath + "/sum_" + sname + "_weighted2.root"
-                fname = ipath + "/sum_" + sname + ".root"
+                fname = ipath + "/sum_" + sname + "*.root"
                 if fname not in fnames:
                     print "adding  %s for background" % fname
                     tree_bkg.Add(fname)
@@ -342,7 +348,8 @@ for sample in sampleMap:
     ##if sample != "Bkg" and sample != "data_obs": 
     if sample != "Bkg": 
         for sname in sampleNameMap[sample]:
-            fname = ipath + "/sum_" + sname + ".root"
+            fname = ipath + "/sum_" + sname + "*.root"
+            #fname = ipath + "/" + sname + "/*.root"
             #fname = ipath + "/sum_" + sname + "_weighted2.root"
             #fname = ipath + "/sum_" + sname + "_3.root"
             #print tree.GetEntries()
@@ -353,7 +360,9 @@ for sample in sampleMap:
         for sample in sampleNameMap:
             if sample in sigSamps: continue
             for sname in sampleNameMap[sample]: 
-                fname = ipath + "/sum_" + sname + ".root"
+                #fname = ipath + "/" + sname + "/*.root"
+                ##fname = ipath + "/sum_" + sname + ".root"
+                fname = ipath + "/sum_" + sname + "*.root"
                 #fname = ipath + "/sum_" + sname + "_weighted2.root"
                 #fname = ipath + "/sum_" + sname + "_3.root"
                 tree.Add(fname)
@@ -445,6 +454,8 @@ for sample in sampleMap:
                 hBinStatDown.Write()
     # other shape systematics
     for syst in systematics:
+        #if (args.systematic != "" and syst != args.systematic): continue
+        if (len(systematics_to_run)>0 and syst not in systematics_to_run): continue
         sysWeight, sysName, sysSamples = systematics[syst]
         if sample not in sysSamples: continue
         #if (syst.find("LHE")==-1): continue
@@ -464,16 +475,21 @@ for sample in sampleMap:
                 if (bdtname.find('[') != -1):
                     # drawing an array variable
                     sysBDTNameUp = bdtname[:bdtname.find('[')] + "_" + sysName + "Up" + bdtname[bdtname.find('['):] 
+                if (bdtname.find('_13TeV') != -1):
+                    # drawing an array variable
+                    sysBDTNameUp = bdtname[:bdtname.find('_13TeV')+6] + "_" + sysName + "Up" + bdtname[bdtname.find('_13TeV')+6:] 
+                    sysBDTNameDown = bdtname[:bdtname.find('_13TeV')+6] + "_" + sysName + "Down" + bdtname[bdtname.find('_13TeV')+6:] 
                 else:
                     sysBDTNameUp += "_%sUp" % sysName
                     sysBDTNameDown += "_%sDown" % sysName
+                print sysBDTNameUp,sysBDTNameDown
 
             passSysup = "Pass_%sUp" % sysName
             passSysdown = "Pass_%sDown" % sysName
             cutStringup = cutString.replace("controlSample","controlSample_%sUp"%sysName)
             cutStringdown = cutString.replace("controlSample","controlSample_%sDown"%sysName)
-            cutStringup = cutStringup.replace("H_mass","H_mass_%sUp"%sysName)
-            cutStringdown = cutStringdown.replace("H_mass","H_mass_%sDown"%sysName)
+            #cutStringup = cutStringup.replace("H_mass","H_mass_%sUp"%sysName)
+            #cutStringdown = cutStringdown.replace("H_mass","H_mass_%sDown"%sysName)
             if weight_string.count('weight') > 1:
                 print 'weight_string is ', weight_string, 'please make sure the replacements in weight_stringup and weight_stringdown are correct'
                 sys.exit(1)
@@ -490,6 +506,9 @@ for sample in sampleMap:
                 elif (sysWeight.find("weight_PU") != -1):
                     tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(1./weight_PU)*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
                     tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(1./weight_PU)*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
+                elif (sysWeight.find("recoWReWeight") != -1):
+                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(1./recoWReWeight)*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
+                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(1./recoWReWeight)*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
                 else:
                     tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
                     tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
@@ -588,9 +607,11 @@ for sample in sampleMap:
     print args.doData
     print sample
     if (sample != "data_obs" or args.doData):
-        print "doing this"
-        hBDT.Write("BDT_%s_%s" % (catName,sample))
-        print hBDT.Integral()
+        #if (args.systematic == "" or args.systematic=="nominal"):
+        if (len(systematics_to_run)==0 or "nominal" in systematics_to_run):
+            print "doing this"
+            hBDT.Write("BDT_%s_%s" % (catName,sample))
+            print hBDT.Integral()
     else: print hBkg.Integral()
     print bdtname
     print "((%s)&&Pass_nominal)*%s" % (cutString,weight_string)
