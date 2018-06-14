@@ -590,6 +590,16 @@ bool VHbbAnalysis::Analyze() {
 
     // channel specific selection and vector boson reconstruction
     TLorentzVector W_withNuFromMWCon;
+    *f["Top1_mass_fromLepton_regPT"] = -999;
+    *f["Top1_mass_fromLepton_regPT_wMET"] = -999;
+    *f["Top1_mass_fromLepton_regPT_w4MET"] = -999;
+    *f["Top1_mass_fromLepton_smearedPT"] = -999;
+    *f["Top1_mass_fromLepton_smearedPT_wMET"] = -999;
+    *f["Top1_mass_fromLepton_smearedPT_w4MET"] = -999;
+    *f["Top1_mass_fromLepton_unsmearedPT"] = -999;
+    *f["Top1_mass_fromLepton_unsmearedPT_wMET"] = -999;
+    *f["Top1_mass_fromLepton_unsmearedPT_w4MET"] =  -999;
+
 
     if (mInt("isZee") == 1 || mInt("isZmm") == 1) {
         TLorentzVector lep1, lep2;
@@ -672,9 +682,17 @@ bool VHbbAnalysis::Analyze() {
 
         //FIXME we should reduce this code to keep only what we use
 
-        *f["Top1_mass_fromLepton_regPT"] = GetRecoTopMass(Lep, false, 0, true); // construct top mass from closest jet to lepton
-        *f["Top1_mass_fromLepton_regPT_wMET"] = GetRecoTopMass(Lep, false, 1, true); // construct top mass from closest jet to lepton
-        *f["Top1_mass_fromLepton_regPT_w4MET"] = GetRecoTopMass(Lep, false, 2, true); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_regPT"] = GetRecoTopMass(Lep, false, 0, true, true); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_regPT_wMET"] = GetRecoTopMass(Lep, false, 1, true, true); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_regPT_w4MET"] = GetRecoTopMass(Lep, false, 2, true, true); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_smearedPT"] = GetRecoTopMass(Lep, false, 0, false, true); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_smearedPT_wMET"] = GetRecoTopMass(Lep, false, 1, false, true); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_smearedPT_w4MET"] = GetRecoTopMass(Lep, false, 2, false, true); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_unsmearedPT"] = GetRecoTopMass(Lep, false, 0, false, false); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_unsmearedPT_wMET"] = GetRecoTopMass(Lep, false, 1, false, false); // construct top mass from closest jet to lepton
+        *f["Top1_mass_fromLepton_unsmearedPT_w4MET"] = GetRecoTopMass(Lep, false, 2, false, false); // construct top mass from closest jet to lepton
+
+
     } else if (mInt("isZnn") == 1) {
         TLorentzVector MET;
         MET.SetPtEtaPhiM(m("MET_Pt"), 0., m("MET_Phi"), 0.); // Eta/M don't affect calculation of V.pt and V.phi
@@ -3442,8 +3460,10 @@ std::pair<int,int> VHbbAnalysis::HighestPtJJBJets(){
     return pair;
 }
 
-double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, bool regPT) {
-
+double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, bool regPT, bool smearedPT) {
+    if (regPT==1 && smearedPT==0){
+        std::cout<<"Don't try to use regressed pT if you're not using smearing!"<<std::endl;    
+    }
     // Try to reconstruct the top in ttbar with leptonic W decay
     // if isJet is true, construct top as given jet + closest lepton
     // if isJet is false, construct top as given lepton + closest lepton
@@ -3479,12 +3499,18 @@ double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, 
     for (int i=0; i<mInt("nJet"); i++) {
         if(regPT){
             thisPT=m("Jet_bReg",i);
-        } else {
+        } else if(smearedPT) {
             thisPT=m("Jet_Pt",i);
+        } else {
+            thisPT=m("Jet_pt",i);
         }
         if (thisPT< 30 || m(taggerName,i) < 0.5) continue; // only consider jets with some minimal preselection
         TLorentzVector j;
-        j.SetPtEtaPhiM(thisPT, m("Jet_eta",i), m("Jet_phi",i), m("Jet_mass",i) * (m("Jet_bReg",i) / m("Jet_Pt",i) )  );
+        if(regPT){
+            j.SetPtEtaPhiM(thisPT, m("Jet_eta",i), m("Jet_phi",i), m("Jet_mass",i) * (m("Jet_bReg",i) / m("Jet_Pt",i) )  );
+        } else {
+            j.SetPtEtaPhiM(thisPT, m("Jet_eta",i), m("Jet_phi",i), m("Jet_mass",i)  );
+        }
         double d1 = j.DeltaR(Obj);
         if (d1 <= minDR) {
             minDR = d1;
@@ -3495,8 +3521,11 @@ double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, 
         if(regPT){
             thisPT=m("Jet_bReg",ObjClosestIndex);
             Obj2.SetPtEtaPhiM(thisPT, m("Jet_eta",ObjClosestIndex), m("Jet_phi",ObjClosestIndex), m("Jet_mass",ObjClosestIndex) * (thisPT / m("Jet_Pt",ObjClosestIndex) ) );
-        } else {
+        } else if (smearedPT){
             thisPT=m("Jet_Pt",ObjClosestIndex);
+            Obj2.SetPtEtaPhiM(thisPT, m("Jet_eta",ObjClosestIndex), m("Jet_phi",ObjClosestIndex), m("Jet_mass",ObjClosestIndex));
+        } else {
+            thisPT=m("Jet_pt",ObjClosestIndex);
             Obj2.SetPtEtaPhiM(thisPT, m("Jet_eta",ObjClosestIndex), m("Jet_phi",ObjClosestIndex), m("Jet_mass",ObjClosestIndex));
         }
     } else return -999;
@@ -3510,14 +3539,22 @@ double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, 
         // try top = lep + jet + met
         // two-particle Mt = sqrt(Et**2 - pt**2)
         TLorentzVector MET;
-        MET.SetPtEtaPhiM(m("MET_Pt"),0.,m("MET_Phi"),0.);
+        if (smearedPT){
+            MET.SetPtEtaPhiM(m("MET_Pt"),0.,m("MET_Phi"),0.);
+        } else {
+            MET.SetPtEtaPhiM(m("MET_pt"),0.,m("MET_phi"),0.);
+        }
         TLorentzVector Obj_transverse, Obj2_transverse; // can only consider transverse (x-y plane) 4-vector components if using MET
         Obj_transverse.SetPxPyPzE(Obj.Px(),Obj.Py(),0,TMath::Sqrt(TMath::Power(Obj.M(),2) + TMath::Power(Obj.Pt(),2)));
         Obj2_transverse.SetPxPyPzE(Obj2.Px(),Obj2.Py(),0,TMath::Sqrt(TMath::Power(Obj2.M(),2) + TMath::Power(Obj2.Pt(),2)));
         Top = Obj_transverse + Obj2_transverse + MET;
     }else if (useMET==2) {
         TLorentzVector MET;
-        MET.SetPtEtaPhiM(m("MET_Pt"),0.,m("MET_Phi"),0.);
+        if (smearedPT){
+            MET.SetPtEtaPhiM(m("MET_Pt"),0.,m("MET_Phi"),0.);
+        } else {
+            MET.SetPtEtaPhiM(m("MET_pt"),0.,m("MET_phi"),0.);
+        }
         TLorentzVector lep, jet;
         if (isJet) {
             lep = Obj2;

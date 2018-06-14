@@ -332,6 +332,12 @@ type=2  name=Top1_mass_fromLepton_w4MET
 type=2  name=Top1_mass_fromLepton_regPT
 type=2  name=Top1_mass_fromLepton_regPT_wMET
 type=2  name=Top1_mass_fromLepton_regPT_w4MET
+type=2  name=Top1_mass_fromLepton_smearedPT
+type=2  name=Top1_mass_fromLepton_smearedPT_wMET
+type=2  name=Top1_mass_fromLepton_smearedPT_w4MET
+type=2  name=Top1_mass_fromLepton_unsmearedPT
+type=2  name=Top1_mass_fromLepton_unsmearedPT_wMET
+type=2  name=Top1_mass_fromLepton_unsmearedPT_w4MET
 type=2  name=Top1_mass_bestCSV_regPT
 type=2  name=Top1_mass_bestCSV_regPT_wMET
 type=2  name=Top1_mass_bestCSV_regPT_w4MET

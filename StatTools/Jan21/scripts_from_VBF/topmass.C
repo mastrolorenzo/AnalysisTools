@@ -134,11 +134,19 @@ RooWorkspace w("w","workspace");
         //TFile *file_down = new TFile("/uscms_data/d3/sbc01/HbbAnalysis13TeV/CMSSW_7_6_3_patch2/src/PrincetonAnalysisTools/VHbbAnalysis/V24_Wln_CR_Sep23_noMW/output_allmc.root");
         //TFile *file_down = new TFile("/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_CR_Feb9/output_data.root");
         //TTree *tree = (TTree*) file_down->Get("tree");
-        TChain *tree = new TChain("tree");
+        TChain *tree = new TChain("Events");
         //tree->Add("/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_CR_Feb9/output_mc.root");
         //tree->Add("/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_CR_Feb9/output_ttpowheg.root");
-        //tree->Add("/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_CR_April6_v2/haddjobs/sum_*_3.root");
-        tree->Add("/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_CR_April6_data/output_data.root");
+        /*tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_TT_DiLep.root");
+        tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_TT_SingleLep.root");
+        tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_TT_AllHadronic.root");
+        tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_ST_s-c_4f_lep_PSw.root");
+        tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_ST_t-c_antitop_4f_inc.root");
+        tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_ST_t-c_top_4f_inc.root");
+        tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_ST_tW_antitop_5f_inc.root");
+        tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_ST_tW_top_5f_inc_PSw.root");*/
+        tree->Add("/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb_ForTopRecoV3/haddjobs/sum_Run2017_Mu_ReMiniAOD.root");
+        //tree->Add("/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_CR_April6_data/output_data.root");
         //TH1F *hist_mbb_reg = new TH1F("hist_mbb_reg","hist_mbb_reg",100,0,250);
         //TH1F *hist_mbb = new TH1F("hist_mbb","hist_mbb",100,0,250);
 	
@@ -146,20 +154,24 @@ RooWorkspace w("w","workspace");
         //tree->Draw("H_mass_noreg>>hist_mbb","(sampleIndex==-12501&&Pass_nominal==1&&(Vtype==2||Vtype==3))*weight");    
         
         TH1F *hist_mbb_reg = new TH1F("hist_mbb_reg","hist_mbb_reg",52,120,250);
-        TH1F *hist_mbb = new TH1F("hist_mbb","hist_mbb",52,120,250);
+        TH1F *hist_mbb_smeared = new TH1F("hist_mbb_smeared","hist_mbb_smeared",52,120,250);
+        TH1F *hist_mbb_unsmeared = new TH1F("hist_mbb_unsmeared","hist_mbb_unsmeared",52,120,250);
 
         //tree->Draw("Top1_mass_fromLepton_regPT_w4MET>>hist_mbb_reg","(met_pt<170&&sampleIndex>0&&sampleIndex!=6000&&sampleIndex!=6001&&sampleIndex!=6002&&controlSample==1&&(Vtype==2||Vtype==3))*weight*bTagWeightMoriondCMVA*VPtCorrFactorSplit3"); 
         //tree->Draw("Top1_mass_fromLepton_w4MET>>hist_mbb","(met_pt<170&&sampleIndex>0&&sampleIndex!=6000&&sampleIndex!=6001&&sampleIndex!=6002&&controlSample==1&&(Vtype==2||Vtype==3))*weight*bTagWeightMoriondCMVA*VPtCorrFactorSplit3");    
         
-        tree->Draw("Top1_mass_fromLepton_regPT_w4MET>>hist_mbb_reg","(met_pt<170&&sampleIndex==0&&controlSample==1&&(Vtype==2||Vtype==3))*weight"); 
-        tree->Draw("Top1_mass_fromLepton_w4MET>>hist_mbb","(met_pt<170&&sampleIndex==0&&controlSample==1&&(Vtype==2||Vtype==3))*weight");    
+        tree->Draw("Top1_mass_fromLepton_regPT_w4MET>>hist_mbb_reg","(controlSample==11&&(isWmunu))*weight"); 
+        tree->Draw("Top1_mass_fromLepton_smearedPT_w4MET>>hist_mbb_smeared","(controlSample==11&&(isWmunu))*weight"); 
+        tree->Draw("Top1_mass_fromLepton_unsmearedPT_w4MET>>hist_mbb_unsmeared","(controlSample==11&&(isWmunu))*weight");    
 
         TFile *fout = new TFile("hists.root","RECREATE");
         hist_mbb_reg->Write();
-        hist_mbb->Write();
+        hist_mbb_smeared->Write();
+        hist_mbb_unsmeared->Write();
+        //fout->Close();
 
-        cout<<hist_mbb_reg->Integral()<<endl;
-        cout<<hist_mbb->Integral()<<endl;
+        //cout<<hist_mbb_reg->Integral()<<endl;
+        //cout<<hist_mbb->Integral()<<endl;
 
         //hist_mbb_reg->Scale(1./hist_mbb_reg->Integral());	
 	//hist_mbb->Scale(1./hist_mbb->Integral());	
@@ -223,8 +235,8 @@ RooWorkspace w("w","workspace");
 char nVar2[50], xVar2[50];
 	sprintf(xVar2,"mbb");
 	RooRealVar x2(xVar2,xVar2,120,250);
-	sprintf(xVar2,"roofit_hist_mbb");
-	RooDataHist rh2(xVar2,xVar2,RooArgList(x2),hist_mbb);
+	sprintf(xVar2,"roofit_hist_mbb_smeared");
+	RooDataHist rh2(xVar2,xVar2,RooArgList(x2),hist_mbb_smeared);
 	sprintf(xVar2,"yield_signal_VBF");
 	RooRealVar m2("mean","mean",170,0,500);
 	RooRealVar s2("sigma","sigma",12,0,200);
@@ -265,6 +277,52 @@ char nVar2[50], xVar2[50];
 	n2.setConstant(kTRUE);
 	fsig2.setConstant(kTRUE);
 
+/*char nVar3[50], xVar3[50];
+	sprintf(xVar3,"mbb_unsmeared");
+	RooRealVar x3(xVar3,xVar3,120,250);
+	sprintf(xVar3,"roofit_hist_mbb_unsmeared");
+	RooDataHist rh3(xVar3,xVar3,RooArgList(x3),hist_mbb_unsmeared);
+	sprintf(xVar3,"yield_signal_VBF");
+	RooRealVar m3("mean","mean",170,0,500);
+	RooRealVar s3("sigma","sigma",12,0,200);
+	RooRealVar width3("fwhm","fwhm",25,0,500);
+	RooRealVar a3("alpha","alpha",1,-10,10);
+	RooFormulaVar mShift3("mean_shifted","mean_shifted","@0",RooArgList(m2));
+	RooFormulaVar sShift3("sigma_shifted","sigma_shifted","@0",RooArgList(s2));
+	RooRealVar n3("exp","exp",1,-100,100);
+	RooRealVar b03("b0","b0",0.5,-1,1.);
+	RooRealVar b13("b1","b1",0.5,-1,1.);
+	RooRealVar b23("b2","b2",0.5,-1,1.);
+	RooRealVar b33("b3","b3",0.5,-1,1.);
+ /// Bkg part: Bernste[i].Data()n     
+	//RooBernstein bkg2("signal_bkg", "signal_bkg" ,x2,RooArgList(b02,b12,b22));
+	 //RooRealVar ml2("ml2","mean landau",5.,-20,20) ;
+         //RooRealVar sl2("sl2","sigma landau",1,0.1,10) ;
+         //RooLandau bkg2("bkg2","bkg2",x2,ml2,sl2) ;
+         RooRealVar mg3("mg3","mg3",200,0,500) ;
+         RooRealVar sg3("sg3","sg3",200,0,1000) ;
+         RooGaussian bkg3("bkg3","bkg3",x3,mg3,sg3) ;
+ /// Sig part: Crystal Ball   
+	RooRealVar fsig3("fsig","fsig",0.7,0.,1.);
+	RooCBShape sig3("signal_gauss",  "signal_gauss",x3,mShift3,sShift3,a3,n3);
+ //// Combined model
+	RooAddPdf model3("signal_model", "signal_model" ,RooArgList(sig3,bkg3),RooArgList(fsig3));
+ //// Fit 
+ 
+	model3.fitTo(rh3,RooFit::SumW2Error(kFALSE));
+
+
+	b03.setConstant(kTRUE);
+	b13.setConstant(kTRUE);
+	b23.setConstant(kTRUE);
+	b33.setConstant(kTRUE);
+	a3.setConstant(kTRUE);
+	m3.setConstant(kTRUE);
+	s3.setConstant(kTRUE);
+	n3.setConstant(kTRUE);
+	fsig3.setConstant(kTRUE);*/
+
+
 //////////////////////////////////////
  /// Draw 
 	 // 			RooDraw(opts,canM,x,rhs[N],hVBF[N],hGF[N],hTOT[N],yVBF[N],yGF[N],model,bkg,fsig,width,mass,m,s,iS,S,C,Cp,archive)
@@ -291,26 +349,43 @@ char nVar2[50], xVar2[50];
 	THStack *hS = new THStack("hs","hs");
 	hS->Add(hist_mbb_reg);
 	hS->Draw("same,hist");
-	hist_mbb->SetLineColor(kRed);
-	hist_mbb->SetMarkerColor(kRed);
-	hist_mbb->SetMarkerStyle(21);
+	hist_mbb_smeared->SetLineColor(kRed);
+	hist_mbb_smeared->SetMarkerColor(kRed);
+	hist_mbb_smeared->SetMarkerStyle(21);
 	THStack *hS2 = new THStack("hs2","hs2");
-	hS2->Add(hist_mbb);
+	hS2->Add(hist_mbb_smeared);
 	hS2->Draw("same,hist");
 	frame_roo->Draw("same");
 	gPad->RedrawAxis();
 
 
 	frame_roo=x2.frame(Name("Mbb"));
-	RooDataHist hScale2("tmp","tmp",RooArgList(x2),hist_mbb);
+	RooDataHist hScale2("tmp","tmp",RooArgList(x2),hist_mbb_smeared);
 	hScale2.plotOn(frame_roo,DrawOption("Psame"),LineWidth(2),LineColor(kRed),MarkerColor(kRed), MarkerStyle(21), FillStyle(1001)) ;
 	model2.plotOn(frame_roo,LineColor(kRed));
+	frame_roo->Draw("same");
+        
+        gPad->RedrawAxis();
+
+/*	hist_mbb_unsmeared->SetLineColor(kGreen+3);
+	hist_mbb_unsmeared->SetMarkerColor(kGreen+3);
+	hist_mbb_unsmeared->SetMarkerStyle(22);
+	THStack *hS3 = new THStack("hs3","hs3");
+	hS3->Add(hist_mbb_unsmeared);
+	hS3->Draw("same,hist");
+	frame_roo->Draw("same");
+	gPad->RedrawAxis();
+
+	frame_roo=x3.frame(Name("Mbb"));
+	RooDataHist hScale3("tmp","tmp",RooArgList(x3),hist_mbb_unsmeared);
+	hScale3.plotOn(frame_roo,DrawOption("Psame"),LineWidth(2),LineColor(kGreen+3),MarkerColor(kGreen+3), MarkerStyle(22), FillStyle(1001)) ;
+	model3.plotOn(frame_roo,LineColor(kGreen+3));
 	frame_roo->Draw("same");
 
 
 
 
-	gPad->RedrawAxis();
+	gPad->RedrawAxis();*/
 
 	TF1 *ftmp= (TF1*) model.asTF(RooArgList(x),RooArgList(fsig),RooArgSet(x));
 	float y_0       = ftmp->GetMaximum();
@@ -325,6 +400,14 @@ char nVar2[50], xVar2[50];
 	float x_12       = ftmp2->GetX(y_02/2.,50,x_02);
 	float x_22 =ftmp2->GetX(y_02/2.,x_02,250);
 	float fwhm2        = x_22-x_12;
+
+/*	TF1 *ftmp3= (TF1*) model3.asTF(RooArgList(x3),RooArgList(fsig3),RooArgSet(x3));
+	float y_03       = ftmp3->GetMaximum();
+	float x_03 = ftmp3->GetMaximumX();
+	float x_13       = ftmp3->GetX(y_03/2.,50,x_03);
+	float x_23 =ftmp3->GetX(y_03/2.,x_03,250);
+	float fwhm3        = x_23-x_13;*/
+
 
 	float right   = gStyle->GetPadRightMargin();
 	float top = gStyle->GetPadTopMargin();
@@ -348,38 +431,54 @@ char nVar2[50], xVar2[50];
 
 	TLegend *leg = new TLegend(0.7,0.65,1.-right-top*0.3333,0.8);
 	leg->AddEntry(hist_mbb_reg,"Regressed","PL");
-	leg->AddEntry(hist_mbb,"Raw","PL");
+	leg->AddEntry(hist_mbb_smeared,"Raw","PL");
+	//leg->AddEntry(hist_mbb_smeared,"Raw (smeared)","PL");
+	//leg->AddEntry(hist_mbb_unsmeared,"Raw (unsmeared)","PL");
 	leg->SetFillStyle(-1);
 	leg->SetBorderSize(0);
 	leg->SetTextFont(42);
-	leg->SetTextSize(top*0.5);
+	leg->SetTextSize(top*0.3);
 	leg->SetY1(leg->GetY2()-top*leg->GetNRows()*0.87);
 	leg->Draw("same");
 
-	TPaveText pave2(0.7,0.59,1.-right-top*0.5333,0.69,"NDC");
+	TPaveText pave2(0.75,0.59,1.-right-top*0.5333,0.65,"NDC");
 	pave2.SetTextAlign(11);
 	pave2.SetFillStyle(-1);
 	pave2.SetBorderSize(0);
 	pave2.SetTextFont(42);
-	pave2.SetTextSize(top*0.5);
+	pave2.SetTextSize(top*0.3);
 	pave2.SetTextColor(kBlue+1);
 	sprintf(cmd,"PEAK = \%.1f",m.getVal())	;
 	pave2.AddText(cmd);
 	sprintf(cmd,"FWHM = \%.1f",fwhm)	;
 	pave2.AddText(cmd);
 	pave2.Draw("same");
-	TPaveText pave3(0.7,0.49,1.-right-top*0.5333,0.59,"NDC");
+	TPaveText pave3(0.75,0.53,1.-right-top*0.5333,0.59,"NDC");
 	pave3.SetTextAlign(11);
 	pave3.SetFillStyle(-1);
 	pave3.SetBorderSize(0);
 	pave3.SetTextFont(42);
-	pave3.SetTextSize(top*0.5);
+	pave3.SetTextSize(top*0.3);
 	pave3.SetTextColor(kRed);
 	sprintf(cmd,"PEAK = \%.1f",m2.getVal())	;
 	pave3.AddText(cmd);
 	sprintf(cmd,"FWHM = \%.1f",fwhm2)	;
 	pave3.AddText(cmd);
 	pave3.Draw("same");
+
+	/*TPaveText pave4(0.75,0.47,1.-right-top*0.5333,0.53,"NDC");
+	pave4.SetTextAlign(11);
+	pave4.SetFillStyle(-1);
+	pave4.SetBorderSize(0);
+	pave4.SetTextFont(42);
+	pave4.SetTextSize(top*0.3);
+	pave4.SetTextColor(kGreen+3);
+	sprintf(cmd,"PEAK = \%.1f",m3.getVal())	;
+	pave4.AddText(cmd);
+	sprintf(cmd,"FWHM = \%.1f",fwhm3)	;
+	pave4.AddText(cmd);
+	pave4.Draw("same");*/
+
 
 
 // CMS info
@@ -421,7 +520,7 @@ char nVar2[50], xVar2[50];
 	pCMS12.Draw("same");
 	pCMS2.Draw("same");
 
-	c_roo->Print("topmass_reg_v24.pdf");
+	c_roo->Print("topmass_wmnTTCR_Data_V3.pdf");
 
 
 

@@ -61,7 +61,7 @@ class VHbbAnalysis : public AnalysisManager {
         std::pair<int,int> HighestCMVABJets(float j1ptCut, float j2ptCut);
         std::pair<int,int> HighestCSVBJets(float j1ptCut, float j2ptCut);
         std::pair<int,int> HighestPtJJBJets();
-        double GetRecoTopMass(TLorentzVector Jet, bool isJet=true, int useMET=0, bool regPT=true);
+        double GetRecoTopMass(TLorentzVector Jet, bool isJet=true, int useMET=0, bool regPT=true, bool smearedPT=true);
         float ptWeightQCD(int nGenVbosons=0, float lheHT=0., int GenVbosons_pdgId=0);
         float ptWeightEWK(int nGenVbosons=0, float GenVbosons_pt=0., int VtypeSim=0, int GenVbosons_pdgId=0);
         TLorentzVector getNu4Momentum(const TLorentzVector& TLepton, const TLorentzVector& TMET);
