@@ -53,6 +53,58 @@ import os
 
 useCondor = True
 
+
+submitfiles = []
+def BuildJobFiles(filesToHadd,sample,suffix=""):
+    outstring = ""
+    outstring += "hadd sum_%s.root " % sample
+    #jobtext = "cd /uscms_data/d3/sbc01/HbbAnalysis13TeV/CMSSW_7_6_3_patch2/src/\n" 
+    jobtext = "cd /cvmfs/cms.cern.ch/slc6_amd64_gcc493/cms/cmssw-patch/CMSSW_7_6_3_patch2/src/\n" 
+    jobtext += "source /cvmfs/cms.cern.ch/cmsset_default.sh\n"
+    jobtext += "eval `scramv1 runtime -sh`\n"
+    jobtext += "cd - \n"
+    jobtext += "hadd sum_%s%s.root " % (sample,suffix)
+    for samplefile in filesToHadd:
+        outstring += samplefile + " "
+        jobtext += samplefile + " "
+    jobtext += "\n"
+    outstring += "\n"
+    xrdcp_string = ""
+    if site == "FNAL":
+        xrdcp_string = "xrdcp sum_%s%s.root root://cmseos.fnal.gov:/%s/haddjobs/sum_%s%s.root\n" % (sample,suffix,ipath_short,sample,suffix)
+    elif site == "CERN":
+        xrdcp_string = "xrdcp sum_%s%s.root root://eoscms.cern.ch:/%s/haddjobs/sum_%s%s.root\n" % (sample,suffix,ipath_short,sample,suffix)
+    jobtext += xrdcp_string
+    jobtext += "rm sum_%s%s.root\n" % (sample, suffix)
+    runscript = open(submission_dir + "/" +sample+suffix+".sh","w")
+    runscript.write(jobtext)
+    submittext =  "universe = vanilla\n"
+    submittext += "Executable = %s/%s%s.sh\n" % (submission_dir,sample,suffix)
+    submittext += "initialdir = %s \n" %  submission_dir
+    submittext += "Should_Transfer_Files = YES\n"
+    submittext += "Output = %s%s.stdout\n" % (sample, suffix)
+    submittext += "Error  = %s%s.stderr\n" % (sample, suffix)
+    submittext += "Log    = %s%s.log\n"    % (sample, suffix)
+    submittext += "Notification = never\n"
+    submittext += "WhenToTransferOutput=On_Exit\n"
+    submittext += "Queue  1\n"
+    submitFile = open(submission_dir + "/" +sample+suffix+".submit","w")
+    submitFile.write(submittext)
+    submitFile.close()
+    runscript.close()
+    submitfiles.append(submission_dir + "/" +sample+suffix+".submit")
+
+def SplitLists(fullList, nParts):
+    avg = len(fullList) / float(nParts)
+    listOfSplitLists = []
+    last = 0.0
+
+    while last < len(fullList):
+        listOfSplitLists.append(fullList[int(last):int(last + avg)])
+        last += avg
+
+    return listOfSplitLists
+
 #ipath = "/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_%s_Feb13" % region
 #ipath = "/eos/uscms/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_%s_March28" % region
 #ipath = "/store/user/sbc01/VHbbAnalysisNtuples/V25_Wlnu_%s_March28" % region
@@ -69,15 +121,28 @@ if site == "FNAL":
 elif site == "CERN":
     ipath_short = ipath.replace("/eos/cms/store","/store")
 
+
 samplepaths = findAllRootFiles(ipath_short,site,False,False)
-#print samplepaths
-outstring = ""
+print samplepaths
+
+##filterList=['DYToLL_HT2500toInf','DYToLL_HT200to400','DYBJets-Pt100To200','DYJets-BGenFilter-Pt100To200','DYBJets-Pt200ToInf','ZJetsToNuNu_BGenFilter_Pt-200toInf','WJets_BGenFilter-Pt100To200','ZJetsToNuNu_HT200To400','DYJets-BGenFilter-Pt200ToInf','ZBJetsToNuNu_Pt-200toInf','ZJetsToNuNu_BGenFilter_Pt-100to200','WJets-HT600To800','WJets-HT200To400','ZBJetsToNuNu_Pt-100to200','WJets-HT100To200','TT_powheg','DYToLL_madgraph','TToLeptons_t_powheg']
+##
+##newList=[]
+##
+##for samplePath in samplepaths:
+##    if samplePath.split("/")[-1] in filterList:
+##        newList.append(samplePath)
+##
+##print len(samplepaths),len(newList),len(filterList)
+##samplepaths=newList
+
+
 os.mkdir(ipath+"/haddjobs")
 tmp = ipath.split('/')
 submission_dir = tmp[len(tmp)-2] + "_haddjobsubmission"
 print "job submission files will be created in: ",submission_dir
 os.mkdir(submission_dir)
-submitfiles = []
+nFilesPerHadd=300
 for samplepath in samplepaths:
     if samplepath.find("sum_")!=-1: continue
     print samplepath
@@ -88,42 +153,17 @@ for samplepath in samplepaths:
     ##if (sample.find("WJets_madgraph")==-1 and sample.find("WJets-HT")==-1): continue
     #if (sample.find("Wplus")==-1 and sample.find("Wminus")==-1): continue
     samplefiles = findAllRootFiles("%s/%s" % (ipath_short,sample),"FNAL")
-    outstring += "hadd sum_%s.root " % sample
-    #jobtext = "cd /uscms_data/d3/sbc01/HbbAnalysis13TeV/CMSSW_7_6_3_patch2/src/\n" 
-    jobtext = "cd /cvmfs/cms.cern.ch/slc6_amd64_gcc493/cms/cmssw-patch/CMSSW_7_6_3_patch2/src/\n" 
-    jobtext += "source /cvmfs/cms.cern.ch/cmsset_default.sh\n"
-    jobtext += "eval `scramv1 runtime -sh`\n"
-    jobtext += "cd - \n"
-    jobtext += "hadd sum_%s.root " % sample
-    for samplefile in samplefiles:
-        outstring += samplefile + " "
-        jobtext += samplefile + " "
-    jobtext += "\n"
-    outstring += "\n"
-    xrdcp_string = ""
-    if site == "FNAL":
-        xrdcp_string = "xrdcp sum_%s.root root://cmseos.fnal.gov:/%s/haddjobs/sum_%s.root\n" % (sample,ipath_short,sample)
-    elif site == "CERN":
-        xrdcp_string = "xrdcp sum_%s.root root://eoscms.cern.ch:/%s/haddjobs/sum_%s.root\n" % (sample,ipath_short,sample)
-    jobtext += xrdcp_string
-    jobtext += "rm sum_%s.root\n" % sample
-    runscript = open(submission_dir + "/" +sample+".sh","w")
-    runscript.write(jobtext)
-    submittext =  "universe = vanilla\n"
-    submittext += "Executable = %s/%s.sh\n" % (submission_dir,sample)
-    submittext += "initialdir = %s \n" %  submission_dir
-    submittext += "Should_Transfer_Files = YES\n"
-    submittext += "Output = %s.stdout\n" % sample
-    submittext += "Error  = %s.stderr\n" % sample
-    submittext += "Log    = %s.log\n"    % sample
-    submittext += "Notification = never\n"
-    submittext += "WhenToTransferOutput=On_Exit\n"
-    submittext += "Queue  1\n"
-    submitFile = open(submission_dir + "/" +sample+".submit","w")
-    submitFile.write(submittext)
-    submitFile.close()
-    runscript.close()
-    submitfiles.append(submission_dir + "/" +sample+".submit")
+    if len(samplefiles)<nFilesPerHadd:
+        BuildJobFiles(samplefiles,sample,suffix="")
+        #continue 
+    else:
+        nJobs=int(len(samplefiles)/nFilesPerHadd)+1
+        listOfSplitList=SplitLists(samplefiles,nJobs)
+        print nJobs,len(listOfSplitList)
+        for iGroup in range(nJobs):
+            BuildJobFiles(listOfSplitList[iGroup],sample,"_"+str(iGroup))
+            
+            
     
 for submitfile in submitfiles:
     if useCondor:
