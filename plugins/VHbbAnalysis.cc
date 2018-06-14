@@ -98,7 +98,7 @@ bool VHbbAnalysis::Preselection() {
         } else if (cursample->sampleNum == 53) {
             //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
             if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
-        } else if (cursample->sampleNum == 54) { 
+        } else if (cursample->sampleNum == 54) {
             //if (m("LHE_Vpt") < 200) return false;
             if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
         }
@@ -512,6 +512,8 @@ bool VHbbAnalysis::Analyze() {
             *in["controlSample"] = 0;
             *b["oneMergedJet"]=true;
         }
+    } else if (!m("twoResolvedJets")) {
+        return false;
     }
 
     //if(m("oneMergedJet")==0 && m("twoResolvedJets")==0){

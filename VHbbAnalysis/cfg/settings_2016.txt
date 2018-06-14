@@ -14,7 +14,7 @@ type=2  name=dataYear           val=2016
 type=2  name=doReg              val=1
 type=2  name=smearJets          val=0
 type=2  name=JERScale           val=1.0
-type=2  name=doBoost            val=1
+type=2  name=doBoost            val=0
 type=2  name=doCMVA             val=1
 type=2  name=doICHEP            val=0
 type=2  name=reReg              val=0
@@ -110,7 +110,7 @@ type=2  name=HVDPhiCut_1lepchan val=2.5
 type=2  name=HVDPhiCut_2lepchan val=2.5
 type=2  name=hptcut_0lepchan    val=120
 type=2  name=hptcut_1lepchan    val=100
-type=2  name=vptcut             val=100 # use eventClass variable instead
+type=2  name=vptcut             val=150 # use eventClass variable instead
 type=2  name=vptPreselCut       val=50
 type=2  name=zmasslow           val=75 # for Z(ll) channel
 type=2  name=zmasshigh          val=105 # for Z(ll) channel
