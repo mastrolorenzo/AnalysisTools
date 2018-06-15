@@ -610,29 +610,34 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
             if(debug>1) std::cout<<"looping over "<<nentry_end-nentry_begin<<std::endl;
             Long64_t nbytes = 0, nb = 0;
             int saved=0;
-            auto start_loop_time = std::chrono::system_clock::now();
+            std::unique_ptr<std::chrono::system_clock::time_point> start_loop_time;
             for (Long64_t jentry=nentry_begin; jentry<nentry_end;jentry++) {
             //for (Long64_t jentry=0; jentry<nentries;jentry++) {
                 if((jentry%1000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
                 //if((jentry%10000==0 && debug>0) || debug>100000)  std::cout<<"entry saved weighted "<<jentry<<" "<<saved<<" "<<saved*cursample->intWeight<<std::endl;
 
-                if (jentry == 2) {
-                    // update at event 2, in case the first event took a long time to load
-                    start_loop_time = std::chrono::system_clock::now(); 
+                if (jentry == 3 && kill_if_runtime_above_minutes > 0) {
+                    // start measuring time at event 3, in case the first events took a long time to load
+                    start_loop_time = std::make_unique<std::chrono::system_clock::time_point>(std::chrono::system_clock::now());
                 }
-                
-                if (jentry == 102 && kill_if_runtime_above_minutes > 0) {
-                    auto time_after_100 = std::chrono::system_clock::now();
-                    std::chrono::duration<double> time_needed_for_100 = time_after_100-start_loop_time;
-                    double minutes_needed_for_1 = time_needed_for_100.count()/60./100.;
-                    if (minutes_needed_for_1*(nentry_end-nentry_begin-100) > kill_if_runtime_above_minutes) {
-                        std::cout << "This is unfortunate...\n"
-                                  << "For 100 events, I needed " << time_needed_for_100.count()/60. <<" minutes.\n"
-                                  << "For the remaining " << nentry_end-nentry_begin-100 << " events, I would need "
-                                  << minutes_needed_for_1*(nentry_end-nentry_begin-100) <<" minutes, which is above "
-                                  << kill_if_runtime_above_minutes << " minutes (kill_if_runtime_above_minutes), "
-                                  << "so I'm going to abort here with std::exit(71).\n";
-                        std::exit(71);
+
+                if (start_loop_time) {
+                    auto time_now = std::chrono::system_clock::now();
+                    std::chrono::duration<double> time_diff = time_now - (*start_loop_time);
+                    if (time_diff.count() > 5*60) {  // check after five minutes
+                        auto n_events_done = jentry - 3;
+                        auto n_events_to_go = nentry_end-nentry_begin-n_events_done;
+                        double n_events_per_minute = n_events_done / (time_diff.count() / 60.);
+                        if (n_events_to_go/n_events_per_minute > kill_if_runtime_above_minutes) {
+                            std::cout << "This is unfortunate...\n"
+                                      << "I'm running at " << n_events_per_minute <<" events per minute.\n"
+                                      << "For the remaining " << n_events_to_go << " events, I would need "
+                                      << n_events_to_go/n_events_per_minute <<" minutes, which is above "
+                                      << kill_if_runtime_above_minutes << " minutes (kill_if_runtime_above_minutes), "
+                                      << "so I'm going to abort here with std::exit(71).\n";
+                            std::exit(71);
+                        }
+                        delete start_loop_time.release();  // don't do the check again
                     }
                 }
 
