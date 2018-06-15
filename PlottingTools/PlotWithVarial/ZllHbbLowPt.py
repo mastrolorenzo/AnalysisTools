@@ -1,4 +1,4 @@
-from samples_2016 import *
+from samples_2017 import *
 import varial
 
 
@@ -21,15 +21,18 @@ name = 'plots_ZllHbbLowPt'
 weight = 'weight'
 
 plot_vars = {
-    'H_pt_fit_fallback':   ('H_pt_fit_fallback',       ';p_{T}(jj) [GeV];',       35, 0, 350),
-    'H_mass_fit_fallback': ('H_mass_fit_fallback',     ';M_{jj} [GeV];',          25, 0, 250),
-    'MET_Pt':              ('MET_Pt',                  ';MET [GeV];',             25, 0, 250),
-    'DeepCSV_max':         ('Jet_btagDeepB[hJetInd1]', ';DeepCSV_{max};',         20, 0, 1),
-    'DeepCSV_min':         ('Jet_btagDeepB[hJetInd2]', ';DeepCSV_{min};',         20, 0, 1),
-    'HVdPhi_fit_fallback': ('HVdPhi_fit_fallback',     ';#||{#Delta#phi(V, H)};', 16, 0, 3.2),
-    'V_pt':                ('V_pt',                    ';p_{T}(V) [GeV];',        40, 0, 400),
-    'jjVPtBal_fit':        ('H_pt_fit/V_pt',           ';fitted jj/V P_{T} Bal;', 30, 0, 2),
-    'jjVPtBal':            ('H_pt/V_pt',               ';jj/V P_{T} Bal;',        30, 0, 2),
+    'H_pt_fit_fallback':   ('H_pt_fit_fallback',       ';p_{T}(jj) [GeV];',       35, 0,  350),
+    'H_mass':              ('H_mass',                  ';M_{jj} [GeV];',          25, 0,  250),
+    'H_mass_fit_fallback': ('H_mass_fit_fallback',     ';fitted M_{jj} [GeV];',   25, 0,  250),
+    'MET_Pt':              ('MET_Pt',                  ';MET [GeV];',             25, 0,  250),
+    'DeepCSV_max':         ('Jet_btagDeepB[hJetInd1]', ';DeepCSV_{max};',         20, 0,  1),
+    'DeepCSV_min':         ('Jet_btagDeepB[hJetInd2]', ';DeepCSV_{min};',         20, 0,  1),
+    'CMVA_max':            ('Jet_btagCMVA[hJetInd1]',  ';CMVA_{max};',            20, -1, 1),
+    'CMVA_min':            ('Jet_btagCMVA[hJetInd2]',  ';CMVA_{min};',            20, -1, 1),
+    'HVdPhi_fit_fallback': ('HVdPhi_fit_fallback',     ';#||{#Delta#phi(V, H)};', 16, 0,  3.2),
+    'V_pt':                ('V_pt',                    ';p_{T}(V) [GeV];',        40, 0,  400),
+    'jjVPtBal_fit':        ('H_pt_fit/V_pt',           ';fitted jj/V P_{T} Bal;', 30, 0,  2),
+    'jjVPtBal':            ('H_pt/V_pt',               ';jj/V P_{T} Bal;',        30, 0,  2),
 }
 
 
@@ -37,15 +40,22 @@ plot_vars = {
 # Samples, Selections, and Categories #
 #######################################
 
+# Scale Factors   | HIG-16-044 | 2017 June 12
+#--------------------------------------------
+# sf_tt           | 1.00       | 0.95532
+# sf_zj0b         | 1.01       | 1.1882
+# sf_zj1b         | 0.98       | 1.3139
+# sf_zj2b         | 1.09       | 1.1734
+
 the_samples_dict = get_samples(
     channel='Zll',
     signal_overlay=False,
     # Note that these scale factors must be
     # appropriate for the low Pt analysis bin.
-    #sf_tt=1.0,
-    #sf_zj0b=1.01,
-    #sf_zj1b=0.98,
-    #sf_zj2b=1.09,
+    #sf_tt  =0.95532,
+    #sf_zj0b=1.1882,
+    #sf_zj1b=1.3139,
+    #sf_zj2b=1.1734,
 )
 
 good_ele_1 = '(abs(Electron_eta[lepInd1])<1.44 || abs(Electron_eta[lepInd1])>1.56)'

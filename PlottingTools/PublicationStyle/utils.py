@@ -96,6 +96,7 @@ def _restyle_upper_pad(pad, logy):
             stack.SetMaximum(1.75 * y_max_data)
         else:
             stack.SetMaximum(1.75 * y_max_stack)
+        stack.SetMinimum(0.)
     # Finally, add two legends...
     legend1 = ROOT.TLegend(0.52, 0.56, 0.77, 0.88, '', 'nbNDC')
     legend1.SetFillColor(0)
@@ -162,6 +163,7 @@ def _restyle_lower_pad(pad):
 
     # Finally, add the legend.
     legend = ROOT.TLegend(0.32, 0.86, 0.93, 0.97, '', 'nbNDC')
+    legend.SetFillColor(0)
     legend.SetTextSize(0.075)
     legend.SetNColumns(2)
     legend.AddEntry(ratio_unc, 'MC unc. (stat.)', 'f')

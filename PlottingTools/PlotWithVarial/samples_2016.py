@@ -42,7 +42,7 @@ sample_colors = {
 }
 
 # The input pattern used to glob for sample files given their input token.
-input_pattern = '/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2016V4_June4_incJES/%s/*.root'
+input_pattern = '/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/CMSConnect_June9_2016V4/haddjobs/sum_%s*.root'
 
 
 def get_samples(channel, signal_overlay=False, **kwargs):
@@ -124,6 +124,20 @@ def get_samples(channel, signal_overlay=False, **kwargs):
             'ZJetsToNuNu_HT2500ToInf_udcsg':  ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_HT2500ToInf']],
             'ZJetsToNuNu_HT2500ToInf_b':      ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_HT2500ToInf']],
             'ZJetsToNuNu_HT2500ToInf_bb':     ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZJetsToNuNu_HT2500ToInf']],
+
+            'ZBJetsToNuNu_Pt-100to200_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZBJetsToNuNu_Pt-100to200']],
+            'ZBJetsToNuNu_Pt-100to200_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZBJetsToNuNu_Pt-100to200']],
+            'ZBJetsToNuNu_Pt-100to200_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZBJetsToNuNu_Pt-100to200']],
+            'ZBJetsToNuNu_Pt-200toInf_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZBJetsToNuNu_Pt-200toInf']],
+            'ZBJetsToNuNu_Pt-200toInf_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZBJetsToNuNu_Pt-200toInf']],
+            'ZBJetsToNuNu_Pt-200toInf_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZBJetsToNuNu_Pt-200toInf']],
+
+            'ZJetsToNuNu_BGenFilter_Pt-100to200_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_BGenFilter_Pt-100to200']],
+            'ZJetsToNuNu_BGenFilter_Pt-100to200_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_BGenFilter_Pt-100to200']],
+            'ZJetsToNuNu_BGenFilter_Pt-100to200_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZJetsToNuNu_BGenFilter_Pt-100to200']],
+            'ZJetsToNuNu_BGenFilter_Pt-200toInf_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_BGenFilter_Pt-200toInf']],
+            'ZJetsToNuNu_BGenFilter_Pt-200toInf_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_BGenFilter_Pt-200toInf']],
+            'ZJetsToNuNu_BGenFilter_Pt-200toInf_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZJetsToNuNu_BGenFilter_Pt-200toInf']],
         })
 
         if signal_overlay:
@@ -235,6 +249,21 @@ def get_samples(channel, signal_overlay=False, **kwargs):
             'DYToLL_HT2500toInf_madgraph_udcsg':  ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['DYToLL_HT2500toInf']],
             'DYToLL_HT2500toInf_madgraph_b':      ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['DYToLL_HT2500toInf']],
             'DYToLL_HT2500toInf_madgraph_bb':     ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['DYToLL_HT2500toInf']],
+
+            'DYBJets-Pt100To200_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['DYBJets-Pt100To200']],
+            'DYBJets-Pt100To200_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['DYBJets-Pt100To200']],
+            'DYBJets-Pt100To200_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['DYBJets-Pt100To200']],
+            'DYBJets-Pt200ToInf_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['DYBJets-Pt200ToInf']],
+            'DYBJets-Pt200ToInf_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['DYBJets-Pt200ToInf']],
+            'DYBJets-Pt200ToInf_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['DYBJets-Pt200ToInf']],
+
+            'DYJets-BGenFilter-Pt100To200_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['DYJets-BGenFilter-Pt100To200']],
+            'DYJets-BGenFilter-Pt100To200_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['DYJets-BGenFilter-Pt100To200']],
+            'DYJets-BGenFilter-Pt100To200_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['DYJets-BGenFilter-Pt100To200']],
+            'DYJets-BGenFilter-Pt200ToInf_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['DYJets-BGenFilter-Pt200ToInf']],
+            'DYJets-BGenFilter-Pt200ToInf_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['DYJets-BGenFilter-Pt200ToInf']],
+            'DYJets-BGenFilter-Pt200ToInf_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['DYJets-BGenFilter-Pt200ToInf']],
+
         })
 
         if signal_overlay:

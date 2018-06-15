@@ -1,4 +1,4 @@
-from samples_2016 import *
+from samples_2017 import *
 import varial
 
 
@@ -21,14 +21,19 @@ name = 'plots_WlnHbb'
 weight = 'weight'
 
 plot_vars = {
-    'H_pt':        ('H_pt',                    ';p_{T}(jj) [GeV];',       30, 50, 350),
-    'H_mass':      ('H_mass',                  ';M_{jj} [GeV];',          25, 0,  250),
-    'MET_Pt':      ('MET_Pt',                  ';MET [GeV];',             20, 0,  200),
-    'DeepCSV_max': ('Jet_btagDeepB[hJetInd1]', ';DeepCSV_{max};',         20, 0,  1),
-    'DeepCSV_min': ('Jet_btagDeepB[hJetInd2]', ';DeepCSV_{min};',         20, 0,  1),
-    'HVdPhi':      ('HVdPhi',                  ';#||{#Delta#phi(V, H)};', 16, 0,  3.2),
-    'rho':         ('fixedGridRhoFastjetAll',  ';#rho;',                  60, 0,  60),
-    'V_pt':        ('V_pt',                    ';p_{T}(V) [GeV];',        30, 50, 350),
+    'H_pt':        ('H_pt',                    ';p_{T}(jj) [GeV];',       30, 50,  350),
+    'H_mass':      ('H_mass',                  ';M_{jj} [GeV];',          25, 0,   250),
+    'MET_Pt':      ('MET_Pt',                  ';MET [GeV];',             20, 0,   200),
+    'DeepCSV_max': ('Jet_btagDeepB[hJetInd1]', ';DeepCSV_{max};',         20, 0,   1),
+    'DeepCSV_min': ('Jet_btagDeepB[hJetInd2]', ';DeepCSV_{min};',         20, 0,   1),
+    'CMVA_max':    ('Jet_btagCMVA[hJetInd1]',  ';CMVA_{max};',            20, -1,  1),
+    'CMVA_min':    ('Jet_btagCMVA[hJetInd2]',  ';CMVA_{min};',            20, -1,  1),
+    'HVdPhi':      ('HVdPhi',                  ';#||{#Delta#phi(V, H)};', 16, 0,   3.2),
+    'rho':         ('fixedGridRhoFastjetAll',  ';#rho;',                  60, 0,   60),
+    'V_pt':        ('V_pt',                    ';p_{T}(V) [GeV];',        30, 50,  350),
+    #'BDT':         ('CMS_vhbb_BDTG_Wln_13TeV', ';BDT output;',            20, -1,  1),
+    #'DNN_Wen':     ('CMS_vhbb_DNN_Wen_13TeV',  ';DNN (Wen) output;',      20, 0,   1),
+    #'DNN_Wmn':     ('CMS_vhbb_DNN_Wmn_13TeV',  ';DNN (Wmn) output;',      20, 0,   1),
 }
 
 
@@ -36,21 +41,28 @@ plot_vars = {
 # Samples, Selections, and Categories #
 #######################################
 
+# Scale Factors   | HIG-16-044 | 2017 June 12
+#--------------------------------------------
+# sf_tt           | 0.91       | 1.0011
+# sf_wj0b         | 1.14       | 1.1311
+# sf_wj1b         | 1.66       | 1.9865
+# sf_wj2b         | 1.49       | 1.7138
+
 the_samples_dict = get_samples(
     channel='Wln',
     signal_overlay=False,
-    #sf_tt=0.91,
-    #sf_wj0b=1.14,
-    #sf_wj1b=1.66,
-    #sf_wj2b=1.49,
+    #sf_tt  =1.0011,
+    #sf_wj0b=1.1311,
+    #sf_wj1b=1.9865,
+    #sf_wj2b=1.7138,
 )
 
 regions = {
-    #'SR_Wen':     'isWenu && controlSample==0 && (H_mass>90&&H_mass<150) && Jet_btagDeepB[hJetInd2]>0.1522',
+    #'SR_Wen':     'isWenu && controlSample==0 && (H_mass>90&&H_mass<150) && Jet_btagDeepB[hJetInd2]>0.1522 && sampleIndex!=0',
     'CR_Wen_TT':  'isWenu && controlSample==11',
     'CR_Wen_WLF': 'isWenu && controlSample==12',
     'CR_Wen_WHF': 'isWenu && controlSample==13',
-    #'SR_Wmn':     'isWmunu && controlSample==0 && (H_mass>90&&H_mass<150) && Jet_btagDeepB[hJetInd2]>0.1522',
+    #'SR_Wmn':     'isWmunu && controlSample==0 && (H_mass>90&&H_mass<150) && Jet_btagDeepB[hJetInd2]>0.1522 && sampleIndex!=0',
     'CR_Wmn_TT':  'isWmunu && controlSample==11',
     'CR_Wmn_WLF': 'isWmunu && controlSample==12',
     'CR_Wmn_WHF': 'isWmunu && controlSample==13',
@@ -60,6 +72,7 @@ selections = [
     'Pass_nominal',
     'cutFlow>=2',
     'twoResolvedJets',
+    'V_pt>150',
 ]
 
 the_category_dict = {
