@@ -98,7 +98,7 @@ bool VHbbAnalysis::Preselection() {
         } else if (cursample->sampleNum == 53) {
             //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) return false;
             if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nGenStatus2bHad == 0) return false;
-        } else if (cursample->sampleNum == 54) { 
+        } else if (cursample->sampleNum == 54) {
             //if (m("LHE_Vpt") < 200) return false;
             if (m("LHE_Vpt") < 200 || nGenStatus2bHad == 0) return false;
         }
@@ -1511,8 +1511,28 @@ void VHbbAnalysis::FinishEvent() {
     std::vector<double> etaBoundH = {0.8,1.6,2.4};
 
     std::map<std::string,float> bTagWeightSys;
-   
-    *f["bTagWeight"] = 1.0; 
+
+    *f["bTagWeight"] = 1.0;
+
+    // b tag weights
+    *f["bTagWeight_JESUp"] = 1.0;
+    *f["bTagWeight_JESDown"] = 1.0;
+    *f["bTagWeight_HFUp"] = 1.0;
+    *f["bTagWeight_HFDown"] = 1.0;
+    *f["bTagWeight_LFUp"] = 1.0;
+    *f["bTagWeight_LFDown"] = 1.0;
+    *f["bTagWeight_LFStats1Up"] = 1.0;
+    *f["bTagWeight_LFStats1Down"] = 1.0;
+    *f["bTagWeight_LFStats2Up"] = 1.0;
+    *f["bTagWeight_LFStats2Down"] = 1.0;
+    *f["bTagWeight_HFStats1Up"] = 1.0;
+    *f["bTagWeight_HFStats1Down"] = 1.0;
+    *f["bTagWeight_HFStats2Up"] = 1.0;
+    *f["bTagWeight_HFStats2Down"] = 1.0;
+    *f["bTagWeight_cErr1Up"] = 1.0;
+    *f["bTagWeight_cErr1Down"] = 1.0;
+    *f["bTagWeight_cErr2Up"] = 1.0;
+    *f["bTagWeight_cErr2Down"] = 1.0;
     for (int i = 0; i < (int) ptBoundL.size(); i++) {
         for (int j = 0; j < (int) etaBoundL.size(); j++) {
 
@@ -1535,7 +1555,7 @@ void VHbbAnalysis::FinishEvent() {
              *f[Form("bTagWeight_cErr1Down_pt%i_eta%i",i,j)] = 1.0;
              *f[Form("bTagWeight_cErr2Up_pt%i_eta%i",i,j)] = 1.0;
              *f[Form("bTagWeight_cErr2Down_pt%i_eta%i",i,j)] = 1.0;
- 
+
              bTagWeightSys[Form("bTagWeight_JESUp_pt%i_eta%i",i,j)] = 1.0;
              bTagWeightSys[Form("bTagWeight_JESDown_pt%i_eta%i",i,j)] = 1.0;
              bTagWeightSys[Form("bTagWeight_HFUp_pt%i_eta%i",i,j)] = 1.0;
@@ -1721,10 +1741,28 @@ void VHbbAnalysis::FinishEvent() {
                    bTagWeight_cferr2_down = bTagCalibReader->eval_auto_bounds(
                        "central", flav,fabs(m("Jet_eta", i)),m("Jet_Pt", i),m(taggerForEvaluation, i));
                }
+                *f["bTagWeight_JESUp"]         *= bTagWeight_jes_up;
+                *f["bTagWeight_JESDown"]       *= bTagWeight_jes_down;
+                *f["bTagWeight_HFUp"]          *= bTagWeight_hf_up;
+                *f["bTagWeight_HFDown"]        *= bTagWeight_hf_down;
+                *f["bTagWeight_LFUp"]          *= bTagWeight_lf_up;
+                *f["bTagWeight_LFDown"]        *= bTagWeight_lf_down;
+                *f["bTagWeight_LFStats1Up"]    *= bTagWeight_lfstats1_up;
+                *f["bTagWeight_LFStats1Down"]  *= bTagWeight_lfstats1_down;
+                *f["bTagWeight_LFStats2Up"]    *= bTagWeight_lfstats2_up;
+                *f["bTagWeight_LFStats2Down"]  *= bTagWeight_lfstats2_down;
+                *f["bTagWeight_HFStats1Up"]    *= bTagWeight_hfstats1_up;
+                *f["bTagWeight_HFStats1Down"]  *= bTagWeight_hfstats1_down;
+                *f["bTagWeight_HFStats2Up"]    *= bTagWeight_hfstats2_up;
+                *f["bTagWeight_HFStats2Down"]  *= bTagWeight_hfstats2_down;
+                *f["bTagWeight_cErr1Up"]       *= bTagWeight_cferr1_up;
+                *f["bTagWeight_cErr1Down"]     *= bTagWeight_cferr1_down;
+                *f["bTagWeight_cErr2Up"]       *= bTagWeight_cferr2_up;
+                *f["bTagWeight_cErr2Down"]     *= bTagWeight_cferr2_down;
                 for (int j = 0; j < (int) ptBoundL.size(); j++) {
                     for (int k = 0; k < (int) etaBoundL.size(); k++) {
-                       if (m("Jet_Pt", i) < ptBoundH[j] && m("Jet_Pt", i) > ptBoundL[j] && fabs(m("Jet_eta", i)) > etaBoundL[k] && fabs(m("Jet_eta", i)) < etaBoundH[k]) {
-                           bTagWeightSys[Form("bTagWeight_JESUp_pt%i_eta%i",j,k)] *= bTagWeight_jes_up; 
+                       if (m("Jet_Pt", i) < ptBoundH[j] && m("Jet_Pt", i) >= ptBoundL[j] && fabs(m("Jet_eta", i)) > etaBoundL[k] && fabs(m("Jet_eta", i)) <= etaBoundH[k]) {
+                           bTagWeightSys[Form("bTagWeight_JESUp_pt%i_eta%i",j,k)] *= bTagWeight_jes_up;
                            bTagWeightSys[Form("bTagWeight_JESDown_pt%i_eta%i",j,k)] *= bTagWeight_jes_down;
                            bTagWeightSys[Form("bTagWeight_HFUp_pt%i_eta%i",j,k)]  *= bTagWeight_hf_up;
                            bTagWeightSys[Form("bTagWeight_HFDown_pt%i_eta%i",j,k)] *= bTagWeight_hf_down;
@@ -1744,7 +1782,7 @@ void VHbbAnalysis::FinishEvent() {
                            bTagWeightSys[Form("bTagWeight_cErr2Down_pt%i_eta%i",j,k)] *= bTagWeight_cferr2_down;
                         }
                         else {
-                           bTagWeightSys[Form("bTagWeight_JESUp_pt%i_eta%i",j,k)] *= bTagWeight_jet; 
+                           bTagWeightSys[Form("bTagWeight_JESUp_pt%i_eta%i",j,k)] *= bTagWeight_jet;
                            bTagWeightSys[Form("bTagWeight_JESDown_pt%i_eta%i",j,k)] *= bTagWeight_jet;
                            bTagWeightSys[Form("bTagWeight_HFUp_pt%i_eta%i",j,k)]  *= bTagWeight_jet;
                            bTagWeightSys[Form("bTagWeight_HFDown_pt%i_eta%i",j,k)] *= bTagWeight_jet;
@@ -1763,7 +1801,7 @@ void VHbbAnalysis::FinishEvent() {
                            bTagWeightSys[Form("bTagWeight_cErr2Up_pt%i_eta%i",j,k)] *= bTagWeight_jet;
                            bTagWeightSys[Form("bTagWeight_cErr2Down_pt%i_eta%i",j,k)] *= bTagWeight_jet;
                         }
-                    }     
+                    }
                 }
             }
         }
@@ -1771,6 +1809,24 @@ void VHbbAnalysis::FinishEvent() {
         //if(m("dataYear")==2016){
         //    *f["bTagWeight"] = 1.0; //stealing CMVA systematics but not central value
        // }
+        *f["bTagWeight_JESUp"]         /= bTagWeight;
+        *f["bTagWeight_JESDown"]       /= bTagWeight;
+        *f["bTagWeight_HFUp"]          /= bTagWeight;
+        *f["bTagWeight_HFDown"]        /= bTagWeight;
+        *f["bTagWeight_LFUp"]          /= bTagWeight;
+        *f["bTagWeight_LFDown"]        /= bTagWeight;
+        *f["bTagWeight_LFStats1Up"]    /= bTagWeight;
+        *f["bTagWeight_LFStats1Down"]  /= bTagWeight;
+        *f["bTagWeight_LFStats2Up"]    /= bTagWeight;
+        *f["bTagWeight_LFStats2Down"]  /= bTagWeight;
+        *f["bTagWeight_HFStats1Up"]    /= bTagWeight;
+        *f["bTagWeight_HFStats1Down"]  /= bTagWeight;
+        *f["bTagWeight_HFStats2Up"]    /= bTagWeight;
+        *f["bTagWeight_HFStats2Down"]  /= bTagWeight;
+        *f["bTagWeight_cErr1Up"]       /= bTagWeight;
+        *f["bTagWeight_cErr1Down"]     /= bTagWeight;
+        *f["bTagWeight_cErr2Up"]       /= bTagWeight;
+        *f["bTagWeight_cErr2Down"]     /= bTagWeight;
         for (int i = 0; i < (int) ptBoundL.size(); i++) {
             for (int j = 0; j < (int) etaBoundL.size(); j++) {
                 *f[Form("bTagWeight_JESUp_pt%i_eta%i",i,j)] = bTagWeightSys[Form("bTagWeight_JESUp_pt%i_eta%i",i,j)]/bTagWeight;
