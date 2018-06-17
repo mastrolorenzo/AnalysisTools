@@ -3,7 +3,11 @@
 
 bdtmethod=BDTG
 bdtname=CMS_vhbb_BDTG_Wln_13TeV
-xmlFile=aux/TMVA_BDT_13TeV_2016V4_CMVA_for2016_1Lep_BDTG.weights.xml
+#training from 16/06
+xmlFile=aux/TMVA_BDT_13TeV_2016V4_CMVA_for2016_1Lep_BDTG_upg.weights.xml
+
+#training from 15/06
+#xmlFile=aux/TMVA_BDT_13TeV_2016V4_CMVA_for2016_1Lep_BDTG.weights.xml
 #xmlFile=aux/TMVA_BDT_Hbb13TeV_V4_kinFit_May25_BDTG_1lep.weights.xml
 
 #bdtmethod=BDT
