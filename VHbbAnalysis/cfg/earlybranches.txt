@@ -194,6 +194,8 @@ type=8  name=Jet_pt_jerUp                         max=250     lengthBranch=nJet 
 type=8  name=Jet_pt_jerDown                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jerUp                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jerDown                         max=250     lengthBranch=nJet onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_nom                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
+type=8  name=Jet_mass_nom                         max=250     lengthBranch=nJet onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesTotalUp                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_pt_jesTotalDown                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
 type=8  name=Jet_mass_jesTotalUp                         max=250     lengthBranch=nJet  onlyMC=1 dropBranch=1
