@@ -5,7 +5,7 @@ import sys
 
 from tqdm import tqdm
 
-from utils import SkimTreeBuilder
+from utils import SkimTreeBuilder,EmptySkimError
 
 
 def parse_command_line(argv):

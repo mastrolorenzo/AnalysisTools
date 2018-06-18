@@ -43,8 +43,11 @@ parser.add_argument('--channel', type=str, default="", help="Specify the channel
 parser.add_argument('--year', type=str, default="2017", help="Specify the year to run")
 parser.add_argument('--even',default=False, action="store_true", help="Use only even events for MC")
 parser.add_argument('--systematic', type=str, default="", help="Specify to run on only particular systematics (comma-separated list)")
+parser.add_argument('--friend', type=str, default="", help="A tree to be added as a friend")
 args = parser.parse_args()
 print args
+
+print args.friend
 
 #if (len(sys.argv) != 4 and len(sys.argv) != 5):
 #    print "Takes three or four arguments:"
@@ -232,7 +235,14 @@ if args.doRebin:
                     print "adding  %s for background" % fname
                     tree_bkg.Add(fname)
                     fnames.append(fname)
-         
+    
+    if args.friend!="":
+        tree_sig.AddFriend("Events",args.friend)
+        tree_bkg.AddFriend("Events",args.friend)
+        tree_sig.SetAlias("DNN","DNN_nominal")
+        tree_bkg.SetAlias("DNN","DNN_nominal")
+
+
     tree_bkg.Draw("%s>>hBkg" % bdtname,"((%s)&&(%s))*%s" % (presel,bkgCutString,weight_string))
     tree_sig.Draw("%s>>hSig" % bdtname,"((%s)&&(%s))*%s" % (presel,sigCutString,weight_string))
 
@@ -366,6 +376,11 @@ for sample in sampleMap:
                 #fname = ipath + "/sum_" + sname + "_weighted2.root"
                 #fname = ipath + "/sum_" + sname + "_3.root"
                 tree.Add(fname)
+    
+    if args.friend!="":
+        tree.AddFriend("Events",args.friend)
+        tree.SetAlias("DNN","DNN_nominal")
+
      
     #cutString = presel + "&&("
     #for index in sampleMap[sample]:
@@ -411,47 +426,48 @@ for sample in sampleMap:
     print "tree.Draw(\"%s>>%s\",\"((%s)&&Pass_nominal)*%s\"" % (bdtname,sample,cutString,weight_string) 
     #hBDT = hBDT.Rebin(nBins, "", binBoundaries)
     # Add bin-by-bin stat. uncertainties
-    if (sample not in ["data_obs"] and (tolerance <= 0.5 or sample not in ["QCD","VVLF","VVHF","WH_hbb","ZH_hbb"]) ): # assuming for SR the tolerance does not go above 0.50
-    #if (sample not in ["QCD","VVLF","VVHF","WH_hbb","ZH_hbb","data_obs"]): # can exclude these when running on background to reduce the number of nuisances
-        for ibin in range(1, hBDT.GetNbinsX()+1):
-            B = hBDT.GetBinContent(ibin)
-            B_err = hBDT.GetBinError(ibin)
-            #print "ibin = %i" % ibin
-            #print "B = %f" % B
-            #print "B_err = %f" % B_err
-            #print "GetEntries = %i" % hBDT.GetEntries()
-            #print "GetSumOfWeights = %f" % hBDT.GetSumOfWeights()
-            #if (B > 0):
-                #print "B_err/sqrt(B) = %f" % (B_err/sqrt(B))
-                #print "B_err/B = %f" % (B_err/B)
-            #B_eff = hBDT.GetEffectiveEntries() # effective statistical number of entries in bin considering weights
+    ## FIXME with autostat I don't think we need this
+    ##if (sample not in ["data_obs"] and (tolerance <= 0.5 or sample not in ["QCD","VVLF","VVHF","WH_hbb","ZH_hbb"]) ): # assuming for SR the tolerance does not go above 0.50
+    ###if (sample not in ["QCD","VVLF","VVHF","WH_hbb","ZH_hbb","data_obs"]): # can exclude these when running on background to reduce the number of nuisances
+    ##    for ibin in range(1, hBDT.GetNbinsX()+1):
+    ##        B = hBDT.GetBinContent(ibin)
+    ##        B_err = hBDT.GetBinError(ibin)
+    ##        #print "ibin = %i" % ibin
+    ##        #print "B = %f" % B
+    ##        #print "B_err = %f" % B_err
+    ##        #print "GetEntries = %i" % hBDT.GetEntries()
+    ##        #print "GetSumOfWeights = %f" % hBDT.GetSumOfWeights()
+    ##        #if (B > 0):
+    ##            #print "B_err/sqrt(B) = %f" % (B_err/sqrt(B))
+    ##            #print "B_err/B = %f" % (B_err/B)
+    ##        #B_eff = hBDT.GetEffectiveEntries() # effective statistical number of entries in bin considering weights
 
-            if ( B > 0 and ( ( B >=1 and (B_err/sqrt(B)) > tolerance) or (B < 1 and B_err/B > tolerance) ) ):
-                
-                ## FIXME: just for dB/sqrt(B) sensitivity study
-                #scale = 0.1
-                #if (B>=1):
-                #    B_err = scale * sqrt(B)
-                #else:
-                #    B_err = scale * B
+    ##        if ( B > 0 and ( ( B >=1 and (B_err/sqrt(B)) > tolerance) or (B < 1 and B_err/B > tolerance) ) ):
+    ##            
+    ##            ## FIXME: just for dB/sqrt(B) sensitivity study
+    ##            #scale = 0.1
+    ##            #if (B>=1):
+    ##            #    B_err = scale * sqrt(B)
+    ##            #else:
+    ##            #    B_err = scale * B
 
-                print "qualified as a bin stat. shape uncertainty! Bin %i, sample %s" % (ibin,sample)
-                if (B >=1): print B_err/sqrt(B)
-                else: print B_err/B
-                print "Bin content: %f +/- %f" % (B,B_err)
-                #hBinStat = ROOT.TH1F("CMS_vhbb_stat%s_%s_bin%i_13TeV" % (sample,catName,ibin),"CMS_vhbb_stat%s_%s_bin%i_13TeV" % (sample,catName,ibin),nBins,-1,1)
-                hBinStatUp = hBDT.Clone()
-                hBinStatDown = hBDT.Clone()
-                hBinStatUp.SetName("BDT_%s_%s_CMS_vhbb_stat%s_%s_bin%i_13TeVUp" % (catName,sample,sample,catName,ibin))
-                hBinStatDown.SetName("BDT_%s_%s_CMS_vhbb_stat%s_%s_bin%i_13TeVDown" % (catName,sample,sample,catName,ibin))
-                #hBinStatUp.SetBinContent(ibin, B + sqrt(B))
-                #hBinStatDown.SetBinContent(ibin, max(B - sqrt(B),0.000001))
-                hBinStatUp.SetBinContent(ibin, B + B_err)
-                hBinStatDown.SetBinContent(ibin, max(B - B_err,0.000001))
-                otextfile.write("CMS_vhbb_stat%s_%s_bin%i_13TeV\n" % (sample,catName,ibin))
-                ofile.cd()
-                hBinStatUp.Write()
-                hBinStatDown.Write()
+    ##            print "qualified as a bin stat. shape uncertainty! Bin %i, sample %s" % (ibin,sample)
+    ##            if (B >=1): print B_err/sqrt(B)
+    ##            else: print B_err/B
+    ##            print "Bin content: %f +/- %f" % (B,B_err)
+    ##            #hBinStat = ROOT.TH1F("CMS_vhbb_stat%s_%s_bin%i_13TeV" % (sample,catName,ibin),"CMS_vhbb_stat%s_%s_bin%i_13TeV" % (sample,catName,ibin),nBins,-1,1)
+    ##            hBinStatUp = hBDT.Clone()
+    ##            hBinStatDown = hBDT.Clone()
+    ##            hBinStatUp.SetName("BDT_%s_%s_CMS_vhbb_stat%s_%s_bin%i_13TeVUp" % (catName,sample,sample,catName,ibin))
+    ##            hBinStatDown.SetName("BDT_%s_%s_CMS_vhbb_stat%s_%s_bin%i_13TeVDown" % (catName,sample,sample,catName,ibin))
+    ##            #hBinStatUp.SetBinContent(ibin, B + sqrt(B))
+    ##            #hBinStatDown.SetBinContent(ibin, max(B - sqrt(B),0.000001))
+    ##            hBinStatUp.SetBinContent(ibin, B + B_err)
+    ##            hBinStatDown.SetBinContent(ibin, max(B - B_err,0.000001))
+    ##            otextfile.write("CMS_vhbb_stat%s_%s_bin%i_13TeV\n" % (sample,catName,ibin))
+    ##            ofile.cd()
+    ##            hBinStatUp.Write()
+    ##            hBinStatDown.Write()
     # other shape systematics
     for syst in systematics:
         #if (args.systematic != "" and syst != args.systematic): continue

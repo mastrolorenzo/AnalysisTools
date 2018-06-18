@@ -2,7 +2,7 @@
 from new_branches import *
 
 # The input pattern used to glob for sample output files.
-input_pattern = '/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/2016V4_June4_incJES/%s/output*.root'
+input_pattern = '/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/CMSConnect_June12_2016V4_FixedBtagInput/haddjobs/sum_%s*root'
 
 # The output directory for skimmed trees.
 destination = 'skim_for_training_2016'
@@ -78,6 +78,10 @@ samples = {
     'DYToLL_HT800to1200':              [None, ['DYToLL_HT800to1200']],
     'DYToLL_HT1200to2500':             [None, ['DYToLL_HT1200to2500']],
     'DYToLL_HT2500toInf':              [None, ['DYToLL_HT2500toInf']],
+    'DYBJets-Pt100To200':              [None,['DYBJets-Pt100To200']],
+    'DYBJets-Pt200ToInf':              [None,['DYBJets-Pt200ToInf']],
+    'DYJets-BGenFilter-Pt100To200':    [None,['DYJets-BGenFilter-Pt100To200']],
+    'DYJets-BGenFilter-Pt200ToInf':    [None,['DYJets-BGenFilter-Pt200ToInf']],
 
     'WJets_madgraph':                  [None, ['WJets_madgraph']],
     'WJets-HT100To200':                [None, ['WJets-HT100To200']],
@@ -99,6 +103,11 @@ samples = {
     'ZJetsToNuNu_HT800To1200':         [None, ['ZJetsToNuNu_HT800To1200']],
     'ZJetsToNuNu_HT1200To2500':        [None, ['ZJetsToNuNu_HT1200To2500']],
     'ZJetsToNuNu_HT2500ToInf':         [None, ['ZJetsToNuNu_HT2500ToInf']],
+
+    'ZBJetsToNuNu_Pt-100to200':        [None,['ZBJetsToNuNu_Pt-100to200']],
+    'ZBJetsToNuNu_Pt-200toInf':        [None,['ZBJetsToNuNu_Pt-200toInf']],
+    'ZJetsToNuNu_BGenFilter_Pt-100to200':   [None,['ZJetsToNuNu_BGenFilter_Pt-100to200']],
+    'ZJetsToNuNu_BGenFilter_Pt-200toInf':   [None,['ZJetsToNuNu_BGenFilter_Pt-200toInf']],
 
     'WW':                              [None, ['WW']],
     'WZ':                              [None, ['WZ']],
