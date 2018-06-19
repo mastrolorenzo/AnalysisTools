@@ -2214,8 +2214,59 @@ void VHbbAnalysis::FinishEvent() {
     // for now we don't do stitching since the W+jets b-enriched statistics are very high
     *f["WJetStitchWeight"] = WJetStitchWeight;
 
+    *b["usingBEnriched"] =  true; // if using b-enriched need to stitch properly
+    if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
+        if (m("LHE_Vpt") > 100) {
+            if (mInt("LHE_Nb") != 0 || mInt("nGenStatus2bHad") != 0) *b["usingBEnriched"]=false;
+        }
+    } else if (cursample->sampleNum == 50) {
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 51) {
+        if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 53) {
+        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 54) {
+        //if (m("LHE_Vpt") < 200) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+    }
+    if (cursample->sampleNum >= 110 && cursample->sampleNum<=117){
+        if (m("LHE_Vpt") > 100) {
+            if (mInt("LHE_Nb") != 0 || mInt("nGenStatus2bHad") != 0) *b["usingBEnriched"]=false;
+        }
+    } else if (cursample->sampleNum == 121){
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 122){
+        if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 141){
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 142){
+        if (m("LHE_Vpt") < 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+    }
+    if (cursample->sampleNum >= 150 && cursample->sampleNum<=156){
+        if (m("LHE_Vpt") > 100) {
+            if (mInt("LHE_Nb") != 0 || mInt("nGenStatus2bHad") != 0) *b["usingBEnriched"]=false;
+        }
+   } else if (cursample->sampleNum == 160){
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 161){
+        if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 162){
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+    } else if (cursample->sampleNum == 163){
+        if (m("LHE_Vpt") < 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+    }
 
-
+    *b["useLOVV"] = true; 
+    // FIXME I think this needs to be adjusted to really included all the NLO VV, at the time of writing this it is not the full phase space in samples_2016.txt I think
+    if (cursample->sampleNum==31 || cursample->sampleNum==32 || cursample->sampleNum==34 || cursample->sampleNum==36 || cursample->sampleNum==37) {
+        *b["useLOVV"] = false;
+    }
+    *b["useNLOVV"] = true; 
+    // FIXME I think this needs to be adjusted to really included all the NLO VV, at the time of writing this it is not the full phase space in samples_2016.txt I think
+    if (cursample->sampleNum==30 || cursample->sampleNum==33 || cursample->sampleNum==35) {
+        *b["useNLOVV"] = false;
+    }
 
     // we need to just save the bTagWeight since we only want to apply it
     // for the nominal shape

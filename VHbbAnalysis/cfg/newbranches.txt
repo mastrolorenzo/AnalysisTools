@@ -15,6 +15,9 @@ type=2  name=dPhi_MET_TkMET
 
 type=4  name=twoResolvedJets
 type=4  name=oneMergedJet
+type=4  name=usingBEnriched
+type=4  name=useLOVV
+type=4  name=useNLOVV
 
 type=1  name=nGenStatus2bHad
 type=1  name=nGenVbosons
