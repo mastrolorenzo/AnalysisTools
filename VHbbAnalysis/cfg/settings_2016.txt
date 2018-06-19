@@ -107,7 +107,7 @@ type=2  name=muidcut            val=1
 
 type=2  name=HVDPhiCut_0lepchan val=2.0
 type=2  name=HVDPhiCut_1lepchan val=2.5
-type=2  name=HVDPhiCut_2lepchan val=2.5
+type=2  name=HVDPhiCut_2lepchan val=0.0
 type=2  name=hptcut_0lepchan    val=120
 type=2  name=hptcut_1lepchan    val=100
 type=2  name=vptcut             val=150 # use eventClass variable instead
