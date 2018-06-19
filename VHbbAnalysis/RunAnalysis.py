@@ -34,6 +34,8 @@ if len(sys.argv) == 1:
     print parser.format_help()
     exit(-1)
 
+os.system('rm aux/roccor.2016.v3_mod/RoccoR_cc*')  # job workers should compile their own version
+
 ROOT.gSystem.Load("AnalysisDict.so")
 
 # reads samples, existing branches and new branches
