@@ -3,7 +3,7 @@
 
 mvaType=DNN
 bdtname=CMS_vhbb_DNN_Znn_13TeV
-xmlFile=aux/June16_2016CMVA_DNNs/Znn_v2/config.cfg:aux/June16_2016CMVA_DNNs/Znn_v2/scaler.dmp:aux/June16_2016CMVA_DNNs/Znn_v2/checkpoints/model.ckpt
+xmlFile=aux/June7_DeepCSVfor2017_DNNs/Znn_v1/config.cfg:aux/June7_DeepCSVfor2017_DNNs/Znn_v1/scaler.dmp:aux/June7_DeepCSVfor2017_DNNs/Znn_v1/checkpoints/model.ckpt
 
 
 # this is the order as from Andreas mail

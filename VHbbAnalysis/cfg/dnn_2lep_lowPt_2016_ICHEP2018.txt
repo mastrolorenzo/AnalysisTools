@@ -3,7 +3,7 @@
 
 mvaType=DNN
 bdtname=CMS_vhbb_DNN_Zll_LowPT_13TeV
-xmlFile=aux/DNNwithCMVAfor2016_ICHEP2018/ZllHigh/config.cfg:aux/DNNwithCMVAfor2016_ICHEP2018/ZllHigh/scaler.dmp:aux/DNNwithCMVAfor2016_ICHEP2018/ZllHigh/model.ckpt
+xmlFile=aux/June16_2016CMVA_DNNs/ZllLow_v2/config.cfg:aux/June16_2016CMVA_DNNs/ZllLow_v2/scaler.dmp:aux/June16_2016CMVA_DNNs/ZllLow_v2/checkpoints/model.ckpt
 
 name=H_mass_fit_fallback        lname=H_mass_fit_fallback         isEx=0 isSpec=0 order=1
 name=H_pt_fit_fallback          lname=H_pt_fit_fallback           isEx=0 isSpec=0 order=2

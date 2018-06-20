@@ -3,7 +3,7 @@
 
 mvaType=DNN
 bdtname=CMS_vhbb_DNN_Wmn_13TeV
-xmlFile=aux/DNNwithCMVAfor2016_ICHEP2018/Wmn/config.cfg:aux/DNNwithCMVAfor2016_ICHEP2018/Wmn/scaler.dmp:aux/DNNwithCMVAfor2016_ICHEP2018/Wmn/model.ckpt
+xmlFile=aux/June16_2016CMVA_DNNs/Wmn_v1/config.cfg:aux/June16_2016CMVA_DNNs/Wmn_v1/scaler.dmp:aux/June16_2016CMVA_DNNs/Wmn_v1/checkpoints/model.ckpt
 
 
 # this is the order as from Andreas mail
@@ -14,7 +14,7 @@ name=V_pt                             lname=V_pt                             isE
 name=hJets_CMVA_0                     lname=hJets_btagged_0                  isEx=0 isSpec=0 order=5
 name=hJets_CMVA_1                     lname=hJets_btagged_1                  isEx=0 isSpec=0 order=6
 name=Top1_mass_fromLepton_regPT_w4MET lname=Top1_mass_fromLepton_regPT_w4MET isEx=0 isSpec=0 order=7
-name=abs_HVdPhi                       lname=abs(HVdPhi)                      isEx=0 isSpec=0 order=8
+name=abs_HVdPhi                       lname=HVdPhi                           isEx=0 isSpec=0 order=8
 name=nAddJets302p5_puid               lname=nAddJets302p5_puid               isEx=0 isSpec=0 order=9
 name=SA5                              lname=SA5                              isEx=0 isSpec=0 order=10
 name=lepMetDPhi                       lname=lepMetDPhi                       isEx=0 isSpec=0 order=11
@@ -22,5 +22,5 @@ name=V_mt                             lname=V_mt                             isE
 name=MET_Pt                           lname=MET_Pt                           isEx=0 isSpec=0 order=13
 name=hJets_leadingPt                  lname=hJets_leadingPt                  isEx=0 isSpec=0 order=14
 name=hJets_subleadingPt               lname=hJets_subleadingPt               isEx=0 isSpec=0 order=15
-name=abs_HJ1_HJ2_dEta                 lname=abs(HJ1_HJ2_dEta)                isEx=0 isSpec=0 order=16
+name=abs_HJ1_HJ2_dEta                 lname=HJ1_HJ2_dEta                     isEx=0 isSpec=0 order=16
 

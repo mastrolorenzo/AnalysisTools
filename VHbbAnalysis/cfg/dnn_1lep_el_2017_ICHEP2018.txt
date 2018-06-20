@@ -3,7 +3,7 @@
 
 mvaType=DNN
 bdtname=CMS_vhbb_DNN_Wen_13TeV
-xmlFile=aux/June16_2016CMVA_DNNs/Wen_v1/config.cfg:aux/June16_2016CMVA_DNNs/Wen_v1/scaler.dmp:aux/June16_2016CMVA_DNNs/Wen_v1/checkpoints/model.ckpt
+xmlFile=aux/June7_DeepCSVfor2017_DNNs/Wen_v1/config.cfg:aux/June7_DeepCSVfor2017_DNNs/Wen_v1/scaler.dmp:aux/June7_DeepCSVfor2017_DNNs/Wen_v1/checkpoints/model.ckpt
 
 # this is the order as from Andreas mail
 name=H_mass                           lname=H_mass                           isEx=1 isSpec=0 order=1

@@ -1,7 +1,7 @@
 analysis=VHbbAnalysis
 outputname=output
 
-samples=cfg/samples_2017.txt
+samples=cfg/samples_2017_validation.txt
 
 earlybranches=cfg/earlybranches.txt
 existingbranches=cfg/existingbranches.txt
@@ -15,9 +15,11 @@ bdt_2lep_highPt=cfg/bdt_2lep_highPt_2017_ICHEP2018.txt
 bdt_2lep_lowPt=cfg/bdt_2lep_lowPt_2017_ICHEP2018.txt
 #bdt_2lep_boosted=cfg/bdt_2lep_boosted.txt
 
-bdt_0lep_dnn=cfg/dnn_0lep_2016_ICHEP2018.txt
-bdt_1lep_el_dnn=cfg/dnn_1lep_el_2016_ICHEP2018.txt
-bdt_1lep_mu_dnn=cfg/dnn_1lep_mu_2016_ICHEP2018.txt
+bdt_0lep_dnn=cfg/dnn_0lep_2017_ICHEP2018.txt
+bdt_1lep_el_dnn=cfg/dnn_1lep_el_2017_ICHEP2018.txt
+bdt_1lep_mu_dnn=cfg/dnn_1lep_mu_2017_ICHEP2018.txt
+bdt_2lep_high=cfg/dnn_2lep_highPt_2017_ICHEP2018.txt
+bdt_2lep_low=cfg/dnn_2lep_lowPt_2017_ICHEP2018.txt
 
 #bdt_0lep_vzbb=cfg/bdt_0lep_vzbb.txt
 #bdt_1lep_vzbb=cfg/bdt_1lep_vzbb.txt
