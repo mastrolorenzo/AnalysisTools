@@ -45,7 +45,6 @@ def main(src, dst, logy):
             canvases = [d.GetListOfKeys()[0].ReadObj() for d in dirs]
             for canvas in canvases:
                 restyle_varial(canvas, logy, WIDTH, HEIGHT, LUMI_TEXT, CMS_POSITION, EXTRA_TEXT, outdir, EXTS)
-                canvas.IsA().Destructor(canvas)
             f.Close()
 
 

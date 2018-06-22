@@ -42,7 +42,7 @@ sample_colors = {
 }
 
 # The input pattern used to glob for sample files given their input token.
-input_pattern = '/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/CMSConnect_June9_2016V4/haddjobs/sum_%s*.root'
+input_pattern = '/eos/uscms/store/group/lpchbb/VHbbAnalysisNtuples/CMSConnect_June12_2016V4_FixedBtagInput/haddjobs/sum_%s*.root'
 
 
 def get_samples(channel, signal_overlay=False, **kwargs):
@@ -271,6 +271,16 @@ def get_samples(channel, signal_overlay=False, **kwargs):
                 'ZH125_ZLL_powheg':    [-12502, 1., 'ZH(b#bar{b})',   ['ZH125_ZLL_powheg']],
                 'ggZH125_ZLL_powheg':  [-12503, 1., 'ggZH(b#bar{b})', ['ggZH125_ZLL_powheg']],
             })
+
+    # Direct Application of Wln pT(W) Reweighting
+    if channel == 'Wln':
+        for sample, options in samples.iteritems():
+            if sample.startswith('W') and sample.endswith('_udcsg'):
+                options[0] = '({0})*(1.097 - 0.000575*V_pt)'.format(options[0])
+            elif sample.startswith('W') and sample.endswith(('_b', '_bb')):
+                options[0] = '({0})*(1.259 - 0.00167*V_pt)'.format(options[0])
+            elif sample.startswith('ST'):
+                options[0] = '(sampleIndex=={0})*(1.259 - 0.00167*V_pt)'.format(options[0])
 
     return samples
 
