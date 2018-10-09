@@ -143,6 +143,7 @@ def apply_mva_eval(input_file, output_file, am, is_data, allowed_names, lep_sys_
 
         for ep in eps:
             ep.set_event(e)
+            #if ep.controlSample != 0 or not ep.twoResolvedJets: continue
             evaluate_discriminator(ep, bdt_infos)
         ot.Fill()
 

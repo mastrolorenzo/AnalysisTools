@@ -10,18 +10,19 @@ ROOT.gStyle.SetOptStat(0)
 #SF_Wj1b = 2.38
 #SF_Wj2b = 1.07
 
-SF_TT = 0.91
-SF_Wj0b = 1.14
-SF_Wj1b = 1.66
-SF_Wj2b = 1.49
+#SF_TT = 0.91
+#SF_Wj0b = 1.14
+#SF_Wj1b = 1.66
+#SF_Wj2b = 1.49
 
-#SF_TT = 1.0
-#SF_Wj0b = 1.0
-#SF_Wj1b = 1.0
-#SF_Wj2b = 1.0
+SF_TT = 1.0
+SF_Wj0b = 1.0
+SF_Wj1b = 1.0
+SF_Wj2b = 1.0
 
 channel = sys.argv[1]
-ifile = ROOT.TFile("hists_%s.root" % channel)
+#ifile = ROOT.TFile("hists_%s.root" % channel)
+ifile = ROOT.TFile(sys.argv[2])
 data = ifile.Get("BDT_%s_data_obs" % channel)
 tt = ifile.Get("BDT_%s_TT" % channel)
 stop = ifile.Get("BDT_%s_s_Top" % channel)
@@ -32,6 +33,8 @@ wj0b = ifile.Get("BDT_%s_Wj0b" % channel)
 wj1b = ifile.Get("BDT_%s_Wj1b" % channel)
 wj2b = ifile.Get("BDT_%s_Wj2b" % channel)
 wh = ifile.Get("BDT_%s_WH_hbb" % channel)
+wh.Add(ifile.Get("BDT_%s_ZH_hbb" % channel))
+wh.Add(ifile.Get("BDT_%s_ggZH_hbb" % channel))
 #qcd = ifile.Get("BDT_%s_QCD" % channel)
 bkg = ifile.Get("BDT_%s_Bkg" % channel)
 vvhf = ifile.Get("BDT_%s_VVHF" % channel)
@@ -39,7 +42,8 @@ vvlf = ifile.Get("BDT_%s_VVLF" % channel)
 
 #doBlind = False
 doBlind = True
-if (doBlind and channel.find("HighPt")!=-1):
+#if (doBlind and channel.find("HighPt")!=-1):
+if doBlind:
     for i in range(data.GetNbinsX()-7,data.GetNbinsX()+1):
     #for i in range(data.GetNbinsX()-4,data.GetNbinsX()+1):
         data.SetBinContent(i,0.0)
@@ -113,7 +117,7 @@ stackvv.Add(vvhf)
 #stack.SetMaximum(20000)
 canv = ROOT.TCanvas("canv","canv")
 canv.SetBottomMargin(0.3)
-xmin = 0.3
+xmin = 0.
 #xmin = -1
 xmax = 1
 frame = ROOT.TH1F("frame","",1,xmin,xmax)
@@ -155,7 +159,7 @@ leg.AddEntry(vvlf,"VVLF")
 leg.AddEntry(vvhf,"VVHF")
 #leg.AddEntry(vvlf,"VVLF X 10")
 #leg.AddEntry(vvhf,"VVHF X 10")
-leg.AddEntry(wh,"WH")
+leg.AddEntry(wh,"VH")
 #leg.AddEntry(wh,"WH X 30")
 leg.AddEntry(zj0b,"Zj0b")
 leg.AddEntry(zj1b,"Zj1b")
@@ -178,7 +182,7 @@ frame2.SetMaximum(0.5)
 frame2.GetYaxis().SetLabelSize(0.02)
 frame2.GetXaxis().SetLabelSize(0.04)
 frame2.GetYaxis().SetTitleSize(0.04)
-frame2.GetXaxis().SetTitle("BDT Score")
+frame2.GetXaxis().SetTitle("DNN Score")
 #frame2.GetXaxis().SetTitle("Sub-leading Jet CMVA")
 frame2.SetStats(0)
 frame2.GetYaxis().SetTitle("Data/MC - 1")	

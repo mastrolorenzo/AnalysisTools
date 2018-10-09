@@ -6,6 +6,7 @@ import numpy
 import argparse
 import re
 
+ROOT.v5.TFormula.SetMaxima(40000)
 ## Create histogram with histograms of a given BDT shape, one histogram for each sample. Used in creation of datacards.
 ##
 ## Author: Stephane Cooperstein
@@ -80,7 +81,7 @@ if (args.systematics != ""):
         for param in params:
             if (param != ''):
                 paramsToKeep.append(param)
-        print paramsToKeep
+        #print paramsToKeep
         if (paramsToKeep[1] != "shape"): continue
         sysSamples = paramsToKeep[3].split(',')
         # map systematic name to the corresponding weight in the ntuple and possibly an extension if it has a different BDT/Mjj output than the nominal
@@ -90,11 +91,34 @@ if (args.systematics != ""):
         else:
             systematics[paramsToKeep[0]] = (paramsToKeep[4], "", sysSamples)
     
-print systematics
+#print systematics
+print "setup",len(systematics),"systs"
+
+# weights from HIG-18-016
+## pT(W) reweighting needed for W(lv) is bugged and needs to be applied/calculated directly
+#weight_ptwhf = "1.259 - 0.00167*V_pt"
+#weight_ptwhf_up = "1.259 - 0.00180*V_pt"
+#weight_ptwhf_down = "1.259 - 0.00154*V_pt"
+#weight_ptwlf = "1.097 - 0.000575*V_pt"
+#weight_ptwlf_up = "1.097 - 0.000621*V_pt"
+#weight_ptwlf_down = "1.097 - 0.000529*V_pt"
+#if '2017' in args.year:
+#    weight_ptwhf = "1.337 - 1.56131e-03*V_pt"
+#    weight_ptwhf_up = "1.337 - (1.56131e-03 + 1.45980e-04)*V_pt"
+#    weight_ptwhf_down = "1.337 - (1.56131e-03 - 1.45980e-04)*V_pt"
+#    weight_ptwlf = "1.115 - 6.36789e-04*V_pt"
+#    weight_ptwlf_up = "1.115 - (6.36789e-04 + 3.87586e-05)*V_pt"
+#    weight_ptwlf_down = "1.115 - (6.36789e-04 - 3.87586e-05)*V_pt"
+
+weight_detajj_0b = "0.935422 + 0.0403162*HJ1_HJ2_dEta -0.0089026*HJ1_HJ2_dEta*HJ1_HJ2_dEta +0.0064324*HJ1_HJ2_dEta*HJ1_HJ2_dEta*HJ1_HJ2_dEta -0.000212443*HJ1_HJ2_dEta*HJ1_HJ2_dEta*HJ1_HJ2_dEta*HJ1_HJ2_dEta"
+weight_detajj_1b = "0.962415 +0.0329463*HJ1_HJ2_dEta -0.0414479*HJ1_HJ2_dEta*HJ1_HJ2_dEta +0.0240993*HJ1_HJ2_dEta*HJ1_HJ2_dEta*HJ1_HJ2_dEta -0.00278271*HJ1_HJ2_dEta*HJ1_HJ2_dEta*HJ1_HJ2_dEta*HJ1_HJ2_dEta"
+weight_detajj_2b = "(0.721265 -0.105643*HJ1_HJ2_dEta -0.0206835*HJ1_HJ2_dEta*HJ1_HJ2_dEta +0.00558626*HJ1_HJ2_dEta*HJ1_HJ2_dEta*HJ1_HJ2_dEta)*TMath::Exp(0.450244*HJ1_HJ2_dEta)"
 
 systematics_to_run = []
 if (args.systematic != ""):
     systematics_to_run = args.systematic.split(',')
+
+print "systematics_to_run",systematics_to_run
 
 set_of_weights = []
 if (args.weights != ""):
@@ -108,9 +132,25 @@ if args.reweightTT:
 else:
     # HACK because I screwed up the norm on the NLO Z+jets samples...
     #weight_string = "weight*(1+(sampleIndex==200)*(-1+(0.0002014*abs(genWeight))))*(1+(sampleIndex==201)*(-1+(0.01679*abs(genWeight))))*(1+(sampleIndex==202)*(-1+(0.1387*abs(genWeight))))*(1+(sampleIndex==203)*(-1+(1.148*abs(genWeight))))*(1+(sampleIndex==204)*(-1+(0.0003781*abs(genWeight))))*(1+(sampleIndex==205)*(-1+(0.01439*abs(genWeight))))*(1+(sampleIndex==206)*(-1+(0.119579*abs(genWeight))))*(1+(sampleIndex==207)*(-1+(1.007*abs(genWeight))))"
+    print args.channel, ('Wln' in args.channel)
+    print args.sample, (args.sample == "Wj2b")
+    #if (('Wln' in args.channel) and (args.sample == "Wj2b" or args.sample == "Wj1b" or args.sample == "s_Top")):
+    #    weight_string = "weight*(%s)" % weight_ptwhf
+    #elif (('Wln' in args.channel) and (args.sample == "Wj0b")):
+    #    weight_string = "weight*(%s)" % weight_ptwlf
+    #else:
+    #    weight_string = "weight"
     weight_string = "weight"
+    #weight_string = "weight"
+    if (args.sample == "Wj0b" or args.sample == "Zj0b"):
+        weight_string = "weight*(1.153/WJetNLOWeight)*(%s)" % weight_detajj_0b
+    if (args.sample == "Wj1b" or args.sample == "Zj1b"):
+        weight_string = "weight*(1.153/WJetNLOWeight)*(%s)" % weight_detajj_1b
+    if (args.sample == "Wj2b" or args.sample == "Zj2b"):
+        weight_string = "weight*(1.153/WJetNLOWeight)*(%s)" % weight_detajj_2b
+
     if args.even:
-        weight_string = "2.0*weight"
+        weight_string = "2.0*" + weight_string
 #weight_string = "(1./CS_SF)*weight*(1 + (sampleIndex==17)*(-1 + 3.07))"
 #weight_string = "(1./CS_SF)*(bTagWeightICHEP/bTagWeight)*weight"
 #weight_string = "(1./CS_SF)*weight*(1+isWenu*(-1+(SF_HLT_Ele23_WPLoose[lepInd]/EffHLT_Ele27_WPLoose_Eta2p1[lepInd])))"
@@ -144,6 +184,8 @@ sampleMap = {} # map sampleNames to list of sampleIndex's
 sampleMapAltModel = {} # alternate MC samples for model shape systematics
 sampleNameMap = {}
 
+hadded_paths = [] # avoid double-hadd's!!
+
 if not 'Znn' in args.channel :
     if '2016' in args.year:
         from nano_samples_2016 import the_samples_dict
@@ -159,14 +201,26 @@ scaleFactorMap = {}
 for sample in the_samples_dict:
     sampleMap[the_samples_dict[sample][2]] = []
     sampleNameMap[the_samples_dict[sample][2]] = []
+    scaleFactorMap[sample] = []
 for sample in the_samples_dict:
     sampleMap[the_samples_dict[sample][2]].append(the_samples_dict[sample][0])
     sampleNameMap[the_samples_dict[sample][2]].extend(the_samples_dict[sample][3])
+    scaleFactorMap[sample] = the_samples_dict[sample][1]
 print "sampleMap = "
 print sampleMap
 print "sampleNameMap = "
 print sampleNameMap
-
+print "scaleFactorMap = "
+print scaleFactorMap 
+    
+for sample in the_samples_dict:
+    if abs(scaleFactorMap[sample]-1.0) > 0.001:
+        if isinstance(the_samples_dict[sample][0],str):
+            weight_string += "*(1 + (%s)*(-1 + %f))" % (the_samples_dict[sample][0],scaleFactorMap[sample])
+        else:
+            weight_string += "*(1 + (sampleIndex==%s)*(-1 + %f))" % (the_samples_dict[sample][0],scaleFactorMap[sample])
+print "weight_string = "
+print weight_string
 
 allSampInd = [] # list of all indices for all backgrounds
 sigSamps = ["WH_hbb","ZH_hbb"]
@@ -182,6 +236,17 @@ print "all Bkg sampleInd = "
 print allSampInd
 if not args.doData:
     sampleMap["data_obs"] = allSampInd # fake data as sum of all background MC
+
+def checkVariation(hnom,hup,hdown):
+    # flag shape variations where up/down variations are same-sided so that we
+    # can symmetrize these
+    for i in xrange(1,hnom.GetNbinsX()+1):
+        up = hup.GetBinContent(i)
+        down = hdown.GetBinContent(i)
+        nom = hnom.GetBinContent(i)
+        if ((up-nom)*(down-nom)>0):
+            return False
+    return True        
 
 def makeCutString(sample, sMap,even=False):
     if even:
@@ -239,8 +304,12 @@ if args.doRebin:
     if args.friend!="":
         tree_sig.AddFriend("Events",args.friend)
         tree_bkg.AddFriend("Events",args.friend)
-        tree_sig.SetAlias("DNN","DNN_nominal")
-        tree_bkg.SetAlias("DNN","DNN_nominal")
+        tree_sig.SetAlias("DNN_max_","DNN_max_nominal")
+        tree_bkg.SetAlias("DNN_max_","DNN_max_nominal")
+        tree_sig.SetAlias("DNN_idMax_","DNN_idMax_nominal")
+        tree_bkg.SetAlias("DNN_idMax_","DNN_idMax_nominal")
+        tree_sig.SetAlias("DNN_","DNN_nominal")
+        tree_bkg.SetAlias("DNN_","DNN_nominal")
 
 
     tree_bkg.Draw("%s>>hBkg" % bdtname,"((%s)&&(%s))*%s" % (presel,bkgCutString,weight_string))
@@ -358,12 +427,16 @@ for sample in sampleMap:
     ##if sample != "Bkg" and sample != "data_obs": 
     if sample != "Bkg": 
         for sname in sampleNameMap[sample]:
+            #fname = ipath + "/" + sname + "/output_"+sname+"_1.root"
             fname = ipath + "/sum_" + sname + "*.root"
             #fname = ipath + "/" + sname + "/*.root"
             #fname = ipath + "/sum_" + sname + "_weighted2.root"
             #fname = ipath + "/sum_" + sname + "_3.root"
             #print tree.GetEntries()
-            tree.Add(fname)
+            if fname not in hadded_paths:
+                tree.Add(fname)
+                hadded_paths.append(fname)
+            else: continue
             print "Added for sample %s: %s" % (sample,fname)
             #print sname,tree.GetEntries()
     elif sample == "Bkg":
@@ -373,13 +446,17 @@ for sample in sampleMap:
                 #fname = ipath + "/" + sname + "/*.root"
                 ##fname = ipath + "/sum_" + sname + ".root"
                 fname = ipath + "/sum_" + sname + "*.root"
+                #fname = ipath + "/" + sname + "/output_"+sname+"_1.root"
                 #fname = ipath + "/sum_" + sname + "_weighted2.root"
                 #fname = ipath + "/sum_" + sname + "_3.root"
                 tree.Add(fname)
     
     if args.friend!="":
         tree.AddFriend("Events",args.friend)
-        tree.SetAlias("DNN","DNN_nominal")
+        tree.SetAlias("DNN_","DNN_nominal")
+        tree.SetAlias("DNN_max_","DNN_max_nominal")
+        tree.SetAlias("DNN_2ndmax_","DNN_2ndmax_nominal")
+        tree.SetAlias("DNN_idMax_","DNN_idMax_nominal")
 
      
     #cutString = presel + "&&("
@@ -473,7 +550,10 @@ for sample in sampleMap:
         #if (args.systematic != "" and syst != args.systematic): continue
         if (len(systematics_to_run)>0 and syst not in systematics_to_run): continue
         sysWeight, sysName, sysSamples = systematics[syst]
+        if (args.catName.find("Zee")!=-1 or args.catName.find("Wen")!=1):
+            syst = syst.replace("eff_m","eff_e")
         if sample not in sysSamples: continue
+        print "running syst",syst
         #if (syst.find("LHE")==-1): continue
         ofile.cd()
         hBDTSystUp = ROOT.TH1F("BDT_%s_%s_%sUp" % (catName,sample,syst), "%s_%sUp" % (sample,syst),nBins,binBoundaries)
@@ -486,6 +566,7 @@ for sample in sampleMap:
         cutStringup = cutString
         weight_stringup = weight_string
         weight_stringdown = weight_string
+        print "weight_string",weight_string
         if (sysName != ""):
             if not args.drawFromNom:
                 if (bdtname.find('[') != -1):
@@ -495,17 +576,28 @@ for sample in sampleMap:
                     # drawing an array variable
                     sysBDTNameUp = bdtname[:bdtname.find('_13TeV')+6] + "_" + sysName + "Up" + bdtname[bdtname.find('_13TeV')+6:] 
                     sysBDTNameDown = bdtname[:bdtname.find('_13TeV')+6] + "_" + sysName + "Down" + bdtname[bdtname.find('_13TeV')+6:] 
+                elif (bdtname.find("ax_")):
+                    sysBDTNameUp = bdtname.replace("ax_","ax__%sUp" % sysName)
+                    sysBDTNameDown = bdtname.replace("ax_","ax__%sDown" % sysName)
+                elif (bdtname.endswith("DNN_")):
+                    sysBDTNameUp = bdtname.replace("DNN_","DNN__%sUp" % sysName)
+                    sysBDTNameDown = bdtname.replace("DNN_","DNN__%sDown" % sysName)
                 else:
                     sysBDTNameUp += "_%sUp" % sysName
                     sysBDTNameDown += "_%sDown" % sysName
+                print "right here"
                 print sysBDTNameUp,sysBDTNameDown
 
             passSysup = "Pass_%sUp" % sysName
             passSysdown = "Pass_%sDown" % sysName
             cutStringup = cutString.replace("controlSample","controlSample_%sUp"%sysName)
             cutStringdown = cutString.replace("controlSample","controlSample_%sDown"%sysName)
-            #cutStringup = cutStringup.replace("H_mass","H_mass_%sUp"%sysName)
-            #cutStringdown = cutStringdown.replace("H_mass","H_mass_%sDown"%sysName)
+            if cutStringup.find("H_mass_fit_fallback")==-1:
+                cutStringup = cutStringup.replace("H_mass","H_mass_%sUp"%sysName)
+                cutStringdown = cutStringdown.replace("H_mass","H_mass_%sDown"%sysName)
+            else:
+                cutStringup = cutStringup.replace("H_mass_fit_fallback","H_mass_fit_fallback_%sUp"%sysName)
+                cutStringdown = cutStringdown.replace("H_mass_fit_fallback","H_mass_fit_fallback_%sDown"%sysName)
             if weight_string.count('weight') > 1:
                 print 'weight_string is ', weight_string, 'please make sure the replacements in weight_stringup and weight_stringdown are correct'
                 sys.exit(1)
@@ -514,17 +606,45 @@ for sample in sampleMap:
         if (sysWeight != "1.0" and sysWeight.find(".root") == -1):
             if (sysWeight.find(',') == -1):
                 if (sysWeight.find("bTagWeight") != -1):
-                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
-                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
+                    sysWeightUp = sysWeight[:(sysWeight.find("_pt"))] + "Up" + sysWeight[(sysWeight.find("_pt")):]
+                    sysWeightDown = sysWeight[:(sysWeight.find("_pt"))] + "Down" + sysWeight[(sysWeight.find("_pt")):]
+                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%s)" % (cutStringup,passSysup,weight_stringup,sysWeightUp))
+                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%s)" % (cutStringdown,passSysdown,weight_stringdown,sysWeightDown))
                 elif (sysWeight.find("VPtCorrFactorSplit") != -1):
                      tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
                      tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*(1./VPtCorrFactorSplit3)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
                 elif (sysWeight.find("weight_PU") != -1):
                     tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(1./weight_PU)*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
                     tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(1./weight_PU)*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
-                elif (sysWeight.find("recoWReWeight") != -1):
+                #elif (sysWeight.find("WJetNLOWeight") != -1):
+                #    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(WJetNLOWeight/1.153)" % (cutStringup,passSysup,weight_stringup))
+                #    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(1.153/WJetNLOWeight)" % (cutStringdown,passSysdown,weight_stringdown))
+                elif (sysWeight.find("WJetNLOWeight") != -1):
+                    weight_detajj = weight_detajj_2b
+                    if (sample == "Wj0b" or sample == "Zj0b"):
+                        weight_detajj = weight_detajj_0b
+                    if (sample == "Wj1b" or sample == "Zj1b"):
+                        weight_detajj = weight_detajj_1b
+                    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%s)" % (cutStringup,passSysup,weight_stringup,weight_detajj))
+                    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(1./(%s))" % (cutStringdown,passSysdown,weight_stringdown,weight_detajj))
+
+
+                    if hBDTSystUp.Integral() > 0.:
+                        hBDTSystUp.Scale(hBDT.Integral()/hBDTSystUp.Integral())
+                    if hBDTSystDown.Integral() > 0.:
+                        hBDTSystDown.Scale(hBDT.Integral()/hBDTSystDown.Integral())
+
+                     #elif (sysWeight.find("recoWReWeight") != -1):
+                elif (sysWeight == "recoWReWeight"):
                     tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(1./recoWReWeight)*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
                     tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(1./recoWReWeight)*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
+                #elif (sysWeight.find("recoWReWeightFixLF") != -1):
+                #    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*((%s)/(%s))" % (cutStringup,passSysup,weight_stringup,weight_ptwlf_up,weight_ptwlf ))
+                #    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*((%s)/(%s))" % (cutStringdown,passSysdown,weight_stringdown,weight_ptwlf_down,weight_ptwlf))
+                #elif (sysWeight.find("recoWReWeightFixHF") != -1):
+                #    print "((%s)&&%s)*%s*(%s/%s)" % (cutStringup,passSysup,weight_stringup,weight_ptwhf_up,weight_ptwhf )
+                #    tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*((%s)/(%s))" % (cutStringup,passSysup,weight_stringup,weight_ptwhf_up,weight_ptwhf ))
+                #    tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*((%s)/(%s))" % (cutStringdown,passSysdown,weight_stringdown,weight_ptwhf_down,weight_ptwhf))
                 else:
                     tree.Draw("%s>>BDT_%s_%s_%sUp" % (sysBDTNameUp, catName,sample, syst),"((%s)&&%s)*%s*(%sUp)" % (cutStringup,passSysup,weight_stringup,sysWeight))
                     tree.Draw("%s>>BDT_%s_%s_%sDown" % (sysBDTNameDown, catName, sample, syst),"((%s)&&%s)*%s*(%sDown)" % (cutStringdown,passSysdown,weight_stringdown,sysWeight))
@@ -605,6 +725,13 @@ for sample in sampleMap:
             hBDTSystUp.Scale(-0.00001) ## if it was just 0.0 we would lose the shape
         if (hBDTSystDown.Integral() < 0):
             hBDTSystDown.Scale(-0.00001) ## if it was just 0.0 we would lose the shape
+
+        # symmetrize problematic shapes where up/down are same-sided in any bin of the distribution
+        #if not checkVariation(hBDT,hBDTSystUp,hBDTSystDown):
+        #    # hnom - (hup - hnom) = 2*hnom - hup
+        #    hBDTSystDown = hBDT.Clone(hBDTSystDown.GetName())
+        #    hBTSystDown.Scale(2.0)
+        #    hBDTSystDown.Add(hBDTSystUp,-1)
 
         ofile.cd()
         hBDTSystUp.Write()

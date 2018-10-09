@@ -1,7 +1,7 @@
 analysis=VHbbAnalysis
 outputname=output
 
-samples=cfg/samples_2017_validation.txt
+samples=cfg/samples_2017.txt
 
 earlybranches=cfg/earlybranches.txt
 existingbranches=cfg/existingbranches.txt
@@ -28,8 +28,8 @@ bdt_2lep_low=cfg/dnn_2lep_lowPt_2017_ICHEP2018.txt
 
 settings=cfg/settings.txt
 
-#systematics=cfg/systematics_facJECsNano.txt
-systematics=cfg/systematics.txt
+systematics=cfg/systematics_facJECsNano.txt
+#systematics=cfg/systematics.txt
 scalefactors=cfg/scalefactors_2017.txt
 btagscalefactors=aux/DeepCSV_94XSF_V2_B_F.csv
 

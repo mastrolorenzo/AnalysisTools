@@ -67,8 +67,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
                 addedAtLeastOneFile=False
                 print site,siteIP
                 samples[name]["externFileName"]=samples[name]["globalPrefix"]+name+"_sampleInfo.root"
-                filesInGlobalPrefix=GetFileList(samples[name]["globalPrefix"], site)
-                samples[name]["externFileExists"]=(samples[name]["externFileName"] in filesInGlobalPrefix)
+                filesInGlobalPrefix=GetFileList(samples[name]["globalPrefix"].replace("/store","/eos/uscms/store"), site)
+                samples[name]["externFileExists"]=(samples[name]["externFileName"].replace("/store","/eos/uscms/store") in filesInGlobalPrefix)
                 print "name externFileExists ",samples[name]["externFileName"],samples[name]["externFileExists"]
                 #print "is name in samplesToRun?",name,(name in samplesToRun)
                 if (runSelectedSamples and name not in samplesToRun):
@@ -131,6 +131,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
                     # AnalysisManager needs to be initialized
                     # with one file at the beginning
                     if aminitialized == 0:
+                        filename.replace("root://cmseos.fnal.gov//store","/eos/uscms/store")
                         print("Initializing with",filename)
                         try:
                             ifile = ROOT.TFile.Open(filename)
@@ -444,6 +445,9 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False,filesToRun=[]):
                 if value.find(',') is not 0:
                     if not runOnSkim:
                         for dirname in value.split(','):
+                            globalPrefix = globalPrefix.replace("/store","/eos/uscms/store/")
+                            print dirname
+                            print globalPrefix,dirname,site
                             samplepaths.extend(findAllRootFiles(globalPrefix+dirname,site))
                     else:
                         # after skimming the sample directory name has been changed to sample name
@@ -793,7 +797,12 @@ def findAllRootFiles(value, site):
         onlyFiles = listdir(str(value))
         for rootfile in onlyFiles:
             if rootfile.find(".root") != -1:
-                samplepaths.append(str(value)+"/"+str(rootfile))
+                tmp = str(value)+"/"+str(rootfile)
+                tmp = tmp.replace("/eos/uscms/store","root://cmseos.fnal.gov//store")
+                print tmp
+                samplepaths.append(tmp)
+                #samplepaths.append(str(value)+"/"+str(rootfile))
             elif (isdir(join(str(value),rootfile))):
+                print "recursive, ",str(value),"/",str(rootfile)
                 samplepaths.extend(findAllRootFiles(str(value)+"/"+str(rootfile),site))
     return samplepaths
