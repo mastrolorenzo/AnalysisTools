@@ -1212,13 +1212,13 @@ void VHbbAnalysis::FinishEvent() {
 //        _|_|
 
     // Compare gen kinematics for b jets for signal vs. ttbar
-    if (mInt("sampleIndex") != 0) {
+    if (mInt("sampleIndex") != 0 && int(m("reRunGenInfo"))==1) {
         // Store number of gen b hadrons with status 2:
-        *in["nGenStatus2bHad"] = 0;
+        *in["nGenStatus2bHad_re"] = 0;
         for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
             if(mInt("GenPart_status",indGP)!=2) continue;
             if(((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)){
-              *in["nGenStatus2bHad"]=mInt("nGenStatus2bHad")+1;
+              *in["nGenStatus2bHad_re"]=mInt("nGenStatus2bHad_re")+1;
             }
         }
 
@@ -1229,10 +1229,10 @@ void VHbbAnalysis::FinishEvent() {
         int dau2_index=-1;
         int top_index_1=-1;
         int top_index_2=-1;
-        *in["nGenTop"] = 0;
-        *in["nGenVbosons"] = 0;
-        *f["LeadGenVBoson_pt"] = 0.;
-        *in["LeadGenVBoson_pdgId"] = 0;
+        *in["nGenTop_re"] = 0;
+        *in["nGenVbosons_re"] = 0;
+        *f["LeadGenVBoson_pt_re"] = 0.;
+        *in["LeadGenVBoson_pdgId_re"] = 0;
         for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
             //Check for Higgs boson and make sure it's the last copy -> 8192 = 2^13, 13th bit is IsLastCopy flag:
             if(fabs(mInt("GenPart_pdgId",indGP))==25 && (mInt("GenPart_statusFlags",indGP) & 8192)==8192 ) {
@@ -1255,7 +1255,7 @@ void VHbbAnalysis::FinishEvent() {
         } else { //can also check for top quarks...
             for(int indGP=0; indGP<mInt("nGenPart"); indGP++){
                 if(fabs(mInt("GenPart_pdgId",indGP))==6 && (mInt("GenPart_statusFlags",indGP) & 8192)==8192 ) {
-                    *in["nGenTop"]=mInt("nGenTop")+1;
+                    *in["nGenTop_re"]=mInt("nGenTop_re")+1;
                     if(top_index_1>-1&&top_index_2>-1){
                         std::cout<<"This isn't supposed to happen!"<<std::endl;
                     } else if(top_index_1>-1){
@@ -1287,23 +1287,23 @@ void VHbbAnalysis::FinishEvent() {
         }
 
 
-       *f["GenBJ1_pt"] = GenBJ1.Pt();
-       *f["GenBJ1_eta"] = GenBJ1.Eta();
-       *f["GenBJ1_phi"] = GenBJ1.Phi();
-       *f["GenBJ1_mass"] = GenBJ1.M();
-       *f["GenBJ2_pt"] = GenBJ2.Pt();
-       *f["GenBJ2_eta"] = GenBJ2.Eta();
-       *f["GenBJ2_phi"] = GenBJ2.Phi();
-       *f["GenBJ2_mass"] = GenBJ2.M();
+       *f["GenBJ1_pt_re"] = GenBJ1.Pt();
+       *f["GenBJ1_eta_re"] = GenBJ1.Eta();
+       *f["GenBJ1_phi_re"] = GenBJ1.Phi();
+       *f["GenBJ1_mass_re"] = GenBJ1.M();
+       *f["GenBJ2_pt_re"] = GenBJ2.Pt();
+       *f["GenBJ2_eta_re"] = GenBJ2.Eta();
+       *f["GenBJ2_phi_re"] = GenBJ2.Phi();
+       *f["GenBJ2_mass_re"] = GenBJ2.M();
 
        GenBJJ = GenBJ1 + GenBJ2;
-       *f["GenBJJ_pt"] = GenBJJ.Pt();
-       *f["GenBJJ_eta"] = GenBJJ.Eta();
-       *f["GenBJJ_phi"] = GenBJJ.Phi();
-       *f["GenBJJ_mass"] = GenBJJ.M();
-       *f["GenBJJ_dPhi"] = GenBJ2.DeltaPhi(GenBJ1);
-       *f["GenBJJ_dR"] = GenBJ2.DeltaR(GenBJ1);
-       *f["GenBJJ_dEta"] = fabs(GenBJ1.Eta() - GenBJ2.Eta());
+       *f["GenBJJ_pt_re"] = GenBJJ.Pt();
+       *f["GenBJJ_eta_re"] = GenBJJ.Eta();
+       *f["GenBJJ_phi_re"] = GenBJJ.Phi();
+       *f["GenBJJ_mass_re"] = GenBJJ.M();
+       *f["GenBJJ_dPhi_re"] = GenBJ2.DeltaPhi(GenBJ1);
+       *f["GenBJJ_dR_re"] = GenBJ2.DeltaR(GenBJ1);
+       *f["GenBJJ_dEta_re"] = fabs(GenBJ1.Eta() - GenBJ2.Eta());
 
 
        TLorentzVector GenLep1, GenLep2; // closest gen lep to either jet1 or jet2. Sometimes these could be the same lepton.
@@ -1318,8 +1318,8 @@ void VHbbAnalysis::FinishEvent() {
        VBosonIndices.clear();
        std::vector<int> LeptonIndices;
        LeptonIndices.clear();
-       *ui["nW"]=0;
-       *ui["nWlep"]=0;
+       *ui["nW_re"]=0;
+       *ui["nWlep_re"]=0;
        std::vector<unsigned int> WBosonIndices;
        std::vector<unsigned int> WBosonLeptonicIndices;
        WBosonIndices.clear();
@@ -1334,7 +1334,7 @@ void VHbbAnalysis::FinishEvent() {
                VBosonIndices.push_back(i);
            }
        }
-       *in["nGenVbosons"] = VBosonIndices.size();
+       *in["nGenVbosons_re"] = VBosonIndices.size();
        if(VBosonIndices.size()>0){
             for (int i = 0; i<mInt("nGenPart"); i++){
                 if(fabs(mInt("GenPart_pdgId",i))>=11 && fabs(mInt("GenPart_pdgId",i))<=16 && mInt("GenPart_genPartIdxMother",i)>-1){
@@ -1354,8 +1354,8 @@ void VHbbAnalysis::FinishEvent() {
                }
            }
        }
-       *ui["nW"]   =WBosonIndices.size();
-       *ui["nWlep"]=WBosonLeptonicIndices.size();
+       *ui["nW_re"]   =WBosonIndices.size();
+       *ui["nWlep_re"]=WBosonLeptonicIndices.size();
 
        if (LeptonIndices.size()>1){
            std::sort(LeptonIndices.begin(),LeptonIndices.end(),[=](const int i1, const int i2){
@@ -1364,17 +1364,17 @@ void VHbbAnalysis::FinishEvent() {
            TLorentzVector lep1,lep2;
            lep1.SetPtEtaPhiM(m("GenPart_pt",LeptonIndices.at(0)),m("GenPart_eta",LeptonIndices.at(0)),m("GenPart_phi",LeptonIndices.at(0)),m("GenPart_mass",LeptonIndices.at(0)));
            lep2.SetPtEtaPhiM(m("GenPart_pt",LeptonIndices.at(1)),m("GenPart_eta",LeptonIndices.at(1)),m("GenPart_phi",LeptonIndices.at(1)),m("GenPart_mass",LeptonIndices.at(1)));
-           *f["LeadGenVBoson_pt"] = (lep1+lep2).Pt();
-           *in["LeadGenVBoson_pdgId"] = 23;
-           *in["nGenVbosons"] = 1;
+           *f["LeadGenVBoson_pt_re"] = (lep1+lep2).Pt();
+           *in["LeadGenVBoson_pdgId_re"] = 23;
+           *in["nGenVbosons_re"] = 1;
        }
        if (VBosonIndices.size()>0){
            std::sort(VBosonIndices.begin(),VBosonIndices.end(),[=](const int i1, const int i2){
                return f["GenPart_pt"][i1] > f["GenPart_pt"][i2];
            });
-           *f["LeadGenVBoson_pt"] = m("GenPart_pt",VBosonIndices.at(0));
-           *in["LeadGenVBoson_pdgId"] = m("GenPart_pdgId",VBosonIndices.at(0));
-           if(VBosonIndices.size()==1 && ( (mInt("sampleIndex")>=30 && mInt("sampleIndex")<=39) || (mInt("sampleIndex")>=340 && mInt("sampleIndex")<=350 ) ) ) *in["nGenVbosons"]=2; // Hack to make sure EWK/QCD reweighting doesn't get applied to diboson samples
+           *f["LeadGenVBoson_pt_re"] = m("GenPart_pt",VBosonIndices.at(0));
+           *in["LeadGenVBoson_pdgId_re"] = m("GenPart_pdgId",VBosonIndices.at(0));
+           if(VBosonIndices.size()==1 && ( (mInt("sampleIndex")>=30 && mInt("sampleIndex")<=39) || (mInt("sampleIndex")>=340 && mInt("sampleIndex")<=350 ) ) ) *in["nGenVbosons_re"]=2; // Hack to make sure EWK/QCD reweighting doesn't get applied to diboson samples
        }
        for (int i = 0; i < mInt("nGenPart"); i++) {
            //Continue if not a final-state electron or muon which is either prompt or from a tau decay.
@@ -1407,43 +1407,43 @@ void VHbbAnalysis::FinishEvent() {
             GenLepIndex2 = GenLepSecIndex2;
        }
 
-       *in["GenLepIndex1"] = GenLepIndex1;
-       *in["GenLepIndex2"] = GenLepIndex2;
+       *in["GenLepIndex1_re"] = GenLepIndex1;
+       *in["GenLepIndex2_re"] = GenLepIndex2;
 
         if (GenLepIndex1 != -1) {
             if(fabs(mInt("GenPart_pdgId",GenLepIndex1))==11) part_mass=0.000511;
             if(fabs(mInt("GenPart_pdgId",GenLepIndex1))==13) part_mass=0.105;
             GenLep1.SetPtEtaPhiM(m("GenPart_pt",GenLepIndex1), m("GenPart_eta",GenLepIndex1), m("GenPart_phi",GenLepIndex1),part_mass);
-            *f["GenLep_GenBJ1_dR"] = GenLep1.DeltaR(GenBJ1);
-            *f["GenLep_GenBJ1_dEta"] = fabs(GenLep1.Eta() - GenBJ1.Eta());
-            *f["GenLep_GenBJ1_dPhi"] = GenLep1.DeltaPhi(GenBJ1);
+            *f["GenLep_GenBJ1_dR_re"] = GenLep1.DeltaR(GenBJ1);
+            *f["GenLep_GenBJ1_dEta_re"] = fabs(GenLep1.Eta() - GenBJ1.Eta());
+            *f["GenLep_GenBJ1_dPhi_re"] = GenLep1.DeltaPhi(GenBJ1);
 
             // try to reconstruct the top mass, although we've lost the neutrino so it will be shifted left
             TLorentzVector GenTop1 = GenLep1 + GenBJ1;
-            *f["GenTop1_mass"] = GenTop1.M();
+            *f["GenTop1_mass_re"] = GenTop1.M();
         } else {
-            *f["GenLep_GenBJ1_dR"] = -999;
-            *f["GenLep_GenBJ1_dEta"] = -999;
-            *f["GenLep_GenBJ1_dPhi"] = -999;
-            *f["GenTop1_mass"] = -999;
+            *f["GenLep_GenBJ1_dR_re"] = -999;
+            *f["GenLep_GenBJ1_dEta_re"] = -999;
+            *f["GenLep_GenBJ1_dPhi_re"] = -999;
+            *f["GenTop1_mass_re"] = -999;
         }
 
         if (GenLepIndex2 != -1) {
             if(fabs(mInt("GenPart_pdgId",GenLepIndex2))==11) part_mass=0.000511;
             if(fabs(mInt("GenPart_pdgId",GenLepIndex2))==13) part_mass=0.105;
             GenLep2.SetPtEtaPhiM(m("GenPart_pt",GenLepIndex2), m("GenPart_eta",GenLepIndex2), m("GenPart_phi",GenLepIndex2),part_mass);
-            *f["GenLep_GenBJ2_dR"] = GenLep2.DeltaR(GenBJ2);
-            *f["GenLep_GenBJ2_dEta"] = (GenLep2.Eta(), GenBJ2.Eta());
-            *f["GenLep_GenBJ2_dPhi"] = GenLep2.DeltaPhi(GenBJ2);
+            *f["GenLep_GenBJ2_dR_re"] = GenLep2.DeltaR(GenBJ2);
+            *f["GenLep_GenBJ2_dEta_re"] = (GenLep2.Eta(), GenBJ2.Eta());
+            *f["GenLep_GenBJ2_dPhi_re"] = GenLep2.DeltaPhi(GenBJ2);
 
            // try to reconstruct the top mass, although we've lost the neutrino so it will be shifted left
             TLorentzVector GenTop2 = GenLep2 + GenBJ2;
-            *f["GenTop2_mass"] = GenTop2.M();
+            *f["GenTop2_mass_re"] = GenTop2.M();
         } else {
-            *f["GenLep_GenBJ2_dR"] = -999;
-            *f["GenLep_GenBJ2_dEta"] = -999;
-            *f["GenLep_GenBJ2_dPhi"] = -999;
-            *f["GenTop2_mass"] = -999;
+            *f["GenLep_GenBJ2_dR_re"] = -999;
+            *f["GenLep_GenBJ2_dEta_re"] = -999;
+            *f["GenLep_GenBJ2_dPhi_re"] = -999;
+            *f["GenTop2_mass_re"] = -999;
         }
 
         // construct Gen W
@@ -1462,15 +1462,15 @@ void VHbbAnalysis::FinishEvent() {
         }
         if(w_index_1>-1){
             GenW1.SetPtEtaPhiM(m("GenPart_pt",w_index_1), m("GenPart_eta",w_index_1), m("GenPart_phi",w_index_1), m("GenPart_mass",w_index_1));
-            *f["GenW_GenBJJ_dPhi"] = GenW1.DeltaPhi(GenBJJ);
-            *f["GenW_GenBJJ_dEta"] = fabs(GenW1.Eta() - GenBJJ.Eta());
+            *f["GenW_GenBJJ_dPhi_re"] = GenW1.DeltaPhi(GenBJJ);
+            *f["GenW_GenBJJ_dEta_re"] = fabs(GenW1.Eta() - GenBJJ.Eta());
             // grab both W's in ttbar events
             if (w_index_2>-1){
                 GenW2.SetPtEtaPhiM(m("GenPart_pt",w_index_2), m("GenPart_eta",w_index_2), m("GenPart_phi",w_index_2), m("GenPart_mass",w_index_2));
             }
         } else {
-            *f["GenW_GenBJJ_dPhi"] = -999;
-            *f["GenW_GenBJJ_dEta"] = -999;
+            *f["GenW_GenBJJ_dPhi_re"] = -999;
+            *f["GenW_GenBJJ_dEta_re"] = -999;
         }
 
         std::vector<TLorentzVector> genWQuarks; // gen quarks from hadronic gen W decay
@@ -1487,7 +1487,7 @@ void VHbbAnalysis::FinishEvent() {
         //int nSelectedJetsMatched = 0; // count the number (0, 1, 2) of selected jets matched to the real bottom quarks
         // Match Jets with Gen B Jets from Higgs/Tops
         for (int i = 0; i < mInt("nJet"); i++) {
-            in["Jet_genJetMatchId"][i] = 0; // 0 if no gen match, 1 for pt-leading b-jet, 2 for pt sub-leading b-jet, 3 if matched to jet from hadronic W decay
+            in["Jet_genJetMatchId_re"][i] = 0; // 0 if no gen match, 1 for pt-leading b-jet, 2 for pt sub-leading b-jet, 3 if matched to jet from hadronic W decay
             TLorentzVector Jet;
             Jet.SetPtEtaPhiM(m("Jet_bReg",i), m("Jet_eta",i), m("Jet_phi",i), m("Jet_mass",i) * (m("Jet_bReg",i) / m("Jet_Pt",i)));
 
@@ -1507,21 +1507,21 @@ void VHbbAnalysis::FinishEvent() {
                 }
             }
 
-            f["Jet_genWQuarkDR"][i] = dR3;
+            f["Jet_genWQuarkDR_re"][i] = dR3;
             if (dR3 < std::min(dR1, dR2) && dR3 < 0.5) {
-                in["Jet_genJetMatchId"][i] = 3;
+                in["Jet_genJetMatchId_re"][i] = 3;
             } else if (dR1 <= dR2 && dR1 < 0.5) {
-                in["Jet_genJetMatchId"][i] = 1;
+                in["Jet_genJetMatchId_re"][i] = 1;
             } else if (dR2 < 0.5) {
-                in["Jet_genJetMatchId"][i] = 2;
+                in["Jet_genJetMatchId_re"][i] = 2;
             }
 
-            f["Jet_genHJetMinDR"][i] = std::min(dR1, dR2);
+            f["Jet_genHJetMinDR_re"][i] = std::min(dR1, dR2);
 
             if (i == mInt("hJetInd1")) {
-                *f["hJet1_matchedMinDR"] = m("Jet_genHJetMinDR",i);
+                *f["hJet1_matchedMinDR_re"] = m("Jet_genHJetMinDR_re",i);
             } else if (i == mInt("hJetInd2")) {
-                *f["hJet2_matchedMinDR"] = m("Jet_genHJetMinDR",i);
+                *f["hJet2_matchedMinDR_re"] = m("Jet_genHJetMinDR_re",i);
             }
         }
     }
@@ -2081,6 +2081,12 @@ void VHbbAnalysis::FinishEvent() {
 
     // stitch together W b-enriched samples with HT-binned samples in order to maximize statistical power
     float WJetStitchWeight = 1.0;
+    int nbHad = 0;
+    if (int(m("reRunGenInfo"))==1){
+        nbHad = mInt("nGenStatus2bHad_re");
+    } else {
+        nbHad = mInt("nGenStatus2bHad");
+    }
     if ( m("dataYear")==2016 && ((cursample->sampleNum>=40 && cursample->sampleNum<=47) || (cursample->sampleNum>=50 && cursample->sampleNum<=54)) ) {
         if (m("LHE_HT")>100 && m("LHE_HT")<200) {
             if (m("LHE_Vpt") > WBjets_ptVMin && m("LHE_Vpt") < WBjets_ptVMax && mInt("LHE_Nb") > 0) {
@@ -2091,7 +2097,7 @@ void VHbbAnalysis::FinishEvent() {
                     WJetStitchWeight = weightWBjetsHT100;
                 }
             }
-            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
+            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && nbHad > 0) {
                 if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT100);
                 }
@@ -2109,7 +2115,7 @@ void VHbbAnalysis::FinishEvent() {
                     WJetStitchWeight = weightWBjetsHT200;
                 }
             }
-            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
+            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && nbHad > 0) {
                 if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT200);
                 }
@@ -2127,7 +2133,7 @@ void VHbbAnalysis::FinishEvent() {
                     WJetStitchWeight = weightWBjetsHT400;
                 }
             }
-            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
+            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && nbHad > 0) {
                 if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT400);
                 }
@@ -2145,7 +2151,7 @@ void VHbbAnalysis::FinishEvent() {
                     WJetStitchWeight = weightWBjetsHT600;
                 }
             }
-        else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
+        else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && nbHad > 0) {
                 if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT600);
                 }
@@ -2163,7 +2169,7 @@ void VHbbAnalysis::FinishEvent() {
                     WJetStitchWeight = weightWBjetsHT800;
                 }
             }
-            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
+            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && nbHad > 0) {
                 if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT800);
                 }
@@ -2181,7 +2187,7 @@ void VHbbAnalysis::FinishEvent() {
                     WJetStitchWeight = weightWBjetsHT1200;
                 }
             }
-            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
+            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && nbHad > 0) {
                 if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT1200);
                 }
@@ -2199,7 +2205,7 @@ void VHbbAnalysis::FinishEvent() {
                     WJetStitchWeight = weightWBjetsHT2500;
                 }
             }
-            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0) {
+            else if (m("LHE_Vpt") > WjetsBgen_ptVMin && m("LHE_Vpt") < WjetsBgen_ptVMax && mInt("LHE_Nb") == 0 && nbHad > 0) {
                 if (cursample->sampleNum == 53) {
                     WJetStitchWeight = (1 - weightWjetsBgenHT2500);
                 }
@@ -2217,7 +2223,7 @@ void VHbbAnalysis::FinishEvent() {
     *b["usingBEnriched"] =  true; // if using b-enriched need to stitch properly
     if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
         if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || mInt("nGenStatus2bHad") != 0) *b["usingBEnriched"]=false;
+            if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
     } else if (cursample->sampleNum == 50) {
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
@@ -2225,36 +2231,36 @@ void VHbbAnalysis::FinishEvent() {
         if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 53) {
         //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) *b["usingBEnriched"]=false;
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 54) {
         //if (m("LHE_Vpt") < 200) *b["usingBEnriched"]=false;
-        if (m("LHE_Vpt") < 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
     }
     if (cursample->sampleNum >= 110 && cursample->sampleNum<=117){
         if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || mInt("nGenStatus2bHad") != 0) *b["usingBEnriched"]=false;
+            if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
     } else if (cursample->sampleNum == 121){
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 122){
         if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 141){
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 142){
-        if (m("LHE_Vpt") < 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
     }
     if (cursample->sampleNum >= 150 && cursample->sampleNum<=156){
         if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || mInt("nGenStatus2bHad") != 0) *b["usingBEnriched"]=false;
+            if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
    } else if (cursample->sampleNum == 160){
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 161){
         if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 162){
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 163){
-        if (m("LHE_Vpt") < 200 || mInt("nGenStatus2bHad") == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
     }
 
     *b["useLOVV"] = true; 
@@ -2735,8 +2741,25 @@ void VHbbAnalysis::FinishEvent() {
         /* GET ELECTROWEAK CORRECTION */
 
         *f["weight_ptEWK"] = 1.0;
+        int nGenT=0;
+        int nGenV=0;
+        double GenVpt=0;
+        int Genpdgid=0;
+        if(mInt("sampleIndex")!=0){
+            if(int(m("reRunGenInfo"))==1){
+                nGenT = mInt("nGenTop_re");
+                nGenV = mInt("nGenVbosons_re");
+                GenVpt = m("LeadGenVBoson_pt_re");
+                Genpdgid = m("LeadGenVBoson_pdgId_re");
+            } else {
+                nGenT = mInt("nGenTop");
+                nGenV = mInt("nGenVBosons");
+                GenVpt = m("LeadGenVBoson_pt");
+                Genpdgid = m("LeadGenVBoson_pdgId");
+            }
+        }
         if(mInt("sampleIndex")<0){
-            if( mInt("nGenVbosons",0) == 1 ){
+            if( nGenV == 1 ){
                 TH1D* thisHist = NULL;
                 if( mInt("sampleIndex") == -12500 ){
                     thisHist=ewkCorrHist_wp ;
@@ -2752,8 +2775,8 @@ void VHbbAnalysis::FinishEvent() {
                 }
                 if(debug>1000) std::cout<<"weight_ptEWK V_pt "<< m("V_pt")<<" "<<*f["weight_ptEWK"]<<std::endl;
             }
-        } else if(mInt("sampleIndex")>0 && mInt("nGenTop")==0 && mInt("nGenVbosons")>0){
-            *f["weight_ptEWK"]=ptWeightEWK(mInt("nGenVbosons"), m("LeadGenVBoson_pt"), m("Vtype"), mInt("LeadGenVBoson_pdgId"));
+        } else if(mInt("sampleIndex")>0 && nGenT==0 && nGenV>0){
+            *f["weight_ptEWK"]=ptWeightEWK(nGenV, GenVpt, m("Vtype"), Genpdgid);
         }
 
         /* ELECTROWEAK CORRECTION APPLIED*/
