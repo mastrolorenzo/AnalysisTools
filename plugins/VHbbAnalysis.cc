@@ -238,8 +238,15 @@ bool VHbbAnalysis::Analyze() {
         *in["cutFlow"] += 1; // lepton selection
     }
 
+    // asking for doCutFlow instead of doOnlySignalRegion, as events with bad leptons will not go into CR
+    if (!doCutFlow && mInt("controlSample") < 0) {
+        return false;
+    }
+
     bool selectJets=SelectJets();
     if(debug>1000) std::cout<<"selectJets "<<selectJets<<std::endl;
+
+    if(!selectJets) return false;
 
     if (m("doOnlySignalRegion")>0 && mInt("controlSample") < 0) {
         return false;
@@ -2090,7 +2097,7 @@ bool VHbbAnalysis::SelectLeptonChannel(){
 
 
 bool VHbbAnalysis::SelectJets(){
-    bool pass=false;
+    bool pass=true;
 
     if (debug > 1000) std::cout << "Looping over jets" << std::endl;
     UpdateJetPts();
@@ -2167,11 +2174,7 @@ bool VHbbAnalysis::SelectJets(){
         *b["twoResolvedJets"]=true; // jets don't need to be b-tagged to be "resolved"
         *in["hJetInd1"] = bjets_bestTagger.first;
         *in["hJetInd2"] = bjets_bestTagger.second;
-        if (m(taggerName,bjets_bestTagger.first) < m("j1Btag")) {
-            *in["controlSample"] = -1;
-        } else if (m(taggerName,bjets_bestTagger.second) < m("j2Btag")) {  // 2nd jet B-Tagged is the same in all SR's
-            *in["controlSample"] = -1;
-        } else if (mInt("isZnn")) { // Higgs jet pT cuts are applied to the pair sorted by pT instead of b-tag value
+        if (mInt("isZnn")) { // Higgs jet pT cuts are applied to the pair sorted by pT instead of b-tag value
             float j1pt = m("Jet_bReg",bjets_bestTagger.first);
             float j2pt = m("Jet_bReg",bjets_bestTagger.second);
             if (std::max(j1pt, j2pt) < m("j1ptCut_0lepchan")) {
@@ -2190,7 +2193,9 @@ bool VHbbAnalysis::SelectJets(){
             *in["controlSample"] = 0;
             *b["oneMergedJet"]=true;
         }
-    } else if (!m("twoResolvedJets")) {
+    } 
+    
+    if (!m("twoResolvedJets") && !m("oneMergedJet")) {
         pass=false;
     }
     return pass;
@@ -2234,10 +2239,10 @@ bool VHbbAnalysis::ReconstructHiggsCand(){
 
 
         // CP ADD BACK
-        //if(debug>1000) std::cout<<"doOnlySignalRegion controlSample "<<doOnlySignalRegion<<" "<<mInt("controlSample")<<std::endl;
-        //if (doOnlySignalRegion && mInt("controlSample") < 0) {
-        //    pass=false;
-        //}
+        if(debug>1000) std::cout<<"doOnlySignalRegion controlSample "<<m("doOnlySignalRegion")<<" "<<mInt("controlSample")<<std::endl;
+        if (m("doOnlySignalRegion")>0 && mInt("controlSample") < 0) {
+            pass=false;
+        }
 
         //*f["H_mass_step2"] = m("H_mass"); // I don't think we need this.
         *f["H_mass_noreg"] = Hbb_noreg.M();
@@ -2398,9 +2403,9 @@ bool VHbbAnalysis::ReconstructVCand(){
         }
 
         // CP ADD BACK
-        //if (doOnlySignalRegion && mInt("controlSample") < 0) {
-        //    return false;
-        //}
+        if (m("doOnlySignalRegion")>0 && mInt("controlSample") < 0) {
+            pass=false;
+        }
 
         if (mInt("controlSample") > -1) {
             *in["cutFlow"] += 1;
@@ -2466,8 +2471,6 @@ bool VHbbAnalysis::ReconstructVCand(){
         }
     }
 
-
-    if (debug > 1000) std::cout << "counting additional jets and leptons" << std::endl;
     return pass;
 }
 
@@ -2483,9 +2486,9 @@ void VHbbAnalysis::ComputeVHKinematics(){
     // Calculate V+H kinematics
 
    // CP ADD BACK
-   // if (doOnlySignalRegion && mInt("controlSample") < 0) {
-   //     return false;
-   // }
+   if (m("doOnlySignalRegion")>0 && mInt("controlSample") < 0) {
+       return;
+   }
 
     if(m("twoResolvedJets")){
 
@@ -2540,6 +2543,8 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
     //nVetoLeptons replicating nselLeptons which was used as a veto that was used for the 0-lepton channel in the 2016 analysis, added for sync purposes
     int nVetoLeptons = 0;
 
+
+    if (debug > 1000) std::cout << "counting additional jets and leptons" << std::endl;
     // 15 to 30 by 1 GeV, 1.5 to 3 w/ 0.1 in eta
     //std::vector<int> ptCuts = {15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
     //std::vector<double> etaCuts = {1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.4,3.5};
@@ -2561,15 +2566,15 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
                         *f[Form("AddJets%i%s_puid_leadJet_pt", ptCuts[i], eta_cut.c_str())] = maxPt;
                         *f[Form("AddJets%i%s_puid_leadJet_eta", ptCuts[i], eta_cut.c_str())] = m("Jet_eta",k);
                         *f[Form("AddJets%i%s_puid_leadJet_phi", ptCuts[i], eta_cut.c_str())] = m("Jet_phi",k);
-                          *f[Form("AddJets%i%s_puid_leadJet_btagged", ptCuts[i], eta_cut.c_str())] = m(taggerName,k);
+                        *f[Form("AddJets%i%s_puid_leadJet_btagged", ptCuts[i], eta_cut.c_str())] = m(taggerName,k);
                     }
                 }
             }
             if( i==1 && j==1){
-          *f[Form("nAddJets%i%s_puid", ptCuts[i], eta_cut.c_str())] = nAddJet_tmp;
-        }else{
-          *in[Form("nAddJets%i%s_puid", ptCuts[i], eta_cut.c_str())] = nAddJet_tmp;
-        }
+                *f[Form("nAddJets%i%s_puid", ptCuts[i], eta_cut.c_str())] = nAddJet_tmp;
+            }else{
+                *in[Form("nAddJets%i%s_puid", ptCuts[i], eta_cut.c_str())] = nAddJet_tmp;
+            }
         }
     }
 
@@ -2635,7 +2640,7 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
         *in["cutFlow"] += 1; // dPhi(jj,W) cut
     }
 
-    if (m("doOnlySignalRegion") && mInt("controlSample") < 0) {
+    if (m("doOnlySignalRegion")>0 && mInt("controlSample") < 0) {
         return;
     }
 
@@ -2705,6 +2710,15 @@ void VHbbAnalysis::ControlSampleSelection(){
         float hJet2_bReg = m("Jet_bReg",mInt("hJetInd2"));
         float min_hJet_bReg = std::min(hJet1_bReg, hJet2_bReg);
         float max_hJet_bReg = std::max(hJet1_bReg, hJet2_bReg);
+        
+        if(mInt("controlSample")!=-1){
+            if (max_hJet_btag > m("j1Btag") && min_hJet_btag > m("j2Btag")) {
+                *in["controlSample"] = 0;
+            } else {
+                *in["controlSample"] = -1;
+            }
+        }
+            
 
         // 0-lepton
         bool base0LepCSSelection = (
