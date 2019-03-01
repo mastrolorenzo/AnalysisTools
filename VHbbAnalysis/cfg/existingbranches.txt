@@ -26,8 +26,6 @@ type=2  name=Pileup_nTrueInt                            onlyMC=1
 type=1  name=Pileup_nPU                                 onlyMC=1
 type=2  name=genWeight                                  onlyMC=1
 type=1  name=nGenJet                                    onlyMC=1
-#type=1  name=stage0_cat                               onlyMC=1 allowMissingBranch=1 #STXS classification as it will appear in future NanoAOD signal samples
-#type=1  name=stage1_cat_pTjet30GeV                    onlyMC=1 allowMissingBranch=1 #STXS classification as it will appear in future NanoAOD signal samples
 type=8  name=GenJet_pt                          max=30  onlyMC=1 lengthBranch=nGenJet dropBranch=1
 type=8  name=GenJet_eta                         max=30  onlyMC=1 lengthBranch=nGenJet dropBranch=1
 type=8  name=GenJet_phi                         max=30  onlyMC=1 lengthBranch=nGenJet dropBranch=1
@@ -352,49 +350,3 @@ type=8  name=SubJet_mass                  max=30      lengthBranch=nSubJet
 ##type=8  name=softActivityVHJets_eta             max=50
 ##type=8  name=softActivityVHJets_phi             max=50
 ##type=8  name=softActivityVHJets_mass            max=50
-
-type=1  name=nGenStatus2bHad                      onlyMC=1 allowMissingBranch=1
-type=1  name=nGenVBosons                          onlyMC=1 allowMissingBranch=1
-type=2  name=LeadGenVBoson_pt                     onlyMC=1 allowMissingBranch=1
-type=2  name=LeadGenVBoson_eta                    onlyMC=1 allowMissingBranch=1
-type=2  name=LeadGenVBoson_phi                    onlyMC=1 allowMissingBranch=1
-type=2  name=LeadNeutrinoFromGenVBoson_pt         onlyMC=1 allowMissingBranch=1
-type=1  name=LeadGenVBoson_pdgId                  onlyMC=1 allowMissingBranch=1
-type=0  name=nW                                   onlyMC=1 allowMissingBranch=1
-type=0  name=nWlep                                onlyMC=1 allowMissingBranch=1
-type=1  name=nGenTop                              onlyMC=1 allowMissingBranch=1
-type=2  name=GenTop1_mass                         onlyMC=1 allowMissingBranch=1
-type=2  name=GenTop2_mass                         onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ1_pt                            onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ1_eta                           onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ1_phi                           onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ1_mass                          onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ1_genjet_pt                     onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ1_genjet_mass                   onlyMC=1 allowMissingBranch=1
-type=1  name=GenBJ1_index                         onlyMC=1 allowMissingBranch=1
-type=1  name=GenBJ1_genjet_index                  onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ2_pt                            onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ2_eta                           onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ2_phi                           onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ2_mass                          onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ2_genjet_pt                     onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJ2_genjet_mass                   onlyMC=1 allowMissingBranch=1
-type=1  name=GenBJ2_index                         onlyMC=1 allowMissingBranch=1
-type=1  name=GenBJ2_genjet_index                  onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_pt                            onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_eta                           onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_phi                           onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_mass                          onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_dPhi                          onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_dEta                          onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_dR                            onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_genjet_pt                     onlyMC=1 allowMissingBranch=1
-type=2  name=GenBJJ_genjet_mass                   onlyMC=1 allowMissingBranch=1
-type=2  name=GenLep_GenBJ1_dR                     onlyMC=1 allowMissingBranch=1
-type=2  name=GenLep_GenBJ2_dR                     onlyMC=1 allowMissingBranch=1
-type=2  name=GenLep_GenBJ1_dEta                   onlyMC=1 allowMissingBranch=1
-type=2  name=GenLep_GenBJ2_dEta                   onlyMC=1 allowMissingBranch=1
-type=2  name=GenLep_GenBJ1_dPhi                   onlyMC=1 allowMissingBranch=1
-type=2  name=GenLep_GenBJ2_dPhi                   onlyMC=1 allowMissingBranch=1
-type=1  name=GenLepIndex1                         onlyMC=1 allowMissingBranch=1
-type=1  name=GenLepIndex2                         onlyMC=1 allowMissingBranch=1

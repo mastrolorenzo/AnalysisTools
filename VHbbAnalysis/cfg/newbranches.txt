@@ -6,8 +6,8 @@ type=2  name=minDPhiFromOtherJets
 type=2  name=otherJetsBestBtag
 type=2  name=otherJetsHighestP
 
-type=0  name=nW_re
-type=0  name=nWlep_re
+type=0  name=nW
+type=0  name=nWlep
 
 type=1  name=nJetsCloseToMET
 type=2  name=min_dPhi_hJet_MET
@@ -19,11 +19,11 @@ type=4  name=usingBEnriched
 type=4  name=useLOVV
 type=4  name=useNLOVV
 
-type=1  name=nGenStatus2bHad_re
-type=1  name=nGenVbosons_re
-type=2  name=LeadGenVBoson_pt_re
-type=1  name=LeadGenVBoson_pdgId_re
-type=1  name=nGenTop_re
+type=1  name=nGenStatus2bHad
+type=1  name=nGenVbosons
+type=2  name=LeadGenVBoson_pt
+type=1  name=LeadGenVBoson_pdgId
+type=1  name=nGenTop
 type=1  name=hJetInd1
 type=1  name=hJetInd1_bestCSV
 type=1  name=hJetInd1_bestCMVA
@@ -506,9 +506,9 @@ type=2  name=HJ2_pt
 type=2  name=n_recoil_jets_fit
 type=2  name=H_mass_sigma_fit
 
-type=8  name=Jet_genHJetMinDR_re            max=250
-type=8  name=Jet_genWQuarkDR_re             max=250
-type=7  name=Jet_genJetMatchId_re           max=250
+type=8  name=Jet_genHJetMinDR            max=250
+type=8  name=Jet_genWQuarkDR             max=250
+type=7  name=Jet_genJetMatchId           max=250
 
 # jet energy regression variables
 type=2  name=Jet1_pt_reg
@@ -560,35 +560,35 @@ type=2  name=V_pt_VPtCorrDown
 type=2  name=CMS_vhbb_BDT_Wln_13TeV_VPtCorrUp
 type=2  name=CMS_vhbb_BDT_Wln_13TeV_VPtCorrDown
 
-type=2  name=GenBJ1_pt_re
-type=2  name=GenBJ1_eta_re
-type=2  name=GenBJ1_phi_re
-type=2  name=GenBJ1_mass_re
-type=2  name=GenBJ2_pt_re
-type=2  name=GenBJ2_eta_re
-type=2  name=GenBJ2_phi_re
-type=2  name=GenBJ2_mass_re
-type=2  name=GenBJJ_pt_re
-type=2  name=GenBJJ_eta_re
-type=2  name=GenBJJ_phi_re
-type=2  name=GenBJJ_mass_re
-type=2  name=GenBJJ_dPhi_re
-type=2  name=GenBJJ_dEta_re
-type=2  name=GenBJJ_dR_re
-type=2  name=hJet1_matchedMinDR_re
-type=2  name=hJet2_matchedMinDR_re
-type=2  name=GenLep_GenBJ1_dR_re
-type=2  name=GenLep_GenBJ2_dR_re
-type=2  name=GenLep_GenBJ1_dEta_re
-type=2  name=GenLep_GenBJ2_dEta_re
-type=2  name=GenLep_GenBJ1_dPhi_re
-type=2  name=GenLep_GenBJ2_dPhi_re
-type=1  name=GenLepIndex1_re
-type=1  name=GenLepIndex2_re
-type=2  name=GenTop1_mass_re
-type=2  name=GenTop2_mass_re
-type=2  name=GenW_GenBJJ_dPhi_re
-type=2  name=GenW_GenBJJ_dEta_re
+type=2  name=GenBJ1_pt
+type=2  name=GenBJ1_eta
+type=2  name=GenBJ1_phi
+type=2  name=GenBJ1_mass
+type=2  name=GenBJ2_pt
+type=2  name=GenBJ2_eta
+type=2  name=GenBJ2_phi
+type=2  name=GenBJ2_mass
+type=2  name=GenBJJ_pt
+type=2  name=GenBJJ_eta
+type=2  name=GenBJJ_phi
+type=2  name=GenBJJ_mass
+type=2  name=GenBJJ_dPhi
+type=2  name=GenBJJ_dEta
+type=2  name=GenBJJ_dR
+type=2  name=hJet1_matchedMinDR
+type=2  name=hJet2_matchedMinDR
+type=2  name=GenLep_GenBJ1_dR
+type=2  name=GenLep_GenBJ2_dR
+type=2  name=GenLep_GenBJ1_dEta
+type=2  name=GenLep_GenBJ2_dEta
+type=2  name=GenLep_GenBJ1_dPhi
+type=2  name=GenLep_GenBJ2_dPhi
+type=1  name=GenLepIndex1
+type=1  name=GenLepIndex2
+type=2  name=GenTop1_mass
+type=2  name=GenTop2_mass
+type=2  name=GenW_GenBJJ_dPhi
+type=2  name=GenW_GenBJJ_dEta
 
 type=2  name=Lep_HJ1_dPhi
 type=2  name=Lep_HJ2_dPhi
