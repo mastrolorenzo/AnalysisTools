@@ -24,8 +24,6 @@ type=2  name=doKinFit           val=1
 
 type=2  name=slimmedOutput      val=1
 
-type=2  name=reRunGenInfo       val=1
-
 type=2  name=j1ptCut_0lepchan   val=60
 type=2  name=j1ptCut_1lepchan   val=25
 type=2  name=j1ptCut_2lepchan   val=20
