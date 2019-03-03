@@ -47,6 +47,13 @@ class VHbbAnalysis : public AnalysisManager {
         bool MuonSelection(int);
         int UpdatedVType();
         bool PassVTypeAndTrigger(int vtype);
+        bool SelectLeptonChannel();
+        bool SelectJets();
+        bool ReconstructHiggsCand();
+        bool ReconstructVCand();
+        void ComputeVHKinematics();
+        void ComputeOtherEventKinematics();
+        void ControlSampleSelection();
         float ReWeightMC(int nPU=0);
         float puWeight_2016(int i=0);
         float puWeight_2016Up(int i=0);
@@ -78,9 +85,12 @@ class VHbbAnalysis : public AnalysisManager {
         bool atLeastOnePreselFatJet;
 	bool enableFSRRecovery;
 
-        TLorentzVector Hbb;
+        TLorentzVector HJ1, HJ2, Hbb;
+        TLorentzVector HJ1_noFSR, HJ2_noFSR, Hbb_noFSR;
+        TLorentzVector HJ1_noreg, HJ2_noreg, Hbb_noreg;
         TLorentzVector fatJetCand;
         TLorentzVector V;
+        TLorentzVector W_withNuFromMWCon; //I think we could make this the V in the 1-lepton case, but I didn't want to change logic in this PR.
 };
 
 #endif // ANALYSISTOOLS_PLUGINS_VHBBANALYSIS_H_
