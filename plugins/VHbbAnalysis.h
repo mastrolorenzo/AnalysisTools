@@ -36,7 +36,8 @@ class VHbbAnalysis : public AnalysisManager {
         TH1D* ewkCorrHist_zll;
         TH1D* ewkCorrHist_znn;
 
-        RooFunctor* met_trigger_sf120_func;
+        RooFunctor* met_trigger_sf120_2017_func;
+        RooFunctor* met_trigger_sf120_2018_func;
         RooFunctor* met_trigger_eff_2016data_func;
 
         void UpdateJetPts();

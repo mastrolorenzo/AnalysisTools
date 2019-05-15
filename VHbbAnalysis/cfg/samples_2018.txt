@@ -1,0 +1,96 @@
+prefix_desy=/pnfs/desy.de/cms/tier2/store/user/adewit/VHbbPostNano2018/V9-2/
+prefix_cern=/store/group/phys_higgs/hbb/ntuples/VHbbPostNano/2018/V9/
+
+############################ DATA ###########################################################
+name=Run2018_Ele                         dir=EGamma/   type=0 xsec=1   lepFlav=3
+name=Run2018_Mu                          dir=SingleMuon/       type=0 xsec=1   lepFlav=2
+name=Run2018_MET		          dir=MET/              type=0 xsec=1   lepFlav=4
+name=Run2018_DoubleEle                   dir=EGamma/         type=0 xsec=1   lepFlav=1
+name=Run2018_DoubleMu                     dir=DoubleMuon/       type=0 xsec=1   lepFlav=0
+
+
+
+############################ MC #############################################################
+########################### Signal #########################################################
+
+name=WplusH125_powheg           dir=WplusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/   type=-12500   xsec=0.17202
+name=WminusH125_powheg          dir=WminusH_HToBB_WToLNu_M125_13TeV_powheg_pythia8/  type=-12501   xsec=0.10899
+name=ZH125_ZLL_powheg           dir=ZH_HToBB_ZToLL_M125_13TeV_powheg_pythia8/        type=-12502   xsec=0.04718
+
+name=TT_DiLep_NoPSWeights                 dir=TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/              type=202      xsec=88.29
+name=TT_SingleLep                         dir=TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/          type=203      xsec=365.34
+name=TT_AllHadronic                       dir=TTToHadronic_TuneCP5_13TeV-powheg-pythia8/    type=212      xsec=377.96
+
+
+#name=DYToLL_madgraph          dir=DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=110  xsec=5343   kfac=1.23   doJetFlavorSplit=1
+
+
+#=========>>>>% Drell-Yan
+name=DYToLL_madgraph          dir=DYJetsToLL_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=110  xsec=5343   kfac=1.23   doJetFlavorSplit=1
+
+#in the TWiki I found 5To50 instead 4To50
+name=DYToLL_HT100to200_madgraph           dir=DYJetsToLL_M-50_HT-100to200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/              type=111  xsec=161.1    kfac=1.23 doJetFlavorSplit=1
+#name=DYToLL_HT200to400_madgraph           dir=DYJetsToLL_M-50_HT-200to400_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/              type=112  xsec=48.66    kfac=1.23 doJetFlavorSplit=1
+name=DYToLL_HT400to600_madgraph           dir=DYJetsToLL_M-50_HT-400to600_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/              type=113  xsec=6.968    kfac=1.23 doJetFlavorSplit=1
+name=DYToLL_HT600to800_madgraph           dir=DYJetsToLL_M-50_HT-600to800_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/              type=114  xsec=1.743    kfac=1.23 doJetFlavorSplit=1
+name=DYToLL_HT800to1200_madgraph          dir=DYJetsToLL_M-50_HT-800to1200_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/             type=115  xsec=0.8052   kfac=1.23 doJetFlavorSplit=1
+#name=DYToLL_HT1200to2500_madgraph         dir=DYJetsToLL_M-50_HT-1200to2500_TuneCP5_PSweights_13TeV-madgraphMLM-pythia8/            type=116  xsec=0.1933   kfac=1.23 doJetFlavorSplit=1
+#name=DYToLL_HT2500toInf_madgraph          dir=DYJetsToLL_M-50_HT-2500toInf_TuneCP5_13TeV-madgraphMLM-pythia8/             type=117  xsec=0.003468 kfac=1.23 doJetFlavorSplit=1
+##name=DYToLL_M4to50_HT70to100_madgraph     dir=DYJetsToLL_M-4to50_HT-70to100_TuneCP5_13TeV-madgraphMLM-pythia8/            type=124  xsec=301.2    kfac=1.23 doJetFlavorSplit=1
+#name=DYToLL_M4to50_HT100to200_madgraph    dir=DYJetsToLL_M-4to50_HT-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/           type=125  xsec=204      kfac=1.23 doJetFlavorSplit=1
+#name=DYToLL_M4to50_HT200to400_madgraph    dir=DYJetsToLL_M-4to50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/           type=126  xsec=54.39    kfac=1.23 doJetFlavorSplit=1
+#name=DYToLL_M4to50_HT400to600_madgraph    dir=DYJetsToLL_M-4to50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/           type=127  xsec=5.697    kfac=1.23 doJetFlavorSplit=1
+#name=DYToLL_M4to50_HT600toInf_madgraph    dir=DYJetsToLL_M-4to50_HT-600toInf_TuneCP5_13TeV-madgraphMLM-pythia8/           type=128  xsec=1.85     kfac=1.23 doJetFlavorSplit=1
+#name=DYBJets-Pt100To200                   dir=DYBJetsToLL_M-50_Zpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/            type=121  xsec=4.042    kfac=.922 doJetFlavorSplit=1
+#name=DYBJets-Pt200ToInf                   dir=DYBJetsToLL_M-50_Zpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/            type=122  xsec=0.4286   kfac=.922 doJetFlavorSplit=1
+#name=DYJets-BGenFilter-Pt100To200         dir=DYJetsToLL_BGenFilter_Zpt-100to200_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=141  xsec=3.384    kfac=0.87 doJetFlavorSplit=1
+#name=DYJets-BGenFilter-Pt200ToInf         dir=DYJetsToLL_BGenFilter_Zpt-200toInf_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=142  xsec=0.5327   kfac=0.87 doJetFlavorSplit=1
+
+
+# cross sections need validation for NLO
+#name=DY1JetsToLL_LHEZpT50to150            dir=DY1JetsToLL_M-50_LHEZpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=131   xsec=312.6  doJetFlavourSplit=1
+#name=DY1JetsToLL_LHEZpT150to250           dir=DY1JetsToLL_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=132   xsec=9.56   doJetFlavourSplit=1
+#name=DY1JetsToLL_LHEZpT250to400           dir=DY1JetsToLL_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=133   xsec=1.095  doJetFlavourSplit=1
+#name=DY1JetsToLL_LHEZpT400toInf           dir=DY1JetsToLL_M-50_LHEZpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=134   xsec=0.1199 doJetFlavourSplit=1
+#name=DY2JetsToLL_LHEZpT50to150            dir=DY2JetsToLL_M-50_LHEZpT_50-150_TuneCP5_13TeV-amcnloFXFX-pythia8/  type=135   xsec=169.7  doJetFlavourSplit=1
+#name=DY2JetsToLL_LHEZpT150to250           dir=DY2JetsToLL_M-50_LHEZpT_150-250_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=136   xsec=15.57   doJetFlavourSplit=1
+#name=DY2JetsToLL_LHEZpT250to400           dir=DY2JetsToLL_M-50_LHEZpT_250-400_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=137   xsec=2.736  doJetFlavourSplit=1
+#name=DY2JetsToLL_LHEZpT400toInf           dir=DY2JetsToLL_M-50_LHEZpT_400-inf_TuneCP5_13TeV-amcnloFXFX-pythia8/ type=138   xsec=0.4501 doJetFlavourSplit=1
+
+#=========>>>>% di-boson
+name=WW           dir=WW_TuneCP5_13TeV-pythia8/                       type=33   xsec=115.3        doJetFlavorSplit=1
+name=WZ           dir=WZ_TuneCP5_13TeV-pythia8/                       type=30   xsec=48.1         doJetFlavorSplit=1
+name=ZZ           dir=ZZ_TuneCP5_13TeV-pythia8/                       type=35   xsec=14.6         doJetFlavorSplit=1
+
+
+#=========>>>>% Single-Top
+
+#name=ST_tW_top_5f_noFullHad_PSw     dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/      type=20   xsec=19.56
+#name=ST_tW_antitop_5f_noFullHad_PSw dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/  type=21   xsec=19.56
+name=ST_tW_top_5f_noFullHad         dir=ST_tW_top_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/                type=20   xsec=19.56
+name=ST_tW_antitop_5f_noFullHad     dir=ST_tW_antitop_5f_NoFullyHadronicDecays_TuneCP5_13TeV-powheg-pythia8/            type=21   xsec=19.56
+name=ST_tW_top_5f_inc               dir=ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/                      type=20   xsec=35.85
+
+name=ST_tW_antitop_5f_inc           dir=ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/                    type=21   xsec=35.85
+#name=ST_tW_top_5f_inc_PSw           dir=ST_tW_top_5f_inclusiveDecays_TuneCP5_PSweights_13TeV-powheg-pythia8/              type=20   xsec=35.85
+
+#name=ST_t-c_antitop_4f_inc          dir=ST_t-channel_antitop_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/   type=19 xsec=80.95 #From 2016 samples, should check xsec
+#name=ST_t-c_top_4f_inc              dir=ST_t-channel_top_4f_inclusiveDecays_TuneCP5_13TeV-powhegV2-madspin-pythia8/       type=18 xsec=136.02 #From 2016 samples, should check xsec
+name=ST_s-c_4f_lep              dir=ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-madgraph-pythia8/            type=16   xsec=3.74 
+
+#=========>>>>% W+Jets:
+#Before trying to use 50-150, need to make sure we can stitch with 100-150 correctly
+##name=WJets_madgraph               dir=WJetsToLNu_TuneCP5_13TeV-madgraphMLM-pythia8/                          type=40   xsec=52940    doJetFlavorSplit=1
+name=WJets_madgraph               dir=WJetsToLNu_HT-70To100_TuneCP5_13TeV-madgraphMLM-pythia8/               type=40   xsec=1353    kfac=1.21 doJetFlavorSplit=1
+name=WJets-HT100To200             dir=WJetsToLNu_HT-100To200_TuneCP5_13TeV-madgraphMLM-pythia8/              type=41   xsec=1395     kfac=1.21 doJetFlavorSplit=1
+name=WJets-HT200To400             dir=WJetsToLNu_HT-200To400_TuneCP5_13TeV-madgraphMLM-pythia8/              type=42   xsec=407.9    kfac=1.21 doJetFlavorSplit=1
+name=WJets-HT400To600             dir=WJetsToLNu_HT-400To600_TuneCP5_13TeV-madgraphMLM-pythia8/              type=43   xsec=57.48    kfac=1.21 doJetFlavorSplit=1
+name=WJets-HT600To800             dir=WJetsToLNu_HT-600To800_TuneCP5_13TeV-madgraphMLM-pythia8/              type=44   xsec=12.87    kfac=1.21 doJetFlavorSplit=1
+name=WJets-HT800To1200            dir=WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/             type=45   xsec=5.366    kfac=1.21 doJetFlavorSplit=1
+name=WJets-HT1200To2500           dir=WJetsToLNu_HT-1200To2500_TuneCP5_13TeV-madgraphMLM-pythia8/            type=46   xsec=1.074    kfac=1.21 doJetFlavorSplit=1
+name=WJets-HT2500ToInf            dir=WJetsToLNu_HT-2500ToInf_TuneCP5_13TeV-madgraphMLM-pythia8/             type=47  xsec=0.03216   kfac=1.21  doJetFlavorSplit=1
+#name=WBJets-Pt100To200            dir=WBJetsToLNu_Wpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/            type=50   xsec=7.35     kfac=1.50 doJetFlavorSplit=1
+#name=WBJets-Pt200ToInf            dir=WBJetsToLNu_Wpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/            type=51   xsec=1.1      kfac=1.50 doJetFlavorSplit=1
+name=WJets_BGenFilter-Pt100To200  dir=WJetsToLNu_BGenFilter_Wpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/  type=53   xsec=26.6     kfac=1.12 doJetFlavorSplit=1
+name=WJets_BGenFilter-Pt200ToInf  dir=WJetsToLNu_BGenFilter_Wpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/  type=54   xsec=3.9      kfac=1.12 doJetFlavorSplit=1
+

@@ -1,0 +1,28 @@
+json=aux/VHbb1ElectronTrigger2017.json    name=singleEleTrigger        binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElTrigger    length=nElectron
+json=aux/VHbb1ElectronIDISO2017.json      name=singleEleIDISO2017      binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElIdIso      length=nElectron
+#from 2016
+json=aux/ScaleFactor_etracker_80x.json    name=ScaleFactor_tracker_80x binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_egammaEffi_tracker length=nElectron
+json=aux/failingVeto_out.json             name=failingVeto_WH          binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_EleVeto            length=nElectron
+
+json=aux/VHbb2ElectronIDISO2017.json        name=doubleEleIDISO2017    binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElIdIso       length=nElectron
+json=aux/VHbb2ElectronTriggerLeg12017.json  name=doubleEleTriggerLeg1  binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElTriggerLeg1 length=nElectron
+json=aux/VHbb2ElectronTriggerLeg22017.json  name=doubleEleTriggerLeg2  binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElTriggerLeg2 length=nElectron
+
+
+#json=aux/VHbb1MuonTrigger2017.json          name=NUM_IsoMu27_DEN_empty                   binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuTrigger  length=nMuon
+#json=aux/VHbb1MuonIDISO2017.json            name=NUM_UltraTightIso4_DEN_TightIDandIPCut  binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuIso      length=nMuon
+#from 2016
+#json=aux/trk_SF_RunBCDEF.json name=Graph binning=pt_eta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTrackerBCDEF length=nMuon
+#json=aux/trk_SF_RunGH.json name=Graph binning=pt_eta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTrackerGH length=nMuon
+
+#json=aux/MuonID_Z_2017.json                 name=NUM_TightID_DEN_genTracks               binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuId       length=nMuon
+json=aux/MuonID_Z_2017.json                 name=NUM_LooseID_DEN_genTracks               binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_DoubleMuId       length=nMuon
+json=aux/MuonISO_Z_2017.json                name=NUM_LooseRelIso_DEN_LooseID             binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_DoubleMuIso      length=nMuon
+
+
+
+json=aux/vhbb_SingleMuon_EfficienciesAndSF.json                name=TightID               binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuId       length=nMuon
+json=aux/vhbb_SingleMuon_EfficienciesAndSF.json                name=TightISO             binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuIso      length=nMuon
+json=aux/vhbb_SingleMuon_EfficienciesAndSF.json                name=TRGIsoMu24             binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuTrigger      length=nMuon
+
+
