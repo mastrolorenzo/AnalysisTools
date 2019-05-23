@@ -34,3 +34,7 @@ systematics=cfg/systematics_2018.txt
 scalefactors=cfg/scalefactors_2018.txt
 btagscalefactors=aux/DeepCSV_102XSF_V1.csv
 
+putarget2018=aux/puData2018_withVar.root
+puUPtarget2018=aux/puData2018_withVar.root
+puDOWNtarget2018=aux/puData2018_withVar.root
+global_puInput=aux/mcPileup2018.root

@@ -1094,7 +1094,9 @@ void VHbbAnalysis::FinishEvent() {
         }
         if (m("dataYear")==2018){
             //*f["weight_PU"] = m("puWeight");
-            *f["weight_PU"] = m("puWeight");
+	    *f["weight_PU"] = GetPUWeight(m("Pileup_nTrueInt"));
+	    *f["weight_PUUp"] = GetPUWeight(m("Pileup_nTrueInt"),1);
+	    *f["weight_PUDown"] = GetPUWeight(m("Pileup_nTrueInt"),-1);
         }
         /*if (mInt("nGenTop")==0 && mInt("nGenVbosons")>0) {
             // only apply to Z/W+jet samples

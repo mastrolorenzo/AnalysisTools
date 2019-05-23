@@ -291,6 +291,51 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
             except:
                 print "something went wrong with",settings["putarget"]
 
+        if settings.has_key("putarget2018"):
+            try:
+                tfile=ROOT.TFile.Open(settings["putarget2018"])
+                puhist=tfile.Get("pileup")
+                am.SetGlobalPUTarget(puhist)
+                if debug > 10:
+                    print "setting putarget"
+                tfile.Close()
+            except:
+                print "something went wrong with",settings["putarget"]
+
+        if settings.has_key("global_puInput"):
+            try:
+                tfile=ROOT.TFile.Open(settings["global_puInput"])
+                puhist=tfile.Get("pu_mc")
+                am.SetGlobalPUInput(puhist)
+                if debug > 10:
+                    print "setting puInput"
+                tfile.Close()
+            except:
+                print "something went wrong with",settings["global_puInput"]
+
+        if settings.has_key("puUPtarget2018"):
+            try:
+                tfile=ROOT.TFile.Open(settings["puUPtarget2018"])
+                puhist=tfile.Get("pileup_plus")
+                am.SetGlobalPUTarget(puhist,1)
+                if debug > 10:
+                    print "setting puUPtarget"
+                tfile.Close()
+            except:
+                print "something went wrong with",settings["puUPtarget2018"]
+
+        if settings.has_key("puDOWNtarget2018"):
+            try:
+                tfile=ROOT.TFile.Open(settings["puDOWNtarget2018"])
+                puhist=tfile.Get("pileup_minus")
+                am.SetGlobalPUTarget(puhist,-1)
+                if debug > 10:
+                    print "setting puDOWNtarget"
+                tfile.Close()
+            except:
+                print "something went wrong with",settings["puDOWNtarget2018"]
+
+
         if settings.has_key("puUPtarget"):
             try:
                 tfile=ROOT.TFile.Open(settings["puUPtarget"])
