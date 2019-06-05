@@ -166,7 +166,7 @@ def mk_fit_particle(e, ind, res_scale=1.):
 # ... and from leptons as well
 def mk_mu_lv_ind(e, ind):
     return mk_lv(
-        abs(e.Muon_pt_corrected[ind]),
+        abs(e.Muon_corrected_pt[ind]),
         # e.Muon_pt[ind],
         e.Muon_eta[ind],
         e.Muon_phi[ind],
@@ -320,7 +320,7 @@ def make_lep_sys_event_proxies(year):
     #######
     if int(year) == 2017:
         def apply_mu_sys_err(e, factor):
-            return list(pt+factor*err for pt, err in zip(e.Muon_pt_corrected, e.Muon_pt_sys_uncert))
+            return list(pt+factor*err for pt, err in zip(e.Muon_corrected_pt, e.Muon_pt_sys_uncert))
     else:
         ROOT.gROOT.ProcessLine('.L aux/roccor.2016.v3_mod/RoccoR.cc+')
         roccor = ROOT.RoccoR('aux/roccor.2016.v3_mod/rcdata.2016.v3')
@@ -338,15 +338,15 @@ def make_lep_sys_event_proxies(year):
         def apply_mu_sys_err(e, factor):
             u1 = random.uniform(0.0, 1.0)
             u2 = random.uniform(0.0, 1.0)
-            muon_inputs = zip(e.Muon_charge, e.Muon_pt_corrected, e.Muon_eta, e.Muon_phi, e.Muon_nTrackerLayers)
+            muon_inputs = zip(e.Muon_charge, e.Muon_corrected_pt, e.Muon_eta, e.Muon_phi, e.Muon_nTrackerLayers)
             return list(
                 pt * (1+factor*mk_safe(roccor.kScaleAndSmearMCerror, chrg, pt, eta, phi, nTrkLyrs, u1, u2))
                 for chrg, pt, eta, phi, nTrkLyrs in muon_inputs
             )
 
     mu_proxies = [
-        EventProxy('mu_up',   {'Muon_pt_corrected': lambda e: apply_mu_sys_err(e, +1)}),
-        EventProxy('mu_down', {'Muon_pt_corrected': lambda e: apply_mu_sys_err(e, -1)}),
+        EventProxy('mu_up',   {'Muon_corrected_pt': lambda e: apply_mu_sys_err(e, +1)}),
+        EventProxy('mu_down', {'Muon_corrected_pt': lambda e: apply_mu_sys_err(e, -1)}),
     ]
 
     return ele_proxies + mu_proxies

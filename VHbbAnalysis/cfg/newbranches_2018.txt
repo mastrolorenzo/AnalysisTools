@@ -22,7 +22,7 @@ type=4  name=useNLOVV
 type=8  name=Jet_bReg         max=250     lengthBranch=nJet
 
 type=1  name=nGenStatus2bHad
-type=1  name=nGenVbosons
+type=1  name=nGenVBosons
 type=2  name=LeadGenVBoson_pt
 type=1  name=LeadGenVBoson_pdgId
 type=1  name=nGenTop
