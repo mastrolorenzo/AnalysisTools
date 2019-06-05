@@ -1,17 +1,11 @@
 #~ /usr/bin/python
 import sys
-from os import listdir
+import os
 from os.path import isfile, join, isdir
 import ROOT
 import json
 from numpy import array
-from ROOT import TH2F
 import subprocess
-#ROOT.gSystem.Load("SampleContainer_cc.so")
-#ROOT.gSystem.Load("AnalysisManager_cc.so")
-#ROOT.gSystem.Load("VHbbAnalysis_cc.so")
-#ROOT.gSystem.Load("BDTInfo_h.so")
-#ROOT.gSystem.Load("VHbbTrigger_h.so")
 ROOT.gSystem.Load("AnalysisDict.so")
 
 debug=200
@@ -58,7 +52,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
 
         if settings.has_key("analysis"):
             am=ROOT.__getattr__(settings["analysis"])()
-            #debug=100000
+            am.debug=100000
         #print "samplesToRun",samplesToRun
         if settings.has_key("samples"):
             aminitialized=0
@@ -435,6 +429,7 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False,filesToRun=[]):
             if name.find("puhist") is 0:
                 sample["puhist"]=str(value)
             if name.find("dir") is 0:
+                sample["dir"]=str(value)
                 if len(filesToRun) > 0:
                     # no need to find all the files again just run on what is given
                     samplepaths = filesToRun
@@ -447,9 +442,9 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False,filesToRun=[]):
                             samplepaths.extend(findAllRootFiles(globalPrefix+dirname,site))
                     else:
                         # after skimming the sample directory name has been changed to sample name
-                        if debug > 10:
-                            print "right here, ",sample["name"]
-                        samplepaths.extend(findAllRootFiles(globalPrefix+sample["name"],site))
+                        if debug > 1:
+                            print "right here, ",sample
+                        samplepaths.extend(findAllRootFiles(globalPrefix+sample["dir"],site))
                 else:
                     samplepaths = findAllRootFiles(globalPrefix+value,site)
                 #print value
@@ -710,7 +705,7 @@ def SetupSF(lines):
         ptBins = sorted(ptBins)
 
         #print etaBins, ptBins
-        SF.scaleMap = TH2F(SF.name, SF.name, len(ptBins)-1, array(ptBins), len(etaBins)-1, array(etaBins))
+        SF.scaleMap = ROOT.TH2F(SF.name, SF.name, len(ptBins)-1, array(ptBins), len(etaBins)-1, array(etaBins))
         #print array(ptBins), array(etaBins)
 
         if (SF.binning.find("pt") != 0 and SF.binning.find("DATA") ==- 1):
@@ -769,15 +764,14 @@ def GetFileList(value, site):
     if value.find("/store") is 0:
         onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
     else:
-        #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
-        onlyFiles = list(join(value,f) for f in listdir(str(value)))
+        #onlyfiles = [ f for f in os.listdir(str(value)) if isfile(join(str(value),f)) ]
+        onlyFiles = list(join(value,f) for f in os.listdir(str(value)))
     return onlyFiles
 
 
 def findAllRootFiles(value, site):
     samplepaths = []
     if value.find("/store") is 0:
-        #onlyFiles = subprocess.check_output(["/cvmfs/cms.cern.ch/slc6_amd64_gcc491/cms/cmssw/CMSSW_7_4_14/external/slc6_amd64_gcc491/bin/xrdfs", siteIP, "ls", value]).split('\n')
         onlyFiles = subprocess.check_output(["xrdfs", siteIP, "ls", value]).split('\n')
         for filepath in onlyFiles:
             if (filepath == ""): continue
@@ -789,8 +783,8 @@ def findAllRootFiles(value, site):
             elif filepath.find("/log/")==-1:
                 samplepaths.extend(findAllRootFiles(filepath,site))
     else:
-        #onlyfiles = [ f for f in listdir(str(value)) if isfile(join(str(value),f)) ]
-        onlyFiles = listdir(str(value))
+        #onlyfiles = [ f for f in os.listdir(str(value)) if isfile(join(str(value),f)) ]
+        onlyFiles = os.listdir(str(value))
         for rootfile in onlyFiles:
             if rootfile.find(".root") != -1:
                 samplepaths.append(str(value)+"/"+str(rootfile))
