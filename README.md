@@ -135,3 +135,20 @@ but only runs two samples in the signal region:
 ./run_plot_from_tree.py <demo_config.py>
 ```
 
+## Making observable histograms/datacards
+The production of observable histogrmas uses again a separate tool that produces 
+TH1F in categories with weights and for numerous systematic variations.  In some 
+systematic variations the plotted observable is a different branch of the tree 
+(e.g. JES varations) and in other cases the weight of the events is augmented 
+(e.g. b-tagging systematics).  
+
+### Shape maker
+This tool is a next-generation tool developed for the VHcc analysis.  A PR is in 
+progress and instructions will be forthcoming.
+
+### Datacards
+After observables with systematic variations are produced, the combine harvester 
+tool kit is used to make datacards and some final plots.  The instructions from the 
+2017 analysis are linked below.
+
+https://gitlab.cern.ch/cms-hcg/ch-areas/VH2017/blob/master/input/VHbbInstructions.md
