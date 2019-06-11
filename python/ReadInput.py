@@ -489,7 +489,7 @@ def MakeSampleMap(lines,samplesToRun,runOnSkim=False,filesToRun=[]):
                         # after skimming the sample directory name has been changed to sample name
                         if debug > 1:
                             print "right here, ",sample
-                        samplepaths.extend(findAllRootFiles(globalPrefix+sample["dir"],site))
+                        samplepaths.extend(findAllRootFiles(globalPrefix+sample["name"],site))
                 else:
                     samplepaths = findAllRootFiles(globalPrefix+value,site)
                 #print value

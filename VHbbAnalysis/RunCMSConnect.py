@@ -114,7 +114,7 @@ def parse_command_line(argv):
     parser.add_option('--site', '--site', dest='site', default='FNAL', type=str, help='If running on lxplus include option --site CERN, otherwise assumes you are running on FNAL')
     parser.add_option('--useSGE', '--useSGE', dest='useSGE', default=0, type=int, help='If 0 (default) use condor, if 1 use SGE job submission')
     parser.add_option('--doSkim', '--doSkim', dest='doSkim', default=0, type=int, help='If 0 (default) run analysis jobs, if 1 run skimming jobs')
-    parser.add_option('--runOnSkim', '--runOnSkim', dest='runOnSkim', default=1, type=int, help='If 1 (default) run analysis jobs assuming the input files are already skimmed by AT, if 0 assume running directly on post-processed NanoAOD. If doSkim is 1 then this variable is assumed to be always 0.')
+    parser.add_option('--runOnSkim', '--runOnSkim', dest='runOnSkim', default=0, type=int, help='If 0 (default) run analysis jobs assuming the input files are already skimmed by AT, if 0 assume running directly on post-processed NanoAOD. If doSkim is 1 then this variable is assumed to be always 0.')
     parser.add_option('--doKinFit', '--doKinFit', dest='doKinFit', default=0, type=int, help='If 1 (default=0) runs the kinematic fit after the analysis job (Automatically turned off when doSkim is 1).')
     parser.add_option('--submitJobs', '--submitJobs', dest='submitJobs', default=1, type=int, help='If 1 (default) submit jobs to batch queue, if 0 then only create submission files')
     parser.add_option('--reuseTarball', action='store_true', help='Reuse a tarball matching the jobName if present.')

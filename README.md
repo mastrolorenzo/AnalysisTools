@@ -30,7 +30,7 @@ python RunAnalysis.py -c vhbb_config_2017.txt
 
 For a unit test something like this would be better.  This runs over 1\% of events where the sample name contains 'Wplus'.
 ```
-python RunAnalysis.py -c vhbb_config_2017.txt --sample Wplus -f 0.01
+python RunAnalysis.py -c vhbb_config_2017.txt --sample WplusH125_powheg -f 0.01
 ```
 
 ## Key configuration files
@@ -96,3 +96,59 @@ type=2  name=elMetDPhiCut       val=2.0
 
 All of these settings are saved in a separate tree in the output file(s).  This way you 
 can look to see what cuts were applied in the files themselves.
+
+
+## Making stacked plots (with Varial)
+In general the output from AnalysisManager inherited classes will be a series of trees
+containing per event weight, event class selection, event variables and evaluated 
+discriminator outputs.  A separate set of code is used to open these trees and make
+stacked plots.  
+
+###Using PlottingTools/PlotWithVarial
+
+In PlottingTools/PlotWithVarial you can find a plotting tool that runs in parallel 
+and is configured in python.  It creates a webpage on which the plots are shown.  
+The plots in different categories are linked. The tool is configured with a config file
+ where a couple of variables are defined. This is an example:
+
+```
+name = 'VHbbPlots'
+input_pattern = '/some/path/V25_VHbb_runonskim_20180212/haddjobs/sum_%s.root'
+weight = 'weight'
+enable_reuse_step = True  # try to find output on disk and don't run a step if present
+
+from main_samples import the_samples_dict, sample_colors
+from main_selections import the_category_dict
+```
+
+The last two lines import the samples and category definitions. Have a look at these 
+files to see how the_category_dict and the_samples_dict are defined. This exact structure 
+is expected by the tool.
+
+IMPORTANT: input_pattern must contain "%s"! This is where the input token from the sample definition is inserted. Wildcards are allowed.
+
+Alter input_pattern in the config file an run this script.  For the first time running 
+it might be good to start with demo_config.py, which is identical to main_config.py, 
+but only runs two samples in the signal region:
+
+```
+./run_plot_from_tree.py <demo_config.py>
+```
+
+## Making observable histograms/datacards
+The production of observable histogrmas uses again a separate tool that produces 
+TH1F in categories with weights and for numerous systematic variations.  In some 
+systematic variations the plotted observable is a different branch of the tree 
+(e.g. JES varations) and in other cases the weight of the events is augmented 
+(e.g. b-tagging systematics).  
+
+### Shape maker
+This tool is a next-generation tool developed for the VHcc analysis.  A PR is in 
+progress and instructions will be forthcoming.
+
+### Datacards
+After observables with systematic variations are produced, the combine harvester 
+tool kit is used to make datacards and some final plots.  The instructions from the 
+2017 analysis are linked below.
+
+https://gitlab.cern.ch/cms-hcg/ch-areas/VH2017/blob/master/input/VHbbInstructions.md
