@@ -3,14 +3,14 @@ outputname=output
 
 samples=cfg/samples_2017.txt
 
-earlybranches=cfg/earlybranches.txt
-existingbranches=cfg/existingbranches.txt
+earlybranches=cfg/earlybranches_2017.txt
+existingbranches=cfg/existingbranches_2017.txt
 newbranches=cfg/newbranches.txt
 
 bdt_0lep=cfg/bdt_0lep_2016_ICHEP2018.txt
 #bdt_0lep_boosted=cfg/bdt_0lep_boosted.txt
 bdt_1lep=cfg/bdt_1lep_2016_ICHEP2018.txt
-#bdt_1lep_boosted=cfg/bdt_1lep_boosted.txt
+bdt_1lep_boosted=cfg/bdt_1lep_boosted.txt
 bdt_2lep_highPt=cfg/bdt_2lep_highPt_2017_ICHEP2018.txt
 bdt_2lep_lowPt=cfg/bdt_2lep_lowPt_2017_ICHEP2018.txt
 #bdt_2lep_boosted=cfg/bdt_2lep_boosted.txt
@@ -26,7 +26,7 @@ bdt_2lep_low=cfg/dnn_2lep_lowPt_2017_ICHEP2018.txt
 #bdt_2lep_highPt_vzbb=cfg/bdt_2lep_highPt_vzbb.txt
 #bdt_2lep_lowPt_vzbb=cfg/bdt_2lep_lowPt_vzbb.txt
 
-settings=cfg/settings.txt
+settings=cfg/settings_2017.txt
 
 systematics=cfg/systematics_facJECsNano.txt
 #systematics=cfg/systematics.txt

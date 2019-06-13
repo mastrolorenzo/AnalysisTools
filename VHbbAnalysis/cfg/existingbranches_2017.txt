@@ -398,3 +398,10 @@ type=2  name=GenLep_GenBJ1_dPhi                   onlyMC=1 allowMissingBranch=1
 type=2  name=GenLep_GenBJ2_dPhi                   onlyMC=1 allowMissingBranch=1
 type=1  name=GenLepIndex1                         onlyMC=1 allowMissingBranch=1
 type=1  name=GenLepIndex2                         onlyMC=1 allowMissingBranch=1
+
+type=1  name=nGenJetAK8                           onlyMC=1 allowMissingBranch=1
+type=7  name=GenJetAK8_partonFlavour              max=10 onlyMC=1 lengthBranch=nGenJetAK8 allowMissingBranch=1
+type=8  name=GenJetAK8_pt                         max=10 onlyMC=1 lengthBranch=nGenJetAK8 allowMissingBranch=1
+type=8  name=GenJetAK8_eta                        max=10 onlyMC=1 lengthBranch=nGenJetAK8 allowMissingBranch=1
+type=8  name=GenJetAK8_phi                        max=10 onlyMC=1 lengthBranch=nGenJetAK8 allowMissingBranch=1
+

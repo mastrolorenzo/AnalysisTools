@@ -18,6 +18,8 @@ the_samples_dict = {
     #'Data':                          [0,      1.,       'Data',             ['Run2017_MET_MiniAOD']],
     #'Data':                          [0,      1.,       'Data',             ['Run2016BToG_MET_ReMiniAOD']],
     'Data':                          [0,      1.,       'Data',             ['Run2016BToG_Mu_ReMiniAOD', 'Run2016BToG_Ele_ReMiniAOD','Run2016BToG_MET_ReMiniAOD']],
+    'WplusH125_powheg':              [-12500, 10., 'WH(b#bar{b})',   ['WplusH125_powheg']],
+    'WminusH125_powheg':              [-12501, 10., 'WH(b#bar{b})',   ['WminusH125_powheg']],
     #'Data':                          [0,      1.,       'Data',             ['ZJetsToNuNu_HT100To200']],
     'TT_powheg':                      [200,     SF_tt,       't#bar{t}',      ['TT_powheg']],
     'TToLeptons_s':                  [16,     1.,       'Top',              ['TToLeptons_s']],
@@ -127,6 +129,7 @@ the_samples_dict = {
 }
 
 sample_colors = {
+    'WH(b#bar{b})':      1,
     'WH125':            880,
     'ZH125':            808,
     't#bar{t}':         600,

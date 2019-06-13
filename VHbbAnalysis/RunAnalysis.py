@@ -253,6 +253,9 @@ else:
                 # Prevent condor from transferring files just because they are new,
                 # e.g. Python bytecode, intermediate kinFit and MVA evaluation files.
                 content += "transfer_output_files = \"\"\n"
+            if site == "CERN":
+                #Set expected job time to 24h (otherwise the default is 20 minutes)
+                content += '+JobFlavour = "tomorrow"\n'
             content += "Queue Arguments from (\n"
             content += "%s" %arg_string
             content += ")"
