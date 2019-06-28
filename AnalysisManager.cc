@@ -586,7 +586,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
             }
         }
 	
-	if(cursample->InputPU == NULL){
+	if(cursample->InputPU == NULL && !(cursample->sampleNum==0)){
 	      
 	  ofile->cd();
 	  globalPUInput->Write();
