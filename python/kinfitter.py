@@ -318,9 +318,12 @@ def make_lep_sys_event_proxies(year):
 
     # Muons
     #######
-    if int(year) == 2017:
+    if int(year) > 2016:
         def apply_mu_sys_err(e, factor):
-            return list(pt+factor*err for pt, err in zip(e.Muon_corrected_pt, e.Muon_pt_sys_uncert))
+            if factor>0:
+                return list(e.Muon_correctedUp_pt)
+            else:
+                return list(e.Muon_correctedDown_pt)
     else:
         ROOT.gROOT.ProcessLine('.L aux/roccor.2016.v3_mod/RoccoR.cc+')
         roccor = ROOT.RoccoR('aux/roccor.2016.v3_mod/rcdata.2016.v3')
