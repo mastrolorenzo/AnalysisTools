@@ -318,38 +318,10 @@ def make_lep_sys_event_proxies(year):
 
     # Muons
     #######
-    if int(year) > 2016:
-        def apply_mu_sys_err(e, factor):
-            if factor>0:
-                return list(e.Muon_correctedUp_pt)
-            else:
-                return list(e.Muon_correctedDown_pt)
-    else:
-        ROOT.gROOT.ProcessLine('.L aux/roccor.2016.v3_mod/RoccoR.cc+')
-        roccor = ROOT.RoccoR('aux/roccor.2016.v3_mod/rcdata.2016.v3')
-
-        def mk_safe(fct, *args):
-            try:
-                return fct(*args)
-            except Exception as e:
-                if any('Error in function boost::math::erf_inv' in arg for arg in e.args):
-                    print 'WARNING: catching exception and returning -1. Exception arguments: %s' % e.args
-                    return -1.
-                else:
-                    raise e
-
-        def apply_mu_sys_err(e, factor):
-            u1 = random.uniform(0.0, 1.0)
-            u2 = random.uniform(0.0, 1.0)
-            muon_inputs = zip(e.Muon_charge, e.Muon_corrected_pt, e.Muon_eta, e.Muon_phi, e.Muon_nTrackerLayers)
-            return list(
-                pt * (1+factor*mk_safe(roccor.kScaleAndSmearMCerror, chrg, pt, eta, phi, nTrkLyrs, u1, u2))
-                for chrg, pt, eta, phi, nTrkLyrs in muon_inputs
-            )
 
     mu_proxies = [
-        EventProxy('mu_up',   {'Muon_corrected_pt': lambda e: apply_mu_sys_err(e, +1)}),
-        EventProxy('mu_down', {'Muon_corrected_pt': lambda e: apply_mu_sys_err(e, -1)}),
+        EventProxy('mu_up',   {'Muon_corrected_pt': lambda e: list(e.Muon_correctedUp_pt)}),
+        EventProxy('mu_down', {'Muon_corrected_pt': lambda e: list(e.Muon_correctedDown_pt)}),
     ]
 
     return ele_proxies + mu_proxies
