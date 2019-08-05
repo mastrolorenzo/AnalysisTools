@@ -154,7 +154,7 @@ public :
     TH1D*           globalPUTarget;
     TH1D*           globalPUTargetUP;
     TH1D*           globalPUTargetDOWN;
-    TH1D*           globalPUInput;
+    TH1D*           globalPUInput=NULL;
 };
 
 #endif

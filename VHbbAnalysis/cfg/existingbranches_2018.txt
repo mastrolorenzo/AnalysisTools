@@ -35,6 +35,53 @@ type=11  name=GenJet_hadronFlavour               max=30  onlyMC=1 lengthBranch=n
 
 type=5  name=LHE_Nc  onlyMC=1     allowMissingBranch=1
 
+type=1  name=nGenStatus2bHad                      onlyMC=1 allowMissingBranch=1
+type=1  name=nGenVBosons                          onlyMC=1 allowMissingBranch=1
+type=2  name=LeadGenVBoson_pt                     onlyMC=1 allowMissingBranch=1
+type=2  name=LeadGenVBoson_eta                    onlyMC=1 allowMissingBranch=1
+type=2  name=LeadGenVBoson_phi                    onlyMC=1 allowMissingBranch=1
+type=2  name=LeadNeutrinoFromGenVBoson_pt         onlyMC=1 allowMissingBranch=1
+type=1  name=LeadGenVBoson_pdgId                  onlyMC=1 allowMissingBranch=1
+type=0  name=nW                                   onlyMC=1 allowMissingBranch=1
+type=0  name=nWlep                                onlyMC=1 allowMissingBranch=1
+type=1  name=nGenTop                              onlyMC=1 allowMissingBranch=1
+type=2  name=GenTop1_mass                         onlyMC=1 allowMissingBranch=1
+type=2  name=GenTop2_mass                         onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_pt                            onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_eta                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_phi                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_mass                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_genjet_pt                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_genjet_mass                   onlyMC=1 allowMissingBranch=1
+type=1  name=GenBJ1_index                         onlyMC=1 allowMissingBranch=1
+type=1  name=GenBJ1_genjet_index                  onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_pt                            onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_eta                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_phi                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_mass                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_genjet_pt                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_genjet_mass                   onlyMC=1 allowMissingBranch=1
+type=1  name=GenBJ2_index                         onlyMC=1 allowMissingBranch=1
+type=1  name=GenBJ2_genjet_index                  onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_pt                            onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_eta                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_phi                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_mass                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_dPhi                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_dEta                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_dR                            onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_genjet_pt                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_genjet_mass                   onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ1_dR                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ2_dR                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ1_dEta                   onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ2_dEta                   onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ1_dPhi                   onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ2_dPhi                   onlyMC=1 allowMissingBranch=1
+type=1  name=GenLepIndex1                         onlyMC=1 allowMissingBranch=1
+type=1  name=GenLepIndex2                         onlyMC=1 allowMissingBranch=1
+
+
 type=0  name=nLHEScaleWeight                     onlyMC=1 allowMissingBranch=1
 type=8  name=LHEScaleWeight                      max=10    onlyMC=1   lengthBranch=nLHEScaleWeight allowMissingBranch=1
 type=0  name=nLHEPdfWeight                       onlyMC=1   allowMissingBranch=1
@@ -69,8 +116,6 @@ type=8  name=Electron_pfRelIso03_all        max=50    lengthBranch=nElectron
 type=8  name=Electron_energyErr             max=50    lengthBranch=nElectron
 type=8  name=Electron_r9                    max=50    lengthBranch=nElectron
 type=11  name=Electron_lostHits              max=50    lengthBranch=nElectron
-type=10  name=Electron_mvaSpring16GP_WP80    max=50    lengthBranch=nElectron
-type=10  name=Electron_mvaSpring16GP_WP90    max=50    lengthBranch=nElectron
 type=10  name=Electron_mvaFall17V2Iso_WP80    max=50     lengthBranch=nElectron
 type=10  name=Electron_mvaFall17V2Iso_WP90    max=50     lengthBranch=nElectron
 type=7  name=Electron_charge                max=50    lengthBranch=nElectron

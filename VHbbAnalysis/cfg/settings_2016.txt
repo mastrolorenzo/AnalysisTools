@@ -37,7 +37,7 @@ type=2  name=tau2OverTau1Cut_2lepchan     val=10
 type=2  name=enableFSRRecovery   val=1.
 type=2  name=slimmedOutput      val=1
 
-type=2  name=reRunGenInfo       val=1
+type=2  name=reRunGenInfo       val=0
 
 type=2  name=j1ptCut_0lepchan   val=60
 type=2  name=j1ptCut_1lepchan   val=25
@@ -62,12 +62,12 @@ type=2  name=JetEtaCut          val=2.5
 type=2  name=enableFSRRecovery   val=1.
 
 #use the following dictionary: 0. => DeepCSV, 1. => CMVA, 2. => CSV
-type=2  name=taggerType         val=1.
+type=2  name=taggerType         val=0.
 
 #define the correct loose (L), medium (M) and tight (T) working point (WP) associated to the chosen tagger
-type=2  name=tagWPL             val=-0.5884
-type=2  name=tagWPM             val=0.4432
-type=2  name=tagWPT             val=0.9432
+type=2  name=tagWPL             val=0.2217
+type=2  name=tagWPM             val=0.6321
+type=2  name=tagWPT             val=0.8953
 
 type=2  name=JetPtPresel        val=20
 type=2  name=LepPtPresel        val=20

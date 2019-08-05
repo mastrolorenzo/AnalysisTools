@@ -1,4 +1,4 @@
-prefix_desy=/pnfs/desy.de/cms/tier2/store/user/htholen/VHbbPostNano2016/V4/
+prefix_desy=/pnfs/desy.de/cms/tier2/store/user/hkaveh/VHbbPostNano2016/V11/
 prefix_cern=/store/group/phys_higgs/hbb/ntuples/VHbbPostNano/2016/V4/
 prefix_fnal=/store/group/lpchbb/VHbbNanoPostProc/2016/V4/
 # prefix_skim=/enter/path/to/favourite/skim/here/
