@@ -188,8 +188,7 @@ type=8  name=Jet_pt_jesTotalUp                         max=100     lengthBranch=
 type=8  name=Jet_pt_jesTotalDown                         max=100     lengthBranch=nJet
 type=8  name=Jet_mass_jesTotalUp                         max=100     lengthBranch=nJet
 type=8  name=Jet_mass_jesTotalDown                         max=100     lengthBranch=nJet
-type=8  name=Jet_mass_nom                         max=100     lengthBranch=nJet
-type=8  name=Jet_mass_nom                         max=100     lengthBranch=nJet
+type=8  name=Jet_mass_nom                       max=100     lengthBranch=nJet  onlyMC=1 dropBranch=1
 ##type=8  name=Jet_corr_JER                     max=100     lengthBranch=nJet  onlyMC=1 dropBranch=1
 ##type=8  name=Jet_pt_reg_corrJECUp             max=100     lengthBranch=nJet
 ##type=8  name=Jet_pt_reg_corrJECDown           max=100     lengthBranch=nJet

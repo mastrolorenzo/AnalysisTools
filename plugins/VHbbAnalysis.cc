@@ -221,7 +221,8 @@ bool VHbbAnalysis::Preselection() {
         fatJetPtCut       = std::min((double)fatJetPtCut            ,m("fatJetPtCut_2lepchan"));
 
         for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
-            if(m("FatJet_pt",iFatJet)>fatJetPtCut){
+            if(m("FatJet_pt",iFatJet)>fatJetPtCut
+                && fabs(m("FatJet_eta",iFatJet))<2.5){
                 atLeastOnePreselFatJet=true;
                 break;
             }
@@ -242,7 +243,7 @@ bool VHbbAnalysis::Analyze() {
     *b["oneMergedJet"]=false;
     *in["FatJetCand_index"]=-1;
     *f["MET_Pt_Nano"] = m("MET_Pt");
-
+    
     // move fast requirements to the front
     if (debug>1000) std::cout << "Imposing json and trigger requirements" << std::endl;
 
@@ -294,13 +295,21 @@ bool VHbbAnalysis::Analyze() {
 
     ComputeOtherEventKinematics();
 
+    ComputeBoostedVariables();
+    
     ControlSampleSelection();
-
+    
 
     if (doCutFlow && mInt("cutFlow") >= m("doCutFlow")) {
         // keep all preselected events for cutflow
         return true;
     } else {
+        
+        if( mInt("boostedControlSample")==-1 && mInt("controlSample") > -1) *in["boostedCategory"] = 0; //resolved
+        if( mInt("boostedControlSample")!=-1 && mInt("controlSample") > -1) *in["boostedCategory"] = 1; //overlap
+        if( mInt("boostedControlSample")!=-1 && mInt("controlSample") == -1) *in["boostedCategory"] = 2; //boosted
+        
+        if( (int(m("doBoost")) == 1) && mInt("boostedControlSample")!=-1) return true;
         return mInt("controlSample") > -1;
     }
 }
@@ -329,6 +338,43 @@ void VHbbAnalysis::FinishEvent() {
               *in["nGenStatus2bHad_re"]=mInt("nGenStatus2bHad_re")+1;
             }
         }
+
+        //Only compute gen b hadrons in final state
+        *in["nGenStatus2bHadFinal"]=0;
+        std::vector<int> bMotherIds;
+        for(int indGP=mInt("nGenPart")-1; indGP>-1; indGP--){//Loop starting at the end
+            if(mInt("GenPart_status",indGP)==2
+                && (((std::abs(mInt("GenPart_pdgId",indGP))/100)%10 ==5) || ((std::abs(mInt("GenPart_pdgId",indGP))/1000)%10==5)) ){
+                if(std::find(bMotherIds.begin(),bMotherIds.end(),indGP) == bMotherIds.end()){//if particle is not a mother of another composite b particle
+                    *in["nGenStatus2bHadFinal"]=mInt("nGenStatus2bHadFinal")+1;
+                }
+                bMotherIds.push_back(mInt("GenPart_genPartIdxMother",indGP));
+            }
+        }
+        //Count gen b's in fatjet to split ttbar
+        int nGenBJetsInFatJetCand = 0;
+        for(int indGJ=0; indGJ<mInt("nGenJet"); indGJ++){
+            if (mInt("GenJet_hadronFlavour",indGJ) == 5 && m("GenJet_pt",indGJ)>20 && fabs(m("GenJet_eta",indGJ)<2.4)) {//b GenJet criteria
+               //Calculate dR GenJet, FatJetCand, see if it's less than 0.8
+                double deltaR = AnalysisManager::EvalDeltaR( m("GenJet_eta",indGJ), m("GenJet_phi",indGJ), m("FatJetCand_eta"), m("FatJetCand_phi"));
+                if(deltaR < 0.8) nGenBJetsInFatJetCand++;
+            }
+        }
+        *in["nGenBJetsInFatJetCand"] = nGenBJetsInFatJetCand;
+        
+        //Gen AK8 Jets
+        //Find closest Gen AK8 Jet to FatJetCand, and save its flavour
+        double minDeltaR = 99.99;
+        *in["GenFatJetCand_partonFlavour"]=-9999;//was f
+        for(int indAK8Jet=0; indAK8Jet<mInt("nGenJetAK8"); indAK8Jet++){
+            double deltaR = AnalysisManager::EvalDeltaR(m("GenJetAK8_eta",indAK8Jet), m("GenJetAK8_phi",indAK8Jet)  , m("FatJetCand_eta"), m("FatJetCand_phi"));
+            if(deltaR < minDeltaR){
+                minDeltaR = deltaR;
+                *in["hGenFatJetCand"] = indAK8Jet;
+                *in["GenFatJetCand_partonFlavour"]= mInt("GenJetAK8_partonFlavour",indAK8Jet);
+            }
+        }
+
 
         //first check for Higgs bosons:
         TLorentzVector GenBJ1, GenBJ2, GenBJJ;
@@ -1564,7 +1610,6 @@ void VHbbAnalysis::FinishEvent() {
     }
 
     // Channel specific BDT inputs
-    ComputeBoostedVariables();
 
     std::string bdt_branch_label;
     if(mInt("isZnn")) {
@@ -2262,9 +2307,7 @@ bool VHbbAnalysis::SelectJets(){
         // (i.e. there is no fat jet) or file size for W+jets is ridiculous for boosted analysis
         FatJetSelection();
 
-        //FIXME should we do this differently...
         if(mInt("FatJetCand_index")>-1){
-            *in["controlSample"] = 0;
             *b["oneMergedJet"]=true;
         }
     } 
@@ -2961,6 +3004,46 @@ void VHbbAnalysis::ControlSampleSelection(){
         }
         // end of 2-lepton
     }
+    
+    //BOOSTED CONTROL SAMPLE SELECTION
+    *in["boostedControlSample"] = -1;
+    if(int(m("doBoost"))==1 && m("oneMergedJet")){
+        if(mInt("FatJetCand_index")>-1
+            && m("V_pt")>250
+            && mInt("nAddLeptons") == 0
+            && m("lepMetDPhi") < 2){
+            
+            //std::cout << "\t\tDoing boosted control sample" << std::endl;
+            //only single lep for now
+            if(mInt("isWmunu")||mInt("isWenu")){    
+                //Boosted Signal
+                if((m("FatJetCand_Msoftdrop_corrected") > 90)
+                    && (m("FatJetCand_Msoftdrop_corrected") < 150)
+                    && (m("FatJetCand_doubleB") > 0.9 )
+                    && (mInt("nBJetsOutsideFatJet") == 0)){
+                        *in["boostedControlSample"] = 0;
+                }
+                //ttbar CR=1
+                if((m("FatJetCand_Msoftdrop_corrected") > 50)
+                    && (m("FatJetCand_doubleB") > 0.9)
+                    && (mInt("nBJetsOutsideFatJet") > 0)){
+                        *in["boostedControlSample"] = 11;
+                }
+                //V+light CR=2
+                if((m("FatJetCand_Msoftdrop_corrected") > 50)
+                    && (m("FatJetCand_doubleB") < 0.9)
+                    && (mInt("nBJetsOutsideFatJet") == 0)){
+                        *in["boostedControlSample"] = 12;
+                }
+                //V+hf CR=3
+                if( ((m("FatJetCand_Msoftdrop_corrected") > 50 && m("FatJetCand_Msoftdrop_corrected") < 90) || (m("FatJetCand_Msoftdrop_corrected") > 150 && m("FatJetCand_Msoftdrop_corrected") < 200))
+                    && m("FatJetCand_doubleB") > 0.9
+                    && mInt("nBJetsOutsideFatJet") == 0){
+                        *in["boostedControlSample"] = 13;
+                }
+            }
+        }
+    }
 }
 
 void VHbbAnalysis::FatJetSelection(){
@@ -2982,13 +3065,22 @@ void VHbbAnalysis::FatJetSelection(){
 
         float highestPt=0;  // I'm assuming highest fat jet pt is best... maybe not?
         float tau2OverTau1=100;
+        float highestDoubleB=-2;
         for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
             tau2OverTau1=m("FatJet_tau2",iFatJet)/m("FatJet_tau1",iFatJet);
             if(m("FatJet_pt",iFatJet)>fatJetPtCut
                     && m("FatJet_btagHbb",iFatJet)>fatJetBBTaggerCut
-                    && tau2OverTau1<tau2OverTau1Cut){
-                if(m("FatJet_pt",iFatJet)>highestPt){
+                    && m("FatJet_mass", iFatJet)>50
+                    && fabs(m("FatJet_eta",iFatJet))<2.5
+                    && tau2OverTau1<tau2OverTau1Cut){//turned off for boosted
+                //if(m("FatJet_pt",iFatJet)>highestPt)
+                if(m("FatJet_btagHbb",iFatJet)>highestDoubleB){
                     *in["FatJetCand_index"]=iFatJet;
+                    highestDoubleB=m("FatJet_btagHbb",iFatJet);
+                    if(m("FatJet_pt",iFatJet)<highestPt){
+                        std::cout<<"this pt is smaller than the last candidate"<<std::endl;
+                    }
+                    highestPt=m("FatJet_pt",iFatJet);
                 }
             }
         }
@@ -3085,7 +3177,35 @@ void VHbbAnalysis::ComputeBoostedVariables(){
                 if(iJet!=mInt("hJetInd2")&&iJet!=mInt("hJetInd1")&&m("Jet_puId",iJet)==7) *f["nJets30_2lep"]=m("nJets30_2lep")+1;
             }
         }
+        //Compute number of b jets outside the fatjet
+        TLorentzVector FatJet;
+        FatJet.SetPtEtaPhiM(m("FatJet_pt",mInt("FatJetCand_index")),
+            m("FatJet_eta",mInt("FatJetCand_index")),
+            m("FatJet_phi",mInt("FatJetCand_index")),
+            m("FatJet_msoftdrop",mInt("FatJetCand_index")) );
+
+        int nBJetsOutsideFatJet = 0;
+        for(int iJet=0;iJet<mInt("nJet");iJet++){
+            if(m("Jet_lepFilter",iJet)
+                && m("Jet_Pt",iJet)>25 
+                && abs(m("Jet_eta",iJet))<2.5
+                && m(taggerName,iJet)>m("tagWPL")){
+
+                TLorentzVector aJet;
+                aJet.SetPtEtaPhiM(m("Jet_pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet));
+                if(FatJet.DeltaR(aJet)>0.8){//Is 0.6 right? fatjet 'radius' is 0.4, jet 'radius' is 0.2
+                    nBJetsOutsideFatJet++;
+                }
+            }
+        }
+        *in["nBJetsOutsideFatJet"] = nBJetsOutsideFatJet;
+
+
+
+
         *f["FatJetCand_pt"]=m("FatJet_pt",mInt("FatJetCand_index"));
+        *f["FatJetCand_eta"]=m("FatJet_eta",mInt("FatJetCand_index"));
+        *f["FatJetCand_phi"]=m("FatJet_phi",mInt("FatJetCand_index"));
         *f["FatJetCand_tau21"]=m("FatJet_tau2",mInt("FatJetCand_index"))/m("FatJet_tau1",mInt("FatJetCand_index"));
         *f["FatJetCand_tau32"]=m("FatJet_tau3",mInt("FatJetCand_index"))/m("FatJet_tau2",mInt("FatJetCand_index"));
         *f["FatJetCand_tau1"]=m("FatJet_tau1",mInt("FatJetCand_index"));

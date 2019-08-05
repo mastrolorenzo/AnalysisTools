@@ -9,14 +9,36 @@ CMVAmin = 'Jet_btagCMVA[hJetInd1] > Jet_btagCMVA[hJetInd2] ? Jet_btagCMVA[hJetIn
 lepRelIso1_safe = 'isWmunu || isWenu || isZmm || isZee ? selLeptons_relIso_0 : -1'
 lepRelIso2_safe = 'isZmm || isZee ? selLeptons_relIso_1 : -1'
 
+
 test = {
+    
+        'V_pt':     ("V_pt",                'test;p_{T}(V)@[GeV];', 30, 200, 500),
+        'FatJetCand_pt':     ("FatJetCand_pt", 'FatJetCand_pt;p_{T}(fj)@[GeV];', 20, 200, 500),#was 12 bins
+        'FatJetCand_eta':     ("FatJetCand_eta", 'FatJetCand_eta;\eta(fj);', 40, -3, 3),
+        'FatJetVdPhi':      ("FatJetVdPhi;\Delta\phi(V,FatJetCand);", 30, 2.85, 3.15),
+        'V_mt':     ("V_mt",     'V_mt', 30, 0, 150),
+        'nBJetsOutsideFatJet':  ("nBJetsOutsideFatJet",             "nBJetsOutsideFatJet", 10, 0, 10),
+        'FatJetCand_tau21':     ("FatJetCand_tau21",                'FatJetCand_tau21;#tau_{21};', 20, 000, 1),
+        'FatJetCand_tau32':     ("FatJetCand_tau32",                'FatJetCand_tau32;#tau_{32};', 20, 000, 1),
+        'FatJetCand_doubleB':     ("FatJetCand_doubleB",                'FatJetCand_doubleB;double btag;', 15, .85, 1),
+        'FatJetCand_Msoftdrop_corrected':     ("FatJetCand_Msoftdrop_corrected",      'FatJetCand_Msoftdrop_corrected;m_{SD}@[GeV];', 15, 50, 200),
+        #'FatJetCand_mass':  ('FatJetCand_mass', 'FatJetCand_mass', 20, 0, 200),
+        'oneMergedJet': ('oneMergedJet', 'oneMergedJet', 2, 0, 2),
+        'OutsideJetMaxPt' : ('Max$(Jet_Pt*(sqrt(pow(FatJetCand_eta-Jet_eta,2)+pow((FatJetCand_phi-Jet_phi)*(fabs(FatJetCand_phi-Jet_phi)<3.14)+(2*3.14-fabs(FatJet_phi-Jet_phi))*(fabs(FatJet_phi-Jet_phi)>3.14),2))>0.8))' , 'OutsideJetMaxPt', 50, 100, 400),#Max pt of jet with dR(jet,fatjetcand)>0.8
     #'met_pt':           ('MET_Pt',                              ';MET@p_{T}@GeV;',              50,      0,      500     ),
     #'Hpt':              ('H_pt',                                ';p_{T}(jj)@GeV;',              21,      0,      350     ),
     #'Vtype':            ('Vtype',                               ';Vtype;',                      10,      -.5,    9.5     ),
     #'jetsubleadpt':     ('Jet_bReg[hJetInd2]',                  ';Regressed Jet2@P_{T}@GeV;',             25,      0,      250     ),
-    'DeepCSVmin':          (DeepCSVmin,                               ';DeepCSV_{min};',                 60,      0.,     1       ),
+    #'DeepCSVmin':          (DeepCSVmin,                               ';DeepCSV_{min};',                 60,      0.,     1       ),
    # 'DeepCSVmin':          (DeepCSVmin,                               ';DeepCSV_{min};',                 20,      0.,     1       ),
     #'BDTZllHigh':              ('CMS_vhbb_BDT_Zll_HighPT_13TeV',              ';BDT@Output;',                 30,      -1,     1       ),
+    'GenFatJetCand_partonFlavour': ('GenFatJetCand_partonFlavour', 'GenFatJetCand_partonFlavour', 7,-0.5,6.5),
+    
+    #'GenJetAK8_partonFlavour': ('GenJetAK8_partonFlavour[hGenFatJetCand]', 'GenJetAK8_partonFlavour', 6, 0, 6),
+    #'GenJetAK8_pt': ('GenJetAK8_pt[hGenFatJetCand]', 'GenJetAK8_pt', 20, 0, 500),
+    #'GenJetAK8_eta': ('GenJetAK8_eta[hGenFatJetCand]', 'GenJetAK8_eta', 20, -3, 3),
+    #'GenJetAK8_phi': ('GenJetAK8_phi[hGenFatJetCand]', 'GenJetAK8_phi', 20, -3.14,3.14),
+
 }
 
 vars_used_in_selections = {

@@ -51,7 +51,39 @@ cats_CR_2Lepton_highVpt = {
     'CR_2Lepton_highVpt_VpLF_El':  '(controlSample==22 && isZee==1%s%s%s)' % (good_ele_1, good_ele_2, high_vpt),
     'CR_2Lepton_highVpt_VpHF_El':  '(controlSample==23 && isZee==1%s%s%s)' % (good_ele_1, good_ele_2, high_vpt),
 }
+cats_CR_TT_boosted = {
+        'CR_TT_boosted': '(boostedControlSample==11)'
+}
+cats_CR_Vlight_boosted = {
+        'CR_Vlight_boosted': '(boostedControlSample==12)'
+}
+cats_CR_Vhf_boosted = {
+        'CR_Vhf_boosted': '(boostedControlSample==13)'
+}
+cats_CR_Vhf_boosted_El = {
+        'CR_Vhf_boosted_El': '(boostedControlSample==13)&&(isWenu)'
+}
+cats_CR_Vhf_boosted_Mu = {
+        'CR_Vhf_boosted_Mu': '(boostedControlSample==13)&&(isWmunu)'
+}
 
+cats_SR_1Lepton_boosted = {
+        'SR_1Lepton_boosted': '(boostedControlSample==0)&&(sampleIndex!=0)'#&&(V_pt>275)&&(FatJetCand_tau32>.4)'#blind the SR
+}
+
+cats_SR_1Lepton_boosted_high_btag = {
+        'SR_1Lepton_boosted_high_btag': '(boostedControlSample==0)&&(sampleIndex!=0)&&(FatJetCand_doubleB>0.97)'#blind the SR
+}
+
+cats_SR_1Lepton_boosted_low_btag = {
+        'SR_1Lepton_boosted_low_btag': '(boostedControlSample==0)&&(sampleIndex!=0)&&(FatJetCand_doubleB<=0.97)'#&&(V_pt>300)&&(FatJetCand_tau32>.4)',#blind the SR
+}
+boosted_sel = ['boostedCategory>0'] #boostedCategory>0 means plot overlap and boosted events together
+boosted_SR_sel = boosted_sel+[]
+
+boosted_SR_low_btag_sel = boosted_SR_sel
+
+boosted_SR_high_btag_sel = boosted_SR_sel
 
 no_sel = [
     'Pass_nominal',
@@ -98,9 +130,17 @@ the_category_dict = {
 #  'CR_2LeptHI':   [cats_CR_2Lepton_highVpt, no_sel,      nano_plotvariables.vars_2lepCR],
    # 'CR_2LeptHI':   [cats_CR_2Lepton_highVpt, no_sel,      nano_plotvariables.test],
 #  'CR_1Lepton':   [cats_CR_1Lepton,         cs_1lep_sel, nano_plotvariables.vars_1lepCR],
-  'CR_1Lepton':   [cats_CR_1Lepton,         cs_1lep_sel, nano_plotvariables.test],
+#  'CR_1Lepton':   [cats_CR_1Lepton,         cs_1lep_sel, nano_plotvariables.test],
 #   'CR_0Lepton':   [cats_CR_0Lepton,         no_sel,      nano_plotvariables.test],
 #   'CR_0Lepton':   [cats_CR_0Lepton,         no_sel,      nano_plotvariables.vars_used_in_selections],
  #   'SR':           [cats_SR,                 sr_sel,      nano_plotvariables.vars_used_in_selections],
    # 'SR':           [cats_SR,                 sr_sel,      nano_plotvariables.test],
+  'CR_TT_boosted':   [cats_CR_TT_boosted,         boosted_sel, nano_plotvariables.test],
+  'CR_Vlight_boosted':   [cats_CR_Vlight_boosted,         boosted_sel, nano_plotvariables.test],
+  'CR_Vhf_boosted':   [cats_CR_Vhf_boosted,         boosted_sel, nano_plotvariables.test],
+  'CR_Vhf_boosted_El':   [cats_CR_Vhf_boosted_El,         boosted_sel, nano_plotvariables.test],
+  'CR_Vhf_boosted_Mu':   [cats_CR_Vhf_boosted_Mu,         boosted_sel, nano_plotvariables.test],
+  'SR_1Lepton_boosted':   [cats_SR_1Lepton_boosted,         boosted_SR_sel, nano_plotvariables.test],
+  'SR_1Lepton_boosted_high_btag':   [cats_SR_1Lepton_boosted_high_btag,         boosted_SR_high_btag_sel, nano_plotvariables.test],
+  'SR_1Lepton_boosted_low_btag':   [cats_SR_1Lepton_boosted_low_btag,         boosted_SR_low_btag_sel, nano_plotvariables.test],
 }
