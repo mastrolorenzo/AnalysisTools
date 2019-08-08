@@ -1,7 +1,6 @@
 # types:  unsigned int=0, int=1, float=2, double=3, bool=4, char=5
 #     array +6;   vector +12;
 
-
 type=2  name=minDPhiFromOtherJets
 type=2  name=otherJetsBestBtag
 type=2  name=otherJetsHighestP
@@ -48,6 +47,7 @@ type=1  name=lepInd2
 type=1  name=nHJetsMatched
 type=1  name=eventClass
 type=2  name=lepMetDPhi
+type=2  name=lepMetDPhiBoostedBDT
 type=1  name=sampleIndex
 type=1  name=sampleIndex_sel
 type=1  name=sampleIndex_GenJetSum
@@ -844,3 +844,5 @@ type=8  name=Jet_corr_CorrelationGroupFlavorUp_ratio        max=250   lengthBran
 type=8  name=Jet_corr_CorrelationGroupFlavorDown_ratio        max=250   lengthBranch=nJet onlyMC=1
 type=8  name=Jet_corr_CorrelationGroupUncorrelatedUp_ratio        max=250   lengthBranch=nJet onlyMC=1
 type=8  name=Jet_corr_CorrelationGroupUncorrelatedDown_ratio        max=250   lengthBranch=nJet onlyMC=1
+
+type=1  name=HTXS_stage1_1_cat_pTjet30GeV_defined   onlyMC=1

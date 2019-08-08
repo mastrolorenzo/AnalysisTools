@@ -1,0 +1,15 @@
+# isSpec 1 -> Spectator variable
+# isSpec 0 -> Variable used in BDT training
+
+bdtmethod=BDT
+bdtname=BDT_2016_Gael_Wlv_nodB
+xmlFile=aux/TMVA_BDT_Gael_Wlv_BOOSTFinal_nodB.weights.xml 
+
+name=FatJet_msoftdrop_sys                                                                         lname=FatJetCand_Msoftdrop_corrected            isEx=0           isSpec=0 order=0
+name=FatJet_pt_sys                                                                                lname=FatJetCand_pt                   isEx=0           isSpec=0 order=1
+name=MET_Pt                                                                                       lname=MET_pt                          isEx=1           isSpec=0 order=2
+name=abs(VHbb::deltaPhi(MET_Phi,Alt$((Vtype_is_2)*Muon_phi[VMuonIdx[0]],0)+Alt$((Vtype_is_3)*Electron_phi[VElectronIdx[0]],0)))                      lname=lepMetDPhiBoostedBDT                  isEx=0           isSpec=0 order=3
+name=V_mt                                                                                       lname=V_mt                          isEx=0           isSpec=0 order=4
+name=SA5                                                                                       lname=SA5                          isEx=0           isSpec=0 order=5
+name=FatJet_pt[Hbb_fjidx]/V_pt                                                                                       lname=FatJetVPtRatio                          isEx=0           isSpec=0 order=6
+name=abs(FatJet_eta[Hbb_fjidx]-V_eta)                                                                                       lname=FatJetVdEta                          isEx=0           isSpec=0 order=7
