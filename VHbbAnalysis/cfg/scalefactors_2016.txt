@@ -2,11 +2,21 @@ json=aux/Tight27AfterIDISO_out.json       name=Tight27AfterIDISO       binning=e
 json=aux/EIDISO_WH_out.json               name=EIDISO_WH               binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElIdIso      length=nElectron
 json=aux/ScaleFactor_etracker_80x.json    name=ScaleFactor_tracker_80x binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_egammaEffi_tracker length=nElectron
 json=aux/failingVeto_out.json             name=failingVeto_WH          binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_EleVeto            length=nElectron
-json=aux/MuID_EfficienciesAndSF_BCDEF.json name=MC_NUM_TightID_DEN_genTracks_PAR_pt_eta binning=pt_abseta_ratio  branches=Muon_pt,Muon_eta branchname=SF_MuIDTightBCDEF length=nMuon
-json=aux/MuID_EfficienciesAndSF_GH.json   name=MC_NUM_TightID_DEN_genTracks_PAR_pt_eta binning=pt_abseta_ratio  branches=Muon_pt,Muon_eta branchname=SF_MuIDTightGH length=nMuon
-json=aux/MuISO_SFs_BCDEF.json             name=TightISO_TightID_pt_eta  binning=pt_abseta_ratio  branches=Muon_pt,Muon_eta  branchname=SF_MuIsoTightBCDEF length=nMuon
-json=aux/MuISO_SFs_GH.json                name=TightISO_TightID_pt_eta  binning=pt_abseta_ratio  branches=Muon_pt,Muon_eta  branchname=SF_MuIsoTightGH length=nMuon
-json=aux/MuTrigger_SFs_BCDEF.json         name=IsoMu24_OR_IsoTkMu24_PtEtaBins binning=pt_abseta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTriggerBCDEF length=nMuon
-json=aux/MuTrigger_SFs_GH.json            name=IsoMu24_OR_IsoTkMu24_PtEtaBins binning=pt_abseta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTriggerGH length=nMuon
+
+
+#json=aux/MuID_EfficienciesAndSF_BCDEF.json name=MC_NUM_TightID_DEN_genTracks_PAR_pt_eta binning=pt_abseta_ratio  branches=Muon_pt,Muon_eta branchname=SF_MuIDTightBCDEF length=nMuon
+#json=aux/MuID_EfficienciesAndSF_GH.json   name=MC_NUM_TightID_DEN_genTracks_PAR_pt_eta binning=pt_abseta_ratio  branches=Muon_pt,Muon_eta branchname=SF_MuIDTightGH length=nMuon
+#json=aux/MuISO_SFs_BCDEF.json             name=TightISO_TightID_pt_eta  binning=pt_abseta_ratio  branches=Muon_pt,Muon_eta  branchname=SF_MuIsoTightBCDEF length=nMuon
+#json=aux/MuISO_SFs_GH.json                name=TightISO_TightID_pt_eta  binning=pt_abseta_ratio  branches=Muon_pt,Muon_eta  branchname=SF_MuIsoTightGH length=nMuon
+#json=aux/MuTrigger_SFs_BCDEF.json         name=IsoMu24_OR_IsoTkMu24_PtEtaBins binning=pt_abseta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTriggerBCDEF length=nMuon
+#json=aux/MuTrigger_SFs_GH.json            name=IsoMu24_OR_IsoTkMu24_PtEtaBins binning=pt_abseta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTriggerGH length=nMuon
 json=aux/trk_SF_RunBCDEF.json             name=Graph binning=pt_eta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTrackerBCDEF length=nMuon
 json=aux/trk_SF_RunGH.json                name=Graph binning=pt_eta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTrackerGH length=nMuon
+
+
+json=aux/MuID_BCDEF_2016.json name=SF_MuIDTightBCDEF binning=abseta_pt  branches=Muon_eta,Muon_pt branchname=SF_MuIDTightBCDEF length=nMuon
+json=aux/MuID_GH_2016.json   name=SF_MuIDTightGH  binning=abseta_pt branches=Muon_pt,Muon_eta branchname=SF_MuIDTightGH length=nMuon
+json=aux/MuIso_BCDEF_2016.json             name=SF_MuIsoTightBCDEF  binning=abseta_pt  branches=Muon_eta,Muon_pt  branchname=SF_MuIsoTightBCDEF length=nMuon
+json=aux/MuIso_GH_2016.json             name=SF_MuIsoTightGH  binning=abseta_pt  branches=Muon_eta,Muon_pt  branchname=SF_MuIsoTightGH length=nMuon
+json=aux/MuTrigger_BCDEF_2016.json         name=SF_MuTriggerBCDEF  binning=abseta_pt branches=Muon_eta,Muon_pt branchname=SF_MuTriggerBCDEF length=nMuon
+json=aux/MuTrigger_GH_2016.json            name=SF_MuTriggerGH binning=abseta_pt branches=Muon_eta,Muon_pt branchname=SF_MuTriggerGH length=nMuon

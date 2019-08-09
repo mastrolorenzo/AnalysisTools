@@ -33,3 +33,8 @@ systematics=cfg/systematics_facJECsNano2016.txt
 #systematics=cfg/systematics.txt
 scalefactors=cfg/scalefactors_2016.txt
 btagscalefactors=aux/cMVAv2_Moriond17_B_H.csv
+
+putarget2018=aux/puData2016_withVar.root
+puUPtarget2018=aux/puData2016_withVar.root
+puDOWNtarget2018=aux/puData2016_withVar.root
+global_puInput=aux/mcPileup2016.root

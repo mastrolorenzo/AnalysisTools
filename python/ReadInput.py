@@ -6,6 +6,7 @@ import ROOT
 import json
 from numpy import array
 import subprocess
+import traceback
 ROOT.gSystem.Load("AnalysisDict.so")
 
 debug=200
@@ -304,7 +305,8 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
                 if debug > 10:
                     print "setting puInput"
                 tfile.Close()
-            except:
+            except Exception as e: 
+                print(e)
                 print "something went wrong with",settings["global_puInput"]
 
         if settings.has_key("puUPtarget2018"):

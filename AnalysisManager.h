@@ -148,6 +148,7 @@ public :
     bool            EvaluatePUReweighting(TH1D* inputPU, int puType=0);
     void            SetGlobalPUTarget(TH1D targetPU, int puType=0);
     void            SetGlobalPUInput(TH1D globalInputPU);
+    void            SetGlobalPUInput(TH1F globalInputPU);
     TH1D*           PUReWeighting;
     TH1D*           PUReWeightingUP;
     TH1D*           PUReWeightingDOWN;
