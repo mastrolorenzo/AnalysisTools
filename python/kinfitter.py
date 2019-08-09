@@ -320,8 +320,8 @@ def make_lep_sys_event_proxies(year):
     #######
 
     mu_proxies = [
-        EventProxy('mu_up',   {'Muon_corrected_pt': lambda e: apply_mu_sys_err(e, +1)}),
-        EventProxy('mu_down', {'Muon_corrected_pt': lambda e: apply_mu_sys_err(e, -1)}),
+        EventProxy('mu_up',   {'Muon_corrected_pt': lambda e: list(e.Muon_correctedUp_pt)}),
+        EventProxy('mu_down', {'Muon_corrected_pt': lambda e: list(e.Muon_correctedDown_pt)}),
     ]
 
     return ele_proxies + mu_proxies

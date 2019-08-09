@@ -1157,7 +1157,7 @@ bool     AnalysisManager::EvaluatePUReweighting(TH1D* inputPU, int puType){
     if((*pointerToTargetPointer)==NULL || inputPU==NULL){
         if(debug>10) std::cout<<"(*pointerToTargetPointer) or inputPU is NULL"<<std::endl;
     } else {
-      if(inputPU->Integral() > 1. || inputPU->Integral() < 0.9) inputPU->Scale(1./inputPU->Integral());
+        if(inputPU->Integral() > 1. || inputPU->Integral() < 0.9) inputPU->Scale(1./inputPU->Integral());
 
         if((*pointerToTargetPointer)->GetNbinsX()!=inputPU->GetNbinsX()){
             int maxBins=std::max((*pointerToTargetPointer)->GetNbinsX(),inputPU->GetNbinsX());
