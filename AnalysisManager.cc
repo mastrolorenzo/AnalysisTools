@@ -586,8 +586,7 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
             }
         }
 	
-	if(cursample->InputPU == NULL && !(cursample->sampleNum==0)){
-	      
+	if(cursample->InputPU == NULL && !(cursample->sampleNum==0) && globalPUInput!=NULL){
 	  ofile->cd();
 	  globalPUInput->Write();
 	  EvaluatePUReweighting(globalPUInput);

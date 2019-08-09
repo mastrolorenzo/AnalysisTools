@@ -7,7 +7,6 @@ type=1  name=Vtype
 type=1  name=nJet
 type=8  name=Jet_pt           max=250     lengthBranch=nJet
 type=8  name=Jet_Pt           max=250     lengthBranch=nJet
-type=8  name=Jet_bReg         max=250     lengthBranch=nJet
 type=8  name=Jet_PtReg        max=250     lengthBranch=nJet
 type=8  name=Jet_PtRegUp        max=250     lengthBranch=nJet
 type=8  name=Jet_PtRegDown        max=250     lengthBranch=nJet
@@ -24,19 +23,23 @@ type=8  name=Jet_btagCSVV2                    max=250     lengthBranch=nJet
 type=8  name=Jet_btagCMVA                     max=250     lengthBranch=nJet
 type=2  name=V_pt
 
-type=0  name=nFatJet
+type=1  name=nFatJet
 type=8  name=FatJet_pt                        max=11     lengthBranch=nFatJet
+type=8  name=FatJet_pt_jesTotalUp             max=11     lengthBranch=nFatJet onlyMC=1 dropBranch=1
+type=8  name=FatJet_pt_jesTotalDown           max=11     lengthBranch=nFatJet onlyMC=1 dropBranch=1
+type=8  name=FatJet_msoftdrop_jesTotalUp      max=11     lengthBranch=nFatJet onlyMC=1 dropBranch=1
+type=8  name=FatJet_msoftdrop_jesTotalDown    max=11     lengthBranch=nFatJet onlyMC=1 dropBranch=1
 
 
 type=1  name=nGenPart                                    onlyMC=1 dropBranch=1
-type=8  name=GenPart_pt                          max=250  onlyMC=1 lengthBranch=nGenPart dropBranch=1
-type=8  name=GenPart_eta                         max=250  onlyMC=1 lengthBranch=nGenPart dropBranch=1
-type=8  name=GenPart_phi                         max=250  onlyMC=1 lengthBranch=nGenPart dropBranch=1
-type=7  name=GenPart_statusFlags                 max=250  onlyMC=1 lengthBranch=nGenPart dropBranch=1
-type=7  name=GenPart_status                      max=250  onlyMC=1 lengthBranch=nGenPart dropBranch=1
-type=7  name=GenPart_pdgId                       max=250  onlyMC=1 lengthBranch=nGenPart dropBranch=1
-type=7  name=GenPart_genPartIdxMother            max=250  onlyMC=1 lengthBranch=nGenPart dropBranch=1
-type=8  name=GenPart_mass                        max=250  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=8  name=GenPart_pt                          max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=8  name=GenPart_eta                         max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=8  name=GenPart_phi                         max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=7  name=GenPart_statusFlags                 max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=7  name=GenPart_status                      max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=7  name=GenPart_pdgId                       max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=7  name=GenPart_genPartIdxMother            max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
+type=8  name=GenPart_mass                        max=300  onlyMC=1 lengthBranch=nGenPart dropBranch=1
 
 type=4  name=HLT_PFMET110_PFMHT110_IDTight  dropBranch=1
 type=4  name=HLT_PFMET120_PFMHT120_IDTight  dropBranch=1

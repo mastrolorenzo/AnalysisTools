@@ -26,8 +26,14 @@ void VHbbAnalysis::InitAnalysis() {
     RooWorkspace *wsp = (RooWorkspace*)wsp_file->Get("w");
     wsp_file->Close();
     met_trigger_sf120_2018_func = wsp->function("met_trig_sf120_2018")->functor(wsp->argSet("met_mht"));
+    met_trigger_sf120_2018_func_up = wsp->function("met_trig_sf120_up_2018")->functor(wsp->argSet("met_mht"));
+    met_trigger_sf120_2018_func_down = wsp->function("met_trig_sf120_down_2018")->functor(wsp->argSet("met_mht"));
     met_trigger_sf120_2017_func = wsp->function("met_trig_sf120_2017")->functor(wsp->argSet("met_mht"));
-    met_trigger_eff_2016data_func = wsp->function("data_nominal_110OR170")->functor(wsp->argSet("met_mht"));
+    met_trigger_sf120_2017_func_up = wsp->function("met_trig_sf120_up_2017")->functor(wsp->argSet("met_mht"));
+    met_trigger_sf120_2017_func_down = wsp->function("met_trig_sf120_down_2017")->functor(wsp->argSet("met_mht"));
+    met_trigger_sf110OR170_2016_func = wsp->function("met_trig_sf110OR170_2016")->functor(wsp->argSet("met_mht"));
+    met_trigger_sf110OR170_2016_func_up = wsp->function("met_trig_sf110OR170_up_2016")->functor(wsp->argSet("met_mht"));
+    met_trigger_sf110OR170_2016_func_down = wsp->function("met_trig_sf110OR170_down_2016")->functor(wsp->argSet("met_mht"));
 
     /* Open the files with the EWK correction factor */
     TFile* wpfile = new TFile("./aux/Wp_nloEWK_weight_unnormalized.root","READ");
@@ -182,16 +188,6 @@ bool VHbbAnalysis::Preselection() {
         }
     }
 
-    if (m("reReg") && m("dataYear") !=2018 ) {
-        for (int i = 0; i < mInt("nJet"); i++) {
-            f["Jet_bReg"][i] = evaluateRegression(i);
-        }
-    }
-
-    if (m("dataYear") != 2018) {
-        UpdateJetPts();
-    }
-
     // FIXME why removed?
     //SetupFactorizedJECs(cursyst->name);
 
@@ -201,14 +197,8 @@ bool VHbbAnalysis::Preselection() {
 
     // Preselect for two jets and one lepton which pass some minimum pt threshold
     int nPreselJets = 0;
-    if(m("dataYear") == 2018){
-        for (int i = 0; i < mInt("nJet"); i++) {
-            if (m("Jet_PtReg",i) > m("JetPtPresel") && mInt("Jet_puId",i) > 0 && mInt("Jet_lepFilter",i)) nPreselJets++;
-        }
-    } else {
-        for (int i = 0; i < mInt("nJet"); i++) {
-            if (m("Jet_bReg",i) > m("JetPtPresel") && mInt("Jet_puId",i) > 0 && mInt("Jet_lepFilter",i)) nPreselJets++;
-        }
+    for (int i = 0; i < mInt("nJet"); i++) {
+        if (m("Jet_PtReg",i) > m("JetPtPresel") && mInt("Jet_puId",i) > 0 && mInt("Jet_lepFilter",i)) nPreselJets++;
     }
 
 
@@ -298,8 +288,18 @@ bool VHbbAnalysis::Analyze() {
     ComputeBoostedVariables();
     
     ControlSampleSelection();
-    
+   
+    //if HTXS_stage1_1_cat_pTjet30GeV isn't defined, set it to 0 for ShapeMaker
+    if( m("sampleIndex")!=0){
+        if( m("HTXS_stage1_1_cat_pTjet30GeV") != 0){
+            *in["HTXS_stage1_1_cat_pTjet30GeV_defined"] = m("HTXS_stage1_1_cat_pTjet30GeV"); 
+        }
+        else{
+            *in["HTXS_stage1_1_cat_pTjet30GeV_defined"] =0;
+        }
+    }
 
+    
     if (doCutFlow && mInt("cutFlow") >= m("doCutFlow")) {
         // keep all preselected events for cutflow
         return true;
@@ -316,6 +316,7 @@ bool VHbbAnalysis::Analyze() {
 
 
 void VHbbAnalysis::FinishEvent() {
+
 
 // move the variable computation and BDT look up to top
 
@@ -1027,29 +1028,53 @@ void VHbbAnalysis::FinishEvent() {
 
     //MET trigger efficiency
     *f["weight_mettrigSF"] = 1.0;
+    *f["weight_mettrigSF_up"] = 1.0;
+    *f["weight_mettrigSF_down"] = 1.0;
     if ( mInt("Vtype") == 4 && mInt("sampleIndex")!=0) {
         double met_mht = std::min(m("MET_pt"),m("MHT_pt"));
         auto args = std::vector<double>{met_mht};
         double met_trigger_sf=1.0;
+        double met_trigger_sf_up=1.0;
+        double met_trigger_sf_down=1.0;
         if (m("dataYear")==2018){
             if(met_mht > 500) met_mht=500;
             if(met_mht >= 100) {
                 met_trigger_sf = met_trigger_sf120_2018_func->eval(args.data());
-            } else met_trigger_sf=0.;
+                met_trigger_sf_up = (met_trigger_sf120_2018_func_up->eval(args.data()))/met_trigger_sf;
+                met_trigger_sf_down = (met_trigger_sf120_2018_func_down->eval(args.data()))/met_trigger_sf;
+            } else {
+                 met_trigger_sf=0.;
+                 met_trigger_sf_up=1.;
+                 met_trigger_sf_down=1.;
+            }
         }
         if (m("dataYear")==2017){
             if(met_mht > 500) met_mht=500;
             if(met_mht >= 100) {
                 met_trigger_sf = met_trigger_sf120_2017_func->eval(args.data());
-            } else met_trigger_sf=0.;
+                met_trigger_sf_up = (met_trigger_sf120_2017_func_up->eval(args.data()))/met_trigger_sf;
+                met_trigger_sf_down = (met_trigger_sf120_2017_func_down->eval(args.data()))/met_trigger_sf;
+            } else { 
+                met_trigger_sf=0.;
+                met_trigger_sf_up=1.;
+                met_trigger_sf_down=1.;
+            }
         }
         if (m("dataYear")==2016){
             if(met_mht > 500) met_mht=500;
-            if(met_mht >= 120){
-                met_trigger_sf = met_trigger_eff_2016data_func->eval(args.data());
-            } else met_trigger_sf=0.;
+            if(met_mht >= 100){
+                met_trigger_sf = met_trigger_sf110OR170_2016_func->eval(args.data());
+                met_trigger_sf_up = (met_trigger_sf110OR170_2016_func_up->eval(args.data()))/met_trigger_sf;
+                met_trigger_sf_down = (met_trigger_sf110OR170_2016_func_down->eval(args.data()))/met_trigger_sf;
+            } else { 
+                met_trigger_sf=0.;
+                met_trigger_sf_up=1.;
+                met_trigger_sf_down=1.;
+            }
         }
         *f["weight_mettrigSF"] = met_trigger_sf;
+        *f["weight_mettrigSF_up"] = met_trigger_sf_up;
+        *f["weight_mettrigSF_down"] = met_trigger_sf_down;
     }
     //if (bool(*f["doCutFlow"])) {
     //    ofile->cd();
@@ -1102,7 +1127,13 @@ void VHbbAnalysis::FinishEvent() {
         // with NanoAOD we use genEventSumw to normalize which includes absolute value
         // of genWeight
         *f["intWeight"] = cursample->intWeight;
-        *f["weight"] = cursample->intWeight * m("genWeight");
+        if(m("dataYear")!=2018){
+            *f["weight"] = cursample->intWeight * m("genWeight") * m("PrefireWeight");
+            *f["PrefireWeight_Up"] = m("PrefireWeight_Up")/m("PrefireWeight");
+            *f["PrefireWeight_Down"] = m("PrefireWeight_Down")/m("PrefireWeight");
+         } else {
+            *f["weight"] = cursample->intWeight * m("genWeight");
+         }
         //std::cout<"intWeight = "<<std::endl;
     }
     else {
@@ -1610,6 +1641,7 @@ void VHbbAnalysis::FinishEvent() {
     }
 
     // Channel specific BDT inputs
+   
 
     std::string bdt_branch_label;
     if(mInt("isZnn")) {
@@ -1639,9 +1671,13 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         if(*b["oneMergedJet"]){
-            thisBDTInfo = bdtInfos.find("bdt_0lep_boosted");
+            thisBDTInfo = bdtInfos.find("bdt_boosted_wdB");
             if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_0lep_boosted");
+                bdtNames.push_back("bdt_boosted_wdB");
+            }
+            thisBDTInfo = bdtInfos.find("bdt_boosted_nodB");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_boosted_nodB");
             }
         }
 
@@ -1707,9 +1743,13 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         if(*b["oneMergedJet"]){
-            thisBDTInfo = bdtInfos.find("bdt_1lep_boosted");
+            thisBDTInfo = bdtInfos.find("bdt_boosted_wdB");
             if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_1lep_boosted");
+                bdtNames.push_back("bdt_boosted_wdB");
+            }
+            thisBDTInfo = bdtInfos.find("bdt_boosted_nodB");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_boosted_nodB");
             }
         }
 
@@ -1754,9 +1794,13 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         if(*b["oneMergedJet"]){
-            thisBDTInfo = bdtInfos.find("bdt_2lep_boosted");
+            thisBDTInfo = bdtInfos.find("bdt_boosted_wdB");
             if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_2lep_boosted");
+                bdtNames.push_back("bdt_boosted_wdB");
+            }
+            thisBDTInfo = bdtInfos.find("bdt_boosted_nodB");
+            if(thisBDTInfo != bdtInfos.end()){
+                bdtNames.push_back("bdt_boosted_nodB");
             }
         }
 
@@ -2657,8 +2701,6 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
 
     // count the number of additional leptons and jets, then cut on this number
     int nAddLep = 0;
-    //nVetoLeptons replicating nselLeptons which was used as a veto that was used for the 0-lepton channel in the 2016 analysis, added for sync purposes
-    int nVetoLeptons = 0;
 
 
     if (debug > 1000) std::cout << "counting additional jets and leptons" << std::endl;
@@ -2711,7 +2753,6 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
 
     // count additional leptons (check both collections, which are exclusive)
     for (int i = 0; i < mInt("nMuon"); i++) {
-        if (m("Muon_pt",i) > 4.5 && fabs(m("Muon_eta",i)) < 2.4 && m("Muon_pfRelIso04_all",i) < 0.4 && fabs(m("Muon_dz",i))<0.2 && fabs(m("Muon_dxy",i))<0.05 ) nVetoLeptons++;
         if (i == mInt("muInd1")) continue; // don't look at the lepton we've selected from the W
         if (i == mInt("muInd2")) continue; // don't look at the lepton we've selected from the Z
         if (m("Muon_pt",i) > 15 && fabs(m("Muon_eta",i)) < 2.5 && m("Muon_pfRelIso04_all",i) < 0.1) {
@@ -2720,7 +2761,6 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
     }
 
     for (int i = 0; i < mInt("nElectron"); i++) {
-        if(m("Electron_pt",i) > 6.5 && fabs(m("Electron_eta",i))<2.5 && m("Electron_pfRelIso03_all",i) < 0.4 && fabs(m("Electron_dz",i))<0.2 && fabs(m("Electron_dxy",i))<0.05 && mInt("Electron_lostHits",i)<1.0) nVetoLeptons++;
         if (i == mInt("elInd1")) continue; // don't look at the lepton we've selected from the W
         if (i == mInt("elInd2")) continue; // don't look at the lepton we've selected from the Z
         if (m("Electron_pt",i) > 15 && fabs(m("Electron_eta",i)) < 2.5 && m("Electron_pfRelIso03_all",i) < 0.1) {
@@ -2730,16 +2770,12 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
 
 
     *in["nAddLeptons"] = nAddLep;
-    *in["nVetoLeptons"] = nVetoLeptons;
     if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && nAddLep >= m("nAddLeptonsCut")) {
         *in["controlSample"] = -1;
     } else if (mInt("controlSample") > -1) {
         *in["cutFlow"] += 1; // additional lepton veto
     }
 
-    /*if (mInt("isZnn") && nVetoLeptons > 0) {
-        *in["controlSample"] = -1;
-    }*/
 
     if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && m("nAddJets302p5_puid") >= m("nAddJetsCut")) {
         *in["controlSample"] = -1;
@@ -2876,22 +2912,11 @@ void VHbbAnalysis::ControlSampleSelection(){
                     *in["controlSample"] = 1; // TTbar Control Sample Index
                 }
             } else if (mInt("isZnn")) {
-                // NOTE cut on nVetoLeptons exists for sync purposes only and needs to be re-evaluated for 2017.
-                if (m("dataYear") == 2016) {
-                    if (*in["nJetsCloseToMET"] == 0 && m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2 && mInt("nVetoLeptons") == 0) {
-                    if (hJet1_btag < m("tagWPM") && m("nAddJets302p5_puid") < 2) {
-                            *in["controlSample"] = 2; // Z+Light Control Sample Index
-                        } else if (hJet1_btag > m("tagWPT") && m("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
-                            *in["controlSample"] = 3; // Z+bb Control Sample Index
-                        }
-                    }
-                } else if (m("dataYear") == 2017 || m("dataYear")==2018) {
-                    if (*in["nJetsCloseToMET"] == 0 && m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2) {
-                    if (hJet1_btag < m("tagWPM") && m("nAddJets302p5_puid") < 2) {
-                            *in["controlSample"] = 2; // Z+Light Control Sample Index
-                        } else if (hJet1_btag > m("tagWPT") && m("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
-                            *in["controlSample"] = 3; // Z+bb Control Sample Index
-                        }
+                if (*in["nJetsCloseToMET"] == 0 && m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2) {
+                if (hJet1_btag < m("tagWPM") && m("nAddJets302p5_puid") < 2) {
+                        *in["controlSample"] = 2; // Z+Light Control Sample Index
+                    } else if (hJet1_btag > m("tagWPT") && m("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
+                        *in["controlSample"] = 3; // Z+bb Control Sample Index
                     }
                 }
             }
@@ -3063,7 +3088,7 @@ void VHbbAnalysis::FatJetSelection(){
             tau2OverTau1Cut   = m("tau2OverTau1Cut_2lepchan");
         }
 
-        float highestPt=0;  // I'm assuming highest fat jet pt is best... maybe not?
+        //float highestPt=0;  // I'm assuming highest fat jet pt is best... maybe not?
         float tau2OverTau1=100;
         float highestDoubleB=-2;
         for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
@@ -3077,10 +3102,10 @@ void VHbbAnalysis::FatJetSelection(){
                 if(m("FatJet_btagHbb",iFatJet)>highestDoubleB){
                     *in["FatJetCand_index"]=iFatJet;
                     highestDoubleB=m("FatJet_btagHbb",iFatJet);
-                    if(m("FatJet_pt",iFatJet)<highestPt){
+                    /*if(m("FatJet_pt",iFatJet)<highestPt){
                         std::cout<<"this pt is smaller than the last candidate"<<std::endl;
-                    }
-                    highestPt=m("FatJet_pt",iFatJet);
+                    }*/
+                    //highestPt=m("FatJet_pt",iFatJet);
                 }
             }
         }
@@ -3213,6 +3238,15 @@ void VHbbAnalysis::ComputeBoostedVariables(){
         *f["FatJetCand_tau3"]=m("FatJet_tau3",mInt("FatJetCand_index"));
         *f["FatJetCand_doubleB"]=m("FatJet_btagHbb",mInt("FatJetCand_index"));
         *f["FatJetCand_Msoftdrop_corrected"]=m("FatJet_msoftdrop",mInt("FatJetCand_index"));
+        //Compute boosted-specific BDT variables
+         
+        //define lepMetDPhi for other channels (temporary until channel-specific boosted BDTs are trained
+        if(mInt("isWenu")==1 || mInt("isWmunu")==1){
+            *f["lepMetDPhiBoostedBDT"] = m("lepMetDPhi");
+        }
+        else{
+            *f["lepMetDPhiBoostedBDT"] = 0.2;
+        }
     }
 }
 
@@ -3230,9 +3264,9 @@ std::pair<int,int> VHbbAnalysis::HighestPtGoodElectronsOppCharge(float min_pt, f
             if (m("dataYear")==2018){
                 passEleIDCut = m("Electron_mvaFall17V2Iso_WP80",i) >0 ;
             } else if(m("dataYear")==2017){
-                passEleIDCut = m("Electron_mvaFall17Iso_WP80",i) > 0 ;
+                passEleIDCut = m("Electron_mvaFall17V2Iso_WP80",i) > 0 ;
             } else if(m("dataYear")==2016){
-                passEleIDCut = m("Electron_mvaSpring16GP_WP80",i) > 0;
+                passEleIDCut = m("Electron_mvaFall17V2Iso_WP80",i) > 0;
             } else {
                 std::cout<<"In HighestPtGoodElectronsOppCharge... what year is it? "<<m("dataYear")<<std::endl;
             }
@@ -3240,9 +3274,9 @@ std::pair<int,int> VHbbAnalysis::HighestPtGoodElectronsOppCharge(float min_pt, f
             if (m("dataYear")==2018){
                 passEleIDCut = m("Electron_mvaFall17V2Iso_WP90",i) >0 ;
             } else if(m("dataYear")==2017){
-                passEleIDCut = m("Electron_mvaFall17Iso_WP90",i) > 0;
+                passEleIDCut = m("Electron_mvaFall17V2Iso_WP90",i) > 0;
             } else if(m("dataYear")==2016){
-                passEleIDCut = m("Electron_mvaSpring16GP_WP90",i) >0;
+                passEleIDCut = m("Electron_mvaFall17V2Iso_WP90",i) >0;
             } else {
                 std::cout<<"In HighestPtGoodElectronsOppCharge... what year is it? "<<m("dataYear")<<std::endl;
             }
