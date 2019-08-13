@@ -836,3 +836,6 @@ type=8  name=Jet_corr_CorrelationGroupFlavorUp_ratio        max=250   lengthBran
 type=8  name=Jet_corr_CorrelationGroupFlavorDown_ratio        max=250   lengthBranch=nJet onlyMC=1
 type=8  name=Jet_corr_CorrelationGroupUncorrelatedUp_ratio        max=250   lengthBranch=nJet onlyMC=1
 type=8  name=Jet_corr_CorrelationGroupUncorrelatedDown_ratio        max=250   lengthBranch=nJet onlyMC=1
+
+
+type=1  name=HTXS_stage1_1_cat_pTjet30GeV_defined   onlyMC=1

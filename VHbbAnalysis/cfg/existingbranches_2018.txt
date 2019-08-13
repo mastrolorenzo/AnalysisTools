@@ -33,6 +33,8 @@ type=8  name=GenJet_phi                         max=30  onlyMC=1 lengthBranch=nG
 type=8  name=GenJet_mass                        max=30  onlyMC=1 lengthBranch=nGenJet dropBranch=1
 type=11  name=GenJet_hadronFlavour               max=30  onlyMC=1 lengthBranch=nGenJet dropBranch=1
 
+type=1  name=HTXS_stage1_1_cat_pTjet30GeV         onlyMC=1 allowMissingBranch=1
+
 type=5  name=LHE_Nc  onlyMC=1     allowMissingBranch=1
 
 type=1  name=nGenStatus2bHad                      onlyMC=1 allowMissingBranch=1
