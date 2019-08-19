@@ -63,6 +63,7 @@ class VHbbAnalysis : public AnalysisManager {
         float puWeight_ichep(int i=0);
         float puWeight_ichep_up(int i=0);
         float puWeight_ichep_down(int i=0);
+        double computeEventSF_fromleg(std::string data_leg8, std::string data_leg17, std::string mc_leg8, std::string mc_leg17);
         std::pair<int,int> HighestPtBJets();
         std::pair<int,int> HighestTaggerValueBJets(float j1ptCut, float j2ptCut, std::string taggerName);
         std::pair<int,int> HighestDeepCSVBJets(float j1ptCut, float j2ptCut);

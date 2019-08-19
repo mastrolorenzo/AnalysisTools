@@ -19,7 +19,7 @@ type=2  name=doICHEP            val=0
 type=2  name=reReg              val=0
 type=2  name=reVType            val=0
 type=2  name=doVPtReweighting   val=0
-type=2  name=postLoopMVAEval    val=1
+type=2  name=postLoopMVAEval    val=0
 type=2  name=doKinFit           val=1
 type=2 name=reRunGenInfo 	val=0
 type=2  name=slimmedOutput      val=1

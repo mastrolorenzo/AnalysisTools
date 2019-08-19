@@ -1847,6 +1847,12 @@ void VHbbAnalysis::FinishEvent() {
                 *f["Lep_SF"] = m("SF_DoubleMuId",mInt("lepInd1")) * m("SF_DoubleMuIso",mInt("lepInd1")) *  m("SF_DoubleMuId",mInt("lepInd2")) * m("SF_DoubleMuIso",mInt("lepInd2"));
                 //m("SF_DoubleMuTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleMuTriggerLeg2",mInt("lepInd2"));
             }
+            if(m("dataYear") == 2018) {
+                //TODO: Add the files for id and iso from the muon pog and link them in scalfactors for the 2018
+                if(debug>1000) std::cout<< "HERE I TRY 2018:::" << computeEventSF_fromleg("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC") << std::endl;
+                *f["Lep_SF"] = m("SF_DoubleMuId",mInt("lepInd1")) * m("SF_DoubleMuIso",mInt("lepInd1")) *  m("SF_DoubleMuId",mInt("lepInd2")) * m("SF_DoubleMuIso",mInt("lepInd2"));
+                *f["Lep_SF"] *= computeEventSF_fromleg("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC");
+            }
         }else
         if (mInt("isZee") == 1) {
             if(m("dataYear") == 2017) {
@@ -4978,3 +4984,18 @@ void VHbbAnalysis::SetupFactorizedJECs(std::string variation) {
 
 }
 
+double VHbbAnalysis::computeEventSF_fromleg(std::string data_leg8, std::string data_leg17, std::string mc_leg8, std::string mc_leg17) {
+    double data_leg8_1 = m(data_leg8,mInt("lepInd1"));
+	double data_leg8_2 = m(data_leg8,mInt("lepInd2"));
+	double data_leg17_1 = m(data_leg17,mInt("lepInd1"));
+	double data_leg17_2 = m(data_leg17,mInt("lepInd2"));
+	double mc_leg8_1 = m(mc_leg8,mInt("lepInd1"));
+	double mc_leg8_2 = m(mc_leg8,mInt("lepInd2"));
+	double mc_leg17_1 = m(mc_leg17,mInt("lepInd1"));
+	double mc_leg17_2 = m(mc_leg17,mInt("lepInd2"));
+
+	double effData_ = (std::pow(data_leg8_1,2)*data_leg17_2 + std::pow(data_leg8_2,2)*data_leg17_1)/(data_leg8_1+data_leg8_2);
+	double effMC_ = (std::pow(mc_leg8_1,2)*mc_leg17_2 + std::pow(mc_leg8_2,2)*mc_leg17_1)/(mc_leg8_1+mc_leg8_2);
+	double eff_ = effData_/effMC_;
+    return eff_;
+}
