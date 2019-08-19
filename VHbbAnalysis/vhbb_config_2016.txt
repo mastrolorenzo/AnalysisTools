@@ -29,10 +29,11 @@ bdt_2lep_low=cfg/dnn_2lep_lowPt_2016_ICHEP2018.txt
 #bdt_bjetreg=cfg/reg1_settings.txt
 settings=cfg/settings_2016.txt
 
-systematics=cfg/systematics_facJECsNano2016.txt
-#systematics=cfg/systematics.txt
+#systematics=cfg/systematics_facJECsNano2016.txt
+systematics=cfg/systematics.txt
 scalefactors=cfg/scalefactors_2016.txt
-btagscalefactors=aux/cMVAv2_Moriond17_B_H.csv
+
+btagscalefactors=aux/DeepCSV_2016LegacySF_V1.csv
 
 putarget2018=aux/puData2016_withVar.root
 puUPtarget2018=aux/puData2016_withVar.root

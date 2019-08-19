@@ -19,6 +19,10 @@ type=2  name=fixedGridRhoFastjetAll
 type=2  name=puWeight                              onlyMC=1
 type=2  name=puWeightUp                            onlyMC=1
 type=2  name=puWeightDown                          onlyMC=1
+type=2  name=PrefireWeight                         onlyMC=1
+type=2  name=PrefireWeight_Up                      onlyMC=1
+type=2  name=PrefireWeight_Down                    onlyMC=1
+
 
 #FIXME Need to add back b-tag weights
 
@@ -70,17 +74,15 @@ type=8  name=Electron_pfRelIso03_all        max=50    lengthBranch=nElectron
 type=8  name=Electron_energyErr             max=50    lengthBranch=nElectron
 type=8  name=Electron_r9                    max=50    lengthBranch=nElectron
 type=11  name=Electron_lostHits              max=50    lengthBranch=nElectron
-type=10  name=Electron_mvaSpring16GP_WP80    max=50    lengthBranch=nElectron
-type=10  name=Electron_mvaSpring16GP_WP90    max=50    lengthBranch=nElectron
-type=10  name=Electron_mvaFall17Iso_WP80    max=50     lengthBranch=nElectron
-type=10  name=Electron_mvaFall17Iso_WP90    max=50     lengthBranch=nElectron
+type=10  name=Electron_mvaFall17V2Iso_WP80    max=50     lengthBranch=nElectron
+type=10  name=Electron_mvaFall17V2Iso_WP90    max=50     lengthBranch=nElectron
 type=7  name=Electron_charge                max=50    lengthBranch=nElectron
 
 type=0  name=nMuon
 type=8  name=Muon_pt                        max=20    lengthBranch=nMuon
-type=8  name=Muon_pt_corrected              max=20    lengthBranch=nMuon
 type=8  name=Muon_correctedUp_pt            max=20    lengthBranch=nMuon
 type=8  name=Muon_correctedDown_pt          max=20    lengthBranch=nMuon
+type=8  name=Muon_corrected_pt              max=20    lengthBranch=nMuon
 type=8  name=Muon_eta                       max=20    lengthBranch=nMuon
 type=8  name=Muon_phi                       max=20    lengthBranch=nMuon
 type=8  name=Muon_dxy                       max=20    lengthBranch=nMuon
@@ -190,7 +192,6 @@ type=2  name=H_pt
 type=2  name=V_phi
 type=2  name=V_mass
 type=2  name=MET_sumEt
-type=2  name=MET_significance
 type=2  name=TkMET_phi
 type=2  name=MHT_pt
 
@@ -280,6 +281,19 @@ type=8  name=FatJet_area                  max=11     lengthBranch=nFatJet
 type=8  name=FatJet_btagCMVA              max=11     lengthBranch=nFatJet
 type=8  name=FatJet_btagCSVV2             max=11     lengthBranch=nFatJet
 type=8  name=FatJet_btagDeepB             max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_H4qvsQCD    max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_HbbvsQCD    max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_TvsQCD      max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_WvsQCD      max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_ZHbbvsQCD   max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_ZHccvsQCD   max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_ZbbvsQCD    max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_ZvsQCD      max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_bbvsLight   max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_ccvsLight   max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_TvsQCD      max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_WvsQCD      max=11     lengthBranch=nFatJet
+type=8  name=FatJet_deepTagMD_ZvsQCD      max=11     lengthBranch=nFatJet
 type=8  name=FatJet_n2b1                  max=11     lengthBranch=nFatJet
 type=8  name=FatJet_n3b1                  max=11     lengthBranch=nFatJet
 type=8  name=FatJet_jetId                 max=11     lengthBranch=nFatJet
@@ -405,4 +419,7 @@ type=7  name=GenJetAK8_partonFlavour              max=10 onlyMC=1 lengthBranch=n
 type=8  name=GenJetAK8_pt                         max=10 onlyMC=1 lengthBranch=nGenJetAK8 allowMissingBranch=1
 type=8  name=GenJetAK8_eta                        max=10 onlyMC=1 lengthBranch=nGenJetAK8 allowMissingBranch=1
 type=8  name=GenJetAK8_phi                        max=10 onlyMC=1 lengthBranch=nGenJetAK8 allowMissingBranch=1
+
+#For STXS signal
+type=1  name=HTXS_stage1_1_cat_pTjet30GeV         onlyMC=1 allowMissingBranch=1
 

@@ -1,7 +1,6 @@
 # types:  unsigned int=0, int=1, float=2, double=3, bool=4, char=5
 #     array +6;   vector +12;
 
-
 type=2  name=minDPhiFromOtherJets
 type=2  name=otherJetsBestBtag
 type=2  name=otherJetsHighestP
@@ -18,6 +17,8 @@ type=4  name=oneMergedJet
 type=4  name=usingBEnriched
 type=4  name=useLOVV
 type=4  name=useNLOVV
+
+type=8  name=Jet_bReg         max=250     lengthBranch=nJet
 
 type=1  name=nGenStatus2bHad_re
 type=1  name=nGenStatus2bHadFinal
@@ -46,6 +47,7 @@ type=1  name=lepInd2
 type=1  name=nHJetsMatched
 type=1  name=eventClass
 type=2  name=lepMetDPhi
+type=2  name=lepMetDPhiBoostedBDT
 type=1  name=sampleIndex
 type=1  name=sampleIndex_sel
 type=1  name=sampleIndex_GenJetSum
@@ -75,6 +77,8 @@ type=2  name=nPVs_f
 type=2  name=WJetStitchWeight
 type=2  name=htJet30
 type=2  name=weight_mettrigSF
+type=2  name=weight_mettrigSF_up
+type=2  name=weight_mettrigSF_down
 
 type=2  name=bTagWeight
 type=2  name=bTagWeight_HFUp
@@ -450,7 +454,6 @@ type=2  name=AddJets302p9_puid_leadJet_btagged
 type=1  name=nAddLeptons
 type=2  name=nAddLep_f
 type=2  name=nAddJet_f
-type=1  name=nVetoLeptons
 
 type=2  name=nAddJets_2lep
 
@@ -841,3 +844,5 @@ type=8  name=Jet_corr_CorrelationGroupFlavorUp_ratio        max=250   lengthBran
 type=8  name=Jet_corr_CorrelationGroupFlavorDown_ratio        max=250   lengthBranch=nJet onlyMC=1
 type=8  name=Jet_corr_CorrelationGroupUncorrelatedUp_ratio        max=250   lengthBranch=nJet onlyMC=1
 type=8  name=Jet_corr_CorrelationGroupUncorrelatedDown_ratio        max=250   lengthBranch=nJet onlyMC=1
+
+type=1  name=HTXS_stage1_1_cat_pTjet30GeV_defined   onlyMC=1

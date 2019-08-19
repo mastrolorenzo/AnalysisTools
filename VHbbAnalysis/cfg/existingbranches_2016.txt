@@ -16,6 +16,9 @@ type=2  name=fixedGridRhoFastjetAll
 type=2  name=puWeight                              onlyMC=1
 type=2  name=puWeightUp                            onlyMC=1
 type=2  name=puWeightDown                          onlyMC=1
+type=2  name=PrefireWeight                         onlyMC=1
+type=2  name=PrefireWeight_Up                      onlyMC=1
+type=2  name=PrefireWeight_Down                    onlyMC=1
 
 #FIXME Need to add back b-tag weights
 
@@ -28,6 +31,56 @@ type=8  name=GenJet_eta                         max=60  onlyMC=1 lengthBranch=nG
 type=8  name=GenJet_phi                         max=60  onlyMC=1 lengthBranch=nGenJet dropBranch=1
 type=8  name=GenJet_mass                        max=60  onlyMC=1 lengthBranch=nGenJet dropBranch=1
 type=11  name=GenJet_hadronFlavour              max=60  onlyMC=1 lengthBranch=nGenJet dropBranch=1
+
+
+type=1  name=HTXS_stage1_1_cat_pTjet30GeV         onlyMC=1 allowMissingBranch=1
+
+type=1  name=nGenStatus2bHad                      onlyMC=1 allowMissingBranch=1
+type=1  name=nGenVBosons                          onlyMC=1 allowMissingBranch=1
+type=2  name=LeadGenVBoson_pt                     onlyMC=1 allowMissingBranch=1
+type=2  name=LeadGenVBoson_eta                    onlyMC=1 allowMissingBranch=1
+type=2  name=LeadGenVBoson_phi                    onlyMC=1 allowMissingBranch=1
+type=2  name=LeadNeutrinoFromGenVBoson_pt         onlyMC=1 allowMissingBranch=1
+type=1  name=LeadGenVBoson_pdgId                  onlyMC=1 allowMissingBranch=1
+type=0  name=nW                                   onlyMC=1 allowMissingBranch=1
+type=0  name=nWlep                                onlyMC=1 allowMissingBranch=1
+type=1  name=nGenTop                              onlyMC=1 allowMissingBranch=1
+type=2  name=GenTop1_mass                         onlyMC=1 allowMissingBranch=1
+type=2  name=GenTop2_mass                         onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_pt                            onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_eta                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_phi                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_mass                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_genjet_pt                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ1_genjet_mass                   onlyMC=1 allowMissingBranch=1
+type=1  name=GenBJ1_index                         onlyMC=1 allowMissingBranch=1
+type=1  name=GenBJ1_genjet_index                  onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_pt                            onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_eta                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_phi                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_mass                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_genjet_pt                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJ2_genjet_mass                   onlyMC=1 allowMissingBranch=1
+type=1  name=GenBJ2_index                         onlyMC=1 allowMissingBranch=1
+type=1  name=GenBJ2_genjet_index                  onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_pt                            onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_eta                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_phi                           onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_mass                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_dPhi                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_dEta                          onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_dR                            onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_genjet_pt                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenBJJ_genjet_mass                   onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ1_dR                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ2_dR                     onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ1_dEta                   onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ2_dEta                   onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ1_dPhi                   onlyMC=1 allowMissingBranch=1
+type=2  name=GenLep_GenBJ2_dPhi                   onlyMC=1 allowMissingBranch=1
+type=1  name=GenLepIndex1                         onlyMC=1 allowMissingBranch=1
+type=1  name=GenLepIndex2                         onlyMC=1 allowMissingBranch=1
+
 
 type=1  name=nGenJetAK8                           onlyMC=1 allowMissingBranch=1
 type=7  name=GenJetAK8_partonFlavour              max=10 onlyMC=1 lengthBranch=nGenJetAK8 allowMissingBranch=1
@@ -83,15 +136,15 @@ type=8  name=Electron_pfRelIso03_all        max=20    lengthBranch=nElectron
 type=8  name=Electron_energyErr             max=20    lengthBranch=nElectron
 type=8  name=Electron_r9                    max=20    lengthBranch=nElectron
 type=11  name=Electron_lostHits              max=20    lengthBranch=nElectron
-type=10  name=Electron_mvaSpring16GP_WP80    max=20    lengthBranch=nElectron
-type=10  name=Electron_mvaSpring16GP_WP90    max=20    lengthBranch=nElectron
+type=10  name=Electron_mvaFall17V2Iso_WP80    max=20     lengthBranch=nElectron
+type=10  name=Electron_mvaFall17V2Iso_WP90    max=20     lengthBranch=nElectron
 type=7  name=Electron_charge                max=20    lengthBranch=nElectron
 
 type=0  name=nMuon
 type=8  name=Muon_pt                        max=20    lengthBranch=nMuon
-type=8  name=Muon_pt_corrected              max=20    lengthBranch=nMuon
 type=8  name=Muon_correctedUp_pt            max=20    lengthBranch=nMuon
 type=8  name=Muon_correctedDown_pt          max=20    lengthBranch=nMuon
+type=8  name=Muon_corrected_pt              max=20    lengthBranch=nMuon
 type=8  name=Muon_eta                       max=20    lengthBranch=nMuon
 type=8  name=Muon_phi                       max=20    lengthBranch=nMuon
 type=8  name=Muon_dxy                       max=20    lengthBranch=nMuon
