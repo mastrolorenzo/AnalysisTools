@@ -11,7 +11,7 @@ if (len(sys.argv) not in allowNArgs):
     print "Or give six arguments: the cfg file, the sample name, a comma-separated list of input files, the name of the output root file, startFrac, endFrac and comma-separated options: doSkim,runOnSkim,onlyMvaEval,kill_if_runtime_above_minutes=XX"
     sys.exit(61)
 
-DEBUG = 2000
+DEBUG = 2
 # do stuff :)
 
 # reads samples, existing branches and new branches
