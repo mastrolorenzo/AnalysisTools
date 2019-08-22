@@ -18,3 +18,7 @@ json=aux/Eff_Mu8LegGH_DATA_2016.json            name=Mu8LegGH binning=abseta_pt 
 json=aux/Eff_Mu17LegGH_DATA_2016.json            name=Mu17LegGH binning=abseta_pt branches=Muon_eta,Muon_pt branchname=SF_Mu17Leg_GH_Data length=nMuon
 json=aux/Eff_Mu8LegGH_MC_2016.json            name=Mu8LegGHMC binning=abseta_pt branches=Muon_eta,Muon_pt branchname=SF_Mu8Leg_GH_MC length=nMuon
 json=aux/Eff_Mu17LegGH_MC_2016.json            name=Mu17LegGHMC binning=abseta_pt branches=Muon_eta,Muon_pt branchname=SF_Mu17Leg_GH_MC length=nMuon
+json=aux/RunBCDEF_SF_ID.json           name=NUM_LooseID_DEN_genTracks binning=pt_eta branches=Muon_pt,Muon_eta branchname=SF_DoubleMu_ID_BF length=nMuon
+json=aux/RunGH_SF_ID.json           name=NUM_LooseID_DEN_genTracks binning=pt_eta branches=Muon_pt,Muon_eta branchname=SF_DoubleMu_ID_GH length=nMuon
+json=aux/RunBCDEF_SF_ISO.json           name=NUM_LooseRelIso_DEN_LooseID binning=pt_eta branches=Muon_pt,Muon_eta branchname=SF_DoubleMu_ISO_BF length=nMuon
+json=aux/RunGH_SF_ISO.json           name=NUM_LooseRelIso_DEN_LooseID binning=pt_eta branches=Muon_pt,Muon_eta branchname=SF_DoubleMu_ISO_GH length=nMuon

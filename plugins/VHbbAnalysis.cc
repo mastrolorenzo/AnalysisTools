@@ -1892,13 +1892,12 @@ void VHbbAnalysis::FinishEvent() {
                 //m("SF_DoubleMuTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleMuTriggerLeg2",mInt("lepInd2"));
             }
             if(m("dataYear") == 2018) {
-                //TODO: Add the files for id and iso from the muon pog and link them in scalfactors for the 2018
-	      *f["Lep_SF"] = m("SF_DoubleMuId",mInt("lepInd1")) * m("SF_DoubleMuIso",mInt("lepInd1")) *  m("SF_DoubleMuId",mInt("lepInd2")) * m("SF_DoubleMuIso",mInt("lepInd2")) * computeEventSF_fromleg("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC");
+                //TODO: Add the DZ and Mass cut eff
+	      *f["Lep_SF"] = m("SF_DoubleMu_ID_AD",mInt("lepInd1")) * m("SF_DoubleMu_ISO_AD",mInt("lepInd1")) *  m("SF_DoubleMu_ID_AD",mInt("lepInd2")) * m("SF_DoubleMu_ISO_AD",mInt("lepInd2")) * computeEventSF_fromleg("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC");
             }
 	    if(m("dataYear") == 2016) {
-                //TODO: Add the files for id and iso from the muon pog and link them in scalfactors for the 2016
-	      //TODO rename according to the info inside the json files
-	      *f["Lep_SF"] = ((20.1/36.4) *  computeEventSF_fromleg("SF_Mu8Leg_BF_Data", "SF_Mu17Leg_BF_Data", "SF_Mu8Leg_BF_MC", "SF_Mu17Leg_BF_MC") + (16.3/36.4)* computeEventSF_fromleg("SF_Mu8Leg_GH_Data", "SF_Mu17Leg_GH_Data", "SF_Mu8Leg_GH_MC", "SF_Mu17Leg_GH_MC")  ) ;
+                //TODO: Add DZ and Mass cut eff
+	      *f["Lep_SF"] = ((20.1/36.4) *m("SF_DoubleMu_ID_BF",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF",mInt("lepInd1")) *  m("SF_DoubleMu_ID_BF",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF",mInt("lepInd2")) * computeEventSF_fromleg("SF_Mu8Leg_BF_Data", "SF_Mu17Leg_BF_Data", "SF_Mu8Leg_BF_MC", "SF_Mu17Leg_BF_MC") + (16.3/36.4) * m("SF_DoubleMu_ID_BF",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF",mInt("lepInd1")) * m("SF_DoubleMu_ID_BF",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF",mInt("lepInd2")) *computeEventSF_fromleg("SF_Mu8Leg_GH_Data", "SF_Mu17Leg_GH_Data", "SF_Mu8Leg_GH_MC", "SF_Mu17Leg_GH_MC")  ) ;
             }
         }else
         if (mInt("isZee") == 1) {
