@@ -320,7 +320,7 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
             except:
                 print "something went wrong with",settings["puUPtarget_global"]
 
-        if settings.has_key("puDOWNtarget2018"):
+        if settings.has_key("puDOWNtarget_global"):
             try:
                 tfile=ROOT.TFile.Open(settings["puDOWNtarget_global"])
                 puhist=tfile.Get("pileup_minus")
