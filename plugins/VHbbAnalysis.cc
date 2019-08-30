@@ -1893,11 +1893,11 @@ void VHbbAnalysis::FinishEvent() {
             }
             if(m("dataYear") == 2018) {
                 //TODO: Add the DZ and Mass cut eff
-	      *f["Lep_SF"] = m("SF_DoubleMu_ID_AD",mInt("lepInd1")) * m("SF_DoubleMu_ISO_AD",mInt("lepInd1")) *  m("SF_DoubleMu_ID_AD",mInt("lepInd2")) * m("SF_DoubleMu_ISO_AD",mInt("lepInd2")) * computeEventSF_fromleg("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC");
+	      *f["Lep_SF"] = m("SF_DoubleMu_ID_AD2018",mInt("lepInd1")) * m("SF_DoubleMu_ISO_AD2018",mInt("lepInd1")) *  m("SF_DoubleMu_ID_AD2018",mInt("lepInd2")) * m("SF_DoubleMu_ISO_AD2018",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC");
             }
 	    if(m("dataYear") == 2016) {
                 //TODO: Add DZ and Mass cut eff
-	      *f["Lep_SF"] = ((20.1/36.4) *m("SF_DoubleMu_ID_BF",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF",mInt("lepInd1")) *  m("SF_DoubleMu_ID_BF",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF",mInt("lepInd2")) * computeEventSF_fromleg("SF_Mu8Leg_BF_Data", "SF_Mu17Leg_BF_Data", "SF_Mu8Leg_BF_MC", "SF_Mu17Leg_BF_MC") + (16.3/36.4) * m("SF_DoubleMu_ID_BF",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF",mInt("lepInd1")) * m("SF_DoubleMu_ID_BF",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF",mInt("lepInd2")) *computeEventSF_fromleg("SF_Mu8Leg_GH_Data", "SF_Mu17Leg_GH_Data", "SF_Mu8Leg_GH_MC", "SF_Mu17Leg_GH_MC")  ) ;
+	      *f["Lep_SF"] = ((20.1/36.4) *m("SF_DoubleMu_ID_BF2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF2016",mInt("lepInd1")) *  m("SF_DoubleMu_ID_BF2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF2016",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_BF_Data", "SF_Mu17Leg_BF_Data", "SF_Mu8Leg_BF_MC", "SF_Mu17Leg_BF_MC") + (16.3/36.4) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_GH2016",mInt("lepInd2")) *computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_GH_Data", "SF_Mu17Leg_GH_Data", "SF_Mu8Leg_GH_MC", "SF_Mu17Leg_GH_MC")  ) ;
             }
         }else
         if (mInt("isZee") == 1) {
@@ -5020,18 +5020,18 @@ void VHbbAnalysis::SetupFactorizedJECs(std::string variation) {
 
 }
 
-double VHbbAnalysis::computeEventSF_fromleg(std::string data_leg8, std::string data_leg17, std::string mc_leg8, std::string mc_leg17) {
-    double data_leg8_1 = m(data_leg8,mInt("lepInd1"));
-	double data_leg8_2 = m(data_leg8,mInt("lepInd2"));
-	double data_leg17_1 = m(data_leg17,mInt("lepInd1"));
-	double data_leg17_2 = m(data_leg17,mInt("lepInd2"));
-	double mc_leg8_1 = m(mc_leg8,mInt("lepInd1"));
-	double mc_leg8_2 = m(mc_leg8,mInt("lepInd2"));
-	double mc_leg17_1 = m(mc_leg17,mInt("lepInd1"));
-	double mc_leg17_2 = m(mc_leg17,mInt("lepInd2"));
+double VHbbAnalysis::computeEventSFForDoubleLeptonTrig(std::string dataeff_lowptleg, std::string dataeff_highptleg, std::string mceff_lowptleg, std::string mceff_highptleg) {
+    double dataeff_lowptleg_1 = m(dataeff_lowptleg,mInt("lepInd1"));
+	double dataeff_lowptleg_2 = m(dataeff_lowptleg,mInt("lepInd2"));
+	double dataeff_highptleg_1 = m(dataeff_highptleg,mInt("lepInd1"));
+	double dataeff_highptleg_2 = m(dataeff_highptleg,mInt("lepInd2"));
+	double mceff_lowptleg_1 = m(mceff_lowptleg,mInt("lepInd1"));
+	double mceff_lowptleg_2 = m(mceff_lowptleg,mInt("lepInd2"));
+	double mceff_highptleg_1 = m(mceff_highptleg,mInt("lepInd1"));
+	double mceff_highptleg_2 = m(mceff_highptleg,mInt("lepInd2"));
 
-	double effData_ = (std::pow(data_leg8_1,2)*data_leg17_2 + std::pow(data_leg8_2,2)*data_leg17_1)/(data_leg8_1+data_leg8_2);
-	double effMC_ = (std::pow(mc_leg8_1,2)*mc_leg17_2 + std::pow(mc_leg8_2,2)*mc_leg17_1)/(mc_leg8_1+mc_leg8_2);
+	double effData_ = (std::pow(dataeff_lowptleg_1,2)*dataeff_highptleg_2 + std::pow(dataeff_lowptleg_2,2)*dataeff_highptleg_1)/(dataeff_lowptleg_1+dataeff_lowptleg_2);
+	double effMC_ = (std::pow(mceff_lowptleg_1,2)*mceff_highptleg_2 + std::pow(mceff_lowptleg_2,2)*mceff_highptleg_1)/(mceff_lowptleg_1+mceff_lowptleg_2);
 	double eff_ = effData_/effMC_;
     return eff_;
 }
