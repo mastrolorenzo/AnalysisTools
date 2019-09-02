@@ -1477,6 +1477,72 @@ void VHbbAnalysis::FinishEvent() {
     //    *f["weight"] = *f["weight"] * *f["bTagWeight"];
     //}*/
 
+
+    float VBenrichReweight = 1.0;
+    
+    if (m("LHE_Vpt") > 100 && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0){
+      //ZJets_BGenFilter, WJets_BGenFilter, DYJets_BGenFilter                                                                                                   
+      if(m("dataYear") == 2016){
+	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+	  VBenrichReweight = 1.0;
+	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+	  VBenrichReweight = 1.0;
+	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+	  VBenrichReweight = 1.0;
+	}
+      }else if(m("dataYear") == 2017){
+	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+	  VBenrichReweight = (7.7e-01 + 1.184e-03*std::min(m("LHE_Vpt"),800.) - 9.181e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+	  VBenrichReweight = (8.325e-01 + 1.054e-03*std::min(m("LHE_Vpt"),800.) - 1.067e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+	  VBenrichReweight = (7.825e-01 + 1.529e-03*std::min(m("LHE_Vpt"),800.) - 9.667e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}
+      }else if(m("dataYear") == 2018){
+	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+	  VBenrichReweight = (3.17457e-00 + 2.671e-03*std::min(m("LHE_Vpt"),800.) - 7.573e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+	  VBenrichReweight = (1.05375 + 1.44192e-03*std::min(m("LHE_Vpt"),800.) - 1.80578e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+	  VBenrichReweight = (8.4438e-01 + 1.02536e-03*std::min(m("LHE_Vpt"),800.) - 2.76698e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}
+      }
+    }else if (m("LHE_Vpt") > 100 && mInt("LHE_Nb") > 0){
+      //ZBJets, WBJets, DYBJets                                                                                                                                            
+      if(m("dataYear") == 2016){
+	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+	  VBenrichReweight = 1.0;
+	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+	  VBenrichReweight = 1.0;
+	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+	  VBenrichReweight = 1.0;
+	}
+      }else if(m("dataYear") == 2017){
+	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+	  VBenrichReweight = (6.968e-01 + 1.764e-03*std::min(m("LHE_Vpt"),800.) - 1.526e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+	  VBenrichReweight = (1.005e-00 + 5.043e-04*std::min(m("LHE_Vpt"),800.) - 3.894e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+	  VBenrichReweight = (7.519e-01 + 1.975e-03*std::min(m("LHE_Vpt"),800.) - 1.836e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}
+      }else if(m("dataYear") == 2018){
+	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+	  VBenrichReweight = (9.955e-01 + 1.842e-03*std::min(m("LHE_Vpt"),800.) - 1.215e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+	  VBenrichReweight = (7.97747e-01 + 1.51461e-03*std::min(m("LHE_Vpt"),800.) - 9.57889e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+	  VBenrichReweight = (7.97747e-01 + 1.51461e-03*std::min(m("LHE_Vpt"),800.) - 9.57889e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}
+      }
+    }
+    
+    *f["VBenrichReweight"] = VBenrichReweight;
+    *f["weight"] = *f["weight"] * *f["VBenrichReweight"];
+    
+
+
+
+
     // Split WJets and ZJets samples by jet parton flavor
     *in["bMCFlavorSum"] = 0;
     *in["bMCFlavorSumSelected"] = 0;
