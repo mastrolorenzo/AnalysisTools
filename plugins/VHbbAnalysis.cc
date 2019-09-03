@@ -1891,6 +1891,14 @@ void VHbbAnalysis::FinishEvent() {
                 *f["Lep_SF"] = m("SF_DoubleMuId",mInt("lepInd1")) * m("SF_DoubleMuIso",mInt("lepInd1")) *  m("SF_DoubleMuId",mInt("lepInd2")) * m("SF_DoubleMuIso",mInt("lepInd2"));
                 //m("SF_DoubleMuTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleMuTriggerLeg2",mInt("lepInd2"));
             }
+            if(m("dataYear") == 2018) {
+                //TODO: Add the DZ and Mass cut eff
+	      *f["Lep_SF"] = m("SF_DoubleMu_ID_AD2018",mInt("lepInd1")) * m("SF_DoubleMu_ISO_AD2018",mInt("lepInd1")) *  m("SF_DoubleMu_ID_AD2018",mInt("lepInd2")) * m("SF_DoubleMu_ISO_AD2018",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC");
+            }
+	    if(m("dataYear") == 2016) {
+                //TODO: Add DZ and Mass cut eff
+	      *f["Lep_SF"] = ((20.1/36.4) *m("SF_DoubleMu_ID_BF2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF2016",mInt("lepInd1")) *  m("SF_DoubleMu_ID_BF2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF2016",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_BF_Data", "SF_Mu17Leg_BF_Data", "SF_Mu8Leg_BF_MC", "SF_Mu17Leg_BF_MC") + (16.3/36.4) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_GH2016",mInt("lepInd2")) *computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_GH_Data", "SF_Mu17Leg_GH_Data", "SF_Mu8Leg_GH_MC", "SF_Mu17Leg_GH_MC")  ) ;
+            }
         }else
         if (mInt("isZee") == 1) {
             if(m("dataYear") == 2017) {
@@ -1903,10 +1911,10 @@ void VHbbAnalysis::FinishEvent() {
                 // used for 2015 analysis
                 *f["Lep_SF"] = m("selLeptons_SF_IsoTight",mInt("lepInd1")) * m("selLeptons_SF_IdCutTight",mInt("lepInd1")) * m("selLeptons_SF_HLT_RunD4p3",mInt("lepInd1"));
             } else if(m("dataYear") == 2016) {
-                *f["Lep_SF"] = ( (20.1/36.4) * m("SF_MuIDTightBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuIDTightGH",mInt("lepInd1"))) * ( (20.1/36.4) * m("SF_MuIsoTightBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuIsoTightGH",mInt("lepInd1")) ) *  ( (20.1/36.4) * m("SF_MuTriggerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTriggerGH",mInt("lepInd1"))) * ( (20.1/36.4) * m("SF_MuTrackerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTrackerGH",mInt("lepInd1")));
-                *f["Lep_SFUp"] = ( (20.1/36.4) * (m("SF_MuIDTightBCDEF",mInt("lepInd1")) + m("SF_MuIDTightBCDEF_err",mInt("lepInd1"))) + (16.3/36.4) * (m("SF_MuIDTightGH",mInt("lepInd1")) + m("SF_MuIDTightGH_err",mInt("lepInd1"))) ) * ( (20.1/36.4) * (m("SF_MuIsoTightBCDEF",mInt("lepInd1")) + m("SF_MuIsoTightBCDEF_err",mInt("lepInd1")) ) + (16.3/36.4) * (m("SF_MuIsoTightGH",mInt("lepInd1")) + m("SF_MuIsoTightGH_err",mInt("lepInd1"))) ) *  ( (20.1/36.4) * (m("SF_MuTriggerBCDEF",mInt("lepInd1")) + m("SF_MuTriggerBCDEF_err",mInt("lepInd1")) )+ (16.3/36.4) * (m("SF_MuTriggerGH",mInt("lepInd1"))) + m("SF_MuTriggerGH_err",mInt("lepInd1"))) * ( (20.1/36.4) * (m("SF_MuTrackerBCDEF",mInt("lepInd1")) + m("SF_MuTrackerBCDEF_err",mInt("lepInd1")))+ (16.3/36.4) * (m("SF_MuTrackerGH",mInt("lepInd1")) + m("SF_MuTrackerGH_err",mInt("lepInd1")) ));
+                *f["Lep_SF"] = ( (20.1/36.4) * m("SF_MuIDTightBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuIDTightGH",mInt("lepInd1"))) * ( (20.1/36.4) * m("SF_MuIsoTightBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuIsoTightGH",mInt("lepInd1")) ) *  ( (20.1/36.4) * m("SF_MuTriggerBCDEF",mInt("lepInd1")) + (16.3/36.4) * m("SF_MuTriggerGH",mInt("lepInd1")));
+                *f["Lep_SFUp"] = ( (20.1/36.4) * (m("SF_MuIDTightBCDEF",mInt("lepInd1")) + m("SF_MuIDTightBCDEF_err",mInt("lepInd1"))) + (16.3/36.4) * (m("SF_MuIDTightGH",mInt("lepInd1")) + m("SF_MuIDTightGH_err",mInt("lepInd1"))) ) * ( (20.1/36.4) * (m("SF_MuIsoTightBCDEF",mInt("lepInd1")) + m("SF_MuIsoTightBCDEF_err",mInt("lepInd1")) ) + (16.3/36.4) * (m("SF_MuIsoTightGH",mInt("lepInd1")) + m("SF_MuIsoTightGH_err",mInt("lepInd1"))) ) *  ( (20.1/36.4) * (m("SF_MuTriggerBCDEF",mInt("lepInd1")) + m("SF_MuTriggerBCDEF_err",mInt("lepInd1")) )+ (16.3/36.4) * (m("SF_MuTriggerGH",mInt("lepInd1"))) + m("SF_MuTriggerGH_err",mInt("lepInd1"))) ;
                 *f["Lep_SFUp"] = m("Lep_SFUp")/ m("Lep_SF");
-                *f["Lep_SFDown"] = ( (20.1/36.4) * (m("SF_MuIDTightBCDEF",mInt("lepInd1")) - m("SF_MuIDTightBCDEF_err",mInt("lepInd1"))) + (16.3/36.4) * (m("SF_MuIDTightGH",mInt("lepInd1")) - m("SF_MuIDTightGH_err",mInt("lepInd1"))) ) * ( (20.1/36.4) * (m("SF_MuIsoTightBCDEF",mInt("lepInd1")) - m("SF_MuIsoTightBCDEF_err",mInt("lepInd1")) ) + (16.3/36.4) * (m("SF_MuIsoTightGH",mInt("lepInd1")) - m("SF_MuIsoTightGH_err",mInt("lepInd1"))) ) *  ( (20.1/36.4) * (m("SF_MuTriggerBCDEF",mInt("lepInd1")) - m("SF_MuTriggerBCDEF_err",mInt("lepInd1")) )+ (16.3/36.4) * (m("SF_MuTriggerGH",mInt("lepInd1"))) - m("SF_MuTriggerGH_err",mInt("lepInd1"))) * ( (20.1/36.4) * (m("SF_MuTrackerBCDEF",mInt("lepInd1")) - m("SF_MuTrackerBCDEF_err",mInt("lepInd1")))+ (16.3/36.4) * (m("SF_MuTrackerGH",mInt("lepInd1")) - m("SF_MuTrackerGH_err",mInt("lepInd1")) ));
+                *f["Lep_SFDown"] = ( (20.1/36.4) * (m("SF_MuIDTightBCDEF",mInt("lepInd1")) - m("SF_MuIDTightBCDEF_err",mInt("lepInd1"))) + (16.3/36.4) * (m("SF_MuIDTightGH",mInt("lepInd1")) - m("SF_MuIDTightGH_err",mInt("lepInd1"))) ) * ( (20.1/36.4) * (m("SF_MuIsoTightBCDEF",mInt("lepInd1")) - m("SF_MuIsoTightBCDEF_err",mInt("lepInd1")) ) + (16.3/36.4) * (m("SF_MuIsoTightGH",mInt("lepInd1")) - m("SF_MuIsoTightGH_err",mInt("lepInd1"))) ) *  ( (20.1/36.4) * (m("SF_MuTriggerBCDEF",mInt("lepInd1")) - m("SF_MuTriggerBCDEF_err",mInt("lepInd1")) )+ (16.3/36.4) * (m("SF_MuTriggerGH",mInt("lepInd1"))) - m("SF_MuTriggerGH_err",mInt("lepInd1")))  ;
                 *f["Lep_SFDown"] = m("Lep_SFDown") / m("Lep_SF");
             } else if(m("dataYear") == 2017) {
                 // keeping 2016 tracking efficiency but not its error
@@ -5012,3 +5020,18 @@ void VHbbAnalysis::SetupFactorizedJECs(std::string variation) {
 
 }
 
+double VHbbAnalysis::computeEventSFForDoubleLeptonTrig(std::string dataeff_lowptleg, std::string dataeff_highptleg, std::string mceff_lowptleg, std::string mceff_highptleg) {
+    double dataeff_lowptleg_1 = m(dataeff_lowptleg,mInt("lepInd1"));
+	double dataeff_lowptleg_2 = m(dataeff_lowptleg,mInt("lepInd2"));
+	double dataeff_highptleg_1 = m(dataeff_highptleg,mInt("lepInd1"));
+	double dataeff_highptleg_2 = m(dataeff_highptleg,mInt("lepInd2"));
+	double mceff_lowptleg_1 = m(mceff_lowptleg,mInt("lepInd1"));
+	double mceff_lowptleg_2 = m(mceff_lowptleg,mInt("lepInd2"));
+	double mceff_highptleg_1 = m(mceff_highptleg,mInt("lepInd1"));
+	double mceff_highptleg_2 = m(mceff_highptleg,mInt("lepInd2"));
+
+	double effData_ = (std::pow(dataeff_lowptleg_1,2)*dataeff_highptleg_2 + std::pow(dataeff_lowptleg_2,2)*dataeff_highptleg_1)/(dataeff_lowptleg_1+dataeff_lowptleg_2);
+	double effMC_ = (std::pow(mceff_lowptleg_1,2)*mceff_highptleg_2 + std::pow(mceff_lowptleg_2,2)*mceff_highptleg_1)/(mceff_lowptleg_1+mceff_lowptleg_2);
+	double eff_ = effData_/effMC_;
+    return eff_;
+}

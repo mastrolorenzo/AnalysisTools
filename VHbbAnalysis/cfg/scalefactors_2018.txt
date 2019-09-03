@@ -26,3 +26,9 @@ json=aux/vhbb_SingleMuon_EfficienciesAndSF.json                name=TightISO    
 json=aux/vhbb_SingleMuon_EfficienciesAndSF.json                name=TRGIsoMu24             binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuTrigger      length=nMuon
 
 
+json=aux/Eff_IsoMu17Cut_NUM_IsoMu17leg_DEN_LooseRelIso_PAR_newpt_eta_DATA2018.json                name=Mu17Leg        binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_Mu17Leg_Data         length=nMuon
+json=aux/Eff_IsoMu17Cut_NUM_IsoMu17leg_DEN_LooseRelIso_PAR_newpt_etaMC2018.json                name=Mu17LegMC        binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_Mu17Leg_MC         length=nMuon
+json=aux/Eff_IsoMu8Cut_NUM_IsoMu8leg_DEN_LooseRelIso_PAR_newpt_eta_DATA2018.json               name=Mu8Leg        binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_Mu8Leg_Data         length=nMuon
+json=aux/Eff_IsoMu8Cut_NUM_IsoMu8leg_DEN_LooseRelIso_PAR_newpt_etaMC2018.json                name=Mu8LegMC        binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_Mu8Leg_MC         length=nMuon
+json=aux/RunABCD2018_SF_ID.json           name=NUM_LooseID_DEN_TrackerMuons2018 binning=abseta_pt branches=Muon_eta,Muon_pt branchname=SF_DoubleMu_ID_AD2018 length=nMuon
+json=aux/RunABCD2018_SF_ISO.json           name=NUM_LooseRelIso_DEN_LooseID2018 binning=abseta_pt branches=Muon_eta,Muon_pt branchname=SF_DoubleMu_ISO_AD2018 length=nMuon

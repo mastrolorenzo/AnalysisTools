@@ -33,3 +33,8 @@ settings=cfg/settings_2016.txt
 systematics=cfg/systematics.txt
 scalefactors=cfg/scalefactors_2016.txt
 btagscalefactors=aux/DeepCSV_2016LegacySF_V1.csv
+
+putarget_global=aux/puData2016_withVar.root
+puUPtarget_global=aux/puData2016_withVar.root
+puDOWNtarget_global=aux/puData2016_withVar.root
+global_puInput=aux/mcPileup2016.root

@@ -1156,7 +1156,7 @@ bool     AnalysisManager::EvaluatePUReweighting(TH1D* inputPU, int puType){
     if((*pointerToTargetPointer)==NULL || inputPU==NULL){
         if(debug>10) std::cout<<"(*pointerToTargetPointer) or inputPU is NULL"<<std::endl;
     } else {
-        inputPU->Scale(1./inputPU->Integral());
+        if(inputPU->Integral() > 1.) inputPU->Scale(1./inputPU->Integral());
 
         if((*pointerToTargetPointer)->GetNbinsX()!=inputPU->GetNbinsX()){
             int maxBins=std::max((*pointerToTargetPointer)->GetNbinsX(),inputPU->GetNbinsX());
@@ -1188,7 +1188,7 @@ bool     AnalysisManager::EvaluatePUReweighting(TH1D* inputPU, int puType){
                 }
                 inputPU=(TH1D*)PUInputReplacement->Clone();
                 inputPU->SetDirectory(0);
-                inputPU->Scale(1./inputPU->Integral());
+                if(inputPU->Integral() > 1.) inputPU->Scale(1./inputPU->Integral());
             }
         }
         TH1D** pointerToReweightingPointer=NULL;
@@ -1237,9 +1237,17 @@ void     AnalysisManager::SetGlobalPUTarget(TH1D targetHist, int puType){
 }
 
 void     AnalysisManager::SetGlobalPUInput(TH1D inputHist){
+    
     globalPUInput=(TH1D*)inputHist.Clone("globalPUInput");
     globalPUInput->SetDirectory(0);
-    globalPUInput->Scale(1./globalPUInput->Integral());
+    if(globalPUInput->Integral() > 1.) globalPUInput->Scale(1./globalPUInput->Integral());
+}
+
+void     AnalysisManager::SetGlobalPUInput(TH1F inputHist){
+    
+    globalPUInput=(TH1D*)inputHist.Clone("globalPUInput");
+    globalPUInput->SetDirectory(0);
+    if(globalPUInput->Integral() > 1.) globalPUInput->Scale(1./globalPUInput->Integral());
 }
 
 
