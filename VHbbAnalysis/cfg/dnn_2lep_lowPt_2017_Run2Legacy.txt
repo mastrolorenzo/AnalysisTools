@@ -1,0 +1,69 @@
+# isSpec 1 -> Spectator variable
+# isSpec 0 -> Variable used in BDT training
+
+mvaType=DNN
+bdtname=CMS_vhbb_DNN_Zll_HighPT_13TeV
+xmlFile=aux/LegacyDNNs/V1_2017_Aug2019/190816_DNN2017V11_ZllLow_SR_maxBtagCutAtMedium_binnedWP/model.ckpt
+
+name=H_mass_fit_fallback        lname=H_mass_fit_fallback         isEx=0 isSpec=0 order=1
+name=H_mass                     lname=H_mass                      isEx=0 isSpec=0 order=2
+name=H_pt_fit_fallback          lname=H_pt_fit_fallback           isEx=0 isSpec=0 order=3
+name=H_pt                       lname=H_pt                        isEx=0 isSpec=0 order=4
+name=HVdPhi_fit_fallback        lname=HVdPhi_fit_fallback         isEx=0 isSpec=0 order=5
+name=HVdPhi                     lname=HVdPhi                      isEx=0 isSpec=0 order=6
+name=hJets_btagWP_0             lname=hJets_btagWP_0              isEx=0 isSpec=0 order=7
+name=hJets_btagWP_1             lname=hJets_btagWP_1              isEx=0 isSpec=0 order=8
+#not sure we have fitted jet pts, vmass, vpt, etc saved... just repeating for now
+#kinFit_hJets_pt_0_fit
+#Jet_PtReg[hJidx[0]]
+#kinFit_hJets_pt_1_fit
+#Jet_PtReg[hJidx[1]]
+name=hJets_leadingPt            lname=hJets_leadingPt             isEx=0 isSpec=0 order=9
+name=hJets_leadingPt            lname=hJets_leadingPt             isEx=0 isSpec=0 order=10
+name=hJets_subleadingPt         lname=hJets_subleadingPt          isEx=0 isSpec=0 order=11
+name=hJets_subleadingPt         lname=hJets_subleadingPt          isEx=0 isSpec=0 order=12
+name=V_mass                     lname=V_mass                      isEx=1 isSpec=0 order=13
+name=V_mass                     lname=V_mass                      isEx=1 isSpec=0 order=14
+name=nAddJets302p5_puid         lname=nAddJets302p5_puid          isEx=0 isSpec=0 order=15
+name=V_pt                       lname=V_pt                        isEx=1 isSpec=0 order=16
+name=V_pt                       lname=V_pt                        isEx=1 isSpec=0 order=17
+name=jjVPtRatio_fit_fallback    lname=jjVPtRatio_fit_fallback     isEx=0 isSpec=0 order=18
+name=jjVPtRatio                 lname=jjVPtRatio                  isEx=0 isSpec=0 order=19
+name=HJ1_HJ2_dEta               lname=HJ1_HJ2_dEta                isEx=0 isSpec=0 order=20
+name=SA5                        lname=SA5                         isEx=1 isSpec=0 order=21
+name=HVdR_fit_fallback          lname=HVdR_fit_fallback           isEx=0 isSpec=0 order=22
+name=HVdR                       lname=HVdR                        isEx=0 isSpec=0 order=23
+name=MET_Pt                     lname=MET_Pt                      isEx=1 isSpec=0 order=24
+name=H_mass_sigma_fit           lname=H_mass_sigma_fit            isEx=0 isSpec=0 order=25
+name=n_recoil_jets_fit          lname=n_recoil_jets_fit           isEx=0 isSpec=0 order=26
+name=HJ1_HJ2_dR                 lname=HJ1_HJ2_dR                  isEx=0 isSpec=0 order=27
+
+
+### list of variables from log file
+##kinFit_H_mass_fit
+##H_mass
+##kinFit_H_pt_fit
+##H_pt
+##kinFit_HVdPhi_fit
+##abs(VHbb::deltaPhi(H_phi,V_phi))
+##Jet_btagDeepB[hJidx[0]]
+##Jet_btagDeepB[hJidx[1]]
+##kinFit_hJets_pt_0_fit
+##Jet_PtReg[hJidx[0]]
+##kinFit_hJets_pt_1_fit
+##Jet_PtReg[hJidx[1]]
+##kinFit_V_mass_fit
+##V_mass
+##Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&Jet_puId==7&&Jet_jetId>0&&Jet_lepFilter>0&&Iteration$!=hJidx[0]&&Iteration$!=hJidx[1])
+##kinFit_V_pt_fit
+##V_pt
+##kinFit_jjVPtRatio_fit
+##(H_pt/V_pt)
+##abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])
+##SA5
+##VHbb::deltaR(kinFit_H_eta_fit,kinFit_H_phi_fit,kinFit_V_eta_fit,kinFit_V_phi_fit)
+##VHbb::deltaR(H_eta,H_phi,V_eta,V_phi)
+##MET_Pt
+##kinFit_H_mass_sigma_fit
+##kinFit_n_recoil_jets_fit
+##VHbb::deltaR(Jet_eta[hJidx[0]],Jet_phi[hJidx[0]],Jet_eta[hJidx[1]],Jet_phi[hJidx[1]])

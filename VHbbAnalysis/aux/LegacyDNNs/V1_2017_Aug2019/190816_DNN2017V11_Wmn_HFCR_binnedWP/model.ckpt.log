@@ -1,0 +1,885 @@
+saving logfile to [34m results//V11_1lep_Wmn_HFCR_binnedWP/Wlv2017_Whf_med_Wmn_190701_V11-St-withSF.h5/32-32-32-32-32-32-32-32/0.10-0.10-0.10-0.10-0.10-0.10-0.10-0.10/1.000e-04/rnd_1/output.txt [0m
+INFO: numpy random state =  MT19937 ,f09a2571,684473bf,50ed7fbe,63f89686,63fa613b,cfed3a1d,2433131,eb7bdd4c,d881bcf8,afd06f6a,804062f5,4adfcb69,ec0688e7,e482a501,d8892c7e,d33ae20c,429234e5,59c1a879,b28af71f,45c4f538,9b680a6e,6658b0c4,affbb8d,439346b7,f07116b9,90294b05,e034634b,60bf6a74,f272c1c0,8d736612,60cfefe2,79a128c3,d777c765,f5ecf47,4b728a13,551db99a,11264344,7d0232c6,cab7f13f,e56a5ea1,4218eed8,1c6f460c,78212cdc,98c86dc6,98dea794,7b34ba89,8a4b7e7a,a9760085,b1cc9996,b01b8c8b,115d086b,2d1367b8,4ef987d2,b60e14c,8ef865c5,2039a204,3bba1a74,7abb24af,bc51a79a,a8691f31,a96ca7d6,e65642b7,849dae37,ad1e09dd,7cdd63fe,8c57ff23,f93d636a,ada08937,6137d6de,c17f9b1d,48dcc105,be42be18,48b7541b,aef576a6,777d5702,97045a0f,10b5cc12,f604e83c,50205dd9,ccef80fe,2db5b639,59e944eb,af48f6d4,6d744951,3594b4f7,f66c4678,cba76322,79e21291,49c6935c,1b6aa6d9,2df0d56e,b4f417d7,9f570c3c,23e8e5d0,fe9cf735,8c648eea,eaee89e0,8c7f36c0,3d1b0c24,4005eca9,5d01b11e,398f659d,670c6687,d84dc539,4272325e,74bdee2b,19289a77,ed0904a2,1c83b993,793dfa84,e204d83e,f4bbeffa,534905f4,63e22cd2,38d1b544,61352741,1efe8de2,624cff3b,43fe3b1d,3774737f,5ddec85e,669a73b8,e160c6,b3db7e9e,1130be8d,dd8c887c,97bb219f,9989c112,ffbf0b5e,210fabde,f68cc2a3,95efa590,39982cba,48cba7bd,a01c6c58,a2925b2c,eefc5571,4fa93cf,2d938135,22de5837,5cb30f74,8f7eb221,a70bc36f,7f245080,60e96703,35987203,468d817d,db8f301d,d03e4ed2,9b655df1,ec52a515,b60bad14,a632e77,72a97172,9de5e08d,db591ea8,d76fd42,b97d1d60,d122ca8,4ef547a9,ccd524c1,c0dd31f2,b65bb7c,18624f2b,ac48a6d2,6804184d,d9a178a5,b7e1f94d,38df4b58,b3ab969,720e55b0,278fea8,4dd5a2c8,83e1d20d,377fc9a2,dcd7c007,fab37e82,8601a030,eb86c122,3729ccb,3a769697,1e34429e,720e0930,e8ea7086,35cd648f,6d4af462,cce8e227,37a14376,488ee862,a0cc1a82,6110298d,b736fb77,9068ac4a,ae7096f9,205c0e32,af56f4ab,8cf39d0f,fb991b11,be313594,7f7e2d79,1fde282,39a46da3,3f522551,8d6d785,d65c574,17dfe631,e2311a5,f0dfe281,41a72451,342dc6b3,21900839,b45d813d,7170f239,3891816a,ac9a0e9b,213a049c,73c7d0a9,291060d,ec936108,239f860d,9d646487,7e5a3d73,d03f191,373e9786,372da80f,c345857f,2febeb12,30c62fb0,371b2c2d,d03a925d,d2cf649f,969b9606,5bb21251,ed762fa5,85693075,f20289e2,1bf70814,ef6c0a39,3cf006a4,25c436d3,988a15f0,6b16d566,7019f948,2f105d26,48181463,ff573bda,a028306b,7c331402,7c1d7ec8,65ca84fc,e3f7cd91,5b2e21f0,7795acbc,f3162cf4,10bb7118,69a329dc,35815ecd,814c2da4,97e8f8c5,989959bd,abc43886,7edd9ed3,605cc26f,ba850b99,168d20f6,42ff1f62,1e85775,5aa75626,7ccbeee0,a81dbd50,80d553f0,b3232ff9,4958b423,e5caf997,d747177d,460b1595,8abbf3d9,89e2a02d,f4de3333,583b5504,21cc6599,46fbb5f7,5b4e20c3,8913bd8e,15d4f439,947a3e29,6465502c,4393c6ce,a6623911,2025f41b,e8df654a,fa356281,e4d2d0bf,f888d740,441c80aa,3249ea21,60fa914d,92041a68,5cd4e476,9b5595b7,683f3fa3,9dffbe93,b50971f5,4d992b1,b075d99e,6915edf9,1a8f9480,1016515e,97fb169e,20e073cc,93f7cbb2,aecfb9f4,a1b5ebc6,1a817f20,a8437fc1,e98d781,a4fffca6,20628157,6ead10e2,c9e2aefd,39afc8de,f6e4044e,e5aba49,c3247f59,7d4e777,98f3b8af,22279572,62541931,576ff364,e9d78a10,bb9cf87,443380ae,9713f9a4,772b01e6,5b21142e,9e18d57,306dd608,10d66616,a7ede41b,60215efc,1162826a,a4c9cc0d,b8748f4e,8ae17711,1cf2004b,2d2059fe,cfb7423d,bc5ee436,bf0cff82,156450d9,c5246c8a,b2f8525c,e9daa1f9,a8357d32,8fed76e,83962ecf,e80c2ae1,6be774f9,f9cad8d5,84be47f2,18421eb2,f2cbd8ee,6ceaf7cb,393f5acd,16f303ef,fd38d527,1618b6c1,83924dd8,9e52a658,ef15af39,79d5d72c,9ef0c609,137f545a,871ceff6,b610f42c,e011f984,edea87e4,32fc91e7,e44ec8be,d7aaf9a8,4c8aa0a8,7a014e78,f255de75,d6405274,d37e5c4f,e56235b6,e1f70203,ecb27889,4c94c8c6,4701e7b6,720e99b2,9969364f,9e26ecb0,ec7f8e40,cc2328b7,8bdd8fbb,7be2945f,51d1e7d8,667a23b1,30a36ec9,b656b8c7,a831fbe7,f9d19042,30f12d9c,8fe3b6f0,49b2319b,5305a363,207a0ad6,77e7c4b3,b67a2fb8,2d3529df,4d411bd0,46b44f76,f635c0e9,e5b90319,c9ac1b63,97d1815a,cab83e0a,b0482ca4,a45e23c,a9bfe14a,dc6658d4,425f270c,4356c4da,d150000,d008dc30,b4e49b6,4576b2d3,3872900,47de19e0,12713a2d,be8abe41,803648f1,a0aa475,86f6e149,1386741d,2926c4a4,4bce3b73,7072a13c,77dd2c0e,d723f640,c51e73f5,ee505dbe,6092f958,d1c77c67,523cdceb,ea0f28ca,41a603f5,64e8c09c,d4cf3ef6,b1b76ffe,4ac7d352,7cdfe12e,931989e7,62952ec1,2cb932b3,133cf4cd,685f6a3a,8f5f89fc,d56756a5,bf13016e,ca7c4ddf,6e933aa4,b07da777,d032294e,9eeadc49,641be99e,c36c717c,c4fca357,5e75fdd4,afe0b07b,e9357729,c657e6e8,da6cbed4,e5de28a0,17e2222a,7a8efca7,98b990b0,ca6a7aff,5d6d2d20,280ad716,66a4e271,c01ae82f,6adccf12,d6789dc8,94f269e1,d607d7d6,892489cb,90f27425,8d97a640,af17de87,1a69bf12,5b1be261,726a8059,32052e3a,fc5cacae,8bf50c35,331badfc,5e7799c2,6bced685,fb013047,602c7250,a0b433f5,7e0b0322,9bb0b97c,95cfda25,cdbe8927,8d897bd,ff81ee4d,d4b0f931,916f93ab,e11c8432,1cf370b8,394e825a,ef74ba46,77ceae0c,49f4e81,2225c45f,1b805736,1fe5eaa9,cb8728a4,ea0b848a,a4a8c330,be33217b,9fb4fcb7,cc9c2cac,140a7409,9623cce2,6e305bf9,b39ef1d5,8fae763e,a9215d1b,b7fa0972,c2abad9f,3791eedc,3f82c10d,9ec0a8c1,13b30233,771f8bb6,133cb19,5b67efa4,cc9a77c4,96cfbd35,7841d4ff,2804d5ea,a87342ac,4a3fcea7,74e8f60c,5f2fe13d,99229941,7fb41120,ccb17fd9,54c71ac3,fa2a22cf,ec50fac1,e150169,30ca623,74bad8b7,a96c61ca,f5141603,16248395,b8580e73,c73a5f32,712a1044,cb81101b,ead58037,a86a7524,bcc886f0,ab9d1e77,296b5782,7fb3ae65,1d0c09d3,4fa468c6,c8e9151d,4bdc2d96,e6ecd55,294bed43,de35db44,4bf5bebc,17670c01,bfc063bd,33cccea9,28b27f94,f5d285b1,5224c75c,71a86d71,2a71a00b,21c994b4,e9be972c,5d9de0a3,7ac4969f,d721f1cc,e02d5e79,2289ad08,65a788d5,53a1967d,c842d753,86dc3e10,d16842b0,784aca79,7e3b0aef,1f0b591b,80239057,e0519aae,c680b432,f49f8dc6,8805a4d3,bfa7818d,a13eaf6e,b21eae95,7608d034,7aee6461,c8c274a6,73341657,a5a70d10,b572fce9,60ea0f37,ef1efe7b,ab992df5,209ea595,cf894a6a,e8428af4,d41e7803,a76889a8
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+initialized TensorflowDNNClassifier, version v0.1 ( 12006 )
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+INFO: command: /var/lib/slurm-llnl/slurmd/job07226/slurm_script -i /data/VHbb/2017/Wln/Wlv2017_Whf_med_Wmn_190701_V11-St-withSF.h5 -c results/1lep_V11_Wen_HFCR/Wlv2017_Whf_med_Wen_190701_V11-St-withSF.h5/32-32-32-32-32-32-32-32/0.10-0.10-0.10-0.10-0.10-0.10-0.10-0.10/1.000e-04/rnd_10/config.cfg -p V11_1lep_Wmn_HFCR_binnedWP --set='ignoreNegativeWeights=True;plot-roc=False;preprocess="np.concatenate((x[:6],np.atleast_1d(np.piecewise(x[6],[x[6]<0.1522,(x[6]>=0.1522)&(x[6]<0.4941),(x[6]>=0.4941)&(x[6]<0.8001),x[6]>=0.8001],[0,1,2,3])),np.atleast_1d(np.piecewise(x[7],[x[7]<0.1522,(x[7]>=0.1522)&(x[7]<0.4941),(x[7]>=0.4941)&(x[7]<0.8001),x[7]>=0.8001],[0,1,2,3])),x[8:]))";'
+INFO: DATA included in H5 file, can make DATA/MC plots!
+INFO: read inputs from disk, metadata is pesent:
+INFO:  >   cut (((hJidx[0]>-1&&hJidx[1]>-1)&&(isWenu||isWmunu)&&(Jet_PtReg[hJidx[0]] > 25 && Jet_PtReg[hJidx[1]] > 25) && (abs(Jet_eta[hJidx[0]]) < 2.5 && abs(Jet_eta[hJidx[1]]) < 2.5)&&H_pt >100&&V_pt >150&&nAddLep15_2p5==0) && Jet_btagDeepB[hJidx[0]] > 0.8001 && H_mass<250 && nAddJets302p5_puid <= 1 && MET_Significance30 > 2.0 && (H_mass > 150 || H_mass < 90)) && isWmunu
+INFO:  >   cutName Whf_med_Wmn
+INFO:  >   region Whf_med_Wmn
+INFO:  >   samples {u'TT': [u'TT_2l2n', u'TT_h', u'TT_Sl'], u'WLIGHT': [u'WJetsHT100_0b', u'WJetsHT200_0b', u'WJetsHT400_0b', u'WJetsHT600_0b', u'WJetsHT800_0b', u'WJetsHT1200_0b', u'WBJets100_0b', u'WBJets200_0b', u'WBGenFilter100_0b', u'WBGenFilter200_0b', u'HT0to100ZJets_0b', u'HT100to200ZJets_0b', u'HT200to400ZJets_0b', u'HT400to600ZJets_0b', u'HT600to800ZJets_0b', u'HT800to1200ZJets_0b', u'HT1200to2500ZJets_0b', u'HT2500toinfZJets_0b', u'ZJetsB_Zpt100to200_0b', u'ZJetsB_Zpt200toInf_0b', u'WWnlo_0b', u'WZnlo_0b', u'ZZnlo_0b', u'WWnlo_1b', u'WWnlo_2b', u'WZnlo_1b', u'WZnlo_2b', u'ZZnlo_1b', u'ZZnlo_2b', u'ZH_Zll', u'ZH_Znunu', u'ggZH_Zll', u'ggZH_Znunu', u'WplusH', u'WminusH'], u'WBB': [u'WJetsHT100_2b', u'WJetsHT200_2b', u'WJetsHT400_2b', u'WJetsHT600_2b', u'WJetsHT800_2b', u'WJetsHT1200_2b', u'WBJets100_2b', u'WBJets200_2b', u'WBGenFilter100_2b', u'WBGenFilter200_2b', u'HT0to100ZJets_2b', u'HT100to200ZJets_2b', u'HT200to400ZJets_2b', u'HT400to600ZJets_2b', u'HT600to800ZJets_2b', u'HT800to1200ZJets_2b', u'HT1200to2500ZJets_2b', u'HT2500toinfZJets_2b', u'ZJetsB_Zpt100to200_2b', u'ZJetsB_Zpt200toInf_2b'], u'WB': [u'WJetsHT100_1b', u'WJetsHT200_1b', u'WJetsHT400_1b', u'WJetsHT600_1b', u'WJetsHT800_1b', u'WJetsHT1200_1b', u'WBJets100_1b', u'WBJets200_1b', u'WBGenFilter100_1b', u'WBGenFilter200_1b', u'HT0to100ZJets_1b', u'HT100to200ZJets_1b', u'HT200to400ZJets_1b', u'HT400to600ZJets_1b', u'HT600to800ZJets_1b', u'HT800to1200ZJets_1b', u'HT1200to2500ZJets_1b', u'HT2500toinfZJets_1b', u'ZJetsB_Zpt100to200_1b', u'ZJetsB_Zpt200toInf_1b'], u'ST': [u'ST_tW_antitop', u'ST_tW_top', u'ST_s-channel_4f', u'ST_t-channel_top_4f', u'ST_t-channel_antitop_4f']}
+INFO:  >   scaleFactors {u'HT200to400ZJets_1b': 1.01207351685, u'HT400to600ZJets_0b': 1.15896070004, u'WJetsHT100_1b': 1.8385642767, u'ZJetsB_Zpt100to200_0b': 1.15896070004, u'HT100to200ZJets_1b': 1.01207351685, u'WBGenFilter200_0b': 1.1853376627, u'WJetsHT600_1b': 1.8385642767, u'WBJets100_2b': 1.20151615143, u'WBGenFilter100_1b': 1.8385642767, u'WJetsHT800_0b': 1.1853376627, u'ZJetsB_Zpt200toInf_1b': 1.01207351685, u'HT400to600ZJets_2b': 1.05474245548, u'ST_s-channel_4f': 1.0, u'ZJetsB_Zpt200toInf_2b': 1.05474245548, u'TT_2l2n': 0.97264277935, u'ST_t-channel_top_4f': 1.0, u'HT0to100ZJets_1b': 1.01207351685, u'ZZnlo_1b': 1.0, u'HT2500toinfZJets_0b': 1.15896070004, u'WJetsHT1200_1b': 1.8385642767, u'HT0to100ZJets_0b': 1.15896070004, u'HT1200to2500ZJets_1b': 1.01207351685, u'ST_tW_antitop': 1.0, u'HT2500toinfZJets_2b': 1.05474245548, u'HT2500toinfZJets_1b': 1.01207351685, u'WBGenFilter200_1b': 1.8385642767, u'WWnlo_1b': 1.0, u'WBJets100_0b': 1.1853376627, u'ZJetsB_Zpt100to200_1b': 1.01207351685, u'WZnlo_2b': 1.0, u'ZJetsB_Zpt100to200_2b': 1.05474245548, u'WJetsHT400_1b': 1.8385642767, u'WZnlo_0b': 1.0, u'ST_tW_top': 1.0, u'WJetsHT400_0b': 1.1853376627, u'WJetsHT100_0b': 1.1853376627, u'ZH_Znunu': 1, u'WBJets200_1b': 1.8385642767, u'HT400to600ZJets_1b': 1.01207351685, u'ZJetsB_Zpt200toInf_0b': 1.15896070004, u'HT100to200ZJets_2b': 1.05474245548, u'HT600to800ZJets_2b': 1.05474245548, u'WJetsHT600_2b': 1.20151615143, u'WBJets200_0b': 1.1853376627, u'HT100to200ZJets_0b': 1.15896070004, u'HT600to800ZJets_0b': 1.15896070004, u'WBGenFilter200_2b': 1.20151615143, u'HT800to1200ZJets_2b': 1.05474245548, u'WJetsHT800_1b': 1.8385642767, u'WJetsHT200_1b': 1.8385642767, u'WBGenFilter100_0b': 1.1853376627, u'WJetsHT200_0b': 1.1853376627, u'HT200to400ZJets_2b': 1.05474245548, u'TT_h': 0.97264277935, u'WJetsHT100_2b': 1.20151615143, u'TT_Sl': 0.97264277935, u'HT200to400ZJets_0b': 1.15896070004, u'ZZnlo_2b': 1.0, u'HT0to100ZJets_2b': 1.05474245548, u'ggZH_Zll': 1, u'WJetsHT1200_0b': 1.1853376627, u'ZZnlo_0b': 1.0, u'HT1200to2500ZJets_2b': 1.05474245548, u'WJetsHT600_0b': 1.1853376627, u'WplusH': 1, u'WBGenFilter100_2b': 1.20151615143, u'ggZH_Znunu': 1, u'HT1200to2500ZJets_0b': 1.15896070004, u'WJetsHT1200_2b': 1.20151615143, u'WminusH': 1, u'HT600to800ZJets_1b': 1.01207351685, u'WBJets200_2b': 1.20151615143, u'WJetsHT800_2b': 1.20151615143, u'WBJets100_1b': 1.8385642767, u'HT800to1200ZJets_1b': 1.01207351685, u'ST_t-channel_antitop_4f': 1.0, u'WJetsHT400_2b': 1.20151615143, u'WWnlo_2b': 1.0, u'ZH_Zll': 1, u'WWnlo_0b': 1.0, u'HT800to1200ZJets_0b': 1.15896070004, u'WZnlo_1b': 1.0, u'WJetsHT200_2b': 1.20151615143}
+INFO:  >   systematics []
+INFO:  >   testCut ((event%2)==0||isData)
+INFO:  >   trainCut !((event%2)==0||isData)
+INFO:  >   variables H_mass H_pt V_mt V_pt V_pt/H_pt abs(TVector2::Phi_mpi_pi(V_phi-H_phi)) Jet_btagDeepB[hJidx[0]] Jet_btagDeepB[hJidx[1]] max(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]]) min(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]]) abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]]) MET_Pt dPhiLepMet top_mass2_05 SA5 nAddJets302p5_puid
+INFO:  >   version 3
+INFO:  >   weightF genWeight*puWeight*(isWenu + isWmunu*muonSF[0])*(isWmunu + isWenu*electronSF[0])*bTagWeightDeepCSV*EWKw[0]*FitCorr[0]*weightLOtoNLO*1.0
+INFO:  >   weightSYS []
+INFO:  >   xSecs {u'HT200to400ZJets_1b': 59.8518, u'HT400to600ZJets_0b': 8.57064, u'WJetsHT100_1b': 1687.95, u'ZJetsB_Zpt100to200_0b': 3.96552, u'HT100to200ZJets_1b': 198.153, u'WBGenFilter200_0b': 3.5525599999999997, u'WJetsHT600_1b': 15.5727, u'WBJets100_2b': 6.705819999999999, u'WBGenFilter100_1b': 24.877599999999997, u'WJetsHT800_0b': 6.492859999999999, u'ZJetsB_Zpt200toInf_1b': 0.40565399999999996, u'HT400to600ZJets_2b': 8.57064, u'ST_s-channel_4f': 3.74, u'ZJetsB_Zpt200toInf_2b': 0.40565399999999996, u'TT_2l2n': 88.29, u'ST_t-channel_top_4f': 136.02, u'HT0to100ZJets_1b': 6571.89, u'ZZnlo_1b': 3.688, u'HT2500toinfZJets_0b': 0.0042680999999999995, u'WJetsHT1200_1b': 1.2995400000000001, u'HT0to100ZJets_0b': 6571.89, u'HT1200to2500ZJets_1b': 0.237759, u'ST_tW_antitop': 35.85, u'HT2500toinfZJets_2b': 0.0042680999999999995, u'HT2500toinfZJets_1b': 0.0042680999999999995, u'WBGenFilter200_1b': 3.5525599999999997, u'WWnlo_1b': 50.85883, u'WBJets100_0b': 6.705819999999999, u'ZJetsB_Zpt100to200_1b': 3.96552, u'WZnlo_2b': 10.87, u'ZJetsB_Zpt100to200_2b': 3.96552, u'WJetsHT400_1b': 69.5508, u'WZnlo_0b': 10.87, u'ST_tW_top': 35.85, u'WJetsHT400_0b': 69.5508, u'WJetsHT100_0b': 1687.95, u'ZH_Znunu': 0.09322, u'WBJets200_1b': 0.96921, u'HT400to600ZJets_1b': 8.57064, u'ZJetsB_Zpt200toInf_0b': 0.40565399999999996, u'HT100to200ZJets_2b': 198.153, u'HT600to800ZJets_2b': 2.1438900000000003, u'WJetsHT600_2b': 15.5727, u'WBJets200_0b': 0.96921, u'HT100to200ZJets_0b': 198.153, u'HT600to800ZJets_0b': 2.1438900000000003, u'WBGenFilter200_2b': 3.5525599999999997, u'HT800to1200ZJets_2b': 0.990396, u'WJetsHT800_1b': 6.492859999999999, u'WJetsHT200_1b': 493.55899999999997, u'WBGenFilter100_0b': 24.877599999999997, u'WJetsHT200_0b': 493.55899999999997, u'HT200to400ZJets_2b': 59.8518, u'TT_h': 377.96, u'WJetsHT100_2b': 1687.95, u'TT_Sl': 365.34, u'HT200to400ZJets_0b': 59.8518, u'ZZnlo_2b': 3.688, u'HT0to100ZJets_2b': 6571.89, u'ggZH_Zll': 0.0072, u'WJetsHT1200_0b': 1.2995400000000001, u'ZZnlo_0b': 3.688, u'HT1200to2500ZJets_2b': 0.237759, u'WJetsHT600_0b': 15.5727, u'WplusH': 0.17202, u'WBGenFilter100_2b': 24.877599999999997, u'ggZH_Znunu': 0.01437, u'HT1200to2500ZJets_0b': 0.237759, u'WJetsHT1200_2b': 1.2995400000000001, u'WminusH': 0.10899, u'HT600to800ZJets_1b': 2.1438900000000003, u'WBJets200_2b': 0.96921, u'WJetsHT800_2b': 6.492859999999999, u'WBJets100_1b': 6.705819999999999, u'HT800to1200ZJets_1b': 0.990396, u'ST_t-channel_antitop_4f': 80.95, u'WJetsHT400_2b': 69.5508, u'WWnlo_2b': 50.85883, u'ZH_Zll': 0.04718, u'WWnlo_0b': 50.85883, u'HT800to1200ZJets_0b': 0.990396, u'WZnlo_1b': 10.87, u'WJetsHT200_2b': 493.55899999999997}
+INFO: random state: (3, (2147483648L, 4283615266L, 1247927846L, 3493584687L, 690078072L, 1833209253L, 201952875L, 2218497292L, 1698654127L, 4213676912L, 2977572698L, 4265388790L, 3621772754L, 45015039L, 1570005736L, 2328640861L, 2335036035L, 1632541863L, 2974647845L, 4242752647L, 2288756236L, 2536613486L, 2334030248L, 3408662750L, 1060521801L, 781422496L, 2638795826L, 3381190930L, 3131904003L, 2556555104L, 3288876829L, 3420368622L, 1469671679L, 1048699985L, 353265869L, 4247412887L, 4081372671L, 87478404L, 3927797630L, 628322609L, 790703141L, 1312672980L, 985338784L, 1863348526L, 3499020410L, 2629275391L, 4113034945L, 238918967L, 2096458440L, 3261635040L, 854528995L, 1070961881L, 1100917966L, 3982868405L, 3057797210L, 212521633L, 4245341967L, 3466110162L, 4076737858L, 3478639682L, 560913251L, 335710503L, 930340092L, 1427358635L, 4107103517L, 2214905161L, 394509613L, 1636706923L, 2386642898L, 3700321694L, 2468716506L, 1296347183L, 1046691921L, 4077956621L, 3394263712L, 1745742169L, 2436261330L, 4241669667L, 3699760433L, 2204367126L, 880787672L, 2629851364L, 3099567044L, 4245135608L, 657056968L, 4142692085L, 1979635256L, 1586839301L, 1072161258L, 499628981L, 1575380015L, 3949882593L, 612265682L, 3329548460L, 2957286215L, 1194812854L, 3150655112L, 903834952L, 4020581035L, 2607165041L, 729141793L, 508263780L, 1100212178L, 2799031982L, 3718614061L, 1403824258L, 195948099L, 279733018L, 3913260092L, 1288565192L, 952239353L, 3884301082L, 4244191074L, 5321940L, 635252970L, 3088704129L, 3917804466L, 3588261388L, 914916868L, 927360572L, 2803157283L, 4223882118L, 3357765594L, 881985532L, 941947985L, 30830074L, 2701095994L, 1014608601L, 3826390358L, 3722910149L, 1409396371L, 537982197L, 521978828L, 3812700036L, 2716235874L, 2527887040L, 233693759L, 297420935L, 953611256L, 3266653696L, 1477886589L, 3997479485L, 2531583763L, 1633316575L, 676850240L, 3645299760L, 1412056714L, 4182872095L, 3697969804L, 1696080331L, 698891499L, 3992161700L, 1717773665L, 785763787L, 632110521L, 4076445899L, 1815482752L, 2130671661L, 28402743L, 617201930L, 2614793618L, 1123048315L, 3131311309L, 61478600L, 1425362930L, 3238465340L, 404808388L, 3622883539L, 1856005187L, 1255812248L, 1619027520L, 219653253L, 2792841693L, 475667124L, 2751829932L, 1180785363L, 2000044295L, 2396748046L, 162174845L, 1274882783L, 2253957475L, 2847715610L, 1089131644L, 2530609562L, 1565895217L, 1013147296L, 3412429557L, 3974243899L, 3882295615L, 902376878L, 2890458616L, 2798235927L, 3810460155L, 2484539300L, 2798932720L, 1287030771L, 664055361L, 3390707364L, 4183920723L, 2903110539L, 2865610404L, 1966218118L, 603087619L, 687409007L, 3336756795L, 2343320041L, 3743235427L, 773235578L, 2415495472L, 775122834L, 3178665922L, 265392359L, 3274292733L, 2838896472L, 4126311744L, 3732875583L, 718188913L, 1108309679L, 4243408166L, 4283935421L, 258162125L, 3255905423L, 148895938L, 567295236L, 3525639613L, 3740592479L, 1111265510L, 3861870133L, 1699424351L, 1593942055L, 487201981L, 121865993L, 3361710080L, 1856143012L, 1674183797L, 775931321L, 3054887400L, 1223264110L, 3027076817L, 3570962882L, 2535165935L, 2620433510L, 3597659964L, 3334515897L, 168046039L, 2727656082L, 397787700L, 1150902310L, 1512555861L, 398577161L, 1894822425L, 4160683880L, 2651410030L, 2432273652L, 1247737962L, 3380582062L, 2207446970L, 2247123372L, 2551266471L, 3148174218L, 3541955157L, 2574312089L, 44322713L, 2923469873L, 611778481L, 3900211229L, 3726393608L, 164129974L, 1600750012L, 863197314L, 2101261104L, 3272324190L, 1012153193L, 3452176260L, 1225990284L, 1117651363L, 200547467L, 1324416903L, 329751072L, 453660662L, 3762492417L, 1959555764L, 3125959426L, 3032092492L, 1813831421L, 4002717074L, 1917717945L, 758078831L, 3637210688L, 914880206L, 3551427414L, 2160875107L, 1743886870L, 3111858148L, 3029296608L, 2733928131L, 4113817989L, 1351809194L, 2645276619L, 2641405724L, 2007924647L, 1162626831L, 3069320789L, 2956970472L, 2890574978L, 39478693L, 3901081554L, 1470469966L, 491377066L, 704849572L, 1664863803L, 1086216008L, 1453565394L, 3520603549L, 2529514497L, 1413128865L, 2793175424L, 624265140L, 3094999403L, 202318571L, 654760191L, 2893634708L, 191869673L, 1630366414L, 1608062609L, 1703658351L, 4123955601L, 450454120L, 736810359L, 118262665L, 539250342L, 4271966696L, 3840670723L, 434554774L, 3776059565L, 1161495402L, 4115008044L, 1202096583L, 1219858299L, 418440697L, 2015086407L, 1755395327L, 432704154L, 850170338L, 2262525841L, 3745566956L, 2733338066L, 2438148995L, 2766104461L, 3969567187L, 361148673L, 2776710542L, 1014544130L, 1468610825L, 651326415L, 416221045L, 2638942003L, 3444923893L, 2792294895L, 1085366042L, 1360652L, 3334792568L, 2111723410L, 4189082909L, 904946167L, 3227913154L, 992358477L, 4190757403L, 2259407864L, 2226448684L, 2963327179L, 877308169L, 2183386886L, 3921574710L, 927409693L, 3670205130L, 2675885984L, 1041090571L, 2955815268L, 3777062349L, 1931718047L, 2875552456L, 42494480L, 1173538029L, 228946634L, 3381906541L, 3081634362L, 2117113576L, 520804097L, 3978332134L, 4195309224L, 2641909241L, 4236836250L, 1874355606L, 3406122541L, 3659744346L, 2614637154L, 3963834285L, 2339503873L, 441890572L, 539975031L, 2156622004L, 2339604104L, 1886752054L, 2636659819L, 3748940963L, 4192778078L, 4153744815L, 3351846363L, 1639440930L, 3732196630L, 1765564768L, 1004066143L, 4078028364L, 4105117079L, 954737784L, 3923472191L, 746286877L, 973877099L, 3303779626L, 2470112687L, 3146904201L, 3256900100L, 1798967054L, 3552876673L, 227358593L, 494983706L, 2997565639L, 3811056717L, 2663465360L, 1284650347L, 1222299597L, 3058543586L, 2884371029L, 1338957494L, 102565909L, 616490147L, 3413640940L, 2759811489L, 2752097383L, 3451907787L, 1987384582L, 535422048L, 3648457006L, 76672874L, 4281186496L, 2734357220L, 3185905913L, 1155581233L, 1952556815L, 2119438161L, 2998950870L, 1987832624L, 801815627L, 1611494237L, 1655146099L, 3092002027L, 1472068038L, 4040792404L, 2917556902L, 2166627922L, 2657278510L, 847637923L, 1331634995L, 1086473170L, 3166772416L, 2473233599L, 1825123350L, 2063038830L, 2397384378L, 4052738695L, 3957525481L, 203595937L, 3916024633L, 902284969L, 2510115354L, 2506825294L, 2170309248L, 47057368L, 2303667861L, 4176993581L, 4026005207L, 215788244L, 1653838796L, 2414214306L, 2947456101L, 896690765L, 2218454425L, 3214036145L, 2035469581L, 3308529351L, 1693461956L, 3278791194L, 48326606L, 1209416021L, 4193143250L, 1128779586L, 2166427503L, 2068187294L, 2947807035L, 1866580516L, 3864389645L, 1107905273L, 3604376720L, 3505214508L, 1725016838L, 1040734885L, 474320125L, 195862632L, 3042278240L, 2285583143L, 3643035711L, 3447875955L, 3189070076L, 354511729L, 1560653661L, 615316515L, 3266736753L, 1219963974L, 1441402802L, 1681340486L, 2421642270L, 529732053L, 2748616795L, 1474378743L, 3693545828L, 2466369110L, 1127649066L, 1658247953L, 2765833864L, 3098223516L, 2362197842L, 4080623257L, 3227219462L, 185275058L, 78590228L, 4239979984L, 1941413450L, 1836540583L, 1219237216L, 1558261222L, 3952296090L, 1859325556L, 4040938843L, 3005322951L, 4171007800L, 3860338332L, 3085400586L, 1241711621L, 1723790822L, 564929238L, 3920855276L, 1732292452L, 3218890511L, 269905348L, 2543812765L, 3588124488L, 1297242121L, 778133096L, 2590430563L, 2222329127L, 4227892136L, 3453551432L, 3542941744L, 1256670748L, 2685246337L, 268982919L, 1807426563L, 3424563331L, 2102244455L, 354232619L, 4106787750L, 2045290239L, 2048173504L, 3450665614L, 3211351387L, 2258750627L, 548657120L, 1493055493L, 3994009385L, 4144295609L, 3529563608L, 357691670L, 872506603L, 3893420850L, 599543967L, 1399954744L, 4067253588L, 2731376839L, 3347765235L, 684312213L, 2510069742L, 3892296634L, 1943576323L, 2190818964L, 1431852225L, 3897559778L, 2928908954L, 1315793440L, 612469784L, 2831719219L, 2057467464L, 2909138000L, 2720708430L, 3679266257L, 870983765L, 3822177157L, 713978558L, 2364682637L, 3276598126L, 1628807643L, 3755246560L, 3532986888L, 313708633L, 925517472L, 3033838842L, 2623581223L, 3688525042L, 2867211217L, 2233747509L, 1757939518L, 3933247505L, 1083092987L, 4180986944L, 624L), None)
+INFO: preprocess test  X, mapfn= np.concatenate((x[:6],np.atleast_1d(np.piecewise(x[6],[x[6]<0.1522,(x[6]>=0.1522)&(x[6]<0.4941),(x[6]>=0.4941)&(x[6]<0.8001),x[6]>=0.8001],[0,1,2,3])),np.atleast_1d(np.piecewise(x[7],[x[7]<0.1522,(x[7]>=0.1522)&(x[7]<0.4941),(x[7]>=0.4941)&(x[7]<0.8001),x[7]>=0.8001],[0,1,2,3])),x[8:]))
+INFO: preprocess train  X, mapfn= np.concatenate((x[:6],np.atleast_1d(np.piecewise(x[6],[x[6]<0.1522,(x[6]>=0.1522)&(x[6]<0.4941),(x[6]>=0.4941)&(x[6]<0.8001),x[6]>=0.8001],[0,1,2,3])),np.atleast_1d(np.piecewise(x[7],[x[7]<0.1522,(x[7]>=0.1522)&(x[7]<0.4941),(x[7]>=0.4941)&(x[7]<0.8001),x[7]>=0.8001],[0,1,2,3])),x[8:]))
+INFO: preprocess data  X, mapfn= np.concatenate((x[:6],np.atleast_1d(np.piecewise(x[6],[x[6]<0.1522,(x[6]>=0.1522)&(x[6]<0.4941),(x[6]>=0.4941)&(x[6]<0.8001),x[6]>=0.8001],[0,1,2,3])),np.atleast_1d(np.piecewise(x[7],[x[7]<0.1522,(x[7]>=0.1522)&(x[7]<0.4941),(x[7]>=0.4941)&(x[7]<0.8001),x[7]>=0.8001],[0,1,2,3])),x[8:]))
+INFO: set 4370 events to 0 because of negative weight
+INFO: set 0 events to 0 because if they were too large (>100.0): [] [] (max 100  events are printed)
+INFO: set 0 events to 0 because if they were too large (>100.0): [] [] (max 100  events are printed)
+nFeatures =  16
+--------------------------------------------------------------------------------
+statistics for dataset: train
+--------------------------------------------------------------------------------
+WLIGHT (y= 0 ) : 26861  avg weight: 0.21640013866910385
+WB (y= 1 ) : 41547  avg weight: 0.2067145979980966
+WBB (y= 2 ) : 22199  avg weight: 0.11857276980613514
+ST (y= 3 ) : 64951  avg weight: 0.11989952212572376
+TT (y= 4 ) : 143051  avg weight: 0.2565913269948513
+--------------------------------------------------------------------------------
+statistics for dataset: test
+--------------------------------------------------------------------------------
+WLIGHT (y= 0 ) : 26850  avg weight: 0.1967993738575691
+WB (y= 1 ) : 41959  avg weight: 0.20690408059017423
+WBB (y= 2 ) : 22035  avg weight: 0.11694121633522991
+ST (y= 3 ) : 64792  avg weight: 0.11793481117730827
+TT (y= 4 ) : 143649  avg weight: 0.25563343123679827
+--------------------------------------------------------------------------------
+classes and labels
+--------------------------------------------------------------------------------
+ERROR: no signal or no background defined!
+ => using bogus signal ID = 0
+list of classes: (signals in [32mgreen[0m, backgrounds in [31mred[0m)
+[32m class 0 => WLIGHT [0m is defined as a SIGNAL
+[31m class 1 => WB [0m
+[31m class 2 => WBB [0m
+[31m class 3 => ST [0m
+[31m class 4 => TT [0m
+--------------------------------------------------------------------------------
+weights and weight uncertainty examples
+--------------------------------------------------------------------------------
+weights:
+train 4.044333 1.8631806 7.3721256 3.8558133 0.20689972 0.040016837 6.7053666 5.7292004 2.0574427 8.148223
+test  0.55095303 4.714051 4.3294563 2.0287783 4.5993476 2.7760172 7.0296125 5.914715 0.05340104 6.2590427
+weights errors:
+train 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+test  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+--------------------------------------------------------------------------------
+input data
+--------------------------------------------------------------------------------
+feature                                            set   mean       std        examples
+H_mass                                             train 1.46e+02   6.48e+01   48.348843 70.350876 207.82097 89.346275
+H_mass                                             test  1.46e+02   6.48e+01   243.03577 52.090183 48.32434 198.5378
+H_pt                                               train 1.77e+02   6.65e+01   145.5886 183.78958 166.14253 124.97657
+H_pt                                               test  1.76e+02   6.57e+01   146.50974 181.66241 161.05641 194.65906
+V_mt                                               train 6.61e+01   5.13e+01   2.7879891 43.340588 63.45185 6.871231
+V_mt                                               test  6.60e+01   5.08e+01   86.51527 49.728317 57.484386 6.1948547
+V_pt                                               train 2.00e+02   5.31e+01   159.16095 224.08656 156.29993 215.77216
+V_pt                                               test  2.00e+02   5.25e+01   157.18217 218.83833 169.37646 168.92519
+V_pt/H_pt                                          train 1.21e+00   3.43e-01   1.093224 1.219256 0.94075805 1.7265009
+V_pt/H_pt                                          test  1.21e+00   3.41e-01   1.0728446 1.2046429 1.0516592 0.8678003
+abs(TVector2::Phi_mpi_pi(V_phi-H_phi))             train 2.78e+00   4.88e-01   2.7652993 2.4802961 3.113031 3.066098
+abs(TVector2::Phi_mpi_pi(V_phi-H_phi))             test  2.77e+00   4.91e-01   3.083389 3.0118442 2.8192997 2.917613
+Jet_btagDeepB[hJidx[0]]                            train 3.00e+00   2.38e-07   3.0 3.0 3.0 3.0
+Jet_btagDeepB[hJidx[0]]                            test  3.00e+00   2.38e-07   3.0 3.0 3.0 3.0
+Jet_btagDeepB[hJidx[1]]                            train 9.58e-01   1.10e+00   0.0 2.0 0.0 0.0
+Jet_btagDeepB[hJidx[1]]                            test  9.64e-01   1.11e+00   0.0 0.0 1.0 0.0
+max(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]])       train 1.39e+02   5.95e+01   88.81426 139.6187 92.73765 109.884155
+max(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]])       test  1.39e+02   5.89e+01   116.32338 110.87985 128.20941 122.57065
+min(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]])       train 5.34e+01   2.38e+01   60.88934 51.78936 74.13801 25.864653
+min(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]])       test  5.35e+01   2.39e+01   67.94523 72.47699 33.455265 83.13598
+abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])           train 8.74e-01   6.48e-01   0.3227539 0.3076172 2.0720673 1.2027588
+abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])           test  8.71e-01   6.46e-01   2.0369873 0.44522095 0.46191406 1.6342773
+MET_Pt                                             train 1.18e+02   5.50e+01   55.992134 162.2077 102.54263 183.48514
+MET_Pt                                             test  1.18e+02   5.46e+01   146.78242 172.07523 108.986374 60.96486
+dPhiLepMet                                         train 7.26e-01   5.46e-01   0.036679745 0.42189932 0.7908962 0.08915169
+dPhiLepMet                                         test  7.25e-01   5.45e-01   1.3502424 0.5301728 0.67123437 0.07633723
+top_mass2_05                                       train 4.74e+02   3.77e+02   190.9419 466.21945 263.1566 -99.0
+top_mass2_05                                       test  4.73e+02   3.78e+02   537.3058 142.89153 790.64124 334.00403
+SA5                                                train 2.47e+00   1.76e+00   0.0 1.0 0.0 1.0
+SA5                                                test  2.47e+00   1.75e+00   0.0 1.0 4.0 1.0
+nAddJets302p5_puid                                 train 5.99e-01   4.90e-01   0.0 1.0 0.0 0.0
+nAddJets302p5_puid                                 test  5.99e-01   4.90e-01   0.0 0.0 0.0 0.0
+--------------------------------------------------------------------------------
+input scaling
+--------------------------------------------------------------------------------
+[31mINFO: scaling is done inside tensorflow graph and StandardScaler() should not be used om top of it => scaler.dmp file will not be written![0m
+balancing classes, reweight WLIGHT by 10.584801704568566
+balancing classes, reweight WB by 7.163934736519175
+balancing classes, reweight WBB by 23.374593226146914
+balancing classes, reweight ST by 7.9005830706902405
+balancing classes, reweight TT by 1.6762143993276082
+shape train: (298609, 16)
+shape test:  (299285, 16)
+building tensorflow graph with parameters
+ adam_epsilon                             1e-11
+ adaptiveRate                             False
+ additional_noise                         0.0
+ backgroundOnly                           True
+ balanceClasses                           True
+ balanceSignalBackground                  False
+ batchNormalization                       [1, 2, 3, 4, 5, 6, 7, 8]
+ batchSize                                32
+ batchSizeAtEpoch                         {0: 32, 32: 8192, 3: 64, 40: 16384, 5: 128, 6: 256, 7: 512, 24: 4096, 9: 2048, 8: 1024}
+ batchSizeTest                            65536
+ bin_opt_cumulative_background            [0.125155, 0.13149, 0.13149, 0.125155, 0.113385, 0.0977718, 0.0802467, 0.0626894, 0.0466138, 0.0329904, 0.0222236, 0.0142493, 0.00869618, 0.00505144, 0.0027929]
+ crossValidation_splitSeed                123456
+ dropoutDecay                             1.0
+ ignoreLargeWeights                       True
+ ignoreNegativeWeights                    True
+ learningRate                             0.0001
+ learning_rate_adam_start                 0.0001
+ loss                                     'cross_entropy'
+ massless_importance                      1.0
+ massless_powers                          [1, 2]
+ maxWeight                                100
+ mvaScoreRescalingPercentileHigh          0.999
+ mvaScoreRescalingPercentileLow           0.01
+ nEpochs                                  200
+ nNodes                                   [32, 32, 32, 32, 32, 32, 32, 32]
+ nStepsPerEpoch                           -1
+ pDropout                                 [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
+ plot-roc                                 False
+ power                                    1.0
+ preprocess                               'np.concatenate((x[:6],np.atleast_1d(np.piecewise(x[6],[x[6]<0.1522,(x[6]>=0.1522)&(x[6]<0.4941),(x[6]>=0.4941)&(x[6]<0.8001),x[6]>=0.8001],[0,1,2,3])),np.atleast_1d(np.piecewise(x[7],[x[7]<0.1522,(x[7]>=0.1522)&(x[7]<0.4941),(x[7]>=0.4941)&(x[7]<0.8001),x[7]>=0.8001],[0,1,2,3])),x[8:]))'
+ rateGamma                                1.0
+ regularization_strength                  0.0
+ removeFeature                            []
+ reweight                                 {}
+ reweightTraining                         None
+ saveCheckpointInterval                   50
+ scaleInputsInsideGraph                   True
+ shuffle                                  True
+ signif_loss_b_epsilon                    1e-08
+ signif_loss_low_b_threshold              1.5
+ signif_loss_low_b_threshold_width        1.5
+ signif_loss_nbins                        15
+ signif_loss_smoothness                   500.0
+ signif_loss_sysApprox_constant           1.5
+ signif_loss_sysApprox_linear             0.1
+ signif_loss_sys_variance_offset          0.1
+ signif_loss_xe_factor                    0.0
+ skipConnections                          {8: [0, 2, 4, 6], 2: [0], 4: [0, 2], 6: [0, 2, 4]}
+ statisticsInterval                       10
+ systematics_scaling_factor               1.0
+ systematics_weight_scaling_factor        1.0
+ weight_sys_ntoys                         -1
+initialize session...
+initialized session!
+add layers...
+layer  1 :  [16, 32]
+> activation with drop-out...
+> batch normalization...
+layer  2 :  [32, 32]
+> activation with drop-out...
+> batch normalization...
+layer  3 :  [32, 32]
+> activation with drop-out...
+> batch normalization...
+layer  4 :  [32, 32]
+> activation with drop-out...
+> batch normalization...
+layer  5 :  [32, 32]
+> activation with drop-out...
+> batch normalization...
+layer  6 :  [32, 32]
+> activation with drop-out...
+> batch normalization...
+layer  7 :  [32, 32]
+> activation with drop-out...
+> batch normalization...
+layer  8 :  [32, 32]
+> activation with drop-out...
+> batch normalization...
+INFO: use ADAM optimizer!
+graph built.
+trainable variables: 16293
+initialized.
+conditions:
+  loss(train,training)    training dataset, loss as seen by gradient descend optimizer
+  loss(train,testing)     training dataset, loss with 'testing' conditions, e.g. is_training: False, no dropout etc
+  loss(test)              test dataset
+start training with batch size 32 
+ epoch     loss(train,training) loss(train,testing) loss(test)
+nSamples =  298609
+set batch size to: 32
+         1    1.60936    1.43688    1.40579 significance (train): 33.804 significance: 30.090 
+         2    1.49473    1.41710    1.38766 
+         3    1.46766    1.41021    1.38114 
+nSamples =  298609
+set batch size to: 64
+         4    1.44580    1.40232    1.37428 
+         5    1.43798    1.39692    1.36821 
+nSamples =  298609
+set batch size to: 128
+         6    1.42913    1.39335    1.36568 
+nSamples =  298609
+set batch size to: 256
+         7    1.42377    1.39132    1.36363 
+nSamples =  298609
+set batch size to: 512
+         8    1.42147    1.38994    1.36216 
+nSamples =  298609
+set batch size to: 1024
+         9    1.41680    1.38894    1.36134 
+nSamples =  298609
+set batch size to: 2048
+        10    1.41613    1.38857    1.36106 
+        11    1.41626    1.38818    1.36066 significance (train): 36.386 significance: 31.999 
+        12    1.41529    1.38768    1.36037 
+        13    1.41442    1.38713    1.35986 
+        14    1.41424    1.38677    1.35962 
+        15    1.41317    1.38624    1.35935 
+        16    1.41366    1.38584    1.35909 
+        17    1.41273    1.38535    1.35865 
+        18    1.41371    1.38496    1.35829 
+        19    1.41200    1.38451    1.35803 
+        20    1.41136    1.38404    1.35739 
+        21    1.41011    1.38360    1.35713 significance (train): 36.558 significance: 32.084 
+        22    1.41015    1.38313    1.35663 
+        23    1.40923    1.38238    1.35614 
+        24    1.41120    1.38182    1.35581 
+nSamples =  298609
+set batch size to: 4096
+        25    1.40746    1.38147    1.35550 
+        26    1.41021    1.38124    1.35524 
+        27    1.40774    1.38098    1.35496 
+        28    1.40867    1.38069    1.35467 
+        29    1.40788    1.38042    1.35450 
+        30    1.40985    1.38016    1.35431 
+        31    1.40880    1.37992    1.35402 significance (train): 36.780 significance: 32.436 
+        32    1.40719    1.37965    1.35378 
+nSamples =  298609
+set batch size to: 8192
+        33    1.40805    1.37944    1.35363 
+        34    1.40820    1.37928    1.35344 
+        35    1.40775    1.37913    1.35333 
+        36    1.40613    1.37897    1.35331 
+        37    1.40765    1.37884    1.35314 
+        38    1.40476    1.37866    1.35299 
+        39    1.40641    1.37852    1.35282 
+        40    1.40432    1.37832    1.35265 
+nSamples =  298609
+set batch size to: 16384
+        41    1.40398    1.37825    1.35260 significance (train): 36.873 significance: 32.352 
+        42    1.40523    1.37816    1.35257 
+        43    1.40611    1.37810    1.35253 
+        44    1.40645    1.37803    1.35245 
+        45    1.40688    1.37796    1.35238 
+        46    1.40407    1.37790    1.35230 
+        47    1.40524    1.37783    1.35226 
+        48    1.40590    1.37774    1.35219 
+        49    1.40563    1.37765    1.35216 
+        50    1.40719    1.37756    1.35213 
+        51    1.40434    1.37746    1.35205 significance (train): 36.861 significance: 32.358 
+        52    1.40527    1.37737    1.35200 
+        53    1.40495    1.37728    1.35191 
+        54    1.40565    1.37720    1.35183 
+        55    1.40410    1.37713    1.35176 
+        56    1.40154    1.37703    1.35165 
+        57    1.40404    1.37694    1.35159 
+        58    1.40501    1.37687    1.35155 
+        59    1.40568    1.37679    1.35153 
+        60    1.40466    1.37672    1.35145 
+        61    1.40655    1.37664    1.35139 significance (train): 36.943 significance: 32.404 
+        62    1.40089    1.37656    1.35138 
+        63    1.40429    1.37651    1.35132 
+        64    1.40162    1.37645    1.35126 
+        65    1.40389    1.37633    1.35115 
+        66    1.40581    1.37625    1.35104 
+        67    1.40402    1.37618    1.35103 
+        68    1.40421    1.37611    1.35097 
+        69    1.40287    1.37606    1.35089 
+        70    1.40373    1.37593    1.35082 
+        71    1.40112    1.37583    1.35083 significance (train): 37.051 significance: 32.444 
+        72    1.40137    1.37571    1.35072 
+        73    1.40114    1.37567    1.35070 
+        74    1.40210    1.37555    1.35058 
+        75    1.40267    1.37545    1.35046 
+        76    1.40338    1.37538    1.35038 
+        77    1.40115    1.37529    1.35033 
+        78    1.40322    1.37516    1.35024 
+        79    1.40321    1.37507    1.35016 
+        80    1.40251    1.37498    1.35010 
+        81    1.40265    1.37492    1.35002 significance (train): 37.081 significance: 32.360 
+        82    1.40424    1.37481    1.34994 
+        83    1.40061    1.37475    1.34985 
+        84    1.40313    1.37468    1.34976 
+        85    1.40233    1.37460    1.34973 
+        86    1.40166    1.37451    1.34963 
+        87    1.40453    1.37442    1.34962 
+        88    1.40401    1.37434    1.34953 
+        89    1.40180    1.37423    1.34945 
+        90    1.40200    1.37416    1.34936 
+        91    1.40209    1.37406    1.34930 significance (train): 37.147 significance: 32.468 
+        92    1.39988    1.37398    1.34925 
+        93    1.40312    1.37390    1.34917 
+        94    1.39930    1.37381    1.34909 
+        95    1.40236    1.37374    1.34903 
+        96    1.40005    1.37365    1.34895 
+        97    1.39988    1.37355    1.34886 
+        98    1.39844    1.37343    1.34874 
+        99    1.40229    1.37334    1.34873 
+       100    1.39949    1.37327    1.34866 
+       101    1.39981    1.37320    1.34856 significance (train): 37.113 significance: 32.522 
+       102    1.39872    1.37315    1.34855 
+       103    1.40056    1.37303    1.34848 
+       104    1.40185    1.37292    1.34839 
+       105    1.39946    1.37281    1.34830 
+       106    1.39934    1.37272    1.34825 
+       107    1.40071    1.37265    1.34817 
+       108    1.40077    1.37257    1.34812 
+       109    1.39952    1.37252    1.34797 
+       110    1.40158    1.37241    1.34790 
+       111    1.39743    1.37230    1.34779 significance (train): 37.138 significance: 32.559 
+       112    1.39841    1.37222    1.34778 
+       113    1.40102    1.37215    1.34771 
+       114    1.39866    1.37207    1.34760 
+       115    1.40134    1.37193    1.34754 
+       116    1.39807    1.37184    1.34749 
+       117    1.39829    1.37175    1.34742 
+       118    1.39739    1.37167    1.34735 
+       119    1.39763    1.37157    1.34728 
+       120    1.40061    1.37155    1.34722 
+       121    1.39774    1.37149    1.34719 significance (train): 37.269 significance: 32.619 
+       122    1.40199    1.37142    1.34714 
+       123    1.39828    1.37133    1.34711 
+       124    1.39911    1.37120    1.34700 
+       125    1.40053    1.37109    1.34688 
+       126    1.40023    1.37100    1.34682 
+       127    1.39797    1.37093    1.34673 
+       128    1.39959    1.37082    1.34659 
+       129    1.39872    1.37073    1.34655 
+       130    1.39787    1.37064    1.34648 
+       131    1.39731    1.37056    1.34639 significance (train): 37.303 significance: 32.525 
+       132    1.39807    1.37046    1.34631 
+       133    1.39654    1.37033    1.34628 
+       134    1.39976    1.37023    1.34623 
+       135    1.39981    1.37019    1.34614 
+       136    1.39550    1.37012    1.34607 
+       137    1.39572    1.37008    1.34599 
+       138    1.39824    1.36995    1.34597 
+       139    1.39523    1.36986    1.34590 
+       140    1.39544    1.36971    1.34579 
+       141    1.39685    1.36962    1.34568 significance (train): 37.362 significance: 32.541 
+       142    1.39500    1.36948    1.34562 
+       143    1.39766    1.36937    1.34549 
+       144    1.39587    1.36925    1.34545 
+       145    1.39619    1.36913    1.34538 
+       146    1.39620    1.36904    1.34529 
+       147    1.39652    1.36898    1.34525 
+       148    1.39492    1.36889    1.34520 
+       149    1.39782    1.36882    1.34510 
+       150    1.39686    1.36876    1.34503 
+       151    1.39632    1.36862    1.34494 significance (train): 37.480 significance: 32.571 
+       152    1.39637    1.36862    1.34489 
+       153    1.39729    1.36855    1.34482 
+       154    1.39510    1.36842    1.34464 
+       155    1.39513    1.36832    1.34459 
+       156    1.39542    1.36821    1.34453 
+       157    1.39426    1.36810    1.34443 
+       158    1.39637    1.36799    1.34443 
+       159    1.39431    1.36786    1.34431 
+       160    1.39525    1.36773    1.34421 
+       161    1.39495    1.36765    1.34418 significance (train): 37.438 significance: 32.639 
+       162    1.39575    1.36757    1.34404 
+       163    1.39153    1.36747    1.34402 
+       164    1.39403    1.36741    1.34387 
+       165    1.39368    1.36731    1.34381 
+       166    1.39342    1.36723    1.34385 
+       167    1.39288    1.36707    1.34366 
+       168    1.39493    1.36695    1.34360 
+       169    1.39351    1.36688    1.34359 
+       170    1.39327    1.36675    1.34354 
+       171    1.39556    1.36670    1.34354 significance (train): 37.513 significance: 32.657 
+       172    1.39234    1.36656    1.34344 
+       173    1.39502    1.36649    1.34334 
+       174    1.39526    1.36646    1.34328 
+       175    1.39467    1.36634    1.34333 
+       176    1.39305    1.36621    1.34321 
+       177    1.39191    1.36608    1.34307 
+       178    1.39388    1.36599    1.34305 
+       179    1.39264    1.36587    1.34299 
+       180    1.39399    1.36582    1.34293 
+       181    1.39206    1.36572    1.34281 significance (train): 37.604 significance: 32.615 
+       182    1.39377    1.36568    1.34280 
+       183    1.39052    1.36557    1.34269 
+       184    1.39418    1.36541    1.34252 
+       185    1.39038    1.36533    1.34243 
+       186    1.39280    1.36521    1.34240 
+       187    1.39212    1.36514    1.34236 
+       188    1.39138    1.36509    1.34226 
+       189    1.39143    1.36503    1.34219 
+       190    1.39179    1.36495    1.34219 
+       191    1.39154    1.36486    1.34211 significance (train): 37.610 significance: 32.594 
+       192    1.39250    1.36481    1.34203 
+       193    1.39041    1.36470    1.34204 
+       194    1.39262    1.36458    1.34197 
+       195    1.39258    1.36447    1.34187 
+       196    1.39092    1.36435    1.34174 
+       197    1.39055    1.36428    1.34159 
+       198    1.39125    1.36415    1.34161 
+       199    1.39302    1.36404    1.34155 
+       200    1.39062    1.36399    1.34148 significance (train): 37.694 significance: 32.793 
+FINAL RESULTS:        200   1.390619   1.341484 significance (train): 37.694 significance: 32.793 
+TRAINING TIME: 0:07:36.389164 (456.4 seconds)
+GRADIENT UPDATES: 47614
+MIN TEST LOSS: 1.34148361022
+training done.
+> results//V11_1lep_Wmn_HFCR_binnedWP/Wlv2017_Whf_med_Wmn_190701_V11-St-withSF.h5/32-32-32-32-32-32-32-32/0.10-0.10-0.10-0.10-0.10-0.10-0.10-0.10/1.000e-04/rnd_1/checkpoints/model.ckpt
+saved checkpoint to [34m results//V11_1lep_Wmn_HFCR_binnedWP/Wlv2017_Whf_med_Wmn_190701_V11-St-withSF.h5/32-32-32-32-32-32-32-32/0.10-0.10-0.10-0.10-0.10-0.10-0.10-0.10/1.000e-04/rnd_1/checkpoints/model.ckpt [0m
+LOSS(train, unmodified):  1.36399037678
+LOSS(test):               1.34148361022
+---
+S    B
+---
+180.61 16765.46
+428.39 10990.80
+748.70 9511.52
+848.61 7351.28
+989.97 5228.57
+1091.04 3466.59
+538.00 1596.98
+361.10 601.50
+93.96 103.44
+ 3.66  4.69
+ 0.00  0.00
+ 0.00  0.00
+ 0.00  0.00
+ 0.00  0.00
+ 0.00  0.00
+---
+significance: 32.793 
+-------------------------
+with optimized binning:
+ method: B
+ target: 0.1252, 0.1315, 0.1315, 0.1252, 0.1134, 0.0978, 0.0802, 0.0627, 0.0466, 0.0330, 0.0222, 0.0142, 0.0087, 0.0051, 0.0028
+ bins:   0.0000, 0.0201, 0.0525, 0.0945, 0.1385, 0.1820, 0.2249, 0.2683, 0.3110, 0.3485, 0.3835, 0.4189, 0.4538, 0.4887, 0.5244, 1.0000
+-------------------------
+---
+S    B
+---
+21.13 6961.21
+113.52 7313.66
+196.62 7314.10
+322.42 6961.35
+458.24 6306.87
+538.35 5438.08
+577.28 4463.64
+574.20 3486.70
+656.19 2593.02
+600.05 1835.18
+394.81 1236.12
+297.98 792.49
+250.35 483.84
+165.67 281.12
+117.23 153.45
+---
+significance: 32.869 (for optimized binning)
+significance: 29.963 ( 1% background uncertainty, for optimized binning)
+significance: 16.381 ( 5% background uncertainty, for optimized binning)
+significance: 9.952 (10% background uncertainty, for optimized binning)
+significance: 7.025 (15% background uncertainty, for optimized binning)
+significance: 5.393 (20% background uncertainty, for optimized binning)
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+now optimizing the bins again for signal region only!
+-------------------------
+with optimized binning:
+ method: B
+ target: 0.1252, 0.1315, 0.1315, 0.1252, 0.1134, 0.0978, 0.0802, 0.0627, 0.0466, 0.0330, 0.0222, 0.0142, 0.0087, 0.0051, 0.0028
+ bins:   0.0000, 0.2824, 0.3111, 0.3350, 0.3578, 0.3795, 0.4012, 0.4233, 0.4453, 0.4673, 0.4892, 0.5087, 0.5283, 0.5482, 0.5741, 1.0000
+-------------------------
+---
+S    B
+---
+114.91 1018.50
+174.60 1070.33
+230.88 1070.44
+246.28 1019.01
+337.75 922.71
+258.02 796.14
+190.88 653.10
+192.81 510.26
+157.43 379.46
+162.91 268.82
+103.51 181.08
+70.42 116.06
+42.71 70.88
+41.09 41.17
+23.88 21.12
+---
+significance: 27.299 (for optimized binning)
+significance: 26.472 ( 1% background uncertainty, for optimized binning)
+significance: 18.343 ( 5% background uncertainty, for optimized binning)
+significance: 12.498 (10% background uncertainty, for optimized binning)
+significance: 9.455 (15% background uncertainty, for optimized binning)
+significance: 7.584 (20% background uncertainty, for optimized binning)
+.....
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+confusion matrix:
+WLIGHT     2348.1    1280.1    509.9     475.2     670.8     
+WB         3080.0    2547.5    1030.8    906.8     1116.3    
+WBB        273.2     254.0     1439.3    198.4     412.0     
+ST         1297.7    1005.0    1012.5    1809.9    2516.1    
+TT         3488.1    3164.0    4357.3    4979.8    20732.2   
+confusion matrix (normalized to output category)
+WLIGHT     22.4      15.5      6.1       5.7       2.6       
+WB         29.4      30.9      12.3      10.8      4.4       
+WBB        2.6       3.1       17.2      2.4       1.6       
+ST         12.4      12.2      12.1      21.6      9.9       
+TT         33.3      38.3      52.2      59.5      81.5      
+confusion matrix (normalized to label)
+WLIGHT     44.4      24.2      9.6       9.0       12.7      
+WB         35.5      29.3      11.9      10.4      12.9      
+WBB        10.6      9.9       55.9      7.7       16.0      
+ST         17.0      13.2      13.3      23.7      32.9      
+TT         9.5       8.6       11.9      13.6      56.5      
+----
+class      efficiency    purity       product
+WLIGHT     44.44        22.39        994.94      
+WB         29.34        30.88        906.05      
+WBB        55.86        17.24        962.81      
+ST         23.69        21.62        512.16      
+TT         56.46        81.47        4,599.67    
+--------------------------------------------------------------------------------
+statistics for dataset: test
+--------------------------------------------------------------------------------
+WLIGHT (y= 0 ) : 26850  avg weight: 0.1967993738575691
+WB (y= 1 ) : 41959  avg weight: 0.20690408059017423
+WBB (y= 2 ) : 22035  avg weight: 0.11694121633522991
+ST (y= 3 ) : 64792  avg weight: 0.11793481117730827
+TT (y= 4 ) : 143649  avg weight: 0.25563343123679827
+test set predictions:
+correct: 131235 wrong: 168050 error: 56.15
+      fun: 21.246961668226906
+ hess_inv: array([[ 2.89742628e-02, -1.76463831e-02,  3.12517564e-03,
+        -8.53604329e-05],
+       [-1.76463831e-02,  1.15551856e-02, -2.52854745e-03,
+        -1.67698468e-05],
+       [ 3.12517564e-03, -2.52854745e-03,  4.15348951e-03,
+        -1.31188255e-04],
+       [-8.53604329e-05, -1.67698468e-05, -1.31188255e-04,
+         4.69314179e-05]])
+      jac: array([-1.43051147e-06, -3.57627869e-06,  4.05311584e-06, -1.66893005e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 102
+      nit: 11
+     njev: 17
+   status: 0
+  success: True
+        x: array([1.40667103, 0.76598792, 1.08833945, 1.02204784])
+[34mINFO: TwoHighest : estimated process scale-factors (without systematics): [1.40667103 0.76598792 1.08833945 1.02204784] [0m
+[34mINFO: TwoHighest : estimated process scale-factor uncertainties (stat only): [0.17021827983327487, 0.10749504915928422, 0.06444757177308481, 0.006850650913087511] [0m
+[34mINFO: TwoHighest : estimated process scale-factor relative uncertainties (stat only): [0.12100788028923626, 0.14033517504637696, 0.0592164255146274, 0.006702867157650696] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.4066710318899447
+scale WB by 0.7659879222993097
+scale WBB by 1.088339446580835
+scale TT by 1.0220478419101793
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.4066710318899447
+scale WB by 0.7659879222993097
+scale WBB by 1.088339446580835
+scale TT by 1.0220478419101793
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  [10, 20, 30, 40, 50, 60, 70, 80, 90]  =  [0.0, 0.27997574782185464, 0.30586709702991993, 0.32594123418183163, 0.34432485846055993, 0.3622850934254001, 0.3811003382426746, 0.40295747766921647, 0.4310396737825379, 0.47128969696688694, 1.0, 1.2570278737591514, 1.273054827517222, 1.2869868900060926, 1.299655639728858, 1.31238440198243, 1.3260473231925924, 1.342218460381235, 1.3623473696388413, 1.389995279975006, 2.0, 2.3042241629869444, 2.3446291622616324, 2.37735688302188, 2.4079419732056815, 2.4397421730012834, 2.478740749768269, 2.5295106080124, 2.607932345882822, 2.7097373879950952, 3.0, 3.2635661997750187, 3.2805347712057356, 3.296874696979794, 3.3122355923097104, 3.3285246365380976, 3.3474889400968255, 3.3685382716411385, 3.3951668319007897, 3.432840452100292, 4.0, 4.300216000043126, 4.3396314002120615, 4.373441396504718, 4.404788707589567, 4.437507816937705, 4.4734725736208745, 4.51578385374402, 4.567305357334699, 4.637422543330727, 5.0]
+      fun: 64.15694956129173
+ hess_inv: array([[ 1.98128994e-02, -1.17867379e-02,  6.45368165e-04,
+        -2.22712585e-05],
+       [-1.17867379e-02,  7.79601480e-03, -8.27537670e-04,
+        -6.98879286e-05],
+       [ 6.45368165e-04, -8.27537670e-04,  2.34883855e-03,
+        -5.30794691e-05],
+       [-2.22712585e-05, -6.98879286e-05, -5.30794691e-05,
+         4.32674230e-05]])
+      jac: array([-5.72204590e-06, -9.53674316e-06,  4.76837158e-06,  1.71661377e-05])
+  message: 'Desired error not necessarily achieved due to precision loss.'
+     nfev: 103
+      nit: 11
+     njev: 17
+   status: 2
+  success: False
+        x: array([1.15092629, 0.94032886, 0.96721496, 1.0262986 ])
+[34mINFO: 10binsFlat : estimated process scale-factors (without systematics): [1.15092629 0.94032886 0.96721496 1.0262986 ] [0m
+[34mINFO: 10binsFlat : estimated process scale-factor uncertainties (stat only): [0.14075830151816413, 0.08829504404335824, 0.04846481767186633, 0.006577797732785966] [0m
+[34mINFO: 10binsFlat : estimated process scale-factor relative uncertainties (stat only): [0.12230001400322273, 0.09389804784161158, 0.05010759730547728, 0.006409243570832479] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.1509262910996478
+scale WB by 0.9403288574464874
+scale WBB by 0.9672149589692783
+scale TT by 1.026298604521843
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.1509262910996478
+scale WB by 0.9403288574464874
+scale WBB by 0.9672149589692783
+scale TT by 1.026298604521843
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  [2, 6, 14, 26, 41, 59, 74, 86, 94, 98]  =  [0.0, 0.24801127284674238, 0.26710160531729205, 0.29098414776607034, 0.31814356061874755, 0.34595619927644244, 0.37905625349878314, 0.4139532578886947, 0.45282262683179486, 0.49494972112194, 0.5330342909823231, 1.0, 1.2350899139710745, 1.2484587037486194, 1.2637162200793588, 1.2812436155582527, 1.3008317548911132, 1.3245334430137445, 1.3499219610305637, 1.3761944991496693, 1.4086323626015966, 1.4383124637905709, 2.0, 2.253093006634119, 2.2818051616926223, 2.3213462001839296, 2.3649508749014085, 2.4105430380035133, 2.4743597718861334, 2.5577794105509426, 2.664049980679463, 2.763229801966514, 2.848570583691872, 3.0, 3.2404411550554757, 3.2543319104169584, 3.2709524841837876, 3.2902587236323315, 3.313915612818576, 3.345507552711992, 3.378563829441942, 3.4157261970492274, 3.458567361418333, 3.511215180744759, 4.0, 4.255288874389315, 4.281346459288654, 4.317137535711562, 4.3602890081568075, 4.407965206561405, 4.469605521742692, 4.534884433565145, 4.606122844749838, 4.674709645039291, 4.731781508329732, 5.0]
+      fun: 48.58976909458045
+ hess_inv: array([[ 3.00858431e-02, -1.83986287e-02,  1.69422092e-03,
+         6.68635445e-05],
+       [-1.83986287e-02,  1.19928472e-02, -1.35384675e-03,
+        -1.17356548e-04],
+       [ 1.69422092e-03, -1.35384675e-03,  2.26872569e-03,
+        -6.56515281e-05],
+       [ 6.68635445e-05, -1.17356548e-04, -6.56515281e-05,
+         4.33300085e-05]])
+      jac: array([ 2.38418579e-06,  4.29153442e-06, -4.76837158e-07,  4.76837158e-07])
+  message: 'Optimization terminated successfully.'
+     nfev: 114
+      nit: 14
+     njev: 19
+   status: 0
+  success: True
+        x: array([1.34501581, 0.81903358, 0.98829921, 1.02518693])
+[34mINFO: 10binsGauss : estimated process scale-factors (without systematics): [1.34501581 0.81903358 0.98829921 1.02518693] [0m
+[34mINFO: 10binsGauss : estimated process scale-factor uncertainties (stat only): [0.1734527114550784, 0.10951185893744725, 0.04763114199469379, 0.006582553338310555] [0m
+[34mINFO: 10binsGauss : estimated process scale-factor relative uncertainties (stat only): [0.12895960750104193, 0.13370863134971467, 0.048195062420332155, 0.006420832268324899] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.3450158139918111
+scale WB by 0.8190335794479804
+scale WBB by 0.9882992074847803
+scale TT by 1.0251869326634577
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.3450158139918111
+scale WB by 0.8190335794479804
+scale WBB by 0.9882992074847803
+scale TT by 1.0251869326634577
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  [20, 40, 60, 80]  =  [0.0, 0.30586709702991993, 0.34432485846055993, 0.3811003382426746, 0.4310396737825379, 1.0, 1.273054827517222, 1.299655639728858, 1.3260473231925924, 1.3623473696388413, 2.0, 2.3446291622616324, 2.4079419732056815, 2.478740749768269, 2.607932345882822, 3.0, 3.2805347712057356, 3.3122355923097104, 3.3474889400968255, 3.3951668319007897, 4.0, 4.3396314002120615, 4.404788707589567, 4.4734725736208745, 4.567305357334699, 5.0]
+      fun: 33.915611063985615
+ hess_inv: array([[ 3.40395770e-02, -2.14930696e-02,  2.24110099e-03,
+         1.32706213e-04],
+       [-2.14930696e-02,  1.42867311e-02, -1.75169204e-03,
+        -1.58177521e-04],
+       [ 2.24110099e-03, -1.75169204e-03,  2.43228755e-03,
+        -6.73464394e-05],
+       [ 1.32706213e-04, -1.58177521e-04, -6.73464394e-05,
+         4.38022168e-05]])
+      jac: array([-5.72204590e-06, -5.72204590e-06, -3.33786011e-06, -4.76837158e-07])
+  message: 'Optimization terminated successfully.'
+     nfev: 96
+      nit: 12
+     njev: 16
+   status: 0
+  success: True
+        x: array([1.19279779, 0.90650832, 0.97234391, 1.02687258])
+[34mINFO: 5binsFlat : estimated process scale-factors (without systematics): [1.19279779 0.90650832 0.97234391 1.02687258] [0m
+[34mINFO: 5binsFlat : estimated process scale-factor uncertainties (stat only): [0.18449817600981241, 0.11952711448941505, 0.049318227405282106, 0.006618324318044023] [0m
+[34mINFO: 5binsFlat : estimated process scale-factor relative uncertainties (stat only): [0.15467682560745263, 0.131854404760607, 0.05072097102826157, 0.006445127122235371] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.192797791687567
+scale WB by 0.9065083165513265
+scale WBB by 0.9723439123001438
+scale TT by 1.0268725802492134
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.192797791687567
+scale WB by 0.9065083165513265
+scale WBB by 0.9723439123001438
+scale TT by 1.0268725802492134
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  [50, 70, 85, 95]  =  [0.0, 0.3622850934254001, 0.40295747766921647, 0.44886195155138425, 0.5013608186988199, 1.0, 1.31238440198243, 1.342218460381235, 1.3737899242301987, 1.4144933431521092, 2.0, 2.4397421730012834, 2.5295106080124, 2.6538811296597604, 2.780223991155344, 3.0, 3.3285246365380976, 3.3685382716411385, 3.4117609162189804, 3.4681048676269652, 4.0, 4.437507816937705, 4.51578385374402, 4.599029647656889, 4.686113199864747, 5.0]
+      fun: 22.707929297147846
+ hess_inv: array([[ 3.24171012e-02, -2.04903753e-02,  1.91439094e-03,
+         1.33194588e-04],
+       [-2.04903753e-02,  1.36685178e-02, -1.52105542e-03,
+        -1.63063608e-04],
+       [ 1.91439094e-03, -1.52105542e-03,  2.16007003e-03,
+        -5.63658632e-05],
+       [ 1.33194588e-04, -1.63063608e-04, -5.63658632e-05,
+         4.42490277e-05]])
+      jac: array([-4.76837158e-07,  2.38418579e-07, -1.66893005e-06,  2.38418579e-07])
+  message: 'Optimization terminated successfully.'
+     nfev: 90
+      nit: 12
+     njev: 15
+   status: 0
+  success: True
+        x: array([1.17848828, 0.92041821, 0.98807678, 1.02484902])
+[34mINFO: 5bins_50_20_15_10_5 : estimated process scale-factors (without systematics): [1.17848828 0.92041821 0.98807678 1.02484902] [0m
+[34mINFO: 5bins_50_20_15_10_5 : estimated process scale-factor uncertainties (stat only): [0.18004749710251453, 0.11691243662378883, 0.04647655359144447, 0.006651994262089026] [0m
+[34mINFO: 5bins_50_20_15_10_5 : estimated process scale-factor relative uncertainties (stat only): [0.1527783523167942, 0.12702099539436956, 0.04703739085093128, 0.006490706561468685] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.1784882764619444
+scale WB by 0.9204182053589166
+scale WBB by 0.9880767778709454
+scale TT by 1.0248490205331122
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.1784882764619444
+scale WB by 0.9204182053589166
+scale WBB by 0.9880767778709454
+scale TT by 1.0248490205331122
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  [30, 58, 79, 93]  =  [0.0, 0.32594123418183163, 0.3769508286623333, 0.42816919926067604, 0.48782939528042046, 1.0, 1.2869868900060926, 1.3231681791095484, 1.3603164671951395, 1.4028508220745766, 2.0, 2.37735688302188, 2.470237575250047, 2.5991033496418914, 2.748571504255402, 3.0, 3.296874696979794, 3.343539220156377, 3.3920603063059764, 3.4512826224265445, 4.0, 4.373441396504718, 4.465780925671792, 4.561555096835586, 4.664521352754845, 5.0]
+      fun: 25.093481945062535
+ hess_inv: array([[ 3.60721752e-02, -2.27590778e-02,  2.24142443e-03,
+         1.25253797e-04],
+       [-2.27590778e-02,  1.50647778e-02, -1.71195063e-03,
+        -1.54106774e-04],
+       [ 2.24142443e-03, -1.71195063e-03,  2.29648116e-03,
+        -6.56890492e-05],
+       [ 1.25253797e-04, -1.54106774e-04, -6.56890492e-05,
+         4.37783321e-05]])
+      jac: array([-1.90734863e-06, -1.43051147e-06,  1.43051147e-06,  3.81469727e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 120
+      nit: 13
+     njev: 20
+   status: 0
+  success: True
+        x: array([1.2022955 , 0.89303066, 1.01458954, 1.02608403])
+[34mINFO: 5bins_30_28_21_14_7 : estimated process scale-factors (without systematics): [1.2022955  0.89303066 1.01458954 1.02608403] [0m
+[34mINFO: 5bins_30_28_21_14_7 : estimated process scale-factor uncertainties (stat only): [0.1899267628488887, 0.12273865654594998, 0.0479216147499705, 0.0066165196400187415] [0m
+[34mINFO: 5bins_30_28_21_14_7 : estimated process scale-factor relative uncertainties (stat only): [0.15797011887683673, 0.1374405848018783, 0.047232514308197436, 0.006448321430277006] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.2022954986630563
+scale WB by 0.8930306628342621
+scale WBB by 1.01458953544748
+scale TT by 1.0260840300162442
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.2022954986630563
+scale WB by 0.8930306628342621
+scale WBB by 1.01458953544748
+scale TT by 1.0260840300162442
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  [33, 67]  =  [0.0, 0.33133653651242345, 0.3957899366689256, 1.0, 1.290994390302029, 1.3368226225517077, 2.0, 2.3870324460855787, 2.511964023949904, 3.0, 3.30137202095648, 3.3620638988558755, 4.0, 4.383000263738719, 4.502403720267781, 5.0]
+      fun: 10.974714075685878
+ hess_inv: array([[ 3.44038442e-02, -2.18522592e-02,  3.03446859e-03,
+         6.47146521e-05],
+       [-2.18522592e-02,  1.46421437e-02, -2.31359347e-03,
+        -1.17774873e-04],
+       [ 3.03446859e-03, -2.31359347e-03,  2.94381424e-03,
+        -8.70080239e-05],
+       [ 6.47146521e-05, -1.17774873e-04, -8.70080239e-05,
+         4.52437731e-05]])
+      jac: array([ 2.02655792e-06,  8.34465027e-07,  4.76837158e-07, -2.38418579e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 96
+      nit: 12
+     njev: 16
+   status: 0
+  success: True
+        x: array([1.29262033, 0.8448816 , 0.99854704, 1.02529532])
+[34mINFO: 3binsFlat : estimated process scale-factors (without systematics): [1.29262033 0.8448816  0.99854704 1.02529532] [0m
+[34mINFO: 3binsFlat : estimated process scale-factor uncertainties (stat only): [0.185482732902973, 0.12100472573976746, 0.054256928068952756, 0.006726349162108029] [0m
+[34mINFO: 3binsFlat : estimated process scale-factor relative uncertainties (stat only): [0.14349359092305036, 0.14322092755599966, 0.05433587595459385, 0.006560401690152972] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.2926203303563548
+scale WB by 0.8448815952016118
+scale WBB by 0.9985470394236937
+scale TT by 1.025295321809965
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.2926203303563548
+scale WB by 0.8448815952016118
+scale WBB by 0.9985470394236937
+scale TT by 1.025295321809965
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  [52, 84]  =  [0.0, 0.3659391079991644, 0.44527959019233426, 1.0, 1.3149248695230815, 1.3714989025165398, 2.0, 2.4471649192082334, 2.6446865194154983, 3.0, 3.332115169366012, 3.4079172501365806, 4.0, 4.4443097295206675, 4.592242440813872, 5.0]
+      fun: 16.049720032507935
+ hess_inv: array([[ 8.52768784e-03, -4.74299942e-03, -2.53485507e-03,
+         9.16407425e-05],
+       [-4.74299942e-03,  3.34196784e-03,  1.36883743e-03,
+        -1.41325517e-04],
+       [-2.53485507e-03,  1.36883743e-03,  1.56907594e-03,
+        -7.02519234e-05],
+       [ 9.16407425e-05, -1.41325517e-04, -7.02519234e-05,
+         4.59912911e-05]])
+      jac: array([2.38418579e-07, 2.38418579e-07, 1.43051147e-06, 1.45435333e-05])
+  message: 'Desired error not necessarily achieved due to precision loss.'
+     nfev: 786
+      nit: 41
+     njev: 129
+   status: 2
+  success: False
+        x: array([1.26699642, 0.85748636, 0.97276503, 1.0278106 ])
+[34mINFO: 3bins_52_32_16 : estimated process scale-factors (without systematics): [1.26699642 0.85748636 0.97276503 1.0278106 ] [0m
+[34mINFO: 3bins_52_32_16 : estimated process scale-factor uncertainties (stat only): [0.09234548086086244, 0.05780975553694823, 0.03961156314947968, 0.006781687923109796] [0m
+[34mINFO: 3bins_52_32_16 : estimated process scale-factor relative uncertainties (stat only): [0.07288535272389875, 0.06741769731377713, 0.04072058728585752, 0.006598188327801955] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.2669964184804283
+scale WB by 0.8574863550721501
+scale WBB by 0.9727650259905998
+scale TT by 1.027810602879377
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.2669964184804283
+scale WB by 0.8574863550721501
+scale WBB by 0.9727650259905998
+scale TT by 1.027810602879377
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  [50]  =  [0.0, 0.3622850934254001, 1.0, 1.31238440198243, 2.0, 2.4397421730012834, 3.0, 3.3285246365380976, 4.0, 4.437507816937705, 5.0]
+      fun: 7.07555024031874
+ hess_inv: array([[ 2.99924370e-04,  1.56239062e-04, -9.01257899e-05,
+        -6.23122698e-05],
+       [ 1.56239062e-04,  8.22265774e-04, -6.70111021e-04,
+        -1.54520706e-04],
+       [-9.01257899e-05, -6.70111021e-04,  2.05280572e-03,
+         9.93594198e-05],
+       [-6.23122698e-05, -1.54520706e-04,  9.93594198e-05,
+         7.30814775e-05]])
+      jac: array([-2.74181366e-06, -3.33786011e-06,  4.17232513e-07,  1.62005424e-04])
+  message: 'Desired error not necessarily achieved due to precision loss.'
+     nfev: 375
+      nit: 14
+     njev: 62
+   status: 2
+  success: False
+        x: array([1.29479156, 0.84693104, 0.99125408, 1.0251532 ])
+[34mINFO: 2binsFlat : estimated process scale-factors (without systematics): [1.29479156 0.84693104 0.99125408 1.0251532 ] [0m
+[34mINFO: 2binsFlat : estimated process scale-factor uncertainties (stat only): [0.01731832467792762, 0.028675176963160794, 0.045307899105469326, 0.008548770526923308] [0m
+[34mINFO: 2binsFlat : estimated process scale-factor relative uncertainties (stat only): [0.013375376560777797, 0.03385774715726686, 0.04570765449985656, 0.008339017571790872] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.2947915596419317
+scale WB by 0.8469310385586675
+scale WBB by 0.9912540820840307
+scale TT by 1.025153197403251
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.2947915596419317
+scale WB by 0.8469310385586675
+scale WBB by 0.9912540820840307
+scale TT by 1.025153197403251
+[32mPLOTS: use real data in the plots![0m
+bin-list CRs  []  =  [0.0, 1.0, 2.0, 3.0, 4.0, 5.0]
+      fun: 2.3201273268222264
+ hess_inv: array([[ 4.37545918e-02, -2.82780922e-02,  4.48094355e-03,
+         1.43706018e-04],
+       [-2.82780922e-02,  1.92125726e-02, -3.57348913e-03,
+        -1.82940255e-04],
+       [ 4.48094355e-03, -3.57348913e-03,  4.91563995e-03,
+        -1.33261105e-04],
+       [ 1.43706018e-04, -1.82940255e-04, -1.33261105e-04,
+         5.17100713e-05]])
+      jac: array([-2.98023224e-08, -5.96046448e-08, -1.19209290e-07, -5.96046448e-08])
+  message: 'Optimization terminated successfully.'
+     nfev: 108
+      nit: 13
+     njev: 18
+   status: 0
+  success: True
+        x: array([1.40970772, 0.76659388, 1.0762634 , 1.02167779])
+[34mINFO: 1bin : estimated process scale-factors (without systematics): [1.40970772 0.76659388 1.0762634  1.02167779] [0m
+[34mINFO: 1bin : estimated process scale-factor uncertainties (stat only): [0.20917598286567915, 0.13860942455098607, 0.07011162493815236, 0.007190971512031249] [0m
+[34mINFO: 1bin : estimated process scale-factor relative uncertainties (stat only): [0.14838251955457213, 0.18081206724791943, 0.06514355570707829, 0.007038394704529213] [0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.4097077168766392
+scale WB by 0.7665938820384844
+scale WBB by 1.0762634028362417
+scale TT by 1.0216777850500276
+[32mPLOTS: use real data in the plots![0m
+[32mPLOTS: use real data in the plots![0m
+scale WLIGHT by 1.4097077168766392
+scale WB by 0.7665938820384844
+scale WBB by 1.0762634028362417
+scale TT by 1.0216777850500276
+[32mPLOTS: use real data in the plots![0m

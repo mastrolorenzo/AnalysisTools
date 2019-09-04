@@ -1,8 +1,5 @@
 #!/usr/bin/env python
-#from DNN.tfZllDNN.TensorflowDNNClassifier import TensorflowDNNClassifier
-#from DNN.tfZllDNN.MyStandardScaler import StandardScaler
-#import DNN.tfZllDNN.MyStandardScaler as MyStandardScaler
-from TensorflowDNNClassifier import TensorflowDNNClassifier
+from TensorflowDNNClassifierSummer2018 import TensorflowDNNClassifier
 import numpy as np
 import pickle
 
@@ -73,7 +70,7 @@ class TensorflowEvaluator():
 
         # fill output branches
         if self.verbose:
-            print "DNN for this event is : ",  probabilities[0,0 ]  #FIXME: you want to write somewhere rather than printing
+            print "DNN for this event is : ",  probabilities[0,0]  #FIXME: you want to write somewhere rather than printing
 
         return probabilities[0,0]
 

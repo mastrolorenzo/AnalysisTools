@@ -1624,6 +1624,9 @@ void VHbbAnalysis::FinishEvent() {
     *f["hJets_btagged_0"] = (float) m(taggerName,mInt("hJetInd1"));
     *f["hJets_btagged_1"] = (float) m(taggerName,mInt("hJetInd2"));
 
+    *f["hJets_btagWP_0"] = (float) BtagWPForJet(mInt("hJetInd1"));
+    *f["hJets_btagWP_1"] = (float) BtagWPForJet(mInt("hJetInd2"));
+
     //*f["hJets_mt_0"] = HJ1.Mt();
     //*f["hJets_mt_1"] = HJ2.Mt();
     //*f["H_dR"] = (float) HJ1.DeltaR(HJ2);
@@ -2054,6 +2057,7 @@ void VHbbAnalysis::FinishEvent() {
     }
 
     if (cursyst->name != "nominal") {
+        if(debug>100) std::cout<<"setting up branches for systematic"<<cursyst->name<<std::endl;
         *in[Form("controlSample_%s", cursyst->name.c_str())]                     = mInt("controlSample");
 
         *f[ Form("H_mass_%s",                            cursyst->name.c_str())] = m("H_mass");
@@ -2071,6 +2075,8 @@ void VHbbAnalysis::FinishEvent() {
         *f[ Form("V_mt_%s",                              cursyst->name.c_str())] = m("V_mt");
         *f[ Form("hJets_btagged_0_%s",                   cursyst->name.c_str())] = m("hJets_btagged_0");
         *f[ Form("hJets_btagged_1_%s",                   cursyst->name.c_str())] = m("hJets_btagged_1");
+        *f[ Form("hJets_btagWP_0_%s",                    cursyst->name.c_str())] = m("hJets_btagWP_0");
+        *f[ Form("hJets_btagWP_1_%s",                    cursyst->name.c_str())] = m("hJets_btagWP_1");
         *f[ Form("hJets_leadingPt_%s",                   cursyst->name.c_str())] = m("hJets_leadingPt");
         *f[ Form("hJets_pt_0_%s",                        cursyst->name.c_str())] = m("hJets_pt_0");
         *f[ Form("hJets_pt_1_%s",                        cursyst->name.c_str())] = m("hJets_pt_1");
@@ -4022,6 +4028,20 @@ double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, 
     return Top.M();
 }
 
+// count the number of WPs passed
+int VHbbAnalysis::BtagWPForJet(int jetIndex){
+    int nWPsPassed=0;
+    if(jetIndex>-1){
+        nWPsPassed+=int(m(taggerName,jetIndex)>m("tagWPL")); 
+        if(nWPsPassed>0){
+            nWPsPassed+=int(m(taggerName,jetIndex)>m("tagWPM")); 
+            if(nWPsPassed>1){
+                nWPsPassed+=int(m(taggerName,jetIndex)>m("tagWPT"));
+            }
+        } 
+    }
+    return nWPsPassed;
+}
 
 float VHbbAnalysis::ReWeightMC(int nPU){
 

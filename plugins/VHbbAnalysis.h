@@ -61,6 +61,7 @@ class VHbbAnalysis : public AnalysisManager {
         void ComputeVHKinematics();
         void ComputeOtherEventKinematics();
         void ControlSampleSelection();
+        int BtagWPForJet(int jetIndex);
         float ReWeightMC(int nPU=0);
         float puWeight_2016(int i=0);
         float puWeight_2016Up(int i=0);

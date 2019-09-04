@@ -910,6 +910,8 @@ void AnalysisManager::SetupSystematicsBranches(){
             SetupNewBranch(Form("V_mt_%s",                                systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("hJets_btagged_0_%s",                     systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("hJets_btagged_1_%s",                     systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJets_btagWP_0_%s",                     systematics[iSyst].name.c_str()), 2);
+            SetupNewBranch(Form("hJets_btagWP_1_%s",                     systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("hJets_leadingPt_%s",                     systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("hJets_pt_0_%s",                          systematics[iSyst].name.c_str()), 2);
             SetupNewBranch(Form("hJets_pt_1_%s",                          systematics[iSyst].name.c_str()), 2);

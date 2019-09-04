@@ -1,5 +1,4 @@
 from kinfitter import EventProxy, prepare_io
-import TensorflowEvaluator
 import ctypes
 import time
 import ROOT
@@ -92,10 +91,21 @@ def prep_bdt_variables(bdt_info):
         bdt_info.BookMVA()
     elif bdt_info.mvaType == "DNN":
         tokens = str(bdt_info.xmlFile).split(':')
-        assert len(tokens)==3, 'for DNN, I need bdt_info.xmlFile to be in the form "cfg:scaler_dump:chpt" (separated by colons)'
-        cfg, scaler_dump, chpt = tokens
-        bdt_info.tf_evaluator = TensorflowEvaluator.TensorflowEvaluator(
-            cfg, scaler_dump, chpt, n_features=len(bdt_info.raw_vars), verbose=VERBOSE)
+        if len(tokens)==3: #old evaluation 'for DNN, I need bdt_info.xmlFile to be in the form "cfg:scaler_dump:checkPointFile" (separated by colons)'
+            import TensorflowEvaluatorSummer2018
+            cfg, scaler_dump, checkPointFile = tokens
+            bdt_info.tf_evaluator = TensorflowEvaluatorSummer2018.TensorflowEvaluator(
+                cfg, scaler_dump, checkPointFile, n_features=len(bdt_info.raw_vars), verbose=VERBOSE)
+        elif len(tokens)==1:  #new evaluation only needs the checkpoint file
+            print "importing"
+            import TensorflowEvaluatorRun2Legacy
+            checkPointFile = tokens[0]
+            print "imported",checkPointFile
+            bdt_info.tf_evaluator = TensorflowEvaluatorRun2Legacy.TensorflowDNNEvaluator(checkPointFile)
+            print("evaluator instantiated")
+        else:
+            print "len(tokens)",len(tokens),"is not 1 or 3.  So this is over"
+            assert(0==1)
     else:
         raise RuntimeError("I don't know mvaType %s. Just BDT and DNN." % bdt_info.mvaType)
     return bdt_info
@@ -108,9 +118,11 @@ def evaluate_discriminator(ep, bdt_infos):
                 raw_var.value = getattr(ep, varname)
             getattr(ep, bdt_info.bdtname)[0] = bdt_info.reader.EvaluateMVA(bdt_info.methodName)
 
-        else:
+        elif bdt_info.mvaType == "DNN":
             raw_vars = tuple(getattr(ep, varname) for varname, _ in bdt_info.raw_vars)
             getattr(ep, bdt_info.bdtname)[0] = bdt_info.tf_evaluator.EvaluateDNN(raw_vars)
+        else:
+            print "What type of MVA is",bdt_info.mvaType
 
 
 def apply_mva_eval(input_file, output_file, am, is_data, allowed_names, lep_sys_names=tuple()):
