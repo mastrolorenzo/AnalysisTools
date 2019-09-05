@@ -1489,15 +1489,7 @@ void VHbbAnalysis::FinishEvent() {
     
     if (m("LHE_Vpt") > 100 && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0){
       //ZJets_BGenFilter, WJets_BGenFilter, DYJets_BGenFilter                                                                                                   
-      if(m("dataYear") == 2016){
-	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
-	  VBenrichReweight = 1.0;
-	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
-	  VBenrichReweight = 1.0;
-	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
-	  VBenrichReweight = 1.0;
-	}
-      }else if(m("dataYear") == 2017){
+      if(m("dataYear") == 2017){
 	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
 	  VBenrichReweight = (7.7e-01 + 1.184e-03*std::min(m("LHE_Vpt"),800.) - 9.181e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
 	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
@@ -1516,15 +1508,7 @@ void VHbbAnalysis::FinishEvent() {
       }
     }else if (m("LHE_Vpt") > 100 && mInt("LHE_Nb") > 0){
       //ZBJets, WBJets, DYBJets                                                                                                                                            
-      if(m("dataYear") == 2016){
-	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
-	  VBenrichReweight = 1.0;
-	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
-	  VBenrichReweight = 1.0;
-	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
-	  VBenrichReweight = 1.0;
-	}
-      }else if(m("dataYear") == 2017){
+    if(m("dataYear") == 2017){
 	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
 	  VBenrichReweight = (6.968e-01 + 1.764e-03*std::min(m("LHE_Vpt"),800.) - 1.526e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
 	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
