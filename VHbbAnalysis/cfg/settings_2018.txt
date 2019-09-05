@@ -35,9 +35,9 @@ type=2  name=j2ptCut_2lepchan   val=20
 type=2  name=j2ptCut            val=25
 
 # 0,1,2 means loose, medium, tight WPs
-type=2  name=j1BtagWP_0lepchan val=2
-type=2  name=j1BtagWP_1lepchan val=2
-type=2  name=j1BtagWP_2lepchan val=0
+type=2  name=j1BtagWP_0lepchan val=1
+type=2  name=j1BtagWP_1lepchan val=1
+type=2  name=j1BtagWP_2lepchan val=1
 type=2  name=j1Btag            val=-1
 type=2  name=j2BtagWP          val=0
 type=2  name=j2Btag            val=-1
@@ -60,9 +60,9 @@ type=2  name=enableFSRRecovery   val=1.
 type=2  name=taggerType         val=0.
 
 #define the correct loose (L), medium (M) and tight (T) working point (WP) associated to the chosen tagger
-type=2  name=tagWPL             val=0.1522
-type=2  name=tagWPM             val=0.4941
-type=2  name=tagWPT             val=0.8001
+type=2  name=tagWPL             val=0.1241
+type=2  name=tagWPM             val=0.4184
+type=2  name=tagWPT             val=0.7527
 
 type=2  name=JetPtPresel        val=20
 type=2  name=LepPtPresel        val=20

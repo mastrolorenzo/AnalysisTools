@@ -500,6 +500,8 @@ type=2  name=met_pt_JECDown_ratio
 
 type=2  name=hJets_btagged_0
 type=2  name=hJets_btagged_1
+type=2  name=hJets_btagWP_0
+type=2  name=hJets_btagWP_1
 type=2  name=hJets_leadingPt_noFSR
 type=2  name=hJets_subleadingPt_noFSR
 type=2  name=hJets_leadingPt

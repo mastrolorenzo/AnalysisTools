@@ -198,7 +198,7 @@ bool VHbbAnalysis::Preselection() {
     // Preselect for two jets and one lepton which pass some minimum pt threshold
     int nPreselJets = 0;
     for (int i = 0; i < mInt("nJet"); i++) {
-        if (m("Jet_PtReg",i) > m("JetPtPresel") && mInt("Jet_puId",i) > 0 && mInt("Jet_lepFilter",i)) nPreselJets++;
+        if (m("Jet_PtReg",i) > m("JetPtPresel") && (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50) && mInt("Jet_lepFilter",i)) nPreselJets++;
     }
 
 
@@ -768,7 +768,7 @@ void VHbbAnalysis::FinishEvent() {
 
         for (int i=0; i<mInt("nJet"); i++)
         {
-            if (m("Jet_puId", i) > 0
+            if ( (m("Jet_puId", i) > 6 || m("Jet_Pt",i)>50)
                 && m("Jet_lepFilter", i) > 0
                 && m("Jet_Pt", i)>m("JetPtPresel")
                 && fabs(m("Jet_eta", i))<=m("JetEtaCut"))
@@ -1624,6 +1624,9 @@ void VHbbAnalysis::FinishEvent() {
     *f["hJets_btagged_0"] = (float) m(taggerName,mInt("hJetInd1"));
     *f["hJets_btagged_1"] = (float) m(taggerName,mInt("hJetInd2"));
 
+    *f["hJets_btagWP_0"] = (float) BtagWPForJet(mInt("hJetInd1"));
+    *f["hJets_btagWP_1"] = (float) BtagWPForJet(mInt("hJetInd2"));
+
     //*f["hJets_mt_0"] = HJ1.Mt();
     //*f["hJets_mt_1"] = HJ2.Mt();
     //*f["H_dR"] = (float) HJ1.DeltaR(HJ2);
@@ -1690,7 +1693,7 @@ void VHbbAnalysis::FinishEvent() {
                 if(iJet==mInt("hJetInd1")) continue;
                 if(iJet==mInt("hJetInd2")) continue;
                 if(mInt("Jet_lepFilter",iJet)==0) continue;
-                if(mInt("Jet_puId",iJet) > 0 && m("Jet_bReg",iJet)>25){
+                if( (mInt("Jet_puId",iJet) > 6 || m("Jet_Pt",iJet)>50) && m("Jet_bReg",iJet)>25){
                     if(*f["otherJetsBestBtag"]< m(taggerName,iJet)){
                         *f["otherJetsBestBtag"]=m(taggerName,iJet);
                     }
@@ -1698,7 +1701,7 @@ void VHbbAnalysis::FinishEvent() {
                         *f["otherJetsHighestPt"]=m("Jet_bReg",iJet);
                     }
                 }
-                if(mInt("Jet_puId",iJet)>0 && m("Jet_Pt",iJet)>30){
+                if( (mInt("Jet_puId",iJet)>6 || m("Jet_Pt",iJet)>50) && m("Jet_Pt",iJet)>30){
                     if(*f["minDPhiFromOtherJets"]>fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)))){
                         *f["minDPhiFromOtherJets"]=fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)));
                     }
@@ -2054,6 +2057,7 @@ void VHbbAnalysis::FinishEvent() {
     }
 
     if (cursyst->name != "nominal") {
+        if(debug>100) std::cout<<"setting up branches for systematic"<<cursyst->name<<std::endl;
         *in[Form("controlSample_%s", cursyst->name.c_str())]                     = mInt("controlSample");
 
         *f[ Form("H_mass_%s",                            cursyst->name.c_str())] = m("H_mass");
@@ -2071,6 +2075,8 @@ void VHbbAnalysis::FinishEvent() {
         *f[ Form("V_mt_%s",                              cursyst->name.c_str())] = m("V_mt");
         *f[ Form("hJets_btagged_0_%s",                   cursyst->name.c_str())] = m("hJets_btagged_0");
         *f[ Form("hJets_btagged_1_%s",                   cursyst->name.c_str())] = m("hJets_btagged_1");
+        *f[ Form("hJets_btagWP_0_%s",                    cursyst->name.c_str())] = m("hJets_btagWP_0");
+        *f[ Form("hJets_btagWP_1_%s",                    cursyst->name.c_str())] = m("hJets_btagWP_1");
         *f[ Form("hJets_leadingPt_%s",                   cursyst->name.c_str())] = m("hJets_leadingPt");
         *f[ Form("hJets_pt_0_%s",                        cursyst->name.c_str())] = m("hJets_pt_0");
         *f[ Form("hJets_pt_1_%s",                        cursyst->name.c_str())] = m("hJets_pt_1");
@@ -2436,7 +2442,7 @@ bool VHbbAnalysis::ReconstructHiggsCand(){
                 if( ijet == mInt("hJetInd1") || ijet == mInt("hJetInd2") ) continue;
 
                 //Select FSR jets
-                if( m("Jet_Pt", ijet) > 20 && abs(m("Jet_eta", ijet)) < 3.0 && m("Jet_puId", ijet) > 0  && m("Jet_lepFilter", ijet) > 0 ){
+                if( m("Jet_Pt", ijet) > 20 && abs(m("Jet_eta", ijet)) < 3.0 && (m("Jet_puId", ijet) > 6 || m("Jet_Pt",ijet)>50)  && m("Jet_lepFilter", ijet) > 0 ){
 
                     TLorentzVector Jet_FSR;
                     Jet_FSR.SetPtEtaPhiM( m("Jet_bReg",ijet), m("Jet_eta",ijet), m("Jet_phi",ijet), m("Jet_mass",ijet) * (m("Jet_bReg",ijet) / m("Jet_Pt",ijet)) );
@@ -2726,7 +2732,7 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
             std::replace(eta_cut.begin(), eta_cut.end(), '.', 'p');
             for (int k = 0; k < mInt("nJet"); k++) {
                 if (k == mInt("hJetInd1") || k == mInt("hJetInd2")) continue;
-                if (m("Jet_lepFilter",k) && m("Jet_Pt",k) > ptCuts[i] && fabs(m("Jet_eta",k)) < etaCuts[j] && m("Jet_puId",k) > 0) {
+                if (m("Jet_lepFilter",k) && m("Jet_Pt",k) > ptCuts[i] && fabs(m("Jet_eta",k)) < etaCuts[j] && (m("Jet_puId",k) > 6 || m("Jet_Pt",k)>50)) {
                     nAddJet_tmp++;
                     if (m("Jet_Pt",k) > maxPt) {
                         maxPt = m("Jet_Pt",k);
@@ -2750,7 +2756,7 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
         if(
                iJet!=mInt("hJetInd1")
             && iJet!=mInt("hJetInd2")
-            && mInt("Jet_puId",iJet)==7
+            && (mInt("Jet_puId",iJet)>6 || m("Jet_Pt",iJet)>6)
             && m("Jet_Pt",iJet)>30
             && mInt("Jet_lepFilter",iJet)>0
             && abs(m("Jet_eta",iJet))<2.4
@@ -2810,7 +2816,7 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
     // Z boson (MET). The latter is used to reject QCD events.
     int nJetsCloseToMET = 0;
     for (int i = 0; i < mInt("nJet"); i++) {
-        if (m("Jet_Pt",i) > 30 && mInt("Jet_puId",i) > 0 && m("Jet_lepFilter",i)) {
+        if (m("Jet_Pt",i) > 30 && (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50) && m("Jet_lepFilter",i)) {
             float dPhi_Jet_MET = fabs(EvalDeltaPhi(m("Jet_phi",i), m("MET_Phi")));
             if (dPhi_Jet_MET < 0.5) {
                 nJetsCloseToMET += 1;
@@ -2923,7 +2929,7 @@ void VHbbAnalysis::ControlSampleSelection(){
                 if (*in["nJetsCloseToMET"] == 0 && m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2) {
                 if (hJet1_btag < m("tagWPM") && m("nAddJets302p5_puid") < 2) {
                         *in["controlSample"] = 2; // Z+Light Control Sample Index
-                    } else if (hJet1_btag > m("tagWPT") && m("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) {
+                    } else if (hJet1_btag > m("tagWPT") && m("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) { //FIXME change tight->medium?
                         *in["controlSample"] = 3; // Z+bb Control Sample Index
                     }
                 }
@@ -2955,7 +2961,7 @@ void VHbbAnalysis::ControlSampleSelection(){
         // htJet30 is not currenty in nanoAOD, need to calculate it
         *f["htJet30"] = 0.;
         for (int i=0; i<mInt("nJet");i++) {
-            if (m("Jet_Pt",i)>30. && m("Jet_lepFilter",i) && m("Jet_puId",i)) {
+            if (m("Jet_Pt",i)>30. && m("Jet_lepFilter",i) && (m("Jet_puId",i)>6 || m("Jet_Pt",i)>50)) {
                 *f["htJet30"] = m("htJet30") + m("Jet_Pt",i);
             }
         }
@@ -2971,7 +2977,7 @@ void VHbbAnalysis::ControlSampleSelection(){
         //}
 
         if (base1LepCSSelection) {
-            if (max_hJet_btag > m("tagWPT")){ //ttbar or W+HF
+            if (max_hJet_btag > m("tagWPT")){ //ttbar or W+HF #FIXME change tight-> medium?
                 if (m("nAddJets302p5_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
                 //} else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
@@ -3002,13 +3008,13 @@ void VHbbAnalysis::ControlSampleSelection(){
 
         if (base2LepCSSelection) {
             if (////////////////////////// ttbar
-                max_hJet_btag > m("tagWPT")
+                max_hJet_btag > m("tagWPT") //fixme change tight->medium?
                 && min_hJet_btag > m("tagWPL")
                 && (V_mass > 10 && (V_mass < 75 || V_mass > 120))
             ) {
                 *in["controlSample"] = 21;
             } else if (/////////////////// Z + LF
-            max_hJet_btag < m("tagWPL")
+            max_hJet_btag < m("tagWPL") // Change loose to medium?
                 && min_hJet_btag < m("tagWPL")
                 && HVdPhi > 2.5
                 && (V_mass > 75 && V_mass < 105)
@@ -3019,7 +3025,7 @@ void VHbbAnalysis::ControlSampleSelection(){
                     *in["controlSample"] = 24;  // keep these event for kinematic fit
                 }
             } else if (/////////////////// Z + HF
-            max_hJet_btag > m("tagWPT")
+            max_hJet_btag > m("tagWPT") //Change tight -> medium?
                 && min_hJet_btag > m("tagWPL")
                 && m("MET_Pt") < 60
                 && HVdPhi > 2.5
@@ -3206,8 +3212,8 @@ void VHbbAnalysis::ComputeBoostedVariables(){
         for(int iJet=0; iJet<mInt("nJet"); iJet++){
             if(m("Jet_lepFilter",iJet)==0) continue;
             if(m("Jet_Pt",iJet)>30 && fabs(m("Jet_eta",iJet))<2.4){
-                if(m("Jet_puId",iJet)>3) *f["nJets30_0lep"]=m("nJets30_0lep")+1;
-                if(iJet!=mInt("hJetInd2")&&iJet!=mInt("hJetInd1")&&m("Jet_puId",iJet)==7) *f["nJets30_2lep"]=m("nJets30_2lep")+1;
+                if( (m("Jet_puId",iJet)>6) || m("Jet_Pt",iJet)>50) *f["nJets30_0lep"]=m("nJets30_0lep")+1;
+                if(iJet!=mInt("hJetInd2")&&iJet!=mInt("hJetInd1")&&(m("Jet_puId",iJet)>6 || m("Jet_Pt",iJet)>50)) *f["nJets30_2lep"]=m("nJets30_2lep")+1;
             }
         }
         //Compute number of b jets outside the fatjet
@@ -3671,7 +3677,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
     std::pair<int,int> pair(-1,-1);
 
     for(int i=0; i<mInt("nJet"); i++){
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>m("j1ptCut")
             && m("Jet_btagCSVV2",i)>m("j1Btag")&&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
@@ -3684,7 +3690,7 @@ std::pair<int,int> VHbbAnalysis::HighestPtBJets(){
 
     for(int i=0; i<mInt("nJet"); i++){
         if(i==pair.first) continue;
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>m("j2ptCut")
             && m("Jet_btagCSVV2",i)>m("j2Btag")&&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {
@@ -3703,7 +3709,7 @@ std::pair<int,int> VHbbAnalysis::HighestCSVBJets(float j1ptCut, float j2ptCut){
     std::pair<int,int> pair(-1,-1);
 
     for(int i=0; i<mInt("nJet"); i++){
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>j1ptCut
             &&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
@@ -3716,7 +3722,7 @@ std::pair<int,int> VHbbAnalysis::HighestCSVBJets(float j1ptCut, float j2ptCut){
 
     for(int i=0; i<mInt("nJet"); i++){
         if(i==pair.first) continue;
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>j2ptCut
             &&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {
@@ -3740,7 +3746,7 @@ std::pair<int,int> VHbbAnalysis::HighestCMVABJets(float j1ptCut, float j2ptCut){
     std::pair<int,int> pair(-1,-1);
 
     for(int i=0; i<mInt("nJet"); i++){
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>j1ptCut
             &&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
@@ -3753,7 +3759,7 @@ std::pair<int,int> VHbbAnalysis::HighestCMVABJets(float j1ptCut, float j2ptCut){
 
     for(int i=0; i<mInt("nJet"); i++){
         if(i==pair.first) continue;
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>j2ptCut
             &&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {
@@ -3776,7 +3782,7 @@ std::pair<int,int> VHbbAnalysis::HighestDeepCSVBJets(float j1ptCut, float j2ptCu
     std::pair<int,int> pair(-1,-1);
 
     for(int i=0; i<mInt("nJet"); i++){
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>j1ptCut
             &&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
@@ -3789,7 +3795,7 @@ std::pair<int,int> VHbbAnalysis::HighestDeepCSVBJets(float j1ptCut, float j2ptCu
 
     for(int i=0; i<mInt("nJet"); i++){
         if(i==pair.first) continue;
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>j2ptCut
             &&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {
@@ -3814,7 +3820,7 @@ std::pair<int,int> VHbbAnalysis::HighestTaggerValueBJets(float j1ptCut, float j2
     std::pair<int,int> pair(-1,-1);
 
     for(int i=0; i<mInt("nJet"); i++){
-        if(m("Jet_lepFilter",i) && mInt("Jet_puId",i) > 0
+        if(m("Jet_lepFilter",i) && (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>j1ptCut
             &&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
@@ -3827,7 +3833,7 @@ std::pair<int,int> VHbbAnalysis::HighestTaggerValueBJets(float j1ptCut, float j2
 
     for(int i=0; i<mInt("nJet"); i++){
         if(i==pair.first) continue;
-        if(m("Jet_lepFilter",i) && mInt("Jet_puId",i) > 0
+        if(m("Jet_lepFilter",i) && (mInt("Jet_puId",i) > 6 ||m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>j2ptCut
             &&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {
@@ -3852,14 +3858,14 @@ std::pair<int,int> VHbbAnalysis::HighestPtJJBJets(){
     // dont implement the btag CSV cuts until we've already selected the highest pT(jj) jets
     double maxPtJJ = 0.;
     for (int i=0; i<mInt("nJet"); i++) {
-        if(mInt("Jet_puId",i) > 0
+        if( (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
             && m("Jet_bReg",i)>m("j1ptCut")
             && fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             TLorentzVector jet1;
             jet1.SetPtEtaPhiM(m("Jet_bReg",i),m("Jet_eta",i),m("Jet_phi",i),m("Jet_mass",i) * (m("Jet_bReg",i) / m("Jet_pt",i) ) );
             for (int j=0; j<mInt("nJet"); j++) {
                 if (i == j) continue;
-                if(mInt("Jet_puId",j) > 0
+                if( (mInt("Jet_puId",j) > 6 || m("Jet_Pt",j)>50)
                     && m("Jet_bReg",j)>m("j2ptCut")
                     && fabs(m("Jet_eta",j))<m("JetEtaCut")) {
                     TLorentzVector jet2;
@@ -4022,6 +4028,20 @@ double VHbbAnalysis::GetRecoTopMass(TLorentzVector Obj, bool isJet, int useMET, 
     return Top.M();
 }
 
+// count the number of WPs passed
+int VHbbAnalysis::BtagWPForJet(int jetIndex){
+    int nWPsPassed=0;
+    if(jetIndex>-1){
+        nWPsPassed+=int(m(taggerName,jetIndex)>m("tagWPL")); 
+        if(nWPsPassed>0){
+            nWPsPassed+=int(m(taggerName,jetIndex)>m("tagWPM")); 
+            if(nWPsPassed>1){
+                nWPsPassed+=int(m(taggerName,jetIndex)>m("tagWPT"));
+            }
+        } 
+    }
+    return nWPsPassed;
+}
 
 float VHbbAnalysis::ReWeightMC(int nPU){
 
