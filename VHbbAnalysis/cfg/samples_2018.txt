@@ -41,10 +41,10 @@ name=DYToLL_HT800to1200_madgraph          dir=DYJetsToLL_M-50_HT-800to1200_TuneC
 #name=DYToLL_M4to50_HT200to400_madgraph    dir=DYJetsToLL_M-4to50_HT-200to400_TuneCP5_13TeV-madgraphMLM-pythia8/           type=126  xsec=54.13    kfac=1.23 doJetFlavorSplit=1
 #name=DYToLL_M4to50_HT400to600_madgraph    dir=DYJetsToLL_M-4to50_HT-400to600_TuneCP5_13TeV-madgraphMLM-pythia8/           type=127  xsec=5.725    kfac=1.23 doJetFlavorSplit=1
 #name=DYToLL_M4to50_HT600toInf_madgraph    dir=DYJetsToLL_M-4to50_HT-600toInf_TuneCP5_13TeV-madgraphMLM-pythia8/           type=128  xsec=1.843     kfac=1.23 doJetFlavorSplit=1
-name=DYBJets-Pt100To200                   dir=DYBJetsToLL_M-50_Zpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/            type=121  xsec=3.206    kfac=1.23*1.2474 doJetFlavorSplit=1
-name=DYBJets-Pt200ToInf                   dir=DYBJetsToLL_M-50_Zpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/            type=122  xsec=0.3304   kfac=1.23*1.2474 doJetFlavorSplit=1
-name=DYJets-BGenFilter-Pt100To200         dir=DYJetsToLL_BGenFilter_Zpt-100to200_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=141  xsec=2.662   kfac=1.23*1.1796 doJetFlavorSplit=1
-name=DYJets-BGenFilter-Pt200ToInf         dir=DYJetsToLL_BGenFilter_Zpt-200toInf_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=142  xsec=0.3949   kfac=1.23*1.1796 doJetFlavorSplit=1
+name=DYBJets-Pt100To200                   dir=DYBJetsToLL_M-50_Zpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/            type=121  xsec=3.206    kfac=1.23 doJetFlavorSplit=1
+name=DYBJets-Pt200ToInf                   dir=DYBJetsToLL_M-50_Zpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/            type=122  xsec=0.3304   kfac=1.23 doJetFlavorSplit=1
+name=DYJets-BGenFilter-Pt100To200         dir=DYJetsToLL_BGenFilter_Zpt-100to200_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=141  xsec=2.662   kfac=1.23 doJetFlavorSplit=1
+name=DYJets-BGenFilter-Pt200ToInf         dir=DYJetsToLL_BGenFilter_Zpt-200toInf_M-50_TuneCP5_13TeV-madgraphMLM-pythia8/  type=142  xsec=0.3949   kfac=1.23 doJetFlavorSplit=1
 
 
 # cross sections need validation for NLO
@@ -89,10 +89,10 @@ name=WJets-HT600To800             dir=WJetsToLNu_HT-600To800_TuneCP5_13TeV-madgr
 name=WJets-HT800To1200            dir=WJetsToLNu_HT-800To1200_TuneCP5_13TeV-madgraphMLM-pythia8/             type=45   xsec=5.450    kfac=1.21 doJetFlavorSplit=1
 name=WJets-HT1200To2500           dir=WJetsToLNu_HT-1200To2500_TuneCP5_13TeV-madgraphMLM-pythia8/            type=46   xsec=1.084    kfac=1.21 doJetFlavorSplit=1
 name=WJets-HT2500ToInf            dir=WJetsToLNu_HT-2500ToInf_TuneCP5_13TeV-madgraphMLM-pythia8/             type=47  xsec=0.008067   kfac=1.21  doJetFlavorSplit=1
-name=WBJets-Pt100To200            dir=WBJetsToLNu_Wpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/            type=50   xsec=5.527     kfac=1.21*1.0079 doJetFlavorSplit=1
-name=WBJets-Pt200ToInf            dir=WBJetsToLNu_Wpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/            type=51   xsec=0.7996      kfac=1.21*1.0079 doJetFlavorSplit=1
-name=WJets_BGenFilter-Pt100To200  dir=WJetsToLNu_BGenFilter_Wpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/  type=53   xsec=20.49     kfac=1.21*1.2656 doJetFlavorSplit=1
-name=WJets_BGenFilter-Pt200ToInf  dir=WJetsToLNu_BGenFilter_Wpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/  type=54   xsec=2.935      kfac=1.21*1.2656 doJetFlavorSplit=1
+name=WBJets-Pt100To200            dir=WBJetsToLNu_Wpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/            type=50   xsec=5.527     kfac=1.21 doJetFlavorSplit=1
+name=WBJets-Pt200ToInf            dir=WBJetsToLNu_Wpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/            type=51   xsec=0.7996      kfac=1.21 doJetFlavorSplit=1
+name=WJets_BGenFilter-Pt100To200  dir=WJetsToLNu_BGenFilter_Wpt-100to200_TuneCP5_13TeV-madgraphMLM-pythia8/  type=53   xsec=20.49     kfac=1.21 doJetFlavorSplit=1
+name=WJets_BGenFilter-Pt200ToInf  dir=WJetsToLNu_BGenFilter_Wpt-200toInf_TuneCP5_13TeV-madgraphMLM-pythia8/  type=54   xsec=2.935      kfac=1.21 doJetFlavorSplit=1
 
 
 #=========>>>>>>% Z-NuNu:
@@ -105,8 +105,8 @@ name=ZJetsToNuNu_HT800To1200           dir=ZJetsToNuNu_HT-800To1200_13TeV-madgra
 name=ZJetsToNuNu_HT1200To2500          dir=ZJetsToNuNu_HT-1200To2500_13TeV-madgraph  type=155  xsec=0.3425   kfac=1.23  doJetFlavorSplit=1
 name=ZJetsToNuNu_HT2500ToInf           dir=ZJetsToNuNu_HT-2500ToInf_13TeV-madgraph   type=156  xsec=0.005263  kfac=1.23  doJetFlavorSplit=1
 
-name=ZBJetsToNuNu_Pt-100to200             dir=ZBJetsToNuNu_Zpt-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            type=160  xsec=6.195    kfac=1.23*1.337  doJetFlavorSplit=1
-name=ZBJetsToNuNu_Pt-200toInf             dir=ZBJetsToNuNu_Zpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            type=161  xsec=0.6293  kfac=1.23*1.337  doJetFlavorSplit=1
-name=ZJetsToNuNu_BGenFilter_Pt-100to200   dir=ZJetsToNuNu_BGenFilter_Zpt-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8  type=162  xsec=1.679    kfac=1.23*3.768  doJetFlavorSplit=1
-name=ZJetsToNuNu_BGenFilter_Pt-200toInf   dir=ZJetsToNuNu_BGenFilter_Zpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8  type=163  xsec=0.2468  kfac=1.23*3.768  doJetFlavorSplit=1
+name=ZBJetsToNuNu_Pt-100to200             dir=ZBJetsToNuNu_Zpt-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            type=160  xsec=6.195    kfac=1.23  doJetFlavorSplit=1
+name=ZBJetsToNuNu_Pt-200toInf             dir=ZBJetsToNuNu_Zpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            type=161  xsec=0.6293  kfac=1.23  doJetFlavorSplit=1
+name=ZJetsToNuNu_BGenFilter_Pt-100to200   dir=ZJetsToNuNu_BGenFilter_Zpt-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8  type=162  xsec=1.679    kfac=1.23  doJetFlavorSplit=1
+name=ZJetsToNuNu_BGenFilter_Pt-200toInf   dir=ZJetsToNuNu_BGenFilter_Zpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8  type=163  xsec=0.2468  kfac=1.23  doJetFlavorSplit=1
 
