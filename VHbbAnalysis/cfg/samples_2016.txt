@@ -140,4 +140,3 @@ name=ZBJetsToNuNu_Pt-100to200             dir=ZBJetsToNuNu_Zpt-100to200_TuneCUET
 name=ZBJetsToNuNu_Pt-200toInf             dir=ZBJetsToNuNu_Zpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8            type=161  xsec=0.6068  kfac=1.23  doJetFlavorSplit=1
 name=ZJetsToNuNu_BGenFilter_Pt-100to200   dir=ZJetsToNuNu_BGenFilter_Zpt-100to200_TuneCUETP8M1_13TeV-madgraphMLM-pythia8  type=162  xsec=2.16    kfac=1.23  doJetFlavorSplit=1
 name=ZJetsToNuNu_BGenFilter_Pt-200toInf   dir=ZJetsToNuNu_BGenFilter_Zpt-200toInf_TuneCUETP8M1_13TeV-madgraphMLM-pythia8  type=163  xsec=0.3155  kfac=1.23  doJetFlavorSplit=1
-

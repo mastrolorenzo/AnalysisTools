@@ -1420,7 +1420,7 @@ void VHbbAnalysis::FinishEvent() {
     *b["usingBEnriched"] =  true; // if using b-enriched need to stitch properly
     if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
         if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
+	     if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
     } else if (cursample->sampleNum == 50) {
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
@@ -1428,37 +1428,44 @@ void VHbbAnalysis::FinishEvent() {
         if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 53) {
         //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 ) *b["usingBEnriched"]=false;
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0 || mInt("LHE_Nb") != 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 54) {
         //if (m("LHE_Vpt") < 200) *b["usingBEnriched"]=false;
-        if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        //if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 200 || nbHad == 0 || mInt("LHE_Nb") != 0) *b["usingBEnriched"]=false;
     }
     if (cursample->sampleNum >= 110 && cursample->sampleNum<=117){
         if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
+	     if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
     } else if (cursample->sampleNum == 121){
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 122){
         if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 141){
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0 || mInt("LHE_Nb") != 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 142){
-        if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        //if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 200 || nbHad == 0 || mInt("LHE_Nb") != 0) *b["usingBEnriched"]=false;
     }
     if (cursample->sampleNum >= 150 && cursample->sampleNum<=156){
         if (m("LHE_Vpt") > 100) {
-            if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
+	     if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
-   } else if (cursample->sampleNum == 160){
+    } else if (cursample->sampleNum == 160){
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 161){
         if (m("LHE_Vpt") < 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 162){
-        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        //if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || nbHad == 0 || mInt("LHE_Nb") != 0) *b["usingBEnriched"]=false;
     } else if (cursample->sampleNum == 163){
-        if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        //if (m("LHE_Vpt") < 200 || nbHad == 0) *b["usingBEnriched"]=false;
+        if (m("LHE_Vpt") < 200 || nbHad == 0 || mInt("LHE_Nb") != 0) *b["usingBEnriched"]=false;
     }
+
 
     *b["useLOVV"] = true; 
     // FIXME I think this needs to be adjusted to really included all the NLO VV, at the time of writing this it is not the full phase space in samples_2016.txt I think
@@ -1476,6 +1483,73 @@ void VHbbAnalysis::FinishEvent() {
     //if (cursyst->name == "nominal") {
     //    *f["weight"] = *f["weight"] * *f["bTagWeight"];
     //}*/
+
+
+    float VBenrichReweight = 1.0;
+    
+    if (m("LHE_Vpt") > 100 && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0){
+      //ZJets_BGenFilter, WJets_BGenFilter, DYJets_BGenFilter                                                                                                   
+
+      if(m("dataYear") == 2016){
+	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+	  VBenrichReweight = 3*0.92;
+	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+	  VBenrichReweight = 0.99;
+	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+	  VBenrichReweight = 0.94;
+	}
+      }else if(m("dataYear") == 2017){
+	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+	  VBenrichReweight = 3.725*(7.7e-01 + 1.184e-03*std::min(m("LHE_Vpt"),800.) - 9.181e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+	  VBenrichReweight = 1.248*(8.325e-01 + 1.054e-03*std::min(m("LHE_Vpt"),800.) - 1.067e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+	  VBenrichReweight = 1.171*(7.825e-01 + 1.529e-03*std::min(m("LHE_Vpt"),800.) - 9.667e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}
+      }else if(m("dataYear") == 2018){
+	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+	  VBenrichReweight = 3.768*(3.17457e-00 + 2.671e-03*std::min(m("LHE_Vpt"),800.) - 7.573e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+	  VBenrichReweight = 1.2656*(1.05375 + 1.44192e-03*std::min(m("LHE_Vpt"),800.) - 1.80578e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+	  VBenrichReweight = 1.1796*(8.4438e-01 + 1.02536e-03*std::min(m("LHE_Vpt"),800.) - 2.76698e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}
+      }
+    }else if (m("LHE_Vpt") > 100 && mInt("LHE_Nb") > 0){
+      //ZBJets, WBJets, DYBJets                                                                                                                                            
+      if(m("dataYear") == 2016){
+	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+	  VBenrichReweight = 1.02;
+	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+	  VBenrichReweight = 1.04;
+	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+	  VBenrichReweight = 1.04;
+	}
+      }else if(m("dataYear") == 2017){
+	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+	  VBenrichReweight = 1.332*(6.968e-01 + 1.764e-03*std::min(m("LHE_Vpt"),800.) - 1.526e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+	  VBenrichReweight = 0.977*(1.005e-00 + 5.043e-04*std::min(m("LHE_Vpt"),800.) - 3.894e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+	  VBenrichReweight = 1.259*(7.519e-01 + 1.975e-03*std::min(m("LHE_Vpt"),800.) - 1.836e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}
+      }else if(m("dataYear") == 2018){
+	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+	  VBenrichReweight = 1.337*(9.955e-01 + 1.842e-03*std::min(m("LHE_Vpt"),800.) - 1.215e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+	  VBenrichReweight = 1.0079*(7.97747e-01 + 1.51461e-03*std::min(m("LHE_Vpt"),800.) - 9.57889e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+	  VBenrichReweight = 1.2474*(7.97747e-01 + 1.51461e-03*std::min(m("LHE_Vpt"),800.) - 9.57889e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+	}
+      }
+    }
+    
+    *f["VBenrichReweight"] = VBenrichReweight;
+    *f["weight"] = *f["weight"] * *f["VBenrichReweight"];
+    
+
+
+
 
     // Split WJets and ZJets samples by jet parton flavor
     *in["bMCFlavorSum"] = 0;
