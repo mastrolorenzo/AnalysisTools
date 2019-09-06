@@ -23,7 +23,6 @@ type=8  name=Jet_btagDeepB                    max=250     lengthBranch=nJet
 type=8  name=Jet_btagCSVV2                    max=250     lengthBranch=nJet
 type=8  name=Jet_btagCMVA                     max=250     lengthBranch=nJet
 type=2  name=V_pt
-
 type=0  name=nFatJet
 type=8  name=FatJet_pt                        max=11     lengthBranch=nFatJet
 

@@ -79,6 +79,7 @@ TREE_VARS = {
     'jjVPtRatio_fit_fallback',
     'hJets_pt_0_fit_fallback',
     'hJets_pt_1_fit_fallback',
+
 }
 
 # resolution functions from HH4b analysis
@@ -240,6 +241,8 @@ class EventProxy(object):
         self.H_pt_fit_fallback[0] = self.e.H_pt
         self.HVdPhi_fit_fallback[0] = self.e.HVdPhi
         self.jjVPtRatio_fit_fallback[0] = self.e.jjVPtRatio
+        self.V_pt_fit[0] = self.e.V_pt
+        self.V_mass_fit[0] = self.e.V_mass
         if self.e.twoResolvedJets:
             self.hJets_pt_0_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd1]
             self.hJets_pt_1_fit_fallback[0] = self.e.Jet_PtReg[self.e.hJetInd2]
