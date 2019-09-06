@@ -129,6 +129,7 @@ else:
         '../python/MyStandardScaler.py',
         '../python/TensorflowEvaluator.py',
         '../python/TensorflowDNNClassifier.py',
+        '../python/TensorflowEvaluatorRun2Legacy.py',
         '../python/mva_evaluator.py',
         '../AnalysisDict_rdict.pcm',
         '../HelperClasses',
@@ -145,12 +146,14 @@ else:
         inputs_to_transfer.remove('../python/MyStandardScaler.py')
         inputs_to_transfer.remove('../python/TensorflowEvaluator.py')
         inputs_to_transfer.remove('../python/TensorflowDNNClassifier.py')
+        inputs_to_transfer.remove('../python/TensorflowEvaluatorRun2Legacy.py')
         inputs_to_transfer.remove('../python/mva_evaluator.py')
         inputs_to_transfer.append('../ReadInput.py')
         inputs_to_transfer.append('../kinfitter.py')
         inputs_to_transfer.append('../MyStandardScaler.py')
         inputs_to_transfer.append('../TensorflowEvaluator.py')
         inputs_to_transfer.append('../TensorflowDNNClassifier.py')
+        inputs_to_transfer.append('../TensorflowEvaluatorRun2Legacy.py')
         inputs_to_transfer.append('../mva_evaluator.py')
     else:
         inputs_to_transfer = list('../../'+p for p in inputs_to_transfer)
