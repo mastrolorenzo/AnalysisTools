@@ -19,8 +19,8 @@ bdt_2lep_lowPt=cfg/bdt_2lep_lowPt_2017_ICHEP2018.txt
 bdt_0lep_dnn=cfg/dnn_0lep_2017_Run2Legacy.txt
 bdt_1lep_el_dnn=cfg/dnn_1lep_el_2017_Run2Legacy.txt
 bdt_1lep_mu_dnn=cfg/dnn_1lep_mu_2017_Run2Legacy.txt
-#bdt_2lep_high=cfg/dnn_2lep_highPt_2017_Run2Legacy.txt
-#bdt_2lep_low=cfg/dnn_2lep_lowPt_2017_Run2Legacy.txt
+bdt_2lep_high=cfg/dnn_2lep_highPt_2017_Run2Legacy.txt
+bdt_2lep_low=cfg/dnn_2lep_lowPt_2017_Run2Legacy.txt
 
 ###bdt_0lep_vzbb=cfg/bdt_0lep_vzbb.txt
 ###bdt_1lep_vzbb=cfg/bdt_1lep_vzbb.txt
