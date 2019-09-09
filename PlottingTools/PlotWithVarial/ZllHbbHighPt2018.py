@@ -74,6 +74,14 @@ plot_vars = {
     'mvaInput_n_recoil_jets_fit':  ('n_recoil_jets_fit',             ';N_{recoil jets};',       10,   0,  10),
     'mvaInput_H_mass_sigma_fit':   ('H_mass_sigma_fit',              ';#sigma(M(jj)) [GeV];',   25,   0,  50),
     'rho':                         ('fixedGridRhoFastjetAll',        ';#rho;',                  60,   0,  60),
+    'CMS_vhbb_DNN_Wen_13TeV':                    ('CMS_vhbb_DNN_Wen_13TeV',        ';DNN;',            20,  -1,   1),
+    'CMS_vhbb_DNN_Wmn_13TeV':                    ('CMS_vhbb_DNN_Wmn_13TeV',        ';DNN;',            20,  -1,   1),
+    'CMS_vhbb_DNN_Zll_HighPT_13TeV':                    ('CMS_vhbb_DNN_Zll_HighPT_13TeV',        ';DNN;',            20,  -1,   1),
+    'CMS_vhbb_DNN_Zll_lowPT_13TeV':                    ('CMS_vhbb_DNN_Zll_lowPT_13TeV',        ';DNN;',            20,  -1,   1),
+    'CMS_vhbb_BDTG_Zll_HighPT_13TeV':                    ('CMS_vhbb_BDTG_Zll_HighPT_13TeV',        ';DNN;',            20,  -1,   1),
+    'CMS_vhbb_BDTG_Zll_LowPT_13TeV':                    ('CMS_vhbb_BDTG_Zll_LowPT_13TeV',        ';DNN;',            20,  -1,   1),
+    'CMS_vhbb_DNN_Znn_13TeV':                    ('CMS_vhbb_DNN_Znn_13TeV',        ';DNN;',            20,  -1,   1),
+
 }
 
 
