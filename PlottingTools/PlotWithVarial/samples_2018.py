@@ -45,7 +45,7 @@ sample_colors = {
 
 # The input pattern used to glob for sample files given their input token.
 #input_pattern = '/nfs/dust/cms/user/hkaveh/VHbbAnalysisNtuples/vhbb_2018_1204/haddjobs/pca/sum_%s*_pca.root'
-input_pattern = '/nfs/dust/cms/user/hkaveh/VHbbAnalysisNtuples/vhbb_2018_1204/haddjobs/sum_%s*.root'
+input_pattern = '/nfs/dust/cms/user/hkaveh/VHbbAnalysisNtuples/vhbb_2018_0609/haddjobs/sum_%s*.root'
 
 #input_pattern = '/nfs/dust/cms/user/hkaveh/VHbbAnalysisNtuples/vhbb_2018_1203/*/output_%s*.root'
 
