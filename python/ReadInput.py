@@ -4,7 +4,7 @@ import os
 from os.path import isfile, join, isdir
 import ROOT
 import json
-from numpy import array
+import numpy
 import subprocess
 import traceback
 ROOT.gSystem.Load("AnalysisDict.so")
@@ -243,7 +243,12 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
                     #bdtInfo.bdtVars[iBDTvar].localVarName=bdtVarPrefix+bdtvar.localVarName
                     #bdtInfo.bdtVars[iBDTvar].isExisting=False
                     iBDTvar=iBDTvar+1
-                am.SetupNewBranch(bdtInfo.bdtname, 2)
+                print "IN READINPUTS", bdtInfo.mvaType,bdtInfo.bdtname,bdtInfo.nOutputs
+                if bdtInfo.mvaType=="MultiDNN":
+                    am.SetupNewBranch(bdtInfo.bdtname, 8, bdtInfo.nOutputs)
+                    am.SetupNewBranch(bdtInfo.mostProbIndex, 2)
+                else: 
+                    am.SetupNewBranch(bdtInfo.bdtname, 2)
                 am.SetupNewBranch(bdtsetting, 2, -1, 1, "settings", 1)
                 am.AddBDT(bdtsetting, bdtInfo)
                 if debug > 10:
@@ -585,6 +590,7 @@ def SetupBDT(lines):
     inputNames = []
     localVarNames = []
     mvaType = "BDT"
+    nOutputs=1
 
     vars = {}
 
@@ -616,6 +622,8 @@ def SetupBDT(lines):
                 inputName=value
             if name.find("lname") is 0:
                 localVarName=value
+            if name.find("nOutputs") is 0:
+                nOutputs=int(value)
             if name.find("isSpec") is 0:
                 if (int(value) == 1): isSpec = True
             if name.find("order") is 0:
@@ -624,7 +632,7 @@ def SetupBDT(lines):
                 if (int(value) == 1): isExisting = True
         vars[order] = (inputName,localVarName,isExisting,isSpec)
 
-    bdt = ROOT.BDTInfo(methodName, bdtname, xmlFile, mvaType)
+    bdtInfo = ROOT.BDTInfo(methodName,bdtname,xmlFile,mvaType,nOutputs)
 
     keys = vars.keys()
     keys.sort()
@@ -637,8 +645,8 @@ def SetupBDT(lines):
                 print "adding variable %s (%s) existing: %i " % (name,lname,int(isExisting))
             else:
                 print "adding spectator variable %s (%s) existing: %i" % (name,lname, int(isExisting))
-        bdt.AddVariable(name, lname, isExisting, isSpec)
-    return bdt
+        bdtInfo.AddVariable(name, lname, isExisting, isSpec)
+    return bdtInfo
 
 
 def SetupSyst(lines):
@@ -752,8 +760,8 @@ def SetupSF(lines):
         ptBins = sorted(ptBins)
 
         #print etaBins, ptBins
-        SF.scaleMap = ROOT.TH2F(SF.name, SF.name, len(ptBins)-1, array(ptBins), len(etaBins)-1, array(etaBins))
-        #print array(ptBins), array(etaBins)
+        SF.scaleMap = ROOT.TH2F(SF.name, SF.name, len(ptBins)-1, numpy.array(ptBins), len(etaBins)-1, numpy.array(etaBins))
+        #print numpy.array(ptBins), numpy.array(etaBins)
 
         if (SF.binning.find("pt") != 0 and SF.binning.find("DATA") ==- 1):
             # categorized first by eta

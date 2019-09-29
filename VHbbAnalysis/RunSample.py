@@ -128,8 +128,9 @@ if "onlyMvaEval" in options or am.branchInfos['postLoopMVAEval'].val > 0.5:
 
     bdt_names = list(name for name, nfo in am.bdtInfos if nfo.mvaType == 'BDT')
     dnn_names = list(name for name, nfo in am.bdtInfos if nfo.mvaType == 'DNN')
+    multidnn_names = list(name for name, nfo in am.bdtInfos if nfo.mvaType == 'MultiDNN')
     # the first block contains all bdts and the next ones the individual dnn's
-    blocks = ([bdt_names] if bdt_names else []) + list([name] for name in dnn_names)
+    blocks = ([bdt_names] if bdt_names else []) + list([name] for name in dnn_names) + list([name] for name in multidnn_names)
 
     def worker_func(block):
         import mva_evaluator

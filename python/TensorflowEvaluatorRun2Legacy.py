@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from __future__ import print_function
-import numpy as np
+import numpy
 import tensorflow as tf
 import pickle
 import os
@@ -22,7 +22,7 @@ class TensorflowDNNEvaluator(object):
         if os.path.isfile(infoFilePath):
             with open(infoFilePath) as infoFile:
                 self.info = json.load(infoFile)
-            print(self.info)
+            #print(self.info)
         self.graph = tf.Graph()
         tf.reset_default_graph()
         self.session = tf.Session(graph=self.graph, config=tf.ConfigProto(device_count={"CPU":1}, inter_op_parallelism_threads=1, intra_op_parallelism_threads=1))
@@ -51,10 +51,13 @@ class TensorflowDNNEvaluator(object):
 
     def EvaluateDNN(self, oneSetOfInputs):
         oneSetOfInputs=[oneSetOfInputs]
-        inputs_scaled = self.scale(oneSetOfInputs) if self.scaler else oneSetOfInputs
-        with self.graph.as_default():
-            probabilities = self.session.run(self.outputs, feed_dict={self.inputs: inputs_scaled})
+        probabilities=self.MultiEvaluateDNN(oneSetOfInputs)
         return probabilities[0,0]
+
+    def EvaluateMultiDNN(self, oneSetOfInputs):
+        oneSetOfInputs=[oneSetOfInputs]
+        probabilities=self.MultiEvaluateDNN(oneSetOfInputs)
+        return probabilities[0]
 
     def scale(self, inputs):
         return self.scaler.transform(inputs)

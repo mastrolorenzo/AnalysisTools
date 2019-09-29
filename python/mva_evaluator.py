@@ -2,7 +2,7 @@ from kinfitter import EventProxy, prepare_io
 import ctypes
 import time
 import ROOT
-
+import numpy
 
 VERBOSE = False
 SYS_VARS = (
@@ -89,7 +89,7 @@ def prep_bdt_variables(bdt_info):
 
     if bdt_info.mvaType == "BDT":
         bdt_info.BookMVA()
-    elif bdt_info.mvaType == "DNN":
+    elif bdt_info.mvaType == "DNN" or bdt_info.mvaType == "MultiDNN":
         tokens = str(bdt_info.xmlFile).split(':')
         if len(tokens)==3: #old evaluation 'for DNN, I need bdt_info.xmlFile to be in the form "cfg:scaler_dump:checkPointFile" (separated by colons)'
             import TensorflowEvaluatorSummer2018
@@ -97,12 +97,9 @@ def prep_bdt_variables(bdt_info):
             bdt_info.tf_evaluator = TensorflowEvaluatorSummer2018.TensorflowEvaluator(
                 cfg, scaler_dump, checkPointFile, n_features=len(bdt_info.raw_vars), verbose=VERBOSE)
         elif len(tokens)==1:  #new evaluation only needs the checkpoint file
-            print "importing"
             import TensorflowEvaluatorRun2Legacy
             checkPointFile = tokens[0]
-            print "imported",checkPointFile
             bdt_info.tf_evaluator = TensorflowEvaluatorRun2Legacy.TensorflowDNNEvaluator(checkPointFile)
-            print("evaluator instantiated")
         else:
             print "len(tokens)",len(tokens),"is not 1 or 3.  So this is over"
             assert(0==1)
@@ -121,6 +118,12 @@ def evaluate_discriminator(ep, bdt_infos):
         elif bdt_info.mvaType == "DNN":
             raw_vars = tuple(getattr(ep, varname) for varname, _ in bdt_info.raw_vars)
             getattr(ep, bdt_info.bdtname)[0] = bdt_info.tf_evaluator.EvaluateDNN(raw_vars)
+        elif bdt_info.mvaType == "MultiDNN":
+            raw_vars = tuple(getattr(ep, varname) for varname, _ in bdt_info.raw_vars)
+            multiDNNOutput = bdt_info.tf_evaluator.EvaluateMultiDNN(raw_vars)
+            for iOut in range(len(multiDNNOutput)):
+                getattr(ep, bdt_info.bdtname)[0] = multiDNNOutput[iOut]
+            getattr(ep, bdt_info.mostProbIndex)[0] = float(numpy.where(multiDNNOutput==max(multiDNNOutput))[0][0])
         else:
             print "What type of MVA is",bdt_info.mvaType
 
@@ -142,7 +145,11 @@ def apply_mva_eval(input_file, output_file, am, is_data, allowed_names, lep_sys_
         eps = make_sys_event_proxies(am, lep_sys_names) + [EventProxy()]  # the last one is for nominal
 
     for ep in eps:
-        ep.init_output(ot, set(str(bdt_info.bdtname) for bdt_info in bdt_infos))
+        listOfOutputBranches=[str(bdt_info.bdtname) for bdt_info in bdt_infos]
+        for bdt_info in bdt_infos:
+            if bdt_info.mvaType == "MultiDNN":
+                listOfOutputBranches.append(str(bdt_info.mostProbIndex))
+        ep.init_output(ot, set(listOfOutputBranches))
 
     n_events = 0
     start_time = time.ctime()
