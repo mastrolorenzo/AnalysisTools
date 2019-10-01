@@ -1,0 +1,25 @@
+# isSpec 1 -> Spectator variable
+# isSpec 0 -> Variable used in BDT training
+
+mvaType=MultiDNN
+bdtname=CMS_vhbb_DNN_ZnnHF_13TeV
+xmlFile=aux/LegacyDNNs/V1_2017_Aug2019/190816_DNN2017V11_Znn_HFCR_binnedWP/model.ckpt
+nOutputs=5
+
+# this is the order as from Andreas mail
+name=H_mass                 lname=H_mass                isEx=1 isSpec=0 order=1
+name=H_pt                   lname=H_pt                  isEx=1 isSpec=0 order=2
+name=V_pt                   lname=V_pt                  isEx=1 isSpec=0 order=3
+name=HVdPhi                 lname=HVdPhi                isEx=0 isSpec=0 order=4
+name=hJets_btagWP_0         lname=hJets_btagWP_0        isEx=0 isSpec=0 order=5
+name=hJets_btagWP_1         lname=hJets_btagWP_1        isEx=0 isSpec=0 order=6
+name=HJ1_HJ2_dEta           lname=HJ1_HJ2_dEta          isEx=0 isSpec=0 order=7
+name=HJ1_HJ2_dPhi           lname=HJ1_HJ2_dPhi          isEx=0 isSpec=0 order=8
+name=hJets_leadingPt        lname=hJets_leadingPt       isEx=0 isSpec=0 order=9
+name=hJets_subleadingPt     lname=hJets_subleadingPt    isEx=0 isSpec=0 order=10
+name=SA5                    lname=SA5                   isEx=0 isSpec=0 order=11
+name=nAddJets302p5_puid     lname=nAddJets302p5_puid    isEx=0 isSpec=0 order=12
+name=otherJetsBestBtag      lname=otherJetsBestBtag     isEx=0 isSpec=0 order=13
+name=otherJetsHighestPt     lname=otherJetsHighestPt    isEx=0 isSpec=0 order=14
+name=minDPhiFromOtherJets   lname=minDPhiFromOtherJets  isEx=0 isSpec=0 order=15
+
