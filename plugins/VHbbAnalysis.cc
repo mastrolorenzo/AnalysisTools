@@ -3333,7 +3333,7 @@ void VHbbAnalysis::ComputeBoostedVariables(){
         *f["FatJetCand_deepTagMD_bbvsLight"]=m("FatJet_deepTagMD_bbvsLight",mInt("FatJetCand_index"));
         float TvsQCD=m("FatJet_deepTagMD_TvsQCD",mInt("FatJetCand_index"));
         float HbbvsQCD=m("FatJet_deepTagMD_HbbvsQCD",mInt("FatJetCand_index"));
-        *f["FatJetCand_deepTagMD_bbvsTop"]==1/(1+(TvsQCD/HbbvsQCD)*(1-HbbvsQCD)/(1-TvsQCD));
+        *f["FatJetCand_deepTagMD_bbvsTop"]=1/(1+(TvsQCD/HbbvsQCD)*(1-HbbvsQCD)/(1-TvsQCD));
         //Compute boosted-specific BDT variables
          
         //define lepMetDPhi for other channels (temporary until channel-specific boosted BDTs are trained
