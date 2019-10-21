@@ -555,6 +555,8 @@ type=2  name=FatJetCand_Msoftdrop_corrected
 type=2  name=FatJetCand_tau1
 type=2  name=FatJetCand_tau2
 type=2  name=FatJetCand_tau3
+type=2  name=FatJetCand_deepTagMD_bbvsLight
+type=2  name=FatJetCand_deepTagMD_bbvsTop
 type=1  name=FatJetCand_index
 type=1  name=nBJetsOutsideFatJet
 

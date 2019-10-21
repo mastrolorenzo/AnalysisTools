@@ -1,0 +1,11 @@
+# isSpec 1 -> Spectator variable
+# isSpec 0 -> Variable used in BDT training
+
+bdtmethod=BDT
+bdtname=BDT_2lep_boosted
+xmlFile=aux/LegacyDNNs/boostedBDTSV1_2017_Oct2019/BDT_2lepton_Boosted_2017.weight.xml
+
+name=FatJet_msoftdrop_nom[Hbb_fjidx]          lname=FatJetCand_Msoftdrop_corrected            isEx=0      isSpec=0 order=1
+name=FatJet_pt_nom[Hbb_fjidx]/V_pt            lname=FatJetVPtRatio                            isEx=0      isSpec=0 order=2
+name=FatJet_deepTagMD_bbvsLight[Hbb_fjidx]    lname=FatJet_deepTagMD_bbvsLight                isEx=0      isSpec=0 order=3
+name=FatJetCand_deepTagMD_bbvsTop             lname=FatJetCand_deepTagMD_bbvsTop              isEx=0      isSpec=0 order=4

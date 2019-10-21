@@ -1748,13 +1748,9 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         if(*b["oneMergedJet"]){
-            thisBDTInfo = bdtInfos.find("bdt_boosted_wdB");
+            thisBDTInfo = bdtInfos.find("BDT_0lep_boosted");
             if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_wdB");
-            }
-            thisBDTInfo = bdtInfos.find("bdt_boosted_nodB");
-            if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_nodB");
+                bdtNames.push_back("BDT_0lep_boosted");
             }
         }
 
@@ -1820,13 +1816,9 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         if(*b["oneMergedJet"]){
-            thisBDTInfo = bdtInfos.find("bdt_boosted_wdB");
+            thisBDTInfo = bdtInfos.find("BDT_1lep_boosted");
             if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_wdB");
-            }
-            thisBDTInfo = bdtInfos.find("bdt_boosted_nodB");
-            if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_nodB");
+                bdtNames.push_back("BDT_1lep_boosted");
             }
         }
 
@@ -1871,13 +1863,9 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         if(*b["oneMergedJet"]){
-            thisBDTInfo = bdtInfos.find("bdt_boosted_wdB");
+            thisBDTInfo = bdtInfos.find("BDT_2lep_boosted");
             if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_wdB");
-            }
-            thisBDTInfo = bdtInfos.find("bdt_boosted_nodB");
-            if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_nodB");
+                bdtNames.push_back("BDT_2lep_boosted");
             }
         }
 
@@ -3326,6 +3314,10 @@ void VHbbAnalysis::ComputeBoostedVariables(){
         *f["FatJetCand_tau3"]=m("FatJet_tau3",mInt("FatJetCand_index"));
         *f["FatJetCand_doubleB"]=m("FatJet_btagHbb",mInt("FatJetCand_index"));
         *f["FatJetCand_Msoftdrop_corrected"]=m("FatJet_msoftdrop",mInt("FatJetCand_index"));
+        *f["FatJetCand_deepTagMD_bbvsLight"]=m("FatJet_deepTagMD_bbvsLight",mInt("FatJetCand_index"));
+        float TvsQCD=m("FatJet_deepTagMD_TvsQCD",mInt("FatJetCand_index"));
+        float HbbvsQCD=m("FatJet_deepTagMD_HbbvsQCD",mInt("FatJetCand_index"));
+        *f["FatJetCand_deepTagMD_bbvsTop"]=1/(1+(TvsQCD/HbbvsQCD)*(1-HbbvsQCD)/(1-TvsQCD));
         //Compute boosted-specific BDT variables
          
         //define lepMetDPhi for other channels (temporary until channel-specific boosted BDTs are trained
