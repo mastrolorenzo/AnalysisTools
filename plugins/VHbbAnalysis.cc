@@ -1752,14 +1752,6 @@ void VHbbAnalysis::FinishEvent() {
             if(thisBDTInfo != bdtInfos.end()){
                 bdtNames.push_back("BDT_0lep_boosted");
             }
-            thisBDTInfo = bdtInfos.find("BDT_1lep_boosted");
-            if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("BDT_1lep_boosted");
-            }
-            thisBDTInfo = bdtInfos.find("BDT_2lep_boosted");
-            if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("BDT_2lep_boosted");
-            }
         }
 
         if(bdtNames.size()>0){
@@ -1824,13 +1816,9 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         if(*b["oneMergedJet"]){
-            thisBDTInfo = bdtInfos.find("bdt_boosted_wdB");
+            thisBDTInfo = bdtInfos.find("BDT_1lep_boosted");
             if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_wdB");
-            }
-            thisBDTInfo = bdtInfos.find("bdt_boosted_nodB");
-            if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_nodB");
+                bdtNames.push_back("BDT_1lep_boosted");
             }
         }
 
@@ -1875,13 +1863,9 @@ void VHbbAnalysis::FinishEvent() {
         }
 
         if(*b["oneMergedJet"]){
-            thisBDTInfo = bdtInfos.find("bdt_boosted_wdB");
+            thisBDTInfo = bdtInfos.find("BDT_2lep_boosted");
             if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_wdB");
-            }
-            thisBDTInfo = bdtInfos.find("bdt_boosted_nodB");
-            if(thisBDTInfo != bdtInfos.end()){
-                bdtNames.push_back("bdt_boosted_nodB");
+                bdtNames.push_back("BDT_2lep_boosted");
             }
         }
 
