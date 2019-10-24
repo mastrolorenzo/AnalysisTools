@@ -128,3 +128,11 @@ type=2  name=SF_TT              val=0.84
 #type=2  name=SF_TT              val=0.99
 
 type=2  name=dPhiMETTkMETCut     val=0.5
+
+type=2  name=sigmasslow           val=90 # ZHF CR window
+type=2  name=sigmasshigh          val=150 # ZHF CR window
+
+type=2  name=metphimin           val=-1.5
+type=2  name=metphimax           val=-0.5
+
+type=2  name=run319077LumiRatio   val=0.345 # 

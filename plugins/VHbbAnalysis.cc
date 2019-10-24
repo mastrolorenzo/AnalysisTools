@@ -274,6 +274,8 @@ bool VHbbAnalysis::Analyze() {
         return false;
     }
 
+    bool checkMET = SelectMETPhi();
+    if(!checkMET) return false;
 
     bool recoedH=ReconstructHiggsCand();
     if(!recoedH) return false;
@@ -1547,9 +1549,13 @@ void VHbbAnalysis::FinishEvent() {
     *f["VBenrichReweight"] = VBenrichReweight;
     *f["weight"] = *f["weight"] * *f["VBenrichReweight"];
     
-
-
-
+    //Reweight MC samples for -1.5<phi(MET)<-0.5 (due to the HEM15/16 issue on data starting with the run 319077)
+    float METPhiWeight=1.;
+    if(m("dataYear") == 2018 &&  mInt("sampleIndex")!=0 && m("isZnn")){
+        if (m("MET_Phi")>m("metphimin") && m("MET_Phi")<m("metphimax")) METPhiWeight = m("run319077LumiRatio");
+    }
+    *f["METPhiWeight"] = METPhiWeight;
+    *f["weight"] = *f["weight"] * *f["METPhiWeight"];
 
     // Split WJets and ZJets samples by jet parton flavor
     *in["bMCFlavorSum"] = 0;
@@ -2438,7 +2444,13 @@ bool VHbbAnalysis::SelectJets(){
     return pass;
 }
 
-
+bool VHbbAnalysis::SelectMETPhi(){
+    bool pass = true;
+    if(m("dataYear") == 2018 && mInt("isZnn") && mInt("sampleIndex")==0){
+        if (m("MET_Phi")>-1.5 && m("MET_Phi")<-0.5 && mInt("run")>=319077) pass=false;
+    }
+    return pass;
+}
 
 
 //      _|        _|
@@ -2952,7 +2964,7 @@ void VHbbAnalysis::ControlSampleSelection(){
         // 0-lepton
         bool base0LepCSSelection = (
             // Vector Boson Cuts
-            (mInt("isWmunu") || mInt("isWenu") || mInt("isZnn"))
+            (mInt("isZnn"))
             && mInt("cutFlow") >= 2
             // Higgs Boson Cuts
             && H_mass < 500
@@ -2983,15 +2995,15 @@ void VHbbAnalysis::ControlSampleSelection(){
         }
 
         if (base0LepCSSelection) {
-            if ((mInt("isWmunu") || mInt("isWenu")) && m("MET_Pt") > m("metcut_0lepchan")) {
-                if ( *f["min_dPhi_hJet_MET"] < 1.57 && hJet1_btag > m("tagWPM") && m("nAddJets302p5_puid") >= 2 && HVdPhi > 2) {
+            if (mInt("isZnn")) {
+                if (m("MET_Pt") > m("metcut_0lepchan") && *f["min_dPhi_hJet_MET"] < 1.57 && hJet1_btag > m("tagWPM") && m("nAddJets302p5_puid") >= 2 && HVdPhi > 2 ){
                     *in["controlSample"] = 1; // TTbar Control Sample Index
                 }
-            } else if (mInt("isZnn")) {
-                if (*in["nJetsCloseToMET"] == 0 && m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2) {
-                if (hJet1_btag < m("tagWPM") && m("nAddJets302p5_puid") < 2) {
+                else if (*in["nJetsCloseToMET"] == 0 && m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2 && m("nAddJets302p5_puid") < 2) {
+                    if (hJet1_btag < m("tagWPM")) {
                         *in["controlSample"] = 2; // Z+Light Control Sample Index
-                    } else if (hJet1_btag > m("tagWPT") && m("nAddJets302p5_puid") < 1 && (H_mass<60 || H_mass>160)) { //FIXME change tight->medium?
+                    } 
+                    else if (hJet1_btag > m("tagWPT") && (H_mass<m("sigmasslow") || H_mass>m("sigmasshigh"))){//FIXME change tight->medium?
                         *in["controlSample"] = 3; // Z+bb Control Sample Index
                     }
                 }
@@ -3043,7 +3055,7 @@ void VHbbAnalysis::ControlSampleSelection(){
                 if (m("nAddJets302p5_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
                 //} else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
-                } else if (m("nAddJets302p5_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<90 || H_mass>150)) {
+                } else if (m("nAddJets302p5_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<m("sigmasslow") || H_mass>m("sigmasshigh"))) {
                     *in["controlSample"] = 13;
                 }
             }else if (max_hJet_btag > m("tagWPL") && max_hJet_btag < m("tagWPM") && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
@@ -3093,7 +3105,7 @@ void VHbbAnalysis::ControlSampleSelection(){
                 && HVdPhi > 2.5
                 && (V_mass > 85 && V_mass <= 97)
             ) {
-                if (H_mass <= 90 || H_mass > 150) {
+                if (H_mass<m("sigmasslow") || H_mass>m("sigmasshigh")) {
                     *in["controlSample"] = 23;  // normal Z + HF CR
                 } else if (
                     *in["controlSample"] != 0 // don't steal SR events

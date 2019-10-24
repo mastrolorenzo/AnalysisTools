@@ -52,6 +52,7 @@ type=1  name=sampleIndex_sel
 type=1  name=sampleIndex_GenJetSum
 type=1  name=sampleIndex_GenBJetSum
 type=1  name=sampleIndex_GenJetSumNB
+type=2	name=VBenrichReweight
 type=2  name=weight
 type=2  name=intWeight
 type=2  name=weight_PU_2016to2017
@@ -78,6 +79,7 @@ type=2  name=htJet30
 type=2  name=weight_mettrigSF
 type=2  name=weight_mettrigSF_up
 type=2  name=weight_mettrigSF_down
+type=2  name=METPhiWeight
 
 type=2  name=bTagWeight
 type=2  name=bTagWeight_HFUp

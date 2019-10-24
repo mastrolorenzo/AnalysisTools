@@ -56,6 +56,7 @@ class VHbbAnalysis : public AnalysisManager {
         bool PassVTypeAndTrigger(int vtype);
         bool SelectLeptonChannel();
         bool SelectJets();
+        bool SelectMETPhi();
         bool ReconstructHiggsCand();
         bool ReconstructVCand();
         void ComputeVHKinematics();

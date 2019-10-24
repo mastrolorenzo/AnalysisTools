@@ -44,8 +44,7 @@ sample_colors = {
 }
 
 # The input pattern used to glob for sample files given their input token.
-#input_pattern = '/nfs/dust/cms/user/hkaveh/VHbbAnalysisNtuples/vhbb_2018_1204/haddjobs/pca/sum_%s*_pca.root'
-input_pattern = '/nfs/dust/cms/user/hkaveh/VHbbAnalysisNtuples/vhbb_2018_0609/haddjobs/sum_%s*.root'
+input_pattern = "/afs/desy.de/user/n/nigamova/nfs_nigamova/VHbbAnalysisNtuples/VHbb_DataMC_naddJetslt2/haddjobs/sum_%s*.root"
 
 #input_pattern = '/nfs/dust/cms/user/hkaveh/VHbbAnalysisNtuples/vhbb_2018_1203/*/output_%s*.root'
 
@@ -107,14 +106,16 @@ def get_samples(channel, signal_overlay=False, **kwargs):
     # Samples specific to the Znn channel.
     if channel == 'Znn':
         samples.update({
-            'Data': [0, 1., 'Data', ['Run2017_Ele_ReMiniAOD',
-                                     #'Run2017_MET_MiniAOD', FIXME
-                                     'Run2017_Mu_ReMiniAOD']],
+            'Data': [0, 1., 'Data', ['Run2018_Ele',
+                                     'Run2018_MET',
+                                     'Run2018_Mu']],
 
             'ZnnH_powheg':    [-12504, 1., 'ZH(b#bar{b})',   ['ZH125_ZNuNu_powheg']],
             'ggZnnH_powheg':  [-12505, 1., 'ggZH(b#bar{b})', ['ggZH125_ZNuNu_powheg']],
             'WminusH_powheg': [-12501, 1., 'WH(b#bar{b})',   ['WminusH125_powheg']],
             'WplusH_powheg':  [-12500, 1., 'WH(b#bar{b})',   ['WplusH125_powheg']],
+            'ZH_ZLL_powheg':   [-12502, 1., 'ZH(b#bar{b})',   ['ZH125_ZLL_powheg']],
+            'ggZH_ZLL_powheg': [-12503, 1., 'ggZH(b#bar{b})', ['ggZH125_ZLL_powheg']],
 
             'ZJetsToNuNu_HT100To200_udcsg':  ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_HT100To200']],
             'ZJetsToNuNu_HT100To200_b':      ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_HT100To200']],
@@ -131,6 +132,26 @@ def get_samples(channel, signal_overlay=False, **kwargs):
             'ZJetsToNuNu_HT800To1200_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_HT800To1200']],
             'ZJetsToNuNu_HT800To1200_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_HT800To1200']],
             'ZJetsToNuNu_HT800To1200_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZJetsToNuNu_HT800To1200']],
+            'ZJetsToNuNu_HT1200To2500_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_HT1200To2500']],
+            'ZJetsToNuNu_HT1200To2500_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_HT1200To2500']],
+            'ZJetsToNuNu_HT1200To2500_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZJetsToNuNu_HT1200To2500']],
+            'ZJetsToNuNu_HT2500ToInf_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_HT2500ToInf']],
+            'ZJetsToNuNu_HT2500ToInf_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_HT2500ToInf']],
+            'ZJetsToNuNu_HT2500ToInf_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZJetsToNuNu_HT2500ToInf']],
+            'ZBJetsToNuNu_Pt-100to200_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZBJetsToNuNu_Pt-100to200']],
+            'ZBJetsToNuNu_Pt-100to200_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZBJetsToNuNu_Pt-100to200']],
+            'ZBJetsToNuNu_Pt-100to200_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZBJetsToNuNu_Pt-100to200']],
+            'ZBJetsToNuNu_Pt-200toInf_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZBJetsToNuNu_Pt-200toInf']],
+            'ZBJetsToNuNu_Pt-200toInf_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZBJetsToNuNu_Pt-200toInf']],
+            'ZBJetsToNuNu_Pt-200toInf_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZBJetsToNuNu_Pt-200toInf']],
+            'ZJetsToNuNu_BGenFilter_Pt-100to200_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_BGenFilter_Pt-100to200']],
+            'ZJetsToNuNu_BGenFilter_Pt-100to200_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_BGenFilter_Pt-100to200']],
+            'ZJetsToNuNu_BGenFilter_Pt-100to200_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZJetsToNuNu_BGenFilter_Pt-100to200']],
+            'ZJetsToNuNu_BGenFilter_Pt-200toInf_udcsg': ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['ZJetsToNuNu_BGenFilter_Pt-200toInf']],
+            'ZJetsToNuNu_BGenFilter_Pt-200toInf_b':     ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['ZJetsToNuNu_BGenFilter_Pt-200toInf']],
+            'ZJetsToNuNu_BGenFilter_Pt-200toInf_bb':    ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['ZJetsToNuNu_BGenFilter_Pt-200toInf']],
+
+
         })
 
         if signal_overlay:
@@ -139,6 +160,9 @@ def get_samples(channel, signal_overlay=False, **kwargs):
                 'ggZnnH125_powheg':  [-12505, 1., 'ggZH(b#bar{b})', ['ggZH125_ZNuNu_powheg']],
                 'WminusH125_powheg': [-12501, 1., 'WH(b#bar{b})',   ['WminusH125_powheg']],
                 'WplusH125_powheg':  [-12500, 1., 'WH(b#bar{b})',   ['WplusH125_powheg']],
+                'ZH_ZLL_powheg':   [-12502, 1., 'ZH(b#bar{b})',   ['ZH125_ZLL_powheg']],
+                'ggZH_ZLL_powheg': [-12503, 1., 'ggZH(b#bar{b})', ['ggZH125_ZLL_powheg']],
+
             })
 
     # Samples specific to the Wln channel.
@@ -182,12 +206,19 @@ def get_samples(channel, signal_overlay=False, **kwargs):
             'WJets-HT1200To2500_b':     ['sampleIndex%100==1', sf_wj1b*sf_lumi, 'W+b',        ['WJets-HT1200To2500']],
             'WJets-HT1200To2500_bb':    ['sampleIndex%100==2', sf_wj2b*sf_lumi, 'W+b#bar{b}', ['WJets-HT1200To2500']],
 
-            #'WJets-HT100To200_udcsg':   ['sampleIndex%100==0', sf_wj0b, 'W+udcsg',    ['WJets_BGenFilter-Pt100To200']],
-            #'WJets-HT100To200_b':       ['sampleIndex%100==1', sf_wj1b, 'W+b',        ['WJets_BGenFilter-Pt100To200']],
-            #'WJets-HT100To200_bb':      ['sampleIndex%100==2', sf_wj2b, 'W+b#bar{b}', ['WJets_BGenFilter-Pt100To200']],
-            #'WJets-HT200To400_udcsg':   ['sampleIndex%100==0', sf_wj0b, 'W+udcsg',    ['WJets_BGenFilter-Pt200To400']],
-            #'WJets-HT200To400_b':       ['sampleIndex%100==1', sf_wj1b, 'W+b',        ['WJets_BGenFilter-Pt200To400']],
-            #'WJets-HT200To400_bb':      ['sampleIndex%100==2', sf_wj2b, 'W+b#bar{b}', ['WJets_BGenFilter-Pt200To400']],
+            'WBJets-Pt100To200_udcsg': ['sampleIndex%100==0', sf_wj0b, 'W+udcsg',    ['WBJets-Pt100To200']],
+            'WBJets-Pt100To200_b':     ['sampleIndex%100==1', sf_wj1b, 'W+b',        ['WBJets-Pt100To200']],
+            'WBJets-Pt100To200_bb':    ['sampleIndex%100==2', sf_wj2b, 'W+b#bar{b}', ['WBJets-Pt100To200']],
+            'WBJets-Pt200ToInf_udcsg': ['sampleIndex%100==0', sf_wj0b, 'W+udcsg',    ['WBJets-Pt200ToInf']],
+            'WBJets-Pt200ToInf_b':     ['sampleIndex%100==1', sf_wj1b, 'W+b',        ['WBJets-Pt200ToInf']],
+            'WBJets-Pt200ToInf_bb':    ['sampleIndex%100==2', sf_wj2b, 'W+b#bar{b}', ['WBJets-Pt200ToInf']],
+
+            'WJets_BGenFilter-Pt100To200_udcsg': ['sampleIndex%100==0', sf_wj0b, 'W+udcsg',    ['WJets_BGenFilter-Pt100To200']],
+            'WJets_BGenFilter-Pt100To200_b':     ['sampleIndex%100==1', sf_wj1b, 'W+b',        ['WJets_BGenFilter-Pt100To200']],
+            'WJets_BGenFilter-Pt100To200_bb':    ['sampleIndex%100==2', sf_wj2b, 'W+b#bar{b}', ['WJets_BGenFilter-Pt100To200']],
+            'WJets_BGenFilter-Pt200ToInf_udcsg': ['sampleIndex%100==0', sf_wj0b, 'W+udcsg',    ['WJets_BGenFilter-Pt200ToInf']],
+            'WJets_BGenFilter-Pt200ToInf_b':     ['sampleIndex%100==1', sf_wj1b, 'W+b',        ['WJets_BGenFilter-Pt200ToInf']],
+            'WJets_BGenFilter-Pt200ToInf_bb':    ['sampleIndex%100==2', sf_wj2b, 'W+b#bar{b}', ['WJets_BGenFilter-Pt200ToInf']],
             
             'QCD_HT200to300':   [2, 1., 'QCD', ['QCD_HT200to300']],
             'QCD_HT300to500':   [3, 1., 'QCD', ['QCD_HT300to500']],
@@ -203,9 +234,9 @@ def get_samples(channel, signal_overlay=False, **kwargs):
             'DYToLL_HT100to200_madgraph_udcsg':   ['sampleIndex%100==0', sf_zj0b*sf_lumi, 'Z+udcsg',    ['DYToLL_HT100to200_madgraph']],
             'DYToLL_HT100to200_madgraph_b':       ['sampleIndex%100==1', sf_zj1b*sf_lumi, 'Z+b',        ['DYToLL_HT100to200_madgraph']],
             'DYToLL_HT100to200_madgraph_bb':      ['sampleIndex%100==2', sf_zj2b*sf_lumi, 'Z+b#bar{b}', ['DYToLL_HT100to200_madgraph']],
-           # 'DYToLL_HT200to400_madgraph_udcsg':   ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['DYToLL_HT200to400_madgraph']],
-           # 'DYToLL_HT200to400_madgraph_b':       ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['DYToLL_HT200to400_madgraph']],
-           # 'DYToLL_HT200to400_madgraph_bb':      ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['DYToLL_HT200to400_madgraph']],
+            'DYToLL_HT200to400_madgraph_udcsg':   ['sampleIndex%100==0', sf_zj0b, 'Z+udcsg',    ['DYToLL_HT200to400_madgraph']],
+            'DYToLL_HT200to400_madgraph_b':       ['sampleIndex%100==1', sf_zj1b, 'Z+b',        ['DYToLL_HT200to400_madgraph']],
+            'DYToLL_HT200to400_madgraph_bb':      ['sampleIndex%100==2', sf_zj2b, 'Z+b#bar{b}', ['DYToLL_HT200to400_madgraph']],
             'DYToLL_HT400to600_madgraph_udcsg':   ['sampleIndex%100==0', sf_zj0b*sf_lumi, 'Z+udcsg',    ['DYToLL_HT400to600_madgraph']],
             'DYToLL_HT400to600_madgraph_b':       ['sampleIndex%100==1', sf_zj1b*sf_lumi, 'Z+b',        ['DYToLL_HT400to600_madgraph']],
             'DYToLL_HT400to600_madgraph_bb':      ['sampleIndex%100==2', sf_zj2b*sf_lumi, 'Z+b#bar{b}', ['DYToLL_HT400to600_madgraph']],
