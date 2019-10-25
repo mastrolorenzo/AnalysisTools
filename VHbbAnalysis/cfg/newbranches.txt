@@ -398,6 +398,7 @@ type=2  name=HVdEta
 type=2  name=HVdR
 type=2  name=HVdEta_4MET
 type=2  name=jjVPtRatio
+type=2  name=VPtjjRatio
 type=2  name=HJ1_HJ2_dPhi
 type=2  name=HJ1_HJ2_dEta
 type=2  name=HJ1_HJ2_dR

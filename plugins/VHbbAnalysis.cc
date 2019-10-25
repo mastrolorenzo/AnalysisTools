@@ -2742,6 +2742,7 @@ void VHbbAnalysis::ComputeVHKinematics(){
     if(m("twoResolvedJets")){
 
         *f["jjVPtRatio"] = m("H_pt") / m("V_pt");
+        *f["VPtjjRatio"] = m("V_pt") / m("H_pt");
         *f["HVdPhi"] = fabs(Hbb.DeltaPhi(V));
         *f["HVdEta"] = fabs(Hbb.Eta() - V.Eta());
         *f["HVdR"]   = Hbb.DeltaR(V);
