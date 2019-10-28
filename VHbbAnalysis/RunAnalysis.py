@@ -127,8 +127,8 @@ else:
         '../python/ReadInput.py',
         '../python/kinfitter.py',
         '../python/MyStandardScaler.py',
-        '../python/TensorflowEvaluator.py',
-        '../python/TensorflowDNNClassifier.py',
+        '../python/TensorflowEvaluatorSummer2018.py',
+        '../python/TensorflowDNNClassifierSummer2018.py',
         '../python/TensorflowEvaluatorRun2Legacy.py',
         '../python/mva_evaluator.py',
         '../AnalysisDict_rdict.pcm',
@@ -291,9 +291,7 @@ else:
     cmssw_version = os.environ['CMSSW_BASE'].split('/')[-1]
     patch_rel = 'cmssw-patch' if 'patch' in cmssw_version else 'cmssw'
 
-    condor_runscript_text = '''
-
-        #!/bin/bash
+    condor_runscript_text = '''#!/bin/bash
         ##
         ## Script to run Analysis Manager jobs on Condor from the LPC
         ## Author: Stephane Cooperstein
