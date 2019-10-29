@@ -1759,7 +1759,6 @@ void VHbbAnalysis::FinishEvent() {
                 bdtNames.push_back("BDT_0lep_boosted");
             }
         }
-
         if(bdtNames.size()>0){
             //loop through jets for best of other variables
             *f["otherJetsBestBtag"]    = -99;
@@ -3120,82 +3119,133 @@ void VHbbAnalysis::ControlSampleSelection(){
     }
     
     //BOOSTED CONTROL SAMPLE SELECTION
+
     *in["boostedControlSample"] = -1;
     if(int(m("doBoost"))==1 && m("oneMergedJet")){
-        if(mInt("FatJetCand_index")>-1
-            && m("V_pt")>250
-            && mInt("nAddLeptons") == 0
-            && m("lepMetDPhi") < 2){
-            
-            //std::cout << "\t\tDoing boosted control sample" << std::endl;
-            //only single lep for now
-            if(mInt("isWmunu")||mInt("isWenu")){    
-                //Boosted Signal
-                if((m("FatJetCand_Msoftdrop_corrected") > 90)
-                    && (m("FatJetCand_Msoftdrop_corrected") < 150)
-                    && (m("FatJetCand_doubleB") > 0.9 )
-                    && (mInt("nBJetsOutsideFatJet") == 0)){
-                        *in["boostedControlSample"] = 0;
-                }
-                //ttbar CR=1
-                if((m("FatJetCand_Msoftdrop_corrected") > 50)
-                    && (m("FatJetCand_doubleB") > 0.9)
-                    && (mInt("nBJetsOutsideFatJet") > 0)){
-                        *in["boostedControlSample"] = 11;
-                }
-                //V+light CR=2
-                if((m("FatJetCand_Msoftdrop_corrected") > 50)
-                    && (m("FatJetCand_doubleB") < 0.9)
-                    && (mInt("nBJetsOutsideFatJet") == 0)){
-                        *in["boostedControlSample"] = 12;
-                }
-                //V+hf CR=3
-                if( ((m("FatJetCand_Msoftdrop_corrected") > 50 && m("FatJetCand_Msoftdrop_corrected") < 90) || (m("FatJetCand_Msoftdrop_corrected") > 150 && m("FatJetCand_Msoftdrop_corrected") < 200))
-                    && m("FatJetCand_doubleB") > 0.9
-                    && mInt("nBJetsOutsideFatJet") == 0){
-                        *in["boostedControlSample"] = 13;
-                }
-            }
+         if(mInt("FatJetCand_index")>-1
+            && m("V_pt")>250){
+	       // For 0-lepton
+	       if (mInt("isZnn")==1){
+	             //Boosted Signal
+                     if((m("FatJetCand_Msoftdrop_corrected") > 90) && (m("FatJetCand_Msoftdrop_corrected") < 150)
+                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
+	                 && (m("FatJetCand_deepTagMD_bbvsTop") > 0.7)
+                         && (m("FatJetVdPhi") > 2.9)
+                         && (mInt("nAddLeptons") == 0)
+	                 && (m("nJetsOutsideFatJet") == 0)){
+                             *in["boostedControlSample"] = 0;
+                     }
+	             //ttbar CR=1
+	             if((m("FatJetCand_Msoftdrop_corrected") > 50)
+                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
+                         && (m("FatJetCand_deepTagMD_bbvsTop") < 0.7)
+                         && (mInt("nAddLeptons") > 0)
+                         && (m("nJetsOutsideFatJet") > 1)){
+	                     *in["boostedControlSample"] = 1;
+	             }
+	             //V+light CR=2
+                     if((m("FatJetCand_Msoftdrop_corrected") > 50)
+                         && (m("FatJet_deepTagMD_bbvsLight") < 0.8)
+                         && (mInt("nAddLeptons") == 0)
+                         && (m("nJetsOutsideFatJet") == 0)){
+                             *in["boostedControlSample"] = 2;
+                     }
+                     //V+HF CR=3
+                     if(((m("FatJetCand_Msoftdrop_corrected") > 50 && m("FatJetCand_Msoftdrop_corrected") < 90) || (m("FatJetCand_Msoftdrop_corrected") > 150 && m("FatJetCand_Msoftdrop_corrected") < 200))
+                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
+                         && (mInt("nAddLeptons") == 0)
+                         && (m("nJetsOutsideFatJet") == 0)){
+                             *in["boostedControlSample"] = 3;
+                     }
+	       //For 1-lepton 
+	       }else if(((mInt("isWmunu")||mInt("isWenu"))) && (m("lepMetDPhi") < 2 && mInt("nAddLeptons") == 0)){
+                     //Boosted Signal
+                     if((m("FatJetCand_Msoftdrop_corrected") > 90)
+                         && (m("FatJetCand_Msoftdrop_corrected") < 150)
+                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8) 
+                         && (m("FatJetCand_deepTagMD_bbvsTop") > 0.7)
+                         && (mInt("nBJetsOutsideFatJet") == 0)){
+                             *in["boostedControlSample"] = 0;
+		     }
+                     //ttbar CR=1
+                     if((m("FatJetCand_Msoftdrop_corrected") > 50)
+                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
+                         && (mInt("nBJetsOutsideFatJet") > 0)
+                         && (m("FatJetCand_deepTagMD_bbvsTop") < 0.7)){
+                             *in["boostedControlSample"] = 11;
+                     }
+                     //V+light CR=2
+                     if((m("FatJetCand_Msoftdrop_corrected") > 50)
+                         && (m("FatJetCand_deepTagMD_bbvsLight") < 0.8)
+                         && (mInt("nBJetsOutsideFatJet") == 0)){
+                             *in["boostedControlSample"] = 12;
+                     }
+                     //V+hf CR=3
+                     if(((m("FatJetCand_Msoftdrop_corrected") > 50 && m("FatJetCand_Msoftdrop_corrected") < 90) || (m("FatJetCand_Msoftdrop_corrected") > 150 && m("FatJetCand_Msoftdrop_corrected") < 200))
+			 && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
+	                 && (mInt("nBJetsOutsideFatJet") == 0)){
+                             *in["boostedControlSample"] = 13;
+                     }
+	       //For 2-lepton
+               }else if ((mInt("isZmm") || mInt("isZee"))){
+                     //Boosted Signal
+                     if((m("FatJetCand_Msoftdrop_corrected") > 90)
+                         && (m("FatJetCand_Msoftdrop_corrected") < 150)
+                         && (m("V_mass") > m("zmasslow"))
+                         && (m("V_mass") < m("zmasshigh"))
+                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.7)
+                         && (m("FatJetVdPhi") > 2.9)){
+                             *in["boostedControlSample"] = 0;
+                     }
+                     //ttbar CR=1
+                     if((m("FatJetCand_Msoftdrop_corrected") > 50)
+                         && (m("V_mass") > 10)
+                         && ((m("V_mass") < m("zmasslow")) || (m("V_mass") > m("zmasshigh")))
+                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.7)){
+                             *in["boostedControlSample"] = 21;
+                     }
+                     //V+light CR=2
+                     if((m("FatJetCand_Msoftdrop_corrected") > 90)
+                         && (m("FatJetCand_Msoftdrop_corrected") < 150)
+                         && (m("V_mass") > m("zmasslow"))
+                         && (m("V_mass") < m("zmasshigh"))
+                         && (m("FatJetCand_deepTagMD_bbvsLight") < 0.8)){
+                             *in["boostedControlSample"] = 22;
+                     }
+                     //V+HF CR=3
+                     if(((m("FatJetCand_Msoftdrop_corrected") > 50 && m("FatJetCand_Msoftdrop_corrected") < 90) || (m("FatJetCand_Msoftdrop_corrected") > 150 && m("FatJetCand_Msoftdrop_corrected") < 200))
+                         && (m("V_mass") > m("zmasslow"))
+                         && (m("V_mass") < m("zmasshigh"))
+                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.7)){
+                             *in["boostedControlSample"] = 23;
+                     }
+               }
         }
     }
 }
 
 void VHbbAnalysis::FatJetSelection(){
     if(atLeastOnePreselFatJet){
-        float fatJetPtCut, fatJetBBTaggerCut, tau2OverTau1Cut;
+        float fatJetPtCut;
         if (mInt("isZnn")) {
             fatJetPtCut       = m("fatJetPtCut_0lepchan");
-            fatJetBBTaggerCut = m("fatJetBBTaggerCut_0lepchan");
-            tau2OverTau1Cut   = m("tau2OverTau1Cut_0lepchan");
         } else if (mInt("isWmunu") || mInt("isWenu")) {
             fatJetPtCut       = m("fatJetPtCut_1lepchan");
-            fatJetBBTaggerCut = m("fatJetBBTaggerCut_1lepchan");
-            tau2OverTau1Cut   = m("tau2OverTau1Cut_1lepchan");
         } else if (mInt("isZmm") || mInt("isZee")) {
             fatJetPtCut       = m("fatJetPtCut_2lepchan");
-            fatJetBBTaggerCut = m("fatJetBBTaggerCut_2lepchan");
-            tau2OverTau1Cut   = m("tau2OverTau1Cut_2lepchan");
         }
 
         //float highestPt=0;  // I'm assuming highest fat jet pt is best... maybe not?
-        float tau2OverTau1=100;
-        float highestDoubleB=-2;
+        // Changed DoubleB to DeepAK8_bbvslight
+	float highestdeep_bbvslight=-2;
         for(int iFatJet=0; iFatJet<mInt("nFatJet"); iFatJet++){
-            tau2OverTau1=m("FatJet_tau2",iFatJet)/m("FatJet_tau1",iFatJet);
             if(m("FatJet_pt",iFatJet)>fatJetPtCut
-                    && m("FatJet_btagHbb",iFatJet)>fatJetBBTaggerCut
-                    && m("FatJet_mass", iFatJet)>50
-                    && fabs(m("FatJet_eta",iFatJet))<2.5
-                    && tau2OverTau1<tau2OverTau1Cut){//turned off for boosted
-                //if(m("FatJet_pt",iFatJet)>highestPt)
-                if(m("FatJet_btagHbb",iFatJet)>highestDoubleB){
-                    *in["FatJetCand_index"]=iFatJet;
-                    highestDoubleB=m("FatJet_btagHbb",iFatJet);
-                    /*if(m("FatJet_pt",iFatJet)<highestPt){
-                        std::cout<<"this pt is smaller than the last candidate"<<std::endl;
-                    }*/
-                    //highestPt=m("FatJet_pt",iFatJet);
-                }
+               && m("FatJet_mass", iFatJet)>50
+               && fabs(m("FatJet_eta",iFatJet))<2.5){
+                    if(m("FatJet_deepTagMD_bbvsLight",iFatJet)>highestdeep_bbvslight){
+                         *in["FatJetCand_index"]=iFatJet;
+                         highestdeep_bbvslight=m("FatJet_deepTagMD_bbvsLight",iFatJet);
+                    }
             }
         }
         if(*in["FatJetCand_index"]>-1){
@@ -3299,22 +3349,25 @@ void VHbbAnalysis::ComputeBoostedVariables(){
             m("FatJet_msoftdrop",mInt("FatJetCand_index")) );
 
         int nBJetsOutsideFatJet = 0;
+        int nJetsOutsideFatJet = 0;
         for(int iJet=0;iJet<mInt("nJet");iJet++){
             if(m("Jet_lepFilter",iJet)
                 && m("Jet_Pt",iJet)>25 
-                && abs(m("Jet_eta",iJet))<2.5
-                && m(taggerName,iJet)>m("tagWPL")){
+                && abs(m("Jet_eta",iJet))<2.5){
 
                 TLorentzVector aJet;
                 aJet.SetPtEtaPhiM(m("Jet_pt",iJet),m("Jet_eta",iJet),m("Jet_phi",iJet),m("Jet_mass",iJet));
-                if(FatJet.DeltaR(aJet)>0.8){//Is 0.6 right? fatjet 'radius' is 0.4, jet 'radius' is 0.2
+                if(FatJet.DeltaR(aJet)>0.8 && m(taggerName,iJet)>m("tagWPL")){
                     nBJetsOutsideFatJet++;
                 }
+                if(FatJet.DeltaR(aJet)>1){
+                    nJetsOutsideFatJet++;
+                }
+
             }
         }
         *in["nBJetsOutsideFatJet"] = nBJetsOutsideFatJet;
-
-
+        *in["nJetsOutsideFatJet"] = nJetsOutsideFatJet;
 
 
         *f["FatJetCand_pt"]=m("FatJet_pt",mInt("FatJetCand_index"));
@@ -3325,7 +3378,6 @@ void VHbbAnalysis::ComputeBoostedVariables(){
         *f["FatJetCand_tau1"]=m("FatJet_tau1",mInt("FatJetCand_index"));
         *f["FatJetCand_tau2"]=m("FatJet_tau2",mInt("FatJetCand_index"));
         *f["FatJetCand_tau3"]=m("FatJet_tau3",mInt("FatJetCand_index"));
-        *f["FatJetCand_doubleB"]=m("FatJet_btagHbb",mInt("FatJetCand_index"));
         *f["FatJetCand_Msoftdrop_corrected"]=m("FatJet_msoftdrop",mInt("FatJetCand_index"));
         *f["FatJetCand_deepTagMD_bbvsLight"]=m("FatJet_deepTagMD_bbvsLight",mInt("FatJetCand_index"));
         float TvsQCD=m("FatJet_deepTagMD_TvsQCD",mInt("FatJetCand_index"));

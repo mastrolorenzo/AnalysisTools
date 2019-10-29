@@ -46,14 +46,8 @@ type=2  name=j2Btag            val=-1
 type=2  name=JetEtaCut          val=2.5
 
 type=2  name=fatJetPtCut_0lepchan         val=250
-type=2  name=fatJetBBTaggerCut_0lepchan   val=0.6
-type=2  name=tau2OverTau1Cut_0lepchan     val=0.65
 type=2  name=fatJetPtCut_1lepchan         val=250
-type=2  name=fatJetBBTaggerCut_1lepchan   val=-1#turned off for boosted CR
-type=2  name=tau2OverTau1Cut_1lepchan     val=999#
 type=2  name=fatJetPtCut_2lepchan         val=250
-type=2  name=fatJetBBTaggerCut_2lepchan   val=0.3
-type=2  name=tau2OverTau1Cut_2lepchan     val=10
 
 #enable the ISR/FSR recovering in the Higgs candidate four-vector
 type=2  name=enableFSRRecovery   val=1.
