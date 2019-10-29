@@ -4,6 +4,7 @@
 type=2  name=minDPhiFromOtherJets
 type=2  name=otherJetsBestBtag
 type=2  name=otherJetsHighestP
+type=2  name=otherJetsHighestPt
 
 type=0  name=nW_re
 type=0  name=nWlep_re
@@ -82,6 +83,7 @@ type=2  name=htJet30
 type=2  name=weight_mettrigSF
 type=2  name=weight_mettrigSF_up
 type=2  name=weight_mettrigSF_down
+type=2  name=METPhiWeight
 
 type=2  name=bTagWeight
 type=2  name=bTagWeight_HFUp

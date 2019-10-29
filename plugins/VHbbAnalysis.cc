@@ -1759,30 +1759,30 @@ void VHbbAnalysis::FinishEvent() {
                 bdtNames.push_back("BDT_0lep_boosted");
             }
         }
-        if(bdtNames.size()>0){
-            //loop through jets for best of other variables
-            *f["otherJetsBestBtag"]    = -99;
-            *f["otherJetsHighestPt"]   = -99;
-            *f["minDPhiFromOtherJets"] = 99;
-            for(int iJet=0; iJet<mInt("nJet"); iJet++){
-                if(iJet==mInt("hJetInd1")) continue;
-                if(iJet==mInt("hJetInd2")) continue;
-                if(mInt("Jet_lepFilter",iJet)==0) continue;
-                if( (mInt("Jet_puId",iJet) > 6 || m("Jet_Pt",iJet)>50) && m("Jet_bReg",iJet)>25){
-                    if(*f["otherJetsBestBtag"]< m(taggerName,iJet)){
-                        *f["otherJetsBestBtag"]=m(taggerName,iJet);
-                    }
-                    if(*f["otherJetsHighestPt"]< m("Jet_bReg",iJet)){
-                        *f["otherJetsHighestPt"]=m("Jet_bReg",iJet);
-                    }
+      
+        //loop through jets for best of other variables
+        *f["otherJetsBestBtag"]    = -99;
+        *f["otherJetsHighestPt"]   = -99;
+        *f["minDPhiFromOtherJets"] = 99;
+        for(int iJet=0; iJet<mInt("nJet"); iJet++){
+            if(iJet==mInt("hJetInd1")) continue;
+            if(iJet==mInt("hJetInd2")) continue;
+            if(mInt("Jet_lepFilter",iJet)==0) continue;
+            if( m("Jet_Pt",iJet)>30 && ( mInt("Jet_puId",iJet) > 6 || m("Jet_Pt",iJet)>50) ){
+                if(*f["otherJetsBestBtag"]< m(taggerName,iJet)){
+                    *f["otherJetsBestBtag"]=m(taggerName,iJet);
                 }
-                if( (mInt("Jet_puId",iJet)>6 || m("Jet_Pt",iJet)>50) && m("Jet_Pt",iJet)>30){
-                    if(*f["minDPhiFromOtherJets"]>fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)))){
-                        *f["minDPhiFromOtherJets"]=fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)));
-                    }
+                if(*f["otherJetsHighestPt"]< m("Jet_Pt",iJet)){
+                    *f["otherJetsHighestPt"]=m("Jet_Pt",iJet);
+                }
+                if(*f["minDPhiFromOtherJets"]>fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)))){
+                    *f["minDPhiFromOtherJets"]=fabs(EvalDeltaPhi(m("MET_Phi"), m("Jet_phi",iJet)));
                 }
             }
-
+        }
+        if(m("minDPhiFromOtherJets") >98) *f["minDPhiFromOtherJets"] = -99;
+        
+        if(bdtNames.size()>0){
             for(unsigned int iBDT=0; iBDT<bdtNames.size(); iBDT++){
                 std::string bdtname(bdtNames[iBDT]);
                 if(debug>5000) {
@@ -1826,7 +1826,6 @@ void VHbbAnalysis::FinishEvent() {
                 bdtNames.push_back("BDT_1lep_boosted");
             }
         }
-
         if(bdtNames.size()>0){
             for(unsigned int iBDT=0; iBDT<bdtNames.size(); iBDT++){
                 std::string bdtname(bdtNames[iBDT]);
@@ -2543,6 +2542,7 @@ bool VHbbAnalysis::ReconstructHiggsCand(){
         *f["HJ1_pt"] = HJ1.Pt();
         *f["HJ2_pt"] = HJ2.Pt();
         *f["HJ1_HJ2_dPhi"] = HJ1.DeltaPhi(HJ2);
+        *f["abs_HJ1_HJ2_dPhi"] = fabs(HJ1.DeltaPhi(HJ2));
         *f["HJ1_HJ2_dEta"] = fabs(HJ1.Eta() - HJ2.Eta());
         *f["HJ1_HJ2_dR"] = HJ1.DeltaR(HJ2);
         *f["JJEtaBal"] = ( fabs( HJ1.Eta() + HJ2.Eta() ) / fabs( HJ1.Eta() - HJ2.Eta() ) );
