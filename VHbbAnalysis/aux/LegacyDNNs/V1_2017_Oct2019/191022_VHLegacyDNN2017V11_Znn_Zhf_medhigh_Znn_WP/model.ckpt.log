@@ -1,0 +1,1975 @@
+saving logfile to [34m results//FINAL_VHLegacy_0lep_WP_Zhf_medhigh_Znn/Zvv2017_Zhf_medhigh_Znn_191022_V11finalVarsWP.h5/512-256-128-64-64-64/0.20-0.50-0.50-0.50-0.50-0.50/1.000e+00/rnd_2/output.txt [0m
+INFO: numpy random state =  MT19937 ,d44858c3,ce7c748f,10630652,bc61a7ef,5f523d18,7236383f,eb520c4,85944522,6d06f593,16a0fcfc,2a533403,4450cfa1,bcc88b98,3a25b4bf,6adff2b2,9592d1fe,c662b484,b9e54dae,3ce62e3c,cd2b474d,5ca82cc6,434e341,ab0365a7,5f4a9dc4,10700b9a,52dae95e,99189c4a,21c2660,b5a96545,d9dd3409,1fc80d1d,13b705b8,4639b596,9799708c,f93b6a51,e6ccd23e,896de144,72d5f82,db758707,b1bc438c,eae6333,8cc84512,eac6bb46,7ed83d1,67a9cd1b,8f1a6109,5e410cd7,a8a22ce5,2ac0b4e5,5198b6e1,62a5e0b0,28a11707,6ed55d7e,5deb072c,996b596e,ac75eb1e,b93baa7f,c0ad96d0,170c936b,141cc902,5d311e05,df64cfeb,77a616a8,62e4feeb,3516598f,33940c64,699264af,b426b619,dbd6e22a,f841901b,a39cd89e,f9a6bd24,4be1d677,6d84fa74,20a7ce30,fcbe1197,144daae,3ee63845,74470c44,5c27c39d,3d400aaa,4faab399,edbe8dd2,ca60e96f,1a199787,a05ae32,4255bfdf,797b282c,54b305a6,7499c3b4,1cfcd3ee,7da63d11,bc05c002,38b085c0,34b44d53,6cafe801,edf9b608,57312553,46c111e5,fc5fdd80,653acb6e,54bdb121,fabd3aff,235b3099,f4c23253,e34bc832,b537a0ba,4c04034e,89916c47,42d2cdcd,fe25cb8f,3df4eacb,bb6e706d,c392bc05,7fdfde,c5c5795b,42ff45a6,b88f261f,ba981379,1427b704,820ea7fd,ed089c35,3e90945c,55c5e422,c4e4bc3c,6f16e29,af6cd6c3,24e7381a,f2c2d608,e9d405b3,cfa2ae4a,b67b3b16,9b91afe9,c8e2284b,12fa43a2,1cc7c7a3,601ab53d,3e0c88b2,b8eea2d8,d32954c7,fa1b842f,bff6a5d1,d9569bea,5e68e1d4,944d67fc,5f8f6568,d8a80c4,d70023bb,dfebb080,5176497a,5657476,8ccea391,8d424d57,502beae3,8b1368f5,aede9d4a,482178e7,6eff1c01,9cd1104,e2ae048c,3cdc710e,74efe766,2a80338f,17ce9453,a610f24f,77875c3e,f3965270,8dd3ebe6,6f8e11be,35b8d025,b110d8fb,248705e2,5a30a57f,eb5929a0,642f4f2c,b2803c66,d4bee484,89090a82,19ca40cb,425387e9,cd85046e,fa7bc5dc,538e0b20,2f21c402,ee68741b,e5c7da19,afc8780c,27a799b4,d7ac19b0,79af7cbe,120254c8,825c1591,e2d2d1af,1b93a379,35271c05,845c188e,530114,270c1788,bd8f4029,e6b7facf,8587890e,ed29a9b8,66f26746,a05ae093,6f7476b9,84641d1d,2ed76450,505d1cb4,efe933c0,58d8ff59,88f9289e,b66bcfcf,3012aa7f,9ad38eef,3e198b55,e01a7660,30cb1cf4,e0195ea2,fa427d,431d7609,a37ed761,7b080309,f2747e1,bb253e4,fd39174,5c9dd30,7c056d84,fde83561,11816779,ae8a350,ba3f2f09,dc152249,723f340,a760b0c0,55306d38,41426c1d,ef1baee4,2f96b8c8,1c221788,e77a7e92,e078fe3d,b365f0e6,e58b8965,bdfa9cec,e0b0cf73,1f52c380,f4cf09c0,9f1d52cc,f6d4c22f,de10464f,63032981,f3763356,202d0c64,8d4d238d,67c0a50c,446948ac,1b477f9c,b20cfb41,d1f93f7f,82b8d4ce,e6526a2e,2d1c46d8,f990c486,824d7abf,efb3fcb9,959ab1b9,34bf309c,7437d0b4,eb9d13a2,1e699f92,8863c61,ee84167f,c8618b79,7bf56720,cbc809c0,1eea7823,34861da,d4cfa279,911d9f81,5f9532b8,a8e714b4,302a9194,b12d22e5,a9c2723e,2c3db7ab,7f1c9fc1,adf3bdf,a98e5cc9,8af015d8,ccb9718e,1e91f7,fc4e0a80,25cd4985,aae705a0,34df9e22,8d810bc7,88b2a36c,de9ba202,715fc645,628ef686,eacc9ed0,e92fe68a,7cbeaefd,9e3523,1aa646d6,43d96710,3f7c01d,510e8b0a,1c112fc8,3e69c1e7,a7c47763,502a6d6,2c8b6ff0,6404274b,cc93c65e,5a770d61,bce776a,665bf33,dda4a6a,de2a6dbc,71d68cac,dac61cca,837e0558,2a324c3b,def6487e,b34adcdc,983ce999,8787635e,4c505125,e8f556b0,8893f5b9,9e521597,89a989fd,9174ed35,9caf2207,c3a9b535,5d5164a1,c411f588,96b78ae5,7001a712,22dbea67,49d7adf3,c9dc2f87,d9536eca,18c99d3b,f2ac2e4,fbffdc14,974e5292,ee4b4900,8ad08fb6,3be34c9e,e1c54318,d5903edf,c5b0ac9e,859fe98a,c76d7b0a,746db4a9,63dc94b0,801a840d,16493a85,80c38ccb,9c6b9133,af2aff8e,89deef17,ef6e5ff1,5cdf197c,627d969b,1a80dba8,e3f46cea,35cf79fe,bf4ce413,9ed3d668,70a72b20,5c870db9,c08e396f,87921e67,c0d01e50,a8afe7dd,f41fb43f,756f4b4e,2495ff22,ebdd9c88,d1bdfe93,61e23249,7d032876,4d7ef7bd,78d5d15a,51ea7baa,d78fff29,c13607b8,a263ec8f,4b4b9f96,38682749,1968f2ef,85d46588,4f349cc6,15a1ab93,82b1e503,654d0110,ed03f761,b441a3d3,290bddf,ee6e5dcc,a9ea274f,1ab0540b,ee2d8eb4,fd3520b5,d1ac1d8b,9fc90d1d,f9a9a281,8fee21a2,f769ee1d,577a65ea,4455955e,256a64b8,a240b8f,fb98497,f0dc0736,96470bff,b739e897,3044cc03,b3688139,cf8753d6,e99cdb96,b5010d71,a4220811,416ea4ce,d33d8de4,45c6ff61,4861bfcc,6257ad12,1f802d48,4e6fb578,376a9692,92dd38,4b813c2f,870dca2b,975aa1d8,da2d41a,42dd36c,adcf0496,d10b389,c5f199a,1d9aae80,b3d03bf3,9362c7c,9563729c,ba97af48,3eb8e3ae,59f7df24,5a8aac35,f1d5af12,d096d6bb,735769b,83b9e6f6,bd24b957,a479de6b,7df797b5,a072ff98,584dcbb5,cc0d5657,3b006752,8ba48739,aa4e21ad,f0618eed,1e58b129,29888655,b4661ae7,489bd743,b66260f1,b86dd60,a63817d5,b5f66c90,d26d688,ba8051ea,edbd2c9f,448d6339,7bfe04fa,46003f5f,4b2df494,8fb1d4ff,9c528762,714d9b09,e2d8b872,8adad98d,1e2f5412,12a682a2,62805507,a6b9519b,89b9bedd,f91b3c5d,4d92dd1d,115fd8c8,123bf41,b1bec774,ccd8fe8c,f4f7d356,97488ce3,e5c056cb,200ddbfe,917a951a,14bdb1c3,75856fa9,a5877750,6d335b14,9fe1ef93,c126fed3,4053a597,8fed55b2,34dfb998,a650549d,5f1ff45,f9d650d0,882622ac,1c917ee0,d14ef28f,69e4c4f4,26bcf630,e9b16c4a,a474f509,c7b8688e,d4b340e8,db8d366c,a149f20e,2c3d7ed6,64e5a16d,bd4f6035,84132ead,24bd8783,7e282a66,b1e5fd4c,6a50f7b3,f3587769,f1e2df27,6db3f502,d4a6f7aa,e7d5d840,15e6841a,1eed5a9a,e4648ded,eb0163f0,e4152fc0,f288ee6f,d77103b8,9e355c6e,4661694b,4f2f62e2,9d1002d1,86d2be7d,ab8b9fdb,733b5830,af6966ef,2be3f7d8,9af087c6,b0a7ab3c,bd427878,c5e542fb,9fab6a4,97b09575,c7e6e736,d83b9a6b,a0717899,d0c42e85,3b7ff1fc,7d720233,4f5ddfa2,81fece4b,56dc1432,41741714,be6da33,7f3185c0,4797e019,b52aee46,3b985761,c2c9902c,fc4174ed,b64e67f8,66eb55ef,dc8cb989,5b8c5412,faa5bfe5,9cab0f8c,91465a54,eebcaf16,184cad79,47d16565,985b93bb,15f5cd02,fd640382,b00b118b,42ca1649,a35608ec,fd4c1a07,9e821fa5,4394a5c9,e09b5f0,de97259,67699cb1,e7db8baf,7489662b,fb0587b4,70a335b0,d6368761,cb8a67ab,98ceea70,3c03206c,96375d9,5268563f,3c56737,faf0ce72,78bc7e50,ab394de5,f897f008,fa61905c,55db58db,e0c2f87c,c499e666,a34e1d62,ff20b9a8,67aeac0e,39958771,8339d3bc,dfdd78cc,3bfef736
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+initialized TensorflowDNNClassifier, version v0.1 ( 12006 )
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+INFO: command: /var/spool/slurmd/job146185/slurm_script -i /work/berger_p2/VHbb/CMSSW_10_1_0/src/Xbb/python/dumps/Zvv2017_Zhf_medhigh_Znn_191022_V11finalVarsWP.h5 -c config/default_momentum.cfg -p FINAL_VHLegacy_0lep_WP_Zhf_medhigh_Znn --set='balanceClasses=True;balanceSignalBackground=False;backgroundOnly=True'
+INFO: read inputs from disk, metadata is pesent:
+INFO:  >   cut ((min(MHT_pt, MET_Pt) > 100 && Jet_btagDeepB[hJidx[1]] > 0.1522 && H_mass < 500 && H_pt > 120.0 && ((Jet_puId[hJidx[0]]>6||Jet_Pt[hJidx[0]]>50.0)&&(Jet_puId[hJidx[1]]>6||Jet_Pt[hJidx[1]]>50.0))) && isZnn && abs(TVector2::Phi_mpi_pi(H_phi-MET_Phi)) > 2.0 && Sum$(abs(TVector2::Phi_mpi_pi(Jet_phi-V_phi))<0.5&&Jet_Pt>30&&(Jet_puId>6||Jet_Pt>50)&&Jet_lepFilter)==0 && (H_mass < 90 || H_mass > 150) && Jet_btagDeepB[hJidx[0]] > 0.4941 && abs(TVector2::Phi_mpi_pi(MET_Phi-TkMET_phi)) < 0.5 && Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6||Jet_Pt>50)&&Jet_lepFilter&&Iteration$!=hJidx[0]&&Iteration$!=hJidx[1])<2)&&((MET_Pt >= 150.0))
+INFO:  >   cutName Zhf_medhigh_Znn
+INFO:  >   region Zhf_medhigh_Znn
+INFO:  >   samples {'WLIGHT': ['WJetsHT100_0b', 'WJetsHT200_0b', 'WJetsHT400_0b', 'WJetsHT600_0b', 'WJetsHT800_0b', 'WJetsHT1200_0b', 'WBJets100_0b', 'WBJets200_0b', 'WBGenFilter100_0b', 'WBGenFilter200_0b'], 'ZBB': ['M4HT100to200_2b', 'M4HT200to400_2b', 'M4HT400to600_2b', 'M4HT600toInf_2b', 'HT0to100ZJets_2b', 'HT100to200ZJets_2b', 'HT200to400ZJets_2b', 'HT400to600ZJets_2b', 'HT600to800ZJets_2b', 'HT800to1200ZJets_2b', 'HT1200to2500ZJets_2b', 'HT2500toinfZJets_2b', 'DYBJets_100to200_2b', 'DYBJets_200toInf_2b', 'DYJetsBGenFilter_100to200_2b', 'DYJetsBGenFilter_200toInf_2b', 'ZJetsHT100_2b', 'ZJetsHT200_2b', 'ZJetsHT400_2b', 'ZJetsHT600_2b', 'ZJetsHT800_2b', 'ZJetsHT1200_2b', 'ZJetsHT2500_2b', 'ZBJets100_2b', 'ZBJets200_2b', 'ZBGenFilter100_2b', 'ZBGenFilter200_2b'], 'TT': ['TT_2l2n', 'TT_h', 'TT_Sl'], 'ZB': ['M4HT100to200_1b', 'M4HT200to400_1b', 'M4HT400to600_1b', 'M4HT600toInf_1b', 'HT0to100ZJets_1b', 'HT100to200ZJets_1b', 'HT200to400ZJets_1b', 'HT400to600ZJets_1b', 'HT600to800ZJets_1b', 'HT800to1200ZJets_1b', 'HT1200to2500ZJets_1b', 'HT2500toinfZJets_1b', 'DYBJets_100to200_1b', 'DYBJets_200toInf_1b', 'DYJetsBGenFilter_100to200_1b', 'DYJetsBGenFilter_200toInf_1b', 'ZJetsHT100_1b', 'ZJetsHT200_1b', 'ZJetsHT400_1b', 'ZJetsHT600_1b', 'ZJetsHT800_1b', 'ZJetsHT1200_1b', 'ZJetsHT2500_1b', 'ZBJets100_1b', 'ZBJets200_1b', 'ZBGenFilter100_1b', 'ZBGenFilter200_1b'], 'ST': ['ST_tW_antitop', 'ST_tW_top', 'ST_s-channel_4f', 'ST_t-channel_top_4f', 'ST_t-channel_antitop_4f'], 'ZLIGHT': ['M4HT100to200_0b', 'M4HT200to400_0b', 'M4HT400to600_0b', 'M4HT600toInf_0b', 'HT0to100ZJets_0b', 'HT100to200ZJets_0b', 'HT200to400ZJets_0b', 'HT400to600ZJets_0b', 'HT600to800ZJets_0b', 'HT800to1200ZJets_0b', 'HT1200to2500ZJets_0b', 'HT2500toinfZJets_0b', 'DYBJets_100to200_0b', 'DYBJets_200toInf_0b', 'DYJetsBGenFilter_100to200_0b', 'DYJetsBGenFilter_200toInf_0b', 'ZJetsHT100_0b', 'ZJetsHT200_0b', 'ZJetsHT400_0b', 'ZJetsHT600_0b', 'ZJetsHT800_0b', 'ZJetsHT1200_0b', 'ZJetsHT2500_0b', 'ZBJets100_0b', 'ZBJets200_0b', 'ZBGenFilter100_0b', 'ZBGenFilter200_0b', 'WWTo1L1Nu2Qnlo_0b', 'WZTo1L1Nu2Qnlo_0b', 'ZZ_0b', 'WWTo1L1Nu2Qnlo_1b', 'WWTo1L1Nu2Qnlo_2b', 'WZTo1L1Nu2Qnlo_1b', 'WZTo1L1Nu2Qnlo_2b', 'ZZ_1b', 'ZZ_2b', 'ZllH_lep_PTV_0_75_hbb', 'ZllH_lep_PTV_75_150_hbb', 'ZllH_lep_PTV_150_250_0J_hbb', 'ZllH_lep_PTV_150_250_GE1J_hbb', 'ZllH_lep_PTV_GT250_hbb', 'ZnnH_lep_PTV_0_75_hbb', 'ZnnH_lep_PTV_75_150_hbb', 'ZnnH_lep_PTV_150_250_0J_hbb', 'ZnnH_lep_PTV_150_250_GE1J_hbb', 'ZnnH_lep_PTV_GT250_hbb', 'ggZllH_lep_PTV_0_75_hbb', 'ggZllH_lep_PTV_75_150_hbb', 'ggZllH_lep_PTV_150_250_0J_hbb', 'ggZllH_lep_PTV_150_250_GE1J_hbb', 'ggZllH_lep_PTV_GT250_hbb', 'ggZnnH_lep_PTV_0_75_hbb', 'ggZnnH_lep_PTV_75_150_hbb', 'ggZnnH_lep_PTV_150_250_0J_hbb', 'ggZnnH_lep_PTV_150_250_GE1J_hbb', 'ggZnnH_lep_PTV_GT250_hbb', 'WminusH_lep_PTV_0_75_hbb', 'WminusH_lep_PTV_75_150_hbb', 'WminusH_lep_PTV_150_250_0J_hbb', 'WminusH_lep_PTV_150_250_GE1J_hbb', 'WminusH_lep_PTV_GT250_hbb', 'WplusH_lep_PTV_0_75_hbb', 'WplusH_lep_PTV_75_150_hbb', 'WplusH_lep_PTV_150_250_0J_hbb', 'WplusH_lep_PTV_150_250_GE1J_hbb', 'WplusH_lep_PTV_GT250_hbb'], 'WBB': ['WJetsHT100_2b', 'WJetsHT200_2b', 'WJetsHT400_2b', 'WJetsHT600_2b', 'WJetsHT800_2b', 'WJetsHT1200_2b', 'WBJets100_2b', 'WBJets200_2b', 'WBGenFilter100_2b', 'WBGenFilter200_2b'], 'WB': ['WJetsHT100_1b', 'WJetsHT200_1b', 'WJetsHT400_1b', 'WJetsHT600_1b', 'WJetsHT800_1b', 'WJetsHT1200_1b', 'WBJets100_1b', 'WBJets200_1b', 'WBGenFilter100_1b', 'WBGenFilter200_1b']}
+INFO:  >   scaleFactors {'ZBGenFilter100_2b': 1.0, 'M4HT600toInf_0b': 1.0, 'WBJets200_1b': 1.0, 'WBGenFilter200_2b': 1.0, 'WBJets100_2b': 1.0, 'ZJetsHT1200_1b': 1.0, 'DYJetsBGenFilter_100to200_1b': 1.0, 'ggZnnH_lep_PTV_GT250_hbb': 1.0, 'ZBJets100_1b': 1.0, 'ggZllH_lep_PTV_150_250_0J_hbb': 1.0, 'ZJetsHT800_1b': 1.0, 'M4HT100to200_2b': 1.0, 'WplusH_lep_PTV_150_250_0J_hbb': 1.0, 'ZZ_1b': 1.0, 'ggZnnH_lep_PTV_75_150_hbb': 1.0, 'WJetsHT200_1b': 1.0, 'WZTo1L1Nu2Qnlo_0b': 1.0, 'ZJetsHT100_1b': 1.0, 'WminusH_lep_PTV_GT250_hbb': 1.0, 'ST_tW_top': 1.0, 'HT400to600ZJets_1b': 1.0, 'WBGenFilter200_1b': 1.0, 'ZnnH_lep_PTV_75_150_hbb': 1.0, 'WBJets200_0b': 1.0, 'HT100to200ZJets_0b': 1.0, 'WJetsHT800_1b': 1.0, 'ZBJets200_0b': 1.0, 'ZBGenFilter100_1b': 1.0, 'ZJetsHT1200_0b': 1.0, 'DYJetsBGenFilter_100to200_2b': 1.0, 'ZBJets100_0b': 1.0, 'ggZllH_lep_PTV_GT250_hbb': 1.0, 'ZJetsHT200_0b': 1.0, 'WplusH_lep_PTV_GT250_hbb': 1.0, 'ZJetsHT800_2b': 1.0, 'HT2500toinfZJets_1b': 1.0, 'ZJetsHT2500_2b': 1.0, 'ZllH_lep_PTV_GT250_hbb': 1.0, 'WJetsHT200_0b': 1.0, 'ggZnnH_lep_PTV_150_250_GE1J_hbb': 1.0, 'HT800to1200ZJets_0b': 1.0, 'ZllH_lep_PTV_75_150_hbb': 1.0, 'WplusH_lep_PTV_0_75_hbb': 1.0, 'HT0to100ZJets_0b': 1.0, 'M4HT600toInf_2b': 1.0, 'WminusH_lep_PTV_150_250_0J_hbb': 1.0, 'ggZllH_lep_PTV_0_75_hbb': 1.0, 'ggZnnH_lep_PTV_150_250_0J_hbb': 1.0, 'ZJetsHT400_1b': 1.0, 'TT_2l2n': 1.0, 'HT0to100ZJets_1b': 1.0, 'ZBGenFilter200_1b': 1.0, 'DYBJets_200toInf_2b': 1.0, 'DYJetsBGenFilter_200toInf_1b': 1.0, 'HT100to200ZJets_2b': 1.0, 'HT1200to2500ZJets_1b': 1.0, 'WplusH_lep_PTV_75_150_hbb': 1.0, 'ZJetsHT600_0b': 1.0, 'WZTo1L1Nu2Qnlo_2b': 1.0, 'M4HT400to600_0b': 1.0, 'WJetsHT400_1b': 1.0, 'HT600to800ZJets_2b': 1.0, 'M4HT600toInf_1b': 1.0, 'HT800to1200ZJets_2b': 1.0, 'ZllH_lep_PTV_0_75_hbb': 1.0, 'DYJetsBGenFilter_100to200_0b': 1.0, 'WWTo1L1Nu2Qnlo_2b': 1.0, 'WminusH_lep_PTV_0_75_hbb': 1.0, 'ZBGenFilter200_2b': 1.0, 'HT0to100ZJets_2b': 1.0, 'ZJetsHT800_0b': 1.0, 'ZJetsHT400_2b': 1.0, 'ZZ_0b': 1.0, 'HT1200to2500ZJets_0b': 1.0, 'ZJetsHT100_0b': 1.0, 'WplusH_lep_PTV_150_250_GE1J_hbb': 1.0, 'WZTo1L1Nu2Qnlo_1b': 1.0, 'ZllH_lep_PTV_150_250_0J_hbb': 1.0, 'ST_t-channel_antitop_4f': 1.0, 'M4HT400to600_1b': 1.0, 'ZJetsHT600_1b': 1.0, 'ZBJets100_2b': 1.0, 'ZJetsHT200_2b': 1.0, 'WJetsHT400_0b': 1.0, 'ZnnH_lep_PTV_0_75_hbb': 1.0, 'WJetsHT600_1b': 1.0, 'M4HT100to200_0b': 1.0, 'ZJetsHT2500_0b': 1.0, 'WBGenFilter100_1b': 1.0, 'WJetsHT100_1b': 1.0, 'HT2500toinfZJets_2b': 1.0, 'HT400to600ZJets_2b': 1.0, 'ST_s-channel_4f': 1.0, 'DYBJets_100to200_0b': 1.0, 'DYBJets_200toInf_0b': 1.0, 'ZJetsHT600_2b': 1.0, 'M4HT400to600_2b': 1.0, 'ZllH_lep_PTV_150_250_GE1J_hbb': 1.0, 'WWTo1L1Nu2Qnlo_1b': 1.0, 'WJetsHT100_0b': 1.0, 'WBGenFilter200_0b': 1.0, 'ZnnH_lep_PTV_150_250_0J_hbb': 1.0, 'WJetsHT600_2b': 1.0, 'HT600to800ZJets_0b': 1.0, 'ZJetsHT100_2b': 1.0, 'HT200to400ZJets_2b': 1.0, 'TT_Sl': 1.0, 'M4HT200to400_0b': 1.0, 'WJetsHT1200_0b': 1.0, 'HT1200to2500ZJets_2b': 1.0, 'DYJetsBGenFilter_200toInf_0b': 1.0, 'ZBGenFilter200_0b': 1.0, 'DYBJets_200toInf_1b': 1.0, 'WBGenFilter100_2b': 1.0, 'ZnnH_lep_PTV_150_250_GE1J_hbb': 1.0, 'WJetsHT800_2b': 1.0, 'ZZ_2b': 1.0, 'WJetsHT400_2b': 1.0, 'ZJetsHT400_0b': 1.0, 'HT200to400ZJets_1b': 1.0, 'HT400to600ZJets_0b': 1.0, 'WminusH_lep_PTV_75_150_hbb': 1.0, 'HT100to200ZJets_1b': 1.0, 'WJetsHT800_0b': 1.0, 'DYBJets_100to200_2b': 1.0, 'ZBJets200_1b': 1.0, 'WJetsHT1200_2b': 1.0, 'ZBGenFilter100_0b': 1.0, 'ZJetsHT200_1b': 1.0, 'HT2500toinfZJets_0b': 1.0, 'ST_tW_antitop': 1.0, 'ZnnH_lep_PTV_GT250_hbb': 1.0, 'WBJets100_0b': 1.0, 'ST_t-channel_top_4f': 1.0, 'ggZnnH_lep_PTV_0_75_hbb': 1.0, 'ZJetsHT1200_2b': 1.0, 'WJetsHT600_0b': 1.0, 'M4HT200to400_1b': 1.0, 'M4HT100to200_1b': 1.0, 'DYBJets_100to200_1b': 1.0, 'ZJetsHT2500_1b': 1.0, 'WBGenFilter100_0b': 1.0, 'TT_h': 1.0, 'WJetsHT100_2b': 1.0, 'ZBJets200_2b': 1.0, 'HT200to400ZJets_0b': 1.0, 'DYJetsBGenFilter_200toInf_2b': 1.0, 'WminusH_lep_PTV_150_250_GE1J_hbb': 1.0, 'ggZllH_lep_PTV_150_250_GE1J_hbb': 1.0, 'ggZllH_lep_PTV_75_150_hbb': 1.0, 'WWTo1L1Nu2Qnlo_0b': 1.0, 'HT600to800ZJets_1b': 1.0, 'WBJets200_2b': 1.0, 'WBJets100_1b': 1.0, 'HT800to1200ZJets_1b': 1.0, 'M4HT200to400_2b': 1.0, 'WJetsHT1200_1b': 1.0, 'WJetsHT200_2b': 1.0}
+INFO:  >   systematics []
+INFO:  >   testCut ((event%2)==0||isData)
+INFO:  >   trainCut !((event%2)==0||isData)
+INFO:  >   variables H_mass H_pt MET_Pt abs(TVector2::Phi_mpi_pi(H_phi-V_phi)) (Jet_btagDeepB[hJidx[0]]>0.1522)+(Jet_btagDeepB[hJidx[0]]>0.4941)+(Jet_btagDeepB[hJidx[0]]>0.8001) (Jet_btagDeepB[hJidx[1]]>0.1522)+(Jet_btagDeepB[hJidx[1]]>0.4941)+(Jet_btagDeepB[hJidx[1]]>0.8001) abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]]) abs(TVector2::Phi_mpi_pi(Jet_phi[hJidx[0]]-Jet_phi[hJidx[1]])) max(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]]) min(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]]) SA5 Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6||Jet_Pt>50)&&Jet_lepFilter&&Iteration$!=hJidx[0]&&Iteration$!=hJidx[1]) -99.0+MaxIf$(99.0+(Jet_btagDeepB>0.1522)+(Jet_btagDeepB>0.4941)+(Jet_btagDeepB>0.8001),Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6||Jet_Pt>50)&&Jet_lepFilter&&Iteration$!=hJidx[0]&&Iteration$!=hJidx[1]) -99.0+MaxIf$(99.0+Jet_Pt,Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6||Jet_Pt>50)&&Jet_lepFilter&&Iteration$!=hJidx[0]&&Iteration$!=hJidx[1]) -99.0+MinIf$(99.0+abs(TVector2::Phi_mpi_pi(Jet_phi-MET_Phi)),Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6||Jet_Pt>50)&&Jet_lepFilter&&Iteration$!=hJidx[0]&&Iteration$!=hJidx[1])
+INFO:  >   version 3
+INFO:  >   weightF genWeight * puWeight * bTagWeightDeepCSV * 1.0 * EWKw[0] * weightLOtoNLO_2016 * 1.0 * ((isZnn * weight_mettrigSF) + (isWmunu * muonSF[0]) + (isWenu * electronSF[0])) * FitCorr[0] * 1.0
+INFO:  >   weightSYS []
+INFO:  >   xSecs {'ZBGenFilter100_2b': 2.07747, 'M4HT600toInf_0b': 2.2755, 'WBJets200_1b': 0.96921, 'WBGenFilter200_2b': 3.5525599999999997, 'WBJets100_2b': 6.705819999999999, 'ZJetsHT1200_1b': 0.420537, 'DYJetsBGenFilter_100to200_1b': 3.2853299999999996, 'ggZnnH_lep_PTV_GT250_hbb': 0.01437, 'ZBJets100_1b': 7.63707, 'ggZllH_lep_PTV_150_250_0J_hbb': 0.0072, 'ZJetsHT800_1b': 1.8327, 'M4HT100to200_2b': 250.92, 'WplusH_lep_PTV_150_250_0J_hbb': 0.17202, 'ZZ_1b': 14.6, 'ggZnnH_lep_PTV_75_150_hbb': 0.01437, 'WJetsHT200_1b': 493.55899999999997, 'WZTo1L1Nu2Qnlo_0b': 10.87, 'ZJetsHT100_1b': 374.53499999999997, 'WminusH_lep_PTV_GT250_hbb': 0.10899, 'ST_tW_top': 35.85, 'HT400to600ZJets_1b': 8.57064, 'WBGenFilter200_1b': 3.5525599999999997, 'ZnnH_lep_PTV_75_150_hbb': 0.09322, 'WBJets200_0b': 0.96921, 'HT100to200ZJets_0b': 198.153, 'WJetsHT800_1b': 6.492859999999999, 'ZBJets200_0b': 0.773178, 'ZBGenFilter100_1b': 2.07747, 'ZJetsHT1200_0b': 0.420537, 'DYJetsBGenFilter_100to200_2b': 3.2853299999999996, 'ZBJets100_0b': 7.63707, 'ggZllH_lep_PTV_GT250_hbb': 0.0072, 'ZJetsHT200_0b': 112.9755, 'WplusH_lep_PTV_GT250_hbb': 0.17202, 'ZJetsHT800_2b': 1.8327, 'HT2500toinfZJets_1b': 0.0042680999999999995, 'ZJetsHT2500_2b': 0.0063295800000000004, 'ZllH_lep_PTV_GT250_hbb': 0.04718, 'WJetsHT200_0b': 493.55899999999997, 'ggZnnH_lep_PTV_150_250_GE1J_hbb': 0.01437, 'HT800to1200ZJets_0b': 0.990396, 'ZllH_lep_PTV_75_150_hbb': 0.04718, 'WplusH_lep_PTV_0_75_hbb': 0.17202, 'HT0to100ZJets_0b': 6571.89, 'M4HT600toInf_2b': 2.2755, 'WminusH_lep_PTV_150_250_0J_hbb': 0.10899, 'ggZllH_lep_PTV_0_75_hbb': 0.0072, 'ggZnnH_lep_PTV_150_250_0J_hbb': 0.01437, 'ZJetsHT400_1b': 16.1253, 'TT_2l2n': 88.29, 'HT0to100ZJets_1b': 6571.89, 'ZBGenFilter200_1b': 0.304548, 'DYBJets_200toInf_2b': 0.40565399999999996, 'DYJetsBGenFilter_200toInf_1b': 0.48388200000000003, 'HT100to200ZJets_2b': 198.153, 'HT1200to2500ZJets_1b': 0.237759, 'WplusH_lep_PTV_75_150_hbb': 0.17202, 'ZJetsHT600_0b': 4.0061100000000005, 'WZTo1L1Nu2Qnlo_2b': 10.87, 'M4HT400to600_0b': 7.00731, 'WJetsHT400_1b': 69.5508, 'HT600to800ZJets_2b': 2.1438900000000003, 'M4HT600toInf_1b': 2.2755, 'HT800to1200ZJets_2b': 0.990396, 'ZllH_lep_PTV_0_75_hbb': 0.04718, 'DYJetsBGenFilter_100to200_0b': 3.2853299999999996, 'WWTo1L1Nu2Qnlo_2b': 50.85883, 'WminusH_lep_PTV_0_75_hbb': 0.10899, 'ZBGenFilter200_2b': 0.304548, 'HT0to100ZJets_2b': 6571.89, 'ZJetsHT800_0b': 1.8327, 'ZJetsHT400_2b': 16.1253, 'ZZ_0b': 14.6, 'HT1200to2500ZJets_0b': 0.237759, 'ZJetsHT100_0b': 374.53499999999997, 'WplusH_lep_PTV_150_250_GE1J_hbb': 0.17202, 'WZTo1L1Nu2Qnlo_1b': 10.87, 'ZllH_lep_PTV_150_250_0J_hbb': 0.04718, 'ST_t-channel_antitop_4f': 80.95, 'M4HT400to600_1b': 7.00731, 'ZJetsHT600_1b': 4.0061100000000005, 'ZBJets100_2b': 7.63707, 'ZJetsHT200_2b': 112.9755, 'WJetsHT400_0b': 69.5508, 'ZnnH_lep_PTV_0_75_hbb': 0.09322, 'WJetsHT600_1b': 15.5727, 'M4HT100to200_0b': 250.92, 'ZJetsHT2500_0b': 0.0063295800000000004, 'WBGenFilter100_1b': 24.877599999999997, 'WJetsHT100_1b': 1687.95, 'HT2500toinfZJets_2b': 0.0042680999999999995, 'HT400to600ZJets_2b': 8.57064, 'ST_s-channel_4f': 3.692, 'DYBJets_100to200_0b': 3.96552, 'DYBJets_200toInf_0b': 0.40565399999999996, 'ZJetsHT600_2b': 4.0061100000000005, 'M4HT400to600_2b': 7.00731, 'ZllH_lep_PTV_150_250_GE1J_hbb': 0.04718, 'WWTo1L1Nu2Qnlo_1b': 50.85883, 'WJetsHT100_0b': 1687.95, 'WBGenFilter200_0b': 3.5525599999999997, 'ZnnH_lep_PTV_150_250_0J_hbb': 0.09322, 'WJetsHT600_2b': 15.5727, 'HT600to800ZJets_0b': 2.1438900000000003, 'ZJetsHT100_2b': 374.53499999999997, 'HT200to400ZJets_2b': 59.8518, 'TT_Sl': 365.34, 'M4HT200to400_0b': 66.8997, 'WJetsHT1200_0b': 1.2995400000000001, 'HT1200to2500ZJets_2b': 0.237759, 'DYJetsBGenFilter_200toInf_0b': 0.48388200000000003, 'ZBGenFilter200_0b': 0.304548, 'DYBJets_200toInf_1b': 0.40565399999999996, 'WBGenFilter100_2b': 24.877599999999997, 'ZnnH_lep_PTV_150_250_GE1J_hbb': 0.09322, 'WJetsHT800_2b': 6.492859999999999, 'ZZ_2b': 14.6, 'WJetsHT400_2b': 69.5508, 'ZJetsHT400_0b': 16.1253, 'HT200to400ZJets_1b': 59.8518, 'HT400to600ZJets_0b': 8.57064, 'WminusH_lep_PTV_75_150_hbb': 0.10899, 'HT100to200ZJets_1b': 198.153, 'WJetsHT800_0b': 6.492859999999999, 'DYBJets_100to200_2b': 3.96552, 'ZBJets200_1b': 0.773178, 'WJetsHT1200_2b': 1.2995400000000001, 'ZBGenFilter100_0b': 2.07747, 'ZJetsHT200_1b': 112.9755, 'HT2500toinfZJets_0b': 0.0042680999999999995, 'ST_tW_antitop': 35.85, 'ZnnH_lep_PTV_GT250_hbb': 0.09322, 'WBJets100_0b': 6.705819999999999, 'ST_t-channel_top_4f': 136.02, 'ggZnnH_lep_PTV_0_75_hbb': 0.01437, 'ZJetsHT1200_2b': 0.420537, 'WJetsHT600_0b': 15.5727, 'M4HT200to400_1b': 66.8997, 'M4HT100to200_1b': 250.92, 'DYBJets_100to200_1b': 3.96552, 'ZJetsHT2500_1b': 0.0063295800000000004, 'WBGenFilter100_0b': 24.877599999999997, 'TT_h': 377.96, 'WJetsHT100_2b': 1687.95, 'ZBJets200_2b': 0.773178, 'HT200to400ZJets_0b': 59.8518, 'DYJetsBGenFilter_200toInf_2b': 0.48388200000000003, 'WminusH_lep_PTV_150_250_GE1J_hbb': 0.10899, 'ggZllH_lep_PTV_150_250_GE1J_hbb': 0.0072, 'ggZllH_lep_PTV_75_150_hbb': 0.0072, 'WWTo1L1Nu2Qnlo_0b': 50.85883, 'HT600to800ZJets_1b': 2.1438900000000003, 'WBJets200_2b': 0.96921, 'WBJets100_1b': 6.705819999999999, 'HT800to1200ZJets_1b': 0.990396, 'M4HT200to400_2b': 66.8997, 'WJetsHT1200_1b': 1.2995400000000001, 'WJetsHT200_2b': 493.55899999999997}
+INFO: random state: (3, (2147483648, 3382124724, 2419160689, 1409434396, 648131184, 3827617119, 1264515875, 2371066634, 11172078, 2155372629, 1705586656, 924292226, 3698156223, 2170480700, 1660354746, 2131294946, 2099624972, 4242231323, 2320787577, 2106614394, 3834763648, 3849243969, 2903808275, 1459866192, 220410822, 3073837217, 2210863933, 679112027, 1695527120, 2299495215, 3146951176, 3051175602, 4168776228, 909512195, 706039167, 3062437928, 820271493, 4033680764, 2529945723, 2569328560, 1663781413, 3561984827, 2315581364, 3065555760, 174060491, 1687619680, 131542464, 1093709234, 4286588833, 1904161229, 4220667674, 688664462, 3080620007, 1252736821, 234472228, 3155207743, 3199154380, 4078410026, 3355128372, 4005706296, 2905997868, 2025634221, 675326164, 3776031941, 1543375274, 602448853, 3223964704, 1522800505, 548413058, 585017022, 2598554484, 262689274, 2577394107, 3837297181, 1784432461, 2141112847, 2294184363, 1985869125, 3476242632, 2202859690, 2322574324, 2573829329, 3255236321, 4176444607, 1591057839, 3746282317, 578280432, 2589593410, 1174396574, 1000172875, 1358664333, 3284767754, 4129437345, 381768704, 2137243212, 430303019, 508689390, 3065495844, 3829420322, 1938680381, 914272640, 1875986827, 87435485, 2341251791, 2501123852, 1798026335, 1102142048, 2891154854, 1113228964, 1208050609, 310816129, 883655270, 1540945377, 2285189539, 2811007109, 2887434568, 386297753, 3647280337, 3260355994, 2584481557, 1689645915, 3465939328, 4212363982, 282470307, 2438569128, 2915314320, 237676818, 2684013903, 1363042597, 3431289934, 837171538, 4156523484, 2981603010, 3672113861, 487198094, 1519082921, 1356757897, 866282635, 3950729457, 4243874561, 487781822, 1033807772, 3378717702, 1142357157, 2536285721, 2356131027, 2945043371, 673665267, 821702063, 216706932, 3900445796, 2364030345, 1125737123, 187940589, 1326592099, 1108067504, 1212059745, 2572698451, 1683748894, 3325844019, 3031979480, 1731591677, 472469057, 875926246, 3117717789, 3109863370, 2988230747, 1025166657, 4119317341, 2639221996, 1630409925, 2403105006, 1736700939, 2441982470, 1311302639, 2278411010, 350427718, 800217487, 3489878275, 2007709098, 4234931396, 3871210860, 2075690235, 2935159773, 242290159, 1943146803, 3521611896, 472244121, 2725186699, 798108356, 1811594750, 189518105, 2549261223, 3629824049, 1813588571, 1069295603, 2544762491, 448387655, 3322280285, 3993466787, 3293226051, 812303656, 2194105686, 1122700647, 399734191, 1819600182, 278659594, 2813311236, 1703423931, 1361373149, 3604409870, 292230199, 2285897705, 2201767194, 256305476, 1280598031, 2052963386, 1359687093, 1874152571, 3136587381, 1300745908, 518599438, 687334122, 1626513831, 15644067, 3571792732, 344484692, 915368564, 2683904981, 1502992534, 1696818200, 2758052941, 2427779540, 1099361549, 3614442806, 1393029513, 2995381546, 302337318, 424179728, 2630425358, 1416008841, 3667755484, 1407946143, 1812029911, 3949737317, 4090398965, 3679593832, 253420459, 3450933228, 414500878, 566734002, 3094732114, 3248875623, 1364678321, 807766296, 2748740834, 2517294999, 1584313084, 3687668264, 14519131, 3602226015, 606960243, 811768726, 3739308615, 2038621437, 1287381052, 774453, 3321424772, 2133437818, 1150971362, 421951549, 1690307180, 4029959112, 298826188, 1344922683, 1214866225, 2676354375, 2243221739, 1341726259, 4159736823, 2223016500, 454863220, 3310417124, 2800462480, 1018832188, 621121296, 2871764699, 4116900615, 2229758531, 1744529050, 4105202546, 4145921027, 3912253341, 1642851968, 1577919887, 2956140976, 341525896, 2210139002, 1057495275, 640862986, 2781107857, 767859632, 3763896463, 1734016030, 4111134317, 3914717677, 3650900900, 649844168, 2607566551, 2057067825, 2463084701, 3056043171, 4088705180, 690553464, 1990447716, 204335025, 812382571, 2503210115, 2737223314, 2813296639, 1632244181, 1981934588, 2693115755, 1224151406, 4195885427, 3448861997, 1686371696, 727571203, 2103384690, 3545714135, 921292632, 3960386552, 4208735246, 3374741923, 2497765622, 727691004, 3712371268, 1949028824, 2480237449, 787060318, 3313293080, 193177064, 81697681, 3404042355, 1882537099, 1317030521, 3297442870, 2348031117, 3742885536, 273203687, 4247711840, 1397789992, 1082295, 1150015950, 4048973701, 1599780427, 2388312340, 2103422025, 3468710990, 1054843237, 1262173250, 1745623310, 3083044362, 439634108, 790021737, 3293099289, 1848330976, 361192470, 380763945, 2097950661, 79334013, 286739972, 864700269, 2995298333, 2673821131, 3189322060, 1816364654, 3971839395, 3987042586, 3582996408, 2355231559, 630122002, 4062829805, 2013131900, 4289438218, 2250866721, 2407949530, 3144935727, 10875240, 2280627006, 85288875, 483387086, 841320867, 1935465380, 268963757, 3750704820, 3035273021, 3982499180, 131803877, 4200137705, 1422815200, 3187397286, 2660726528, 1561744862, 2620237596, 3160743175, 1599173271, 3893198382, 2243788606, 3409215684, 4259762500, 615824218, 3455140076, 3210651996, 1372979640, 585059218, 3406523065, 1715707034, 3768111998, 221143218, 3039094250, 541357684, 116926960, 3109437328, 3112610230, 3427137717, 33736989, 2376170896, 2100102270, 1260613531, 3859527797, 3211538515, 2069057671, 1504618558, 2204911037, 2975798743, 3768072097, 4069203996, 1860322180, 739694665, 402506703, 265602613, 2624287363, 501827662, 3632474469, 2462869063, 3286997662, 3745868987, 3203876015, 1876165092, 2804180308, 1977928234, 3171786190, 2546917406, 1504691997, 590758813, 1304037560, 2125626211, 745985387, 3250627360, 2541112044, 2197390208, 3055853790, 2507070734, 266422803, 4146582598, 3154136303, 2188250838, 2275441270, 2378319783, 2633833869, 3404776532, 1045196593, 847825301, 1763155911, 18989036, 3316468617, 3803597647, 2403641735, 2007033494, 1736977424, 36672951, 3100464217, 1426301738, 2621000315, 3964389291, 1782395291, 2544957554, 936782515, 2826243140, 2903531319, 741264386, 1739935720, 2498867441, 8022575, 3495513803, 895415464, 4109031933, 3752679197, 2697298131, 1155029545, 1450758194, 4171121479, 3331542744, 380061768, 3514813517, 1040374799, 2843906803, 3490020323, 2201074119, 1473943227, 2664012666, 2442494508, 1767808014, 921065338, 103496991, 3091024638, 2085955013, 784841643, 1083818374, 2573650282, 4231807583, 2897784588, 708438427, 610386185, 2518450577, 215105289, 2047692398, 3503816490, 2238347025, 2284713564, 1725390844, 567151338, 1514590269, 1905698993, 3665575988, 519229565, 3444579894, 1809205669, 1771724134, 156264927, 2288760407, 2421927780, 855545420, 3872922959, 3667628900, 185005368, 890397759, 1297851375, 592706758, 2356140306, 1203496032, 2454375245, 2932163628, 1339888103, 170512001, 2222518098, 2885267531, 1988667962, 3525062729, 1658960702, 2224840618, 455480808, 258174363, 2926183813, 613351611, 2557227660, 3338746388, 1477763314, 1280219970, 1066378556, 1138135101, 3423895227, 1955845739, 720121302, 3815190337, 991334666, 411330522, 396964714, 2761934963, 4065992851, 391202547, 762575800, 1727418548, 996599603, 1234153204, 111225336, 1665819743, 63689486, 1200087875, 2382180285, 541869716, 2518859504, 417794325, 1870961069, 2150058289, 2015322598, 1083169034, 1175626907, 3576972189, 1179805435, 672186640, 1488002465, 3921504386, 1397994781, 3227450910, 1795778229, 1479516584, 3955364885, 48753039, 2191641878, 950375421, 3263030258, 1461280981, 610622447, 506680395, 359832454, 1042632642, 1882390063, 1482569669, 957486095, 1293815717, 3266016859, 3266654954, 624), None)
+INFO: set 2581 events to 0 because of negative weight
+nFeatures =  15
+--------------------------------------------------------------------------------
+statistics for dataset: train
+--------------------------------------------------------------------------------
+ZLIGHT (y= 0 ) : 42633  avg weight: 0.07448251604089119
+ZB (y= 1 ) : 23721  avg weight: 0.0998592751483594
+ZBB (y= 2 ) : 48455  avg weight: 0.08688084675680083
+WLIGHT (y= 3 ) : 3088  avg weight: 0.9017731851986225
+WB (y= 4 ) : 8904  avg weight: 0.11784767232263983
+WBB (y= 5 ) : 11213  avg weight: 0.09440136522995224
+ST (y= 6 ) : 21414  avg weight: 0.09321402431893597
+TT (y= 7 ) : 50564  avg weight: 0.2586310030021506
+--------------------------------------------------------------------------------
+statistics for dataset: test
+--------------------------------------------------------------------------------
+ZLIGHT (y= 0 ) : 42511  avg weight: 0.07347137563188996
+ZB (y= 1 ) : 23644  avg weight: 0.09895415090159834
+ZBB (y= 2 ) : 48678  avg weight: 0.08664477584915112
+WLIGHT (y= 3 ) : 3121  avg weight: 0.8625571726548515
+WB (y= 4 ) : 8794  avg weight: 0.11922871139635578
+WBB (y= 5 ) : 11342  avg weight: 0.09405190893183113
+ST (y= 6 ) : 22158  avg weight: 0.08861959399092247
+TT (y= 7 ) : 50798  avg weight: 0.2576434423733738
+--------------------------------------------------------------------------------
+classes and labels
+--------------------------------------------------------------------------------
+ERROR: no signal or no background defined!
+ => using bogus signal ID = 0
+list of classes: (signals in [32mgreen[0m, backgrounds in [31mred[0m)
+[32m class 0 => ZLIGHT [0m is defined as a SIGNAL
+[31m class 1 => ZB [0m
+[31m class 2 => ZBB [0m
+[31m class 3 => WLIGHT [0m
+[31m class 4 => WB [0m
+[31m class 5 => WBB [0m
+[31m class 6 => ST [0m
+[31m class 7 => TT [0m
+--------------------------------------------------------------------------------
+weights and weight uncertainty examples
+--------------------------------------------------------------------------------
+weights:
+train 1.6734498 0.01535004 2.1492908 1.3837473 1.6252792 1.8092735 0.2969382 0.2217211 0.2689535 0.016066695
+test  0.97921354 1.2621326 0.23084478 0.18902707 0.18934003 0.1534412 0.0021323557 0.048253007 0.04676742 0.024678234
+weights errors:
+train 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+test  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+--------------------------------------------------------------------------------
+input data
+--------------------------------------------------------------------------------
+feature                                            set   mean       std        examples
+H_mass                                             train 2.29e+02   1.14e+02   66.39305 225.12036 344.41925 310.48233
+H_mass                                             test  2.29e+02   1.14e+02   271.03506 239.64095 305.39426 224.08015
+H_pt                                               train 2.10e+02   7.10e+01   194.74329 272.4191 235.3138 261.14926
+H_pt                                               test  2.10e+02   7.15e+01   214.62552 174.39687 260.93726 271.2281
+MET_Pt                                             train 2.26e+02   5.97e+01   231.1688 271.31616 245.75389 283.53378
+MET_Pt                                             test  2.27e+02   6.00e+01   197.17564 186.74248 176.1993 188.61612
+abs(TVector2::Phi_mpi_pi(H_phi-V_phi))             train 2.92e+00   2.09e-01   3.0747435 3.1334224 3.0617077 2.9238331
+abs(TVector2::Phi_mpi_pi(H_phi-V_phi))             test  2.92e+00   2.10e-01   3.0626726 3.1200025 3.1025882 2.9978173
+(Jet_btagDeepB[hJidx[0]]>0.1522)+(Jet_btagDeep...  train 2.67e+00   4.71e-01   3.0 2.0 2.0 2.0
+(Jet_btagDeepB[hJidx[0]]>0.1522)+(Jet_btagDeep...  test  2.67e+00   4.70e-01   3.0 2.0 2.0 2.0
+(Jet_btagDeepB[hJidx[1]]>0.1522)+(Jet_btagDeep...  train 1.55e+00   7.57e-01   1.0 1.0 1.0 2.0
+(Jet_btagDeepB[hJidx[1]]>0.1522)+(Jet_btagDeep...  test  1.55e+00   7.59e-01   1.0 1.0 1.0 1.0
+abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])           train 1.04e+00   7.79e-01   0.67089844 0.48828125 1.4564209 1.9749756
+abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])           test  1.03e+00   7.74e-01   1.2779541 0.34985352 1.2011108 1.3811035
+abs(TVector2::Phi_mpi_pi(Jet_phi[hJidx[0]]-Jet...  train 1.45e+00   8.48e-01   0.05029297 1.805542 1.5356268 2.6079712
+abs(TVector2::Phi_mpi_pi(Jet_phi[hJidx[0]]-Jet...  test  1.46e+00   8.49e-01   1.4431152 2.477277 1.3840154 1.4165039
+max(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]])       train 1.77e+02   7.23e+01   142.81363 280.10114 177.04948 291.68817
+max(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]])       test  1.78e+02   7.27e+01   156.71173 222.88203 183.86069 260.3804
+min(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]])       train 7.17e+01   3.07e+01   51.977844 64.854095 148.90292 36.226326
+min(Jet_PtReg[hJidx[0]],Jet_PtReg[hJidx[1]])       test  7.18e+01   3.08e+01   128.04431 68.0947 154.13724 45.821342
+SA5                                                train 2.74e+00   1.92e+00   4.0 0.0 1.0 2.0
+SA5                                                test  2.74e+00   1.91e+00   0.0 2.0 1.0 5.0
+Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6|...  train 5.73e-01   4.95e-01   0.0 0.0 0.0 1.0
+Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6|...  test  5.72e-01   4.95e-01   0.0 0.0 1.0 1.0
+-99.0+MaxIf$(99.0+(Jet_btagDeepB>0.1522)+(Jet_...  train -4.21e+01  4.90e+01   -99.0 -99.0 -99.0 0.0
+-99.0+MaxIf$(99.0+(Jet_btagDeepB>0.1522)+(Jet_...  test  -4.23e+01  4.91e+01   -99.0 -99.0 0.0 0.0
+-99.0+MaxIf$(99.0+Jet_Pt,Jet_Pt>30&&abs(Jet_et...  train 7.18e+00   1.01e+02   -99.0 -99.0 -99.0 34.01173
+-99.0+MaxIf$(99.0+Jet_Pt,Jet_Pt>30&&abs(Jet_et...  test  7.16e+00   1.01e+02   -99.0 -99.0 75.93955 48.222675
+-99.0+MinIf$(99.0+abs(TVector2::Phi_mpi_pi(Jet...  train -4.09e+01  5.01e+01   -99.0 -99.0 -99.0 1.5897609
+-99.0+MinIf$(99.0+abs(TVector2::Phi_mpi_pi(Jet...  test  -4.11e+01  5.01e+01   -99.0 -99.0 2.7878935 2.632833
+--------------------------------------------------------------------------------
+input scaling
+--------------------------------------------------------------------------------
+[31mINFO: scaling is done inside tensorflow graph and StandardScaler() should not be used om top of it => scaler.dmp file will not be written![0m
+balancing classes, reweight ZLIGHT by 9.359413196751817
+balancing classes, reweight ZB by 12.546640404034617
+balancing classes, reweight ZBB by 7.0596994259499875
+balancing classes, reweight WLIGHT by 10.672698599700242
+balancing classes, reweight WB by 28.323224420539585
+balancing classes, reweight WBB by 28.076874227249554
+balancing classes, reweight ST by 14.889146301068763
+balancing classes, reweight TT by 2.272620119013468
+shape train: (209992, 15)
+shape test:  (211046, 15)
+building tensorflow graph with parameters
+ adam_epsilon                             1e-09
+ adaptiveRate                             False
+ additional_noise                         0.0
+ backgroundOnly                           True
+ balanceClasses                           True
+ balanceSignalBackground                  False
+ batchNormalization                       [1, 2, 3, 4, 5, 6, 7, 8]
+ batchSize                                1024
+ batchSizeTest                            65536
+ binMethod                                'SB'
+ binTarget                                [0.109, 0.1194, 0.1242, 0.1226, 0.1148, 0.1021, 0.0861, 0.069, 0.0524, 0.0378, 0.0259, 0.0168, 0.0104, 0.0061, 0.0034]
+ crossValidation_splitSeed                123456
+ dropoutDecay                             1.0
+ ignoreLargeWeights                       False
+ ignoreNegativeWeights                    True
+ learningRate                             {0: 1.0, 50: 0.5, 100: 0.25, 200: 0.1, 300: 0.05, 400: 0.02, 500: 0.01, 600: 0.005, 700: 0.002, 800: 0.001}
+ loss                                     'cross_entropy'
+ massless_importance                      1.0
+ massless_powers                          [1, 2]
+ momentum                                 0.9
+ mvaScoreRescalingPercentileHigh          0.999
+ mvaScoreRescalingPercentileLow           0.01
+ nEpochs                                  1000
+ nNodes                                   [512, 256, 128, 64, 64, 64]
+ optimizer                                'momentum'
+ pDropout                                 [0.2, 0.5, 0.5, 0.5, 0.5, 0.5]
+ plot-data                                False
+ plot-inputs                              True
+ plot-jacobian                            False
+ plot-scores                              True
+ power                                    1.0
+ rateGamma                                1.0
+ removeFeature                            []
+ reweight                                 None
+ reweightTraining                         None
+ saveCheckpointInterval                   50
+ scaleInputsInsideGraph                   True
+ shuffle                                  True
+ signif_loss_b_epsilon                    1e-08
+ signif_loss_low_b_threshold              1.5
+ signif_loss_low_b_threshold_width        1.5
+ signif_loss_nbins                        15
+ signif_loss_smoothness                   500.0
+ signif_loss_sysApprox_constant           1.5
+ signif_loss_sysApprox_linear             0.1
+ signif_loss_sys_variance_offset          0.1
+ signif_loss_xe_factor                    0.0
+ skipConnections                          {2: [0], 4: [0, 2], 6: [0, 2, 4]}
+ statisticsInterval                       20
+ systematics_scaling_factor               1.0
+ systematics_weight_scaling_factor        1.0
+ weight_sys_ntoys                         -1
+initialize session...
+initialized session!
+add layers...
+layer  1 :  [15, 512]
+> activation with drop-out...
+> batch normalization...
+layer  2 :  [512, 256]
+> activation with drop-out...
+> batch normalization...
+layer  3 :  [256, 128]
+> activation with drop-out...
+> batch normalization...
+layer  4 :  [128, 64]
+> activation with drop-out...
+> batch normalization...
+layer  5 :  [64, 64]
+> activation with drop-out...
+> batch normalization...
+layer  6 :  [64, 64]
+> activation with drop-out...
+> batch normalization...
+INFO: use MomentumOptimizer
+graph built.
+trainable variables: 232136
+initialized.
+conditions:
+  loss(train,training)    training dataset, loss as seen by gradient descend optimizer
+  loss(train,testing)     training dataset, loss with 'testing' conditions, e.g. is_training: False, no dropout etc
+  loss(test)              test dataset
+start training with batch size 1024 and learning rate 1.0 
+ epoch     loss(train,training) loss(train,testing) loss(test)
+         1    2.44409    2.09128    2.07687 significance (train): 30.153 significance: 29.955 
+         2    2.26454    2.08338    2.06561 
+         3    2.22651    2.13399    2.11919 
+         4    2.19678    2.12725    2.11552 
+         5    2.19452    2.07194    2.06140 
+         6    2.19175    2.08090    2.06803 
+         7    2.16473    2.06208    2.05055 
+         8    2.16786    2.05422    2.04521 
+         9    2.17555    2.11565    2.10362 
+        10    2.18548    2.10151    2.08958 
+        11    2.17952    2.03326    2.02406 
+        12    2.17129    2.02930    2.02117 
+        13    2.15184    2.06804    2.05985 
+        14    2.18649    2.04960    2.03581 
+        15    2.17067    2.03732    2.02965 
+        16    2.17853    2.00468    1.99227 
+        17    2.14671    2.00893    2.00020 
+        18    2.17623    2.04769    2.04281 
+        19    2.17218    2.03938    2.03212 
+        20    2.17311    2.10727    2.08785 
+        21    2.16452    2.05234    2.04428 significance (train): 30.046 significance: 29.645 
+        22    2.16813    2.02451    2.01605 
+        23    2.14679    2.03037    2.02341 
+        24    2.15630    2.05551    2.04214 
+        25    2.17456    2.14075    2.13754 
+        26    2.16252    2.04055    2.02938 
+        27    2.14094    2.07427    2.06949 
+        28    2.16931    2.07510    2.06966 
+        29    2.14677    2.06879    2.05576 
+        30    2.14409    2.02963    2.02497 
+        31    2.14725    2.02098    2.01203 
+        32    2.14989    2.03049    2.02365 
+        33    2.16191    2.02011    2.01073 
+        34    2.13782    2.02638    2.02076 
+        35    2.13478    2.07072    2.06758 
+        36    2.19181    2.01511    2.00541 
+        37    2.14594    2.04095    2.03208 
+        38    2.13949    2.04694    2.03856 
+        39    2.16934    2.02200    2.01412 
+        40    2.18398    2.05139    2.04412 
+        41    2.15154    2.02988    2.02124 significance (train): 31.318 significance: 31.090 
+        42    2.12169    2.02542    2.01729 
+        43    2.15817    2.06171    2.06065 
+        44    2.12791    2.03480    2.03089 
+        45    2.13965    2.02627    2.02132 
+        46    2.14522    2.01690    2.01374 
+        47    2.12777    2.01967    2.01293 
+        48    2.12563    2.01858    2.00748 
+        49    2.15527    1.99504    1.98762 
+        50    2.11570    2.06317    2.05442 
+set learning rate to: 0.5
+        51    2.06638    2.00022    1.99519 
+        52    2.07853    2.00226    1.99948 
+        53    2.07516    1.98370    1.97857 
+        54    2.05789    2.00593    2.00259 
+        55    2.06238    1.97345    1.96851 
+        56    2.05389    1.97525    1.97126 
+        57    2.04991    1.98534    1.98151 
+        58    2.05353    1.96965    1.96730 
+        59    2.04759    2.00030    1.99870 
+        60    2.05262    1.98099    1.97938 
+        61    2.05884    1.99476    1.98925 significance (train): 31.901 significance: 31.441 
+        62    2.04986    2.00573    2.00552 
+        63    2.05622    2.00841    2.00629 
+        64    2.05334    1.99797    1.99453 
+        65    2.03940    2.00553    2.00911 
+        66    2.05691    1.98918    1.98785 
+        67    2.04346    1.97299    1.97182 
+        68    2.05531    1.99518    1.99142 
+        69    2.05569    2.00731    2.00159 
+        70    2.06821    2.00697    2.00142 
+        71    2.04845    2.00924    2.01207 
+        72    2.06163    1.96325    1.96353 
+        73    2.04337    1.98035    1.97720 
+        74    2.03968    1.97498    1.97335 
+        75    2.05553    1.96884    1.97079 
+        76    2.04597    1.97824    1.98153 
+        77    2.04602    2.00510    2.00710 
+        78    2.04142    1.97453    1.97460 
+        79    2.05191    1.98069    1.98208 
+        80    2.04703    1.96359    1.96665 
+        81    2.04002    1.97614    1.97477 significance (train): 31.518 significance: 31.277 
+        82    2.06765    2.00498    2.00736 
+        83    2.05952    1.97725    1.98107 
+        84    2.04683    1.97247    1.97728 
+        85    2.05412    1.98205    1.98272 
+        86    2.05038    1.98812    1.98507 
+        87    2.04326    1.97601    1.97751 
+        88    2.05478    1.98979    1.99926 
+        89    2.05596    1.97636    1.97720 
+        90    2.04619    1.97134    1.97468 
+        91    2.04913    1.96189    1.96641 
+        92    2.05032    2.00501    2.00577 
+        93    2.03557    1.98317    1.98401 
+        94    2.04205    1.96515    1.96643 
+        95    2.04904    1.98603    1.99202 
+        96    2.04271    1.98387    1.99038 
+        97    2.03878    1.98407    1.98558 
+        98    2.03739    1.95124    1.95363 
+        99    2.04181    2.00069    2.01090 
+       100    2.04585    1.95998    1.96260 
+set learning rate to: 0.25
+       101    2.01657    1.96109    1.96339 significance (train): 31.088 significance: 30.803 
+       102    2.02114    1.96248    1.96460 
+       103    2.00765    1.94928    1.94974 
+       104    2.01393    1.94975    1.95212 
+       105    2.01249    1.95315    1.95164 
+       106    2.01202    1.96605    1.97092 
+       107    2.01208    1.95532    1.96063 
+       108    2.01560    1.95181    1.95706 
+       109    2.00653    1.97358    1.97785 
+       110    2.01514    1.95056    1.95262 
+       111    2.00828    1.95687    1.95853 
+       112    2.01256    1.94325    1.94570 
+       113    2.00911    1.94657    1.95004 
+       114    2.00086    1.95014    1.95459 
+       115    2.01564    1.96320    1.96984 
+       116    2.00286    1.95013    1.95488 
+       117    2.00302    1.95201    1.95355 
+       118    2.00107    1.97978    1.98348 
+       119    2.01424    1.95067    1.95728 
+       120    1.99996    1.94799    1.95202 
+       121    2.00466    1.96827    1.97372 significance (train): 31.459 significance: 31.023 
+       122    2.00852    1.97569    1.98220 
+       123    2.00334    1.94491    1.95143 
+       124    2.00673    1.95361    1.95780 
+       125    2.00693    1.96044    1.96514 
+       126    1.99983    1.94740    1.95154 
+       127    2.01136    1.95070    1.95939 
+       128    2.00935    1.94844    1.95174 
+       129    2.00620    1.94885    1.95132 
+       130    2.00466    1.95793    1.96277 
+       131    2.00225    1.94784    1.95158 
+       132    2.00417    1.95462    1.96125 
+       133    2.00598    1.96418    1.96781 
+       134    2.00641    1.95356    1.95582 
+       135    1.99942    1.95787    1.96538 
+       136    2.00552    1.95033    1.95539 
+       137    2.00342    1.94590    1.95381 
+       138    2.00763    1.94112    1.94498 
+       139    2.00307    1.93970    1.94300 
+       140    2.00475    1.95480    1.96114 
+       141    2.00085    1.96181    1.96689 significance (train): 31.516 significance: 31.071 
+       142    2.00507    1.95488    1.96205 
+       143    1.99847    1.94761    1.95365 
+       144    2.00299    1.94359    1.95149 
+       145    2.00678    1.94882    1.95624 
+       146    2.00409    1.95842    1.96212 
+       147    2.00615    1.96635    1.97075 
+       148    2.00392    1.95864    1.96374 
+       149    2.00872    1.95021    1.95655 
+       150    2.00238    1.94643    1.95496 
+       151    1.99998    1.96503    1.97503 
+       152    2.00019    1.95768    1.96148 
+       153    2.00311    1.94688    1.95701 
+       154    2.00431    1.94667    1.95128 
+       155    2.00563    1.94091    1.94911 
+       156    1.99940    1.95338    1.95998 
+       157    1.99724    1.94606    1.95184 
+       158    2.00187    1.94387    1.94924 
+       159    2.00302    1.94115    1.94874 
+       160    1.99776    1.94173    1.94852 
+       161    1.99804    1.93661    1.94574 significance (train): 31.714 significance: 31.026 
+       162    2.00205    1.95488    1.96260 
+       163    2.00173    1.93937    1.94857 
+       164    1.99941    1.94731    1.95574 
+       165    2.00358    1.94793    1.95820 
+       166    2.00201    1.94151    1.95208 
+       167    1.99925    1.93928    1.94522 
+       168    2.00316    1.94325    1.95236 
+       169    2.00215    1.94887    1.95667 
+       170    2.01056    1.95041    1.96197 
+       171    2.00297    1.93821    1.94658 
+       172    2.00224    1.93455    1.94556 
+       173    2.00589    1.95303    1.96336 
+       174    2.00706    1.95177    1.95883 
+       175    2.00199    1.94976    1.95670 
+       176    1.99718    1.95194    1.96150 
+       177    2.01119    1.96045    1.97148 
+       178    2.00348    1.94779    1.95819 
+       179    1.99505    1.95110    1.95723 
+       180    1.99844    1.93796    1.95041 
+       181    2.00298    1.95196    1.96274 significance (train): 31.913 significance: 31.329 
+       182    1.99821    1.95235    1.96415 
+       183    2.00418    1.93579    1.94139 
+       184    2.00572    1.93957    1.94889 
+       185    2.00228    1.93834    1.94714 
+       186    1.99921    1.94766    1.95615 
+       187    1.99808    1.96777    1.97602 
+       188    1.99770    1.95362    1.96315 
+       189    2.00627    1.94005    1.94666 
+       190    1.99720    1.93518    1.94592 
+       191    2.00354    1.94412    1.95361 
+       192    1.99981    1.93799    1.95018 
+       193    1.99820    1.93995    1.95304 
+       194    2.00021    1.95430    1.96805 
+       195    2.00040    1.94760    1.95679 
+       196    1.99850    1.93046    1.93978 
+       197    2.00058    1.96081    1.97213 
+       198    2.00043    1.93572    1.94485 
+       199    1.99724    1.94671    1.95689 
+       200    1.99627    1.94659    1.95659 
+set learning rate to: 0.1
+       201    1.98349    1.93912    1.95186 significance (train): 31.513 significance: 30.858 
+       202    1.98233    1.93520    1.94657 
+       203    1.97897    1.92921    1.93908 
+       204    1.98053    1.93104    1.94179 
+       205    1.97829    1.92969    1.94081 
+       206    1.98051    1.94196    1.95108 
+       207    1.97950    1.93137    1.94335 
+       208    1.97860    1.93883    1.94754 
+       209    1.97884    1.92990    1.93910 
+       210    1.98136    1.93297    1.94292 
+       211    1.98209    1.93577    1.94496 
+       212    1.98133    1.92948    1.94315 
+       213    1.98068    1.93575    1.94798 
+       214    1.97926    1.93090    1.93939 
+       215    1.98042    1.92909    1.93810 
+       216    1.98218    1.93667    1.94546 
+       217    1.97761    1.92755    1.93752 
+       218    1.97765    1.93057    1.94115 
+       219    1.98035    1.93460    1.94845 
+       220    1.97826    1.92756    1.93753 
+       221    1.98287    1.93036    1.94255 significance (train): 31.880 significance: 31.169 
+       222    1.97921    1.92894    1.94019 
+       223    1.97893    1.92790    1.94114 
+       224    1.97453    1.92689    1.93957 
+       225    1.97289    1.93043    1.94119 
+       226    1.97657    1.92957    1.94208 
+       227    1.97955    1.93017    1.94188 
+       228    1.97853    1.93139    1.94081 
+       229    1.97233    1.93559    1.94796 
+       230    1.97635    1.92335    1.93547 
+       231    1.97497    1.92889    1.94090 
+       232    1.97705    1.93001    1.94135 
+       233    1.97687    1.93515    1.94892 
+       234    1.97487    1.93209    1.94386 
+       235    1.97446    1.93651    1.94908 
+       236    1.97523    1.92482    1.93732 
+       237    1.97627    1.92984    1.94112 
+       238    1.97884    1.92614    1.93687 
+       239    1.97278    1.92563    1.93708 
+       240    1.97594    1.93354    1.94309 
+       241    1.97496    1.93369    1.94680 significance (train): 32.008 significance: 31.409 
+       242    1.97749    1.93046    1.94356 
+       243    1.97897    1.92431    1.93700 
+       244    1.97470    1.92951    1.94010 
+       245    1.97553    1.92918    1.93910 
+       246    1.97763    1.92635    1.93507 
+       247    1.97388    1.92642    1.93791 
+       248    1.97275    1.92383    1.93502 
+       249    1.97355    1.92689    1.94015 
+       250    1.97145    1.93027    1.94107 
+       251    1.97711    1.92286    1.93479 
+       252    1.97563    1.92725    1.94238 
+       253    1.97495    1.92380    1.93543 
+       254    1.97359    1.92542    1.93848 
+       255    1.96894    1.92799    1.94265 
+       256    1.97758    1.92455    1.93784 
+       257    1.97406    1.92456    1.93720 
+       258    1.97509    1.93343    1.94397 
+       259    1.97292    1.92270    1.93266 
+       260    1.97644    1.92329    1.93701 
+       261    1.97532    1.92754    1.94138 significance (train): 31.829 significance: 31.035 
+       262    1.97472    1.92567    1.93900 
+       263    1.97685    1.92399    1.93776 
+       264    1.98264    1.92978    1.94195 
+       265    1.97324    1.92930    1.94181 
+       266    1.97584    1.92134    1.93456 
+       267    1.97814    1.93042    1.94283 
+       268    1.97235    1.92555    1.93855 
+       269    1.97620    1.92564    1.93951 
+       270    1.97453    1.92408    1.93594 
+       271    1.97227    1.92708    1.93930 
+       272    1.97485    1.92448    1.93705 
+       273    1.97436    1.92856    1.94122 
+       274    1.97509    1.92680    1.94117 
+       275    1.97601    1.92091    1.93538 
+       276    1.97526    1.93459    1.94711 
+       277    1.97771    1.92488    1.93900 
+       278    1.97455    1.92330    1.93609 
+       279    1.97224    1.93470    1.94721 
+       280    1.97534    1.92093    1.93271 
+       281    1.97826    1.92538    1.93637 significance (train): 31.839 significance: 31.077 
+       282    1.97380    1.92447    1.93951 
+       283    1.97169    1.92405    1.93883 
+       284    1.97597    1.92629    1.94398 
+       285    1.97368    1.93109    1.94382 
+       286    1.97856    1.92651    1.94095 
+       287    1.97214    1.92395    1.93830 
+       288    1.97669    1.93874    1.95153 
+       289    1.97401    1.92088    1.93695 
+       290    1.97338    1.92159    1.93827 
+       291    1.97258    1.92631    1.94030 
+       292    1.97200    1.92085    1.93565 
+       293    1.96989    1.92889    1.94194 
+       294    1.97267    1.92686    1.94030 
+       295    1.97345    1.92361    1.94008 
+       296    1.97194    1.92628    1.94078 
+       297    1.97502    1.92325    1.93813 
+       298    1.97415    1.92631    1.94150 
+       299    1.97272    1.92698    1.94239 
+       300    1.97524    1.92213    1.93409 
+set learning rate to: 0.05
+       301    1.96919    1.92098    1.93519 significance (train): 32.128 significance: 31.302 
+       302    1.96718    1.91946    1.93548 
+       303    1.96969    1.92345    1.93762 
+       304    1.96984    1.92228    1.93534 
+       305    1.96401    1.92043    1.93550 
+       306    1.96339    1.92267    1.93668 
+       307    1.96504    1.92197    1.93747 
+       308    1.96679    1.92331    1.93842 
+       309    1.96685    1.91959    1.93497 
+       310    1.96732    1.92013    1.93461 
+       311    1.96237    1.92657    1.94053 
+       312    1.96779    1.92147    1.93500 
+       313    1.96624    1.91989    1.93434 
+       314    1.96712    1.92111    1.93704 
+       315    1.96779    1.92180    1.93591 
+       316    1.96521    1.92083    1.93556 
+       317    1.96511    1.92237    1.93649 
+       318    1.96148    1.91867    1.93535 
+       319    1.96713    1.92201    1.93710 
+       320    1.96413    1.92075    1.93603 
+       321    1.96685    1.91875    1.93350 significance (train): 31.919 significance: 31.306 
+       322    1.96484    1.91978    1.93510 
+       323    1.96781    1.92262    1.93565 
+       324    1.96481    1.91881    1.93399 
+       325    1.96439    1.92364    1.93642 
+       326    1.96192    1.92039    1.93541 
+       327    1.96478    1.91750    1.93395 
+       328    1.96589    1.91776    1.93360 
+       329    1.96504    1.91745    1.93405 
+       330    1.96591    1.92327    1.93951 
+       331    1.96399    1.92242    1.93787 
+       332    1.96584    1.91755    1.93360 
+       333    1.96303    1.91590    1.93195 
+       334    1.96528    1.92203    1.93921 
+       335    1.96608    1.91561    1.93128 
+       336    1.96394    1.91735    1.93405 
+       337    1.96505    1.91849    1.93376 
+       338    1.96046    1.91922    1.93417 
+       339    1.96248    1.92245    1.93683 
+       340    1.96609    1.91967    1.93455 
+       341    1.96541    1.92278    1.93716 significance (train): 32.136 significance: 31.426 
+       342    1.96657    1.92575    1.94095 
+       343    1.96300    1.91788    1.93416 
+       344    1.96657    1.92145    1.93747 
+       345    1.96155    1.91543    1.93237 
+       346    1.96776    1.92095    1.93473 
+       347    1.96440    1.91950    1.93682 
+       348    1.96574    1.91878    1.93412 
+       349    1.96308    1.91776    1.93270 
+       350    1.96173    1.91822    1.93332 
+       351    1.95881    1.92232    1.93846 
+       352    1.96632    1.91797    1.93357 
+       353    1.96437    1.91867    1.93535 
+       354    1.96511    1.91769    1.93221 
+       355    1.96283    1.92009    1.93658 
+       356    1.96368    1.92007    1.93539 
+       357    1.96414    1.92011    1.93564 
+       358    1.96240    1.91888    1.93280 
+       359    1.96278    1.91789    1.93433 
+       360    1.96460    1.91679    1.93322 
+       361    1.96331    1.91724    1.93360 significance (train): 32.221 significance: 31.419 
+       362    1.96774    1.91780    1.93455 
+       363    1.96579    1.91743    1.93404 
+       364    1.96396    1.91613    1.93135 
+       365    1.96116    1.91724    1.93446 
+       366    1.96069    1.92041    1.93707 
+       367    1.96156    1.91841    1.93515 
+       368    1.96158    1.91928    1.93612 
+       369    1.96421    1.91830    1.93516 
+       370    1.96383    1.91891    1.93573 
+       371    1.96268    1.91438    1.93096 
+       372    1.96490    1.91594    1.93149 
+       373    1.96288    1.91565    1.93155 
+       374    1.96197    1.91873    1.93541 
+       375    1.96092    1.92475    1.94069 
+       376    1.96427    1.92448    1.94130 
+       377    1.96377    1.91664    1.93318 
+       378    1.96123    1.91768    1.93403 
+       379    1.96014    1.91895    1.93449 
+       380    1.96319    1.91751    1.93513 
+       381    1.96064    1.91470    1.93277 significance (train): 32.113 significance: 31.255 
+       382    1.96209    1.92067    1.93872 
+       383    1.96536    1.91683    1.93277 
+       384    1.96805    1.91878    1.93491 
+       385    1.96402    1.91537    1.93085 
+       386    1.96272    1.91644    1.93291 
+       387    1.96199    1.92056    1.93649 
+       388    1.96115    1.91441    1.93045 
+       389    1.96178    1.91201    1.92918 
+       390    1.96260    1.91837    1.93333 
+       391    1.96713    1.91802    1.93291 
+       392    1.96158    1.91862    1.93775 
+       393    1.96658    1.91560    1.93109 
+       394    1.96321    1.91665    1.93399 
+       395    1.96011    1.91442    1.93193 
+       396    1.96256    1.91369    1.93071 
+       397    1.96183    1.91872    1.93646 
+       398    1.96334    1.91917    1.93645 
+       399    1.96452    1.91320    1.93080 
+       400    1.96110    1.91487    1.93315 
+set learning rate to: 0.02
+       401    1.96101    1.91309    1.93050 significance (train): 32.136 significance: 31.302 
+       402    1.95660    1.91285    1.93018 
+       403    1.95923    1.91540    1.93169 
+       404    1.95823    1.91318    1.93026 
+       405    1.95777    1.91378    1.93117 
+       406    1.95402    1.91461    1.93076 
+       407    1.95778    1.91428    1.93090 
+       408    1.95888    1.91582    1.93346 
+       409    1.95556    1.91448    1.93139 
+       410    1.95689    1.91334    1.93108 
+       411    1.95749    1.91333    1.92902 
+       412    1.95774    1.91336    1.92935 
+       413    1.95975    1.91411    1.92998 
+       414    1.95845    1.91374    1.93054 
+       415    1.95678    1.91734    1.93409 
+       416    1.95816    1.91418    1.93106 
+       417    1.95821    1.91622    1.93266 
+       418    1.96128    1.91421    1.93083 
+       419    1.96051    1.91455    1.93091 
+       420    1.95791    1.91726    1.93285 
+       421    1.95660    1.91411    1.93140 significance (train): 32.119 significance: 31.229 
+       422    1.95593    1.91416    1.93188 
+       423    1.95607    1.91308    1.92978 
+       424    1.95634    1.91706    1.93406 
+       425    1.95771    1.91655    1.93252 
+       426    1.95749    1.91318    1.93032 
+       427    1.95442    1.91307    1.92972 
+       428    1.95522    1.91401    1.93173 
+       429    1.95935    1.91510    1.93301 
+       430    1.95559    1.91369    1.93189 
+       431    1.95764    1.91313    1.93186 
+       432    1.95343    1.91164    1.92990 
+       433    1.95811    1.91212    1.93001 
+       434    1.95962    1.91465    1.93181 
+       435    1.95298    1.91282    1.93048 
+       436    1.95776    1.91232    1.92937 
+       437    1.95465    1.91369    1.93100 
+       438    1.95444    1.91316    1.93089 
+       439    1.95823    1.91557    1.93103 
+       440    1.95364    1.91310    1.93124 
+       441    1.95467    1.91421    1.93136 significance (train): 32.085 significance: 31.184 
+       442    1.95659    1.91315    1.93012 
+       443    1.95274    1.91441    1.93088 
+       444    1.95769    1.91732    1.93411 
+       445    1.95645    1.91577    1.93328 
+       446    1.95942    1.91869    1.93457 
+       447    1.95731    1.91315    1.93134 
+       448    1.95638    1.91309    1.93061 
+       449    1.96105    1.91261    1.93006 
+       450    1.95486    1.91311    1.93115 
+       451    1.95709    1.91399    1.93206 
+       452    1.95591    1.91249    1.92937 
+       453    1.95625    1.91617    1.93285 
+       454    1.95282    1.91310    1.93020 
+       455    1.95691    1.91379    1.93069 
+       456    1.95552    1.91246    1.92974 
+       457    1.95737    1.91216    1.93013 
+       458    1.95891    1.91081    1.92789 
+       459    1.95620    1.91258    1.93009 
+       460    1.95655    1.91437    1.93177 
+       461    1.95357    1.91098    1.92878 significance (train): 32.230 significance: 31.236 
+       462    1.95726    1.91198    1.92991 
+       463    1.95540    1.91306    1.93112 
+       464    1.95623    1.91287    1.93110 
+       465    1.95720    1.91564    1.93198 
+       466    1.95628    1.91303    1.92991 
+       467    1.95748    1.91261    1.93049 
+       468    1.95906    1.91287    1.93071 
+       469    1.95444    1.91174    1.92896 
+       470    1.95282    1.91118    1.92956 
+       471    1.95645    1.91673    1.93334 
+       472    1.95922    1.91295    1.93066 
+       473    1.95498    1.91348    1.92966 
+       474    1.95709    1.91253    1.93039 
+       475    1.95332    1.91333    1.93088 
+       476    1.95823    1.91315    1.93100 
+       477    1.95228    1.91268    1.93002 
+       478    1.95515    1.91249    1.93002 
+       479    1.95351    1.91221    1.92956 
+       480    1.95363    1.91289    1.93044 
+       481    1.95488    1.91330    1.93203 significance (train): 32.133 significance: 31.222 
+       482    1.95775    1.91153    1.93030 
+       483    1.95604    1.91160    1.92881 
+       484    1.95862    1.91305    1.93105 
+       485    1.95591    1.91278    1.93046 
+       486    1.95760    1.91115    1.92918 
+       487    1.95351    1.91035    1.92880 
+       488    1.95857    1.91139    1.92873 
+       489    1.95689    1.91325    1.93078 
+       490    1.95814    1.91221    1.92971 
+       491    1.95742    1.91573    1.93305 
+       492    1.95588    1.91287    1.93039 
+       493    1.95660    1.91271    1.93011 
+       494    1.95939    1.91279    1.93066 
+       495    1.95899    1.91343    1.93138 
+       496    1.95264    1.91340    1.93048 
+       497    1.95669    1.91190    1.93003 
+       498    1.95538    1.91183    1.92998 
+       499    1.95241    1.91180    1.92999 
+       500    1.95593    1.91358    1.93221 
+set learning rate to: 0.01
+       501    1.95637    1.91126    1.92911 significance (train): 32.203 significance: 31.259 
+       502    1.95338    1.91261    1.93041 
+       503    1.95497    1.91165    1.92944 
+       504    1.95521    1.91136    1.92965 
+       505    1.95204    1.91068    1.92932 
+       506    1.95452    1.91135    1.92894 
+       507    1.95217    1.91068    1.92808 
+       508    1.95417    1.91032    1.92834 
+       509    1.95374    1.91263    1.93047 
+       510    1.95803    1.91253    1.92938 
+       511    1.95287    1.91254    1.92990 
+       512    1.95347    1.91238    1.93019 
+       513    1.95338    1.91223    1.93011 
+       514    1.95429    1.91204    1.92992 
+       515    1.95249    1.90985    1.92786 
+       516    1.95442    1.91133    1.92977 
+       517    1.95038    1.91062    1.92942 
+       518    1.95473    1.91149    1.92937 
+       519    1.95455    1.91146    1.92974 
+       520    1.95369    1.91229    1.93018 
+       521    1.95326    1.91118    1.92930 significance (train): 32.197 significance: 31.196 
+       522    1.95310    1.91229    1.93021 
+       523    1.95474    1.91154    1.92869 
+       524    1.95311    1.91070    1.92843 
+       525    1.95000    1.91051    1.92833 
+       526    1.95416    1.91057    1.92923 
+       527    1.95444    1.91239    1.93008 
+       528    1.95203    1.91146    1.92927 
+       529    1.95064    1.91124    1.92842 
+       530    1.95577    1.91070    1.92863 
+       531    1.95413    1.91132    1.92940 
+       532    1.95327    1.91150    1.92991 
+       533    1.95537    1.91143    1.92921 
+       534    1.95219    1.91114    1.92963 
+       535    1.95418    1.91205    1.92950 
+       536    1.94914    1.91096    1.92881 
+       537    1.95429    1.91179    1.92996 
+       538    1.95216    1.91165    1.92976 
+       539    1.95463    1.91121    1.92980 
+       540    1.95166    1.91114    1.92941 
+       541    1.95231    1.91286    1.93096 significance (train): 32.185 significance: 31.355 
+       542    1.95596    1.91103    1.92847 
+       543    1.95400    1.90982    1.92781 
+       544    1.95166    1.91097    1.92878 
+       545    1.95149    1.91185    1.93015 
+       546    1.95444    1.91162    1.92902 
+       547    1.95229    1.91111    1.92883 
+       548    1.95255    1.91124    1.92954 
+       549    1.95459    1.90933    1.92743 
+       550    1.95064    1.90984    1.92829 
+       551    1.95151    1.91049    1.92929 
+       552    1.95550    1.91020    1.92873 
+       553    1.95585    1.91183    1.92917 
+       554    1.95187    1.91118    1.92843 
+       555    1.95589    1.91217    1.92904 
+       556    1.95421    1.91074    1.92881 
+       557    1.95890    1.91168    1.92946 
+       558    1.95277    1.91083    1.92909 
+       559    1.95260    1.91182    1.92958 
+       560    1.95399    1.90998    1.92803 
+       561    1.95479    1.91347    1.93091 significance (train): 32.155 significance: 31.281 
+       562    1.95232    1.91317    1.93102 
+       563    1.95234    1.91057    1.92829 
+       564    1.95621    1.91169    1.92906 
+       565    1.95360    1.91216    1.92941 
+       566    1.95364    1.91118    1.92890 
+       567    1.95541    1.91065    1.92864 
+       568    1.95180    1.90992    1.92776 
+       569    1.95344    1.91067    1.92904 
+       570    1.95340    1.90981    1.92753 
+       571    1.95069    1.90983    1.92726 
+       572    1.95127    1.91169    1.92966 
+       573    1.95205    1.91139    1.93011 
+       574    1.95040    1.91108    1.92910 
+       575    1.95371    1.90906    1.92743 
+       576    1.95341    1.91119    1.92919 
+       577    1.95078    1.91138    1.92930 
+       578    1.95077    1.91000    1.92892 
+       579    1.95036    1.90959    1.92867 
+       580    1.95672    1.91065    1.92933 
+       581    1.95248    1.91052    1.92993 significance (train): 32.102 significance: 31.109 
+       582    1.95261    1.91036    1.92953 
+       583    1.95380    1.91039    1.92874 
+       584    1.95451    1.91097    1.92930 
+       585    1.95290    1.90999    1.92834 
+       586    1.95277    1.91004    1.92828 
+       587    1.95235    1.91048    1.92853 
+       588    1.95379    1.90997    1.92907 
+       589    1.95194    1.91204    1.93032 
+       590    1.95658    1.91073    1.92812 
+       591    1.95019    1.91107    1.92964 
+       592    1.95370    1.91099    1.93026 
+       593    1.94867    1.91165    1.93078 
+       594    1.95221    1.91018    1.92893 
+       595    1.95232    1.91021    1.92842 
+       596    1.95108    1.90847    1.92673 
+       597    1.95227    1.91003    1.92820 
+       598    1.95156    1.91019    1.92779 
+       599    1.95384    1.91017    1.92867 
+       600    1.95448    1.91116    1.92968 
+set learning rate to: 0.005
+       601    1.95150    1.90980    1.92802 significance (train): 32.159 significance: 31.213 
+       602    1.95110    1.90981    1.92868 
+       603    1.95278    1.90971    1.92802 
+       604    1.95233    1.91021    1.92864 
+       605    1.95146    1.91034    1.92827 
+       606    1.94861    1.91019    1.92848 
+       607    1.95122    1.90930    1.92735 
+       608    1.95265    1.90970    1.92777 
+       609    1.95327    1.91005    1.92813 
+       610    1.95147    1.90926    1.92770 
+       611    1.95150    1.90975    1.92789 
+       612    1.95193    1.90969    1.92793 
+       613    1.95252    1.91027    1.92801 
+       614    1.95139    1.90922    1.92726 
+       615    1.95246    1.91103    1.92884 
+       616    1.95139    1.90986    1.92783 
+       617    1.95298    1.90969    1.92787 
+       618    1.94994    1.91005    1.92793 
+       619    1.95174    1.90971    1.92811 
+       620    1.94857    1.91008    1.92855 
+       621    1.95178    1.91007    1.92850 significance (train): 32.167 significance: 31.091 
+       622    1.95342    1.91025    1.92922 
+       623    1.95135    1.91067    1.92914 
+       624    1.95388    1.91044    1.92851 
+       625    1.95250    1.91002    1.92804 
+       626    1.95328    1.91021    1.92849 
+       627    1.95090    1.91015    1.92838 
+       628    1.95422    1.90986    1.92846 
+       629    1.94866    1.91055    1.92889 
+       630    1.95019    1.90958    1.92865 
+       631    1.95138    1.91003    1.92879 
+       632    1.95258    1.91065    1.92915 
+       633    1.95132    1.91007    1.92881 
+       634    1.95309    1.91024    1.92838 
+       635    1.95191    1.91021    1.92848 
+       636    1.95146    1.90991    1.92827 
+       637    1.95381    1.90975    1.92840 
+       638    1.95345    1.91026    1.92851 
+       639    1.94969    1.90984    1.92819 
+       640    1.95230    1.90993    1.92793 
+       641    1.95232    1.91042    1.92867 significance (train): 32.225 significance: 31.272 
+       642    1.94967    1.90973    1.92813 
+       643    1.95225    1.90910    1.92745 
+       644    1.95022    1.90944    1.92830 
+       645    1.95003    1.91069    1.92906 
+       646    1.95227    1.91076    1.92908 
+       647    1.94983    1.90987    1.92819 
+       648    1.95249    1.90984    1.92841 
+       649    1.95091    1.90917    1.92811 
+       650    1.94881    1.90968    1.92882 
+       651    1.95375    1.90986    1.92846 
+       652    1.95175    1.90984    1.92802 
+       653    1.95353    1.90945    1.92763 
+       654    1.95457    1.91078    1.92898 
+       655    1.95304    1.90956    1.92817 
+       656    1.95356    1.90940    1.92770 
+       657    1.95217    1.90989    1.92833 
+       658    1.95124    1.90912    1.92715 
+       659    1.94970    1.90917    1.92777 
+       660    1.95363    1.91019    1.92834 
+       661    1.94977    1.90951    1.92794 significance (train): 32.252 significance: 31.174 
+       662    1.95364    1.91005    1.92872 
+       663    1.95114    1.91039    1.92888 
+       664    1.94958    1.91021    1.92880 
+       665    1.95355    1.90975    1.92797 
+       666    1.95182    1.90928    1.92745 
+       667    1.95028    1.91005    1.92824 
+       668    1.95274    1.90937    1.92822 
+       669    1.95414    1.90990    1.92811 
+       670    1.95280    1.91022    1.92781 
+       671    1.95127    1.90988    1.92796 
+       672    1.95419    1.91088    1.92883 
+       673    1.94895    1.90916    1.92760 
+       674    1.95210    1.90940    1.92808 
+       675    1.95374    1.90952    1.92799 
+       676    1.95296    1.90966    1.92810 
+       677    1.94824    1.91021    1.92939 
+       678    1.94879    1.90986    1.92870 
+       679    1.95368    1.90899    1.92786 
+       680    1.94973    1.90890    1.92755 
+       681    1.95156    1.90992    1.92819 significance (train): 32.193 significance: 31.231 
+       682    1.95387    1.91033    1.92837 
+       683    1.95192    1.91078    1.92904 
+       684    1.95141    1.91023    1.92839 
+       685    1.95257    1.91040    1.92874 
+       686    1.94985    1.90974    1.92825 
+       687    1.95118    1.90941    1.92797 
+       688    1.95070    1.91031    1.92853 
+       689    1.95248    1.90986    1.92838 
+       690    1.95247    1.90973    1.92779 
+       691    1.95055    1.91014    1.92860 
+       692    1.95191    1.90919    1.92760 
+       693    1.95169    1.90919    1.92809 
+       694    1.95054    1.90864    1.92736 
+       695    1.95471    1.90918    1.92732 
+       696    1.95293    1.90997    1.92788 
+       697    1.95018    1.90955    1.92765 
+       698    1.95110    1.90908    1.92758 
+       699    1.95243    1.90918    1.92760 
+       700    1.95183    1.90958    1.92820 
+set learning rate to: 0.002
+       701    1.95257    1.90941    1.92762 significance (train): 32.247 significance: 31.209 
+       702    1.95053    1.90966    1.92797 
+       703    1.95557    1.90925    1.92745 
+       704    1.94861    1.90957    1.92820 
+       705    1.94990    1.90935    1.92798 
+       706    1.95248    1.90914    1.92776 
+       707    1.95033    1.90931    1.92824 
+       708    1.95126    1.90949    1.92836 
+       709    1.94891    1.90999    1.92855 
+       710    1.95234    1.90933    1.92801 
+       711    1.94945    1.90945    1.92829 
+       712    1.95016    1.90885    1.92773 
+       713    1.94997    1.90912    1.92784 
+       714    1.95040    1.90959    1.92822 
+       715    1.94943    1.90910    1.92785 
+       716    1.94978    1.90929    1.92801 
+       717    1.95092    1.90896    1.92777 
+       718    1.95280    1.90925    1.92801 
+       719    1.95203    1.90946    1.92775 
+       720    1.94932    1.90934    1.92801 
+       721    1.95298    1.90923    1.92774 significance (train): 32.173 significance: 31.188 
+       722    1.95007    1.90918    1.92761 
+       723    1.95000    1.90922    1.92798 
+       724    1.95413    1.90934    1.92802 
+       725    1.94708    1.90911    1.92794 
+       726    1.95240    1.90991    1.92851 
+       727    1.95019    1.90904    1.92754 
+       728    1.94918    1.90931    1.92789 
+       729    1.95058    1.90941    1.92785 
+       730    1.95277    1.90985    1.92811 
+       731    1.95281    1.90907    1.92738 
+       732    1.94984    1.90930    1.92773 
+       733    1.95150    1.90919    1.92783 
+       734    1.95011    1.90982    1.92829 
+       735    1.94883    1.90944    1.92764 
+       736    1.94658    1.90958    1.92790 
+       737    1.95068    1.90916    1.92756 
+       738    1.94938    1.90965    1.92811 
+       739    1.95128    1.90950    1.92780 
+       740    1.94975    1.90926    1.92782 
+       741    1.95125    1.90914    1.92756 significance (train): 32.218 significance: 31.245 
+       742    1.95110    1.90920    1.92754 
+       743    1.94805    1.90970    1.92843 
+       744    1.95214    1.90966    1.92801 
+       745    1.94865    1.90912    1.92742 
+       746    1.95378    1.90931    1.92758 
+       747    1.95135    1.90922    1.92758 
+       748    1.95119    1.90983    1.92822 
+       749    1.95125    1.90916    1.92777 
+       750    1.95051    1.90952    1.92808 
+       751    1.95010    1.90957    1.92788 
+       752    1.94879    1.90949    1.92793 
+       753    1.95246    1.90875    1.92709 
+       754    1.94903    1.90943    1.92790 
+       755    1.94952    1.90937    1.92812 
+       756    1.95175    1.90900    1.92744 
+       757    1.94767    1.90913    1.92790 
+       758    1.94994    1.90914    1.92778 
+       759    1.95251    1.90958    1.92811 
+       760    1.94984    1.90939    1.92802 
+       761    1.94967    1.90890    1.92773 significance (train): 32.141 significance: 31.147 
+       762    1.94908    1.90852    1.92712 
+       763    1.94810    1.90844    1.92722 
+       764    1.95015    1.90862    1.92739 
+       765    1.95093    1.90881    1.92765 
+       766    1.95310    1.90923    1.92788 
+       767    1.95173    1.90941    1.92820 
+       768    1.94980    1.90885    1.92774 
+       769    1.94985    1.90978    1.92850 
+       770    1.94821    1.90904    1.92755 
+       771    1.94770    1.90904    1.92791 
+       772    1.95175    1.90921    1.92783 
+       773    1.95199    1.90942    1.92802 
+       774    1.95224    1.90962    1.92812 
+       775    1.94853    1.90942    1.92803 
+       776    1.95103    1.90927    1.92789 
+       777    1.94918    1.90897    1.92766 
+       778    1.94909    1.90894    1.92780 
+       779    1.94875    1.90932    1.92813 
+       780    1.94872    1.90886    1.92767 
+       781    1.95134    1.90952    1.92790 significance (train): 32.189 significance: 31.230 
+       782    1.95091    1.90925    1.92808 
+       783    1.94869    1.90934    1.92780 
+       784    1.95194    1.90986    1.92827 
+       785    1.94874    1.90924    1.92776 
+       786    1.94977    1.90900    1.92783 
+       787    1.95218    1.90918    1.92761 
+       788    1.95092    1.90935    1.92793 
+       789    1.95139    1.90932    1.92811 
+       790    1.94920    1.90902    1.92785 
+       791    1.94984    1.90900    1.92791 
+       792    1.94968    1.90838    1.92722 
+       793    1.94975    1.90887    1.92785 
+       794    1.94928    1.90925    1.92830 
+       795    1.94972    1.90913    1.92841 
+       796    1.95022    1.90883    1.92770 
+       797    1.94898    1.90941    1.92831 
+       798    1.95131    1.90894    1.92805 
+       799    1.94990    1.90895    1.92786 
+       800    1.95017    1.90868    1.92775 
+set learning rate to: 0.001
+       801    1.95134    1.90932    1.92818 significance (train): 32.202 significance: 31.201 
+       802    1.94987    1.90945    1.92821 
+       803    1.95034    1.90874    1.92791 
+       804    1.95000    1.90928    1.92815 
+       805    1.94887    1.90875    1.92790 
+       806    1.95067    1.90906    1.92811 
+       807    1.94992    1.90892    1.92783 
+       808    1.95277    1.90954    1.92825 
+       809    1.94972    1.90924    1.92805 
+       810    1.94978    1.90861    1.92738 
+       811    1.95237    1.90908    1.92791 
+       812    1.95036    1.90898    1.92763 
+       813    1.95039    1.90951    1.92811 
+       814    1.94963    1.90946    1.92798 
+       815    1.94688    1.90916    1.92790 
+       816    1.95156    1.90920    1.92769 
+       817    1.94971    1.90914    1.92767 
+       818    1.94972    1.90903    1.92771 
+       819    1.95020    1.90873    1.92749 
+       820    1.94758    1.90864    1.92750 
+       821    1.94904    1.90879    1.92746 significance (train): 32.149 significance: 31.184 
+       822    1.94999    1.90882    1.92760 
+       823    1.95178    1.90873    1.92733 
+       824    1.94911    1.90895    1.92767 
+       825    1.94946    1.90898    1.92801 
+       826    1.95314    1.90909    1.92784 
+       827    1.95023    1.90909    1.92783 
+       828    1.94956    1.90882    1.92751 
+       829    1.95019    1.90912    1.92791 
+       830    1.94910    1.90853    1.92725 
+       831    1.94767    1.90874    1.92775 
+       832    1.95021    1.90850    1.92754 
+       833    1.94728    1.90919    1.92804 
+       834    1.95137    1.90908    1.92788 
+       835    1.94871    1.90857    1.92760 
+       836    1.94646    1.90839    1.92735 
+       837    1.95058    1.90848    1.92738 
+       838    1.94999    1.90908    1.92788 
+       839    1.94732    1.90922    1.92805 
+       840    1.95050    1.90897    1.92804 
+       841    1.94893    1.90890    1.92786 significance (train): 32.154 significance: 31.147 
+       842    1.95043    1.90909    1.92788 
+       843    1.95001    1.90944    1.92813 
+       844    1.94688    1.90895    1.92798 
+       845    1.95193    1.90814    1.92744 
+       846    1.95174    1.90841    1.92757 
+       847    1.95172    1.90906    1.92780 
+       848    1.94844    1.90939    1.92811 
+       849    1.94970    1.90895    1.92782 
+       850    1.94974    1.90891    1.92769 
+       851    1.95139    1.90890    1.92761 
+       852    1.95117    1.90882    1.92744 
+       853    1.94911    1.90910    1.92765 
+       854    1.94940    1.90896    1.92770 
+       855    1.94972    1.90897    1.92759 
+       856    1.94941    1.90872    1.92752 
+       857    1.94916    1.90900    1.92790 
+       858    1.95255    1.90852    1.92739 
+       859    1.94979    1.90868    1.92746 
+       860    1.95371    1.90916    1.92780 
+       861    1.95108    1.90926    1.92810 significance (train): 32.194 significance: 31.194 
+       862    1.95058    1.90903    1.92787 
+       863    1.95042    1.90858    1.92732 
+       864    1.94911    1.90882    1.92756 
+       865    1.94846    1.90889    1.92762 
+       866    1.95210    1.90865    1.92754 
+       867    1.94742    1.90899    1.92775 
+       868    1.94909    1.90877    1.92754 
+       869    1.94967    1.90923    1.92774 
+       870    1.95069    1.90914    1.92772 
+       871    1.95025    1.90918    1.92781 
+       872    1.95183    1.90895    1.92781 
+       873    1.94744    1.90903    1.92784 
+       874    1.94998    1.90881    1.92749 
+       875    1.94999    1.90882    1.92766 
+       876    1.94985    1.90841    1.92743 
+       877    1.94989    1.90835    1.92720 
+       878    1.94768    1.90906    1.92774 
+       879    1.94776    1.90890    1.92790 
+       880    1.94986    1.90906    1.92791 
+       881    1.95259    1.90940    1.92798 significance (train): 32.185 significance: 31.212 
+       882    1.94648    1.90834    1.92709 
+       883    1.95072    1.90841    1.92730 
+       884    1.95011    1.90914    1.92795 
+       885    1.94960    1.90905    1.92792 
+       886    1.94876    1.90896    1.92770 
+       887    1.95130    1.90924    1.92795 
+       888    1.94626    1.90923    1.92790 
+       889    1.94999    1.90900    1.92781 
+       890    1.95067    1.90864    1.92748 
+       891    1.95045    1.90869    1.92737 
+       892    1.95093    1.90876    1.92770 
+       893    1.94985    1.90906    1.92774 
+       894    1.95058    1.90922    1.92795 
+       895    1.94819    1.90940    1.92811 
+       896    1.95148    1.90914    1.92784 
+       897    1.95028    1.90928    1.92790 
+       898    1.94855    1.90908    1.92771 
+       899    1.95043    1.90909    1.92773 
+       900    1.95391    1.90859    1.92757 
+       901    1.95021    1.90908    1.92785 significance (train): 32.150 significance: 31.198 
+       902    1.95003    1.90940    1.92809 
+       903    1.95034    1.90946    1.92814 
+       904    1.94802    1.90919    1.92784 
+       905    1.94753    1.90867    1.92743 
+       906    1.95277    1.90902    1.92775 
+       907    1.95060    1.90908    1.92776 
+       908    1.95123    1.90907    1.92782 
+       909    1.95395    1.90889    1.92758 
+       910    1.95094    1.90936    1.92792 
+       911    1.94748    1.90921    1.92796 
+       912    1.95235    1.90937    1.92791 
+       913    1.95159    1.90942    1.92792 
+       914    1.94866    1.90891    1.92745 
+       915    1.94884    1.90888    1.92746 
+       916    1.94937    1.90918    1.92771 
+       917    1.95232    1.90887    1.92762 
+       918    1.94704    1.90854    1.92738 
+       919    1.95161    1.90878    1.92735 
+       920    1.94856    1.90869    1.92750 
+       921    1.95367    1.90906    1.92780 significance (train): 32.218 significance: 31.318 
+       922    1.95384    1.90885    1.92741 
+       923    1.95269    1.90934    1.92785 
+       924    1.94645    1.90903    1.92776 
+       925    1.95021    1.90890    1.92757 
+       926    1.95000    1.90889    1.92770 
+       927    1.94534    1.90881    1.92755 
+       928    1.95008    1.90873    1.92748 
+       929    1.95254    1.90896    1.92761 
+       930    1.95108    1.90884    1.92754 
+       931    1.95133    1.90937    1.92787 
+       932    1.94749    1.90920    1.92778 
+       933    1.95067    1.90883    1.92742 
+       934    1.94767    1.90874    1.92758 
+       935    1.95095    1.90911    1.92774 
+       936    1.94810    1.90882    1.92775 
+       937    1.95113    1.90897    1.92773 
+       938    1.94786    1.90886    1.92767 
+       939    1.95080    1.90949    1.92812 
+       940    1.94867    1.90871    1.92746 
+       941    1.95083    1.90836    1.92732 significance (train): 32.172 significance: 31.172 
+       942    1.94983    1.90917    1.92770 
+       943    1.94901    1.90903    1.92771 
+       944    1.94638    1.90888    1.92775 
+       945    1.94998    1.90873    1.92772 
+       946    1.95072    1.90882    1.92775 
+       947    1.94940    1.90898    1.92770 
+       948    1.94862    1.90887    1.92761 
+       949    1.95178    1.90861    1.92746 
+       950    1.94871    1.90888    1.92781 
+       951    1.95012    1.90921    1.92782 
+       952    1.95178    1.90865    1.92749 
+       953    1.94882    1.90895    1.92770 
+       954    1.94569    1.90849    1.92739 
+       955    1.95234    1.90838    1.92733 
+       956    1.95262    1.90879    1.92744 
+       957    1.94927    1.90872    1.92751 
+       958    1.95281    1.90894    1.92761 
+       959    1.95213    1.90887    1.92768 
+       960    1.94860    1.90923    1.92795 
+       961    1.94908    1.90873    1.92747 significance (train): 32.239 significance: 31.321 
+       962    1.95052    1.90883    1.92748 
+       963    1.95074    1.90918    1.92765 
+       964    1.95104    1.90913    1.92759 
+       965    1.94806    1.90891    1.92752 
+       966    1.95130    1.90845    1.92712 
+       967    1.95321    1.90908    1.92750 
+       968    1.95107    1.90896    1.92762 
+       969    1.94903    1.90915    1.92768 
+       970    1.94824    1.90903    1.92751 
+       971    1.95180    1.90902    1.92759 
+       972    1.94894    1.90878    1.92747 
+       973    1.94834    1.90869    1.92731 
+       974    1.94753    1.90871    1.92740 
+       975    1.94770    1.90890    1.92779 
+       976    1.94951    1.90877    1.92780 
+       977    1.94866    1.90886    1.92774 
+       978    1.94793    1.90879    1.92743 
+       979    1.95082    1.90874    1.92763 
+       980    1.95373    1.90984    1.92851 
+       981    1.95217    1.90901    1.92772 significance (train): 32.206 significance: 31.231 
+       982    1.95155    1.90864    1.92746 
+       983    1.94790    1.90907    1.92773 
+       984    1.94929    1.90865    1.92755 
+       985    1.94704    1.90887    1.92760 
+       986    1.95055    1.90864    1.92764 
+       987    1.95275    1.90950    1.92820 
+       988    1.95190    1.90908    1.92775 
+       989    1.94879    1.90844    1.92732 
+       990    1.94892    1.90896    1.92778 
+       991    1.95025    1.90917    1.92789 
+       992    1.95050    1.90895    1.92777 
+       993    1.94926    1.90907    1.92767 
+       994    1.95226    1.90907    1.92773 
+       995    1.94977    1.90845    1.92739 
+       996    1.94667    1.90823    1.92739 
+       997    1.95100    1.90834    1.92710 
+       998    1.94851    1.90857    1.92759 
+       999    1.95091    1.90899    1.92791 
+      1000    1.94906    1.90850    1.92755 significance (train): 32.232 significance: 31.201 
+FINAL RESULTS:       1000   1.949059   1.927547 significance (train): 32.232 significance: 31.201 
+TRAINING TIME: 0:31:25.967025 (1886.0 seconds)
+GRADIENT UPDATES: 205000
+MIN TEST LOSS: 1.926732653769356
+training done.
+> results//FINAL_VHLegacy_0lep_WP_Zhf_medhigh_Znn/Zvv2017_Zhf_medhigh_Znn_191022_V11finalVarsWP.h5/512-256-128-64-64-64/0.20-0.50-0.50-0.50-0.50-0.50/1.000e+00/rnd_2/checkpoints/model.ckpt
+saved checkpoint to [34m results//FINAL_VHLegacy_0lep_WP_Zhf_medhigh_Znn/Zvv2017_Zhf_medhigh_Znn_191022_V11finalVarsWP.h5/512-256-128-64-64-64/0.20-0.50-0.50-0.50-0.50-0.50/1.000e+00/rnd_2/checkpoints/model.ckpt [0m
+LOSS(train, unmodified):  1.9084974456557346
+LOSS(test):               1.9275465222901338
+---
+S    B
+---
+362.04 15512.50
+365.48 4192.86
+420.36 2480.42
+751.02 2207.24
+761.02 1364.65
+374.80 552.98
+69.58 92.47
+16.45 11.91
+ 1.99  0.93
+ 0.41  0.17
+ 0.07  0.00
+ 0.09  0.00
+ 0.00  0.00
+ 0.00  0.00
+ 0.00  0.00
+---
+significance: 31.201 
+area under ROC: AUC_test =  79.08183056863845
+area under ROC: AUC_train =  79.18531021429892
+INFO: set range to: 28.166601 499.98773
+INFO: set range to: 120.00236 1954.6243
+INFO: set range to: 170.0001 2058.2888
+INFO: set range to: 2.0000339 3.1415918
+INFO: set range to: 2.0 3.0
+INFO: set range to: 1.0 3.0
+INFO: set range to: 0.0 4.286133
+INFO: set range to: 0.0 3.1415837
+INFO: set range to: 36.48186 1883.7512
+INFO: set range to: 35.000607 623.64746
+INFO: set range to: -1.0 16.0
+INFO: set range to: 0.0 1.0
+INFO: set range to: -99.0 3.0
+INFO: set range to: -99.0 1624.2385
+INFO: set range to: -99.0 3.141589
+-------------------------
+with optimized binning:
+ method: SB
+ target: 0.1090, 0.1194, 0.1242, 0.1226, 0.1148, 0.1021, 0.0861, 0.0690, 0.0524, 0.0378, 0.0259, 0.0168, 0.0104, 0.0061, 0.0034
+ bins:   0.0000, 0.0110, 0.0255, 0.0431, 0.0579, 0.0761, 0.1337, 0.1922, 0.2365, 0.2733, 0.3078, 0.3350, 0.3586, 0.3875, 0.4288, 1.0000
+-------------------------
+---
+S    B
+---
+10.68 3208.88
+29.26 3498.11
+78.41 3590.42
+139.29 3482.30
+205.09 3186.03
+265.39 2750.82
+357.72 2186.04
+445.30 1592.64
+460.15 1084.79
+387.75 732.50
+291.68 474.45
+189.38 308.69
+139.60 167.76
+75.66 105.20
+47.97 47.50
+---
+significance: 31.424 (for optimized binning)
+significance: 30.044 ( 1% background uncertainty, for optimized binning)
+significance: 19.379 ( 5% background uncertainty, for optimized binning)
+significance: 12.611 (10% background uncertainty, for optimized binning)
+significance: 9.231 (15% background uncertainty, for optimized binning)
+significance: 7.234 (20% background uncertainty, for optimized binning)
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+now optimizing the bins again for signal region only!
+-------------------------
+with optimized binning:
+ method: SB
+ target: 0.1090, 0.1194, 0.1242, 0.1226, 0.1148, 0.1021, 0.0861, 0.0690, 0.0524, 0.0378, 0.0259, 0.0168, 0.0104, 0.0061, 0.0034
+ bins:   0.0000, 0.2346, 0.2684, 0.2888, 0.3047, 0.3189, 0.3327, 0.3462, 0.3602, 0.3758, 0.3932, 0.4138, 0.4393, 0.4687, 0.5129, 1.0000
+-------------------------
+---
+S    B
+---
+68.01 332.46
+115.72 323.43
+143.46 312.93
+159.31 291.99
+149.18 273.03
+155.40 220.02
+114.58 200.87
+95.15 158.38
+85.73 109.10
+65.88 73.70
+38.59 58.99
+28.11 33.70
+19.11 18.71
+13.19 10.06
+ 4.84  2.68
+---
+significance: 24.908 (for optimized binning)
+significance: 24.619 ( 1% background uncertainty, for optimized binning)
+significance: 20.096 ( 5% background uncertainty, for optimized binning)
+significance: 14.751 (10% background uncertainty, for optimized binning)
+significance: 11.482 (15% background uncertainty, for optimized binning)
+significance: 9.397 (20% background uncertainty, for optimized binning)
+.....
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+confusion matrix:
+ZLIGHT     1256.3    208.1     58.4      1062.0    142.7     175.0     74.0      147.0     
+ZB         373.5     595.1     144.0     288.7     339.8     236.9     166.2     195.5     
+ZBB        387.4     545.6     1179.4    223.2     272.6     864.7     347.6     397.2     
+WLIGHT     784.8     102.4     28.8      1284.9    171.9     63.2      109.4     146.6     
+WB         128.0     176.9     40.9      170.9     196.5     125.8     93.9      115.6     
+WBB        85.1      83.5      135.8     76.0      81.7      440.7     61.3      102.6     
+ST         101.4     159.5     162.1     249.6     204.7     135.4     405.7     545.2     
+TT         559.7     455.6     502.8     1404.1    838.7     956.9     1357.2    7012.7    
+confusion matrix (normalized to output category)
+ZLIGHT     34.2      8.9       2.6       22.3      6.3       5.8       2.8       1.7       
+ZB         10.2      25.6      6.4       6.1       15.1      7.9       6.4       2.3       
+ZBB        10.5      23.4      52.4      4.7       12.1      28.8      13.3      4.6       
+WLIGHT     21.3      4.4       1.3       27.0      7.6       2.1       4.2       1.7       
+WB         3.5       7.6       1.8       3.6       8.7       4.2       3.6       1.3       
+WBB        2.3       3.6       6.0       1.6       3.6       14.7      2.3       1.2       
+ST         2.8       6.9       7.2       5.2       9.1       4.5       15.5      6.3       
+TT         15.2      19.6      22.3      29.5      37.3      31.9      51.9      81.0      
+confusion matrix (normalized to label)
+ZLIGHT     40.2      6.7       1.9       34.0      4.6       5.6       2.4       4.7       
+ZB         16.0      25.4      6.2       12.3      14.5      10.1      7.1       8.4       
+ZBB        9.2       12.9      28.0      5.3       6.5       20.5      8.2       9.4       
+WLIGHT     29.2      3.8       1.1       47.7      6.4       2.3       4.1       5.4       
+WB         12.2      16.9      3.9       16.3      18.7      12.0      9.0       11.0      
+WBB        8.0       7.8       12.7      7.1       7.7       41.3      5.8       9.6       
+ST         5.2       8.1       8.3       12.7      10.4      6.9       20.7      27.8      
+TT         4.3       3.5       3.8       10.7      6.4       7.3       10.4      53.6      
+----
+class      efficiency    purity       product
+ZLIGHT     40.22        34.17        1,374.43    
+ZB         25.43        25.58        650.53      
+ZBB        27.96        52.37        1,464.32    
+WLIGHT     47.73        27.00        1,288.47    
+WB         18.74        8.74         163.80      
+WBB        41.31        14.70        607.22      
+ST         20.66        15.51        320.53      
+TT         53.58        80.96        4,337.79    
+--------------------------------------------------------------------------------
+statistics for dataset: test
+--------------------------------------------------------------------------------
+ZLIGHT (y= 0 ) : 42511  avg weight: 0.07347137563188996
+ZB (y= 1 ) : 23644  avg weight: 0.09895415090159834
+ZBB (y= 2 ) : 48678  avg weight: 0.08664477584915112
+WLIGHT (y= 3 ) : 3121  avg weight: 0.8625571726548515
+WB (y= 4 ) : 8794  avg weight: 0.11922871139635578
+WBB (y= 5 ) : 11342  avg weight: 0.09405190893183113
+ST (y= 6 ) : 22158  avg weight: 0.08861959399092247
+TT (y= 7 ) : 50798  avg weight: 0.2576434423733738
+test set predictions:
+correct: 70330 wrong: 140716 error: 66.68
+      fun: nan
+ hess_inv: array([[1, 0, 0, 0, 0, 0, 0],
+       [0, 1, 0, 0, 0, 0, 0],
+       [0, 0, 1, 0, 0, 0, 0],
+       [0, 0, 0, 1, 0, 0, 0],
+       [0, 0, 0, 0, 1, 0, 0],
+       [0, 0, 0, 0, 0, 1, 0],
+       [0, 0, 0, 0, 0, 0, 1]])
+      jac: array([nan, nan, nan, nan, nan, nan, nan])
+  message: 'Desired error not necessarily achieved due to precision loss.'
+     nfev: 9
+      nit: 0
+     njev: 1
+   status: 2
+  success: False
+        x: array([1.09235187, 1.21324968, 1.32564757, 1.00301384, 0.95108907,
+       1.25053094, 0.91068887])
+[34mINFO: TwoHighest : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: TwoHighest : estimated process scale-factors (without systematics): [1.09235187 1.21324968 1.32564757 1.00301384 0.95108907 1.25053094
+ 0.91068887] [0m
+[34mINFO: TwoHighest : estimated process scale-factor uncertainties (stat only): [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0] [0m
+[34mINFO: TwoHighest : estimated process scale-factor relative uncertainties (stat only): [0.9154559333399578, 0.8242326499884439, 0.7543483058587371, 0.9969952208120503, 1.051426238900928, 0.7996603404988576, 1.0980698586670636] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 1.0923518692501024
+scale ZB by 1.2132496814024782
+scale ZBB by 1.3256475718622012
+scale WLIGHT by 1.0030138350969249
+scale WB by 0.9510890664525506
+scale WBB by 1.250530943395496
+scale TT by 0.9106888711196302
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 1.0923518692501024
+scale ZB by 1.2132496814024782
+scale ZBB by 1.3256475718622012
+scale WLIGHT by 1.0030138350969249
+scale WB by 0.9510890664525506
+scale WBB by 1.250530943395496
+scale TT by 0.9106888711196302
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [10, 20, 30, 40, 50, 60, 70, 80, 90]  =  [0.0, 0.23142691887624584, 0.26239680812724886, 0.28117792224587795, 0.294593302591388, 0.30769363015908985, 0.3200285861451251, 0.33407044222718935, 0.3505341281169629, 0.37579381384668, 1.0, 1.2109610620636557, 1.2251171726166534, 1.237482256050401, 1.2493571208880654, 1.2627092595162597, 1.2765351370033735, 1.2907884458212104, 1.3099305399424002, 1.3344443314992733, 2.0, 2.2540295448181245, 2.2827012744278745, 2.307207209926011, 2.3335732720705122, 2.361610116923586, 2.393270310155708, 2.430720611859485, 2.4883681844238232, 2.5854993455872615, 3.0, 3.2424544699673117, 3.2644278649433573, 3.2797698002086224, 3.2932987907252222, 3.3058081510361683, 3.319669542504404, 3.3368286665626945, 3.3581178332986767, 3.3908777521055073, 4.0, 4.192900754540423, 4.204472929573409, 4.213016569862983, 4.21970320699918, 4.225417921534907, 4.230482820321474, 4.2375537338365366, 4.246730199740786, 4.26088732166245, 5.0, 5.215323081304645, 5.2361820363539895, 5.262456944501353, 5.305631799399657, 5.348167059287565, 5.387203929758553, 5.42324039306091, 5.460963011447659, 5.507662959833728, 6.0, 6.212517228260526, 6.228047677515658, 6.2416212295121705, 6.25608832193821, 6.271681838911237, 6.289000915770895, 6.310435042922268, 6.33570867573877, 6.370497503633933, 7.0, 7.2397543909779705, 7.274473355662337, 7.3087805326768835, 7.344781371925481, 7.3846099779509835, 7.426868210903239, 7.473273550944511, 7.526189420806118, 7.589291237808915, 8.0]
+      fun: 2.1917213462292937e-11
+ hess_inv: array([[ 8.66770671e-03, -7.91508087e-03,  6.34435586e-04,
+        -8.76583949e-03,  1.70719560e-02, -3.76997526e-03,
+        -4.12821275e-05],
+       [-7.91508087e-03,  2.92832749e-02, -3.33579524e-03,
+         8.80789416e-03, -6.79885280e-02,  1.11175468e-02,
+         4.89752575e-04],
+       [ 6.34435586e-04, -3.33579524e-03,  1.67808447e-03,
+        -6.42681701e-04,  6.26942915e-03, -4.17528334e-03,
+        -8.56357592e-05],
+       [-8.76583949e-03,  8.80789416e-03, -6.42681701e-04,
+         1.13459275e-02, -2.35455551e-02,  4.40692302e-03,
+         2.77452129e-05],
+       [ 1.70719560e-02, -6.79885280e-02,  6.26942915e-03,
+        -2.35455551e-02,  1.88521594e-01, -2.95411277e-02,
+        -1.69202906e-03],
+       [-3.76997526e-03,  1.11175468e-02, -4.17528334e-03,
+         4.40692302e-03, -2.95411277e-02,  2.01957501e-02,
+         9.89483234e-05],
+       [-4.12821275e-05,  4.89752575e-04, -8.56357592e-05,
+         2.77452129e-05, -1.69202906e-03,  9.89483234e-05,
+         1.19278961e-04]])
+      jac: array([ 1.06533754e-06,  2.99361427e-07,  1.03381337e-06,  9.13861746e-07,
+        9.24091767e-08,  3.65035755e-07, -4.21330055e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 171
+      nit: 12
+     njev: 19
+   status: 0
+  success: True
+        x: array([1.0000001 , 0.99999989, 0.99999999, 0.99999985, 1.00000045,
+       0.99999988, 1.        ])
+[34mINFO: 10binsFlat : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 10binsFlat : estimated process scale-factors (without systematics): [1.0000001  0.99999989 0.99999999 0.99999985 1.00000045 0.99999988
+ 1.        ] [0m
+[34mINFO: 10binsFlat : estimated process scale-factor uncertainties (stat only): [0.09310051936206133, 0.17112356630255252, 0.040964429285681433, 0.1065172638661716, 0.43419073406254705, 0.14211175200916842, 0.010921490805091043] [0m
+[34mINFO: 10binsFlat : estimated process scale-factor relative uncertainties (stat only): [0.09310050968720561, 0.17112358573375633, 0.0409644298171335, 0.10651727949851435, 0.43419053981153805, 0.1421117691434563, 0.010921490847865726] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 1.000000103918397
+scale ZB by 0.9999998864492949
+scale ZBB by 0.999999987026499
+scale WLIGHT by 0.9999998532412504
+scale WB by 1.0000004473865531
+scale WBB by 0.9999998794309016
+scale TT by 0.9999999960834391
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 1.000000103918397
+scale ZB by 0.9999998864492949
+scale ZBB by 0.999999987026499
+scale WLIGHT by 0.9999998532412504
+scale WB by 1.0000004473865531
+scale WBB by 0.9999998794309016
+scale TT by 0.9999999960834391
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [2, 6, 14, 26, 41, 59, 74, 86, 94, 98]  =  [0.0, 0.1888329455788601, 0.21604650148934568, 0.24562837189287057, 0.27360549681960505, 0.29583365837289516, 0.31885289963925434, 0.34023957551163103, 0.3630713887052799, 0.39396551460817814, 0.4362242788192107, 1.0, 1.1884323787206739, 1.2031263386908515, 1.2171272215075684, 1.2326749156362327, 1.2508751783388317, 1.2751764187796528, 1.298068663839921, 1.3232510877320023, 1.3507229368969784, 1.3805826234310765, 2.0, 2.214841233464133, 2.238404889764032, 2.266327837625569, 2.296987518749067, 2.3358195800311425, 2.3898645821266395, 2.449902902949644, 2.5425132314103136, 2.6346925599822972, 2.736875613970268, 3.0, 3.2093218423766983, 3.2302281378172393, 3.252630974113881, 3.273991930104902, 3.2944784956141304, 3.318443203178121, 3.3451472383833507, 3.374960309677822, 3.418024030619698, 3.47586982045857, 4.0, 4.174181028659084, 4.185359707160179, 4.198282046332202, 4.209546953775118, 4.220203097542977, 4.22995452080785, 4.24130579267984, 4.253994954639775, 4.269260296070121, 4.285380907418448, 5.0, 5.186763830190706, 5.204944363501021, 5.224139424698557, 5.249334272600315, 5.310344895166825, 5.383390354215472, 5.4377779735898795, 5.487632085801968, 5.531864347244559, 5.57042089723725, 6.0, 6.185430380071065, 6.204089851874019, 6.219442246347193, 6.236318510199186, 6.257654301927177, 6.287321421355718, 6.320166198395344, 6.354909588849542, 6.393833344872849, 6.434307344820585, 7.0, 7.199223773122668, 7.222269339528242, 7.254659036434148, 7.295273515807488, 7.348757258675986, 7.42170300105677, 7.493261662016498, 7.562023647295247, 7.624473108426615, 7.678197616611486, 8.0]
+      fun: 2.9573809705572916e-11
+ hess_inv: array([[ 8.06105701e-03, -7.30968634e-03,  5.67843757e-04,
+        -8.12374957e-03,  1.57048951e-02, -3.47411488e-03,
+        -4.33138676e-05],
+       [-7.30968634e-03,  2.84690014e-02, -3.18149404e-03,
+         8.12313002e-03, -6.66683064e-02,  1.07014196e-02,
+         4.89062498e-04],
+       [ 5.67843757e-04, -3.18149404e-03,  1.65765933e-03,
+        -5.47438795e-04,  5.94310416e-03, -4.12042491e-03,
+        -8.32047032e-05],
+       [-8.12374957e-03,  8.12313002e-03, -5.47438795e-04,
+         1.08003588e-02, -2.21950056e-02,  4.13884297e-03,
+         3.19952762e-05],
+       [ 1.57048951e-02, -6.66683064e-02,  5.94310416e-03,
+        -2.21950056e-02,  1.87903016e-01, -2.90658614e-02,
+        -1.73001156e-03],
+       [-3.47411488e-03,  1.07014196e-02, -4.12042491e-03,
+         4.13884297e-03, -2.90658614e-02,  2.02399434e-02,
+         9.87549801e-05],
+       [-4.33138676e-05,  4.89062498e-04, -8.32047032e-05,
+         3.19952762e-05, -1.73001156e-03,  9.87549801e-05,
+         1.24329344e-04]])
+      jac: array([-4.09108559e-06, -1.67605217e-06, -2.04714737e-06, -3.90566859e-06,
+       -1.15267859e-06, -4.36592661e-07, -7.64532157e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 162
+      nit: 13
+     njev: 18
+   status: 0
+  success: True
+        x: array([1.00000001, 1.00000008, 0.99999991, 0.99999997, 0.99999992,
+       1.00000022, 1.        ])
+[34mINFO: 10binsGauss : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 10binsGauss : estimated process scale-factors (without systematics): [1.00000001 1.00000008 0.99999991 0.99999997 0.99999992 1.00000022
+ 1.        ] [0m
+[34mINFO: 10binsGauss : estimated process scale-factor uncertainties (stat only): [0.08978338939251607, 0.16872759539826884, 0.040714362658613446, 0.10392477493506172, 0.43347781536465757, 0.14226715496942824, 0.011150306905661144] [0m
+[34mINFO: 10binsGauss : estimated process scale-factor relative uncertainties (stat only): [0.0897833882021487, 0.16872758247467198, 0.04071436626772353, 0.1039247776169558, 0.43347784947093343, 0.1422671241756515, 0.011150306859798549] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 1.0000000132582139
+scale ZB by 1.0000000765944528
+scale ZBB by 0.9999999113553661
+scale WLIGHT by 0.9999999741938915
+scale WB by 0.9999999213194494
+scale WBB by 1.0000002164504058
+scale TT by 1.000000004113124
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 1.0000000132582139
+scale ZB by 1.0000000765944528
+scale ZBB by 0.9999999113553661
+scale WLIGHT by 0.9999999741938915
+scale WB by 0.9999999213194494
+scale WBB by 1.0000002164504058
+scale TT by 1.000000004113124
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [1, 3, 5, 8, 14, 26, 41, 59, 74, 84, 89, 93, 96, 98]  =  [0.0, 0.18006961842555666, 0.19886038629508432, 0.21076003599315277, 0.22429164255702866, 0.24562837189287057, 0.27360549681960505, 0.29583365837289516, 0.31885289963925434, 0.34023957551163103, 0.3583401510620113, 0.3730856082967303, 0.38966970127228734, 0.4111065616386827, 0.4362242788192107, 1.0, 1.1797528347236734, 1.1938102301388687, 1.2006520796149884, 1.2072538154448897, 1.2171272215075684, 1.2326749156362327, 1.2508751783388317, 1.2751764187796528, 1.298068663839921, 1.3181687801855335, 1.3315706290310094, 1.3465404882505112, 1.3616615158231693, 1.3805826234310765, 2.0, 2.2045866925043347, 2.2218781769666265, 2.233557846739466, 2.2474657120692267, 2.266327837625569, 2.296987518749067, 2.3358195800311425, 2.3898645821266395, 2.449902902949644, 2.525022301666943, 2.5740255187916787, 2.6204915046308193, 2.6695936280593107, 2.736875613970268, 3.0, 3.1963959188157287, 3.217007050205922, 3.2269822889596083, 3.23681330218204, 3.252630974113881, 3.273991930104902, 3.2944784956141304, 3.318443203178121, 3.3451472383833507, 3.3688370945217523, 3.3863534481518784, 3.4100687503048444, 3.4392633599398037, 3.47586982045857, 4.0, 4.1699197221493876, 4.178354422435014, 4.1834952431638275, 4.189531456307937, 4.198282046332202, 4.209546953775118, 4.220203097542977, 4.22995452080785, 4.24130579267984, 4.251559582774976, 4.258911765551587, 4.267156963204026, 4.275492155552916, 4.285380907418448, 5.0, 5.177305666749758, 5.193976299693345, 5.202558490405406, 5.210523564786815, 5.224139424698557, 5.249334272600315, 5.310344895166825, 5.383390354215472, 5.4377779735898795, 5.478784089885202, 5.5028243689330685, 5.524792124300987, 5.547712775458576, 5.57042089723725, 6.0, 6.175066383370404, 6.1921709532104305, 6.200335122651993, 6.20851814513069, 6.219442246347193, 6.236318510199186, 6.257654301927177, 6.287321421355718, 6.320166198395344, 6.348068966815382, 6.366037404075181, 6.387015916004172, 6.409757870775088, 6.434307344820585, 7.0, 7.189620266324087, 7.2063753776636155, 7.217402567114265, 7.230871172342919, 7.254659036434148, 7.295273515807488, 7.348757258675986, 7.42170300105677, 7.493261662016498, 7.549366762561901, 7.582532208736052, 7.614707215785355, 7.647223864988832, 7.678197616611486, 8.0]
+      fun: 3.126072682516225e-11
+ hess_inv: array([[ 7.03036678e-03, -6.43229966e-03,  4.79253901e-04,
+        -6.89667281e-03,  1.35222939e-02, -2.94626468e-03,
+        -3.27805410e-05],
+       [-6.43229966e-03,  2.74426588e-02, -3.11429891e-03,
+         7.32523286e-03, -6.41427917e-02,  1.01348259e-02,
+         4.89075444e-04],
+       [ 4.79253901e-04, -3.11429891e-03,  1.67615831e-03,
+        -4.74458009e-04,  5.76783673e-03, -4.03399180e-03,
+        -8.41124435e-05],
+       [-6.89667281e-03,  7.32523286e-03, -4.74458009e-04,
+         9.39121331e-03, -2.03331720e-02,  3.58223949e-03,
+         3.58123813e-05],
+       [ 1.35222939e-02, -6.41427917e-02,  5.76783673e-03,
+        -2.03331720e-02,  1.81814505e-01, -2.75793826e-02,
+        -1.75362513e-03],
+       [-2.94626468e-03,  1.01348259e-02, -4.03399180e-03,
+         3.58223949e-03, -2.75793826e-02,  1.98321735e-02,
+         9.14832764e-05],
+       [-3.27805410e-05,  4.89075444e-04, -8.41124435e-05,
+         3.58123813e-05, -1.75362513e-03,  9.14832764e-05,
+         1.26356645e-04]])
+      jac: array([-3.25239828e-06, -3.22595499e-07,  1.78787867e-06, -2.71617499e-06,
+       -7.23358654e-08,  3.78775567e-07, -7.33972916e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 171
+      nit: 14
+     njev: 19
+   status: 0
+  success: True
+        x: array([1.00000005, 0.99999982, 1.00000001, 0.99999993, 1.00000057,
+       0.99999994, 0.99999999])
+[34mINFO: 15binsGauss : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 15binsGauss : estimated process scale-factors (without systematics): [1.00000005 0.99999982 1.00000001 0.99999993 1.00000057 0.99999994
+ 0.99999999] [0m
+[34mINFO: 15binsGauss : estimated process scale-factor uncertainties (stat only): [0.08384728248218484, 0.16565825893079927, 0.04094091239171861, 0.09690827266031515, 0.42639712153615855, 0.14082675007617146, 0.011240847173396512] [0m
+[34mINFO: 15binsGauss : estimated process scale-factor relative uncertainties (stat only): [0.0838472778866786, 0.1656582885045637, 0.040940911979947904, 0.09690827948330619, 0.426396879928042, 0.14082675796291763, 0.011240847278942439] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 1.0000000548080552
+scale ZB by 0.999999821477303
+scale ZBB by 1.000000010057683
+scale WLIGHT by 0.9999999295933116
+scale WB by 1.0000005666273089
+scale WBB by 0.9999999439968208
+scale TT by 0.9999999906105008
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 1.0000000548080552
+scale ZB by 0.999999821477303
+scale ZBB by 1.000000010057683
+scale WLIGHT by 0.9999999295933116
+scale WB by 1.0000005666273089
+scale WBB by 0.9999999439968208
+scale TT by 0.9999999906105008
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [20, 40, 60, 80]  =  [0.0, 0.26239680812724886, 0.294593302591388, 0.3200285861451251, 0.3505341281169629, 1.0, 1.2251171726166534, 1.2493571208880654, 1.2765351370033735, 1.3099305399424002, 2.0, 2.2827012744278745, 2.3335732720705122, 2.393270310155708, 2.4883681844238232, 3.0, 3.2644278649433573, 3.2932987907252222, 3.319669542504404, 3.3581178332986767, 4.0, 4.204472929573409, 4.21970320699918, 4.230482820321474, 4.246730199740786, 5.0, 5.2361820363539895, 5.305631799399657, 5.387203929758553, 5.460963011447659, 6.0, 6.228047677515658, 6.25608832193821, 6.289000915770895, 6.33570867573877, 7.0, 7.274473355662337, 7.344781371925481, 7.426868210903239, 7.526189420806118, 8.0]
+      fun: 2.776402762926954e-11
+ hess_inv: array([[ 1.02953524e-02, -1.04787224e-02,  8.86934499e-04,
+        -1.07245090e-02,  2.37812236e-02, -5.14368334e-03,
+        -9.16204674e-05],
+       [-1.04787224e-02,  3.52679282e-02, -3.93325986e-03,
+         1.19176948e-02, -8.36385177e-02,  1.40160833e-02,
+         6.06449947e-04],
+       [ 8.86934499e-04, -3.93325986e-03,  1.73562433e-03,
+        -9.22217235e-04,  7.81482909e-03, -4.56744619e-03,
+        -9.31060270e-05],
+       [-1.07245090e-02,  1.19176948e-02, -9.22217235e-04,
+         1.38147236e-02, -3.19393805e-02,  6.11770925e-03,
+         9.11795482e-05],
+       [ 2.37812236e-02, -8.36385177e-02,  7.81482909e-03,
+        -3.19393805e-02,  2.30649775e-01, -3.74239670e-02,
+        -2.03315597e-03],
+       [-5.14368334e-03,  1.40160833e-02, -4.56744619e-03,
+         6.11770925e-03, -3.74239670e-02,  2.24463361e-02,
+         1.46844991e-04],
+       [-9.16204674e-05,  6.06449947e-04, -9.31060270e-05,
+         9.11795482e-05, -2.03315597e-03,  1.46844991e-04,
+         1.27092023e-04]])
+      jac: array([2.21734723e-06, 5.54167113e-07, 1.31017476e-06, 2.47636776e-06,
+       4.31687219e-07, 3.60095387e-07, 7.02611542e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 171
+      nit: 13
+     njev: 19
+   status: 0
+  success: True
+        x: array([0.99999996, 0.99999978, 0.99999995, 1.0000001 , 1.00000027,
+       1.00000011, 1.00000002])
+[34mINFO: 5binsFlat : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 5binsFlat : estimated process scale-factors (without systematics): [0.99999996 0.99999978 0.99999995 1.0000001  1.00000027 1.00000011
+ 1.00000002] [0m
+[34mINFO: 5binsFlat : estimated process scale-factor uncertainties (stat only): [0.1014660162221442, 0.1877975722688102, 0.041660824894574684, 0.11753605224271643, 0.480260111921481, 0.14982101362830288, 0.011273509776324875] [0m
+[34mINFO: 5binsFlat : estimated process scale-factor relative uncertainties (stat only): [0.10146602069258351, 0.18779761265868009, 0.041660826841880834, 0.11753604094926469, 0.4802599805783041, 0.14982099652631647, 0.01127350960427166] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999999559415135
+scale ZB by 0.9999997849287362
+scale ZBB by 0.9999999532581013
+scale WLIGHT by 1.0000000960850106
+scale WB by 1.0000002734834927
+scale WBB by 1.0000001141494637
+scale TT by 1.000000015261726
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999999559415135
+scale ZB by 0.9999997849287362
+scale ZBB by 0.9999999532581013
+scale WLIGHT by 1.0000000960850106
+scale WB by 1.0000002734834927
+scale WBB by 1.0000001141494637
+scale TT by 1.000000015261726
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [50, 70, 85, 95]  =  [0.0, 0.30769363015908985, 0.33407044222718935, 0.36065887296023413, 0.4025940166260683, 1.0, 1.2627092595162597, 1.2907884458212104, 1.3207890880533624, 1.3556664045680906, 2.0, 2.361610116923586, 2.430720611859485, 2.533183639403794, 2.6498006145459283, 3.0, 3.3058081510361683, 3.3368286665626945, 3.371617134524156, 3.426004162959492, 4.0, 4.225417921534907, 4.2375537338365366, 4.252996141732955, 4.27208935995584, 5.0, 5.348167059287565, 5.42324039306091, 5.4829898008794595, 5.538642571474572, 6.0, 6.271681838911237, 6.310435042922268, 6.351520764819296, 6.401338685635797, 7.0, 7.3846099779509835, 7.473273550944511, 7.555311601304748, 7.63446946718206, 8.0]
+      fun: 3.6845235617487086e-11
+ hess_inv: array([[ 1.05540652e-02, -1.02468532e-02,  7.91974468e-04,
+        -1.10084543e-02,  2.30104810e-02, -4.89306300e-03,
+        -7.53987762e-05],
+       [-1.02468532e-02,  3.51333086e-02, -3.96003295e-03,
+         1.17188702e-02, -8.30971109e-02,  1.37400232e-02,
+         5.98979773e-04],
+       [ 7.91974468e-04, -3.96003295e-03,  1.86436908e-03,
+        -8.17521693e-04,  7.63657336e-03, -4.73199851e-03,
+        -1.05543109e-04],
+       [-1.10084543e-02,  1.17188702e-02, -8.17521693e-04,
+         1.41854652e-02, -3.15178040e-02,  5.90389479e-03,
+         7.76999983e-05],
+       [ 2.30104810e-02, -8.30971109e-02,  7.63657336e-03,
+        -3.15178040e-02,  2.30981177e-01, -3.65776583e-02,
+        -2.05460584e-03],
+       [-4.89306300e-03,  1.37400232e-02, -4.73199851e-03,
+         5.90389479e-03, -3.65776583e-02,  2.27088936e-02,
+         1.52427019e-04],
+       [-7.53987762e-05,  5.98979773e-04, -1.05543109e-04,
+         7.76999983e-05, -2.05460584e-03,  1.52427019e-04,
+         1.40762264e-04]])
+      jac: array([ 5.13017266e-07,  1.25996402e-06,  5.25579344e-07,  8.16516655e-07,
+        4.16123487e-07, -4.52008778e-08,  4.51303286e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 189
+      nit: 15
+     njev: 21
+   status: 0
+  success: True
+        x: array([0.99999984, 1.00000017, 0.99999996, 1.00000001, 0.99999983,
+       0.99999996, 1.        ])
+[34mINFO: 5bins_50_20_15_10_5 : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 5bins_50_20_15_10_5 : estimated process scale-factors (without systematics): [0.99999984 1.00000017 0.99999996 1.00000001 0.99999983 0.99999996
+ 1.        ] [0m
+[34mINFO: 5bins_50_20_15_10_5 : estimated process scale-factor uncertainties (stat only): [0.10273298009942157, 0.18743881282344604, 0.043178340382820084, 0.11910275046103792, 0.4806050118492618, 0.150694703190775, 0.01186432735541648] [0m
+[34mINFO: 5bins_50_20_15_10_5 : estimated process scale-factor relative uncertainties (stat only): [0.10273299668109231, 0.18743878127557712, 0.04317834200577957, 0.11910274928098549, 0.48060509309848576, 0.1506947097608454, 0.011864327370736902] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999998385944995
+scale ZB by 1.0000001683102542
+scale ZBB by 0.9999999624126491
+scale WLIGHT by 1.000000009907852
+scale WB by 0.9999998309438973
+scale WBB by 0.9999999564014529
+scale TT by 0.9999999987086986
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999998385944995
+scale ZB by 1.0000001683102542
+scale ZBB by 0.9999999624126491
+scale WLIGHT by 1.000000009907852
+scale WB by 0.9999998309438973
+scale WBB by 0.9999999564014529
+scale TT by 0.9999999987086986
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [30, 58, 79, 93]  =  [0.0, 0.28117792224587795, 0.31768635193224626, 0.3485999637688334, 0.38966970127228734, 1.0, 1.237482256050401, 1.2738105040310688, 1.3076851703179382, 1.3465404882505112, 2.0, 2.307207209926011, 2.3865899700481137, 2.480096951568212, 2.6204915046308193, 3.0, 3.2797698002086224, 3.3171816568040424, 3.3559810295158243, 3.4100687503048444, 4.0, 4.213016569862983, 4.229394987641229, 4.245793890337529, 4.267156963204026, 5.0, 5.262456944501353, 5.3792064311623475, 5.457063680794548, 5.524792124300987, 6.0, 6.2416212295121705, 6.285597871376376, 6.333058070391349, 6.387015916004172, 7.0, 7.3087805326768835, 7.417666582961906, 7.520204862459534, 7.614707215785355, 8.0]
+      fun: 2.4389921876667402e-11
+ hess_inv: array([[ 1.05485736e-02, -1.02217848e-02,  7.81142164e-04,
+        -1.09695992e-02,  2.33854644e-02, -4.79993180e-03,
+        -1.00474178e-04],
+       [-1.02217848e-02,  3.50944053e-02, -3.87814282e-03,
+         1.17638353e-02, -8.36098913e-02,  1.35799322e-02,
+         6.37994634e-04],
+       [ 7.81142164e-04, -3.87814282e-03,  1.74979067e-03,
+        -8.39990907e-04,  7.69049175e-03, -4.42738185e-03,
+        -1.01345627e-04],
+       [-1.09695992e-02,  1.17638353e-02, -8.39990907e-04,
+         1.40617083e-02, -3.17521014e-02,  5.83228767e-03,
+         9.09914361e-05],
+       [ 2.33854644e-02, -8.36098913e-02,  7.69049175e-03,
+        -3.17521014e-02,  2.31737313e-01, -3.66241256e-02,
+        -2.09149874e-03],
+       [-4.79993180e-03,  1.35799322e-02, -4.42738185e-03,
+         5.83228767e-03, -3.66241256e-02,  2.15761325e-02,
+         1.67683821e-04],
+       [-1.00474178e-04,  6.37994634e-04, -1.01345627e-04,
+         9.09914361e-05, -2.09149874e-03,  1.67683821e-04,
+         1.26409646e-04]])
+      jac: array([-4.32997837e-07, -4.42466786e-07,  1.78533133e-07, -7.54572124e-08,
+       -1.59936801e-07, -4.93413309e-08,  2.23649797e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 189
+      nit: 13
+     njev: 21
+   status: 0
+  success: True
+        x: array([0.99999986, 0.99999988, 0.99999994, 1.00000014, 1.00000014,
+       1.00000017, 1.        ])
+[34mINFO: 5bins_30_28_21_14_7 : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 5bins_30_28_21_14_7 : estimated process scale-factors (without systematics): [0.99999986 0.99999988 0.99999994 1.00000014 1.00000014 1.00000017
+ 1.        ] [0m
+[34mINFO: 5bins_30_28_21_14_7 : estimated process scale-factor uncertainties (stat only): [0.10270624925737573, 0.1873350082468108, 0.04183049928724093, 0.11858207400056762, 0.48139101876943785, 0.1468881630840672, 0.011243204450809455] [0m
+[34mINFO: 5bins_30_28_21_14_7 : estimated process scale-factor relative uncertainties (stat only): [0.10270626341674566, 0.18733503004752378, 0.0418305017637628, 0.11858205700532574, 0.4813909489703389, 0.1468881380686608, 0.011243204471958293] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999998621372305
+scale ZB by 0.9999998836271413
+scale ZBB by 0.9999999407962666
+scale WLIGHT by 1.0000001433205183
+scale WB by 1.0000001449946225
+scale WBB by 1.000000170302427
+scale TT by 0.9999999981189671
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999998621372305
+scale ZB by 0.9999998836271413
+scale ZBB by 0.9999999407962666
+scale WLIGHT by 1.0000001433205183
+scale WB by 1.0000001449946225
+scale WBB by 1.000000170302427
+scale TT by 0.9999999981189671
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [33, 67]  =  [0.0, 0.2850265504121517, 0.32944122795310177, 1.0, 1.240787141162913, 1.2865549730300403, 2.0, 2.3146640903363447, 2.4177471249378724, 3.0, 3.284435866736548, 3.3314792787595757, 4.0, 4.2151050290615, 4.235163707593937, 5.0, 5.274754523558526, 5.412876211212968, 6.0, 6.246160557448206, 6.30370434839101, 7.0, 7.319549685182861, 7.459096525839502, 8.0]
+      fun: 1.89137915282744e-11
+ hess_inv: array([[ 1.34961036e-02, -1.35328316e-02,  1.05724119e-03,
+        -1.43636742e-02,  3.12275197e-02, -6.76216839e-03,
+        -6.77318568e-05],
+       [-1.35328316e-02,  4.00873249e-02, -4.28673971e-03,
+         1.55663534e-02, -9.59103871e-02,  1.61792808e-02,
+         6.55514724e-04],
+       [ 1.05724119e-03, -4.28673971e-03,  1.90830991e-03,
+        -1.12967221e-03,  8.63156053e-03, -5.08377319e-03,
+        -1.01397093e-04],
+       [-1.43636742e-02,  1.55663534e-02, -1.12967221e-03,
+         1.80289754e-02, -4.11237252e-02,  7.97160578e-03,
+         7.52606464e-05],
+       [ 3.12275197e-02, -9.59103871e-02,  8.63156053e-03,
+        -4.11237252e-02,  2.64416346e-01, -4.31730096e-02,
+        -2.24593070e-03],
+       [-6.76216839e-03,  1.61792808e-02, -5.08377319e-03,
+         7.97160578e-03, -4.31730096e-02,  2.52128678e-02,
+         1.35663954e-04],
+       [-6.77318568e-05,  6.55514724e-04, -1.01397093e-04,
+         7.52606464e-05, -2.24593070e-03,  1.35663954e-04,
+         1.39139671e-04]])
+      jac: array([ 4.11669993e-07, -1.85149594e-07, -7.51010316e-07,  3.36789486e-07,
+       -9.60328165e-08, -3.92046886e-07,  2.96306042e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 207
+      nit: 17
+     njev: 23
+   status: 0
+  success: True
+        x: array([0.99999993, 0.99999989, 1.00000004, 1.0000001 , 0.99999984,
+       0.99999985, 1.00000006])
+[34mINFO: 3binsFlat : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 3binsFlat : estimated process scale-factors (without systematics): [0.99999993 0.99999989 1.00000004 1.0000001  0.99999984 0.99999985
+ 1.00000006] [0m
+[34mINFO: 3binsFlat : estimated process scale-factor uncertainties (stat only): [0.11617273157482227, 0.20021819317001902, 0.04368420666338226, 0.13427202020205353, 0.5142142992818858, 0.15878560321534965, 0.011795748001739933] [0m
+[34mINFO: 3binsFlat : estimated process scale-factor relative uncertainties (stat only): [0.11617273917567061, 0.20021821608816123, 0.0436842049235438, 0.13427200706469763, 0.5142143838437436, 0.15878562699812265, 0.01179574731723517] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.999999934572875
+scale ZB by 0.9999998855341803
+scale ZBB by 1.0000000398276325
+scale WLIGHT by 1.0000000978413608
+scale WB by 0.9999998355513565
+scale WBB by 0.9999998502208703
+scale TT by 1.000000058029792
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.999999934572875
+scale ZB by 0.9999998855341803
+scale ZBB by 1.0000000398276325
+scale WLIGHT by 1.0000000978413608
+scale WB by 0.9999998355513565
+scale WBB by 0.9999998502208703
+scale TT by 1.000000058029792
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [52, 84]  =  [0.0, 0.31019776539099786, 0.3583401510620113, 1.0, 1.2654455165416894, 1.3181687801855335, 2.0, 2.3683395456498655, 2.525022301666943, 3.0, 3.3083505772727424, 3.3688370945217523, 4.0, 4.226529379083439, 4.251559582774976, 5.0, 5.356527080896071, 5.478784089885202, 6.0, 6.2750820890653225, 6.348068966815382, 7.0, 7.3927980312909165, 7.549366762561901, 8.0]
+      fun: 2.7227143872026527e-11
+ hess_inv: array([[ 1.07812973e-02, -1.00823012e-02,  8.05041671e-04,
+        -1.14626109e-02,  2.29359121e-02, -5.03040015e-03,
+        -5.18222033e-05],
+       [-1.00823012e-02,  3.61589958e-02, -4.05328596e-03,
+         1.14094640e-02, -8.61175143e-02,  1.41994947e-02,
+         6.06639461e-04],
+       [ 8.05041671e-04, -4.05328596e-03,  1.80727715e-03,
+        -8.15543396e-04,  8.01451999e-03, -4.66265944e-03,
+        -9.69211742e-05],
+       [-1.14626109e-02,  1.14094640e-02, -8.15543396e-04,
+         1.48713472e-02, -3.11137863e-02,  6.01709656e-03,
+         4.32606659e-05],
+       [ 2.29359121e-02, -8.61175143e-02,  8.01451999e-03,
+        -3.11137863e-02,  2.38994137e-01, -3.79984596e-02,
+        -2.08355981e-03],
+       [-5.03040015e-03,  1.41994947e-02, -4.66265944e-03,
+         6.01709656e-03, -3.79984596e-02,  2.26372428e-02,
+         1.45422294e-04],
+       [-5.18222033e-05,  6.06639461e-04, -9.69211742e-05,
+         4.32606659e-05, -2.08355981e-03,  1.45422294e-04,
+         1.24910516e-04]])
+      jac: array([-9.26881700e-07, -1.05735560e-06, -1.77885203e-06,  9.41336124e-08,
+       -2.88161827e-07, -4.28431365e-07, -6.03554232e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 189
+      nit: 15
+     njev: 21
+   status: 0
+  success: True
+        x: array([0.99999991, 0.99999992, 1.00000001, 1.00000024, 0.99999941,
+       1.00000013, 1.00000003])
+[34mINFO: 3bins_52_32_16 : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 3bins_52_32_16 : estimated process scale-factors (without systematics): [0.99999991 0.99999992 1.00000001 1.00000024 0.99999941 1.00000013
+ 1.00000003] [0m
+[34mINFO: 3bins_52_32_16 : estimated process scale-factor uncertainties (stat only): [0.10383302585489802, 0.1901551886461378, 0.042512082378820246, 0.12194813316165391, 0.4888702656446267, 0.15045678055860778, 0.011176337341690235] [0m
+[34mINFO: 3bins_52_32_16 : estimated process scale-factor relative uncertainties (stat only): [0.10383303489846199, 0.19015520444438383, 0.042512081943644246, 0.12194810410708284, 0.48887055529966505, 0.15045676158615784, 0.011176337026263809] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999999129028254
+scale ZB by 0.9999999169192026
+scale ZBB by 1.0000000102365252
+scale WLIGHT by 1.0000002382535693
+scale WB by 0.9999994075015662
+scale WBB by 1.0000001260990183
+scale TT by 1.0000000282227017
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999999129028254
+scale ZB by 0.9999999169192026
+scale ZBB by 1.0000000102365252
+scale WLIGHT by 1.0000002382535693
+scale WB by 0.9999994075015662
+scale WBB by 1.0000001260990183
+scale TT by 1.0000000282227017
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  [50]  =  [0.0, 0.30769363015908985, 1.0, 1.2627092595162597, 2.0, 2.361610116923586, 3.0, 3.3058081510361683, 4.0, 4.225417921534907, 5.0, 5.348167059287565, 6.0, 6.271681838911237, 7.0, 7.3846099779509835, 8.0]
+      fun: 2.332410429799673e-11
+ hess_inv: array([[ 1.62190870e-02, -1.58940658e-02,  1.21652798e-03,
+        -1.76640489e-02,  3.77546418e-02, -8.10090163e-03,
+        -9.70208728e-05],
+       [-1.58940658e-02,  4.29904971e-02, -4.60737776e-03,
+         1.84514939e-02, -1.03640158e-01,  1.76524376e-02,
+         6.94979623e-04],
+       [ 1.21652798e-03, -4.60737776e-03,  1.92920912e-03,
+        -1.32364105e-03,  9.46632087e-03, -5.24485897e-03,
+        -1.12420762e-04],
+       [-1.76640489e-02,  1.84514939e-02, -1.32364105e-03,
+         2.20400153e-02, -4.90426695e-02,  9.67531934e-03,
+         9.91776762e-05],
+       [ 3.77546418e-02, -1.03640158e-01,  9.46632087e-03,
+        -4.90426695e-02,  2.83933756e-01, -4.70480876e-02,
+        -2.27752996e-03],
+       [-8.10090163e-03,  1.76524376e-02, -5.24485897e-03,
+         9.67531934e-03, -4.70480876e-02,  2.60093994e-02,
+         1.65535953e-04],
+       [-9.70208728e-05,  6.94979623e-04, -1.12420762e-04,
+         9.91776762e-05, -2.27752996e-03,  1.65535953e-04,
+         1.31416021e-04]])
+      jac: array([-3.63880123e-07,  1.38959212e-07,  7.13590276e-07, -4.88545536e-07,
+        5.29379770e-08,  1.67489968e-07,  1.68724336e-06])
+  message: 'Optimization terminated successfully.'
+     nfev: 189
+      nit: 14
+     njev: 21
+   status: 0
+  success: True
+        x: array([0.99999966, 1.00000102, 0.99999981, 1.00000029, 0.999998  ,
+       1.00000035, 1.00000003])
+[34mINFO: 2binsFlat : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 2binsFlat : estimated process scale-factors (without systematics): [0.99999966 1.00000102 0.99999981 1.00000029 0.999998   1.00000035
+ 1.00000003] [0m
+[34mINFO: 2binsFlat : estimated process scale-factor uncertainties (stat only): [0.12735417943026625, 0.2073414986474728, 0.043922763135508615, 0.14845880009974552, 0.5328543477217074, 0.1612742984979351, 0.01146368268984086] [0m
+[34mINFO: 2binsFlat : estimated process scale-factor relative uncertainties (stat only): [0.12735422314532358, 0.20734128759107587, 0.04392277130765929, 0.14845875711543838, 0.5328554144033402, 0.16127424193095435, 0.011463682394990264] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999996567443448
+scale ZB by 1.0000010179178465
+scale ZBB by 0.9999998139427355
+scale WLIGHT by 1.0000002895370268
+scale WB by 0.9999979981781099
+scale WBB by 1.0000003507502504
+scale TT by 1.0000000257204087
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999996567443448
+scale ZB by 1.0000010179178465
+scale ZBB by 0.9999998139427355
+scale WLIGHT by 1.0000002895370268
+scale WB by 0.9999979981781099
+scale WBB by 1.0000003507502504
+scale TT by 1.0000000257204087
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+bin-list CRs  []  =  [0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0]
+      fun: 1.1025410495438328e-12
+ hess_inv: array([[ 2.01316773e-02, -1.90812679e-02,  1.49365134e-03,
+        -2.20636189e-02,  4.59171265e-02, -1.09698635e-02,
+        -4.62232374e-05],
+       [-1.90812679e-02,  5.21791405e-02, -5.56271553e-03,
+         2.23387288e-02, -1.27722587e-01,  2.30054148e-02,
+         8.11239394e-04],
+       [ 1.49365134e-03, -5.56271553e-03,  2.25262281e-03,
+        -1.67098012e-03,  1.17373400e-02, -6.31313386e-03,
+        -1.30441815e-04],
+       [-2.20636189e-02,  2.23387288e-02, -1.67098012e-03,
+         2.70653686e-02, -5.94325451e-02,  1.33626714e-02,
+         4.68229024e-05],
+       [ 4.59171265e-02, -1.27722587e-01,  1.17373400e-02,
+        -5.94325451e-02,  3.53063735e-01, -6.40144592e-02,
+        -2.67467480e-03],
+       [-1.09698635e-02,  2.30054148e-02, -6.31313386e-03,
+         1.33626714e-02, -6.40144592e-02,  3.37108473e-02,
+         2.23666619e-04],
+       [-4.62232374e-05,  8.11239394e-04, -1.30441815e-04,
+         4.68229024e-05, -2.67467480e-03,  2.23666619e-04,
+         1.44420658e-04]])
+      jac: array([-6.61572185e-09,  1.53196190e-08, -9.54831815e-08,  8.82997114e-09,
+        5.40572586e-09, -1.90702007e-08, -4.82365339e-07])
+  message: 'Optimization terminated successfully.'
+     nfev: 153
+      nit: 14
+     njev: 17
+   status: 0
+  success: True
+        x: array([0.99999947, 1.00000036, 0.99999996, 1.00000074, 0.99999944,
+       0.9999998 , 0.99999998])
+[34mINFO: 1bin : processes: ['ZLIGHT', 'ZB', 'ZBB', 'WLIGHT', 'WB', 'WBB', 'TT'] [0m
+[34mINFO: 1bin : estimated process scale-factors (without systematics): [0.99999947 1.00000036 0.99999996 1.00000074 0.99999944 0.9999998
+ 0.99999998] [0m
+[34mINFO: 1bin : estimated process scale-factor uncertainties (stat only): [0.14188614201232458, 0.22842753890632111, 0.04746180371671369, 0.16451555720082828, 0.5941916653419711, 0.18360513958945415, 0.012017514645779903] [0m
+[34mINFO: 1bin : estimated process scale-factor relative uncertainties (stat only): [0.14188621738893248, 0.22842745607782883, 0.04746180538481177, 0.16451543563146284, 0.5941919978568249, 0.18360517693971695, 0.01201751484727108] [0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999994687531369
+scale ZB by 1.00000036260305
+scale ZBB by 0.9999999648538849
+scale WLIGHT by 1.0000007389541594
+scale WB by 0.9999994403915654
+scale WBB by 0.999999796572932
+scale TT by 0.9999999832335404
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+scale ZLIGHT by 0.9999994687531369
+scale ZB by 1.00000036260305
+scale ZBB by 0.9999999648538849
+scale WLIGHT by 1.0000007389541594
+scale WB by 0.9999994403915654
+scale WBB by 0.999999796572932
+scale TT by 0.9999999832335404
+[32mPLOTS: use n=S+B Asimov data in the plots![0m

@@ -3,8 +3,9 @@
 
 mvaType=MultiDNN
 bdtname=CMS_vhbb_DNN_ZnnHF_13TeV
-xmlFile=aux/LegacyDNNs/V1_2017_Aug2019/190816_DNN2017V11_Znn_HFCR_binnedWP/model.ckpt
-nOutputs=5
+#xmlFile=aux/LegacyDNNs/V1_2017_Aug2019/190816_DNN2017V11_Znn_HFCR_binnedWP/model.ckpt
+xmlFile=aux/LegacyDNNs/V1_2017_Oct2019/191022_VHLegacyDNN2017V11_Znn_Zhf_medhigh_Znn_WP/model.ckpt
+nOutputs=8
 
 # this is the order as from Andreas mail
 name=H_mass                 lname=H_mass                isEx=1 isSpec=0 order=1

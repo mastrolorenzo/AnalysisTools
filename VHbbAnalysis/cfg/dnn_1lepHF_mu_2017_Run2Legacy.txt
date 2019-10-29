@@ -3,7 +3,8 @@
 
 mvaType=MultiDNN
 bdtname=CMS_vhbb_DNN_WmnHF_13TeV
-xmlFile=aux/LegacyDNNs/V1_2017_Aug2019/190816_DNN2017V11_Wmn_HFCR_binnedWP/model.ckpt
+#xmlFile=aux/LegacyDNNs/V1_2017_Aug2019/190816_DNN2017V11_Wmn_HFCR_binnedWP/model.ckpt
+xmlFile=aux/LegacyDNNs/V1_2017_Oct2019/191022_VHLegacyDNN2017V11_Wln_Whf_medhigh_Wln_WP/model.ckpt
 nOutputs=5
 
 # this is the order as from the model.ckpt.log file

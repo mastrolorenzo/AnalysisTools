@@ -1,0 +1,1307 @@
+saving logfile to [34m results//FINAL_VHLegacy_2lep_WP_SR_medhigh_Zll/Zll2017_SR_medhigh_Zll_191022_V11finalVarsWP.h5/512-256-128-64-64-64/0.20-0.50-0.50-0.50-0.50-0.50/1.000e+00/rnd_1/output.txt [0m
+INFO: numpy random state =  MT19937 ,91d7ba83,244f82d9,6cd8825d,30cc6e8e,fdac1d8f,ce3e5d7d,a0a193f4,8ec4cc37,8c919cdb,b80b6553,f249d0f8,ed800aa6,3be79e10,f0b79852,d820a996,d3d44ec9,3261681,9b3d560e,783efd04,3381be03,6d21726,154c284f,9f8a00f5,214d6048,c71fdde3,82b65649,37e7d416,51666a45,22bc8424,ed4a5fa4,57e7a4a8,fdedc5bb,7bc4cc88,3db46203,91dda4c9,78fe3c34,d44e0aa8,31e3f931,2d062baa,afb0a109,7059499e,f3909a8d,9c93e628,2b4d8a0c,7e658ce0,736e2cab,704a3ad2,63f3a6e,c0302a8f,893771a0,816312d6,b68efe0e,e9770063,3e6e2bae,8d2455b8,faf54dac,7dbfeadb,2dc43bfa,b8b831e7,58a53d76,bef190d1,83674ddb,b3e0561d,5854f9aa,7fd5a274,a2196683,80ba1129,fc0f129,940535b4,ea2ccafc,950fdf79,bc5a0d47,294470c4,70762b41,4d02364a,1aa5a1cc,68427238,b02ac84d,9fff762a,da828a68,8557ed78,81afee14,f3389c87,a15b432e,18c364a6,e6a97ca7,f44e1173,ae78d1e1,7e1b4c60,ed0967ea,6a54396f,70232f8b,911a2b90,ec39e3f2,8389a22a,e4606ca8,b19f3bfb,eeb996f4,11cec811,bf2f6146,a5097d79,f853261e,3415a158,79eaad37,3385b60c,d15e969,6b00faaf,95339cd7,aa6b3cbc,f3fd39cb,dba751,ef4ce3c7,7c62eb9a,f05071c6,bfc21928,49f3ce44,39b2751c,de93d5e2,63f59c45,67c68e11,cf408058,2eed6660,33bb8627,2a917ef4,f7acfba,821abdfb,dd7c41a0,452fb07e,9e4f5565,1152b605,867cc24f,c852aa05,e484ffd0,633e493c,265b42d3,4c8c0473,ab8a47e,a51d7871,2731a2a0,c4f6acae,65a7d537,cdfc10bf,917fa6cb,dc82aeed,d2250789,82be780c,a4f17fbe,234f1778,bb25b01a,5e955237,3828f95,f2ae5c54,5551c2e8,3e57f603,6eb16999,b1a7bcf6,6d2c308,54fd2ff0,5c94f83a,4b30bc4a,87a10d60,63722821,54f8a1dd,9d6592a3,2d6cd44e,ab9db348,ee760531,28ca01a5,b0154e03,404dc391,83ff762c,bc7fdacd,f969a988,9b3b1dc7,342b9f5c,34099334,886de03a,6a488ad6,889ca6e4,de34a854,72c14f88,bdca68f6,bc6009e1,8cc3e333,4544a902,86b66b,264295de,27504e9,5392569f,ce8378e2,5cb982e6,e1b100ae,8c7fbd36,11fbb50c,1075cffb,ae34b14,bc445fa1,b015fd67,704a1989,95f9fa95,426081e0,79e55d97,869ea899,358e5ed3,359fe065,c0556964,e0de3215,32ce9a81,c56bbc1e,2c774315,97c60c25,88ae5a52,29ae5c36,5f14b71d,2cb3c99e,37c61de9,782a9ec5,a4f24710,a980c1f9,2865f4a6,ecfb94a3,3b85c3a,b7a1cf40,fbf24de8,fbf55a43,841b1a4b,5b518941,ae6f2a8a,6de97f72,fadab775,8bf993e5,86f17846,6487fd16,3b20ca8c,a209e02,4ce86884,82bfc231,710cdaa0,9369cbb7,f8c6d40a,56d0daf2,9a12d6c8,ee5ed05d,4721da55,5a570f3e,f4be3395,633ad248,ba10372e,14a5cbff,98ae8f88,4e890ee9,f63995e1,9259c268,cb2e5812,822e12a1,b371b59e,c78adeef,cb4f9051,73441b61,ae05f38e,63fca376,83c4d977,c02790b5,b20fca25,eb5a2423,cbd9ed1c,ad45cd5c,f8a7955c,f2a2adb7,b99de7e0,26d0b9fa,66758d09,bbf06ad1,19873098,db07ec28,18094a7c,dc7b939e,d28e0fdd,afc6b4cd,1ab14322,8b7a19eb,5c7c32f6,2156f62f,7f7e8728,a7163dd7,71404987,41282c73,9d78976d,aef31a30,5bc69841,270db443,5443e459,408271f8,fd4a69c8,f8eb432,12823ec6,c16cd3af,72e365ac,49f505e4,41005092,f791344e,c7f39e6,d9a1fd53,24076bdf,8cef2a54,7d57deaf,68b1d6e7,9282f987,371212d,5d461bec,3e175e09,5a79ccfc,9ba1d4cd,db77dcf7,d49d6aab,dde55aea,eb1c59ec,b0b85e78,ac74da32,bc885818,443fed36,fbc0dfa7,67325372,6629c998,96b6d995,a7156364,6a547ff3,4d68acd8,a1108984,a2dea054,98267116,a475ffea,2f36d6dc,60d9e03e,c7b10cdb,69d4cff0,6e50d119,1ca4361a,5b610970,4b30c181,6fe3ade3,e47972ff,a12d4cee,68f5bc6f,7fbbf584,40e540e6,abd04ce2,6452b2a2,e83bac1c,bc86e2db,6a8714c0,53c609b5,17487385,d21b433b,25b737eb,6339903c,4b343704,264cbcc5,ddc89338,e2c45442,2ba6c1b0,d0c8f11b,f5428240,1f8bcd47,c205cf6,3b5c9380,bef42920,d1cd1068,106356bb,17e2299b,68a70794,1fa61f49,e7b002cf,b2351c64,10b1eb9a,8c5f1267,5f3f026c,786aad13,b1121ef1,680e0447,c46918c0,28bf9a53,bdd38872,970cbaa2,7682c529,59c20ab9,16313158,2fc7e4a,b66b3a95,1f1fa449,1ccd4267,34d8bf62,152342db,35da9d41,e28c8c49,68707e59,52b1ec0e,446a6fec,27d72b1e,56581889,d7396c76,390031c7,f397805e,f1122dd0,116325ff,ae74ad03,944596a0,15a22954,791dc548,c4ca0950,72d59ae8,8d712a7a,60c546a9,3e02f6ad,6b0af4f7,cda1a98a,d4415fd3,f09075fa,644dfefb,3fa17a70,6a3a8424,f883fa34,819c2eee,3b2c4477,c498eec9,3d45af91,182dcdba,6cf0a864,4498dbc1,4c33e1d3,5ec6491b,9db1b0b5,b16f465d,e1a1310b,d2ecd2e8,df95e9aa,25a0d3d6,14e42f6c,6b900116,7f3f524e,21e00c2a,5fb66287,95191dfd,d9f20f07,fb96506d,81e0001,cdecf8d8,a3b2fe8e,19570777,c4e3c567,b3ad760,8309a5fe,f8b8e4d4,d363c8d2,7ba3582f,f6bd574b,4634b78a,66fe3d28,3f8f9629,7b7bae73,29b6c68d,25829126,2e42066e,18506d39,52a066f8,c766f5e6,6ffe821a,bf3eec7a,cb25d846,509cd40e,258a31ff,1a077910,eb3832f5,e16a295d,f8a0c4a,efe71ec5,59c79a51,10bac606,86f19410,f094568d,9318a3f3,483397dd,300c2c95,7154c661,6300fb51,9faa872f,9a55c44c,662ef56,8fa92294,7fe144e,271aa02c,3591907e,420b04bd,31cd6589,903f37d5,be481503,f0e56bbf,e2689f3c,de7a922f,7449d349,fffb1824,fa82e860,a37cbf87,36744b3,dc2dd0cc,9f8d6400,3d729e7d,d01963e0,62fe7043,7033ef71,fc41f818,84800cde,93dcff2c,e90ba061,51454c95,93f35b25,72d5e1d4,c061d08b,3a63c3,f739534c,49a3a4a9,83839d19,a594d71c,546c0b58,6dce876f,8381845d,39bf0e8e,1ed3fe5c,25fbc66b,174e7884,d6b362ae,165c60b6,a4c1d5e3,dccb62f8,7027a7a0,cf00b523,7758a6ce,644aee91,8f79e5f4,d71bdb6d,fb606ab9,eb5cd54d,ced94bcf,2cd1b21b,d163e6a6,9550e008,450997e8,36602d69,35fb34a4,4931cfa7,30018205,c2d73201,67121fe5,c11d964,c5c2d684,140df3cd,ae21d843,f902244d,4e1e3014,9f3bf285,70668e6,49cb2221,b65fbfbc,ab78f23c,bf24a2a4,75ba218,5b007d6b,c43ab364,88b4728d,69d6cc9b,dda9909d,d18a20e3,1655810f,6e9889d0,67a5938b,be0ec25f,fd0045a3,7a1c23e7,f568fad,acb22745,c695c5a0,37c3eff1,7ece1a3,afa2f115,d32c6075,b863a537,1b98f7c7,3f3dcf07,7b338596,628e81c5,5d0215fd,94b9a812,7c8d97fe,2ca4bccf,b390de4b,c174a5a9,e6341547,fd618914,5993df78,bd0de331,dc0e7dcb,cbb5e2db,6825e1fa,47d4a6cf,88e0cbf5,a90b4497,ac4a0d92,4a2efe0,d5c3e6a4,7960821,92b19811,ba769a6,8f3ef53f,f9fbc06b,d55bccd0,52b93813,bcb5bfe7,7f81005e,de6f8a8b,830347a2,a3544f1f,1d46e979,d31af08b,342114b6
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+initialized TensorflowDNNClassifier, version v0.1 ( 12006 )
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+INFO: command: /var/spool/slurmd/job148020/slurm_script -i /work/berger_p2/VHbb/CMSSW_10_1_0/src/Xbb/python/dumps/Zll2017_SR_medhigh_Zll_191022_V11finalVarsWP.h5 -c config/default_momentum.cfg -p FINAL_VHLegacy_2lep_WP_SR_medhigh_Zll
+INFO: read inputs from disk, metadata is pesent:
+INFO:  >   cut (1 && V_mass > 75 && V_mass < 105 && (H_mass > 90 && H_mass < 150) && Jet_btagDeepB[hJidx[0]] > 0.4941 && Jet_btagDeepB[hJidx[1]] > 0.1522) && (isZee||isZmm) && (V_pt>=150.0)
+INFO:  >   cutName SR_medhigh_Zll
+INFO:  >   region SR_medhigh_Zll
+INFO:  >   samples {'SIG_ALL': ['ZllH_lep_PTV_0_75_hbb', 'ZllH_lep_PTV_75_150_hbb', 'ZllH_lep_PTV_150_250_0J_hbb', 'ZllH_lep_PTV_150_250_GE1J_hbb', 'ZllH_lep_PTV_GT250_hbb', 'ZnnH_lep_PTV_0_75_hbb', 'ZnnH_lep_PTV_75_150_hbb', 'ZnnH_lep_PTV_150_250_0J_hbb', 'ZnnH_lep_PTV_150_250_GE1J_hbb', 'ZnnH_lep_PTV_GT250_hbb', 'ggZllH_lep_PTV_0_75_hbb', 'ggZllH_lep_PTV_75_150_hbb', 'ggZllH_lep_PTV_150_250_0J_hbb', 'ggZllH_lep_PTV_150_250_GE1J_hbb', 'ggZllH_lep_PTV_GT250_hbb', 'ggZnnH_lep_PTV_0_75_hbb', 'ggZnnH_lep_PTV_75_150_hbb', 'ggZnnH_lep_PTV_150_250_0J_hbb', 'ggZnnH_lep_PTV_150_250_GE1J_hbb', 'ggZnnH_lep_PTV_GT250_hbb', 'WminusH_lep_PTV_0_75_hbb', 'WminusH_lep_PTV_75_150_hbb', 'WminusH_lep_PTV_150_250_0J_hbb', 'WminusH_lep_PTV_150_250_GE1J_hbb', 'WminusH_lep_PTV_GT250_hbb', 'WplusH_lep_PTV_0_75_hbb', 'WplusH_lep_PTV_75_150_hbb', 'WplusH_lep_PTV_150_250_0J_hbb', 'WplusH_lep_PTV_150_250_GE1J_hbb', 'WplusH_lep_PTV_GT250_hbb'], 'BKG_ALL': ['TT_2l2n', 'TT_h', 'TT_Sl', 'ST_tW_antitop', 'ST_tW_top', 'ST_s-channel_4f', 'ST_t-channel_top_4f', 'ST_t-channel_antitop_4f', 'WWTo1L1Nu2Qnlo_0b', 'WZTo1L1Nu2Qnlo_0b', 'ZZTo2L2Qnlo_0b', 'WWTo1L1Nu2Qnlo_1b', 'WWTo1L1Nu2Qnlo_2b', 'WZTo1L1Nu2Qnlo_1b', 'WZTo1L1Nu2Qnlo_2b', 'ZZTo2L2Qnlo_1b', 'ZZTo2L2Qnlo_2b', 'M4HT100to200_0b', 'M4HT100to200_1b', 'M4HT100to200_2b', 'M4HT200to400_0b', 'M4HT200to400_1b', 'M4HT200to400_2b', 'M4HT400to600_0b', 'M4HT400to600_1b', 'M4HT400to600_2b', 'M4HT600toInf_0b', 'M4HT600toInf_1b', 'M4HT600toInf_2b', 'HT0to100ZJets_0b', 'HT0to100ZJets_1b', 'HT0to100ZJets_2b', 'HT100to200ZJets_0b', 'HT100to200ZJets_1b', 'HT100to200ZJets_2b', 'HT200to400ZJets_0b', 'HT200to400ZJets_1b', 'HT200to400ZJets_2b', 'HT400to600ZJets_0b', 'HT400to600ZJets_1b', 'HT400to600ZJets_2b', 'HT600to800ZJets_0b', 'HT600to800ZJets_1b', 'HT600to800ZJets_2b', 'HT800to1200ZJets_0b', 'HT800to1200ZJets_1b', 'HT800to1200ZJets_2b', 'HT1200to2500ZJets_0b', 'HT1200to2500ZJets_1b', 'HT1200to2500ZJets_2b', 'HT2500toinfZJets_0b', 'HT2500toinfZJets_1b', 'HT2500toinfZJets_2b', 'DYBJets_100to200_0b', 'DYBJets_100to200_1b', 'DYBJets_100to200_2b', 'DYBJets_200toInf_0b', 'DYBJets_200toInf_1b', 'DYBJets_200toInf_2b', 'DYJetsBGenFilter_100to200_0b', 'DYJetsBGenFilter_100to200_1b', 'DYJetsBGenFilter_100to200_2b', 'DYJetsBGenFilter_200toInf_0b', 'DYJetsBGenFilter_200toInf_1b', 'DYJetsBGenFilter_200toInf_2b']}
+INFO:  >   scaleFactors {'M4HT600toInf_0b': 1.0, 'DYJetsBGenFilter_100to200_1b': 1.0, 'ggZnnH_lep_PTV_GT250_hbb': 1.0, 'ZZTo2L2Qnlo_0b': 1.0, 'ggZllH_lep_PTV_150_250_0J_hbb': 1.0, 'WplusH_lep_PTV_150_250_0J_hbb': 1.0, 'HT2500toinfZJets_2b': 1.0, 'ZllH_lep_PTV_150_250_0J_hbb': 1.0, 'WZTo1L1Nu2Qnlo_0b': 1.0, 'WminusH_lep_PTV_GT250_hbb': 1.0, 'ST_tW_top': 1.0, 'HT400to600ZJets_1b': 1.0, 'ZnnH_lep_PTV_75_150_hbb': 1.0, 'HT100to200ZJets_0b': 1.0, 'DYJetsBGenFilter_200toInf_0b': 1.0, 'DYJetsBGenFilter_100to200_2b': 1.0, 'ggZllH_lep_PTV_GT250_hbb': 1.0, 'WplusH_lep_PTV_GT250_hbb': 1.0, 'HT2500toinfZJets_1b': 1.0, 'ZllH_lep_PTV_GT250_hbb': 1.0, 'WWTo1L1Nu2Qnlo_2b': 1.0, 'HT800to1200ZJets_0b': 1.0, 'ZllH_lep_PTV_75_150_hbb': 1.0, 'WplusH_lep_PTV_0_75_hbb': 1.0, 'DYBJets_200toInf_1b': 1.0, 'M4HT600toInf_2b': 1.0, 'WminusH_lep_PTV_150_250_0J_hbb': 1.0, 'ggZllH_lep_PTV_0_75_hbb': 1.0, 'ggZnnH_lep_PTV_150_250_0J_hbb': 1.0, 'M4HT200to400_1b': 1.0, 'TT_2l2n': 1.0, 'HT0to100ZJets_1b': 1.0, 'DYBJets_200toInf_2b': 1.0, 'DYJetsBGenFilter_200toInf_1b': 1.0, 'HT1200to2500ZJets_1b': 1.0, 'M4HT100to200_2b': 1.0, 'WZTo1L1Nu2Qnlo_2b': 1.0, 'M4HT400to600_0b': 1.0, 'HT600to800ZJets_2b': 1.0, 'M4HT600toInf_1b': 1.0, 'HT800to1200ZJets_2b': 1.0, 'ZllH_lep_PTV_0_75_hbb': 1.0, 'DYJetsBGenFilter_100to200_0b': 1.0, 'ggZnnH_lep_PTV_150_250_GE1J_hbb': 1.0, 'WminusH_lep_PTV_0_75_hbb': 1.0, 'HT0to100ZJets_2b': 1.0, 'WplusH_lep_PTV_75_150_hbb': 1.0, 'HT1200to2500ZJets_0b': 1.0, 'WplusH_lep_PTV_150_250_GE1J_hbb': 1.0, 'WZTo1L1Nu2Qnlo_1b': 1.0, 'ST_t-channel_antitop_4f': 1.0, 'M4HT400to600_1b': 1.0, 'ZZTo2L2Qnlo_1b': 1.0, 'ZnnH_lep_PTV_0_75_hbb': 1.0, 'M4HT100to200_0b': 1.0, 'HT400to600ZJets_2b': 1.0, 'ST_s-channel_4f': 1.0, 'DYBJets_100to200_0b': 1.0, 'DYBJets_200toInf_0b': 1.0, 'M4HT400to600_2b': 1.0, 'ZllH_lep_PTV_150_250_GE1J_hbb': 1.0, 'WWTo1L1Nu2Qnlo_1b': 1.0, 'ZnnH_lep_PTV_150_250_0J_hbb': 1.0, 'HT600to800ZJets_0b': 1.0, 'HT200to400ZJets_2b': 1.0, 'TT_Sl': 1.0, 'M4HT200to400_0b': 1.0, 'HT1200to2500ZJets_2b': 1.0, 'DYBJets_100to200_1b': 1.0, 'HT0to100ZJets_0b': 1.0, 'ZnnH_lep_PTV_150_250_GE1J_hbb': 1.0, 'HT200to400ZJets_1b': 1.0, 'HT400to600ZJets_0b': 1.0, 'WminusH_lep_PTV_75_150_hbb': 1.0, 'HT100to200ZJets_1b': 1.0, 'DYBJets_100to200_2b': 1.0, 'ZZTo2L2Qnlo_2b': 1.0, 'HT2500toinfZJets_0b': 1.0, 'ST_tW_antitop': 1.0, 'ggZnnH_lep_PTV_75_150_hbb': 1.0, 'ST_t-channel_top_4f': 1.0, 'ggZnnH_lep_PTV_0_75_hbb': 1.0, 'HT100to200ZJets_2b': 1.0, 'M4HT100to200_1b': 1.0, 'TT_h': 1.0, 'HT200to400ZJets_0b': 1.0, 'DYJetsBGenFilter_200toInf_2b': 1.0, 'WminusH_lep_PTV_150_250_GE1J_hbb': 1.0, 'ggZllH_lep_PTV_150_250_GE1J_hbb': 1.0, 'ggZllH_lep_PTV_75_150_hbb': 1.0, 'WWTo1L1Nu2Qnlo_0b': 1.0, 'HT600to800ZJets_1b': 1.0, 'HT800to1200ZJets_1b': 1.0, 'M4HT200to400_2b': 1.0, 'ZnnH_lep_PTV_GT250_hbb': 1.0}
+INFO:  >   systematics []
+INFO:  >   testCut ((event%2)==0||isData)
+INFO:  >   trainCut !((event%2)==0||isData)
+INFO:  >   variables kinFit_H_mass_fit H_mass kinFit_H_pt_fit H_pt kinFit_HVdPhi_fit abs(VHbb::deltaPhi(H_phi,V_phi)) (Jet_btagDeepB[hJidx[0]]>0.1522)+(Jet_btagDeepB[hJidx[0]]>0.4941)+(Jet_btagDeepB[hJidx[0]]>0.8001) (Jet_btagDeepB[hJidx[1]]>0.1522)+(Jet_btagDeepB[hJidx[1]]>0.4941)+(Jet_btagDeepB[hJidx[1]]>0.8001) kinFit_hJets_pt_0_fit Jet_PtReg[hJidx[0]] kinFit_hJets_pt_1_fit Jet_PtReg[hJidx[1]] kinFit_V_mass_fit V_mass Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6||Jet_Pt>50)&&Jet_jetId>0&&Jet_lepFilter>0&&Iteration$!=hJidx[0]&&Iteration$!=hJidx[1]) kinFit_V_pt_fit V_pt kinFit_jjVPtRatio_fit (H_pt/V_pt) abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]]) SA5 VHbb::deltaR(kinFit_H_eta_fit,kinFit_H_phi_fit,kinFit_V_eta_fit,kinFit_V_phi_fit) VHbb::deltaR(H_eta,H_phi,V_eta,V_phi) MET_Pt kinFit_H_mass_sigma_fit kinFit_n_recoil_jets_fit VHbb::deltaR(Jet_eta[hJidx[0]],Jet_phi[hJidx[0]],Jet_eta[hJidx[1]],Jet_phi[hJidx[1]])
+INFO:  >   version 3
+INFO:  >   weightF genWeight*puWeight*1.0*muonSF_Iso[0]*muonSF_Id[0]*electronSF_IdIso[0]*electronSF_trigger[0]*bTagWeightDeepCSV*EWKw[0]*weightLOtoNLO_2016*FitCorr[0]
+INFO:  >   weightSYS []
+INFO:  >   xSecs {'M4HT600toInf_0b': 2.2755, 'DYJetsBGenFilter_100to200_1b': 3.2853299999999996, 'ggZnnH_lep_PTV_GT250_hbb': 0.01437, 'ZZTo2L2Qnlo_0b': 3.688, 'ggZllH_lep_PTV_150_250_0J_hbb': 0.0072, 'WplusH_lep_PTV_150_250_0J_hbb': 0.17202, 'HT2500toinfZJets_2b': 0.0042680999999999995, 'ZllH_lep_PTV_150_250_0J_hbb': 0.04718, 'WZTo1L1Nu2Qnlo_0b': 10.87, 'WminusH_lep_PTV_GT250_hbb': 0.10899, 'ST_tW_top': 35.85, 'HT400to600ZJets_1b': 8.57064, 'ZnnH_lep_PTV_75_150_hbb': 0.09322, 'HT100to200ZJets_0b': 198.153, 'DYJetsBGenFilter_200toInf_0b': 0.48388200000000003, 'DYJetsBGenFilter_100to200_2b': 3.2853299999999996, 'ggZllH_lep_PTV_GT250_hbb': 0.0072, 'WplusH_lep_PTV_GT250_hbb': 0.17202, 'HT2500toinfZJets_1b': 0.0042680999999999995, 'ZllH_lep_PTV_GT250_hbb': 0.04718, 'WWTo1L1Nu2Qnlo_2b': 50.85883, 'HT800to1200ZJets_0b': 0.990396, 'ZllH_lep_PTV_75_150_hbb': 0.04718, 'WplusH_lep_PTV_0_75_hbb': 0.17202, 'DYBJets_200toInf_1b': 0.40565399999999996, 'M4HT600toInf_2b': 2.2755, 'WminusH_lep_PTV_150_250_0J_hbb': 0.10899, 'ggZllH_lep_PTV_0_75_hbb': 0.0072, 'ggZnnH_lep_PTV_150_250_0J_hbb': 0.01437, 'M4HT200to400_1b': 66.8997, 'TT_2l2n': 88.29, 'HT0to100ZJets_1b': 6571.89, 'DYBJets_200toInf_2b': 0.40565399999999996, 'DYJetsBGenFilter_200toInf_1b': 0.48388200000000003, 'HT1200to2500ZJets_1b': 0.237759, 'M4HT100to200_2b': 250.92, 'WZTo1L1Nu2Qnlo_2b': 10.87, 'M4HT400to600_0b': 7.00731, 'HT600to800ZJets_2b': 2.1438900000000003, 'M4HT600toInf_1b': 2.2755, 'HT800to1200ZJets_2b': 0.990396, 'ZllH_lep_PTV_0_75_hbb': 0.04718, 'DYJetsBGenFilter_100to200_0b': 3.2853299999999996, 'ggZnnH_lep_PTV_150_250_GE1J_hbb': 0.01437, 'WminusH_lep_PTV_0_75_hbb': 0.10899, 'HT0to100ZJets_2b': 6571.89, 'WplusH_lep_PTV_75_150_hbb': 0.17202, 'HT1200to2500ZJets_0b': 0.237759, 'WplusH_lep_PTV_150_250_GE1J_hbb': 0.17202, 'WZTo1L1Nu2Qnlo_1b': 10.87, 'ST_t-channel_antitop_4f': 80.95, 'M4HT400to600_1b': 7.00731, 'ZZTo2L2Qnlo_1b': 3.688, 'ZnnH_lep_PTV_0_75_hbb': 0.09322, 'M4HT100to200_0b': 250.92, 'HT400to600ZJets_2b': 8.57064, 'ST_s-channel_4f': 3.692, 'DYBJets_100to200_0b': 3.96552, 'DYBJets_200toInf_0b': 0.40565399999999996, 'M4HT400to600_2b': 7.00731, 'ZllH_lep_PTV_150_250_GE1J_hbb': 0.04718, 'WWTo1L1Nu2Qnlo_1b': 50.85883, 'ZnnH_lep_PTV_150_250_0J_hbb': 0.09322, 'HT600to800ZJets_0b': 2.1438900000000003, 'HT200to400ZJets_2b': 59.8518, 'TT_Sl': 365.34, 'M4HT200to400_0b': 66.8997, 'HT1200to2500ZJets_2b': 0.237759, 'DYBJets_100to200_1b': 3.96552, 'HT0to100ZJets_0b': 6571.89, 'ZnnH_lep_PTV_150_250_GE1J_hbb': 0.09322, 'HT200to400ZJets_1b': 59.8518, 'HT400to600ZJets_0b': 8.57064, 'WminusH_lep_PTV_75_150_hbb': 0.10899, 'HT100to200ZJets_1b': 198.153, 'DYBJets_100to200_2b': 3.96552, 'ZZTo2L2Qnlo_2b': 3.688, 'HT2500toinfZJets_0b': 0.0042680999999999995, 'ST_tW_antitop': 35.85, 'ggZnnH_lep_PTV_75_150_hbb': 0.01437, 'ST_t-channel_top_4f': 136.02, 'ggZnnH_lep_PTV_0_75_hbb': 0.01437, 'HT100to200ZJets_2b': 198.153, 'M4HT100to200_1b': 250.92, 'TT_h': 377.96, 'HT200to400ZJets_0b': 59.8518, 'DYJetsBGenFilter_200toInf_2b': 0.48388200000000003, 'WminusH_lep_PTV_150_250_GE1J_hbb': 0.10899, 'ggZllH_lep_PTV_150_250_GE1J_hbb': 0.0072, 'ggZllH_lep_PTV_75_150_hbb': 0.0072, 'WWTo1L1Nu2Qnlo_0b': 50.85883, 'HT600to800ZJets_1b': 2.1438900000000003, 'HT800to1200ZJets_1b': 0.990396, 'M4HT200to400_2b': 66.8997, 'ZnnH_lep_PTV_GT250_hbb': 0.09322}
+INFO: random state: (3, (2147483648, 1182686048, 495726882, 181767960, 3848509118, 1430811355, 2221239358, 3636005127, 2792893379, 4064654194, 3117051264, 1287343560, 472424336, 2926803014, 2480086467, 3057367623, 4015125016, 3739850203, 2487813244, 2123547682, 3462821115, 1122734410, 1361182661, 414233517, 2076379530, 143755142, 3490546476, 1117575744, 3970419344, 1959513969, 191797205, 2171763607, 2012544872, 1117623025, 551532989, 2997318149, 1073143654, 2263867658, 3025350150, 2193711201, 600797553, 2685769675, 2298345743, 40350232, 1801390773, 3561760321, 2676159570, 4144828901, 3273221320, 995801071, 2201690999, 1338223428, 885980748, 2672579689, 3946320474, 1291335285, 4104261012, 104424851, 4041693161, 3337646440, 3513747702, 1274913420, 2463682392, 470865746, 4215877883, 2534999533, 1764867918, 1434327014, 2667089455, 364453498, 3993136433, 1089128745, 1357043245, 3175873021, 3569008882, 2195369653, 1106010779, 2099531285, 3664913959, 3214883589, 1843754161, 438377179, 2690692864, 4053878546, 4083736378, 3707644121, 1822993411, 1992363362, 626957928, 1329631019, 2783247653, 1542478312, 1081410049, 3445527683, 3946047243, 3704902521, 3962140216, 43565146, 741706847, 774458944, 3121092353, 821880974, 2889420248, 1796409989, 1047519242, 2445739195, 767629156, 2668651989, 3769107942, 596578214, 3928010700, 488507239, 2274423176, 1847385264, 2269229162, 2041807185, 1842311515, 1624348295, 4268044849, 2597628489, 2425076388, 68194005, 963272214, 2645112577, 3466074009, 1893889980, 3917675527, 2719831982, 2798733764, 2143887294, 231234735, 777848888, 1911143787, 3755991549, 2953964152, 744679785, 1945065756, 4076742103, 836223522, 1045458599, 3138187714, 3811303283, 1823496994, 2983994736, 282559559, 1140655984, 1707234616, 2155623444, 3593524308, 1749352803, 4166149495, 2029095163, 2512362595, 662545388, 2069455011, 3931011446, 3496249645, 3563681376, 1315571541, 2399235269, 3619524585, 766657131, 3197345216, 3002613518, 4052485337, 740212670, 2589305498, 1084959038, 1093408474, 2634227812, 1991961124, 3975401699, 3961363194, 938845405, 110625043, 4019788447, 1433381847, 3301566093, 2143524041, 4090456115, 2908536969, 2814657851, 201799487, 1285342290, 1525362453, 379839260, 2432511003, 1739149529, 355744608, 1513640075, 3272016957, 353762769, 4003705101, 3213822880, 2726450359, 889959853, 723903414, 875501178, 1130283211, 2249931180, 124625694, 1937245644, 414648467, 2154242285, 602892357, 431598477, 3239694104, 3747128904, 2310798428, 3446759932, 2688638070, 2544354853, 2874481141, 1687035320, 3323534518, 3305134456, 3332903325, 3411947393, 1502183171, 3892767185, 2990812904, 992743741, 1701834072, 1126537428, 3916390019, 369908620, 1585579282, 1239788962, 176746083, 991766505, 4015772177, 48791327, 2369298682, 4074382172, 1176435811, 4000452895, 291512227, 4040559631, 211741993, 3706013367, 3564557286, 1388447563, 3875727088, 1524892357, 202613021, 2966178777, 2720966227, 3347503356, 3816317439, 3410747601, 1648549389, 222263280, 2736508103, 2398657819, 3497486950, 2034928421, 3999440577, 2011889051, 4229537570, 117006103, 3240881270, 1465630114, 1615899683, 1421210203, 3346160055, 3573923159, 1460755576, 3849052407, 1375390093, 1047399234, 1836761521, 2827573639, 42466228, 2054283320, 2987290750, 1310092958, 4105317098, 3214110026, 2085072956, 3354678908, 1208719833, 1481887608, 289866653, 637154576, 1214425979, 1833481387, 4249745623, 2022764260, 2528022108, 3882226839, 2853566707, 4186738715, 431167124, 610908008, 1333603311, 3814794533, 2512821924, 1390127306, 3221877574, 937602512, 1507633289, 1827024409, 3120756566, 1629996722, 3149634254, 3770102958, 1183644731, 1531605916, 4205398438, 2018858967, 714603732, 112723688, 1989510514, 1063207181, 2536589109, 3018752077, 354309163, 1969645425, 3366973920, 675549108, 1630334419, 1738589106, 2850677832, 4220417849, 315112964, 186243398, 2597921714, 1033934573, 678548961, 755403378, 44160844, 3705028162, 2971681098, 853893344, 1475841491, 2843437373, 4093215376, 3110521501, 2082582173, 1610780020, 44744568, 2692282893, 3670432208, 3316977022, 2466740241, 3193346423, 4105168681, 3276452709, 406438016, 3739060838, 1733425427, 245422388, 1073829169, 155536067, 1735001079, 1579214664, 3651643768, 3557352909, 3667824023, 758903946, 2588644636, 3514641610, 1515077039, 3265394232, 3034848484, 569479478, 2383573872, 3578342377, 751807735, 3860644526, 1664583097, 3174524972, 19601615, 2675748189, 3329784560, 2721385335, 2633621788, 282279910, 1651889591, 4035448791, 3125120216, 2840843319, 155190713, 3111838502, 318535007, 841780018, 4077452542, 2182845740, 3626167035, 3457211333, 3148567849, 758784428, 1418996790, 1608399675, 103314629, 1936511532, 3993359777, 2634757727, 1277386520, 983689560, 1920934710, 2084431865, 3789285654, 3127220600, 695371863, 1960736170, 2003920195, 2538432859, 482184809, 1899792323, 641429773, 2230824286, 1284831685, 2990545450, 3207876368, 3792997958, 3975910127, 1295614078, 778469749, 4148854817, 3520137475, 4080982611, 3719313725, 1473476945, 1903559858, 726393303, 1853626739, 1781986416, 2169613526, 1989956077, 4054480946, 2467325100, 1935693363, 1800756893, 1650035292, 1662646062, 2469047130, 3233179996, 3096391681, 2367933938, 3367105675, 2863668258, 3734097859, 2856060245, 2688110442, 3036867095, 3433513643, 2578119801, 1184971129, 1318733401, 1582528913, 4036156676, 262664091, 660676495, 164782098, 1326836979, 3311200331, 320222133, 3599298443, 3348297328, 1609473410, 3560158989, 606634995, 3698710939, 2819514087, 586754533, 2879031810, 3889204953, 1028146218, 3048961629, 1121768109, 115700807, 872706464, 201264370, 1779031564, 2670903, 321091655, 245510433, 1392555256, 1520986410, 1383591236, 4090407987, 3803400975, 2213234353, 1028156205, 225849554, 365902847, 2876791608, 3831858162, 203043936, 2856849236, 3101247348, 4003535962, 1034885645, 966671568, 3526769641, 2134207059, 1735584930, 84245990, 3797744137, 1832134542, 2939913886, 1091910955, 1214995430, 4004349222, 1192595867, 2605940034, 3962471707, 2546868509, 16992704, 1440696249, 428133689, 83430549, 184378004, 2249936642, 3209167268, 3404661421, 3405496967, 3718815699, 1916076906, 2168047740, 4236178777, 2473111797, 3208010220, 113208039, 439733710, 1050940935, 1869020228, 874977628, 2596513407, 577727767, 2746746198, 479054478, 3413356249, 929757494, 704481709, 2601763898, 2858767441, 2944005698, 3378376206, 946051302, 829294885, 1848966521, 1989096474, 849622840, 2381125592, 3143805860, 1708502044, 229710491, 1794873147, 3464524129, 3665181606, 4177578007, 3829449119, 3493293204, 3719632509, 859394991, 4128619220, 3525922877, 676356313, 4031564977, 1578381115, 3632117453, 1774452105, 1323794979, 2375916832, 2798312417, 3057272018, 4135067217, 2657299446, 1844314973, 975114785, 1961863684, 285006326, 3524620268, 92020860, 2154746300, 1671080594, 571306839, 2729124397, 2748284204, 1973659984, 2551186146, 3200647377, 3767962918, 1442817029, 1304390105, 2238683491, 1882880779, 1187273860, 479432672, 2125591177, 4129308311, 3819998620, 840532333, 403676038, 878047786, 396027936, 234792556, 2764928772, 4140142731, 2395799131, 1814967601, 2325952601, 1990558492, 3738528815, 3222899321, 4157556152, 3476545602, 3600605764, 3563226055, 2221586519, 896016150, 1819446153, 2614434960, 938080016, 3872901898, 570238657, 3917563912, 4201479302, 1819902354, 3882071712, 2799898767, 416660709, 624), None)
+INFO: set 3896 events to 0 because of negative weight
+nFeatures =  27
+--------------------------------------------------------------------------------
+statistics for dataset: train
+--------------------------------------------------------------------------------
+SIG_ALL (y= 0 ) : 144365  avg weight: 0.0003440833707999052
+BKG_ALL (y= 1 ) : 31477  avg weight: 0.08151807923133278
+--------------------------------------------------------------------------------
+statistics for dataset: test
+--------------------------------------------------------------------------------
+SIG_ALL (y= 0 ) : 145441  avg weight: 0.000337994355170853
+BKG_ALL (y= 1 ) : 31434  avg weight: 0.07980359166202779
+--------------------------------------------------------------------------------
+classes and labels
+--------------------------------------------------------------------------------
+list of classes: (signals in [32mgreen[0m, backgrounds in [31mred[0m)
+[32m class 0 => SIG_ALL [0m is defined as a SIGNAL
+[31m class 1 => BKG_ALL [0m
+--------------------------------------------------------------------------------
+weights and weight uncertainty examples
+--------------------------------------------------------------------------------
+weights:
+train 0.0007790356 0.00087259104 0.0016338682 0.00027025197 0.00089528394 0.00068102864 0.000791218 0.00047387637 0.0 0.00130539
+test  0.0009768761 0.0005755029 0.00050037866 0.00057058263 0.00092809554 2.0375549e-07 0.00091512676 0.00020560256 0.0009687356 1.861088e-05
+weights errors:
+train 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+test  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+--------------------------------------------------------------------------------
+input data
+--------------------------------------------------------------------------------
+feature                                            set   mean       std        examples
+kinFit_H_mass_fit                                  train 1.13e+02   3.50e+01   101.875336 127.79726 105.15705 107.1756
+kinFit_H_mass_fit                                  test  1.13e+02   3.55e+01   148.67038 53.018986 90.90998 122.4167
+H_mass                                             train 1.18e+02   1.74e+01   98.1549 123.29262 124.52438 118.09944
+H_mass                                             test  1.18e+02   1.72e+01   148.47502 104.54941 124.82602 132.96938
+kinFit_H_pt_fit                                    train 1.81e+02   9.28e+01   147.67537 322.00137 180.04932 150.62227
+kinFit_H_pt_fit                                    test  1.82e+02   9.26e+01   144.00731 119.028946 208.2679 150.65457
+H_pt                                               train 1.74e+02   9.36e+01   125.34279 304.8173 183.69261 159.38441
+H_pt                                               test  1.75e+02   9.31e+01   144.00731 54.148045 275.63138 158.61076
+kinFit_HVdPhi_fit                                  train 2.89e+00   8.38e-01   3.0884864 0.7866726 2.9586449 3.089167
+kinFit_HVdPhi_fit                                  test  2.89e+00   8.48e-01   0.046049103 3.2555702 2.7288384 3.1082695
+abs(VHbb::deltaPhi(H_phi,V_phi))                   train 2.60e+00   7.20e-01   2.9326046 0.8321092 3.0951834 3.0207324
+abs(VHbb::deltaPhi(H_phi,V_phi))                   test  2.60e+00   7.14e-01   0.046049103 2.8555703 2.6523888 3.0739803
+(Jet_btagDeepB[hJidx[0]]>0.1522)+(Jet_btagDeep...  train 2.63e+00   4.82e-01   3.0 3.0 3.0 3.0
+(Jet_btagDeepB[hJidx[0]]>0.1522)+(Jet_btagDeep...  test  2.62e+00   4.84e-01   3.0 2.0 3.0 3.0
+(Jet_btagDeepB[hJidx[1]]>0.1522)+(Jet_btagDeep...  train 1.57e+00   7.77e-01   1.0 3.0 1.0 3.0
+(Jet_btagDeepB[hJidx[1]]>0.1522)+(Jet_btagDeep...  test  1.57e+00   7.75e-01   3.0 1.0 3.0 1.0
+kinFit_hJets_pt_0_fit                              train 1.03e+02   7.22e+01   56.37158 232.47153 40.267307 61.61988
+kinFit_hJets_pt_0_fit                              test  1.04e+02   7.41e+01   160.26137 124.5844 130.03192 66.35022
+Jet_PtReg[hJidx[0]]                                train 9.26e+01   6.69e+01   61.063828 227.15604 57.295147 72.85953
+Jet_PtReg[hJidx[0]]                                test  9.33e+01   6.85e+01   160.26137 84.75812 156.95786 74.00117
+kinFit_hJets_pt_1_fit                              train 9.97e+01   7.92e+01   116.736046 111.730705 159.22975 96.14918
+kinFit_hJets_pt_1_fit                              test  9.89e+01   7.85e+01   22.846521 5.631295 81.60321 89.758415
+Jet_PtReg[hJidx[1]]                                train 8.82e+01   7.48e+01   89.435165 98.6639 150.68146 94.03732
+Jet_PtReg[hJidx[1]]                                test  8.78e+01   7.39e+01   22.846521 30.613781 122.61824 90.28242
+kinFit_V_mass_fit                                  train 9.07e+01   4.13e+00   92.44979 90.55168 93.15789 89.47969
+kinFit_V_mass_fit                                  test  9.05e+01   4.17e+00   83.663376 85.45159 91.6186 93.00265
+V_mass                                             train 9.08e+01   4.71e+00   92.51783 90.344246 93.54305 89.8174
+V_mass                                             test  9.07e+01   4.79e+00   83.663376 92.774475 91.46383 93.39648
+Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6|...  train 1.08e+00   1.06e+00   0.0 2.0 2.0 0.0
+Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6|...  test  1.08e+00   1.06e+00   0.0 0.0 1.0 0.0
+kinFit_V_pt_fit                                    train 2.12e+02   7.11e+01   153.88344 152.7021 150.76723 149.51723
+kinFit_V_pt_fit                                    test  2.12e+02   7.14e+01   201.33192 133.66254 152.3838 149.34212
+V_pt                                               train 2.12e+02   7.15e+01   153.6737 152.41884 151.83708 150.5396
+V_pt                                               test  2.13e+02   7.17e+01   201.33192 152.02228 152.04175 150.63936
+kinFit_jjVPtRatio_fit                              train 8.69e-01   3.75e-01   0.9596573 2.10869 1.1942205 1.0073907
+kinFit_jjVPtRatio_fit                              test  8.70e-01   3.69e-01   0.7152731 0.8905183 1.3667325 1.0087882
+(H_pt/V_pt)                                        train 8.34e-01   3.83e-01   0.8156424 1.9998662 1.2098007 1.0587541
+(H_pt/V_pt)                                        test  8.35e-01   3.79e-01   0.7152731 0.35618493 1.8128664 1.0529171
+abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])           train 8.82e-01   6.07e-01   0.57299805 0.24304199 0.7402344 1.1817322
+abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])           test  8.93e-01   6.16e-01   1.4407845 0.17993164 0.7833252 1.3823853
+SA5                                                train 2.90e+00   2.24e+00   0.0 4.0 2.0 4.0
+SA5                                                test  2.88e+00   2.24e+00   0.0 2.0 1.0 0.0
+VHbb::deltaR(kinFit_H_eta_fit,kinFit_H_phi_fit...  train 2.98e+00   7.11e-01   3.088534 1.6350185 2.9586558 3.419536
+VHbb::deltaR(kinFit_H_eta_fit,kinFit_H_phi_fit...  test  2.96e+00   7.06e-01   0.15375757 3.0277565 2.757487 3.1493528
+VHbb::deltaR(H_eta,H_phi,V_eta,V_phi)              train 2.94e+00   7.09e-01   2.9330726 1.6522406 3.0966876 3.3348851
+VHbb::deltaR(H_eta,H_phi,V_eta,V_phi)              test  2.93e+00   6.98e-01   0.15375757 2.9135242 2.6759756 3.120879
+MET_Pt                                             train 4.89e+01   3.53e+01   42.420986 32.671425 46.064655 50.779713
+MET_Pt                                             test  4.97e+01   3.75e+01   181.31648 47.064137 94.17644 122.61501
+kinFit_H_mass_sigma_fit                            train 1.95e+01   1.95e+01   12.9587965 28.834663 15.290758 14.921179
+kinFit_H_mass_sigma_fit                            test  1.97e+01   1.87e+01   -1.0 26.611603 27.846426 13.441738
+kinFit_n_recoil_jets_fit                           train 1.05e+00   1.15e+00   0.0 3.0 2.0 0.0
+kinFit_n_recoil_jets_fit                           test  1.05e+00   1.16e+00   -1.0 0.0 2.0 0.0
+VHbb::deltaR(Jet_eta[hJidx[0]],Jet_phi[hJidx[0...  train 1.61e+00   7.33e-01   1.3275217 0.8256446 1.3300108 1.3287033
+VHbb::deltaR(Jet_eta[hJidx[0]],Jet_phi[hJidx[0...  test  1.61e+00   7.30e-01   2.8111038 3.1343193 0.85351706 1.4804261
+--------------------------------------------------------------------------------
+input scaling
+--------------------------------------------------------------------------------
+[31mINFO: scaling is done inside tensorflow graph and StandardScaler() should not be used om top of it => scaler.dmp file will not be written![0m
+number of expected events (test): {0: 2508.5461003041814, 1: 49.15823701040403}
+number of expected events (train): {0: 2565.944579964662, 1: 49.67359582552831}
+balancing signal/background, reweight class SIG_ALL  from group 1 (signals) by 52.65610697838728
+balancing signal/background, reweight class BKG_ALL  from group 0 (backgrounds) by 1.0193587952808445
+shape train: (175842, 27)
+shape test:  (176875, 27)
+building tensorflow graph with parameters
+ adam_epsilon                             1e-09
+ adaptiveRate                             False
+ additional_noise                         0.0
+ balanceClasses                           False
+ balanceSignalBackground                  True
+ batchNormalization                       [1, 2, 3, 4, 5, 6, 7, 8]
+ batchSize                                1024
+ batchSizeTest                            65536
+ binMethod                                'SB'
+ binTarget                                [0.109, 0.1194, 0.1242, 0.1226, 0.1148, 0.1021, 0.0861, 0.069, 0.0524, 0.0378, 0.0259, 0.0168, 0.0104, 0.0061, 0.0034]
+ crossValidation_splitSeed                123456
+ dropoutDecay                             1.0
+ ignoreLargeWeights                       False
+ ignoreNegativeWeights                    True
+ learningRate                             {0: 1.0, 50: 0.5, 100: 0.25, 200: 0.1, 300: 0.05, 400: 0.02, 500: 0.01, 600: 0.005, 700: 0.002, 800: 0.001}
+ loss                                     'cross_entropy'
+ massless_importance                      1.0
+ massless_powers                          [1, 2]
+ momentum                                 0.9
+ mvaScoreRescalingPercentileHigh          0.999
+ mvaScoreRescalingPercentileLow           0.01
+ nEpochs                                  1000
+ nNodes                                   [512, 256, 128, 64, 64, 64]
+ optimizer                                'momentum'
+ pDropout                                 [0.2, 0.5, 0.5, 0.5, 0.5, 0.5]
+ plot-data                                False
+ plot-inputs                              True
+ plot-jacobian                            False
+ plot-scores                              True
+ power                                    1.0
+ rateGamma                                1.0
+ removeFeature                            []
+ reweight                                 None
+ reweightTraining                         None
+ saveCheckpointInterval                   50
+ scaleInputsInsideGraph                   True
+ shuffle                                  True
+ signif_loss_b_epsilon                    1e-08
+ signif_loss_low_b_threshold              1.5
+ signif_loss_low_b_threshold_width        1.5
+ signif_loss_nbins                        15
+ signif_loss_smoothness                   500.0
+ signif_loss_sysApprox_constant           1.5
+ signif_loss_sysApprox_linear             0.1
+ signif_loss_sys_variance_offset          0.1
+ signif_loss_xe_factor                    0.0
+ skipConnections                          {2: [0], 4: [0, 2], 6: [0, 2, 4]}
+ statisticsInterval                       20
+ systematics_scaling_factor               1.0
+ systematics_weight_scaling_factor        1.0
+ weight_sys_ntoys                         -1
+initialize session...
+initialized session!
+add layers...
+layer  1 :  [27, 512]
+> activation with drop-out...
+> batch normalization...
+layer  2 :  [512, 256]
+> activation with drop-out...
+> batch normalization...
+layer  3 :  [256, 128]
+> activation with drop-out...
+> batch normalization...
+layer  4 :  [128, 64]
+> activation with drop-out...
+> batch normalization...
+layer  5 :  [64, 64]
+> activation with drop-out...
+> batch normalization...
+layer  6 :  [64, 64]
+> activation with drop-out...
+> batch normalization...
+INFO: use MomentumOptimizer
+graph built.
+trainable variables: 242498
+initialized.
+conditions:
+  loss(train,training)    training dataset, loss as seen by gradient descend optimizer
+  loss(train,testing)     training dataset, loss with 'testing' conditions, e.g. is_training: False, no dropout etc
+  loss(test)              test dataset
+start training with batch size 1024 and learning rate 1.0 
+ epoch     loss(train,training) loss(train,testing) loss(test)
+         1    0.01675    0.01631    0.01605 significance (train): 1.980 significance: 1.948 
+         2    0.01525    0.01483    0.01465 
+         3    0.01507    0.01450    0.01434 
+         4    0.01497    0.01422    0.01407 
+         5    0.01481    0.01418    0.01406 
+         6    0.01475    0.01419    0.01407 
+         7    0.01473    0.01412    0.01400 
+         8    0.01466    0.01412    0.01400 
+         9    0.01461    0.01411    0.01399 
+        10    0.01449    0.01411    0.01402 
+        11    0.01454    0.01400    0.01392 
+        12    0.01453    0.01405    0.01398 
+        13    0.01442    0.01403    0.01393 
+        14    0.01448    0.01389    0.01385 
+        15    0.01439    0.01397    0.01391 
+        16    0.01443    0.01388    0.01382 
+        17    0.01438    0.01390    0.01383 
+        18    0.01436    0.01385    0.01381 
+        19    0.01431    0.01394    0.01390 
+        20    0.01430    0.01389    0.01387 
+        21    0.01432    0.01383    0.01381 significance (train): 2.321 significance: 2.219 
+        22    0.01427    0.01380    0.01377 
+        23    0.01427    0.01381    0.01378 
+        24    0.01429    0.01374    0.01373 
+        25    0.01430    0.01376    0.01377 
+        26    0.01422    0.01375    0.01375 
+        27    0.01425    0.01390    0.01387 
+        28    0.01422    0.01369    0.01372 
+        29    0.01423    0.01373    0.01377 
+        30    0.01421    0.01370    0.01372 
+        31    0.01415    0.01364    0.01370 
+        32    0.01418    0.01368    0.01375 
+        33    0.01418    0.01373    0.01378 
+        34    0.01420    0.01363    0.01369 
+        35    0.01419    0.01366    0.01371 
+        36    0.01415    0.01369    0.01378 
+        37    0.01419    0.01364    0.01370 
+        38    0.01413    0.01367    0.01378 
+        39    0.01416    0.01365    0.01371 
+        40    0.01411    0.01384    0.01387 
+        41    0.01413    0.01358    0.01368 significance (train): 2.432 significance: 2.222 
+        42    0.01407    0.01362    0.01376 
+        43    0.01407    0.01361    0.01373 
+        44    0.01407    0.01365    0.01375 
+        45    0.01405    0.01358    0.01367 
+        46    0.01412    0.01367    0.01376 
+        47    0.01406    0.01375    0.01380 
+        48    0.01405    0.01354    0.01369 
+        49    0.01404    0.01378    0.01383 
+        50    0.01412    0.01377    0.01380 
+set learning rate to: 0.5
+        51    0.01399    0.01357    0.01369 
+        52    0.01397    0.01351    0.01363 
+        53    0.01390    0.01347    0.01362 
+        54    0.01393    0.01346    0.01362 
+        55    0.01389    0.01349    0.01363 
+        56    0.01392    0.01348    0.01362 
+        57    0.01392    0.01345    0.01365 
+        58    0.01390    0.01342    0.01361 
+        59    0.01387    0.01349    0.01366 
+        60    0.01389    0.01343    0.01361 
+        61    0.01387    0.01344    0.01361 significance (train): 2.494 significance: 2.266 
+        62    0.01391    0.01344    0.01365 
+        63    0.01389    0.01345    0.01363 
+        64    0.01385    0.01339    0.01360 
+        65    0.01391    0.01342    0.01364 
+        66    0.01390    0.01342    0.01361 
+        67    0.01388    0.01343    0.01360 
+        68    0.01384    0.01346    0.01365 
+        69    0.01388    0.01345    0.01367 
+        70    0.01387    0.01348    0.01365 
+        71    0.01388    0.01341    0.01359 
+        72    0.01385    0.01339    0.01359 
+        73    0.01386    0.01347    0.01366 
+        74    0.01388    0.01337    0.01359 
+        75    0.01387    0.01344    0.01362 
+        76    0.01386    0.01355    0.01373 
+        77    0.01389    0.01338    0.01358 
+        78    0.01386    0.01341    0.01363 
+        79    0.01387    0.01370    0.01387 
+        80    0.01384    0.01335    0.01360 
+        81    0.01383    0.01338    0.01360 significance (train): 2.503 significance: 2.254 
+        82    0.01381    0.01339    0.01361 
+        83    0.01385    0.01345    0.01363 
+        84    0.01383    0.01339    0.01367 
+        85    0.01384    0.01332    0.01360 
+        86    0.01386    0.01343    0.01365 
+        87    0.01379    0.01343    0.01365 
+        88    0.01383    0.01337    0.01362 
+        89    0.01380    0.01337    0.01361 
+        90    0.01383    0.01340    0.01361 
+        91    0.01379    0.01331    0.01357 
+        92    0.01383    0.01337    0.01361 
+        93    0.01377    0.01329    0.01358 
+        94    0.01379    0.01333    0.01360 
+        95    0.01382    0.01335    0.01365 
+        96    0.01376    0.01329    0.01358 
+        97    0.01378    0.01337    0.01360 
+        98    0.01381    0.01332    0.01360 
+        99    0.01381    0.01333    0.01360 
+       100    0.01379    0.01328    0.01359 
+set learning rate to: 0.25
+       101    0.01377    0.01327    0.01357 significance (train): 2.553 significance: 2.260 
+       102    0.01375    0.01324    0.01356 
+       103    0.01371    0.01326    0.01355 
+       104    0.01371    0.01323    0.01355 
+       105    0.01373    0.01333    0.01362 
+       106    0.01374    0.01328    0.01359 
+       107    0.01371    0.01330    0.01359 
+       108    0.01375    0.01325    0.01359 
+       109    0.01375    0.01324    0.01357 
+       110    0.01368    0.01324    0.01357 
+       111    0.01373    0.01324    0.01356 
+       112    0.01369    0.01324    0.01356 
+       113    0.01374    0.01323    0.01357 
+       114    0.01371    0.01323    0.01356 
+       115    0.01371    0.01319    0.01356 
+       116    0.01371    0.01322    0.01357 
+       117    0.01369    0.01322    0.01359 
+       118    0.01372    0.01326    0.01357 
+       119    0.01370    0.01321    0.01355 
+       120    0.01369    0.01323    0.01355 
+       121    0.01372    0.01323    0.01356 significance (train): 2.559 significance: 2.272 
+       122    0.01367    0.01321    0.01355 
+       123    0.01372    0.01328    0.01362 
+       124    0.01369    0.01319    0.01357 
+       125    0.01369    0.01319    0.01357 
+       126    0.01365    0.01318    0.01356 
+       127    0.01366    0.01319    0.01356 
+       128    0.01368    0.01330    0.01360 
+       129    0.01368    0.01318    0.01356 
+       130    0.01372    0.01320    0.01355 
+       131    0.01371    0.01321    0.01356 
+       132    0.01370    0.01318    0.01356 
+       133    0.01369    0.01319    0.01356 
+       134    0.01367    0.01318    0.01354 
+       135    0.01367    0.01320    0.01358 
+       136    0.01365    0.01321    0.01358 
+       137    0.01370    0.01317    0.01356 
+       138    0.01369    0.01322    0.01361 
+       139    0.01366    0.01318    0.01357 
+       140    0.01366    0.01320    0.01360 
+       141    0.01365    0.01324    0.01360 significance (train): 2.566 significance: 2.269 
+       142    0.01367    0.01326    0.01360 
+       143    0.01365    0.01327    0.01364 
+       144    0.01367    0.01318    0.01357 
+       145    0.01368    0.01316    0.01355 
+       146    0.01368    0.01319    0.01358 
+       147    0.01368    0.01316    0.01355 
+       148    0.01367    0.01316    0.01355 
+       149    0.01368    0.01323    0.01360 
+       150    0.01365    0.01331    0.01367 
+       151    0.01369    0.01318    0.01356 
+       152    0.01368    0.01319    0.01356 
+       153    0.01369    0.01318    0.01359 
+       154    0.01366    0.01315    0.01356 
+       155    0.01363    0.01314    0.01354 
+       156    0.01368    0.01318    0.01355 
+       157    0.01360    0.01319    0.01360 
+       158    0.01369    0.01318    0.01357 
+       159    0.01365    0.01317    0.01356 
+       160    0.01367    0.01315    0.01357 
+       161    0.01369    0.01315    0.01355 significance (train): 2.568 significance: 2.260 
+       162    0.01362    0.01315    0.01354 
+       163    0.01365    0.01315    0.01358 
+       164    0.01365    0.01316    0.01357 
+       165    0.01366    0.01328    0.01362 
+       166    0.01364    0.01313    0.01355 
+       167    0.01367    0.01315    0.01358 
+       168    0.01370    0.01316    0.01357 
+       169    0.01364    0.01318    0.01358 
+       170    0.01367    0.01313    0.01354 
+       171    0.01361    0.01315    0.01356 
+       172    0.01361    0.01313    0.01356 
+       173    0.01366    0.01315    0.01355 
+       174    0.01366    0.01311    0.01356 
+       175    0.01366    0.01320    0.01358 
+       176    0.01361    0.01312    0.01357 
+       177    0.01361    0.01313    0.01358 
+       178    0.01366    0.01318    0.01358 
+       179    0.01362    0.01317    0.01357 
+       180    0.01366    0.01311    0.01357 
+       181    0.01367    0.01316    0.01357 significance (train): 2.621 significance: 2.259 
+       182    0.01363    0.01312    0.01355 
+       183    0.01360    0.01311    0.01357 
+       184    0.01362    0.01308    0.01358 
+       185    0.01369    0.01313    0.01359 
+       186    0.01363    0.01311    0.01356 
+       187    0.01365    0.01310    0.01354 
+       188    0.01366    0.01312    0.01354 
+       189    0.01364    0.01317    0.01355 
+       190    0.01365    0.01314    0.01357 
+       191    0.01367    0.01311    0.01356 
+       192    0.01364    0.01311    0.01356 
+       193    0.01366    0.01314    0.01356 
+       194    0.01368    0.01315    0.01360 
+       195    0.01360    0.01311    0.01356 
+       196    0.01362    0.01310    0.01356 
+       197    0.01361    0.01310    0.01357 
+       198    0.01364    0.01313    0.01357 
+       199    0.01367    0.01311    0.01355 
+       200    0.01360    0.01311    0.01356 
+set learning rate to: 0.1
+       201    0.01361    0.01309    0.01356 significance (train): 2.607 significance: 2.283 
+       202    0.01354    0.01309    0.01356 
+       203    0.01354    0.01306    0.01354 
+       204    0.01357    0.01308    0.01355 
+       205    0.01353    0.01305    0.01354 
+       206    0.01360    0.01305    0.01354 
+       207    0.01357    0.01305    0.01353 
+       208    0.01353    0.01305    0.01354 
+       209    0.01358    0.01305    0.01356 
+       210    0.01359    0.01307    0.01354 
+       211    0.01354    0.01305    0.01356 
+       212    0.01353    0.01308    0.01356 
+       213    0.01359    0.01305    0.01354 
+       214    0.01354    0.01306    0.01355 
+       215    0.01351    0.01311    0.01357 
+       216    0.01354    0.01308    0.01355 
+       217    0.01356    0.01304    0.01354 
+       218    0.01353    0.01306    0.01357 
+       219    0.01358    0.01307    0.01354 
+       220    0.01353    0.01306    0.01355 
+       221    0.01355    0.01304    0.01355 significance (train): 2.603 significance: 2.255 
+       222    0.01352    0.01306    0.01355 
+       223    0.01354    0.01304    0.01354 
+       224    0.01351    0.01303    0.01356 
+       225    0.01357    0.01308    0.01356 
+       226    0.01353    0.01306    0.01354 
+       227    0.01357    0.01305    0.01355 
+       228    0.01355    0.01303    0.01355 
+       229    0.01351    0.01304    0.01354 
+       230    0.01357    0.01304    0.01356 
+       231    0.01355    0.01307    0.01357 
+       232    0.01351    0.01305    0.01355 
+       233    0.01356    0.01304    0.01354 
+       234    0.01358    0.01306    0.01355 
+       235    0.01354    0.01303    0.01355 
+       236    0.01355    0.01305    0.01356 
+       237    0.01353    0.01303    0.01354 
+       238    0.01354    0.01304    0.01355 
+       239    0.01355    0.01301    0.01355 
+       240    0.01355    0.01303    0.01353 
+       241    0.01357    0.01305    0.01355 significance (train): 2.612 significance: 2.275 
+       242    0.01353    0.01305    0.01355 
+       243    0.01356    0.01304    0.01354 
+       244    0.01359    0.01303    0.01353 
+       245    0.01355    0.01302    0.01354 
+       246    0.01355    0.01301    0.01354 
+       247    0.01357    0.01302    0.01354 
+       248    0.01352    0.01304    0.01353 
+       249    0.01357    0.01304    0.01354 
+       250    0.01359    0.01304    0.01354 
+       251    0.01355    0.01301    0.01354 
+       252    0.01354    0.01301    0.01355 
+       253    0.01357    0.01301    0.01355 
+       254    0.01350    0.01303    0.01353 
+       255    0.01352    0.01302    0.01354 
+       256    0.01351    0.01304    0.01354 
+       257    0.01351    0.01301    0.01355 
+       258    0.01353    0.01299    0.01354 
+       259    0.01357    0.01302    0.01354 
+       260    0.01355    0.01301    0.01353 
+       261    0.01353    0.01303    0.01354 significance (train): 2.636 significance: 2.249 
+       262    0.01355    0.01301    0.01356 
+       263    0.01352    0.01302    0.01355 
+       264    0.01351    0.01301    0.01354 
+       265    0.01351    0.01300    0.01354 
+       266    0.01351    0.01305    0.01355 
+       267    0.01354    0.01303    0.01354 
+       268    0.01354    0.01303    0.01356 
+       269    0.01352    0.01301    0.01354 
+       270    0.01351    0.01302    0.01354 
+       271    0.01349    0.01300    0.01354 
+       272    0.01351    0.01301    0.01355 
+       273    0.01353    0.01303    0.01356 
+       274    0.01355    0.01303    0.01355 
+       275    0.01358    0.01301    0.01353 
+       276    0.01352    0.01301    0.01355 
+       277    0.01351    0.01300    0.01354 
+       278    0.01352    0.01300    0.01355 
+       279    0.01352    0.01301    0.01353 
+       280    0.01348    0.01300    0.01355 
+       281    0.01351    0.01298    0.01355 significance (train): 2.634 significance: 2.278 
+       282    0.01350    0.01302    0.01354 
+       283    0.01349    0.01301    0.01354 
+       284    0.01354    0.01300    0.01354 
+       285    0.01352    0.01302    0.01357 
+       286    0.01354    0.01299    0.01354 
+       287    0.01354    0.01299    0.01354 
+       288    0.01359    0.01302    0.01353 
+       289    0.01350    0.01299    0.01354 
+       290    0.01355    0.01300    0.01354 
+       291    0.01354    0.01300    0.01354 
+       292    0.01350    0.01298    0.01356 
+       293    0.01349    0.01300    0.01354 
+       294    0.01349    0.01302    0.01356 
+       295    0.01354    0.01301    0.01355 
+       296    0.01351    0.01302    0.01355 
+       297    0.01353    0.01301    0.01354 
+       298    0.01357    0.01301    0.01355 
+       299    0.01350    0.01298    0.01354 
+       300    0.01350    0.01298    0.01356 
+set learning rate to: 0.05
+       301    0.01350    0.01299    0.01354 significance (train): 2.648 significance: 2.269 
+       302    0.01349    0.01299    0.01354 
+       303    0.01350    0.01301    0.01355 
+       304    0.01344    0.01299    0.01354 
+       305    0.01352    0.01299    0.01354 
+       306    0.01350    0.01297    0.01354 
+       307    0.01348    0.01299    0.01354 
+       308    0.01351    0.01299    0.01354 
+       309    0.01351    0.01298    0.01354 
+       310    0.01349    0.01297    0.01354 
+       311    0.01350    0.01298    0.01354 
+       312    0.01348    0.01298    0.01354 
+       313    0.01352    0.01298    0.01353 
+       314    0.01352    0.01296    0.01354 
+       315    0.01352    0.01297    0.01354 
+       316    0.01351    0.01300    0.01354 
+       317    0.01350    0.01298    0.01355 
+       318    0.01351    0.01298    0.01354 
+       319    0.01348    0.01299    0.01354 
+       320    0.01347    0.01296    0.01354 
+       321    0.01348    0.01298    0.01353 significance (train): 2.665 significance: 2.266 
+       322    0.01351    0.01297    0.01354 
+       323    0.01348    0.01298    0.01354 
+       324    0.01347    0.01296    0.01354 
+       325    0.01348    0.01295    0.01354 
+       326    0.01348    0.01296    0.01354 
+       327    0.01349    0.01296    0.01353 
+       328    0.01346    0.01298    0.01355 
+       329    0.01349    0.01298    0.01354 
+       330    0.01351    0.01297    0.01354 
+       331    0.01349    0.01297    0.01355 
+       332    0.01347    0.01297    0.01354 
+       333    0.01349    0.01297    0.01354 
+       334    0.01346    0.01298    0.01354 
+       335    0.01348    0.01301    0.01355 
+       336    0.01346    0.01296    0.01355 
+       337    0.01349    0.01297    0.01353 
+       338    0.01351    0.01296    0.01353 
+       339    0.01351    0.01297    0.01353 
+       340    0.01350    0.01298    0.01354 
+       341    0.01349    0.01296    0.01353 significance (train): 2.667 significance: 2.270 
+       342    0.01348    0.01297    0.01354 
+       343    0.01347    0.01298    0.01354 
+       344    0.01351    0.01297    0.01353 
+       345    0.01349    0.01296    0.01354 
+       346    0.01347    0.01295    0.01354 
+       347    0.01346    0.01296    0.01354 
+       348    0.01352    0.01297    0.01354 
+       349    0.01350    0.01295    0.01354 
+       350    0.01345    0.01296    0.01354 
+       351    0.01347    0.01298    0.01354 
+       352    0.01344    0.01295    0.01354 
+       353    0.01351    0.01297    0.01353 
+       354    0.01348    0.01297    0.01355 
+       355    0.01346    0.01296    0.01354 
+       356    0.01343    0.01297    0.01355 
+       357    0.01347    0.01294    0.01355 
+       358    0.01348    0.01294    0.01354 
+       359    0.01350    0.01295    0.01353 
+       360    0.01349    0.01295    0.01353 
+       361    0.01347    0.01295    0.01354 significance (train): 2.665 significance: 2.269 
+       362    0.01353    0.01296    0.01354 
+       363    0.01349    0.01296    0.01354 
+       364    0.01347    0.01297    0.01354 
+       365    0.01349    0.01295    0.01353 
+       366    0.01349    0.01295    0.01353 
+       367    0.01348    0.01296    0.01353 
+       368    0.01351    0.01299    0.01355 
+       369    0.01349    0.01295    0.01354 
+       370    0.01347    0.01298    0.01354 
+       371    0.01345    0.01296    0.01354 
+       372    0.01350    0.01295    0.01354 
+       373    0.01348    0.01297    0.01354 
+       374    0.01345    0.01295    0.01354 
+       375    0.01342    0.01294    0.01355 
+       376    0.01352    0.01297    0.01355 
+       377    0.01345    0.01294    0.01354 
+       378    0.01349    0.01298    0.01355 
+       379    0.01347    0.01295    0.01354 
+       380    0.01350    0.01295    0.01354 
+       381    0.01350    0.01294    0.01354 significance (train): 2.653 significance: 2.256 
+       382    0.01351    0.01296    0.01354 
+       383    0.01352    0.01294    0.01354 
+       384    0.01345    0.01294    0.01354 
+       385    0.01350    0.01296    0.01354 
+       386    0.01349    0.01297    0.01354 
+       387    0.01352    0.01295    0.01353 
+       388    0.01343    0.01296    0.01354 
+       389    0.01346    0.01296    0.01354 
+       390    0.01351    0.01295    0.01354 
+       391    0.01346    0.01295    0.01354 
+       392    0.01347    0.01296    0.01354 
+       393    0.01354    0.01296    0.01354 
+       394    0.01349    0.01295    0.01353 
+       395    0.01345    0.01294    0.01353 
+       396    0.01348    0.01294    0.01354 
+       397    0.01344    0.01295    0.01354 
+       398    0.01348    0.01295    0.01353 
+       399    0.01348    0.01295    0.01355 
+       400    0.01351    0.01294    0.01354 
+set learning rate to: 0.02
+       401    0.01348    0.01295    0.01354 significance (train): 2.671 significance: 2.262 
+       402    0.01346    0.01295    0.01354 
+       403    0.01349    0.01294    0.01353 
+       404    0.01347    0.01294    0.01353 
+       405    0.01349    0.01294    0.01353 
+       406    0.01347    0.01295    0.01354 
+       407    0.01345    0.01294    0.01354 
+       408    0.01346    0.01294    0.01354 
+       409    0.01344    0.01293    0.01354 
+       410    0.01349    0.01294    0.01353 
+       411    0.01347    0.01294    0.01354 
+       412    0.01349    0.01294    0.01354 
+       413    0.01345    0.01293    0.01354 
+       414    0.01345    0.01294    0.01354 
+       415    0.01345    0.01293    0.01354 
+       416    0.01345    0.01294    0.01354 
+       417    0.01345    0.01293    0.01354 
+       418    0.01346    0.01293    0.01354 
+       419    0.01347    0.01293    0.01354 
+       420    0.01348    0.01294    0.01354 
+       421    0.01344    0.01294    0.01354 significance (train): 2.669 significance: 2.263 
+       422    0.01346    0.01293    0.01354 
+       423    0.01349    0.01294    0.01354 
+       424    0.01342    0.01293    0.01354 
+       425    0.01347    0.01293    0.01354 
+       426    0.01347    0.01293    0.01353 
+       427    0.01345    0.01294    0.01354 
+       428    0.01341    0.01293    0.01354 
+       429    0.01350    0.01294    0.01354 
+       430    0.01345    0.01293    0.01354 
+       431    0.01346    0.01293    0.01354 
+       432    0.01344    0.01292    0.01354 
+       433    0.01345    0.01294    0.01354 
+       434    0.01345    0.01295    0.01354 
+       435    0.01348    0.01295    0.01354 
+       436    0.01344    0.01293    0.01354 
+       437    0.01352    0.01293    0.01353 
+       438    0.01344    0.01294    0.01354 
+       439    0.01342    0.01294    0.01354 
+       440    0.01346    0.01293    0.01353 
+       441    0.01348    0.01294    0.01354 significance (train): 2.686 significance: 2.280 
+       442    0.01347    0.01293    0.01354 
+       443    0.01348    0.01293    0.01354 
+       444    0.01346    0.01293    0.01354 
+       445    0.01345    0.01293    0.01354 
+       446    0.01347    0.01293    0.01354 
+       447    0.01343    0.01293    0.01354 
+       448    0.01346    0.01294    0.01353 
+       449    0.01350    0.01293    0.01354 
+       450    0.01342    0.01292    0.01353 
+       451    0.01344    0.01294    0.01354 
+       452    0.01348    0.01293    0.01354 
+       453    0.01350    0.01293    0.01354 
+       454    0.01352    0.01293    0.01354 
+       455    0.01345    0.01294    0.01354 
+       456    0.01346    0.01293    0.01353 
+       457    0.01345    0.01293    0.01353 
+       458    0.01346    0.01293    0.01354 
+       459    0.01342    0.01294    0.01354 
+       460    0.01347    0.01294    0.01354 
+       461    0.01347    0.01293    0.01354 significance (train): 2.663 significance: 2.262 
+       462    0.01345    0.01293    0.01354 
+       463    0.01344    0.01292    0.01354 
+       464    0.01342    0.01292    0.01354 
+       465    0.01346    0.01292    0.01354 
+       466    0.01346    0.01293    0.01354 
+       467    0.01344    0.01293    0.01354 
+       468    0.01348    0.01293    0.01354 
+       469    0.01352    0.01293    0.01354 
+       470    0.01344    0.01292    0.01354 
+       471    0.01345    0.01293    0.01354 
+       472    0.01350    0.01294    0.01354 
+       473    0.01344    0.01292    0.01354 
+       474    0.01342    0.01293    0.01354 
+       475    0.01346    0.01293    0.01354 
+       476    0.01344    0.01292    0.01354 
+       477    0.01349    0.01293    0.01353 
+       478    0.01349    0.01293    0.01354 
+       479    0.01344    0.01293    0.01354 
+       480    0.01348    0.01293    0.01354 
+       481    0.01348    0.01294    0.01354 significance (train): 2.673 significance: 2.278 
+       482    0.01346    0.01293    0.01354 
+       483    0.01345    0.01293    0.01354 
+       484    0.01348    0.01293    0.01354 
+       485    0.01347    0.01293    0.01353 
+       486    0.01343    0.01293    0.01354 
+       487    0.01353    0.01294    0.01353 
+       488    0.01346    0.01292    0.01353 
+       489    0.01348    0.01293    0.01353 
+       490    0.01349    0.01293    0.01353 
+       491    0.01342    0.01294    0.01354 
+       492    0.01347    0.01293    0.01354 
+       493    0.01345    0.01293    0.01354 
+       494    0.01346    0.01293    0.01354 
+       495    0.01345    0.01293    0.01353 
+       496    0.01348    0.01293    0.01354 
+       497    0.01349    0.01294    0.01353 
+       498    0.01348    0.01293    0.01353 
+       499    0.01348    0.01293    0.01353 
+       500    0.01350    0.01293    0.01353 
+set learning rate to: 0.01
+       501    0.01341    0.01293    0.01354 significance (train): 2.667 significance: 2.260 
+       502    0.01344    0.01293    0.01353 
+       503    0.01345    0.01292    0.01353 
+       504    0.01347    0.01292    0.01353 
+       505    0.01346    0.01293    0.01354 
+       506    0.01344    0.01292    0.01353 
+       507    0.01343    0.01293    0.01353 
+       508    0.01340    0.01292    0.01354 
+       509    0.01344    0.01292    0.01354 
+       510    0.01345    0.01292    0.01354 
+       511    0.01348    0.01293    0.01354 
+       512    0.01344    0.01293    0.01354 
+       513    0.01344    0.01292    0.01354 
+       514    0.01349    0.01292    0.01353 
+       515    0.01342    0.01292    0.01354 
+       516    0.01344    0.01292    0.01354 
+       517    0.01346    0.01292    0.01354 
+       518    0.01343    0.01292    0.01354 
+       519    0.01343    0.01292    0.01354 
+       520    0.01346    0.01292    0.01354 
+       521    0.01345    0.01292    0.01354 significance (train): 2.670 significance: 2.269 
+       522    0.01343    0.01292    0.01354 
+       523    0.01347    0.01292    0.01353 
+       524    0.01348    0.01292    0.01354 
+       525    0.01348    0.01293    0.01353 
+       526    0.01349    0.01293    0.01353 
+       527    0.01346    0.01292    0.01353 
+       528    0.01344    0.01292    0.01354 
+       529    0.01344    0.01292    0.01353 
+       530    0.01348    0.01292    0.01353 
+       531    0.01344    0.01292    0.01353 
+       532    0.01347    0.01292    0.01353 
+       533    0.01346    0.01293    0.01353 
+       534    0.01342    0.01292    0.01353 
+       535    0.01346    0.01292    0.01353 
+       536    0.01341    0.01292    0.01354 
+       537    0.01339    0.01292    0.01354 
+       538    0.01345    0.01292    0.01354 
+       539    0.01343    0.01292    0.01354 
+       540    0.01338    0.01292    0.01354 
+       541    0.01344    0.01292    0.01354 significance (train): 2.669 significance: 2.261 
+       542    0.01347    0.01292    0.01354 
+       543    0.01343    0.01292    0.01353 
+       544    0.01345    0.01292    0.01353 
+       545    0.01343    0.01292    0.01353 
+       546    0.01348    0.01293    0.01353 
+       547    0.01342    0.01292    0.01354 
+       548    0.01344    0.01292    0.01354 
+       549    0.01343    0.01292    0.01354 
+       550    0.01345    0.01293    0.01354 
+       551    0.01347    0.01292    0.01354 
+       552    0.01341    0.01292    0.01354 
+       553    0.01344    0.01292    0.01353 
+       554    0.01344    0.01292    0.01354 
+       555    0.01346    0.01292    0.01353 
+       556    0.01344    0.01292    0.01353 
+       557    0.01343    0.01292    0.01353 
+       558    0.01344    0.01292    0.01354 
+       559    0.01345    0.01293    0.01353 
+       560    0.01348    0.01292    0.01353 
+       561    0.01343    0.01292    0.01353 significance (train): 2.676 significance: 2.261 
+       562    0.01346    0.01292    0.01354 
+       563    0.01344    0.01292    0.01354 
+       564    0.01341    0.01292    0.01354 
+       565    0.01344    0.01292    0.01353 
+       566    0.01345    0.01291    0.01354 
+       567    0.01343    0.01292    0.01354 
+       568    0.01351    0.01292    0.01354 
+       569    0.01343    0.01292    0.01354 
+       570    0.01344    0.01292    0.01354 
+       571    0.01348    0.01292    0.01354 
+       572    0.01341    0.01291    0.01354 
+       573    0.01346    0.01292    0.01354 
+       574    0.01344    0.01292    0.01354 
+       575    0.01342    0.01291    0.01354 
+       576    0.01346    0.01292    0.01353 
+       577    0.01346    0.01292    0.01354 
+       578    0.01348    0.01292    0.01353 
+       579    0.01343    0.01292    0.01353 
+       580    0.01345    0.01292    0.01354 
+       581    0.01349    0.01292    0.01353 significance (train): 2.675 significance: 2.257 
+       582    0.01349    0.01292    0.01353 
+       583    0.01346    0.01292    0.01353 
+       584    0.01345    0.01292    0.01353 
+       585    0.01341    0.01292    0.01353 
+       586    0.01345    0.01291    0.01354 
+       587    0.01345    0.01291    0.01353 
+       588    0.01347    0.01292    0.01353 
+       589    0.01346    0.01292    0.01353 
+       590    0.01346    0.01292    0.01354 
+       591    0.01346    0.01292    0.01353 
+       592    0.01351    0.01292    0.01353 
+       593    0.01344    0.01292    0.01354 
+       594    0.01341    0.01291    0.01354 
+       595    0.01347    0.01292    0.01354 
+       596    0.01344    0.01292    0.01354 
+       597    0.01349    0.01292    0.01353 
+       598    0.01343    0.01292    0.01354 
+       599    0.01343    0.01291    0.01354 
+       600    0.01346    0.01292    0.01354 
+set learning rate to: 0.005
+       601    0.01345    0.01292    0.01354 significance (train): 2.670 significance: 2.262 
+       602    0.01346    0.01292    0.01354 
+       603    0.01347    0.01292    0.01354 
+       604    0.01345    0.01292    0.01354 
+       605    0.01346    0.01292    0.01354 
+       606    0.01349    0.01292    0.01353 
+       607    0.01345    0.01292    0.01353 
+       608    0.01350    0.01292    0.01353 
+       609    0.01342    0.01292    0.01353 
+       610    0.01343    0.01292    0.01353 
+       611    0.01344    0.01292    0.01353 
+       612    0.01341    0.01292    0.01354 
+       613    0.01347    0.01291    0.01354 
+       614    0.01345    0.01291    0.01353 
+       615    0.01347    0.01291    0.01354 
+       616    0.01347    0.01291    0.01353 
+       617    0.01344    0.01291    0.01353 
+       618    0.01342    0.01291    0.01353 
+       619    0.01342    0.01291    0.01353 
+       620    0.01344    0.01291    0.01354 
+       621    0.01338    0.01291    0.01354 significance (train): 2.663 significance: 2.259 
+       622    0.01339    0.01291    0.01354 
+       623    0.01340    0.01291    0.01353 
+       624    0.01343    0.01291    0.01353 
+       625    0.01346    0.01291    0.01354 
+       626    0.01345    0.01291    0.01353 
+       627    0.01345    0.01291    0.01353 
+       628    0.01347    0.01292    0.01354 
+       629    0.01342    0.01291    0.01353 
+       630    0.01347    0.01291    0.01353 
+       631    0.01346    0.01291    0.01354 
+       632    0.01346    0.01291    0.01353 
+       633    0.01344    0.01292    0.01354 
+       634    0.01346    0.01292    0.01353 
+       635    0.01343    0.01291    0.01353 
+       636    0.01345    0.01292    0.01354 
+       637    0.01344    0.01292    0.01354 
+       638    0.01348    0.01292    0.01354 
+       639    0.01344    0.01291    0.01354 
+       640    0.01344    0.01291    0.01353 
+       641    0.01344    0.01291    0.01353 significance (train): 2.675 significance: 2.264 
+       642    0.01344    0.01291    0.01353 
+       643    0.01348    0.01292    0.01353 
+       644    0.01341    0.01291    0.01353 
+       645    0.01342    0.01291    0.01353 
+       646    0.01344    0.01291    0.01353 
+       647    0.01344    0.01291    0.01353 
+       648    0.01345    0.01292    0.01353 
+       649    0.01341    0.01292    0.01354 
+       650    0.01343    0.01292    0.01353 
+       651    0.01346    0.01292    0.01353 
+       652    0.01344    0.01292    0.01354 
+       653    0.01344    0.01291    0.01354 
+       654    0.01342    0.01291    0.01354 
+       655    0.01345    0.01291    0.01353 
+       656    0.01349    0.01291    0.01353 
+       657    0.01347    0.01291    0.01353 
+       658    0.01348    0.01292    0.01353 
+       659    0.01351    0.01292    0.01354 
+       660    0.01339    0.01291    0.01354 
+       661    0.01342    0.01291    0.01354 significance (train): 2.673 significance: 2.261 
+       662    0.01344    0.01291    0.01354 
+       663    0.01346    0.01291    0.01353 
+       664    0.01348    0.01292    0.01354 
+       665    0.01345    0.01291    0.01353 
+       666    0.01346    0.01291    0.01353 
+       667    0.01341    0.01291    0.01354 
+       668    0.01342    0.01291    0.01353 
+       669    0.01347    0.01291    0.01354 
+       670    0.01347    0.01291    0.01353 
+       671    0.01346    0.01291    0.01354 
+       672    0.01343    0.01292    0.01354 
+       673    0.01346    0.01292    0.01353 
+       674    0.01350    0.01292    0.01353 
+       675    0.01346    0.01291    0.01353 
+       676    0.01343    0.01291    0.01353 
+       677    0.01343    0.01291    0.01354 
+       678    0.01345    0.01291    0.01354 
+       679    0.01346    0.01291    0.01353 
+       680    0.01343    0.01291    0.01353 
+       681    0.01341    0.01291    0.01354 significance (train): 2.680 significance: 2.265 
+       682    0.01345    0.01291    0.01354 
+       683    0.01344    0.01291    0.01353 
+       684    0.01344    0.01292    0.01354 
+       685    0.01345    0.01291    0.01353 
+       686    0.01342    0.01291    0.01353 
+       687    0.01341    0.01291    0.01353 
+       688    0.01345    0.01291    0.01354 
+       689    0.01342    0.01291    0.01354 
+       690    0.01340    0.01291    0.01354 
+       691    0.01345    0.01291    0.01354 
+       692    0.01343    0.01291    0.01354 
+       693    0.01348    0.01291    0.01354 
+       694    0.01346    0.01291    0.01353 
+       695    0.01345    0.01291    0.01353 
+       696    0.01342    0.01291    0.01354 
+       697    0.01345    0.01291    0.01353 
+       698    0.01342    0.01291    0.01353 
+       699    0.01340    0.01291    0.01353 
+       700    0.01341    0.01291    0.01353 
+set learning rate to: 0.002
+       701    0.01345    0.01291    0.01354 significance (train): 2.676 significance: 2.252 
+       702    0.01343    0.01291    0.01354 
+       703    0.01347    0.01291    0.01353 
+       704    0.01344    0.01291    0.01353 
+       705    0.01344    0.01291    0.01354 
+       706    0.01346    0.01291    0.01354 
+       707    0.01346    0.01291    0.01353 
+       708    0.01346    0.01291    0.01354 
+       709    0.01344    0.01291    0.01354 
+       710    0.01348    0.01291    0.01354 
+       711    0.01343    0.01291    0.01354 
+       712    0.01344    0.01291    0.01353 
+       713    0.01347    0.01291    0.01353 
+       714    0.01343    0.01291    0.01353 
+       715    0.01343    0.01291    0.01353 
+       716    0.01339    0.01291    0.01354 
+       717    0.01343    0.01291    0.01354 
+       718    0.01349    0.01291    0.01354 
+       719    0.01345    0.01291    0.01354 
+       720    0.01343    0.01291    0.01354 
+       721    0.01350    0.01291    0.01354 significance (train): 2.679 significance: 2.263 
+       722    0.01345    0.01291    0.01353 
+       723    0.01345    0.01291    0.01353 
+       724    0.01347    0.01291    0.01353 
+       725    0.01342    0.01291    0.01354 
+       726    0.01342    0.01291    0.01353 
+       727    0.01346    0.01291    0.01354 
+       728    0.01347    0.01291    0.01354 
+       729    0.01343    0.01291    0.01353 
+       730    0.01345    0.01291    0.01354 
+       731    0.01348    0.01291    0.01353 
+       732    0.01350    0.01291    0.01354 
+       733    0.01344    0.01291    0.01354 
+       734    0.01343    0.01291    0.01353 
+       735    0.01348    0.01291    0.01354 
+       736    0.01341    0.01291    0.01354 
+       737    0.01346    0.01291    0.01354 
+       738    0.01346    0.01291    0.01354 
+       739    0.01346    0.01291    0.01354 
+       740    0.01341    0.01291    0.01354 
+       741    0.01344    0.01291    0.01354 significance (train): 2.681 significance: 2.265 
+       742    0.01342    0.01291    0.01354 
+       743    0.01341    0.01291    0.01354 
+       744    0.01343    0.01291    0.01353 
+       745    0.01343    0.01291    0.01353 
+       746    0.01345    0.01291    0.01353 
+       747    0.01345    0.01291    0.01353 
+       748    0.01346    0.01291    0.01353 
+       749    0.01341    0.01291    0.01354 
+       750    0.01344    0.01291    0.01354 
+       751    0.01340    0.01291    0.01354 
+       752    0.01340    0.01291    0.01354 
+       753    0.01339    0.01291    0.01353 
+       754    0.01346    0.01291    0.01354 
+       755    0.01348    0.01291    0.01353 
+       756    0.01347    0.01291    0.01354 
+       757    0.01344    0.01291    0.01354 
+       758    0.01344    0.01291    0.01354 
+       759    0.01339    0.01291    0.01354 
+       760    0.01347    0.01291    0.01354 
+       761    0.01345    0.01291    0.01353 significance (train): 2.681 significance: 2.263 
+       762    0.01339    0.01291    0.01354 
+       763    0.01341    0.01291    0.01353 
+       764    0.01344    0.01291    0.01353 
+       765    0.01349    0.01291    0.01354 
+       766    0.01344    0.01291    0.01354 
+       767    0.01344    0.01291    0.01354 
+       768    0.01342    0.01291    0.01353 
+       769    0.01341    0.01291    0.01353 
+       770    0.01346    0.01291    0.01353 
+       771    0.01345    0.01291    0.01353 
+       772    0.01338    0.01291    0.01353 
+       773    0.01345    0.01291    0.01354 
+       774    0.01343    0.01291    0.01354 
+       775    0.01346    0.01291    0.01354 
+       776    0.01341    0.01291    0.01354 
+       777    0.01342    0.01291    0.01353 
+       778    0.01341    0.01291    0.01354 
+       779    0.01347    0.01291    0.01353 
+       780    0.01345    0.01291    0.01353 
+       781    0.01347    0.01291    0.01353 significance (train): 2.683 significance: 2.263 
+       782    0.01341    0.01291    0.01353 
+       783    0.01343    0.01291    0.01354 
+       784    0.01343    0.01291    0.01354 
+       785    0.01346    0.01291    0.01354 
+       786    0.01342    0.01291    0.01353 
+       787    0.01344    0.01291    0.01353 
+       788    0.01348    0.01291    0.01354 
+       789    0.01345    0.01291    0.01354 
+       790    0.01343    0.01291    0.01353 
+       791    0.01346    0.01291    0.01354 
+       792    0.01342    0.01291    0.01353 
+       793    0.01341    0.01291    0.01353 
+       794    0.01346    0.01291    0.01353 
+       795    0.01344    0.01291    0.01354 
+       796    0.01346    0.01291    0.01353 
+       797    0.01346    0.01291    0.01353 
+       798    0.01348    0.01291    0.01353 
+       799    0.01343    0.01291    0.01353 
+       800    0.01347    0.01291    0.01353 
+set learning rate to: 0.001
+       801    0.01344    0.01291    0.01354 significance (train): 2.675 significance: 2.269 
+       802    0.01349    0.01291    0.01354 
+       803    0.01343    0.01291    0.01353 
+       804    0.01351    0.01291    0.01353 
+       805    0.01340    0.01291    0.01354 
+       806    0.01347    0.01291    0.01353 
+       807    0.01346    0.01291    0.01353 
+       808    0.01340    0.01291    0.01353 
+       809    0.01339    0.01291    0.01353 
+       810    0.01346    0.01291    0.01353 
+       811    0.01346    0.01291    0.01353 
+       812    0.01346    0.01291    0.01354 
+       813    0.01342    0.01291    0.01353 
+       814    0.01340    0.01291    0.01353 
+       815    0.01340    0.01291    0.01354 
+       816    0.01343    0.01291    0.01353 
+       817    0.01345    0.01291    0.01353 
+       818    0.01345    0.01291    0.01353 
+       819    0.01342    0.01291    0.01353 
+       820    0.01348    0.01291    0.01353 
+       821    0.01344    0.01291    0.01353 significance (train): 2.680 significance: 2.270 
+       822    0.01343    0.01291    0.01353 
+       823    0.01344    0.01291    0.01353 
+       824    0.01344    0.01291    0.01354 
+       825    0.01344    0.01291    0.01354 
+       826    0.01347    0.01291    0.01353 
+       827    0.01344    0.01291    0.01354 
+       828    0.01345    0.01291    0.01354 
+       829    0.01342    0.01291    0.01353 
+       830    0.01344    0.01291    0.01354 
+       831    0.01341    0.01291    0.01354 
+       832    0.01347    0.01291    0.01353 
+       833    0.01344    0.01291    0.01354 
+       834    0.01345    0.01291    0.01353 
+       835    0.01342    0.01291    0.01354 
+       836    0.01342    0.01291    0.01353 
+       837    0.01346    0.01291    0.01353 
+       838    0.01346    0.01291    0.01353 
+       839    0.01347    0.01291    0.01354 
+       840    0.01339    0.01291    0.01353 
+       841    0.01346    0.01291    0.01353 significance (train): 2.673 significance: 2.263 
+       842    0.01347    0.01291    0.01354 
+       843    0.01344    0.01291    0.01354 
+       844    0.01344    0.01291    0.01353 
+       845    0.01344    0.01291    0.01354 
+       846    0.01341    0.01291    0.01353 
+       847    0.01346    0.01291    0.01353 
+       848    0.01344    0.01291    0.01353 
+       849    0.01346    0.01291    0.01353 
+       850    0.01345    0.01291    0.01354 
+       851    0.01343    0.01291    0.01353 
+       852    0.01348    0.01291    0.01353 
+       853    0.01344    0.01291    0.01353 
+       854    0.01347    0.01291    0.01353 
+       855    0.01342    0.01291    0.01354 
+       856    0.01343    0.01291    0.01353 
+       857    0.01339    0.01291    0.01354 
+       858    0.01343    0.01291    0.01354 
+       859    0.01344    0.01291    0.01354 
+       860    0.01342    0.01291    0.01354 
+       861    0.01344    0.01291    0.01354 significance (train): 2.673 significance: 2.261 
+       862    0.01345    0.01291    0.01353 
+       863    0.01344    0.01291    0.01353 
+       864    0.01345    0.01291    0.01353 
+       865    0.01341    0.01291    0.01353 
+       866    0.01347    0.01291    0.01354 
+       867    0.01344    0.01291    0.01353 
+       868    0.01347    0.01291    0.01354 
+       869    0.01344    0.01291    0.01353 
+       870    0.01343    0.01291    0.01353 
+       871    0.01351    0.01291    0.01353 
+       872    0.01345    0.01291    0.01353 
+       873    0.01343    0.01291    0.01353 
+       874    0.01345    0.01291    0.01353 
+       875    0.01347    0.01291    0.01353 
+       876    0.01342    0.01291    0.01354 
+       877    0.01341    0.01291    0.01354 
+       878    0.01345    0.01291    0.01353 
+       879    0.01344    0.01291    0.01354 
+       880    0.01342    0.01291    0.01354 
+       881    0.01344    0.01291    0.01354 significance (train): 2.675 significance: 2.264 
+       882    0.01341    0.01291    0.01354 
+       883    0.01344    0.01291    0.01354 
+       884    0.01345    0.01291    0.01353 
+       885    0.01345    0.01291    0.01354 
+       886    0.01340    0.01291    0.01353 
+       887    0.01346    0.01291    0.01354 
+       888    0.01342    0.01291    0.01353 
+       889    0.01347    0.01291    0.01353 
+       890    0.01345    0.01291    0.01353 
+       891    0.01345    0.01291    0.01354 
+       892    0.01343    0.01291    0.01354 
+       893    0.01342    0.01291    0.01353 
+       894    0.01345    0.01291    0.01353 
+       895    0.01343    0.01291    0.01353 
+       896    0.01342    0.01291    0.01354 
+       897    0.01344    0.01291    0.01354 
+       898    0.01342    0.01291    0.01353 
+       899    0.01340    0.01291    0.01354 
+       900    0.01343    0.01291    0.01354 
+       901    0.01344    0.01291    0.01354 significance (train): 2.674 significance: 2.264 
+       902    0.01342    0.01291    0.01353 
+       903    0.01342    0.01291    0.01353 
+       904    0.01344    0.01291    0.01353 
+       905    0.01342    0.01291    0.01354 
+       906    0.01347    0.01291    0.01353 
+       907    0.01342    0.01291    0.01354 
+       908    0.01347    0.01291    0.01353 
+       909    0.01344    0.01291    0.01354 
+       910    0.01341    0.01291    0.01354 
+       911    0.01345    0.01291    0.01354 
+       912    0.01343    0.01291    0.01353 
+       913    0.01344    0.01291    0.01354 
+       914    0.01346    0.01291    0.01354 
+       915    0.01344    0.01291    0.01354 
+       916    0.01343    0.01291    0.01353 
+       917    0.01347    0.01291    0.01354 
+       918    0.01344    0.01291    0.01353 
+       919    0.01343    0.01291    0.01353 
+       920    0.01346    0.01291    0.01353 
+       921    0.01340    0.01291    0.01353 significance (train): 2.674 significance: 2.269 
+       922    0.01344    0.01291    0.01354 
+       923    0.01342    0.01291    0.01354 
+       924    0.01344    0.01291    0.01354 
+       925    0.01343    0.01291    0.01353 
+       926    0.01348    0.01291    0.01353 
+       927    0.01345    0.01291    0.01354 
+       928    0.01342    0.01291    0.01353 
+       929    0.01345    0.01291    0.01353 
+       930    0.01343    0.01291    0.01354 
+       931    0.01344    0.01291    0.01354 
+       932    0.01346    0.01291    0.01354 
+       933    0.01349    0.01291    0.01353 
+       934    0.01344    0.01291    0.01353 
+       935    0.01344    0.01291    0.01353 
+       936    0.01344    0.01291    0.01354 
+       937    0.01349    0.01291    0.01353 
+       938    0.01343    0.01291    0.01353 
+       939    0.01344    0.01291    0.01354 
+       940    0.01344    0.01291    0.01353 
+       941    0.01341    0.01291    0.01353 significance (train): 2.677 significance: 2.272 
+       942    0.01344    0.01291    0.01353 
+       943    0.01345    0.01291    0.01353 
+       944    0.01346    0.01291    0.01354 
+       945    0.01346    0.01291    0.01353 
+       946    0.01347    0.01291    0.01353 
+       947    0.01342    0.01291    0.01353 
+       948    0.01341    0.01291    0.01354 
+       949    0.01345    0.01291    0.01353 
+       950    0.01346    0.01291    0.01353 
+       951    0.01345    0.01291    0.01353 
+       952    0.01348    0.01291    0.01354 
+       953    0.01345    0.01291    0.01354 
+       954    0.01345    0.01291    0.01354 
+       955    0.01347    0.01291    0.01353 
+       956    0.01342    0.01291    0.01353 
+       957    0.01347    0.01291    0.01354 
+       958    0.01344    0.01291    0.01354 
+       959    0.01345    0.01291    0.01353 
+       960    0.01346    0.01291    0.01354 
+       961    0.01342    0.01291    0.01354 significance (train): 2.669 significance: 2.264 
+       962    0.01343    0.01291    0.01353 
+       963    0.01344    0.01291    0.01353 
+       964    0.01342    0.01291    0.01353 
+       965    0.01345    0.01291    0.01353 
+       966    0.01343    0.01291    0.01353 
+       967    0.01341    0.01291    0.01354 
+       968    0.01343    0.01291    0.01353 
+       969    0.01343    0.01291    0.01353 
+       970    0.01344    0.01291    0.01353 
+       971    0.01345    0.01291    0.01353 
+       972    0.01346    0.01291    0.01353 
+       973    0.01344    0.01291    0.01353 
+       974    0.01343    0.01291    0.01353 
+       975    0.01344    0.01291    0.01353 
+       976    0.01344    0.01291    0.01354 
+       977    0.01344    0.01291    0.01353 
+       978    0.01348    0.01291    0.01354 
+       979    0.01344    0.01291    0.01353 
+       980    0.01345    0.01291    0.01353 
+       981    0.01344    0.01291    0.01353 significance (train): 2.677 significance: 2.271 
+       982    0.01345    0.01291    0.01354 
+       983    0.01342    0.01291    0.01354 
+       984    0.01344    0.01291    0.01353 
+       985    0.01342    0.01291    0.01354 
+       986    0.01343    0.01291    0.01353 
+       987    0.01342    0.01291    0.01354 
+       988    0.01345    0.01291    0.01353 
+       989    0.01346    0.01291    0.01353 
+       990    0.01346    0.01291    0.01354 
+       991    0.01344    0.01291    0.01354 
+       992    0.01345    0.01291    0.01353 
+       993    0.01345    0.01291    0.01353 
+       994    0.01343    0.01291    0.01353 
+       995    0.01343    0.01291    0.01353 
+       996    0.01343    0.01291    0.01354 
+       997    0.01346    0.01291    0.01354 
+       998    0.01345    0.01291    0.01353 
+       999    0.01347    0.01291    0.01354 
+      1000    0.01345    0.01291    0.01353 significance (train): 2.669 significance: 2.272 
+FINAL RESULTS:       1000   0.013446   0.013534 significance (train): 2.669 significance: 2.272 
+TRAINING TIME: 0:26:12.376002 (1572.4 seconds)
+GRADIENT UPDATES: 171000
+MIN TEST LOSS: 0.013529302268272574
+training done.
+> results//FINAL_VHLegacy_2lep_WP_SR_medhigh_Zll/Zll2017_SR_medhigh_Zll_191022_V11finalVarsWP.h5/512-256-128-64-64-64/0.20-0.50-0.50-0.50-0.50-0.50/1.000e+00/rnd_1/checkpoints/model.ckpt
+saved checkpoint to [34m results//FINAL_VHLegacy_2lep_WP_SR_medhigh_Zll/Zll2017_SR_medhigh_Zll_191022_V11finalVarsWP.h5/512-256-128-64-64-64/0.20-0.50-0.50-0.50-0.50-0.50/1.000e+00/rnd_1/checkpoints/model.ckpt [0m
+LOSS(train, unmodified):  0.012908022076635866
+LOSS(test):               0.013534278871608707
+---
+S    B
+---
+ 0.32 463.14
+ 0.67 327.30
+ 0.94 276.13
+ 1.21 219.49
+ 1.49 213.20
+ 1.95 184.92
+ 2.23 163.77
+ 2.52 139.12
+ 2.64 108.57
+ 2.66 86.63
+ 3.09 71.74
+ 4.26 81.16
+ 6.43 75.82
+ 9.93 71.56
+ 8.81 25.97
+---
+significance: 2.272 
+area under ROC: AUC_test =  86.10921082427025
+area under ROC: AUC_train =  87.9182297005262
+INFO: set range to: 1.1319071 526.0083
+INFO: set range to: 90.00124 149.99974
+INFO: set range to: 1.5820093 1747.4672
+INFO: set range to: 0.12193481 1659.2484
+INFO: set range to: 0.00010809631 6.2557387
+INFO: set range to: 0.0002052784 3.14159
+INFO: set range to: 2.0 3.0
+INFO: set range to: 1.0 3.0
+INFO: set range to: 0.008366257 1588.6918
+INFO: set range to: 20.001316 1395.278
+INFO: set range to: 0.0047261203 1719.1318
+INFO: set range to: 20.000544 1637.3809
+INFO: set range to: 51.460514 109.78512
+INFO: set range to: 75.00318 104.996346
+INFO: set range to: 0.0 9.0
+INFO: set range to: 122.10054 1783.584
+INFO: set range to: 150.00006 1591.287
+INFO: set range to: 0.0055165235 6.447321
+INFO: set range to: 0.0007145899 5.729688
+INFO: set range to: 0.0 3.7739258
+INFO: set range to: -1.0 18.0
+INFO: set range to: 0.034748428 7.287452
+INFO: set range to: 0.019376041 8.409098
+INFO: set range to: 0.120362535 734.5923
+INFO: set range to: -1.0 1015.22235
+INFO: set range to: -1.0 9.0
+INFO: set range to: 0.39688307 4.6014214
+-------------------------
+with optimized binning:
+ method: SB
+ target: 0.1090, 0.1194, 0.1242, 0.1226, 0.1148, 0.1021, 0.0861, 0.0690, 0.0524, 0.0378, 0.0259, 0.0168, 0.0104, 0.0061, 0.0034
+ bins:   0.0000, 0.0351, 0.0900, 0.1583, 0.2418, 0.3353, 0.4298, 0.5287, 0.6458, 0.7552, 0.8329, 0.8834, 0.9188, 0.9460, 0.9643, 1.0000
+-------------------------
+---
+S    B
+---
+ 0.12 278.55
+ 0.40 305.12
+ 0.79 316.92
+ 1.34 312.24
+ 2.03 291.72
+ 2.86 258.34
+ 3.60 216.64
+ 4.68 171.93
+ 5.17 128.86
+ 5.90 90.58
+ 5.68 60.90
+ 5.30 37.80
+ 4.84 21.76
+ 3.45 12.13
+ 3.00  5.04
+---
+significance: 2.337 (for optimized binning)
+significance: 2.332 ( 1% background uncertainty, for optimized binning)
+significance: 2.240 ( 5% background uncertainty, for optimized binning)
+significance: 2.055 (10% background uncertainty, for optimized binning)
+significance: 1.868 (15% background uncertainty, for optimized binning)
+significance: 1.700 (20% background uncertainty, for optimized binning)
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+INFO: search optimal cut position for sensitivity
+optimal position for analysis based on single cut on score > x:
+AMS_cut_position = 0.8178600072860718
+AMC_cut_significance = 1.8728371241961517
+INFO: convert to histogram
