@@ -2668,7 +2668,7 @@ bool VHbbAnalysis::ReconstructVCand(){
         MET.SetPtEtaPhiM(m("MET_Pt"), 0., m("MET_Phi"), 0.); // Eta/M don't affect calculation of W.pt and W.phi
         Lep.SetPtEtaPhiM(m("selLeptons_pt_0"), m("selLeptons_eta_0"), m("selLeptons_phi_0"), m("selLeptons_mass_0"));
         double cosPhi12 = (Lep.Px()*MET.Px() + Lep.Py()*MET.Py()) / (Lep.Pt() * MET.Pt()); // cos of the angle between the lepton and the missing energy
-        *f["V_mt"] = TMath::Sqrt(2*Lep.Pt()*MET.Pt() * (1 - cosPhi12));
+        *f["V_mt"] = TMath::Sqrt(2*Lep.Pt()*MET.Pt() *std::max(0.0, (1 - cosPhi12)));
         if(mInt("hJetInd1")>-1 && mInt("hJetInd2")>-1) {
             *f["Lep_HJ1_dPhi"] = Lep.DeltaPhi(HJ1);
             *f["Lep_HJ2_dPhi"] = Lep.DeltaPhi(HJ2);
@@ -3029,6 +3029,7 @@ void VHbbAnalysis::ControlSampleSelection(){
             && m("V_pt") > m("vptcut")
             && H_mass < 250
             && H_pt > m("hptcut_1lepchan")
+            && m("lepMetDPhi") < 2.0
         );
 
 
