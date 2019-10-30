@@ -121,9 +121,8 @@ def evaluate_discriminator(ep, bdt_infos):
         elif bdt_info.mvaType == "MultiDNN":
             raw_vars = tuple(getattr(ep, varname) for varname, _ in bdt_info.raw_vars)
             multiDNNOutput = bdt_info.tf_evaluator.EvaluateMultiDNN(raw_vars)
-            for iOut in range(len(multiDNNOutput)):
-                getattr(ep, bdt_info.bdtname)[0] = multiDNNOutput[iOut]
-            getattr(ep, bdt_info.mostProbIndex)[0] = float(numpy.where(multiDNNOutput==max(multiDNNOutput))[0][0])
+            getattr(ep, bdt_info.mostProbIndex)[0] = float(numpy.argmax(multiDNNOutput))
+            getattr(ep, bdt_info.bdtname)[0] = float(numpy.argmax(multiDNNOutput))+numpy.max(multiDNNOutput)
         else:
             print "What type of MVA is",bdt_info.mvaType
 
