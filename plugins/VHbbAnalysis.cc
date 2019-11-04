@@ -2995,11 +2995,11 @@ void VHbbAnalysis::ControlSampleSelection(){
         }
 
         if (base0LepCSSelection) {
-            if (mInt("isZnn")) {
-                if (m("MET_Pt") > m("metcut_0lepchan") && *f["min_dPhi_hJet_MET"] < 1.57 && hJet1_btag > m("tagWPM") && m("nAddJets302p5_puid") >= 2 && HVdPhi > 2 ){
+            if (mInt("isZnn") && *in["nJetsCloseToMET"] == 0) {
+                if (m("MET_Pt") > m("metcut_0lepchan") && *f["min_dPhi_hJet_MET"] < 1.57 && hJet1_btag > m("tagWPM") && m("nAddJets302p5_puid") >= 2 && HVdPhi > 2){
                     *in["controlSample"] = 1; // TTbar Control Sample Index
                 }
-                else if (*in["nJetsCloseToMET"] == 0 && m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2 && m("nAddJets302p5_puid") < 2) {
+                else if (m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2 && m("nAddJets302p5_puid") < 2) {
                     if (hJet1_btag < m("tagWPM")) {
                         *in["controlSample"] = 2; // Z+Light Control Sample Index
                     } 
