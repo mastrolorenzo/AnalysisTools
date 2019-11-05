@@ -11,7 +11,7 @@ name=MET_Pt                                   lname=MET_Pt                      
 name=V_mt                                     lname=V_mt                                      isEx=1      isSpec=0 order=4
 name=SA5                                      lname=SA5                                       isEx=1      isSpec=0 order=5
 name=FatJet_pt[Hbb_fjidx]/V_pt                lname=FatJetVPtRatio                            isEx=0      isSpec=0 order=6
-name=FatJet_deepTagMD_bbvsLight[Hbb_fjidx]    lname=FatJet_deepTagMD_bbvsLight                isEx=0      isSpec=0 order=7
+name=FatJet_deepTagMD_bbvsLight[Hbb_fjidx]    lname=FatJetCand_deepTagMD_bbvsLight            isEx=0      isSpec=0 order=7
 name=FatJetCand_deepTagMD_bbvsTop             lname=FatJetCand_deepTagMD_bbvsTop              isEx=0      isSpec=0 order=8
 
 

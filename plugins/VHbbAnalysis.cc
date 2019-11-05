@@ -3146,7 +3146,7 @@ void VHbbAnalysis::ControlSampleSelection(){
 	             }
 	             //V+light CR=2
                      if((m("FatJetCand_Msoftdrop_corrected") > 50)
-                         && (m("FatJet_deepTagMD_bbvsLight") < 0.8)
+                         && (m("FatJetCand_deepTagMD_bbvsLight") < 0.8)
                          && (mInt("nAddLeptons") == 0)
                          && (m("nJetsOutsideFatJet") == 0)){
                              *in["boostedControlSample"] = 2;
