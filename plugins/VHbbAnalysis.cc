@@ -84,12 +84,12 @@ bool VHbbAnalysis::Preselection() {
     
     if(m("dataYear") !=2018)
       {
-	if (cursample->sampleNum == 110 && m("LHE_HT") > 100) return false;
+    if (cursample->sampleNum == 110 && m("LHE_HT") > 100) return false;
       }
     
     if(m("dataYear") ==2018)
       {
-	if (cursample->sampleNum == 110 && ( (m("LHE_HT") > 100 && m("LHE_HT") <= 200) || (m("LHE_HT") > 400 && m("LHE_HT") <= 1200) ) ) return false;
+    if (cursample->sampleNum == 110 && ( (m("LHE_HT") > 100 && m("LHE_HT") <= 200) || (m("LHE_HT") > 400 && m("LHE_HT") <= 1200) ) ) return false;
       }
 
 
@@ -1173,9 +1173,9 @@ void VHbbAnalysis::FinishEvent() {
         }
         if (m("dataYear")==2018){
             //*f["weight_PU"] = m("puWeight");
-	    *f["weight_PU"] = GetPUWeight(m("Pileup_nTrueInt"));
-	    *f["weight_PUUp"] = GetPUWeight(m("Pileup_nTrueInt"),1);
-	    *f["weight_PUDown"] = GetPUWeight(m("Pileup_nTrueInt"),-1);
+        *f["weight_PU"] = GetPUWeight(m("Pileup_nTrueInt"));
+        *f["weight_PUUp"] = GetPUWeight(m("Pileup_nTrueInt"),1);
+        *f["weight_PUDown"] = GetPUWeight(m("Pileup_nTrueInt"),-1);
         }
         /*if (mInt("nGenTop")==0 && mInt("nGenVbosons")>0) {
             // only apply to Z/W+jet samples
@@ -1422,7 +1422,7 @@ void VHbbAnalysis::FinishEvent() {
     *b["usingBEnriched"] =  true; // if using b-enriched need to stitch properly
     if (cursample->sampleNum >= 40 && cursample->sampleNum <=47) {
         if (m("LHE_Vpt") > 100) {
-	     if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
+         if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
     } else if (cursample->sampleNum == 50) {
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
@@ -1439,7 +1439,7 @@ void VHbbAnalysis::FinishEvent() {
     }
     if (cursample->sampleNum >= 110 && cursample->sampleNum<=117){
         if (m("LHE_Vpt") > 100) {
-	     if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
+         if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
     } else if (cursample->sampleNum == 121){
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
@@ -1454,7 +1454,7 @@ void VHbbAnalysis::FinishEvent() {
     }
     if (cursample->sampleNum >= 150 && cursample->sampleNum<=156){
         if (m("LHE_Vpt") > 100) {
-	     if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
+         if (mInt("LHE_Nb") != 0 || nbHad != 0) *b["usingBEnriched"]=false;
         }
     } else if (cursample->sampleNum == 160){
         if (m("LHE_Vpt") < 100 || m("LHE_Vpt") > 200 || mInt("LHE_Nb") == 0) *b["usingBEnriched"]=false;
@@ -1490,62 +1490,60 @@ void VHbbAnalysis::FinishEvent() {
     float VBenrichReweight = 1.0;
     
     if (m("LHE_Vpt") > 100 && mInt("LHE_Nb") == 0 && mInt("nGenStatus2bHad") > 0){
-      //ZJets_BGenFilter, WJets_BGenFilter, DYJets_BGenFilter                                                                                                   
-
-      if(m("dataYear") == 2016){
-	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
-	  VBenrichReweight = 3*0.92;
-	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
-	  VBenrichReweight = 0.99;
-	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
-	  VBenrichReweight = 0.94;
-	}
-      }else if(m("dataYear") == 2017){
-	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
-	  VBenrichReweight = 3.725*(7.7e-01 + 1.184e-03*std::min(m("LHE_Vpt"),800.) - 9.181e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
-	  VBenrichReweight = 1.248*(8.325e-01 + 1.054e-03*std::min(m("LHE_Vpt"),800.) - 1.067e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
-	  VBenrichReweight = 1.171*(7.825e-01 + 1.529e-03*std::min(m("LHE_Vpt"),800.) - 9.667e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}
-      }else if(m("dataYear") == 2018){
-	if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
-	  VBenrichReweight = 3.768*(3.17457e-00 + 2.671e-03*std::min(m("LHE_Vpt"),800.) - 7.573e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
-	  VBenrichReweight = 1.2656*(1.05375 + 1.44192e-03*std::min(m("LHE_Vpt"),800.) - 1.80578e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
-	  VBenrichReweight = 1.1796*(8.4438e-01 + 1.02536e-03*std::min(m("LHE_Vpt"),800.) - 2.76698e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}
-      }
+        //ZJets_BGenFilter, WJets_BGenFilter, DYJets_BGenFilter
+        if(m("dataYear") == 2016){
+            if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+              VBenrichReweight = 3*0.92;
+            }else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+              VBenrichReweight = 0.99;
+            }else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+              VBenrichReweight = 0.94;
+            }
+        }else if(m("dataYear") == 2017){
+            if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+              VBenrichReweight = 3.725*(7.7e-01 + 1.184e-03*std::min(m("LHE_Vpt"),800.) - 9.181e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+              VBenrichReweight = 1.248*(8.325e-01 + 1.054e-03*std::min(m("LHE_Vpt"),800.) - 1.067e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+              VBenrichReweight = 1.171*(7.825e-01 + 1.529e-03*std::min(m("LHE_Vpt"),800.) - 9.667e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }
+        }else if(m("dataYear") == 2018){
+            if (cursample->sampleNum == 162 || cursample->sampleNum == 163){
+              VBenrichReweight = 3.768*(3.17457e-00 + 2.671e-03*std::min(m("LHE_Vpt"),800.) - 7.573e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }else if (cursample->sampleNum == 53 || cursample->sampleNum == 54){
+              VBenrichReweight = 1.2656*(1.05375 + 1.44192e-03*std::min(m("LHE_Vpt"),800.) - 1.80578e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }else if (cursample->sampleNum == 141 || cursample->sampleNum == 142){
+              VBenrichReweight = 1.1796*(8.4438e-01 + 1.02536e-03*std::min(m("LHE_Vpt"),800.) - 2.76698e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }
+        }
     }else if (m("LHE_Vpt") > 100 && mInt("LHE_Nb") > 0){
       //ZBJets, WBJets, DYBJets                                                                                                                                            
-      if(m("dataYear") == 2016){
-	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
-	  VBenrichReweight = 1.02;
-	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
-	  VBenrichReweight = 1.04;
-	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
-	  VBenrichReweight = 1.04;
-	}
-      }else if(m("dataYear") == 2017){
-	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
-	  VBenrichReweight = 1.332*(6.968e-01 + 1.764e-03*std::min(m("LHE_Vpt"),800.) - 1.526e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
-	  VBenrichReweight = 0.977*(1.005e-00 + 5.043e-04*std::min(m("LHE_Vpt"),800.) - 3.894e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
-	  VBenrichReweight = 1.259*(7.519e-01 + 1.975e-03*std::min(m("LHE_Vpt"),800.) - 1.836e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}
-      }else if(m("dataYear") == 2018){
-	if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
-	  VBenrichReweight = 1.337*(9.955e-01 + 1.842e-03*std::min(m("LHE_Vpt"),800.) - 1.215e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
-	  VBenrichReweight = 1.0079*(7.97747e-01 + 1.51461e-03*std::min(m("LHE_Vpt"),800.) - 9.57889e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
-	  VBenrichReweight = 1.2474*(7.97747e-01 + 1.51461e-03*std::min(m("LHE_Vpt"),800.) - 9.57889e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
-	}
-      }
+        if(m("dataYear") == 2016){
+            if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+              VBenrichReweight = 1.02;
+            }else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+              VBenrichReweight = 1.04;
+            }else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+              VBenrichReweight = 1.04;
+            }
+        }else if(m("dataYear") == 2017){
+            if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+              VBenrichReweight = 1.332*(6.968e-01 + 1.764e-03*std::min(m("LHE_Vpt"),800.) - 1.526e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+              VBenrichReweight = 0.977*(1.005e-00 + 5.043e-04*std::min(m("LHE_Vpt"),800.) - 3.894e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+              VBenrichReweight = 1.259*(7.519e-01 + 1.975e-03*std::min(m("LHE_Vpt"),800.) - 1.836e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }
+        }else if(m("dataYear") == 2018){
+            if (cursample->sampleNum == 160 || cursample->sampleNum == 161){
+              VBenrichReweight = 1.337*(9.955e-01 + 1.842e-03*std::min(m("LHE_Vpt"),800.) - 1.215e-06*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }else if (cursample->sampleNum == 50 || cursample->sampleNum == 51){
+              VBenrichReweight = 1.0079*(7.97747e-01 + 1.51461e-03*std::min(m("LHE_Vpt"),800.) - 9.57889e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }else if (cursample->sampleNum == 121 || cursample->sampleNum == 122){
+              VBenrichReweight = 1.2474*(7.97747e-01 + 1.51461e-03*std::min(m("LHE_Vpt"),800.) - 9.57889e-07*TMath::Power(std::min(m("LHE_Vpt"),800.),2));
+            }
+        }
     }
-    
     *f["VBenrichReweight"] = VBenrichReweight;
     *f["weight"] = *f["weight"] * *f["VBenrichReweight"];
     
@@ -1554,8 +1552,11 @@ void VHbbAnalysis::FinishEvent() {
     if(m("dataYear") == 2018 &&  mInt("sampleIndex")!=0 && m("isZnn")){
         if (m("MET_Phi")>m("metphimin") && m("MET_Phi")<m("metphimax")) METPhiWeight = m("run319077LumiRatio");
     }
-    *f["METPhiWeight"] = METPhiWeight;
-    *f["weight"] = *f["weight"] * *f["METPhiWeight"];
+    
+    if(m("dataYear") == 2018){
+        *f["METPhiWeight"] = METPhiWeight;
+        *f["weight"] = *f["weight"] * *f["METPhiWeight"];
+    }
 
     // Split WJets and ZJets samples by jet parton flavor
     *in["bMCFlavorSum"] = 0;
@@ -1959,17 +1960,14 @@ void VHbbAnalysis::FinishEvent() {
             if(m("dataYear") == 2017) {
                 *f["Lep_SF"] = m("SF_DoubleMuId",mInt("lepInd1")) * m("SF_DoubleMuIso",mInt("lepInd1")) *  m("SF_DoubleMuId",mInt("lepInd2")) * m("SF_DoubleMuIso",mInt("lepInd2"));
                 //m("SF_DoubleMuTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleMuTriggerLeg2",mInt("lepInd2"));
-            }
-            if(m("dataYear") == 2018) {
+            } else if(m("dataYear") == 2018) {
                 //TODO: Add the DZ and Mass cut eff
-	      *f["Lep_SF"] = m("SF_DoubleMu_ID_AD2018",mInt("lepInd1")) * m("SF_DoubleMu_ISO_AD2018",mInt("lepInd1")) *  m("SF_DoubleMu_ID_AD2018",mInt("lepInd2")) * m("SF_DoubleMu_ISO_AD2018",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC");
-            }
-	    if(m("dataYear") == 2016) {
+                *f["Lep_SF"] = m("SF_DoubleMu_ID_AD2018",mInt("lepInd1")) * m("SF_DoubleMu_ISO_AD2018",mInt("lepInd1")) *  m("SF_DoubleMu_ID_AD2018",mInt("lepInd2")) * m("SF_DoubleMu_ISO_AD2018",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_Data", "SF_Mu17Leg_Data", "SF_Mu8Leg_MC", "SF_Mu17Leg_MC");
+            } else if(m("dataYear") == 2016) {
                 //TODO: Add DZ and Mass cut eff
-	      *f["Lep_SF"] = ((20.1/36.4) *m("SF_DoubleMu_ID_BF2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF2016",mInt("lepInd1")) *  m("SF_DoubleMu_ID_BF2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF2016",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_BF_Data", "SF_Mu17Leg_BF_Data", "SF_Mu8Leg_BF_MC", "SF_Mu17Leg_BF_MC") + (16.3/36.4) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_GH2016",mInt("lepInd2")) *computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_GH_Data", "SF_Mu17Leg_GH_Data", "SF_Mu8Leg_GH_MC", "SF_Mu17Leg_GH_MC")  ) ;
+                *f["Lep_SF"] = ((20.1/36.4) *m("SF_DoubleMu_ID_BF2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF2016",mInt("lepInd1")) *  m("SF_DoubleMu_ID_BF2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF2016",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_BF_Data", "SF_Mu17Leg_BF_Data", "SF_Mu8Leg_BF_MC", "SF_Mu17Leg_BF_MC") + (16.3/36.4) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_GH2016",mInt("lepInd2")) *computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_GH_Data", "SF_Mu17Leg_GH_Data", "SF_Mu8Leg_GH_MC", "SF_Mu17Leg_GH_MC")  ) ;
             }
-        }else
-        if (mInt("isZee") == 1) {
+        }else if (mInt("isZee") == 1) {
             if(m("dataYear") == 2017) {
                 *f["Lep_SF"] = m("SF_DoubleElIdIso",mInt("lepInd1")) * m("SF_DoubleElIdIso",mInt("lepInd2")) * m("SF_DoubleElTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleElTriggerLeg2",mInt("lepInd2"));
                 *f["Lep_SFUp"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))+m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))+m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))+m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))+m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2")));
@@ -5174,16 +5172,16 @@ void VHbbAnalysis::SetupFactorizedJECs(std::string variation) {
 
 double VHbbAnalysis::computeEventSFForDoubleLeptonTrig(std::string dataeff_lowptleg, std::string dataeff_highptleg, std::string mceff_lowptleg, std::string mceff_highptleg) {
     double dataeff_lowptleg_1 = m(dataeff_lowptleg,mInt("lepInd1"));
-	double dataeff_lowptleg_2 = m(dataeff_lowptleg,mInt("lepInd2"));
-	double dataeff_highptleg_1 = m(dataeff_highptleg,mInt("lepInd1"));
-	double dataeff_highptleg_2 = m(dataeff_highptleg,mInt("lepInd2"));
-	double mceff_lowptleg_1 = m(mceff_lowptleg,mInt("lepInd1"));
-	double mceff_lowptleg_2 = m(mceff_lowptleg,mInt("lepInd2"));
-	double mceff_highptleg_1 = m(mceff_highptleg,mInt("lepInd1"));
-	double mceff_highptleg_2 = m(mceff_highptleg,mInt("lepInd2"));
+    double dataeff_lowptleg_2 = m(dataeff_lowptleg,mInt("lepInd2"));
+    double dataeff_highptleg_1 = m(dataeff_highptleg,mInt("lepInd1"));
+    double dataeff_highptleg_2 = m(dataeff_highptleg,mInt("lepInd2"));
+    double mceff_lowptleg_1 = m(mceff_lowptleg,mInt("lepInd1"));
+    double mceff_lowptleg_2 = m(mceff_lowptleg,mInt("lepInd2"));
+    double mceff_highptleg_1 = m(mceff_highptleg,mInt("lepInd1"));
+    double mceff_highptleg_2 = m(mceff_highptleg,mInt("lepInd2"));
 
-	double effData_ = (std::pow(dataeff_lowptleg_1,2)*dataeff_highptleg_2 + std::pow(dataeff_lowptleg_2,2)*dataeff_highptleg_1)/(dataeff_lowptleg_1+dataeff_lowptleg_2);
-	double effMC_ = (std::pow(mceff_lowptleg_1,2)*mceff_highptleg_2 + std::pow(mceff_lowptleg_2,2)*mceff_highptleg_1)/(mceff_lowptleg_1+mceff_lowptleg_2);
-	double eff_ = effData_/effMC_;
+    double effData_ = (std::pow(dataeff_lowptleg_1,2)*dataeff_highptleg_2 + std::pow(dataeff_lowptleg_2,2)*dataeff_highptleg_1)/(dataeff_lowptleg_1+dataeff_lowptleg_2);
+    double effMC_ = (std::pow(mceff_lowptleg_1,2)*mceff_highptleg_2 + std::pow(mceff_lowptleg_2,2)*mceff_highptleg_1)/(mceff_lowptleg_1+mceff_lowptleg_2);
+    double eff_ = effData_/effMC_;
     return eff_;
 }
