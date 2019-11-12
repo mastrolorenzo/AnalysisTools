@@ -10,6 +10,8 @@
 
 #include <iostream>
 #include "TLorentzVector.h"
+#include "TH2F.h"
+#include "TAxis.h"
 #include "../AnalysisManager.h"
 #include "RooWorkspace.h"
 #include "RooRealVar.h"
@@ -35,6 +37,9 @@ class VHbbAnalysis : public AnalysisManager {
         TH1D* ewkCorrHist_wm;
         TH1D* ewkCorrHist_zll;
         TH1D* ewkCorrHist_znn;
+
+        std::string bEnrichFileName;
+        std::map<std::string,TH2F*> benrichWeightHists;
 
         RooFunctor* met_trigger_sf120_2017_func;
         RooFunctor* met_trigger_sf120_2017_func_up;
@@ -81,6 +86,8 @@ class VHbbAnalysis : public AnalysisManager {
         double GetRecoTopMass(TLorentzVector Jet, bool isJet=true, int useMET=0, bool regPT=true, bool smearedPT=true);
         float ptWeightQCD(int nGenVbosons=0, float lheHT=0., int GenVbosons_pdgId=0);
         float ptWeightEWK(int nGenVbosons=0, float GenVbosons_pt=0., int VtypeSim=0, int GenVbosons_pdgId=0);
+        float GetWeightingBenrichReshaping(float LHE_HT, int LHE_Nb, int nGenStatus2bHad, float LHE_Vpt, float dataYear);
+        float GetWeightingForHTPlusBenrich(float LHE_HT, int LHE_Nb, int nGenStatus2bHad, float LHE_Vpt);
         TLorentzVector getNu4Momentum(const TLorentzVector& TLepton, const TLorentzVector& TMET);
         double LOtoNLOWeightBjetSplitEtabb(double etabb=10., int njets=0);
         float GetVHEWKCorrFactor( float V_pt, TH1D* hist );
@@ -93,7 +100,7 @@ class VHbbAnalysis : public AnalysisManager {
         void BoostedSelection();
         void ComputeBoostedVariables();
         bool atLeastOnePreselFatJet;
-	bool enableFSRRecovery;
+        bool enableFSRRecovery;
 
         TLorentzVector HJ1, HJ2, Hbb;
         TLorentzVector HJ1_noFSR, HJ2_noFSR, Hbb_noFSR;

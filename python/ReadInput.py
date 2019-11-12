@@ -280,6 +280,9 @@ def ReadTextFile(filename, filetype, samplesToRun="", filesToRun=[], doSkim=Fals
                 print "adding btag scale factors"
             am.InitializeBTagSF(settings["btagscalefactors"])
 
+        if settings.has_key("benrichweights"):
+            am.bEnrichFileName=settings["benrichweights"]
+
         if settings.has_key("putarget"):
             try:
                 tfile=ROOT.TFile.Open(settings["putarget"])

@@ -23,6 +23,7 @@ type=2  name=postLoopMVAEval    val=1
 type=2  name=doKinFit           val=1
 type=2 name=reRunGenInfo 	val=0
 type=2  name=slimmedOutput      val=1
+type=2  name=enrichReweight     val=0
 
 type=2  name=j1ptCut_0lepchan   val=60
 type=2  name=j1ptCut_1lepchan   val=25

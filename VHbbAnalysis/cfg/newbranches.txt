@@ -13,7 +13,8 @@ type=1  name=nJetsCloseToMET
 type=2  name=min_dPhi_hJet_MET
 type=2  name=dPhi_MET_TkMET
 
-type=2  name=VBenrichReweight
+type=2  name=VBenrichShapeWeight
+type=2  name=benPlusHTWeight
 type=1  name=nAddJet                     max=30     allowMissingBranch=1
 
 type=4  name=twoResolvedJets
@@ -403,6 +404,7 @@ type=2  name=HVdEta_4MET
 type=2  name=jjVPtRatio
 type=2  name=VPtjjRatio
 type=2  name=HJ1_HJ2_dPhi
+type=2  name=abs_HJ1_HJ2_dPhi
 type=2  name=HJ1_HJ2_dEta
 type=2  name=HJ1_HJ2_dR
 type=2  name=JJEtaBal
