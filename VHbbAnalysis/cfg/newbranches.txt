@@ -79,7 +79,6 @@ type=1  name=boostedControlSample
 type=1  name=boostedCategory #0 for resolved, 1 for overlap, 2 for boosted
 type=2  name=nProcEvents
 type=2  name=nPVs_f
-type=2  name=WJetStitchWeight
 type=2  name=htJet30
 type=2  name=weight_mettrigSF
 type=2  name=weight_mettrigSF_up
