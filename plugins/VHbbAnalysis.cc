@@ -1208,7 +1208,7 @@ void VHbbAnalysis::FinishEvent() {
 
 
     *f["VBenrichShapeWeight"] = GetWeightingBenrichReshaping(m("LHE_HT"),mInt("LHE_Nb"),nbHad,m("LHE_Vpt"),m("dataYear"));
-    *f["benPlusHTWeight"]     = GetWeightingForHTPlusBenrich(m("LHE_HT"),mInt("LHE_Nb"),nbHad,m("LHE_Vpt"));
+    *f["benPlusHTWeight"]     = *f["enrichReweight"]==1 ? GetWeightingForHTPlusBenrich(m("LHE_HT"),mInt("LHE_Nb"),nbHad,m("LHE_Vpt")) : 1.0;
     if(debug>1000) std::cout<<"VBenrichShapeWeight benPlusHTWeight "<<m("VBenrichShapeWeight")<<" "<<m("benPlusHTWeight")<<std::endl;
     *f["weight"] = m("weight") * m("VBenrichShapeWeight") * m("benPlusHTWeight");
     
