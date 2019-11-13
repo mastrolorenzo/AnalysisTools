@@ -13,9 +13,11 @@ type=1  name=nJetsCloseToMET
 type=2  name=min_dPhi_hJet_MET
 type=2  name=dPhi_MET_TkMET
 
+type=2  name=VBenrichShapeWeight
+type=2  name=benPlusHTWeight
+
 type=4  name=twoResolvedJets
 type=4  name=oneMergedJet
-type=4  name=usingBEnriched
 type=4  name=useLOVV
 type=4  name=useNLOVV
 
