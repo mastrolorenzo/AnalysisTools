@@ -32,6 +32,7 @@ settings=cfg/settings_2017.txt
 systematics=cfg/systematics.txt
 scalefactors=cfg/scalefactors_2017.txt
 btagscalefactors=aux/DeepCSV_94XSF_V2_B_F.csv
+benrichweights=aux/EnrichementReweighting_2017.root
 
 putarget=aux/pileup_Cert_294927-306462_13TeV_PromptReco_Collisions17_JSON_ALL2017.txt_69200pb_may15.root
 puUPtarget=aux/pileup_Cert_294927-306462_13TeV_PromptReco_Collisions17_JSON_ALL2017.txt_72383pb_may15.root

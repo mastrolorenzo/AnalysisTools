@@ -13,7 +13,8 @@ type=1  name=nJetsCloseToMET
 type=2  name=min_dPhi_hJet_MET
 type=2  name=dPhi_MET_TkMET
 
-type=2  name=VBenrichReweight
+type=2  name=VBenrichShapeWeight
+type=2  name=benPlusHTWeight
 type=1  name=nAddJet                     max=30     allowMissingBranch=1
 
 type=4  name=twoResolvedJets
@@ -78,7 +79,6 @@ type=1  name=boostedControlSample
 type=1  name=boostedCategory #0 for resolved, 1 for overlap, 2 for boosted
 type=2  name=nProcEvents
 type=2  name=nPVs_f
-type=2  name=WJetStitchWeight
 type=2  name=htJet30
 type=2  name=weight_mettrigSF
 type=2  name=weight_mettrigSF_up
@@ -403,6 +403,7 @@ type=2  name=HVdEta_4MET
 type=2  name=jjVPtRatio
 type=2  name=VPtjjRatio
 type=2  name=HJ1_HJ2_dPhi
+type=2  name=abs_HJ1_HJ2_dPhi
 type=2  name=HJ1_HJ2_dEta
 type=2  name=HJ1_HJ2_dR
 type=2  name=JJEtaBal

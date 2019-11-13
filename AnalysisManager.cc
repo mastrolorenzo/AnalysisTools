@@ -585,18 +585,18 @@ void AnalysisManager::Loop(std::string sampleName, std::string filename, std::st
                 EvaluatePUReweighting(cursample->InputPU,-1);
             }
         }
-	
-	if(cursample->InputPU == NULL && !(cursample->sampleNum==0) && globalPUInput!=NULL){
-	  ofile->cd();
-	  globalPUInput->Write();
-	  EvaluatePUReweighting(globalPUInput);
-	  if(globalPUTargetUP!= NULL){
-	    EvaluatePUReweighting(globalPUInput,1);
-	  }
-	  if(globalPUTargetDOWN!= NULL){
-	    EvaluatePUReweighting(globalPUInput,-1);
-	  }
-	}
+        
+        if(cursample->InputPU == NULL && !(cursample->sampleNum==0) && globalPUInput!=NULL){
+            ofile->cd();
+            globalPUInput->Write();
+            EvaluatePUReweighting(globalPUInput);
+            if(globalPUTargetUP!= NULL){
+                EvaluatePUReweighting(globalPUInput,1);
+            }
+            if(globalPUTargetDOWN!= NULL){
+                EvaluatePUReweighting(globalPUInput,-1);
+            }
+        }
 
         for(int ifile=0; ifile<(int)(cursample->files.size()); ifile++){
             if(std::find(readFiles.begin(), readFiles.end(), cursample->files[ifile]) != readFiles.end() ) {
