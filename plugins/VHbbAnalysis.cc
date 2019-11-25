@@ -2061,9 +2061,9 @@ void VHbbAnalysis::FinishEvent() {
                     thisHist=ewkCorrHist_znn ;
                 }
                 if(thisHist!=NULL){
-                    *f["weight_ptEWK"] = GetVHEWKCorrFactor( m("V_pt"), thisHist );
+                    *f["weight_ptEWK"] = GetVHEWKCorrFactor( GenVpt, thisHist );
                 }
-                if(debug>1000) std::cout<<"weight_ptEWK V_pt "<< m("V_pt")<<" "<<*f["weight_ptEWK"]<<std::endl;
+                if(debug>1000) std::cout<<"weight_ptEWK V_pt "<< GenVpt <<" "<<*f["weight_ptEWK"]<<std::endl;
             }
         } else if(mInt("sampleIndex")>0 && nGenT==0 && nGenV>0){
             *f["weight_ptEWK"]=ptWeightEWK(nGenV, GenVpt, m("Vtype"), Genpdgid);
