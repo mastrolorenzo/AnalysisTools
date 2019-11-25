@@ -8,22 +8,22 @@ earlybranches=cfg/earlybranches_2018.txt
 existingbranches=cfg/existingbranches_2018.txt
 newbranches=cfg/newbranches_2018.txt
 
-bdt_0lep=cfg/bdt_0lep_2016_ICHEP2018.txt
+#bdt_0lep=cfg/bdt_0lep_2016_ICHEP2018.txt
 #bdt_0lep_boosted=cfg/bdt_0lep_boosted.txt
-bdt_1lep=cfg/bdt_1lep_2016_ICHEP2018.txt
+#bdt_1lep=cfg/bdt_1lep_2016_ICHEP2018.txt
 #bdt_1lep_boosted=cfg/bdt_1lep_boosted.txt
-bdt_2lep_highPt=cfg/bdt_2lep_highPt_2017_ICHEP2018.txt
-bdt_2lep_lowPt=cfg/bdt_2lep_lowPt_2017_ICHEP2018.txt
+#bdt_2lep_highPt=cfg/bdt_2lep_highPt_2017_ICHEP2018.txt
+#bdt_2lep_lowPt=cfg/bdt_2lep_lowPt_2017_ICHEP2018.txt
 #bdt_2lep_boosted=cfg/bdt_2lep_boosted.txt
 
-#using 2017 DNNs for now
-bdt_0lep_dnn=cfg/dnn_0lep_2017_Run2Legacy.txt
-bdt_1lep_el_dnn=cfg/dnn_1lep_el_2017_Run2Legacy.txt
-bdt_1lep_mu_dnn=cfg/dnn_1lep_mu_2017_Run2Legacy.txt
-bdt_2lep_high=cfg/dnn_2lep_highPt_2017_Run2Legacy.txt
-bdt_2lep_low=cfg/dnn_2lep_lowPt_2017_Run2Legacy.txt
-#bdt_2lep_high=cfg/dnn_2lep_highPt_2017_ICHEP2018.txt
-#bdt_2lep_low=cfg/dnn_2lep_lowPt_2017_ICHEP2018.txt
+bdt_0lep_dnn=cfg/dnn_0lep_2018_Run2Legacy.txt
+bdt_0lephf_dnn=cfg/dnn_0lepHF_2018_Run2Legacy.txt
+bdt_1lep_el_dnn=cfg/dnn_1lep_el_2018_Run2Legacy.txt
+bdt_1lep_mu_dnn=cfg/dnn_1lep_mu_2018_Run2Legacy.txt
+bdt_1lephf_el_dnn=cfg/dnn_1lepHF_el_2018_Run2Legacy.txt
+bdt_1lephf_mu_dnn=cfg/dnn_1lepHF_mu_2018_Run2Legacy.txt
+bdt_2lep_high=cfg/dnn_2lep_highPt_2018_Run2Legacy.txt
+bdt_2lep_low=cfg/dnn_2lep_lowPt_2018_Run2Legacy.txt
 
 #bdt_0lep_vzbb=cfg/bdt_0lep_vzbb.txt
 #bdt_1lep_vzbb=cfg/bdt_1lep_vzbb.txt

@@ -1,0 +1,481 @@
+saving logfile to [34m results//2018_V11__BDT_Zll_HighPt_weightsFixed/Zll2018_SR_low_Zll_191104_V11final.h5/512-256-128-64-64-64/0.20-0.40-0.50-0.60-0.70-0.80/5.000e-04/rnd_2/output.txt [0m
+INFO: numpy random state =  MT19937 ,caa94073,67eca16,27817cf3,9ffda1ba,428f6e8f,43ed9032,ec24aafa,3507c26c,79820fd3,d2c73137,99680426,b3547f17,99fdd37d,99a8d84b,5f391044,86cbe838,7a9d869f,71ef0e30,d171be69,7a159a04,d62a9533,61509194,12052c48,f92ff7f1,2d1e5b58,cd064242,b18b32f1,3345ddde,d2344827,33f0b72f,1e679f8e,5ddf3035,5097bfcc,460696d0,a9fff02,2c33d551,1a0ba873,b1968684,eb6e4ee1,665c7afd,2f08c0f6,cf653333,d45f7790,381c7440,3182907e,b1899d28,f318349e,bed99141,6878be78,c618f116,d4e2ff3e,3259a668,2607d630,cdb5c2e0,1657897d,65814374,2be2703d,dfd9b704,c7fd9670,b3046cac,b7d667df,ff0b7798,d20ffeee,88a78a6,6a444f74,d84c32f0,d217e022,dbad48fa,b9b2b2b8,2f1b50d7,9246dacc,3cbb1d23,e10bfbd6,ae234cc2,5af3a7aa,c49c2bf6,1c42e97c,20dbb656,ae9fccba,d6d2c2f7,81ae63f9,e814d38,b3acb7f1,68b9df3c,7114d244,ff9d1132,ae0b8dd1,d60673b0,28084f56,68588e95,f78c712b,6ba5ddf7,e00a1aae,a7c53be1,cad5b73,bf0649f3,2ca4da8d,93454fc7,e195797b,70bc6b02,73ee5671,151d4640,e344f185,c36f6099,b2b7e8df,4eb65513,c3271bab,77afc094,451269a6,6477fa3e,6c0cc844,fcaf1d33,403ef28f,8f07e8c9,d4020e96,fe95449,308f9d85,a170ae02,7f45d849,c2e97ad5,416f30c9,1af91067,d6c4c6b4,42eb98b9,a7f1b368,374d3b1b,bfe92002,b237f287,13ab5416,cf71db2f,2a8d4101,cdd0db0,e62b659,69b802ad,c6836a94,a259b92a,95d36e21,5cd4f051,16496923,dd169de8,a1f018eb,3e0e52d,aaa5e597,aa8ce7ef,7b0f3a5b,ae1b2045,23c6270,c0aef757,60771b60,557bb6a7,a2c596b1,b1b5aa86,4238e63d,5829b4e,50ff030d,5909902,b4378138,9835a54a,80eaa5cd,af91ea98,aa693923,4bd31a11,cbb45e42,fbcc26f4,a5da020c,6d2e73e5,45c7e557,8918ed03,27ad9973,6fa63826,39c95ec3,ed212534,90b24c6c,340c893b,e6f1cf41,f363417c,562bde1f,8a39ad6d,574aee70,14603781,b1638fa,983feef6,8dd8593c,84e46d87,3355e67,79f055bd,7b09e955,6fa5840b,5281fbba,a4e215de,96bd5533,cd737438,6bb5796e,6d698134,2df212c,7e063400,b63cb884,ac42d4c9,abe5424d,66844fa9,9e2378c0,19301622,4075bffa,c7ff59a7,7995ddec,ad5cc691,ae799ea6,4950b74b,1df7c891,2c1b16ab,5c01f08,705f7947,865ff28d,9cc9739b,1b3af37b,2baa0688,cf86d5aa,18932fd6,f8e45d8e,189d529b,bcf0c324,f2531d75,90afa16c,d7b6de0c,5b2fe4cc,9434caff,71d54950,84697b5e,14c1420,2363a3c9,ab7dd1cc,7c37f414,148b5395,5c323295,a43ff9b8,b4f64b39,a2ab2620,406f99b3,4cf5c2bb,3c1c7b4b,59bf1c1f,4ace33c9,c05900f1,56f097c8,98581d1a,2b2f3acd,58c95c4,feb27229,e4205033,2ab3d5e2,56c12e9,5826d9bb,cd797668,31cbfb24,b20e47a,db4204b7,a61b1164,23ecc9c0,3de12022,8937190a,14ca0b6f,92cf7aa4,99264a91,5dd808ea,1e40ca3b,d0304b5e,f8697080,dbe10606,3cf06274,636707a0,d1016d2c,ed653e0f,b5fc8a8a,6486f32c,3c2de64e,1c5d9b1a,d3f97f97,80ac9316,ea8f2567,441027b5,d74bfc41,55ed8c0c,ff1b6447,5a9b5ff5,a27c34d0,11fb2d00,34159dd0,f97136a0,aab9b0e8,df937ab1,427abfd6,1e5406f0,e685f012,5810f8bf,cd2a6702,10d587a5,44e2a0e6,c686547e,3aa5b3e7,af0a524e,dfab2097,107e4d3,d29d2def,eaa8f1f,790bbfe0,3af8ff08,1a28d975,586907d7,4c7d04e2,6aeb8b8e,61b43377,6610fa9d,4c63b5f2,c8c9ca33,b9ba9fcc,53d87b35,e48fa7e1,477ecde5,63bfe186,52728dd0,7331149a,ecbde056,2b07a1b1,f25efda1,2402e43e,19a0b379,770474ac,223da9b9,350ad846,7c7b9f8a,d1f93aaa,186e61cb,e08bee25,6ddae9ae,42639d9d,406af140,21ce88c4,39cb173a,b1dfa892,47b94d55,1efbf4c1,f9e26a,288eecb,1f9e2782,5d8088dd,a600458e,2154f5f8,fedbec35,bc16c410,79703cbd,89728f9a,e6bfbc6e,bee59cf3,50ab8e5a,b373b20e,29c81abb,3f1eb582,98e7f20b,1ca6b893,2622ed83,9fd1afdf,56fe2137,14189109,4d555792,2ad165f,f1b3c69,26e06f7a,20333688,36fed3a2,d352b1b5,bc301948,9dc7e168,85b7224,35b687d8,210c7f67,828e8aaa,289d06c2,d78cf272,4472a8bd,649e6f07,793dec80,34ed34a8,580700b4,a8ff9626,4a6e85,a1ad445d,a62dc25f,538dc781,f6e794a4,5a5fab05,d89e8b0c,75c45e5a,b5483e86,25ddd538,3d5f458f,4fca0aee,df80aed4,23f73a51,8956862f,a460377c,5b09ed9,45421157,46af2195,d33fd58a,a01df4b9,fa0c75f3,8d441f91,36970910,d06813ff,ebd6a16,42c7b6ac,d0a3bf91,8356599b,bd9f20c8,9687a56,d6f5c311,f0fcbc59,20f9ac5,d2f1f313,f944b7c,4e491efc,dadd391f,fdb0812d,e47c063,d4fc74b5,36932029,b1e4ea22,a45ab8a6,7d05f851,294dca98,4afb2dd6,b0e8bbb8,dca9c1d5,85443ce6,30989e5c,3728b900,7d3d9790,625104c2,2c0be723,a8b11b80,324b0a99,62ed2e53,642e8bf0,39794cb8,2b44d076,a69d4a83,ff3a5fb6,eebefff8,d14ca6ea,8399d62b,99b3de4,9cce0edc,96ec39f7,bfe48b12,810b9027,2a519e24,f03c929e,9a669283,a0a81e6b,1032a53d,3bbd36b,11cf3ed4,f180a867,613cea72,a38d5c0,628be3b2,b57aedfd,c52692f6,c09d06df,ce6393b,ac78b4c,aae64e01,293054c4,3feaa631,208eac80,9cb0360c,c780a87d,a3ea0711,483ca258,6046d381,780b7ec,df0e71a8,31c2a940,7c28daee,f5af4828,31887f03,a04faa55,f1158599,d4e8cebf,b45f1f7a,8ff25f54,f6dc8b10,77f57182,3abda8a2,685accba,6541d78b,883b9b78,8fa75b86,a9ead261,bce4efc6,b6eafc0f,19a6709c,948a2e0e,609de6d,4cc40a9d,6eb74169,622bd7b,38fded87,195c2d36,28521602,7191a2b1,2f2e3d3,80baf416,a50d64db,7fb54068,ab50174f,655a2361,7fc08a99,531d3771,c81a00ab,36e8ec12,4c23ad99,418c8e95,a922a571,a2fe3bc6,c6d11b6c,e42fbc81,94afa172,8b990767,9d484348,953eee33,5be4d9c4,88091dcd,9ebbbc0e,4655ff1f,bf12be8a,7804ca90,520af4eb,e9e9765e,5ecf1d76,ef8476d6,b4353510,a0d8af4c,a8ca1206,ba03bb22,e35dcb69,55945ae0,c22d041c,cba0dc8a,2e53c470,6e986fd7,3eda079e,158fa02f,7894c7d1,35dd39b,49a64a55,9d5a383a,9628a880,f23caebc,d4c95ff7,7cd32187,d97a6754,faa81523,6eb18ef1,b94ec062,48b7f0df,3251ebaf,c050bf0f,e4dc97da,d4608bf7,379dab75,376ee32b,5441849d,4825ab12,f166488e,bebc826f,2c4f6c78,507f92ce,e4efac12,bc111c0f,445842e5,2bcaad46,21d707b,46d813ae,cf0736ec,fde05291,6c8aeed3,936a78ff,17f64481,7d088735,f1513cd1,bcb2d8fb,d5712f6a,7921388e,6b859bf6,6a320e69,a5ac38bf,5aa42aba,b7e81117,bf45eee2,10d06633,25acd5cf,397ce2cd,f6e3b037,6fa5bc0,c56d96d6,2a6966f9,d973d59a,a8cc323b,ebfd668a,bba19b76,b5fc434b,371cf39d,54c02895,94d0887a,13f4a6f2,c0d2a363,40b509da,aa73ecc7,23d4ca35,68187021,feb39a39,622f518a,552c103b
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+initialized TensorflowDNNClassifier, version v0.1 ( 12006 )
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+INFO: command: /work/krgedia/CMSSW_10_1_0/src/Xbb/python/tfVHbbDNN/./train.py -i /mnt/t3nfs01/data01/shome/krgedia/CMSSW_10_1_0/src/Xbb/python/dumps/Zll2018_SR_low_Zll_191104_V11final.h5 -c config/high_dropout.cfg -p 2018_V11__BDT_Zll_HighPt_weightsFixed
+INFO: read inputs from disk, metadata is pesent:
+INFO:  >   cut (V_mass > 75 && V_mass < 105 && (H_mass > 90 && H_mass < 150) && Jet_btagDeepB[hJidx[0]] > 0.1241 && Jet_btagDeepB[hJidx[1]] > 0.1241 && ((Jet_puId[hJidx[0]]>6||Jet_Pt[hJidx[0]]>50.0)&&(Jet_puId[hJidx[1]]>6||Jet_Pt[hJidx[1]]>50.0))) && (V_pt>=50.0&&V_pt<150.0) && (isZee||isZmm)
+INFO:  >   cutName SR_low_Zll
+INFO:  >   region SR_low_Zll
+INFO:  >   samples {u'SIG_ALL': [u'ZllH_lep_PTV_0_75_hbb', u'ZllH_lep_PTV_75_150_hbb', u'ZllH_lep_PTV_150_250_0J_hbb', u'ZllH_lep_PTV_150_250_GE1J_hbb', u'ZllH_lep_PTV_GT250_hbb', u'ZnnH_lep_PTV_0_75_hbb', u'ZnnH_lep_PTV_75_150_hbb', u'ZnnH_lep_PTV_150_250_0J_hbb', u'ZnnH_lep_PTV_150_250_GE1J_hbb', u'ZnnH_lep_PTV_GT250_hbb', u'ggZllH_lep_PTV_0_75_hbb', u'ggZllH_lep_PTV_75_150_hbb', u'ggZllH_lep_PTV_150_250_0J_hbb', u'ggZllH_lep_PTV_150_250_GE1J_hbb', u'ggZllH_lep_PTV_GT250_hbb', u'ggZnnH_lep_PTV_0_75_hbb', u'ggZnnH_lep_PTV_75_150_hbb', u'ggZnnH_lep_PTV_150_250_0J_hbb', u'ggZnnH_lep_PTV_150_250_GE1J_hbb', u'ggZnnH_lep_PTV_GT250_hbb', u'WminusH_lep_PTV_0_75_hbb', u'WminusH_lep_PTV_75_150_hbb', u'WminusH_lep_PTV_150_250_0J_hbb', u'WminusH_lep_PTV_150_250_GE1J_hbb', u'WminusH_lep_PTV_GT250_hbb', u'WplusH_lep_PTV_0_75_hbb', u'WplusH_lep_PTV_75_150_hbb', u'WplusH_lep_PTV_150_250_0J_hbb', u'WplusH_lep_PTV_150_250_GE1J_hbb', u'WplusH_lep_PTV_GT250_hbb'], u'BKG_ALL': [u'TT_2l2n', u'TT_h', u'TT_Sl', u'ST_tW_antitop', u'ST_tW_top', u'ST_s-channel_4f', u'ST_t-channel_top_4f', u'ST_t-channel_antitop_4f', u'WW_0b', u'WZ_0b', u'ZZ_0b', u'WW_1b', u'WW_2b', u'WZ_1b', u'WZ_2b', u'ZZ_1b', u'ZZ_2b', u'M4HT100to200_0b', u'M4HT100to200_1b', u'M4HT100to200_2b', u'M4HT200to400_0b', u'M4HT200to400_1b', u'M4HT200to400_2b', u'M4HT400to600_0b', u'M4HT400to600_1b', u'M4HT400to600_2b', u'M4HT600toInf_0b', u'M4HT600toInf_1b', u'M4HT600toInf_2b', u'HT0to100ZJets_0b', u'HT0to100ZJets_1b', u'HT0to100ZJets_2b', u'HT100to200ZJets_0b', u'HT100to200ZJets_1b', u'HT100to200ZJets_2b', u'HT200to400ZJets_0b', u'HT200to400ZJets_1b', u'HT200to400ZJets_2b', u'HT400to600ZJets_0b', u'HT400to600ZJets_1b', u'HT400to600ZJets_2b', u'HT600to800ZJets_0b', u'HT600to800ZJets_1b', u'HT600to800ZJets_2b', u'HT800to1200ZJets_0b', u'HT800to1200ZJets_1b', u'HT800to1200ZJets_2b', u'HT1200to2500ZJets_0b', u'HT1200to2500ZJets_1b', u'HT1200to2500ZJets_2b', u'HT2500toinfZJets_0b', u'HT2500toinfZJets_1b', u'HT2500toinfZJets_2b', u'DYBJets_100to200_0b', u'DYBJets_100to200_1b', u'DYBJets_100to200_2b', u'DYBJets_200toInf_0b', u'DYBJets_200toInf_1b', u'DYBJets_200toInf_2b', u'DYJetsBGenFilter_100to200_0b', u'DYJetsBGenFilter_100to200_1b', u'DYJetsBGenFilter_100to200_2b', u'DYJetsBGenFilter_200toInf_0b', u'DYJetsBGenFilter_200toInf_1b', u'DYJetsBGenFilter_200toInf_2b']}
+INFO:  >   scaleFactors {u'M4HT600toInf_0b': 1.0, u'DYJetsBGenFilter_100to200_1b': 1.0, u'ggZnnH_lep_PTV_GT250_hbb': 1.0, u'ggZllH_lep_PTV_150_250_0J_hbb': 1.0, u'WplusH_lep_PTV_150_250_0J_hbb': 1.0, u'HT2500toinfZJets_2b': 1.0, u'ZllH_lep_PTV_150_250_0J_hbb': 1.0, u'WminusH_lep_PTV_GT250_hbb': 1.0, u'ST_tW_top': 1.0, u'WZ_1b': 1.0, u'HT400to600ZJets_1b': 1.0, u'ZnnH_lep_PTV_75_150_hbb': 1.0, u'HT100to200ZJets_0b': 1.0, u'DYJetsBGenFilter_100to200_2b': 1.0, u'ggZllH_lep_PTV_GT250_hbb': 1.0, u'WplusH_lep_PTV_GT250_hbb': 1.0, u'HT2500toinfZJets_1b': 1.0, u'DYJetsBGenFilter_200toInf_0b': 1.0, u'ggZnnH_lep_PTV_150_250_GE1J_hbb': 1.0, u'HT800to1200ZJets_0b': 1.0, u'ZllH_lep_PTV_75_150_hbb': 1.0, u'WplusH_lep_PTV_0_75_hbb': 1.0, u'DYBJets_200toInf_1b': 1.0, u'M4HT600toInf_2b': 1.0, u'WminusH_lep_PTV_150_250_0J_hbb': 1.0, u'ggZllH_lep_PTV_0_75_hbb': 1.0, u'ggZnnH_lep_PTV_150_250_0J_hbb': 1.0, u'M4HT200to400_1b': 1.0, u'TT_2l2n': 1.0, u'HT0to100ZJets_1b': 1.0, u'DYBJets_200toInf_2b': 1.0, u'DYJetsBGenFilter_200toInf_1b': 1.0, u'HT1200to2500ZJets_1b': 1.0, u'M4HT100to200_2b': 1.0, u'WW_1b': 1.0, u'M4HT400to600_0b': 1.0, u'HT600to800ZJets_2b': 1.0, u'M4HT600toInf_1b': 1.0, u'ZllH_lep_PTV_GT250_hbb': 1.0, u'HT800to1200ZJets_2b': 1.0, u'ZllH_lep_PTV_0_75_hbb': 1.0, u'DYJetsBGenFilter_100to200_0b': 1.0, u'WminusH_lep_PTV_0_75_hbb': 1.0, u'HT0to100ZJets_2b': 1.0, u'WplusH_lep_PTV_75_150_hbb': 1.0, u'ZZ_0b': 1.0, u'HT1200to2500ZJets_0b': 1.0, u'WplusH_lep_PTV_150_250_GE1J_hbb': 1.0, u'ST_t-channel_antitop_4f': 1.0, u'M4HT400to600_1b': 1.0, u'WW_2b': 1.0, u'ZnnH_lep_PTV_0_75_hbb': 1.0, u'M4HT100to200_0b': 1.0, u'ZZ_1b': 1.0, u'HT400to600ZJets_2b': 1.0, u'ST_s-channel_4f': 1.0, u'DYBJets_100to200_0b': 1.0, u'DYBJets_200toInf_0b': 1.0, u'M4HT400to600_2b': 1.0, u'ZllH_lep_PTV_150_250_GE1J_hbb': 1.0, u'WZ_2b': 1.0, u'WW_0b': 1.0, u'ZnnH_lep_PTV_150_250_0J_hbb': 1.0, u'HT600to800ZJets_0b': 1.0, u'HT200to400ZJets_2b': 1.0, u'TT_Sl': 1.0, u'M4HT200to400_0b': 1.0, u'HT1200to2500ZJets_2b': 1.0, u'DYBJets_100to200_1b': 1.0, u'HT0to100ZJets_0b': 1.0, u'ZnnH_lep_PTV_150_250_GE1J_hbb': 1.0, u'ZZ_2b': 1.0, u'HT200to400ZJets_1b': 1.0, u'HT400to600ZJets_0b': 1.0, u'WZ_0b': 1.0, u'WminusH_lep_PTV_75_150_hbb': 1.0, u'HT100to200ZJets_1b': 1.0, u'DYBJets_100to200_2b': 1.0, u'HT2500toinfZJets_0b': 1.0, u'ST_tW_antitop': 1.0, u'ggZnnH_lep_PTV_75_150_hbb': 1.0, u'ST_t-channel_top_4f': 1.0, u'ggZnnH_lep_PTV_0_75_hbb': 1.0, u'HT100to200ZJets_2b': 1.0, u'M4HT100to200_1b': 1.0, u'TT_h': 1.0, u'HT200to400ZJets_0b': 1.0, u'DYJetsBGenFilter_200toInf_2b': 1.0, u'WminusH_lep_PTV_150_250_GE1J_hbb': 1.0, u'ggZllH_lep_PTV_150_250_GE1J_hbb': 1.0, u'ggZllH_lep_PTV_75_150_hbb': 1.0, u'HT600to800ZJets_1b': 1.0, u'HT800to1200ZJets_1b': 1.0, u'M4HT200to400_2b': 1.0, u'ZnnH_lep_PTV_GT250_hbb': 1.0}
+INFO:  >   systematics []
+INFO:  >   testCut ((event%2)==0||isData)
+INFO:  >   trainCut !((event%2)==0||isData)
+INFO:  >   variables kinFit_H_mass_fit H_mass kinFit_H_pt_fit H_pt kinFit_HVdPhi_fit abs(VHbb::deltaPhi(H_phi,V_phi)) (Jet_btagDeepB[hJidx[0]]>0.1241)+(Jet_btagDeepB[hJidx[0]]>0.4184)+(Jet_btagDeepB[hJidx[0]]>0.7527) (Jet_btagDeepB[hJidx[1]]>0.1241)+(Jet_btagDeepB[hJidx[1]]>0.4184)+(Jet_btagDeepB[hJidx[1]]>0.7527) kinFit_hJets_pt_0_fit Jet_PtReg[hJidx[0]] kinFit_hJets_pt_1_fit Jet_PtReg[hJidx[1]] kinFit_V_mass_fit V_mass Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6||Jet_Pt>50)&&Jet_jetId>0&&Jet_lepFilter>0&&Iteration$!=hJidx[0]&&Iteration$!=hJidx[1]) kinFit_V_pt_fit V_pt kinFit_jjVPtRatio_fit (H_pt/V_pt) abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]]) SA5 VHbb::deltaR(kinFit_H_eta_fit,kinFit_H_phi_fit,kinFit_V_eta_fit,kinFit_V_phi_fit) VHbb::deltaR(H_eta,H_phi,V_eta,V_phi) MET_Pt kinFit_H_mass_sigma_fit kinFit_n_recoil_jets_fit VHbb::deltaR(Jet_eta[hJidx[0]],Jet_phi[hJidx[0]],Jet_eta[hJidx[1]],Jet_phi[hJidx[1]])
+INFO:  >   version 3
+INFO:  >   weightF genWeight*1.0*muonSF_Iso[0]*muonSF_Id[0]*electronSF_IdIso[0]*electronSF_trigger[0]*bTagWeightDeepCSV*EWKw[0]*weightLOtoNLO_2016*FitCorr[0]
+INFO:  >   weightSYS []
+INFO:  >   xSecs {u'M4HT600toInf_0b': 2.26689, u'DYJetsBGenFilter_100to200_1b': 3.27426, u'ggZnnH_lep_PTV_GT250_hbb': 0.01437, u'ggZllH_lep_PTV_150_250_0J_hbb': 0.0072, u'WplusH_lep_PTV_150_250_0J_hbb': 0.17202, u'HT2500toinfZJets_2b': 0.00432099, u'ZllH_lep_PTV_150_250_0J_hbb': 0.04718, u'WminusH_lep_PTV_GT250_hbb': 0.10899, u'ST_tW_top': 35.85, u'WZ_1b': 48.1, u'HT400to600ZJets_1b': 8.587860000000001, u'ZnnH_lep_PTV_75_150_hbb': 0.09322, u'HT100to200ZJets_0b': 197.78400000000002, u'DYJetsBGenFilter_100to200_2b': 3.27426, u'ggZllH_lep_PTV_GT250_hbb': 0.0072, u'WplusH_lep_PTV_GT250_hbb': 0.17202, u'HT2500toinfZJets_1b': 0.00432099, u'DYJetsBGenFilter_200toInf_0b': 0.48572699999999996, u'ggZnnH_lep_PTV_150_250_GE1J_hbb': 0.01437, u'HT800to1200ZJets_0b': 0.995562, u'ZllH_lep_PTV_75_150_hbb': 0.04718, u'WplusH_lep_PTV_0_75_hbb': 0.17202, u'DYBJets_200toInf_1b': 0.40639200000000003, u'M4HT600toInf_2b': 2.26689, u'WminusH_lep_PTV_150_250_0J_hbb': 0.10899, u'ggZllH_lep_PTV_0_75_hbb': 0.0072, u'ggZnnH_lep_PTV_150_250_0J_hbb': 0.01437, u'M4HT200to400_1b': 66.57990000000001, u'TT_2l2n': 88.29, u'HT0to100ZJets_1b': 6571.89, u'DYBJets_200toInf_2b': 0.40639200000000003, u'DYJetsBGenFilter_200toInf_1b': 0.48572699999999996, u'HT1200to2500ZJets_1b': 0.237513, u'M4HT100to200_2b': 250.059, u'WW_1b': 115.3, u'M4HT400to600_0b': 7.0417499999999995, u'HT600to800ZJets_2b': 2.15988, u'M4HT600toInf_1b': 2.26689, u'ZllH_lep_PTV_GT250_hbb': 0.04718, u'HT800to1200ZJets_2b': 0.995562, u'ZllH_lep_PTV_0_75_hbb': 0.04718, u'DYJetsBGenFilter_100to200_0b': 3.27426, u'WminusH_lep_PTV_0_75_hbb': 0.10899, u'HT0to100ZJets_2b': 6571.89, u'WplusH_lep_PTV_75_150_hbb': 0.17202, u'ZZ_0b': 14.6, u'HT1200to2500ZJets_0b': 0.237513, u'WplusH_lep_PTV_150_250_GE1J_hbb': 0.17202, u'ST_t-channel_antitop_4f': 80.95, u'M4HT400to600_1b': 7.0417499999999995, u'WW_2b': 115.3, u'ZnnH_lep_PTV_0_75_hbb': 0.09322, u'M4HT100to200_0b': 250.059, u'ZZ_1b': 14.6, u'HT400to600ZJets_2b': 8.587860000000001, u'ST_s-channel_4f': 10.1, u'DYBJets_100to200_0b': 3.94338, u'DYBJets_200toInf_0b': 0.40639200000000003, u'M4HT400to600_2b': 7.0417499999999995, u'ZllH_lep_PTV_150_250_GE1J_hbb': 0.04718, u'WZ_2b': 48.1, u'WW_0b': 115.3, u'ZnnH_lep_PTV_150_250_0J_hbb': 0.09322, u'HT600to800ZJets_0b': 2.15988, u'HT200to400ZJets_2b': 59.8149, u'TT_Sl': 365.34, u'M4HT200to400_0b': 66.57990000000001, u'HT1200to2500ZJets_2b': 0.237513, u'DYBJets_100to200_1b': 3.94338, u'HT0to100ZJets_0b': 6571.89, u'ZnnH_lep_PTV_150_250_GE1J_hbb': 0.09322, u'ZZ_2b': 14.6, u'HT200to400ZJets_1b': 59.8149, u'HT400to600ZJets_0b': 8.587860000000001, u'WZ_0b': 48.1, u'WminusH_lep_PTV_75_150_hbb': 0.10899, u'HT100to200ZJets_1b': 197.78400000000002, u'DYBJets_100to200_2b': 3.94338, u'HT2500toinfZJets_0b': 0.00432099, u'ST_tW_antitop': 35.85, u'ggZnnH_lep_PTV_75_150_hbb': 0.01437, u'ST_t-channel_top_4f': 136.02, u'ggZnnH_lep_PTV_0_75_hbb': 0.01437, u'HT100to200ZJets_2b': 197.78400000000002, u'M4HT100to200_1b': 250.059, u'TT_h': 377.96, u'HT200to400ZJets_0b': 59.8149, u'DYJetsBGenFilter_200toInf_2b': 0.48572699999999996, u'WminusH_lep_PTV_150_250_GE1J_hbb': 0.10899, u'ggZllH_lep_PTV_150_250_GE1J_hbb': 0.0072, u'ggZllH_lep_PTV_75_150_hbb': 0.0072, u'HT600to800ZJets_1b': 2.15988, u'HT800to1200ZJets_1b': 0.995562, u'M4HT200to400_2b': 66.57990000000001, u'ZnnH_lep_PTV_GT250_hbb': 0.09322}
+INFO: random state: (3, (2147483648L, 202220888L, 1201785720L, 3177651337L, 4006107055L, 3042077472L, 1030200488L, 1891413996L, 1930939225L, 3852839386L, 1920015566L, 2907202840L, 2977323237L, 1314576809L, 3639500788L, 721888640L, 4188954441L, 1669721255L, 1511255326L, 3635339474L, 473661419L, 1077941303L, 4135110972L, 1906479174L, 3597420102L, 1602681524L, 1482883754L, 964209136L, 2839267009L, 2651139864L, 3833104193L, 2364246185L, 1853382494L, 633988540L, 2599420672L, 1609299286L, 126774438L, 3178233842L, 780657922L, 928671956L, 3249081823L, 3027391961L, 930088788L, 1102901302L, 2706021264L, 2260021683L, 516422815L, 1679538890L, 3926675521L, 1186404410L, 2863164904L, 4178086250L, 1839681817L, 1166475584L, 1030647669L, 3503216165L, 3015454212L, 548157877L, 3936428232L, 884345620L, 1859769541L, 1009211675L, 757677255L, 185412298L, 2972512622L, 3941201543L, 3286118457L, 572619726L, 224375295L, 2566263570L, 3696764934L, 1950379855L, 3544222434L, 964152870L, 13754878L, 3736257204L, 2327127993L, 409185727L, 3287234467L, 3052161822L, 3160505488L, 2089503119L, 2777808316L, 2203906401L, 2131483411L, 3060972122L, 3067993912L, 1090509569L, 3859080190L, 4115797679L, 2839780117L, 3893473649L, 552039103L, 2498710371L, 755534241L, 1253978164L, 1305530123L, 3541543413L, 3015357588L, 3955878031L, 3913469069L, 3866653717L, 255174003L, 3250160502L, 3201691453L, 2899362282L, 4135581572L, 1360475997L, 820942892L, 3503238390L, 3072827881L, 1012127135L, 1597891939L, 2362474144L, 1195105646L, 337412178L, 3596720271L, 1932274284L, 2325810820L, 840913868L, 7011860L, 1264344486L, 3458241703L, 771809169L, 3789640050L, 1002692846L, 341655019L, 982369273L, 949861891L, 1151174812L, 838098731L, 1363644881L, 891358130L, 3752183989L, 3267239790L, 2917022543L, 1527363419L, 1685867925L, 2397324911L, 1395995566L, 284516292L, 166702019L, 2161334612L, 1478248821L, 2230821100L, 2427807217L, 1558053823L, 560430223L, 2543021281L, 2668226697L, 4031987662L, 3471864774L, 1949771050L, 4157369732L, 521490149L, 1923082176L, 3262004906L, 1543326576L, 2762072739L, 2352569858L, 2422639456L, 1120664328L, 2089614145L, 1361176268L, 1257707390L, 1463401802L, 3011690366L, 537070995L, 1416077891L, 2334282138L, 83961195L, 3678296686L, 2392511992L, 23042114L, 707887935L, 1996652207L, 926150108L, 1971389670L, 2776737920L, 992870587L, 511255527L, 1356218447L, 534087462L, 2115102295L, 1603230484L, 2533391147L, 3223071016L, 189858550L, 3647147538L, 434506499L, 397311554L, 1353781336L, 184885810L, 1560777897L, 2748434702L, 1414819870L, 3681083498L, 2596136672L, 1945201428L, 1553651263L, 2779316373L, 2611592819L, 2034128867L, 2763581028L, 1329751935L, 422553582L, 2841530671L, 1487523667L, 177035282L, 2939582728L, 1740727647L, 2478623388L, 2567484737L, 3805678211L, 1060208131L, 4236088308L, 1886150025L, 2541857805L, 1220141699L, 2420882668L, 908599403L, 2192749950L, 2155391528L, 935244107L, 4120276252L, 2994599754L, 1879762065L, 4176842152L, 2116242527L, 1026685253L, 3242120848L, 2381403519L, 4223544359L, 1825371509L, 754536347L, 2084991478L, 4292317584L, 3591605139L, 895880671L, 1842173825L, 2819245563L, 3475622152L, 3141929250L, 1115005805L, 76584074L, 225345245L, 3422381283L, 2613135307L, 1816145835L, 690368679L, 490729704L, 2814231631L, 4018630310L, 676946885L, 3956861679L, 1936520355L, 1055308148L, 4022832629L, 4147808314L, 1722297691L, 96207073L, 948981480L, 525077836L, 1055516188L, 3193851673L, 2642987883L, 789772054L, 1536003249L, 4220559963L, 4128000259L, 3768026896L, 1789784415L, 1534470655L, 91204279L, 2116180779L, 3765390715L, 3491814580L, 3918715792L, 238026917L, 203058043L, 2569720024L, 2384872882L, 545182584L, 4235502069L, 2053292882L, 3695175094L, 2156098143L, 2271608698L, 3306741693L, 2345704990L, 1228933255L, 299628201L, 1504783087L, 3794200915L, 3304131602L, 484747731L, 432895310L, 1962004971L, 2857501031L, 3085020019L, 1330556457L, 1112062146L, 3591143234L, 2457739982L, 4275972027L, 3027644506L, 1508761908L, 1238317525L, 2158881908L, 1308328998L, 3914077436L, 2397710817L, 285624100L, 4178298615L, 3833596679L, 633370799L, 169086762L, 3212302487L, 1416907312L, 3535407356L, 1830299119L, 3859186833L, 2960724201L, 1824861223L, 618186880L, 1211185797L, 1896012771L, 1205254775L, 2376208380L, 1928158378L, 208788350L, 191859013L, 2235476239L, 3352974964L, 1690878343L, 3169395917L, 3962068860L, 2913450870L, 4104035068L, 4096295284L, 942054050L, 767896475L, 292993437L, 1873159381L, 381457798L, 971805149L, 2204078604L, 959622371L, 1140518110L, 1021655441L, 2403580330L, 2653105205L, 2982247423L, 3494079439L, 2249450558L, 2351444846L, 2962110261L, 4152048L, 3965808826L, 1279342978L, 1651431295L, 1622872203L, 711481366L, 1176451378L, 3522532502L, 900163697L, 3379491066L, 3667785281L, 3329643938L, 2881768565L, 4164946442L, 2694726024L, 2102250952L, 253472056L, 4238835352L, 1137155388L, 3466280775L, 1952732648L, 2610994843L, 661492170L, 3941900678L, 480086910L, 589757506L, 2005072811L, 334114969L, 828974599L, 3086089888L, 2380392303L, 3111552190L, 879223662L, 931400438L, 741090827L, 3307027567L, 3622107228L, 4000195185L, 1195984565L, 2471989200L, 2546186405L, 1008584083L, 3649756820L, 1451879087L, 583019007L, 4009909800L, 2468751194L, 3538369718L, 2615458829L, 1012025953L, 27588323L, 3806519133L, 3239060851L, 2674494406L, 1454734149L, 1335047094L, 1595147337L, 2985282239L, 2392130106L, 449023544L, 3946247294L, 2150945698L, 867018470L, 2808010533L, 2300410216L, 3055599768L, 56001461L, 472749137L, 2325175650L, 1529761730L, 3673440097L, 2062864162L, 1942999219L, 3267789881L, 3165181303L, 3706089817L, 3371469891L, 1364510396L, 2680250781L, 1816912928L, 3240053166L, 4193339409L, 2688286875L, 4271255919L, 3107758600L, 3143837440L, 82875854L, 814322178L, 2632430752L, 3933162546L, 3337380809L, 350270789L, 1573360200L, 816856305L, 3248081242L, 3683074076L, 999376851L, 4249613384L, 3384400760L, 331528450L, 2302037637L, 447986159L, 26382404L, 1670669972L, 1279959855L, 2502062201L, 1681460360L, 389191258L, 1014835648L, 109113761L, 3704416798L, 1670718835L, 2233915965L, 2576591837L, 1781481246L, 3621755901L, 3564003029L, 606569639L, 486703726L, 3871895184L, 1207976907L, 2298257189L, 3317821476L, 3744456363L, 3239728753L, 947226383L, 2822100840L, 2770060162L, 2688073182L, 301073609L, 687317946L, 2270743037L, 1046096469L, 3858322030L, 856405760L, 486778934L, 1588222798L, 1288465628L, 2874653916L, 20416712L, 4241007315L, 4181414784L, 3096177858L, 2750761787L, 2260469875L, 2484630748L, 3176212943L, 1766321863L, 371112982L, 3582524475L, 3129139768L, 528826792L, 53637382L, 1942837563L, 3445183111L, 1353756603L, 426391589L, 510644576L, 871121203L, 2059749445L, 383546219L, 2674376163L, 1970831265L, 1282387831L, 2374062292L, 1426810383L, 4048696072L, 1960257430L, 149688493L, 3277064140L, 2266693670L, 154809589L, 3909928573L, 732920921L, 116186780L, 1530938342L, 3114713576L, 3331264449L, 4140523128L, 912952640L, 3450285295L, 4264981763L, 1340472816L, 1457442752L, 3512100658L, 1581602148L, 3204301726L, 2142276146L, 228433860L, 2935114486L, 3235242706L, 114765772L, 1906250006L, 3994898560L, 3107698944L, 2326495527L, 2227283837L, 3161753688L, 4019419906L, 4278964824L, 1876626616L, 2743493425L, 3726178183L, 3498787313L, 2169369586L, 3994058898L, 1388841053L, 4254856677L, 1024379189L, 3640413027L, 808875832L, 2263941831L, 2117112296L, 643167242L, 1392500918L, 4227382318L, 2429528138L, 3948862177L, 432230086L, 2250937294L, 2272702973L, 4241525695L, 3225354418L, 3616586064L, 3635072193L, 4233194116L, 1482804036L, 3004349923L, 526871899L, 1601238751L, 2093989785L, 1075463522L, 3876716301L, 2287855046L, 711863423L, 3041038644L, 549535038L, 2523694705L, 1002760464L, 3281384807L, 856759101L, 2943589848L, 3584442402L, 1235364933L, 756471879L, 197762308L, 634610201L, 3691896177L, 2268312297L, 3561460097L, 1470978064L, 526601207L, 3168677209L, 3452563189L, 152829917L, 1533374764L, 1593882827L, 1318699873L, 2263047000L, 1644008588L, 128807411L, 3515667266L, 1110995708L, 2120281554L, 2818662788L, 3844008954L, 2520046654L, 624L), None)
+nFeatures =  27
+--------------------------------------------------------------------------------
+statistics for dataset: train
+--------------------------------------------------------------------------------
+SIG_ALL (y= 0 ) : 332982  avg weight: 0.0004499914556462895
+BKG_ALL (y= 1 ) : 51720  avg weight: 0.9745830376968736
+--------------------------------------------------------------------------------
+statistics for dataset: test
+--------------------------------------------------------------------------------
+SIG_ALL (y= 0 ) : 332699  avg weight: 0.0004490941789890282
+BKG_ALL (y= 1 ) : 52513  avg weight: 0.9928396626376077
+--------------------------------------------------------------------------------
+classes and labels
+--------------------------------------------------------------------------------
+list of classes: (signals in [32mgreen[0m, backgrounds in [31mred[0m)
+[32m class 0 => SIG_ALL [0m is defined as a SIGNAL
+[31m class 1 => BKG_ALL [0m
+--------------------------------------------------------------------------------
+weights and weight uncertainty examples
+--------------------------------------------------------------------------------
+weights:
+train 0.000855126 0.000815014 0.000578858 0.0006185697 0.00084024714 0.0007118412 0.0006627838 0.00071534043 0.0008779468 0.00084961427
+test  0.0008169429 0.00069783593 0.0007113337 0.0010232553 0.00078862405 -0.00068888726 -0.00072272745 0.0012036909 0.00071560073 0.0010079711
+weights errors:
+train 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+test  0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0
+--------------------------------------------------------------------------------
+input data
+--------------------------------------------------------------------------------
+feature                                            set   mean       std        examples
+kinFit_H_mass_fit                                  train 1.08e+02   3.40e+01   120.43095 126.99927 121.43322 93.56178
+kinFit_H_mass_fit                                  test  1.08e+02   3.45e+01   129.03471 135.58798 123.45627 124.14776
+H_mass                                             train 1.18e+02   1.71e+01   123.39804 116.94941 115.91666 93.15016
+H_mass                                             test  1.18e+02   1.71e+01   122.349304 135.1077 130.95772 122.032616
+kinFit_H_pt_fit                                    train 8.61e+01   4.71e+01   65.86635 59.12039 57.29225 75.240845
+kinFit_H_pt_fit                                    test  8.48e+01   4.67e+01   61.516644 69.40231 175.30505 55.012596
+H_pt                                               train 8.92e+01   4.98e+01   58.350292 39.53083 73.22217 73.01189
+H_pt                                               test  8.82e+01   4.95e+01   71.7438 60.660133 144.669 60.33038
+kinFit_HVdPhi_fit                                  train 2.90e+00   8.28e-01   3.0946445 3.1117363 2.1518853 3.1342616
+kinFit_HVdPhi_fit                                  test  2.89e+00   8.39e-01   3.1595187 3.0916553 2.7746964 3.0659528
+abs(VHbb::deltaPhi(H_phi,V_phi))                   train 2.49e+00   7.26e-01   2.8329158 2.4094396 2.2020652 3.1104667
+abs(VHbb::deltaPhi(H_phi,V_phi))                   test  2.48e+00   7.27e-01   3.0552769 3.0627506 2.8825257 2.7756221
+(Jet_btagDeepB[hJidx[0]]>0.1241)+(Jet_btagDeep...  train 2.17e+00   8.77e-01   3.0 3.0 3.0 3.0
+(Jet_btagDeepB[hJidx[0]]>0.1241)+(Jet_btagDeep...  test  2.19e+00   8.67e-01   3.0 3.0 3.0 3.0
+(Jet_btagDeepB[hJidx[1]]>0.1241)+(Jet_btagDeep...  train 1.51e+00   7.66e-01   1.0 2.0 2.0 2.0
+(Jet_btagDeepB[hJidx[1]]>0.1241)+(Jet_btagDeep...  test  1.50e+00   7.59e-01   2.0 3.0 2.0 3.0
+kinFit_hJets_pt_0_fit                              train 6.18e+01   3.79e+01   39.601955 53.82781 91.82798 73.802925
+kinFit_hJets_pt_0_fit                              test  6.13e+01   3.74e+01   94.14257 43.16561 32.703693 73.54408
+Jet_PtReg[hJidx[0]]                                train 6.14e+01   3.49e+01   48.08813 64.23099 99.38069 72.55542
+Jet_PtReg[hJidx[0]]                                test  6.15e+01   3.48e+01   99.081894 44.482525 40.886456 39.256073
+kinFit_hJets_pt_1_fit                              train 5.82e+01   3.80e+01   74.49094 85.493095 35.53442 46.232376
+kinFit_hJets_pt_1_fit                              test  5.75e+01   3.76e+01   36.43267 108.990585 178.25526 54.955467
+Jet_PtReg[hJidx[1]]                                train 5.73e+01   3.51e+01   62.978813 56.802856 26.805613 43.6974
+Jet_PtReg[hJidx[1]]                                test  5.67e+01   3.44e+01   30.067654 102.43312 147.74602 42.957016
+kinFit_V_mass_fit                                  train 9.04e+01   4.94e+00   85.0983 90.265884 92.58146 86.23432
+kinFit_V_mass_fit                                  test  9.03e+01   4.89e+00   90.567505 88.07909 92.413956 92.75728
+V_mass                                             train 9.04e+01   5.48e+00   84.76988 90.29892 93.36641 79.82524
+V_mass                                             test  9.03e+01   5.41e+00   90.46181 87.94837 92.48566 92.88964
+Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6|...  train 5.98e-01   8.33e-01   0.0 0.0 1.0 0.0
+Sum$(Jet_Pt>30&&abs(Jet_eta)<2.4&&(Jet_puId>6|...  test  5.87e-01   8.34e-01   0.0 0.0 2.0 1.0
+kinFit_V_pt_fit                                    train 8.28e+01   2.51e+01   68.31934 69.69713 70.32005 75.989525
+kinFit_V_pt_fit                                    test  8.24e+01   2.51e+01   60.07833 72.258194 73.6341 54.388866
+V_pt                                               train 8.28e+01   2.51e+01   68.140205 69.74688 70.80709 70.45128
+V_pt                                               test  8.25e+01   2.51e+01   59.93522 72.221634 73.72298 54.444313
+kinFit_jjVPtRatio_fit                              train 1.06e+00   5.60e-01   0.96409523 0.8482471 0.81473565 0.99014753
+kinFit_jjVPtRatio_fit                              test  1.05e+00   5.56e-01   1.0239406 0.9604768 2.380759 1.0114679
+(H_pt/V_pt)                                        train 1.11e+00   6.14e-01   0.85632694 0.5667756 1.0341078 1.0363458
+(H_pt/V_pt)                                        test  1.10e+00   6.13e-01   1.1970223 0.8399164 1.9623327 1.1081117
+abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])           train 1.24e+00   7.71e-01   1.3095703 0.21508789 0.72802734 0.043701172
+abs(Jet_eta[hJidx[0]]-Jet_eta[hJidx[1]])           test  1.25e+00   7.81e-01   0.9564667 0.10229492 0.4969635 0.91503906
+SA5                                                train 2.26e+00   1.99e+00   0.0 2.0 2.0 2.0
+SA5                                                test  2.27e+00   1.99e+00   3.0 0.0 6.0 2.0
+VHbb::deltaR(kinFit_H_eta_fit,kinFit_H_phi_fit...  train 3.04e+00   7.50e-01   3.2649672 3.1573715 2.3513033 3.392961
+VHbb::deltaR(kinFit_H_eta_fit,kinFit_H_phi_fit...  test  3.04e+00   7.62e-01   3.1250982 3.7561278 2.948471 3.0700083
+VHbb::deltaR(H_eta,H_phi,V_eta,V_phi)              train 2.94e+00   8.01e-01   3.0515645 2.5241554 2.3229196 3.371515
+VHbb::deltaR(H_eta,H_phi,V_eta,V_phi)              test  2.94e+00   7.91e-01   3.059954 3.7894871 3.0308316 2.7980955
+MET_Pt                                             train 4.65e+01   3.27e+01   9.502782 24.1971 90.08072 23.941326
+MET_Pt                                             test  4.70e+01   3.24e+01   8.505574 13.336104 40.45062 64.06788
+kinFit_H_mass_sigma_fit                            train 7.72e+00   9.27e+00   3.8037 3.1445022 5.4235497 6.1171436
+kinFit_H_mass_sigma_fit                            test  7.63e+00   8.58e+00   5.0115204 5.293544 10.7890005 2.812762
+kinFit_n_recoil_jets_fit                           train 8.88e-01   1.16e+00   0.0 0.0 1.0 0.0
+kinFit_n_recoil_jets_fit                           test  8.98e-01   1.17e+00   0.0 0.0 2.0 0.0
+VHbb::deltaR(Jet_eta[hJidx[0]],Jet_phi[hJidx[0...  train 2.31e+00   6.54e-01   2.445397 2.4964654 3.0415409 1.8662165
+VHbb::deltaR(Jet_eta[hJidx[0]],Jet_phi[hJidx[0...  test  2.33e+00   6.63e-01   2.9404263 2.8770454 1.8531572 2.7294834
+--------------------------------------------------------------------------------
+input scaling
+--------------------------------------------------------------------------------
+[31mINFO: scaling is done inside tensorflow graph and StandardScaler() should not be used om top of it => scaler.dmp file will not be written![0m
+number of expected events (test): {0: 52136.98920408869, 1: 149.4131842554707}
+number of expected events (train): {0: 50405.434709682304, 1: 149.83905488401277}
+balancing signal/background, reweight class SIG_ALL  from group 1 (signals) by 337.39717461312125
+balancing signal/background, reweight class BKG_ALL  from group 0 (backgrounds) by 1.0029726765724178
+shape train: (384702, 27)
+shape test:  (385212, 27)
+building tensorflow graph with parameters
+ adam_epsilon                             1e-11
+ adaptiveRate                             False
+ additional_noise                         0.0
+ bInitScale                               0.01
+ balanceClasses                           False
+ balanceSignalBackground                  True
+ batchNormalization                       [1, 2, 3, 4, 5, 6, 7, 8]
+ batchSize                                32
+ batchSizeAtEpoch                         {0: 128, 80: 16384, 20: 512, 40: 1024, 120: 32768, 10: 256, 160: 65536, 60: 8192}
+ batchSizeTest                            65536
+ bin_opt_cumulative                       [0.8, 0.9, 1.0, 0.9, 0.8, 0.7, 0.55, 0.4, 0.25, 0.12, 0.06, 0.03, 0.02, 0.015, 0.01]
+ crossValidation_splitSeed                123456
+ dropoutDecay                             1.0
+ ignoreLargeWeights                       False
+ ignoreNegativeWeights                    False
+ learningRate                             0.0005
+ learning_rate_adam_start                 0.0005
+ loss                                     'cross_entropy'
+ massless_importance                      1.0
+ massless_powers                          [1, 2]
+ mvaScoreRescalingPercentileHigh          0.999
+ mvaScoreRescalingPercentileLow           0.01
+ nEpochs                                  200
+ nNodes                                   [512, 256, 128, 64, 64, 64]
+ nStepsPerEpoch                           -1
+ pDropout                                 [0.2, 0.4, 0.5, 0.6, 0.7, 0.8]
+ power                                    1.0
+ rateGamma                                1.0
+ removeFeature                            []
+ reweight                                 None
+ reweightTraining                         None
+ saveCheckpointInterval                   50
+ scaleInputsInsideGraph                   True
+ shuffle                                  True
+ signif_loss_b_epsilon                    1e-08
+ signif_loss_low_b_threshold              1.5
+ signif_loss_low_b_threshold_width        1.5
+ signif_loss_nbins                        15
+ signif_loss_smoothness                   500.0
+ signif_loss_sysApprox_constant           1.5
+ signif_loss_sysApprox_linear             0.1
+ signif_loss_sys_variance_offset          0.1
+ signif_loss_xe_factor                    0.0
+ skipConnections                          {8: [0, 2, 4, 6], 2: [0], 4: [0, 2], 6: [0, 2, 4]}
+ statisticsInterval                       20
+ systematics_scaling_factor               1.0
+ systematics_weight_scaling_factor        1.0
+ wInitScale                               0.01
+ weight_sys_ntoys                         -1
+initialize session...
+initialized session!
+add layers...
+layer  1 :  [27, 512]
+> activation with drop-out...
+> batch normalization...
+layer  2 :  [512, 256]
+> activation with drop-out...
+> batch normalization...
+layer  3 :  [256, 128]
+> activation with drop-out...
+> batch normalization...
+layer  4 :  [128, 64]
+> activation with drop-out...
+> batch normalization...
+layer  5 :  [64, 64]
+> activation with drop-out...
+> batch normalization...
+layer  6 :  [64, 64]
+> activation with drop-out...
+> batch normalization...
+INFO: use ADAM optimizer!
+graph built.
+trainable variables: 242498
+initialized.
+conditions:
+  loss(train,training)    training dataset, loss as seen by gradient descend optimizer
+  loss(train,testing)     training dataset, loss with 'testing' conditions, e.g. is_training: False, no dropout etc
+  loss(test)              test dataset
+start training with batch size 32 
+ epoch     loss(train,training) loss(train,testing) loss(test)
+nSamples =  384702
+set batch size to: 128
+         1    0.13631    0.11411    0.11665 significance (train): 1.814 significance: 1.829 
+         2    0.11915    0.11109    0.11302 
+         3    0.11777    0.10937    0.11176 
+         4    0.11624    0.10860    0.11149 
+         5    0.11582    0.10842    0.11111 
+         6    0.11513    0.10803    0.11120 
+         7    0.11429    0.10818    0.11089 
+         8    0.11402    0.10673    0.10992 
+         9    0.11404    0.10747    0.11082 
+        10    0.11363    0.10652    0.10981 
+nSamples =  384702
+set batch size to: 256
+        11    0.11144    0.10524    0.10888 
+        12    0.11087    0.10535    0.10901 
+        13    0.11091    0.10544    0.10953 
+        14    0.11096    0.10480    0.10890 
+        15    0.11051    0.10609    0.11023 
+        16    0.11025    0.10400    0.10791 
+        17    0.11026    0.10420    0.10834 
+        18    0.10944    0.10406    0.10823 
+        19    0.11000    0.10307    0.10716 
+        20    0.10977    0.10353    0.10788 
+nSamples =  384702
+set batch size to: 512
+        21    0.10858    0.10245    0.10719 significance (train): 2.046 significance: 1.920 
+        22    0.10770    0.10240    0.10699 
+        23    0.10828    0.10217    0.10684 
+        24    0.10812    0.10218    0.10710 
+        25    0.10796    0.10183    0.10697 
+        26    0.10778    0.10152    0.10646 
+        27    0.10782    0.10146    0.10652 
+        28    0.10795    0.10160    0.10718 
+        29    0.10753    0.10109    0.10609 
+        30    0.10759    0.10200    0.10705 
+        31    0.10750    0.10115    0.10658 
+        32    0.10753    0.10122    0.10655 
+        33    0.10727    0.10092    0.10624 
+        34    0.10717    0.10096    0.10649 
+        35    0.10680    0.10054    0.10613 
+        36    0.10690    0.10125    0.10716 
+        37    0.10632    0.10063    0.10655 
+        38    0.10705    0.10096    0.10670 
+        39    0.10721    0.10038    0.10630 
+        40    0.10621    0.09985    0.10582 
+nSamples =  384702
+set batch size to: 1024
+        41    0.10573    0.09955    0.10563 significance (train): 2.133 significance: 1.895 
+        42    0.10563    0.09922    0.10571 
+        43    0.10555    0.09922    0.10586 
+        44    0.10566    0.09903    0.10552 
+        45    0.10554    0.09910    0.10556 
+        46    0.10540    0.09921    0.10554 
+        47    0.10536    0.09900    0.10536 
+        48    0.10563    0.09919    0.10560 
+        49    0.10511    0.09874    0.10532 
+        50    0.10526    0.09903    0.10563 
+        51    0.10494    0.09888    0.10537 
+        52    0.10503    0.09935    0.10588 
+        53    0.10564    0.09873    0.10544 
+        54    0.10517    0.09849    0.10536 
+        55    0.10510    0.09850    0.10582 
+        56    0.10523    0.09838    0.10524 
+        57    0.10473    0.09858    0.10566 
+        58    0.10455    0.09830    0.10535 
+        59    0.10481    0.09816    0.10556 
+        60    0.10484    0.09828    0.10523 
+nSamples =  384702
+set batch size to: 8192
+        61    0.10384    0.09771    0.10483 significance (train): 2.191 significance: 1.901 
+        62    0.10347    0.09756    0.10492 
+        63    0.10336    0.09740    0.10489 
+        64    0.10358    0.09730    0.10484 
+        65    0.10319    0.09718    0.10477 
+        66    0.10360    0.09710    0.10470 
+        67    0.10327    0.09705    0.10470 
+        68    0.10299    0.09696    0.10476 
+        69    0.10320    0.09697    0.10468 
+        70    0.10294    0.09701    0.10497 
+        71    0.10295    0.09689    0.10493 
+        72    0.10300    0.09682    0.10481 
+        73    0.10340    0.09692    0.10494 
+        74    0.10321    0.09681    0.10478 
+        75    0.10330    0.09677    0.10484 
+        76    0.10310    0.09677    0.10495 
+        77    0.10309    0.09670    0.10487 
+        78    0.10294    0.09664    0.10481 
+        79    0.10274    0.09667    0.10505 
+        80    0.10318    0.09670    0.10512 
+nSamples =  384702
+set batch size to: 16384
+        81    0.10320    0.09649    0.10477 significance (train): 2.236 significance: 1.885 
+        82    0.10297    0.09655    0.10501 
+        83    0.10340    0.09653    0.10485 
+        84    0.10280    0.09644    0.10476 
+        85    0.10283    0.09640    0.10476 
+        86    0.10268    0.09647    0.10502 
+        87    0.10290    0.09638    0.10482 
+        88    0.10259    0.09637    0.10486 
+        89    0.10267    0.09634    0.10484 
+        90    0.10257    0.09636    0.10493 
+        91    0.10277    0.09629    0.10478 
+        92    0.10250    0.09630    0.10487 
+        93    0.10289    0.09633    0.10487 
+        94    0.10265    0.09626    0.10473 
+        95    0.10279    0.09634    0.10502 
+        96    0.10253    0.09623    0.10483 
+        97    0.10263    0.09621    0.10478 
+        98    0.10252    0.09619    0.10488 
+        99    0.10278    0.09617    0.10475 
+       100    0.10258    0.09618    0.10486 
+       101    0.10292    0.09614    0.10488 significance (train): 2.241 significance: 1.887 
+       102    0.10267    0.09615    0.10475 
+       103    0.10242    0.09616    0.10476 
+       104    0.10259    0.09606    0.10479 
+       105    0.10251    0.09613    0.10488 
+       106    0.10279    0.09612    0.10483 
+       107    0.10268    0.09606    0.10477 
+       108    0.10259    0.09603    0.10483 
+       109    0.10220    0.09595    0.10475 
+       110    0.10266    0.09595    0.10471 
+       111    0.10224    0.09593    0.10478 
+       112    0.10224    0.09594    0.10488 
+       113    0.10264    0.09591    0.10477 
+       114    0.10247    0.09598    0.10480 
+       115    0.10234    0.09597    0.10464 
+       116    0.10241    0.09584    0.10473 
+       117    0.10261    0.09586    0.10468 
+       118    0.10249    0.09582    0.10487 
+       119    0.10241    0.09584    0.10482 
+       120    0.10262    0.09580    0.10473 
+nSamples =  384702
+set batch size to: 32768
+       121    0.10217    0.09580    0.10489 significance (train): 2.260 significance: 1.887 
+       122    0.10174    0.09577    0.10489 
+       123    0.10241    0.09571    0.10476 
+       124    0.10241    0.09577    0.10485 
+       125    0.10212    0.09573    0.10486 
+       126    0.10194    0.09569    0.10487 
+       127    0.10211    0.09570    0.10491 
+       128    0.10253    0.09566    0.10476 
+       129    0.10183    0.09567    0.10481 
+       130    0.10264    0.09566    0.10477 
+       131    0.10220    0.09567    0.10486 
+       132    0.10228    0.09568    0.10485 
+       133    0.10230    0.09563    0.10483 
+       134    0.10199    0.09563    0.10482 
+       135    0.10190    0.09560    0.10485 
+       136    0.10176    0.09560    0.10478 
+       137    0.10248    0.09560    0.10473 
+       138    0.10208    0.09560    0.10486 
+       139    0.10226    0.09555    0.10481 
+       140    0.10250    0.09556    0.10469 
+       141    0.10244    0.09556    0.10486 significance (train): 2.264 significance: 1.882 
+       142    0.10193    0.09553    0.10479 
+       143    0.10212    0.09552    0.10486 
+       144    0.10245    0.09550    0.10475 
+       145    0.10177    0.09552    0.10481 
+       146    0.10212    0.09553    0.10482 
+       147    0.10205    0.09551    0.10484 
+       148    0.10173    0.09550    0.10492 
+       149    0.10227    0.09543    0.10473 
+       150    0.10221    0.09549    0.10494 
+       151    0.10194    0.09549    0.10483 
+       152    0.10230    0.09547    0.10481 
+       153    0.10237    0.09543    0.10480 
+       154    0.10230    0.09540    0.10469 
+       155    0.10220    0.09541    0.10476 
+       156    0.10169    0.09538    0.10483 
+       157    0.10172    0.09541    0.10493 
+       158    0.10206    0.09540    0.10483 
+       159    0.10229    0.09538    0.10490 
+       160    0.10214    0.09532    0.10473 
+nSamples =  384702
+set batch size to: 65536
+       161    0.10187    0.09534    0.10484 significance (train): 2.274 significance: 1.872 
+       162    0.10181    0.09535    0.10489 
+       163    0.10177    0.09532    0.10489 
+       164    0.10223    0.09530    0.10483 
+       165    0.10226    0.09529    0.10473 
+       166    0.10190    0.09530    0.10479 
+       167    0.10203    0.09533    0.10483 
+       168    0.10170    0.09533    0.10483 
+       169    0.10182    0.09532    0.10479 
+       170    0.10262    0.09532    0.10472 
+       171    0.10266    0.09532    0.10474 
+       172    0.10167    0.09535    0.10487 
+       173    0.10218    0.09532    0.10486 
+       174    0.10191    0.09526    0.10476 
+       175    0.10225    0.09524    0.10471 
+       176    0.10169    0.09524    0.10470 
+       177    0.10200    0.09529    0.10484 
+       178    0.10199    0.09529    0.10484 
+       179    0.10199    0.09524    0.10477 
+       180    0.10170    0.09523    0.10478 
+       181    0.10154    0.09521    0.10476 significance (train): 2.261 significance: 1.870 
+       182    0.10285    0.09520    0.10472 
+       183    0.10255    0.09521    0.10471 
+       184    0.10150    0.09524    0.10477 
+       185    0.10180    0.09525    0.10482 
+       186    0.10193    0.09522    0.10477 
+       187    0.10195    0.09521    0.10478 
+       188    0.10152    0.09521    0.10477 
+       189    0.10165    0.09523    0.10476 
+       190    0.10264    0.09523    0.10478 
+       191    0.10192    0.09522    0.10477 
+       192    0.10141    0.09524    0.10485 
+       193    0.10144    0.09524    0.10487 
+       194    0.10119    0.09522    0.10487 
+       195    0.10174    0.09518    0.10481 
+       196    0.10192    0.09518    0.10482 
+       197    0.10235    0.09519    0.10483 
+       198    0.10201    0.09518    0.10482 
+       199    0.10185    0.09517    0.10485 
+       200    0.10195    0.09515    0.10482 significance (train): 2.274 significance: 1.871 
+FINAL RESULTS:        200   0.101951   0.104817 significance (train): 2.274 significance: 1.871 
+TRAINING TIME: 6:10:04.686350 (22204.7 seconds)
+GRADIENT UPDATES: 70070
+MIN TEST LOSS: 0.104640771442
+training done.
+> results//2018_V11__BDT_Zll_HighPt_weightsFixed/Zll2018_SR_low_Zll_191104_V11final.h5/512-256-128-64-64-64/0.20-0.40-0.50-0.60-0.70-0.80/5.000e-04/rnd_2/checkpoints/model.ckpt
+saved checkpoint to [34m results//2018_V11__BDT_Zll_HighPt_weightsFixed/Zll2018_SR_low_Zll_191104_V11final.h5/512-256-128-64-64-64/0.20-0.40-0.50-0.60-0.70-0.80/5.000e-04/rnd_2/checkpoints/model.ckpt [0m
+LOSS(train, unmodified):  0.0951510206649
+LOSS(test):               0.104816987681
+---
+S    B
+---
+ 1.43 18539.42
+ 1.88 6554.85
+ 2.12 4289.94
+ 2.41 3363.23
+ 2.79 2829.71
+ 3.37 2391.14
+ 4.29 2241.77
+ 5.37 2057.62
+ 7.33 2049.18
+ 9.52 1799.94
+ 7.90 1169.36
+10.36 1185.84
+17.06 1457.58
+31.85 1486.65
+41.74 720.89
+---
+significance: 1.871 
+area under ROC: AUC_test =  90.3214557226
+area under ROC: AUC_train =  91.8568061493
+-------------------------
+with optimized binning:
+ method: SB
+ target: 0.1220, 0.1373, 0.1526, 0.1373, 0.1220, 0.1068, 0.0839, 0.0610, 0.0381, 0.0183, 0.0092, 0.0046, 0.0031, 0.0023, 0.0015
+ bins:   0.0000, 0.0087, 0.0336, 0.0926, 0.1882, 0.3217, 0.4801, 0.6239, 0.7864, 0.8770, 0.9197, 0.9434, 0.9558, 0.9659, 0.9805, 1.0000
+-------------------------
+---
+S    B
+---
+ 0.14 6376.55
+ 0.50 7184.96
+ 1.51 7970.73
+ 2.87 7190.65
+ 5.10 6376.90
+ 9.13 5578.16
+15.16 4371.05
+21.92 3177.39
+23.16 1972.60
+19.85 938.46
+15.30 466.30
+ 9.36 233.32
+ 8.02 152.82
+10.73 111.78
+ 6.67 35.45
+---
+significance: 2.092 (for optimized binning)
+significance: 2.045 ( 1% background uncertainty, for optimized binning)
+significance: 1.676 ( 5% background uncertainty, for optimized binning)
+significance: 1.320 (10% background uncertainty, for optimized binning)
+significance: 1.068 (15% background uncertainty, for optimized binning)
+significance: 0.886 (20% background uncertainty, for optimized binning)
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+[32mPLOTS: use n=S+B Asimov data in the plots![0m
+INFO: search optimal cut position for sensitivity
+INFO: convert to histogram
