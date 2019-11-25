@@ -33,7 +33,7 @@ settings=cfg/settings_2016.txt
 systematics=cfg/systematics.txt
 scalefactors=cfg/scalefactors_2016.txt
 btagscalefactors=aux/DeepCSV_2016LegacySF_V1.csv
-benrichweights=aux/EnrichementReweighting_2016.root
+benrichweights=aux/EnrichementReweighting_2016_v11.root
 
 putarget_global=aux/puData2016_withVar.root
 puUPtarget_global=aux/puData2016_withVar.root
