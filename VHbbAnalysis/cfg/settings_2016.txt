@@ -22,7 +22,7 @@ type=2  name=reVType            val=0
 type=2  name=doVPtReweighting   val=0
 type=2  name=postLoopMVAEval    val=1
 type=2  name=doKinFit           val=1
-type=2  name=enrichReweight     val=0
+type=2  name=enrichReweight     val=1
 
 type=2  name=fatJetPtCut_0lepchan         val=250
 type=2  name=fatJetBBTaggerCut_0lepchan   val=0.6

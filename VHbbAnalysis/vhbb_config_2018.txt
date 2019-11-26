@@ -36,6 +36,7 @@ settings=cfg/settings_2018.txt
 systematics=cfg/systematics_2018.txt
 scalefactors=cfg/scalefactors_2018.txt
 btagscalefactors=aux/DeepCSV_102XSF_V1.csv
+benrichweights=aux/EnrichementReweighting_2018_v11.root
 
 putarget_global=aux/puData2018_withVar.root
 puUPtarget_global=aux/puData2018_withVar.root
