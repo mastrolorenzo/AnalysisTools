@@ -11,7 +11,7 @@ AnalysisDict.cxx: HelperClasses/SampleContainer.h HelperClasses/InfoStructs.h He
 
 
 AnalysisDict.so: AnalysisDict.cxx HelperClasses/SampleContainer.cc HelperClasses/BDTInfo.cc HelperClasses/BDTVariable.cc HelperClasses/SystematicContainer.cc HelperClasses/SFContainer.cc AnalysisManager.cc plugins/VHbbAnalysis.cc plugins/VHbbTrigger.cc HelperClasses/EquationSolver.h HelperClasses/BTagCalibrationStandalone.cpp HelperClasses/EnergyScaleCorrection.cc HelperClasses/KinFitter/*.cc
-	g++ -shared -fPIC -Wall -Werror -o $@ ${ROOTFLAGS} ${ROOTLIBS} -lTMVA -I${HOMEDIR} $^
+	g++ -shared -fPIC -Wall -Werror -o $@ ${ROOTFLAGS} ${ROOTLIBS} -lTMVA -lRooFit -lRooFitCore -I${HOMEDIR} $^
 
 clean:
 	rm AnalysisDict.cxx

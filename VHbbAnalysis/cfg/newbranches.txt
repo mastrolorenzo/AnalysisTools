@@ -15,6 +15,7 @@ type=2  name=dPhi_MET_TkMET
 
 type=2  name=VBenrichShapeWeight
 type=2  name=benPlusHTWeight
+type=2  name=WJetsNLOvsLOWeight
 type=1  name=nAddJet                     max=30     allowMissingBranch=1
 
 type=4  name=twoResolvedJets

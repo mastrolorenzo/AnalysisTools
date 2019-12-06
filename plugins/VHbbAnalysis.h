@@ -88,6 +88,7 @@ class VHbbAnalysis : public AnalysisManager {
         float ptWeightEWK(int nGenVbosons=0, float GenVbosons_pt=0., int VtypeSim=0, int GenVbosons_pdgId=0);
         float GetWeightingBenrichReshaping(float LHE_HT, int LHE_Nb, int nGenStatus2bHad, float LHE_Vpt, float dataYear);
         float GetWeightingForHTPlusBenrich(float LHE_HT, int LHE_Nb, int nGenStatus2bHad, float LHE_Vpt);
+	float GetWeightingForWJetsNLOvsLO(float LHE_Vpt, float dataYear);
         TLorentzVector getNu4Momentum(const TLorentzVector& TLepton, const TLorentzVector& TMET);
         double LOtoNLOWeightBjetSplitEtabb(double etabb=10., int njets=0);
         float GetVHEWKCorrFactor( float V_pt, TH1D* hist );

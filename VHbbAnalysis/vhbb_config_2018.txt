@@ -1,7 +1,7 @@
 analysis=VHbbAnalysis
 outputname=output
 
-#samples=cfg/samples_2018_e.txt
+#samples=cfg/samples_2018_NLO.txt
 samples=cfg/samples_2018.txt
 
 earlybranches=cfg/earlybranches_2018.txt

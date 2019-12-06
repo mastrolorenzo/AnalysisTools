@@ -7,6 +7,7 @@
 
 #include "VHbbAnalysis.h"
 #include "HelperClasses/EquationSolver.h"
+#include "RooChebychev.h"
 
 // initialize parameters
 VHbbAnalysis::VHbbAnalysis() {
@@ -1212,6 +1213,10 @@ void VHbbAnalysis::FinishEvent() {
     if(debug>1000) std::cout<<"VBenrichShapeWeight benPlusHTWeight "<<m("VBenrichShapeWeight")<<" "<<m("benPlusHTWeight")<<std::endl;
     *f["weight"] = m("weight") * m("VBenrichShapeWeight") * m("benPlusHTWeight");
     
+    *f["WJetsNLOvsLOWeight"]     = *f["WJetsNLOvsLOReweight"]==1 ? GetWeightingForWJetsNLOvsLO(m("LHE_Vpt"),m("dataYear")) : 1.0;
+    if(debug>1000) std::cout<<"WJETS NLOvsLO weights "<<m("WJetsNLOvsLOWeight")<<std::endl;
+    *f["weight"] = m("weight") * m("WJetsNLOvsLOWeight");
+
     //Reweight MC samples for -1.5<phi(MET)<-0.5 (due to the HEM15/16 issue on data starting with the run 319077)
     float METPhiWeight=1.;
     if(m("dataYear") == 2018 &&  mInt("sampleIndex")!=0 && m("isZnn")){
@@ -3965,6 +3970,47 @@ float VHbbAnalysis::GetWeightingForHTPlusBenrich(float LHE_HT, int LHE_Nb, int n
     valFromHist=thisWeightHist->GetBinContent(benrichIndex,HTBin);
 
     return valFromHist;
+}
+
+float VHbbAnalysis::GetWeightingForWJetsNLOvsLO(float LHE_Vpt, float dataYear){
+    float NLOLOWeight = 1.0;
+    int channel=-1;
+    // only WJets samples
+    int thisSampleNum=cursample->sampleNum;
+    
+    if (thisSampleNum>=40 &&thisSampleNum<55)   { channel=1;} //WJets
+    else if (channel !=1) {return NLOLOWeight;}
+
+    float maxVPT=800;
+    
+    // Fit PDF definition
+    RooRealVar x("x", "x", 100, 800);   
+    RooRealVar a0("a0", "a0", -0.34836, -0.34836-0.263749, -0.34836+0.263749);
+    RooRealVar a1("a1", "a1", 0.205221, 0.2052210-0.200458, 0.205221+0.200458);
+    RooRealVar a2("a2", "a2", -0.0554825, -0.0554825-0.209449, -0.0554825+0.209449);
+
+    RooChebychev cheb2017("cheb2017", "cheb2017", x, RooArgList(a0, a1, a2));
+    RooChebychev cheb2018("cheb2018", "cheb2018", x, RooArgList(a0, a1, a2));
+    
+    auto f_cheb2017 = cheb2017.asTF( x,  RooArgList(a0, a1, a2));
+
+    auto f_cheb2018 = cheb2018.asTF( x,  RooArgList(a0, a1, a2));
+    f_cheb2018->SetParameters(-0.451628, 0.141293, -0.0574374);
+
+
+    if (LHE_Vpt > 100){
+        //WJets_BGenFilter, WBJets, WJetsHT
+        if(dataYear == 2017){
+            if (thisSampleNum>=40 &&thisSampleNum<55){
+	      NLOLOWeight = (0.9631/1.609)*f_cheb2017->Eval(std::min(LHE_Vpt,maxVPT));
+            }
+        }else if(dataYear == 2018){
+            if (thisSampleNum>=40 &&thisSampleNum<55){
+                NLOLOWeight = (0.9291/1.6503)*f_cheb2018->Eval(std::min(LHE_Vpt,maxVPT));
+            }
+        }
+    }
+    return NLOLOWeight;
 }
 
 float VHbbAnalysis::ReWeightMC(int nPU){
