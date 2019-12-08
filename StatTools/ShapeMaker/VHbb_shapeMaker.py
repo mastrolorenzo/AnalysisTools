@@ -51,7 +51,7 @@ def elapsed(string,level=0):
 
 parser = argparse.ArgumentParser("Produce shape histograms for datacards.")
 parser.add_argument('-i', '--inputfile', type=str, default="", help="The input root file (ntuple).")
-parser.add_argument('-d', '--inputdir', type=str, default="/nfs/dust/cms/user/lmastrol/VHbbAnalysisNtuples/VHccNtuple_March16_forApproval_fixZnnHF/haddjobs/", help="The directory where all the ntuples are stored.")
+parser.add_argument('-d', '--inputdir', type=str, default="/nfs/dust/cms/user/dewita/VHbbAnalysisNtuples/VHbb2017_JecCombs/haddjobs/", help="The directory where all the ntuples are stored.")
 parser.add_argument('-samp', '--samplename', type=str, default="", help="The name of the sample, eg, 'DYToLL_HT100to200'.")
 parser.add_argument('-n', '--nOuts', type=str, default="0", help="The max. number of output files to produce. Use 0 to process full input file.")
 parser.add_argument('-io', '--iOut', type=str, default="", help="The index of the first output file that will be produced if iOut!=0. So this instance of the program will produce ith to (i+n-1)th outputs.")
@@ -271,11 +271,18 @@ for iprocess, processArray in enumerate(processArrays):
         systematicsProcesses = [sampleDict[k][3] for k in sampleDict]
         systematicsProcesses = set([x for sub in systematicsProcesses for x in sub])
         if processName not in systematicsProcesses:
+           #try check for longer syst list
+           systematicsProcessesLong = [sampleDict[k][4] for k in sampleDict]
+           systematicsProcessesLong = set([x for sub in systematicsProcessesLong for x in sub])
         #if processName not in set([x for x in sampleDict[k][3] for k in sampleDict]):
         #if processName not in sampleDict:
+        if processName not in systematicsProcesses and processName not in systematicsProcessesLong:
             elapsed("I could not find the systematics relevant to %s channel for %s process. Perhaps this process is not required for this channel...? I have created the nominal histogram, but skipping systematics."%(channel,processName))
             continue
-        systListofList = [[x,sampleDict[x][0],sampleDict[x][1],sampleDict[x][2]] for x in sampleDict if processName in sampleDict[x][3]] 
+        if processName in systematicsProcesses:
+            systListofList = [[x,sampleDict[x][0],sampleDict[x][1],sampleDict[x][2]] for x in sampleDict if processName in sampleDict[x][3]] 
+        else :
+            systListofList = [[x,sampleDict[x][0],sampleDict[x][1],sampleDict[x][2],sampleDict[x][3]] for x in sampleDict if processName in sampleDict[x][4]] 
         #systListofList = sampleDict[processName]
         systNameList = [i[0] for i in systListofList]
         elapsed("Created pointer to nominal histogram, next I will plot %i systematics. "%(len(systNameList)),1)
@@ -292,7 +299,7 @@ for iprocess, processArray in enumerate(processArrays):
             
             #print "systList"
             #print systList
-            if '.root' in systWeight:
+            if '.root' in str(systWeight):
                 elapsed("***** ERROR *****: I have not been programmed to load weights from .root files for systematics. Exiting." )
                 # Weights in .root files are not used in VHcc 2016, so I didn't bother to code it... yet. *shrug*
                 sys.exit(1)
@@ -347,7 +354,7 @@ for iprocess, processArray in enumerate(processArrays):
 
             else:
             # systWeight is not 1.0
-                if ',' not in systWeight:
+                if ',' not in str(systWeight):
                     # up and down branch are not separate
                     if systWeight == "weight_PU":
                         weight_stringUp = "%s*(1./weight_PU)*(%sUp)"%(weight_stringUp,systWeight)
@@ -363,7 +370,7 @@ for iprocess, processArray in enumerate(processArrays):
                         weight_stringUp = "%s*(1./recoWReWeight)*(%sUp)"%(weight_stringUp,systWeight)
                         weight_stringDown = "%s*(1./recoWReWeight)*(%sDown)"%(weight_stringDown,systWeight)
                     #check if weight is of form btagweight_ptX_etaY and correct name to btagweightUp_ptX_etaY
-                    elif systWeight[-8:-6] == "pt" and systWeight[-4:-1] == "eta":
+                    elif str(systWeight)[-8:-6] == "pt" and str(systWeight)[-4:-1] == "eta":
                         #e.g. systWeight: bTagWeight_JES_pt0_eta0+Up
                         #to bTagWeight_JESUp_pt0_eta0
                         #so if _ptX_etaY in systWeight, remove suffix, add Up, reappend

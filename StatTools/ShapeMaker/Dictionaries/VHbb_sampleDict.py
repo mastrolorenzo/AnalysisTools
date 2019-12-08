@@ -1,4 +1,5 @@
 Zll_sampleDict = {
+    #"CMS_scale_j_AbsoluteStat": ["shape", 1.0, 1.0, "AbsoluteStat", ["QCD","TT","VVHF","VVLF","WH_hbb","Wj0b","Wj1b","Wj2b","ZH_lep_PTV_0_75_hbb","ZH_lep_PTV_150_250_0J_hbb","ZH_lep_PTV_150_250_GE1J_hbb","ZH_lep_PTV_75_150_hbb","ZH_lep_PTV_GT250_hbb","Zj0b","Zj1b","Zj2b","ggZH_lep_PTV_0_75_hbb","ggZH_lep_PTV_150_250_0J_hbb","ggZH_lep_PTV_150_250_GE1J_hbb","ggZH_lep_PTV_75_150_hbb","ggZH_lep_PTV_GT250_hbb","s_Top"]],
     "CMS_LHE_weights_scale_muF_TT": ["shape","1.0","LHE_weights_scale_muFDown,LHE_weights_scale_muFUp", ["TT"]],
     "CMS_LHE_weights_scale_muF_ZH": ["shape","1.0","LHE_weights_scale_muFDown,LHE_weights_scale_muFUp", ["ZH_hbb"]],
     "CMS_LHE_weights_scale_muF_Zj0b": ["shape","1.0","LHE_weights_scale_muFDown,LHE_weights_scale_muFUp", ["Zj0b"]],
