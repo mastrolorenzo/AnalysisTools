@@ -2800,19 +2800,17 @@ void VHbbAnalysis::ControlSampleSelection(){
 	             //Boosted Signal
                      if((m("FatJetCand_Msoftdrop_corrected") > 90) && (m("FatJetCand_Msoftdrop_corrected") < 150)
                          && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
-	                 && (m("FatJetCand_deepTagMD_bbvsTop") > 0.7)
                          && (m("FatJetVdPhi") > 2.9)
                          && (mInt("nAddLeptons") == 0)
-	                 && (m("nJetsOutsideFatJet") == 0)){
+	                     && (m("nJetsOutsideFatJet") == 0)){
                              *in["boostedControlSample"] = 0;
                      }
 	             //ttbar CR=1
 	             if((m("FatJetCand_Msoftdrop_corrected") > 50)
                          && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
-                         && (m("FatJetCand_deepTagMD_bbvsTop") < 0.7)
                          && (mInt("nAddLeptons") > 0)
                          && (m("nJetsOutsideFatJet") > 1)){
-	                     *in["boostedControlSample"] = 1;
+	                         *in["boostedControlSample"] = 1;
 	             }
 	             //V+light CR=2
                      if((m("FatJetCand_Msoftdrop_corrected") > 50)
@@ -2833,28 +2831,26 @@ void VHbbAnalysis::ControlSampleSelection(){
                      //Boosted Signal
                      if((m("FatJetCand_Msoftdrop_corrected") > 90)
                          && (m("FatJetCand_Msoftdrop_corrected") < 150)
-                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8) 
-                         && (m("FatJetCand_deepTagMD_bbvsTop") > 0.7)
+                         && (m("FatJetCand_deepTagMD_bbvsTop") > 0.8)
                          && (mInt("nBJetsOutsideFatJet") == 0)){
                              *in["boostedControlSample"] = 0;
 		     }
                      //ttbar CR=1
                      if((m("FatJetCand_Msoftdrop_corrected") > 50)
-                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
                          && (mInt("nBJetsOutsideFatJet") > 0)
-                         && (m("FatJetCand_deepTagMD_bbvsTop") < 0.7)){
+                         && (m("FatJetCand_deepTagMD_bbvsTop") > 0.8)){
                              *in["boostedControlSample"] = 11;
                      }
                      //V+light CR=2
                      if((m("FatJetCand_Msoftdrop_corrected") > 50)
-                         && (m("FatJetCand_deepTagMD_bbvsLight") < 0.8)
-                         && (mInt("nBJetsOutsideFatJet") == 0)){
+                         && (mInt("nBJetsOutsideFatJet") == 0)
+                         && (m("FatJetCand_deepTagMD_bbvsTop") < 0.8)){
                              *in["boostedControlSample"] = 12;
                      }
                      //V+hf CR=3
                      if(((m("FatJetCand_Msoftdrop_corrected") > 50 && m("FatJetCand_Msoftdrop_corrected") < 90) || (m("FatJetCand_Msoftdrop_corrected") > 150 && m("FatJetCand_Msoftdrop_corrected") < 200))
-			 && (m("FatJetCand_deepTagMD_bbvsLight") > 0.8)
-	                 && (mInt("nBJetsOutsideFatJet") == 0)){
+	                    && (mInt("nBJetsOutsideFatJet") == 0)
+                        && (m("FatJetCand_deepTagMD_bbvsTop") > 0.8)){
                              *in["boostedControlSample"] = 13;
                      }
 	       //For 2-lepton
@@ -2864,7 +2860,7 @@ void VHbbAnalysis::ControlSampleSelection(){
                          && (m("FatJetCand_Msoftdrop_corrected") < 150)
                          && (m("V_mass") > m("zmasslow"))
                          && (m("V_mass") < m("zmasshigh"))
-                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.7)
+                         && (m("FatJetCand_deepTagMD_bbvsTop") > 0.8)
                          && (m("FatJetVdPhi") > 2.9)){
                              *in["boostedControlSample"] = 0;
                      }
@@ -2872,7 +2868,8 @@ void VHbbAnalysis::ControlSampleSelection(){
                      if((m("FatJetCand_Msoftdrop_corrected") > 50)
                          && (m("V_mass") > 10)
                          && ((m("V_mass") < m("zmasslow")) || (m("V_mass") > m("zmasshigh")))
-                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.7)){
+
+                         && (m("FatJetCand_deepTagMD_bbvsTop") > 0.8)){
                              *in["boostedControlSample"] = 21;
                      }
                      //V+light CR=2
@@ -2880,14 +2877,14 @@ void VHbbAnalysis::ControlSampleSelection(){
                          && (m("FatJetCand_Msoftdrop_corrected") < 150)
                          && (m("V_mass") > m("zmasslow"))
                          && (m("V_mass") < m("zmasshigh"))
-                         && (m("FatJetCand_deepTagMD_bbvsLight") < 0.8)){
+                         && (m("FatJetCand_deepTagMD_bbvsTop") < 0.8)){
                              *in["boostedControlSample"] = 22;
                      }
                      //V+HF CR=3
                      if(((m("FatJetCand_Msoftdrop_corrected") > 50 && m("FatJetCand_Msoftdrop_corrected") < 90) || (m("FatJetCand_Msoftdrop_corrected") > 150 && m("FatJetCand_Msoftdrop_corrected") < 200))
                          && (m("V_mass") > m("zmasslow"))
                          && (m("V_mass") < m("zmasshigh"))
-                         && (m("FatJetCand_deepTagMD_bbvsLight") > 0.7)){
+                         && (m("FatJetCand_deepTagMD_bbvsTop") > 0.8)){
                              *in["boostedControlSample"] = 23;
                      }
                }
@@ -2984,14 +2981,7 @@ void VHbbAnalysis::BoostedSelection(){
                 *in["FatJetCand_index"]=-1;
                 *b["oneMergedJet"]=false;
             }
-        } else if(m("isZmm")==1 || m("isZee")==1){
-            // not including h mass window selection.  can do with ntuples
-            if( !(m("V_mass")>75 && m("V_mass")<105 && m("V_pt")>100)){  //since all precomputed, invert selection to cut
-                *in["FatJetCand_index"]=-1;
-                *b["oneMergedJet"]=false;
-            }
-
-        }
+        } 
     }
 }
 
