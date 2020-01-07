@@ -191,7 +191,7 @@ bool VHbbAnalysis::Preselection() {
     // Preselect for two jets and one lepton which pass some minimum pt threshold
     int nPreselJets = 0;
     for (int i = 0; i < mInt("nJet"); i++) {
-        if (m("Jet_PtReg",i) > m("JetPtPresel") && (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50) && mInt("Jet_lepFilter",i)) nPreselJets++;
+        if (m("Jet_PtReg",i) > m("JetPtPresel") && (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50) && mInt("Jet_jetId",i)>4&& mInt("Jet_lepFilter",i)) nPreselJets++;
     }
 
 
@@ -1819,8 +1819,8 @@ void VHbbAnalysis::FinishEvent() {
         *f[ Form("lepMetDPhi_%s",                        cursyst->name.c_str())] = m("lepMetDPhi");
         *f[ Form("minDPhiFromOtherJets_%s",              cursyst->name.c_str())] = m("minDPhiFromOtherJets");
         *f[ Form("nAddJet_f_%s",                         cursyst->name.c_str())] = m("nAddJet_f");
-        *f[ Form("nAddJets302p5_puid_%s",                cursyst->name.c_str())] = m("nAddJets302p5_puid");
-        *f[ Form("nAddJets252p5_puid_%s",                cursyst->name.c_str())] = m("nAddJets252p5_puid");
+        *f[ Form("nAddJets302p4_puid_%s",                cursyst->name.c_str())] = m("nAddJets302p4_puid");
+        *f[ Form("nAddJets252p4_puid_%s",                cursyst->name.c_str())] = m("nAddJets252p4_puid");
         *f[ Form("nAddJets_2lep_%s",                     cursyst->name.c_str())] = m("nAddJets_2lep");
         *f[ Form("nJets25_dR06_%s",                      cursyst->name.c_str())] = m("nJets25_dR06");
         *f[ Form("nJets30_0lep_%s",                      cursyst->name.c_str())] = m("nJets30_0lep");
@@ -1941,7 +1941,7 @@ bool VHbbAnalysis::SelectLeptonChannel(){
         if (m("dataYear") == 2016) {
             passMetFilters = (
                 m("Flag_goodVertices")
-                && m("Flag_globalTightHalo2016Filter")
+                && m("Flag_globalSuperTightHalo2016Filter")
                 && m("Flag_HBHENoiseFilter")
                 && m("Flag_HBHENoiseIsoFilter")
                 && m("Flag_EcalDeadCellTriggerPrimitiveFilter")
@@ -1949,7 +1949,7 @@ bool VHbbAnalysis::SelectLeptonChannel(){
         } else if (m("dataYear") == 2017) {
             passMetFilters = (
                 m("Flag_goodVertices")
-                && m("Flag_globalTightHalo2016Filter")
+                && m("Flag_globalSuperTightHalo2016Filter")
                 && m("Flag_HBHENoiseFilter")
                 && m("Flag_HBHENoiseIsoFilter")
                 && m("Flag_EcalDeadCellTriggerPrimitiveFilter")
@@ -1972,7 +1972,7 @@ bool VHbbAnalysis::SelectLeptonChannel(){
         if (mInt("sampleIndex") == 0) { // Data
             passMetFilters = passMetFilters && m("Flag_eeBadScFilter");
         }
-        if ((m("MET_Pt") > m("metcut_0lepchan")) && passMetFilters) {
+        if ((m("MET_Pt") > m("metcut_0lepchan")) && std::min(m("MET_pt"),m("MHT_pt"))>100&& passMetFilters) {
             *in["isZnn"] = 1;
             pass=true;
         } else {
@@ -2182,10 +2182,10 @@ bool VHbbAnalysis::ReconstructHiggsCand(){
                 if( ijet == mInt("hJetInd1") || ijet == mInt("hJetInd2") ) continue;
 
                 //Select FSR jets
-                if( m("Jet_Pt", ijet) > 20 && abs(m("Jet_eta", ijet)) < 3.0 && (m("Jet_puId", ijet) > 6 || m("Jet_Pt",ijet)>50)  && m("Jet_lepFilter", ijet) > 0 ){
+                if( m("Jet_Pt", ijet) > 20 && abs(m("Jet_eta", ijet)) < 3.0 && (m("Jet_puId", ijet) > 6 || m("Jet_Pt",ijet)>50)  && m("Jet_lepFilter", ijet) > 0 && m("Jet_jetId",ijet)>4){
 
                     TLorentzVector Jet_FSR;
-                    Jet_FSR.SetPtEtaPhiM( m("Jet_bReg",ijet), m("Jet_eta",ijet), m("Jet_phi",ijet), m("Jet_mass",ijet) * (m("Jet_bReg",ijet) / m("Jet_Pt",ijet)) );
+                    Jet_FSR.SetPtEtaPhiM( m("Jet_Pt",ijet), m("Jet_eta",ijet), m("Jet_phi",ijet), m("Jet_mass",ijet));
 
                     if( std::min( Jet_FSR.DeltaR( HJ1 ), Jet_FSR.DeltaR( HJ2 ) ) < 0.8){
                         if(Jet_FSR.DeltaR( HJ1 )<Jet_FSR.DeltaR( HJ2 )){
@@ -2465,7 +2465,7 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
     //std::vector<int> ptCuts = {15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
     //std::vector<double> etaCuts = {1.5,1.6,1.7,1.8,1.9,2.0,2.1,2.2,2.3,2.4,2.5,2.6,2.7,2.8,2.9,3.0,3.1,3.2,3.3,3.4,3.5};
     std::vector<int> ptCuts = {25, 30};
-    std::vector<double> etaCuts = {2.9, 2.5};
+    std::vector<double> etaCuts = {2.9, 2.4};
 
     for (int i = 0; i < (int) ptCuts.size(); i++) {
         for (int j = 0; j < (int) etaCuts.size(); j++) {
@@ -2534,7 +2534,7 @@ void VHbbAnalysis::ComputeOtherEventKinematics(){
     }
 
 
-    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && m("nAddJets302p5_puid") >= m("nAddJetsCut")) {
+    if ((mInt("isZnn") || mInt("isWmunu") || mInt("isWenu")) && m("nAddJets302p4_puid") >= m("nAddJetsCut")) {
         *in["controlSample"] = -1;
     } else if (mInt("controlSample") > -1) {
         *in["cutFlow"] += 1; // additional jet veto
@@ -2642,9 +2642,10 @@ void VHbbAnalysis::ControlSampleSelection(){
             && max_hJet_bReg > 60
             && min_hJet_bReg > 35
             && hJet2_btag > m("tagWPL")
+            && mInt("nAddLeptons") == 0
             // MET Filters
             && m("Flag_goodVertices")
-            && m("Flag_globalTightHalo2016Filter")
+            && m("Flag_globalSuperTightHalo2016Filter")
             && m("Flag_HBHENoiseFilter")
             && m("Flag_HBHENoiseIsoFilter")
             && m("Flag_EcalDeadCellTriggerPrimitiveFilter")
@@ -2665,14 +2666,14 @@ void VHbbAnalysis::ControlSampleSelection(){
 
         if (base0LepCSSelection) {
             if (mInt("isZnn") && *in["nJetsCloseToMET"] == 0) {
-                if (m("MET_Pt") > m("metcut_0lepchan") && *f["min_dPhi_hJet_MET"] < 1.57 && hJet1_btag > m("tagWPM") && m("nAddJets302p5_puid") >= 2 && HVdPhi > 2){
+                if (m("MET_Pt") > m("metcut_0lepchan") && *f["min_dPhi_hJet_MET"] < 1.57 && hJet1_btag > m("tagWPM") && m("nAddJets302p4_puid") >= 2 && HVdPhi > 2){
                     *in["controlSample"] = 1; // TTbar Control Sample Index
                 }
-                else if (m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2 && m("nAddJets302p5_puid") < 2) {
+                else if (m("dPhi_MET_TkMET") < 0.5 && HVdPhi > 2 && m("nAddJets302p4_puid") < 2) {
                     if (hJet1_btag < m("tagWPM")) {
                         *in["controlSample"] = 2; // Z+Light Control Sample Index
                     } 
-                    else if (hJet1_btag > m("tagWPT") && (H_mass<m("sigmasslow") || H_mass>m("sigmasshigh"))){//FIXME change tight->medium?
+                    else if (hJet1_btag > m("tagWPM") && (H_mass<m("sigmasslow") || H_mass>m("sigmasshigh"))){
                         *in["controlSample"] = 3; // Z+bb Control Sample Index
                     }
                 }
@@ -2721,11 +2722,11 @@ void VHbbAnalysis::ControlSampleSelection(){
         //}
 
         if (base1LepCSSelection) {
-            if (max_hJet_btag > m("tagWPT")){ //ttbar or W+HF #FIXME change tight-> medium?
-                if (m("nAddJets302p5_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan")) { //ttbar, avoid overlap with Z(vv) TT CR
+            if (max_hJet_btag > m("tagWPM")){ //ttbar or W+HF 
+                if (m("nAddJets302p4_puid") > 1.5 && m("MET_Pt") < m("metcut_0lepchan") && max_hJet_btag > m("tagWPT")) { //ttbar, avoid overlap with Z(vv) TT CR
                     *in["controlSample"] = 11;
                 //} else if (mInt("nAddJets252p9_puid") < 0.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+HF // remove mass window so we can use the same ntuple for VV, just be careful that we always avoid overlap with SR
-                } else if (m("nAddJets302p5_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<m("sigmasslow") || H_mass>m("sigmasshigh"))) {
+                } else if (m("nAddJets302p4_puid") < 1.5 && m("MET_Pt")/sqrt(m("htJet30")) > 2. && (H_mass<m("sigmasslow") || H_mass>m("sigmasshigh"))) {
                     *in["controlSample"] = 13;
                 }
             }else if (max_hJet_btag > m("tagWPL") && max_hJet_btag < m("tagWPM") && m("MET_Pt")/sqrt(m("htJet30")) > 2.) { //W+LF
@@ -2735,7 +2736,7 @@ void VHbbAnalysis::ControlSampleSelection(){
             if (mInt("sampleIndex") == 0 && debug>10) {
                 std::cout << "data CS event " << mInt("controlSample")
                       << " max_hJet_btag " << max_hJet_btag
-                          << " nAddJets302p5_puid " << m("nAddJets302p5_puid")
+                          << " nAddJets302p4_puid " << m("nAddJets302p4_puid")
                           << " MET_Pt " << m("MET_Pt")
                           << " MET_sumEt " << m("MET_sumEt")
                           << " H_mass " << m("H_mass")
@@ -2769,7 +2770,7 @@ void VHbbAnalysis::ControlSampleSelection(){
                     *in["controlSample"] = 24;  // keep these event for kinematic fit
                 }
             } else if (/////////////////// Z + HF
-            max_hJet_btag > m("tagWPT") //Change tight -> medium?
+            max_hJet_btag > m("tagWPM") 
                 && min_hJet_btag > m("tagWPL")
                 && m("MET_Pt") < 60
                 && HVdPhi > 2.5
@@ -3621,7 +3622,7 @@ std::pair<int,int> VHbbAnalysis::HighestTaggerValueBJets(float j1ptCut, float j2
     std::pair<int,int> pair(-1,-1);
 
     for(int i=0; i<mInt("nJet"); i++){
-        if(m("Jet_lepFilter",i) && (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50)
+        if(m("Jet_lepFilter",i) && (mInt("Jet_puId",i) > 6 || m("Jet_Pt",i)>50) && mInt("Jet_jetId",i)>4
             && m("Jet_bReg",i)>j1ptCut
             &&fabs(m("Jet_eta",i))<=m("JetEtaCut")) {
             if( pair.first == -1 ) {
@@ -3634,7 +3635,7 @@ std::pair<int,int> VHbbAnalysis::HighestTaggerValueBJets(float j1ptCut, float j2
 
     for(int i=0; i<mInt("nJet"); i++){
         if(i==pair.first) continue;
-        if(m("Jet_lepFilter",i) && (mInt("Jet_puId",i) > 6 ||m("Jet_Pt",i)>50)
+        if(m("Jet_lepFilter",i) && (mInt("Jet_puId",i) > 6 ||m("Jet_Pt",i)>50) && mInt("Jet_jetId",i)>4
             && m("Jet_bReg",i)>j2ptCut
             &&fabs(m("Jet_eta",i))<m("JetEtaCut")) {
             if( pair.second == -1 ) {

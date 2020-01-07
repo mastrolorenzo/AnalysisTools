@@ -85,7 +85,7 @@ for subdir, dirs, files in os.walk(args.dir):
        #     os.system("cp %s/%s %s/RE%s"%(subdir,file,subdir,file))
        #     os.system("sed -i 's/(ProcId)./(ProcId)RE./g' %s/RE%s"%(subdir, file))
        #     print 'copy'
-        if (".log" in file and args.fromMultiJobPerCluster and not 'RE' in file):
+        if (".log" in file and args.fromMultiJobPerCluster and not 'RE' in file and not 'ckpt' in file):
             dirpaths = subdir.split('/')
             sample = dirpaths[len(dirpaths)-1]
             jobAndClustNum=file.replace(".log","").replace("log_","")
@@ -124,7 +124,7 @@ for subdir, dirs, files in os.walk(args.dir):
                     missingFiles.append(rootfilename)
     dirpaths = subdir.split('/')
     sample=dirpaths[len(dirpaths)-1]
-    if len(dirpaths) > 1 and not 'HelperClasses' in sample and not 'cfg' in sample and not 'aux' in subdir and not 'plugins' in sample and sample and not args.check and args.fromMultiJobPerCluster:
+    if len(dirpaths) > 1 and not 'KinFitter' in sample and not 'HelperClasses' in sample and not 'cfg' in sample and not 'aux' in subdir and not 'plugins' in sample and sample and not args.check and args.fromMultiJobPerCluster:
         try :
             os.remove("%s/REjob%s.submit"%(subdir,sample))
         except OSError: 

@@ -363,6 +363,7 @@ type=8  name=Jet_mass_jerDown        max=100   lengthBranch=nJet onlyMC=1 dropBr
 
 
 type=7  name=Jet_puId                         max=100     lengthBranch=nJet
+type=7  name=Jet_jetId                         max=100     lengthBranch=nJet
 type=8  name=Jet_eta                          max=100     lengthBranch=nJet
 type=8  name=Jet_mass                         max=100     lengthBranch=nJet
 type=8  name=Jet_phi                          max=100     lengthBranch=nJet

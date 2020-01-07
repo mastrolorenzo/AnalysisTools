@@ -374,6 +374,7 @@ type=8  name=Jet_mass_jesTotalDown        max=250   lengthBranch=nJet onlyMC=1 d
 
 
 type=7  name=Jet_puId                         max=250     lengthBranch=nJet
+type=7  name=Jet_jetId                         max=250     lengthBranch=nJet
 type=8  name=Jet_eta                          max=250     lengthBranch=nJet
 type=8  name=Jet_mass                         max=250     lengthBranch=nJet
 type=8  name=Jet_phi                          max=250     lengthBranch=nJet
