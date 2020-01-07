@@ -1638,7 +1638,7 @@ void VHbbAnalysis::FinishEvent() {
                 *f["Lep_SF"] = ((20.1/36.4) *m("SF_DoubleMu_ID_BF2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_BF2016",mInt("lepInd1")) *  m("SF_DoubleMu_ID_BF2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_BF2016",mInt("lepInd2")) * computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_BF_Data", "SF_Mu17Leg_BF_Data", "SF_Mu8Leg_BF_MC", "SF_Mu17Leg_BF_MC") + (16.3/36.4) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ISO_GH2016",mInt("lepInd1")) * m("SF_DoubleMu_ID_GH2016",mInt("lepInd2"))* m("SF_DoubleMu_ISO_GH2016",mInt("lepInd2")) *computeEventSFForDoubleLeptonTrig("SF_Mu8Leg_GH_Data", "SF_Mu17Leg_GH_Data", "SF_Mu8Leg_GH_MC", "SF_Mu17Leg_GH_MC")  ) ;
             }
         }else if (mInt("isZee") == 1) {
-            if(m("dataYear") == 2017) {
+            if(m("dataYear") == 2016 || m("dataYear") == 2017 || m("dataYear") == 2018) {
                 *f["Lep_SF"] = m("SF_DoubleElIdIso",mInt("lepInd1")) * m("SF_DoubleElIdIso",mInt("lepInd2")) * m("SF_DoubleElTriggerLeg1",mInt("lepInd1")) * m("SF_DoubleElTriggerLeg2",mInt("lepInd2"));
                 *f["Lep_SFUp"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))+m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))+m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))+m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))+m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2")));
                 *f["Lep_SFDown"] = (m("SF_DoubleElIdIso",mInt("lepInd1"))-m("SF_DoubleElIdIso_err",mInt("lepInd1"))) * (m("SF_DoubleElIdIso",mInt("lepInd2"))-m("SF_DoubleElIdIso_err",mInt("lepInd2"))) * (m("SF_DoubleElTriggerLeg1",mInt("lepInd1"))-m("SF_DoubleElTriggerLeg1_err",mInt("lepInd1"))) * (m("SF_DoubleElTriggerLeg2",mInt("lepInd2"))-m("SF_DoubleElTriggerLeg2_err",mInt("lepInd2")));
@@ -1673,7 +1673,7 @@ void VHbbAnalysis::FinishEvent() {
            if (m("do2015") == 1) {
                // used for 2015 analysis
                *f["Lep_SF"] = m("selLeptons_SF_IsoTight",mInt("lepInd1")) * m("selLeptons_SF_IdMVATight",mInt("lepInd1")) * m("SF_HLT_Ele23_WPLoose",mInt("lepInd1"));
-           } else if(m("dataYear") == 2016 || m("dataYear") == 2017){
+           } else if(m("dataYear") == 2016 || m("dataYear") == 2017 || m("dataYear") == 2018 ){
                *f["Lep_SF"] = m("SF_SingleElTrigger",mInt("lepInd1")) * m("SF_SingleElIdIso",mInt("lepInd1")) *  m("SF_egammaEffi_tracker",mInt("lepInd1"));
 
                *f["Lep_SFUp"] = (m("SF_SingleElTrigger",mInt("lepInd1")) + m("SF_SingleElTrigger_err",mInt("lepInd1")) )* (m("SF_SingleElIdIso",mInt("lepInd1")) + m("SF_SingleElIdIso_err",mInt("lepInd1")) ) *  (m("SF_egammaEffi_tracker",mInt("lepInd1")) + m("SF_egammaEffi_tracker_err",mInt("lepInd1")) );

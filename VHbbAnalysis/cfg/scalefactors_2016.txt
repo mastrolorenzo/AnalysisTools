@@ -1,5 +1,10 @@
-json=aux/Tight27AfterIDISO_out.json       name=Tight27AfterIDISO       binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElTrigger    length=nElectron
-json=aux/EIDISO_WH_out.json               name=EIDISO_WH               binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElIdIso      length=nElectron
+json=aux/Run2EleSFs/V1/Trig2016passingSingleEle.json    name=Trig2016passingSingleEle        binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElTrigger    length=nElectron
+json=aux/Run2EleSFs/V1/IDs2016passingMVA94Xwp80iso.json      name=IDs2016passingMVA94Xwp80iso      binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElIdIso      length=nElectron
+
+json=aux/Run2EleSFs/V1/IDs2016passingMVA94Xwp90iso.json        name=IDs2016passingMVA94Xwp90iso    binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElIdIso       length=nElectron
+json=aux/Run2EleSFs/V1/Trig2016passingDoubleEleLeg1.json  name=Trig2016passingDoubleEleLeg1  binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElTriggerLeg1 length=nElectron
+json=aux/Run2EleSFs/V1/Trig2016passingDoubleEleLeg2.json   name=Trig2016passingDoubleEleLeg2  binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElTriggerLeg2 length=nElectron
+
 json=aux/ScaleFactor_etracker_80x.json    name=ScaleFactor_tracker_80x binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_egammaEffi_tracker length=nElectron
 json=aux/failingVeto_out.json             name=failingVeto_WH          binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_EleVeto            length=nElectron
 json=aux/trk_SF_RunBCDEF.json             name=Graph binning=pt_eta_ratio branches=Muon_pt,Muon_eta branchname=SF_MuTrackerBCDEF length=nMuon

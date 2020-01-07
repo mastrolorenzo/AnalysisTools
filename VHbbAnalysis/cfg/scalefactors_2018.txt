@@ -1,12 +1,12 @@
-json=aux/VHbb1ElectronTrigger2017.json    name=singleEleTrigger        binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElTrigger    length=nElectron
-json=aux/VHbb1ElectronIDISO2017.json      name=singleEleIDISO2017      binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElIdIso      length=nElectron
+json=aux/Run2EleSFs/V1/Trig2018passingSingleEle.json    name=Trig2018passingSingleEle        binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElTrigger    length=nElectron
+json=aux/Run2EleSFs/V1/IDs2018passingMVA94Xwp80iso.json      name=IDs2018passingMVA94Xwp80iso      binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_SingleElIdIso      length=nElectron
 #from 2016
 json=aux/ScaleFactor_etracker_80x.json    name=ScaleFactor_tracker_80x binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_egammaEffi_tracker length=nElectron
 json=aux/failingVeto_out.json             name=failingVeto_WH          binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_EleVeto            length=nElectron
 
-json=aux/VHbb2ElectronIDISO2017.json        name=doubleEleIDISO2017    binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElIdIso       length=nElectron
-json=aux/VHbb2ElectronTriggerLeg12017.json  name=doubleEleTriggerLeg1  binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElTriggerLeg1 length=nElectron
-json=aux/VHbb2ElectronTriggerLeg22017.json  name=doubleEleTriggerLeg2  binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElTriggerLeg2 length=nElectron
+json=aux/Run2EleSFs/V1/IDs2018passingMVA94Xwp90iso.json        name=IDs2018passingMVA94Xwp90iso    binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElIdIso       length=nElectron
+json=aux/Run2EleSFs/V1/Trig2018passingDoubleEleLeg1.json  name=Trig2018passingDoubleEleLeg1  binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElTriggerLeg1 length=nElectron
+json=aux/Run2EleSFs/V1/Trig2018passingDoubleEleLeg2.json   name=Trig2018passingDoubleEleLeg2  binning=eta_pt_ratio branches=Electron_pt,Electron_eta branchname=SF_DoubleElTriggerLeg2 length=nElectron
 
 
 #json=aux/VHbb1MuonTrigger2017.json          name=NUM_IsoMu27_DEN_empty                   binning=abseta_pt    branches=Muon_pt,Muon_eta branchname=SF_SingleMuTrigger  length=nMuon
